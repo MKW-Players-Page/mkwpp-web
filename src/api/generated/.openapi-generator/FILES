@@ -1,0 +1,16 @@
+apis/TimetrialsApi.ts
+apis/index.ts
+index.ts
+models/CategoryEnum.ts
+models/Player.ts
+models/PlayerBasic.ts
+models/Region.ts
+models/RegionTypeEnum.ts
+models/Score.ts
+models/ScoreWithPlayer.ts
+models/Standard.ts
+models/StandardLevel.ts
+models/Track.ts
+models/TrackCup.ts
+models/index.ts
+runtime.ts

@@ -1,0 +1,76 @@
+@import-sanitize;
+
+
+/* Variables */
+
+:root {
+  /* General */
+  --background-color: #141F2F;
+  --text-color: #D8F0F9;
+  /* Header */
+  --header-height: 76px;
+  --header-background-color: #22354C;
+  --header-border-color: #304050;
+  /* Navbar */
+  --navbar-width: 200px;
+  --navbar-background-color: #1C2C3F;
+  --navbar-background-color-hover: #28405D;
+  --navbar-border-color: #283848;
+  --navbar-text-color: #C0D8DF;
+  /* Modules */
+  --module-background-color: var(--navbar-background-color);
+  --module-background-color-alt: var(--navbar-background-color-hover);
+  --module-border-color: #304868;
+}
+
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: auto;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.65rem;
+  padding-bottom: 12px;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+
+table {
+  width: 100%;
+}
+
+thead {
+  background-color: var(--module-background-color-alt);
+}
+
+td, th {
+  text-align: left;
+  padding: 4px 16px;
+  font-size: 0.925rem;
+}
+
+th {
+  height: 36px;
+}
+
+td {
+  height: 28px;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 10px 0px;
+  padding: 0px 12px;
+}

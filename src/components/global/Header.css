@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  z-index: 100;
+  padding: 12px;
+  background-color: var(--header-background-color);
+  border-bottom: 1px solid var(--header-border-color);
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  width: auto;
+  height: 100%;
+}

@@ -1,0 +1,27 @@
+.content {
+  padding-top: calc(var(--header-height) + 20px);
+  padding-left: calc(var(--navbar-width) + 20px);
+  padding-bottom: 20px;
+  padding-right: 20px;
+}
+
+.module {
+  width: 100%;
+  background-color: var(--module-background-color);
+  border: 1px solid var(--module-border-color);
+  margin-bottom: 16px;
+}
+
+.module-content {
+  padding: 12px;
+}
+
+.module-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.col-icon {
+  width: 16px;
+}
