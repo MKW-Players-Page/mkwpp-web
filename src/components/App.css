@@ -25,3 +25,8 @@
 .col-icon {
   width: 16px;
 }
+
+.fallthrough, .fallthrough a {
+  font-style: italic;
+  color: var(--alt-text-color);
+}

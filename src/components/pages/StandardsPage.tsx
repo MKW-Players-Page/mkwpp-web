@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
-import { getCategoryName } from '../../utils/EnumMappings';
+import { getCategoryName } from '../../utils/EnumUtils';
 import { formatTime } from '../../utils/Formatters';
 import { MetadataContext } from '../../utils/Metadata';
 

@@ -50,10 +50,12 @@ export interface TimetrialsPlayersRetrieveRequest {
 export interface TimetrialsPlayersScoresListRequest {
     id: number;
     category?: TimetrialsPlayersScoresListCategoryEnum;
+    isLap?: boolean;
 }
 
 export interface TimetrialsRecordsListRequest {
     category?: TimetrialsRecordsListCategoryEnum;
+    isLap?: boolean;
 }
 
 export interface TimetrialsStandardsListRequest {
@@ -175,6 +177,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['category'] = requestParameters['category'];
         }
 
+        if (requestParameters['isLap'] != null) {
+            queryParameters['is_lap'] = requestParameters['isLap'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
@@ -204,6 +210,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['isLap'] != null) {
+            queryParameters['is_lap'] = requestParameters['isLap'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

@@ -3,9 +3,9 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
+import { CategorySelect } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks';
-import { getCategoryName } from '../../utils/EnumMappings';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
@@ -31,14 +31,7 @@ const TrackChartPage = () => {
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <h1>{track?.name}</h1>
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value as CategoryEnum)}
-      >
-        {track?.categories?.map((value) => (
-          <option key={value} value={value}>{getCategoryName(value)}</option>
-        ))}
-      </select>
+      <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
       <select
         value={String(isLap)}
         onChange={(e) => setIsLap(e.target.value === "true")}
@@ -68,12 +61,14 @@ const TrackChartPage = () => {
                       {score.player.name}
                     </Link>
                   </td>
-                  <td>{formatTime(score.value)}</td>
+                  <td className={score.category !== category ? 'fallthrough' : ''}>
+                    {formatTime(score.value)}
+                  </td>
                   <td>{score.date && formatDate(score.date)}</td>
-                  <td>{score?.videoLink && (
+                  <td>{score.videoLink && (
                     <a href={score.videoLink} target="_blank" rel="noopener noreferrer">V</a>
                   )}</td>
-                  <td>{score?.ghostLink && (
+                  <td>{score.ghostLink && (
                     <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">G</a>
                   )}</td>
                 </tr>

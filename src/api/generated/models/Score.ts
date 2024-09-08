@@ -33,7 +33,7 @@ export interface Score {
      */
     readonly id: number;
     /**
-     * Compute the rank of this score by counting scores with value lower than self.
+     * Return category-aware rank if provided by context.
      * @type {number}
      * @memberof Score
      */

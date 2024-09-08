@@ -7,6 +7,7 @@
   /* General */
   --background-color: #141F2F;
   --text-color: #D8F0F9;
+  --alt-text-color: #90B0BC;
   /* Header */
   --header-height: 76px;
   --header-background-color: #22354C;
@@ -43,6 +44,10 @@ h1 {
 a {
   color: var(--text-color);
   text-decoration: none;
+}
+
+a:hover {
+  color: var(--alt-text-color);
 }
 
 

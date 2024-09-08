@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
-import api from '../../api';
+import { CategorySelect } from '../widgets';
+import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks/ApiHook';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { getRegionNameFull, MetadataContext } from '../../utils/Metadata';
@@ -12,6 +13,8 @@ import { integerOr } from '../../utils/Numbers';
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
+
+  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
 
   const metadata = useContext(MetadataContext);
 
@@ -24,7 +27,7 @@ const PlayerProfilePage = () => {
   const {
     isLoading: scoresLoading,
     data: scores
-  } = useApi(() => api.timetrialsPlayersScoresList({ id, category: 'nonsc' }));
+  } = useApi(() => api.timetrialsPlayersScoresList({ id, category }), [category]);
 
   return (
     <>
@@ -71,6 +74,7 @@ const PlayerProfilePage = () => {
           </Deferred>
         </div>
       </div>
+      <CategorySelect value={category} onChange={setCategory} />
       <div className="module">
         <Deferred isWaiting={metadata.isLoading && scoresLoading}>
           <table>
@@ -100,7 +104,9 @@ const PlayerProfilePage = () => {
                       </td>
                     )}
                     {isLap && <td />}
-                    <td>{score ? formatTime(score.value) : "-"}</td>
+                    <td className={score?.category !== category ? 'fallthrough' : ''}>
+                      {score ? formatTime(score.value) : "-"}
+                    </td>
                     {!isLap && <td />}
                     <td>{score?.rank || '-'}</td>
                     <td>{score?.date ? formatDate(score.date) : "-"}</td>

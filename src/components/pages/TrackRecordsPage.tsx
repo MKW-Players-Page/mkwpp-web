@@ -1,21 +1,28 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
-import api from '../../api';
+import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { MetadataContext } from '../../utils/Metadata';
+import { CategorySelect } from '../widgets';
 
 const TrackRecordsPage = () => {
+  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+
   const metadata = useContext(MetadataContext);
 
-  const { isLoading, data: scores } = useApi(() => api.timetrialsRecordsList({ category: 'nonsc' }));
+  const {
+    isLoading,
+    data: scores
+  } = useApi(() => api.timetrialsRecordsList({ category }), [category]);
 
   return (
     <>
       <h1>World Records</h1>
+      <CategorySelect value={category} onChange={setCategory} />
       <div className="module">
         <Deferred isWaiting={isLoading || metadata.isLoading}>
           <table>
@@ -52,7 +59,9 @@ const TrackRecordsPage = () => {
                       ) : "-"}
                     </td>
                     {isLap && <td />}
-                    <td>{score ? formatTime(score.value) : "-"}</td>
+                    <td className={score?.category !== category ? 'fallthrough' : ''}>
+                      {score ? formatTime(score.value) : "-"}
+                    </td>
                     {!isLap && <td />}
                     <td>{score?.date ? formatDate(score.date) : "-"}</td>
                     <td>{score?.videoLink && (
