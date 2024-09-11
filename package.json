@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/",
+    "lint": "eslint ./src/ --max-warnings=0",
     "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml"
   },
   "eslintConfig": {
