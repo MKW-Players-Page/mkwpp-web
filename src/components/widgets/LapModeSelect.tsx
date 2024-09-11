@@ -1,5 +1,3 @@
-import { CategoryEnum } from '../../api';
-import { getCategoryName } from '../../utils/EnumUtils';
 
 export interface LapModeSelectProps {
   /** Whether to include Overall as an option. Defaults to false if not defined. */
