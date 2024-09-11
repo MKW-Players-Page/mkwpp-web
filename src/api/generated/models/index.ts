@@ -3,6 +3,7 @@
 export * from './CategoryEnum';
 export * from './Player';
 export * from './PlayerBasic';
+export * from './PlayerStats';
 export * from './Region';
 export * from './RegionTypeEnum';
 export * from './Score';

@@ -4,6 +4,7 @@ index.ts
 models/CategoryEnum.ts
 models/Player.ts
 models/PlayerBasic.ts
+models/PlayerStats.ts
 models/Region.ts
 models/RegionTypeEnum.ts
 models/Score.ts

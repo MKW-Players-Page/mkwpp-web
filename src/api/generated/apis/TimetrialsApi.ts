@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   Player,
   PlayerBasic,
+  PlayerStats,
   Region,
   Score,
   ScoreWithPlayer,
@@ -29,6 +30,8 @@ import {
     PlayerToJSON,
     PlayerBasicFromJSON,
     PlayerBasicToJSON,
+    PlayerStatsFromJSON,
+    PlayerStatsToJSON,
     RegionFromJSON,
     RegionToJSON,
     ScoreFromJSON,
@@ -48,13 +51,25 @@ export interface TimetrialsPlayersRetrieveRequest {
 }
 
 export interface TimetrialsPlayersScoresListRequest {
+    category: TimetrialsPlayersScoresListCategoryEnum;
     id: number;
-    category?: TimetrialsPlayersScoresListCategoryEnum;
+    isLap?: boolean;
+}
+
+export interface TimetrialsPlayersStatsListRequest {
+    category: TimetrialsPlayersStatsListCategoryEnum;
+    id: number;
+    isLap?: boolean;
+}
+
+export interface TimetrialsRankingsListRequest {
+    category: TimetrialsRankingsListCategoryEnum;
+    metric: Array<TimetrialsRankingsListMetricEnum>;
     isLap?: boolean;
 }
 
 export interface TimetrialsRecordsListRequest {
-    category?: TimetrialsRecordsListCategoryEnum;
+    category: TimetrialsRecordsListCategoryEnum;
     isLap?: boolean;
 }
 
@@ -63,8 +78,8 @@ export interface TimetrialsStandardsListRequest {
 }
 
 export interface TimetrialsTracksScoresListRequest {
+    category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
-    category?: TimetrialsTracksScoresListCategoryEnum;
     isLap?: boolean;
 }
 
@@ -164,6 +179,13 @@ export class TimetrialsApi extends runtime.BaseAPI {
     /**
      */
     async timetrialsPlayersScoresListRaw(requestParameters: TimetrialsPlayersScoresListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Score>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsPlayersScoresList().'
+            );
+        }
+
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
@@ -205,7 +227,116 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
+    async timetrialsPlayersStatsListRaw(requestParameters: TimetrialsPlayersStatsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerStats>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsPlayersStatsList().'
+            );
+        }
+
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling timetrialsPlayersStatsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['isLap'] != null) {
+            queryParameters['is_lap'] = requestParameters['isLap'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/api/timetrials/players/{id}/stats/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PlayerStatsFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsPlayersStatsList(requestParameters: TimetrialsPlayersStatsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerStats>> {
+        const response = await this.timetrialsPlayersStatsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsRankingsListRaw(requestParameters: TimetrialsRankingsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerStats>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsRankingsList().'
+            );
+        }
+
+        if (requestParameters['metric'] == null) {
+            throw new runtime.RequiredError(
+                'metric',
+                'Required parameter "metric" was null or undefined when calling timetrialsRankingsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['isLap'] != null) {
+            queryParameters['is_lap'] = requestParameters['isLap'];
+        }
+
+        if (requestParameters['metric'] != null) {
+            queryParameters['metric'] = requestParameters['metric']!.join(runtime.COLLECTION_FORMATS["csv"]);
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/api/timetrials/rankings/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PlayerStatsFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsRankingsList(requestParameters: TimetrialsRankingsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerStats>> {
+        const response = await this.timetrialsRankingsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
     async timetrialsRecordsListRaw(requestParameters: TimetrialsRecordsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreWithPlayer>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsRecordsList().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['category'] != null) {
@@ -233,7 +364,7 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsRecordsList(requestParameters: TimetrialsRecordsListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreWithPlayer>> {
+    async timetrialsRecordsList(requestParameters: TimetrialsRecordsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreWithPlayer>> {
         const response = await this.timetrialsRecordsListRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -326,6 +457,13 @@ export class TimetrialsApi extends runtime.BaseAPI {
     /**
      */
     async timetrialsTracksScoresListRaw(requestParameters: TimetrialsTracksScoresListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreWithPlayer>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsTracksScoresList().'
+            );
+        }
+
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
@@ -376,6 +514,32 @@ export const TimetrialsPlayersScoresListCategoryEnum = {
     Unrestricted: 'unres'
 } as const;
 export type TimetrialsPlayersScoresListCategoryEnum = typeof TimetrialsPlayersScoresListCategoryEnum[keyof typeof TimetrialsPlayersScoresListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsPlayersStatsListCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsPlayersStatsListCategoryEnum = typeof TimetrialsPlayersStatsListCategoryEnum[keyof typeof TimetrialsPlayersStatsListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsRankingsListCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsRankingsListCategoryEnum = typeof TimetrialsRankingsListCategoryEnum[keyof typeof TimetrialsRankingsListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsRankingsListMetricEnum = {
+    AverageFinish: 'average_finish',
+    TotalScore: 'total_score'
+} as const;
+export type TimetrialsRankingsListMetricEnum = typeof TimetrialsRankingsListMetricEnum[keyof typeof TimetrialsRankingsListMetricEnum];
 /**
  * @export
  */

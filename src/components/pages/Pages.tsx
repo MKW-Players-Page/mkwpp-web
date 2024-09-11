@@ -8,6 +8,7 @@ import TrackChartPage from './TrackChartPage';
 import TrackListPage from './TrackListPage';
 import TrackRecordsPage from './TrackRecordsPage';
 import StandardsPage from './StandardsPage';
+import RankingsPage, { RankingsMetrics } from './RankingsPage';
 
 
 export type PageMap = {
@@ -26,6 +27,14 @@ export const Pages: PageMap = {
   PlayerProfile: {
     path: '/players/:id',
     element: <PlayerProfilePage />,
+  },
+  RankingsAverageFinish: {
+    path: '/rankings/af',
+    element: <RankingsPage key='af' metric={RankingsMetrics.AverageFinish} />,
+  },
+  RankingsTotalTime: {
+    path: '/rankings/totals',
+    element: <RankingsPage key='totals' metric={RankingsMetrics.TotalTime} />,
   },
   Rules: {
     path: '/rules',

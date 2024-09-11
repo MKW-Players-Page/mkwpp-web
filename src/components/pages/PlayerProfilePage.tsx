@@ -9,12 +9,14 @@ import { useApi } from '../../hooks/ApiHook';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { getRegionNameFull, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
+import LapModeSelect from '../widgets/LapModeSelect';
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+  const [lapMode, setLapMode] = useState<boolean>();
 
   const metadata = useContext(MetadataContext);
 
@@ -25,15 +27,28 @@ const PlayerProfilePage = () => {
   } = useApi(() => api.timetrialsPlayersRetrieve({ id }));
 
   const {
+    isLoading: statsLoading,
+    data: statsList
+  } = useApi(() => api.timetrialsPlayersStatsList({
+    id,
+    category,
+    isLap: lapMode
+  }), [category, lapMode]);
+
+  const {
     isLoading: scoresLoading,
     data: scores
   } = useApi(() => api.timetrialsPlayersScoresList({ id, category }), [category]);
 
+  // Temporary until region-based stats are implemented
+  const stats = statsList?.at(0);
   return (
     <>
       {/* Redirect to player list if id is invalid or does not exist. */}
       {playerError && <Navigate to={resolvePage(Pages.PlayerList)} />}
       <h1>{player?.name || <>&nbsp;</>}</h1>
+      <CategorySelect value={category} onChange={setCategory} />
+      <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
       <div className="module-row">
         <div className="module">
           <Deferred isWaiting={playerLoading}>
@@ -48,12 +63,28 @@ const PlayerProfilePage = () => {
                   <td>{player?.alias}</td>
                 </tr>
                 <tr>
-                  <td>Date joined</td>
+                  <td>Date Joined</td>
                   <td>{player?.joinedDate && formatDate(player.joinedDate)}</td>
                 </tr>
                 <tr>
-                  <td>Last activity</td>
+                  <td>Last Activity</td>
                   <td>{player?.lastActivity && formatDate(player.lastActivity)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </Deferred>
+        </div>
+        <div className="module">
+          <Deferred isWaiting={statsLoading}>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Average Finish</td>
+                  <td>{stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}</td>
+                </tr>
+                <tr>
+                  <td>Total Time</td>
+                  <td>{stats ? formatTime(stats.totalScore) : "-"}</td>
                 </tr>
               </tbody>
             </table>
@@ -74,7 +105,6 @@ const PlayerProfilePage = () => {
           </Deferred>
         </div>
       </div>
-      <CategorySelect value={category} onChange={setCategory} />
       <div className="module">
         <Deferred isWaiting={metadata.isLoading && scoresLoading}>
           <table>

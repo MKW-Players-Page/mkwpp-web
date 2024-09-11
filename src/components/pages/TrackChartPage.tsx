@@ -9,6 +9,7 @@ import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
+import LapModeSelect from '../widgets/LapModeSelect';
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -32,13 +33,7 @@ const TrackChartPage = () => {
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <h1>{track?.name}</h1>
       <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
-      <select
-        value={String(isLap)}
-        onChange={(e) => setIsLap(e.target.value === "true")}
-      >
-        <option value="false">Course</option>
-        <option value="true">Lap</option>
-      </select>
+      <LapModeSelect value={isLap} onChange={(mode) => setIsLap(!!mode)} />
       <div className="module">
         <Deferred isWaiting={isLoading}>
           <table>

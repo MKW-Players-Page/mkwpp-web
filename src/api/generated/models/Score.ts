@@ -33,11 +33,11 @@ export interface Score {
      */
     readonly id: number;
     /**
-     * Return category-aware rank if provided by context.
+     * 
      * @type {number}
      * @memberof Score
      */
-    readonly rank: number;
+    rank: number;
     /**
      * Finish time in milliseconds (e.g. 69999 for 1:09.999).
      * @type {number}
@@ -126,12 +126,13 @@ export function ScoreFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sco
     };
 }
 
-export function ScoreToJSON(value?: Omit<Score, 'id'|'rank'> | null): any {
+export function ScoreToJSON(value?: Omit<Score, 'id'> | null): any {
     if (value == null) {
         return value;
     }
     return {
         
+        'rank': value['rank'],
         'value': value['value'],
         'player': value['player'],
         'track': value['track'],

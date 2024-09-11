@@ -70,11 +70,11 @@ const SECTIONS: NavbarSection[] = [
       },
       {
         label: "Average Finish",
-        url: '/af_',
+        url: resolvePage(Pages.RankingsAverageFinish),
       },
       {
         label: "Total Times",
-        url: '/totals_',
+        url: resolvePage(Pages.RankingsTotalTime),
       },
     ],
   },
