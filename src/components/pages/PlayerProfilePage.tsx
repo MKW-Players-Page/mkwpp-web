@@ -80,7 +80,15 @@ const PlayerProfilePage = () => {
               <tbody>
                 <tr>
                   <td>Average Finish</td>
-                  <td>{stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}</td>
+                  <td>
+                    {stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}
+                  </td>
+                </tr>
+                <tr>
+                  <td>ARR</td>
+                  <td>
+                    {stats && stats.scoreCount > 0 ? stats.totalStandard / stats.scoreCount : "-"}
+                  </td>
                 </tr>
                 <tr>
                   <td>Total Time</td>

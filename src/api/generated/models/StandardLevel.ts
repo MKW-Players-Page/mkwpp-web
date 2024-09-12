@@ -55,7 +55,7 @@ export interface StandardLevel {
      * @type {Array<Standard>}
      * @memberof StandardLevel
      */
-    standards: Array<Standard>;
+    readonly standards: Array<Standard>;
 }
 
 /**
@@ -88,7 +88,7 @@ export function StandardLevelFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function StandardLevelToJSON(value?: Omit<StandardLevel, 'id'> | null): any {
+export function StandardLevelToJSON(value?: Omit<StandardLevel, 'id'|'standards'> | null): any {
     if (value == null) {
         return value;
     }
@@ -97,7 +97,6 @@ export function StandardLevelToJSON(value?: Omit<StandardLevel, 'id'> | null): a
         'name': value['name'],
         'value': value['value'],
         'is_legacy': value['isLegacy'],
-        'standards': ((value['standards'] as Array<any>).map(StandardToJSON)),
     };
 }
 

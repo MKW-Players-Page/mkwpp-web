@@ -63,6 +63,12 @@ export interface PlayerStats {
      */
     totalRank: number;
     /**
+     * Sum of the standard of all lowest scores
+     * @type {number}
+     * @memberof PlayerStats
+     */
+    totalStandard: number;
+    /**
      * 
      * @type {number}
      * @memberof PlayerStats
@@ -93,6 +99,7 @@ export function instanceOfPlayerStats(value: object): value is PlayerStats {
     if (!('scoreCount' in value) || value['scoreCount'] === undefined) return false;
     if (!('totalScore' in value) || value['totalScore'] === undefined) return false;
     if (!('totalRank' in value) || value['totalRank'] === undefined) return false;
+    if (!('totalStandard' in value) || value['totalStandard'] === undefined) return false;
     if (!('player' in value) || value['player'] === undefined) return false;
     if (!('playerName' in value) || value['playerName'] === undefined) return false;
     return true;
@@ -114,6 +121,7 @@ export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'scoreCount': json['score_count'],
         'totalScore': json['total_score'],
         'totalRank': json['total_rank'],
+        'totalStandard': json['total_standard'],
         'player': json['player'],
         'playerName': json['player_name'],
         'playerRegion': json['player_region'] == null ? undefined : json['player_region'],
@@ -132,6 +140,7 @@ export function PlayerStatsToJSON(value?: PlayerStats | null): any {
         'score_count': value['scoreCount'],
         'total_score': value['totalScore'],
         'total_rank': value['totalRank'],
+        'total_standard': value['totalStandard'],
         'player': value['player'],
         'player_name': value['playerName'],
         'player_region': value['playerRegion'],

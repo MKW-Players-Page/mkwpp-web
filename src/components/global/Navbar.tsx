@@ -73,6 +73,10 @@ const SECTIONS: NavbarSection[] = [
         url: resolvePage(Pages.RankingsAverageFinish),
       },
       {
+        label: "ARR",
+        url: resolvePage(Pages.RankingsAverageStandard),
+      },
+      {
         label: "Total Times",
         url: resolvePage(Pages.RankingsTotalTime),
       },

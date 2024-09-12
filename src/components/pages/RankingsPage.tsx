@@ -26,6 +26,11 @@ export const RankingsMetrics: RankingsMetricMap = {
     metric: 'average_finish',
     getValueString: (player) => String(player.totalRank / player.scoreCount),
   },
+  AverageStandard: {
+    title: "ARR",
+    metric: 'average_standard',
+    getValueString: (player) => String(player.totalStandard / player.scoreCount),
+  },
   TotalTime: {
     title: "Total Time",
     metric: 'total_score',
