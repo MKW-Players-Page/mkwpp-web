@@ -91,6 +91,14 @@ const PlayerProfilePage = () => {
                   </td>
                 </tr>
                 <tr>
+                  <td>PR:WR</td>
+                  <td>
+                    {stats && stats.scoreCount > 0 ? (
+                      (stats.totalRecordRatio / stats.scoreCount * 100).toFixed(4) + "%"
+                    ) : "-"}
+                  </td>
+                </tr>
+                <tr>
                   <td>Total Time</td>
                   <td>{stats ? formatTime(stats.totalScore) : "-"}</td>
                 </tr>
@@ -123,6 +131,7 @@ const PlayerProfilePage = () => {
                 <th>Lap</th>
                 <th>Rank</th>
                 <th>Standard</th>
+                <th>PR:WR</th>
                 <th>Date</th>
                 <th className="col-icon" />
                 <th className="col-icon" />
@@ -149,6 +158,7 @@ const PlayerProfilePage = () => {
                     {!isLap && <td />}
                     <td>{score?.rank || "-"}</td>
                     <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
+                    <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
                     <td>{score?.date ? formatDate(score.date) : "-"}</td>
                     <td>{score?.videoLink && (
                       <a href={score.videoLink} target="_blank" rel="noopener noreferrer">V</a>

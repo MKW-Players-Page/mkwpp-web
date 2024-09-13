@@ -36,6 +36,10 @@ export const Pages: PageMap = {
     path: '/rankings/arr',
     element: <RankingsPage key='arr' metric={RankingsMetrics.AverageStandard} />,
   },
+  RankingsAverageRecordRatio: {
+    path: '/rankings/prwr',
+    element: <RankingsPage key='prwr' metric={RankingsMetrics.AverageRecordRatio} />,
+  },
   RankingsTotalTime: {
     path: '/rankings/totals',
     element: <RankingsPage key='totals' metric={RankingsMetrics.TotalTime} />,

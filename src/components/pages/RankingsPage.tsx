@@ -23,13 +23,20 @@ export type RankingsMetricMap = {
 export const RankingsMetrics: RankingsMetricMap = {
   AverageFinish: {
     title: "Average Finish",
-    metric: 'average_finish',
+    metric: 'total_rank',
     getValueString: (player) => String(player.totalRank / player.scoreCount),
   },
   AverageStandard: {
     title: "ARR",
-    metric: 'average_standard',
+    metric: 'total_standard',
     getValueString: (player) => String(player.totalStandard / player.scoreCount),
+  },
+  AverageRecordRatio: {
+    title: "PR:WR",
+    metric: 'total_record_ratio',
+    getValueString: (player) => (
+      (player.totalRecordRatio / player.scoreCount * 100).toFixed(4) + "%"
+    ),
   },
   TotalTime: {
     title: "Total Time",

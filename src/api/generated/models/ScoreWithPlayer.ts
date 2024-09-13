@@ -45,12 +45,6 @@ export interface ScoreWithPlayer {
      */
     rank: number;
     /**
-     * 
-     * @type {number}
-     * @memberof ScoreWithPlayer
-     */
-    standard: number;
-    /**
      * Finish time in milliseconds (e.g. 69999 for 1:09.999).
      * @type {number}
      * @memberof ScoreWithPlayer
@@ -82,6 +76,18 @@ export interface ScoreWithPlayer {
     isLap?: boolean;
     /**
      * 
+     * @type {number}
+     * @memberof ScoreWithPlayer
+     */
+    standard: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ScoreWithPlayer
+     */
+    recordRatio: number;
+    /**
+     * 
      * @type {Date}
      * @memberof ScoreWithPlayer
      */
@@ -108,11 +114,12 @@ export interface ScoreWithPlayer {
 export function instanceOfScoreWithPlayer(value: object): value is ScoreWithPlayer {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('rank' in value) || value['rank'] === undefined) return false;
-    if (!('standard' in value) || value['standard'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
     if (!('player' in value) || value['player'] === undefined) return false;
     if (!('track' in value) || value['track'] === undefined) return false;
     if (!('category' in value) || value['category'] === undefined) return false;
+    if (!('standard' in value) || value['standard'] === undefined) return false;
+    if (!('recordRatio' in value) || value['recordRatio'] === undefined) return false;
     return true;
 }
 
@@ -128,12 +135,13 @@ export function ScoreWithPlayerFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'id': json['id'],
         'rank': json['rank'],
-        'standard': json['standard'],
         'value': json['value'],
         'player': PlayerBasicFromJSON(json['player']),
         'track': json['track'],
         'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
+        'standard': json['standard'],
+        'recordRatio': json['record_ratio'],
         'date': json['date'] == null ? undefined : (new Date(json['date'])),
         'videoLink': json['video_link'] == null ? undefined : json['video_link'],
         'ghostLink': json['ghost_link'] == null ? undefined : json['ghost_link'],
@@ -147,12 +155,13 @@ export function ScoreWithPlayerToJSON(value?: Omit<ScoreWithPlayer, 'id'> | null
     return {
         
         'rank': value['rank'],
-        'standard': value['standard'],
         'value': value['value'],
         'player': PlayerBasicToJSON(value['player']),
         'track': value['track'],
         'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
+        'standard': value['standard'],
+        'record_ratio': value['recordRatio'],
         'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
         'video_link': value['videoLink'],
         'ghost_link': value['ghostLink'],

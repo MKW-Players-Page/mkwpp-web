@@ -536,9 +536,10 @@ export type TimetrialsRankingsListCategoryEnum = typeof TimetrialsRankingsListCa
  * @export
  */
 export const TimetrialsRankingsListMetricEnum = {
-    AverageFinish: 'average_finish',
-    AverageStandard: 'average_standard',
-    TotalScore: 'total_score'
+    Rank: 'total_rank',
+    RecordRatio: 'total_record_ratio',
+    Score: 'total_score',
+    Standard: 'total_standard'
 } as const;
 export type TimetrialsRankingsListMetricEnum = typeof TimetrialsRankingsListMetricEnum[keyof typeof TimetrialsRankingsListMetricEnum];
 /**
