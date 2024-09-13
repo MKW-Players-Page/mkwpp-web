@@ -74,3 +74,25 @@ export const getRegionNameFull = (metadata: Metadata, regionId: number) => {
 
   return region.name;
 };
+
+/** The standard level of the standard with the given id.
+ * 
+ * @param metadata The Metadata object returned from `useContext(MetadataContext)`
+ * @param standardId The id of the standard
+ * @returns A StandardLevel object, or `undefined` if no standard with the given id exists.
+ */
+export const getStandardLevel = (metadata: Metadata, standardId: number) => {
+  if (!metadata.standards) {
+    return undefined;
+  }
+
+  // This is obviously inefficient but this doesn't appear to cause any measurable slow downs...
+  for (const level of metadata.standards) {
+    const standard = level.standards.find((s) => s.id === standardId);
+    if (standard) {
+      return level;
+    }
+  }
+
+  return undefined;
+}

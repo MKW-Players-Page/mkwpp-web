@@ -6,7 +6,7 @@ import Deferred from '../global/Deferred';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { MetadataContext } from '../../utils/Metadata';
+import { getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { CategorySelect } from '../widgets';
 
 const TrackRecordsPage = () => {
@@ -32,6 +32,7 @@ const TrackRecordsPage = () => {
                 <th>Player</th>
                 <th>Course</th>
                 <th>Lap</th>
+                <th>Standard</th>
                 <th>Date</th>
                 <th className="col-icon" />
                 <th className="col-icon" />
@@ -63,6 +64,7 @@ const TrackRecordsPage = () => {
                       {score ? formatTime(score.value) : "-"}
                     </td>
                     {!isLap && <td />}
+                    <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
                     <td>{score?.date ? formatDate(score.date) : "-"}</td>
                     <td>{score?.videoLink && (
                       <a href={score.videoLink} target="_blank" rel="noopener noreferrer">V</a>

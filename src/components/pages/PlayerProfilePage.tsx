@@ -7,7 +7,7 @@ import { CategorySelect } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks/ApiHook';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { getRegionNameFull, MetadataContext } from '../../utils/Metadata';
+import { getRegionNameFull, getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
 import LapModeSelect from '../widgets/LapModeSelect';
 
@@ -122,6 +122,7 @@ const PlayerProfilePage = () => {
                 <th>Course</th>
                 <th>Lap</th>
                 <th>Rank</th>
+                <th>Standard</th>
                 <th>Date</th>
                 <th className="col-icon" />
                 <th className="col-icon" />
@@ -146,7 +147,8 @@ const PlayerProfilePage = () => {
                       {score ? formatTime(score.value) : "-"}
                     </td>
                     {!isLap && <td />}
-                    <td>{score?.rank || '-'}</td>
+                    <td>{score?.rank || "-"}</td>
+                    <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
                     <td>{score?.date ? formatDate(score.date) : "-"}</td>
                     <td>{score?.videoLink && (
                       <a href={score.videoLink} target="_blank" rel="noopener noreferrer">V</a>

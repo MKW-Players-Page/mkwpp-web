@@ -39,6 +39,12 @@ export interface Score {
      */
     rank: number;
     /**
+     * 
+     * @type {number}
+     * @memberof Score
+     */
+    standard: number;
+    /**
      * Finish time in milliseconds (e.g. 69999 for 1:09.999).
      * @type {number}
      * @memberof Score
@@ -96,6 +102,7 @@ export interface Score {
 export function instanceOfScore(value: object): value is Score {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('rank' in value) || value['rank'] === undefined) return false;
+    if (!('standard' in value) || value['standard'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
     if (!('player' in value) || value['player'] === undefined) return false;
     if (!('track' in value) || value['track'] === undefined) return false;
@@ -115,6 +122,7 @@ export function ScoreFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sco
         
         'id': json['id'],
         'rank': json['rank'],
+        'standard': json['standard'],
         'value': json['value'],
         'player': json['player'],
         'track': json['track'],
@@ -133,6 +141,7 @@ export function ScoreToJSON(value?: Omit<Score, 'id'> | null): any {
     return {
         
         'rank': value['rank'],
+        'standard': value['standard'],
         'value': value['value'],
         'player': value['player'],
         'track': value['track'],

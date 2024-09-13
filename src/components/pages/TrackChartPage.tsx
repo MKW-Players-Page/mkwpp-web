@@ -7,7 +7,7 @@ import { CategorySelect } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { MetadataContext } from '../../utils/Metadata';
+import { getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
 import LapModeSelect from '../widgets/LapModeSelect';
 
@@ -42,6 +42,7 @@ const TrackChartPage = () => {
                 <th>Rank</th>
                 <th>Player</th>
                 <th>Time</th>
+                <th>Standard</th>
                 <th>Date</th>
                 <th className="col-icon" />
                 <th className="col-icon" />
@@ -59,6 +60,7 @@ const TrackChartPage = () => {
                   <td className={score.category !== category ? 'fallthrough' : ''}>
                     {formatTime(score.value)}
                   </td>
+                  <td>{getStandardLevel(metadata, score.standard)?.name}</td>
                   <td>{score.date && formatDate(score.date)}</td>
                   <td>{score.videoLink && (
                     <a href={score.videoLink} target="_blank" rel="noopener noreferrer">V</a>
