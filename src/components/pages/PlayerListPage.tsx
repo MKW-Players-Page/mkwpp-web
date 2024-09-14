@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
+import { FlagIcon } from '../widgets';
 import api from '../../api';
 import { useApi } from '../../hooks/ApiHook';
-import { getRegionNameFull, MetadataContext } from '../../utils/Metadata';
+import { getRegionById, getRegionNameFull, MetadataContext } from '../../utils/Metadata';
 
 const PlayerListPage = () => {
   const { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
@@ -28,6 +29,7 @@ const PlayerListPage = () => {
               {players?.map((player) => (
                 <tr key={player.id}>
                   <td>
+                    <FlagIcon region={getRegionById(metadata, player.region || 0)} />
                     <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
                       {player.name}
                     </Link>

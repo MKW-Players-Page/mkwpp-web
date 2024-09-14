@@ -3,13 +3,12 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
-import { CategorySelect } from '../widgets';
+import { CategorySelect, FlagIcon, LapModeSelect } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { getStandardLevel, MetadataContext } from '../../utils/Metadata';
+import { getRegionById, getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
-import LapModeSelect from '../widgets/LapModeSelect';
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -31,11 +30,12 @@ const TrackChartPage = () => {
     <>
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
+      <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
       <h1>{track?.name}</h1>
       <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
       <LapModeSelect value={isLap} onChange={(mode) => setIsLap(!!mode)} />
       <div className="module">
-        <Deferred isWaiting={isLoading}>
+        <Deferred isWaiting={metadata.isLoading || isLoading}>
           <table>
             <thead>
               <tr>
@@ -53,6 +53,7 @@ const TrackChartPage = () => {
                 <tr key={score.id}>
                   <td>{score.rank}</td>
                   <td>
+                    <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
                     <Link to={resolvePage(Pages.PlayerProfile, {id: score.player.id})}>
                       {score.player.name}
                     </Link>

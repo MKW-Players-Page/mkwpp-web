@@ -3,13 +3,12 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
-import { CategorySelect } from '../widgets';
+import { CategorySelect, FlagIcon, LapModeSelect } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks/ApiHook';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { getRegionNameFull, getStandardLevel, MetadataContext } from '../../utils/Metadata';
+import { getRegionById, getRegionNameFull, getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
-import LapModeSelect from '../widgets/LapModeSelect';
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -46,7 +45,10 @@ const PlayerProfilePage = () => {
     <>
       {/* Redirect to player list if id is invalid or does not exist. */}
       {playerError && <Navigate to={resolvePage(Pages.PlayerList)} />}
-      <h1>{player?.name || <>&nbsp;</>}</h1>
+      <h1>
+        <FlagIcon region={getRegionById(metadata, player?.region || 0)} />
+        {player?.name || <>&nbsp;</>}
+      </h1>
       <CategorySelect value={category} onChange={setCategory} />
       <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
       <div className="module-row">
@@ -122,7 +124,7 @@ const PlayerProfilePage = () => {
         </div>
       </div>
       <div className="module">
-        <Deferred isWaiting={metadata.isLoading && scoresLoading}>
+        <Deferred isWaiting={metadata.isLoading || scoresLoading}>
           <table>
             <thead>
               <tr>

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
+import { CategorySelect, FlagIcon } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { getStandardLevel, MetadataContext } from '../../utils/Metadata';
-import { CategorySelect } from '../widgets';
+import { getRegionById, getStandardLevel, MetadataContext } from '../../utils/Metadata';
 
 const TrackRecordsPage = () => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
@@ -54,9 +54,12 @@ const TrackRecordsPage = () => {
                     )}
                     <td>
                       {score ? (
-                        <Link to={resolvePage(Pages.PlayerProfile, { id: score?.player.id })}>
-                          {score?.player.name}
-                        </Link>
+                        <>
+                          <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
+                          <Link to={resolvePage(Pages.PlayerProfile, { id: score?.player.id })}>
+                            {score.player.alias || score.player.name}
+                          </Link>
+                        </>
                       ) : "-"}
                     </td>
                     {isLap && <td />}
