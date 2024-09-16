@@ -24,3 +24,41 @@ export const useApi = <T,>(apiCallback: () => Promise<T>, dependencies: Dependen
 
   return state;
 };
+
+export const useApiArray = <T, R>(
+  apiCallback: (params: R) => Promise<T>,
+  callCount: number,
+  paramArray: R[],
+  dependencies: DependencyList = [],
+) => {
+  const initialState = Array.from(
+    { length: callCount },
+    (_, __) => ({ isLoading: true })
+  )
+  const [state, setState] = useState<Array<ApiState<T>>>(initialState);
+
+  useEffect(() => {
+    for (let i = 0; i < callCount; ++i) {
+      if (i >= paramArray.length) {
+        return;
+      }
+
+      apiCallback(paramArray[i]).then((data: T) => {
+        setState((prev) => [
+          ...prev.slice(0, i),
+          { isLoading: false, data },
+          ...prev.slice(i + 1),
+        ]);
+      }).catch((error: ResponseError) => {
+        setState((prev) => [
+          ...prev.slice(0, i),
+          { isLoading: false, error },
+          ...prev.slice(i + 1),
+        ]);
+      });
+    }
+    // eslint-disable-next-line
+  }, dependencies);
+
+  return state;
+};

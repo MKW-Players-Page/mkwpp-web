@@ -16,14 +16,18 @@
 /**
  * * `world` - World
  * * `continent` - Continent
+ * * `country_group` - Country Group
  * * `country` - Country
+ * * `subnational_group` - Subnational Group
  * * `subnational` - Subnational
  * @export
  */
 export const RegionTypeEnum = {
     World: 'world',
     Continent: 'continent',
+    CountryGroup: 'country_group',
     Country: 'country',
+    SubnationalGroup: 'subnational_group',
     Subnational: 'subnational'
 } as const;
 export type RegionTypeEnum = typeof RegionTypeEnum[keyof typeof RegionTypeEnum];

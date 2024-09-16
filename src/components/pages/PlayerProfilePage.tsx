@@ -27,11 +27,11 @@ const PlayerProfilePage = () => {
 
   const {
     isLoading: statsLoading,
-    data: statsList
+    data: statsList,
   } = useApi(() => api.timetrialsPlayersStatsList({
     id,
     category,
-    isLap: lapMode
+    isLap: lapMode,
   }), [category, lapMode]);
 
   const {

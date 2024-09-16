@@ -54,23 +54,27 @@ export interface TimetrialsPlayersScoresListRequest {
     category: TimetrialsPlayersScoresListCategoryEnum;
     id: number;
     isLap?: boolean;
+    region?: string;
 }
 
 export interface TimetrialsPlayersStatsListRequest {
     category: TimetrialsPlayersStatsListCategoryEnum;
     id: number;
     isLap?: boolean;
+    region?: string;
 }
 
 export interface TimetrialsRankingsListRequest {
     category: TimetrialsRankingsListCategoryEnum;
     metric: Array<TimetrialsRankingsListMetricEnum>;
     isLap?: boolean;
+    region?: string;
 }
 
 export interface TimetrialsRecordsListRequest {
     category: TimetrialsRecordsListCategoryEnum;
     isLap?: boolean;
+    region?: string;
 }
 
 export interface TimetrialsStandardsListRequest {
@@ -81,6 +85,14 @@ export interface TimetrialsTracksScoresListRequest {
     category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
     isLap?: boolean;
+    region?: string;
+}
+
+export interface TimetrialsTracksTopsListRequest {
+    category: TimetrialsTracksTopsListCategoryEnum;
+    id: number;
+    isLap?: boolean;
+    region?: string;
 }
 
 /**
@@ -203,6 +215,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['is_lap'] = requestParameters['isLap'];
         }
 
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
@@ -250,6 +266,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['isLap'] != null) {
             queryParameters['is_lap'] = requestParameters['isLap'];
+        }
+
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -305,6 +325,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['metric'] = requestParameters['metric']!.join(runtime.COLLECTION_FORMATS["csv"]);
         }
 
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
@@ -345,6 +369,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['isLap'] != null) {
             queryParameters['is_lap'] = requestParameters['isLap'];
+        }
+
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -481,6 +509,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['is_lap'] = requestParameters['isLap'];
         }
 
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
@@ -500,6 +532,59 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsTracksScoresList(requestParameters: TimetrialsTracksScoresListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreWithPlayer>> {
         const response = await this.timetrialsTracksScoresListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsTracksTopsListRaw(requestParameters: TimetrialsTracksTopsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreWithPlayer>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsTracksTopsList().'
+            );
+        }
+
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling timetrialsTracksTopsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['isLap'] != null) {
+            queryParameters['is_lap'] = requestParameters['isLap'];
+        }
+
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/api/timetrials/tracks/{id}/tops/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreWithPlayerFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsTracksTopsList(requestParameters: TimetrialsTracksTopsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreWithPlayer>> {
+        const response = await this.timetrialsTracksTopsListRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -560,3 +645,12 @@ export const TimetrialsTracksScoresListCategoryEnum = {
     Unrestricted: 'unres'
 } as const;
 export type TimetrialsTracksScoresListCategoryEnum = typeof TimetrialsTracksScoresListCategoryEnum[keyof typeof TimetrialsTracksScoresListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsTracksTopsListCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsTracksTopsListCategoryEnum = typeof TimetrialsTracksTopsListCategoryEnum[keyof typeof TimetrialsTracksTopsListCategoryEnum];

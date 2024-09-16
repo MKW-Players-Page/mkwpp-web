@@ -48,12 +48,16 @@ const SECTIONS: NavbarSection[] = [
     title: "Courses",
     items: [
       {
-        label: "Course Charts",
-        url: resolvePage(Pages.TrackList),
+        label: "Records",
+        url: resolvePage(Pages.TrackRecords),
       },
       {
-        label: "Course Records",
-        url: resolvePage(Pages.TrackRecords),
+        label: "Top 10s",
+        url: resolvePage(Pages.TrackTopsHome),
+      },
+      {
+        label: "Charts",
+        url: resolvePage(Pages.TrackList),
       },
       {
         label: "Standards",
@@ -64,10 +68,6 @@ const SECTIONS: NavbarSection[] = [
   {
     title: "Players",
     items: [
-      {
-        label: "Rankings",
-        url: '/rankings_',
-      },
       {
         label: "Average Finish",
         url: resolvePage(Pages.RankingsAverageFinish),

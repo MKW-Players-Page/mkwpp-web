@@ -56,6 +56,12 @@ export interface Region {
      * @memberof Region
      */
     parent?: number | null;
+    /**
+     * Whether this region has a dedicated tops chart and player rankings.
+     * @type {boolean}
+     * @memberof Region
+     */
+    isRanked?: boolean;
 }
 
 
@@ -86,6 +92,7 @@ export function RegionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Re
         'name': json['name'],
         'code': json['code'],
         'parent': json['parent'] == null ? undefined : json['parent'],
+        'isRanked': json['is_ranked'] == null ? undefined : json['is_ranked'],
     };
 }
 
@@ -99,6 +106,7 @@ export function RegionToJSON(value?: Omit<Region, 'id'> | null): any {
         'name': value['name'],
         'code': value['code'],
         'parent': value['parent'],
+        'is_ranked': value['isRanked'],
     };
 }
 

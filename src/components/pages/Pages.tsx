@@ -3,12 +3,13 @@ import { RouteObject, generatePath } from 'react-router-dom';
 import HomePage from './HomePage';
 import PlayerListPage from './PlayerListPage';
 import PlayerProfilePage from './PlayerProfilePage';
+import RankingsPage, { RankingsMetrics } from './RankingsPage';
 import RulesPage from './RulesPage';
+import StandardsPage from './StandardsPage';
 import TrackChartPage from './TrackChartPage';
 import TrackListPage from './TrackListPage';
 import TrackRecordsPage from './TrackRecordsPage';
-import StandardsPage from './StandardsPage';
-import RankingsPage, { RankingsMetrics } from './RankingsPage';
+import TrackTopsPage, { TrackTopsHomePage } from './TrackTopsPage';
 
 
 export type PageMap = {
@@ -59,6 +60,14 @@ export const Pages: PageMap = {
   TrackRecords: {
     path: '/records',
     element: <TrackRecordsPage />,
+  },
+  TrackTopsHome: {
+    path: '/tops',
+    element: <TrackTopsHomePage />,
+  },
+  TrackTops: {
+    path: '/tops/:region/:cup',
+    element: <TrackTopsPage />,
   },
   Standards: {
     path: '/standards',

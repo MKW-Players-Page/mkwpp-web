@@ -27,7 +27,7 @@ export const RankingsMetrics: RankingsMetricMap = {
     description:
       "Average Finish (AF for short) is the average of a player's ranking across all tracks.",
     metric: 'total_rank',
-    getValueString: (player) => String(player.totalRank / player.scoreCount),
+    getValueString: (stats) => String(stats.totalRank / stats.scoreCount),
   },
   AverageStandard: {
     title: "ARR",
@@ -35,7 +35,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "Average Rank Rating (ARR for short) is the average standard of a player's time across all " +
       "tracks.",
     metric: 'total_standard',
-    getValueString: (player) => String(player.totalStandard / player.scoreCount),
+    getValueString: (stats) => String(stats.totalStandard / stats.scoreCount),
   },
   AverageRecordRatio: {
     title: "PR:WR",
@@ -44,15 +44,15 @@ export const RankingsMetrics: RankingsMetricMap = {
       "time by the player's time. Players are ranked by the average of their PR:WR across all " +
       "tracks.",
     metric: 'total_record_ratio',
-    getValueString: (player) => (
-      (player.totalRecordRatio / player.scoreCount * 100).toFixed(4) + "%"
+    getValueString: (stats) => (
+      (stats.totalRecordRatio / stats.scoreCount * 100).toFixed(4) + "%"
     ),
   },
   TotalTime: {
     title: "Total Time",
     description: "Total time is the sum of a player's fastest times across all tracks.",
     metric: 'total_score',
-    getValueString: (player) => formatTime(player.totalScore),
+    getValueString: (stats) => formatTime(stats.totalScore),
   },
 };
 
@@ -92,16 +92,16 @@ const RankingsPage = ({ metric }: RankingsProps) => {
               </tr>
             </thead>
             <tbody>
-              {rankings?.map((player) => (
-                <tr key={player.player}>
-                  <td>{player.rank}</td>
+              {rankings?.map((stats) => (
+                <tr key={stats.player.id}>
+                  <td>{stats.rank}</td>
                   <td>
-                    <FlagIcon region={getRegionById(metadata, player.playerRegion || 0)} />
-                    <Link to={resolvePage(Pages.PlayerProfile, { id: player.player })}>
-                      {player.playerName}
+                    <FlagIcon region={getRegionById(metadata, stats.player.region || 0)} />
+                    <Link to={resolvePage(Pages.PlayerProfile, { id: stats.player.id })}>
+                      {stats.player.alias || stats.player.name}
                     </Link>
                   </td>
-                  <td>{metric.getValueString(player)}</td>
+                  <td>{metric.getValueString(stats)}</td>
                 </tr>
               ))}
             </tbody>

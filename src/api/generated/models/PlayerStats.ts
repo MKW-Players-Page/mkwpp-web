@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PlayerBasic } from './PlayerBasic';
+import {
+    PlayerBasicFromJSON,
+    PlayerBasicFromJSONTyped,
+    PlayerBasicToJSON,
+} from './PlayerBasic';
 import type { CategoryEnum } from './CategoryEnum';
 import {
     CategoryEnumFromJSON,
@@ -32,6 +38,18 @@ export interface PlayerStats {
      * @memberof PlayerStats
      */
     rank: number;
+    /**
+     * 
+     * @type {PlayerBasic}
+     * @memberof PlayerStats
+     */
+    player: PlayerBasic;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlayerStats
+     */
+    region: number;
     /**
      * 
      * @type {CategoryEnum}
@@ -74,24 +92,6 @@ export interface PlayerStats {
      * @memberof PlayerStats
      */
     totalRecordRatio: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlayerStats
-     */
-    player: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlayerStats
-     */
-    playerName: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlayerStats
-     */
-    playerRegion?: number | null;
 }
 
 
@@ -101,14 +101,14 @@ export interface PlayerStats {
  */
 export function instanceOfPlayerStats(value: object): value is PlayerStats {
     if (!('rank' in value) || value['rank'] === undefined) return false;
+    if (!('player' in value) || value['player'] === undefined) return false;
+    if (!('region' in value) || value['region'] === undefined) return false;
     if (!('category' in value) || value['category'] === undefined) return false;
     if (!('scoreCount' in value) || value['scoreCount'] === undefined) return false;
     if (!('totalScore' in value) || value['totalScore'] === undefined) return false;
     if (!('totalRank' in value) || value['totalRank'] === undefined) return false;
     if (!('totalStandard' in value) || value['totalStandard'] === undefined) return false;
     if (!('totalRecordRatio' in value) || value['totalRecordRatio'] === undefined) return false;
-    if (!('player' in value) || value['player'] === undefined) return false;
-    if (!('playerName' in value) || value['playerName'] === undefined) return false;
     return true;
 }
 
@@ -123,6 +123,8 @@ export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     return {
         
         'rank': json['rank'],
+        'player': PlayerBasicFromJSON(json['player']),
+        'region': json['region'],
         'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'scoreCount': json['score_count'],
@@ -130,9 +132,6 @@ export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'totalRank': json['total_rank'],
         'totalStandard': json['total_standard'],
         'totalRecordRatio': json['total_record_ratio'],
-        'player': json['player'],
-        'playerName': json['player_name'],
-        'playerRegion': json['player_region'] == null ? undefined : json['player_region'],
     };
 }
 
@@ -143,6 +142,8 @@ export function PlayerStatsToJSON(value?: PlayerStats | null): any {
     return {
         
         'rank': value['rank'],
+        'player': PlayerBasicToJSON(value['player']),
+        'region': value['region'],
         'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
         'score_count': value['scoreCount'],
@@ -150,9 +151,6 @@ export function PlayerStatsToJSON(value?: PlayerStats | null): any {
         'total_rank': value['totalRank'],
         'total_standard': value['totalStandard'],
         'total_record_ratio': value['totalRecordRatio'],
-        'player': value['player'],
-        'player_name': value['playerName'],
-        'player_region': value['playerRegion'],
     };
 }
 
