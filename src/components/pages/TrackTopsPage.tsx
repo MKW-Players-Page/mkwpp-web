@@ -4,7 +4,9 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
 import { CategorySelect, FlagIcon, LapModeSelect } from '../widgets';
+import { LapModeEnum } from '../widgets/LapModeSelect';
 import api, { CategoryEnum } from '../../api';
+import { TimetrialsTracksTopsListLapModeEnum } from '../../api/generated';
 import { useApiArray } from '../../hooks/ApiHook';
 import { formatTime } from '../../utils/Formatters';
 import { getRegionById, MetadataContext } from '../../utils/Metadata';
@@ -32,7 +34,7 @@ const TrackTopsPage = () => {
   const cupId = Math.max(integerOr(cupStr, 0), 0);
 
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [isLap, setIsLap] = useState<boolean>(false);
+  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
 
   const metadata = useContext(MetadataContext);
 
@@ -45,11 +47,11 @@ const TrackTopsPage = () => {
     cup?.tracks.map((track) => (
       {
         id: track,
-        region: region?.code,
         category,
-        isLap,
+        lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
+        region: region?.id,
       }
-    )) || [], [category, cup, isLap, region]
+    )) || [], [category, cup, lapMode, region]
   );
 
   return (
@@ -90,7 +92,7 @@ const TrackTopsPage = () => {
           ))}
         </div>
         <CategorySelect value={category} onChange={setCategory} />
-        <LapModeSelect value={isLap} onChange={(lapMode) => setIsLap(!!lapMode)} />
+        <LapModeSelect value={lapMode} onChange={setLapMode} />
         <div className="module-row">
           {cup && metadata.tracks?.filter((track) => cup.tracks.includes(track.id)).map((track, index) => (
             <div key={track.id}>

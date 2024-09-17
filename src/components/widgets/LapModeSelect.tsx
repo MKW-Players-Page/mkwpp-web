@@ -1,45 +1,31 @@
 
+export enum LapModeEnum {
+  Course = 'course',
+  Lap = 'lap',
+  Overall = 'overall',
+};
+
 export interface LapModeSelectProps {
   /** Whether to include Overall as an option. Defaults to false if not defined. */
   includeOverall?: boolean;
   /** The currently selected option. If included, the value for Overall is `undefined`. */
-  value?: boolean;
+  value: LapModeEnum;
   /** Callback to invoke when user attempts to select a new lap mode */
-  onChange: (isLap: boolean | undefined) => void;
-};
-
-const stringToLapMode = (value: string) => {
-  switch (value) {
-    case 'undefined': return undefined;
-    case 'true': return true;
-    case 'false':
-    default:
-      return false;
-  }
-}
-
-const getLapModeName = (mode?: boolean) => {
-  if (mode === undefined) {
-    return "Overall";
-  } else if (mode) {
-    return "Lap";
-  } else {
-    return "Course";
-  }
+  onChange: (lapMode: LapModeEnum) => void;
 };
 
 const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) => {
   const options = [
-    ...(includeOverall ? ['undefined'] : []),
-    'false',
-    'true',
+    ...(includeOverall ? [LapModeEnum.Overall] : []),
+    LapModeEnum.Course,
+    LapModeEnum.Lap,
   ];
 
   return (
-    <select value={String(value)} onChange={(e) => onChange(stringToLapMode(e.target.value))}>
+    <select value={value} onChange={(e) => onChange(e.target.value as LapModeEnum)}>
       {options.map((option) => (
         <option key={option} value={option}>
-          {getLapModeName(stringToLapMode(option))}
+          {Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}
         </option>
       ))}
     </select>

@@ -7,15 +7,18 @@ import { CategorySelect, FlagIcon, LapModeSelect } from '../widgets';
 import api, { CategoryEnum } from '../../api';
 import { useApi } from '../../hooks/ApiHook';
 import { formatDate, formatTime } from '../../utils/Formatters';
-import { getRegionById, getRegionNameFull, getStandardLevel, MetadataContext } from '../../utils/Metadata';
+import {
+  getRegionById, getRegionNameFull, getStandardLevel, MetadataContext
+} from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
+import { LapModeEnum } from '../widgets/LapModeSelect';
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<boolean>();
+  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
   const metadata = useContext(MetadataContext);
 
@@ -27,11 +30,12 @@ const PlayerProfilePage = () => {
 
   const {
     isLoading: statsLoading,
-    data: statsList,
-  } = useApi(() => api.timetrialsPlayersStatsList({
+    data: stats,
+  } = useApi(() => api.timetrialsPlayersStatsRetrieve({
     id,
     category,
-    isLap: lapMode,
+    lapMode,
+    region: 1,
   }), [category, lapMode]);
 
   const {
@@ -39,8 +43,6 @@ const PlayerProfilePage = () => {
     data: scores
   } = useApi(() => api.timetrialsPlayersScoresList({ id, category }), [category]);
 
-  // Temporary until region-based stats are implemented
-  const stats = statsList?.at(0);
   return (
     <>
       {/* Redirect to player list if id is invalid or does not exist. */}

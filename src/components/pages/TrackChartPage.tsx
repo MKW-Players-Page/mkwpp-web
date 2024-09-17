@@ -9,13 +9,15 @@ import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { getRegionById, getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
+import { LapModeEnum } from '../widgets/LapModeSelect';
+import { TimetrialsTracksScoresListLapModeEnum } from '../../api/generated';
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [isLap, setIsLap] = useState<boolean>(false);
+  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
 
   const metadata = useContext(MetadataContext);
   const track = metadata.tracks?.find((t) => t.id === id);
@@ -23,8 +25,8 @@ const TrackChartPage = () => {
   const { isLoading, data: scores } = useApi(() => api.timetrialsTracksScoresList({
     id,
     category,
-    isLap,
-  }), [category, isLap]);
+    lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
+  }), [category, lapMode]);
 
   return (
     <>
@@ -33,7 +35,7 @@ const TrackChartPage = () => {
       <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
       <h1>{track?.name}</h1>
       <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
-      <LapModeSelect value={isLap} onChange={(mode) => setIsLap(!!mode)} />
+      <LapModeSelect value={lapMode} onChange={setLapMode} />
       <div className="module">
         <Deferred isWaiting={metadata.isLoading || isLoading}>
           <table>

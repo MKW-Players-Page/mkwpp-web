@@ -53,28 +53,26 @@ export interface TimetrialsPlayersRetrieveRequest {
 export interface TimetrialsPlayersScoresListRequest {
     category: TimetrialsPlayersScoresListCategoryEnum;
     id: number;
-    isLap?: boolean;
-    region?: string;
+    lapMode?: TimetrialsPlayersScoresListLapModeEnum;
 }
 
-export interface TimetrialsPlayersStatsListRequest {
-    category: TimetrialsPlayersStatsListCategoryEnum;
+export interface TimetrialsPlayersStatsRetrieveRequest {
+    category: TimetrialsPlayersStatsRetrieveCategoryEnum;
     id: number;
-    isLap?: boolean;
-    region?: string;
+    lapMode: TimetrialsPlayersStatsRetrieveLapModeEnum;
+    region: number;
 }
 
 export interface TimetrialsRankingsListRequest {
     category: TimetrialsRankingsListCategoryEnum;
-    metric: Array<TimetrialsRankingsListMetricEnum>;
-    isLap?: boolean;
-    region?: string;
+    lapMode: TimetrialsRankingsListLapModeEnum;
+    metric: TimetrialsRankingsListMetricEnum;
+    region: number;
 }
 
 export interface TimetrialsRecordsListRequest {
     category: TimetrialsRecordsListCategoryEnum;
-    isLap?: boolean;
-    region?: string;
+    lapMode?: TimetrialsRecordsListLapModeEnum;
 }
 
 export interface TimetrialsStandardsListRequest {
@@ -84,15 +82,14 @@ export interface TimetrialsStandardsListRequest {
 export interface TimetrialsTracksScoresListRequest {
     category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
-    isLap?: boolean;
-    region?: string;
+    lapMode: TimetrialsTracksScoresListLapModeEnum;
 }
 
 export interface TimetrialsTracksTopsListRequest {
     category: TimetrialsTracksTopsListCategoryEnum;
     id: number;
-    isLap?: boolean;
-    region?: string;
+    lapMode: TimetrialsTracksTopsListLapModeEnum;
+    region?: number;
 }
 
 /**
@@ -211,12 +208,8 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['category'] = requestParameters['category'];
         }
 
-        if (requestParameters['isLap'] != null) {
-            queryParameters['is_lap'] = requestParameters['isLap'];
-        }
-
-        if (requestParameters['region'] != null) {
-            queryParameters['region'] = requestParameters['region'];
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -243,18 +236,32 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsPlayersStatsListRaw(requestParameters: TimetrialsPlayersStatsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerStats>>> {
+    async timetrialsPlayersStatsRetrieveRaw(requestParameters: TimetrialsPlayersStatsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PlayerStats>> {
         if (requestParameters['category'] == null) {
             throw new runtime.RequiredError(
                 'category',
-                'Required parameter "category" was null or undefined when calling timetrialsPlayersStatsList().'
+                'Required parameter "category" was null or undefined when calling timetrialsPlayersStatsRetrieve().'
             );
         }
 
         if (requestParameters['id'] == null) {
             throw new runtime.RequiredError(
                 'id',
-                'Required parameter "id" was null or undefined when calling timetrialsPlayersStatsList().'
+                'Required parameter "id" was null or undefined when calling timetrialsPlayersStatsRetrieve().'
+            );
+        }
+
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsPlayersStatsRetrieve().'
+            );
+        }
+
+        if (requestParameters['region'] == null) {
+            throw new runtime.RequiredError(
+                'region',
+                'Required parameter "region" was null or undefined when calling timetrialsPlayersStatsRetrieve().'
             );
         }
 
@@ -264,8 +271,8 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['category'] = requestParameters['category'];
         }
 
-        if (requestParameters['isLap'] != null) {
-            queryParameters['is_lap'] = requestParameters['isLap'];
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         if (requestParameters['region'] != null) {
@@ -284,13 +291,13 @@ export class TimetrialsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PlayerStatsFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerStatsFromJSON(jsonValue));
     }
 
     /**
      */
-    async timetrialsPlayersStatsList(requestParameters: TimetrialsPlayersStatsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerStats>> {
-        const response = await this.timetrialsPlayersStatsListRaw(requestParameters, initOverrides);
+    async timetrialsPlayersStatsRetrieve(requestParameters: TimetrialsPlayersStatsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PlayerStats> {
+        const response = await this.timetrialsPlayersStatsRetrieveRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -304,10 +311,24 @@ export class TimetrialsApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsRankingsList().'
+            );
+        }
+
         if (requestParameters['metric'] == null) {
             throw new runtime.RequiredError(
                 'metric',
                 'Required parameter "metric" was null or undefined when calling timetrialsRankingsList().'
+            );
+        }
+
+        if (requestParameters['region'] == null) {
+            throw new runtime.RequiredError(
+                'region',
+                'Required parameter "region" was null or undefined when calling timetrialsRankingsList().'
             );
         }
 
@@ -317,12 +338,12 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['category'] = requestParameters['category'];
         }
 
-        if (requestParameters['isLap'] != null) {
-            queryParameters['is_lap'] = requestParameters['isLap'];
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         if (requestParameters['metric'] != null) {
-            queryParameters['metric'] = requestParameters['metric']!.join(runtime.COLLECTION_FORMATS["csv"]);
+            queryParameters['metric'] = requestParameters['metric'];
         }
 
         if (requestParameters['region'] != null) {
@@ -367,12 +388,8 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['category'] = requestParameters['category'];
         }
 
-        if (requestParameters['isLap'] != null) {
-            queryParameters['is_lap'] = requestParameters['isLap'];
-        }
-
-        if (requestParameters['region'] != null) {
-            queryParameters['region'] = requestParameters['region'];
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -499,18 +516,21 @@ export class TimetrialsApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsTracksScoresList().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
         }
 
-        if (requestParameters['isLap'] != null) {
-            queryParameters['is_lap'] = requestParameters['isLap'];
-        }
-
-        if (requestParameters['region'] != null) {
-            queryParameters['region'] = requestParameters['region'];
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -552,14 +572,21 @@ export class TimetrialsApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsTracksTopsList().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
         }
 
-        if (requestParameters['isLap'] != null) {
-            queryParameters['is_lap'] = requestParameters['isLap'];
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         if (requestParameters['region'] != null) {
@@ -602,12 +629,29 @@ export type TimetrialsPlayersScoresListCategoryEnum = typeof TimetrialsPlayersSc
 /**
  * @export
  */
-export const TimetrialsPlayersStatsListCategoryEnum = {
+export const TimetrialsPlayersScoresListLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap'
+} as const;
+export type TimetrialsPlayersScoresListLapModeEnum = typeof TimetrialsPlayersScoresListLapModeEnum[keyof typeof TimetrialsPlayersScoresListLapModeEnum];
+/**
+ * @export
+ */
+export const TimetrialsPlayersStatsRetrieveCategoryEnum = {
     NonShortcut: 'nonsc',
     Shortcut: 'sc',
     Unrestricted: 'unres'
 } as const;
-export type TimetrialsPlayersStatsListCategoryEnum = typeof TimetrialsPlayersStatsListCategoryEnum[keyof typeof TimetrialsPlayersStatsListCategoryEnum];
+export type TimetrialsPlayersStatsRetrieveCategoryEnum = typeof TimetrialsPlayersStatsRetrieveCategoryEnum[keyof typeof TimetrialsPlayersStatsRetrieveCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsPlayersStatsRetrieveLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap',
+    Overall: 'overall'
+} as const;
+export type TimetrialsPlayersStatsRetrieveLapModeEnum = typeof TimetrialsPlayersStatsRetrieveLapModeEnum[keyof typeof TimetrialsPlayersStatsRetrieveLapModeEnum];
 /**
  * @export
  */
@@ -617,6 +661,15 @@ export const TimetrialsRankingsListCategoryEnum = {
     Unrestricted: 'unres'
 } as const;
 export type TimetrialsRankingsListCategoryEnum = typeof TimetrialsRankingsListCategoryEnum[keyof typeof TimetrialsRankingsListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsRankingsListLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap',
+    Overall: 'overall'
+} as const;
+export type TimetrialsRankingsListLapModeEnum = typeof TimetrialsRankingsListLapModeEnum[keyof typeof TimetrialsRankingsListLapModeEnum];
 /**
  * @export
  */
@@ -639,6 +692,14 @@ export type TimetrialsRecordsListCategoryEnum = typeof TimetrialsRecordsListCate
 /**
  * @export
  */
+export const TimetrialsRecordsListLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap'
+} as const;
+export type TimetrialsRecordsListLapModeEnum = typeof TimetrialsRecordsListLapModeEnum[keyof typeof TimetrialsRecordsListLapModeEnum];
+/**
+ * @export
+ */
 export const TimetrialsTracksScoresListCategoryEnum = {
     NonShortcut: 'nonsc',
     Shortcut: 'sc',
@@ -648,9 +709,25 @@ export type TimetrialsTracksScoresListCategoryEnum = typeof TimetrialsTracksScor
 /**
  * @export
  */
+export const TimetrialsTracksScoresListLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap'
+} as const;
+export type TimetrialsTracksScoresListLapModeEnum = typeof TimetrialsTracksScoresListLapModeEnum[keyof typeof TimetrialsTracksScoresListLapModeEnum];
+/**
+ * @export
+ */
 export const TimetrialsTracksTopsListCategoryEnum = {
     NonShortcut: 'nonsc',
     Shortcut: 'sc',
     Unrestricted: 'unres'
 } as const;
 export type TimetrialsTracksTopsListCategoryEnum = typeof TimetrialsTracksTopsListCategoryEnum[keyof typeof TimetrialsTracksTopsListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsTracksTopsListLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap'
+} as const;
+export type TimetrialsTracksTopsListLapModeEnum = typeof TimetrialsTracksTopsListLapModeEnum[keyof typeof TimetrialsTracksTopsListLapModeEnum];
