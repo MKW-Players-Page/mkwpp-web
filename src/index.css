@@ -21,6 +21,7 @@
   /* Modules */
   --module-background-color: var(--navbar-background-color);
   --module-background-color-alt: var(--navbar-background-color-hover);
+  --module-background-color-focus: #1A3C65;
   --module-border-color: #304868;
 }
 
