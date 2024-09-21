@@ -10,6 +10,7 @@ import TrackChartPage from './TrackChartPage';
 import TrackListPage from './TrackListPage';
 import TrackRecordsPage from './TrackRecordsPage';
 import TrackTopsPage, { TrackTopsHomePage } from './TrackTopsPage';
+import UserLoginPage from './user/UserLoginPage';
 
 
 export type PageMap = {
@@ -72,6 +73,10 @@ export const Pages: PageMap = {
   Standards: {
     path: '/standards',
     element: <StandardsPage />,
+  },
+  UserLogin: {
+    path: '/login',
+    element: <UserLoginPage />,
   },
 };
 

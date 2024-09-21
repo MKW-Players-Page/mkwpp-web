@@ -1,4 +1,7 @@
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
   height: var(--header-height);
   position: fixed;
@@ -12,4 +15,24 @@
 .logo {
   width: auto;
   height: 100%;
+}
+
+.account-actions {
+  display: flex;
+  align-items: center;
+  padding-right: 24px;
+  gap: 40px;
+}
+
+.account-actions button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.account-actions button:hover {
+  color: var(--alt-text-color);
 }
