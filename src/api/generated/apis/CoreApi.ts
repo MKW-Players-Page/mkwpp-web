@@ -25,6 +25,10 @@ import {
     UserToJSON,
 } from '../models/index';
 
+export interface CreateUserRequest {
+    user: Omit<User, 'player'>;
+}
+
 export interface LoginRequest {
     auth: Omit<Auth, 'token'|'expiry'>;
 }
@@ -33,6 +37,40 @@ export interface LoginRequest {
  * 
  */
 export class CoreApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async createUserRaw(requestParameters: CreateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<User>> {
+        if (requestParameters['user'] == null) {
+            throw new runtime.RequiredError(
+                'user',
+                'Required parameter "user" was null or undefined when calling createUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/core/signup/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserToJSON(requestParameters['user']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async createUser(requestParameters: CreateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<User> {
+        const response = await this.createUserRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      */

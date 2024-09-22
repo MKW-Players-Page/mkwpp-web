@@ -33,10 +33,16 @@ export interface User {
     email: string;
     /**
      * 
+     * @type {string}
+     * @memberof User
+     */
+    password: string;
+    /**
+     * 
      * @type {number}
      * @memberof User
      */
-    player: number;
+    readonly player: number;
 }
 
 /**
@@ -45,6 +51,7 @@ export interface User {
 export function instanceOfUser(value: object): value is User {
     if (!('username' in value) || value['username'] === undefined) return false;
     if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('password' in value) || value['password'] === undefined) return false;
     if (!('player' in value) || value['player'] === undefined) return false;
     return true;
 }
@@ -61,11 +68,12 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
         
         'username': json['username'],
         'email': json['email'],
+        'password': json['password'],
         'player': json['player'],
     };
 }
 
-export function UserToJSON(value?: User | null): any {
+export function UserToJSON(value?: Omit<User, 'player'> | null): any {
     if (value == null) {
         return value;
     }
@@ -73,7 +81,7 @@ export function UserToJSON(value?: User | null): any {
         
         'username': value['username'],
         'email': value['email'],
-        'player': value['player'],
+        'password': value['password'],
     };
 }
 

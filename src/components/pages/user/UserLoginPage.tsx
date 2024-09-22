@@ -1,15 +1,16 @@
-import { ChangeEvent, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Pages, resolvePage } from '../Pages';
 import { coreApi } from '../../../api';
 import { ResponseError } from '../../../api/generated';
 import { loginUser, UserContext } from '../../../utils/User';
+import Form, { Field } from '../../widgets/Form';
 
 interface UserLoginState {
   username: string;
   password: string;
-  error?: string;
+  errors: { [key: string]: string[]; };
 };
 
 const UserLoginPage = () => {
@@ -17,12 +18,8 @@ const UserLoginPage = () => {
 
   const { setUser } = useContext(UserContext);
 
-  const initialState = { username: "", password: "" };
+  const initialState = { username: "", password: "", errors: {} };
   const [state, setState] = useState<UserLoginState>(initialState);
-
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
 
   const submit = () => {
     coreApi.login({
@@ -33,8 +30,7 @@ const UserLoginPage = () => {
     }).catch((reason: ResponseError) => {
       if (reason.response) {
         reason.response.json().then((json) => {
-          const error = json['non_field_errors'] || "Invalid credentials";
-          setState((prev) => ({ ...prev, error }));
+          setState((prev) => ({ ...prev, errors: { ...json } }));
         });
       }
     });
@@ -42,14 +38,10 @@ const UserLoginPage = () => {
 
   return (
     <>
-      <h1>Log In</h1>
-      {state.error && <b>{state.error}</b>}
-      <p>Username</p>
-      <input type="text" name="username" value={state.username} onChange={onInputChange} />
-      <p>Password</p>
-      <input type="password" name="password" value={state.password} onChange={onInputChange} />
-      <br />
-      <button onClick={submit}>Log In</button>
+      <Form state={state} setState={setState} title="Log In" submitLabel="Log In" submit={submit}>
+        <Field type="text" field="username" label="Username" />
+        <Field type="password" field="password" label="Password" />
+      </Form>
     </>
   );
 };

@@ -20,6 +20,7 @@ const Header = () => {
       <div className="account-actions">
         {user ? (
           <>
+            {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
             <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
               {user.username}
             </Link>
@@ -30,7 +31,7 @@ const Header = () => {
             <Link to={resolvePage(Pages.UserLogin)}>
               Log In
             </Link>
-            <Link to="">
+            <Link to={resolvePage(Pages.UserJoin)}>
               Join
             </Link>
           </>

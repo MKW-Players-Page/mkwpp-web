@@ -25,12 +25,10 @@
 }
 
 .account-actions button {
-  appearance: none;
   background-color: transparent;
-  border: none;
-  font: inherit;
   color: inherit;
-  cursor: pointer;
+  border: none;
+  padding: 0;
 }
 
 .account-actions button:hover {

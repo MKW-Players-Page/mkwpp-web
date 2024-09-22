@@ -23,6 +23,10 @@
   --module-background-color-alt: var(--navbar-background-color-hover);
   --module-background-color-focus: #1A3C65;
   --module-border-color: #304868;
+  /* Inputs */
+  --input-background-color: #2C405F;
+  --input-background-color-hover: #364C6D;
+  --input-border-color: #405463;
 }
 
 
@@ -79,4 +83,29 @@ ul {
   list-style-type: none;
   margin: 10px 0px;
   padding: 0px 12px;
+}
+
+
+button, input[type="submit"] {
+  appearance: none;
+  background-color: var(--input-background-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  padding: 4px 36px;
+  font: inherit;
+  cursor: pointer;
+}
+
+input {
+  appearance: none;
+  background-color: var(--input-background-color);
+  color: var(--text-color);
+  border: none;
+  padding: 2px 4px;
+  font: inherit;
+}
+
+button:hover, input:hover, input[type="submit"]:hover {
+  background-color: var(--input-background-color-hover);
 }

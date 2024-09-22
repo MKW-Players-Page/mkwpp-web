@@ -1,0 +1,12 @@
+.form-fields {
+  margin-bottom: 28px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field-error {
+  font-size: 0.75rem;
+  color: red;
+}
