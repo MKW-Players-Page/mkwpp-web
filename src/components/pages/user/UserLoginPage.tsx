@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { Pages, resolvePage } from '../Pages';
 import { coreApi } from '../../../api';
@@ -16,13 +16,13 @@ interface UserLoginState {
 const UserLoginPage = () => {
   const navigate = useNavigate();
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const initialState = { username: "", password: "", errors: {} };
   const [state, setState] = useState<UserLoginState>(initialState);
 
   const submit = () => {
-    coreApi.login({
+    coreApi.coreLoginCreate({
       auth: { username: state.username, password: state.password }
     }).then((auth) => {
       loginUser(setUser, auth);
@@ -38,6 +38,8 @@ const UserLoginPage = () => {
 
   return (
     <>
+      {/* Redirect users to home page if they are already logged in. */}
+      {user && <Navigate to={resolvePage(Pages.Home)} />}
       <Form state={state} setState={setState} title="Log In" submitLabel="Log In" submit={submit}>
         <Field type="text" field="username" label="Username" />
         <Field type="password" field="password" label="Password" />

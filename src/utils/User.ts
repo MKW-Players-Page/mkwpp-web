@@ -18,7 +18,7 @@ export const UserContext = createContext<UserContextType>({
  * using the given callback.
  */
 export const fetchCurrentUser = (setUser: (user?: User) => void) => {
-  coreApi.currentUser().then((user) => {
+  coreApi.coreUserRetrieve().then((user) => {
     setUser(user);
   }).catch(() => {
     setUser();
@@ -38,5 +38,5 @@ export const logoutUser = (setUser: (user?: User) => void) => {
     clearToken();
   };
 
-  coreApi.logout().then(clearUserData).catch(clearUserData);
+  coreApi.coreLogoutCreate().then(clearUserData).catch(clearUserData);
 };

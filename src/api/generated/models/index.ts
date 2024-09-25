@@ -14,3 +14,4 @@ export * from './StandardLevel';
 export * from './Track';
 export * from './TrackCup';
 export * from './User';
+export * from './VerificationToken';

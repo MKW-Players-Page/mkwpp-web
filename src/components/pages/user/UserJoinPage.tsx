@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { Pages, resolvePage } from '../Pages';
 import Form, { Field } from '../../widgets/Form';
 import { coreApi } from '../../../api';
 import { ResponseError } from '../../../api/generated';
+import { UserContext } from '../../../utils/User';
 
 interface UserJoinState {
   email: string;
@@ -20,6 +21,8 @@ const UserJoinPage = () => {
   const initialState = { email: "", username: "", password: "", password2: "", errors: {} };
   const [state, setState] = useState<UserJoinState>(initialState);
 
+  const { user } = useContext(UserContext);
+
   const submit = () => {
     setState((prev) => ({ ...prev, errors: {} }));
 
@@ -34,7 +37,7 @@ const UserJoinPage = () => {
       return;
     }
 
-    coreApi.createUser({
+    coreApi.coreSignupCreate({
       user: { username: state.username, email: state.email, password: state.password }
     }).then(() => {
       navigate(resolvePage(Pages.UserJoinSuccess));
@@ -50,6 +53,8 @@ const UserJoinPage = () => {
 
   return (
     <>
+      {/* Redirect users to home page if they are already logged in. */}
+      {user && <Navigate to={resolvePage(Pages.Home)} />}
       <Form state={state} setState={setState} title="Join" submitLabel="Join" submit={submit}>
         <Field type="email" field="email" label="Email" />
         <Field type="text" field="username" label="Username" />

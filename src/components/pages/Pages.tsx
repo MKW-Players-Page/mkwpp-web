@@ -10,6 +10,7 @@ import TrackChartPage from './TrackChartPage';
 import TrackListPage from './TrackListPage';
 import TrackRecordsPage from './TrackRecordsPage';
 import TrackTopsPage, { TrackTopsHomePage } from './TrackTopsPage';
+import UserActivationPage from './user/UserActivationPage';
 import UserJoinPage, { UserJoinSuccessPage } from './user/UserJoinPage';
 import UserLoginPage from './user/UserLoginPage';
 
@@ -74,6 +75,10 @@ export const Pages: PageMap = {
   Standards: {
     path: '/standards',
     element: <StandardsPage />,
+  },
+  UserActivation: {
+    path: '/activate',
+    element: <UserActivationPage />,
   },
   UserJoin: {
     path: '/join',

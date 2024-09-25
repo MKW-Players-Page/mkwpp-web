@@ -16,5 +16,6 @@ models/StandardLevel.ts
 models/Track.ts
 models/TrackCup.ts
 models/User.ts
+models/VerificationToken.ts
 models/index.ts
 runtime.ts
