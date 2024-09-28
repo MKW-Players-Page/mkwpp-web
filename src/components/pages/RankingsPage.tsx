@@ -10,6 +10,7 @@ import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from '../
 import { useApi } from '../../hooks';
 import { formatTime } from '../../utils/Formatters';
 import { getRegionById, MetadataContext } from '../../utils/Metadata';
+import { UserContext } from '../../utils/User';
 
 export interface RankingsMetric {
   title: string;
@@ -67,6 +68,8 @@ const RankingsPage = ({ metric }: RankingsProps) => {
 
   const metadata = useContext(MetadataContext);
 
+  const { user } = useContext(UserContext);
+
   const {
     isLoading,
     data: rankings,
@@ -95,7 +98,10 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             </thead>
             <tbody>
               {rankings?.map((stats) => (
-                <tr key={stats.player.id}>
+                <tr
+                  key={stats.player.id}
+                  className={user && stats.player.id === user.player ? 'highlighted' : ''}
+                >
                   <td>{stats.rank}</td>
                   <td>
                     <FlagIcon region={getRegionById(metadata, stats.player.region || 0)} />

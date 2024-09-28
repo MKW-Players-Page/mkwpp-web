@@ -4,13 +4,14 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Pages, resolvePage } from './Pages';
 import Deferred from '../global/Deferred';
 import { CategorySelect, FlagIcon, LapModeSelect } from '../widgets';
+import { LapModeEnum } from '../widgets/LapModeSelect';
 import api, { CategoryEnum } from '../../api';
+import { TimetrialsTracksScoresListLapModeEnum } from '../../api/generated';
 import { useApi } from '../../hooks';
 import { formatDate, formatTime } from '../../utils/Formatters';
 import { getRegionById, getStandardLevel, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
-import { LapModeEnum } from '../widgets/LapModeSelect';
-import { TimetrialsTracksScoresListLapModeEnum } from '../../api/generated';
+import { UserContext } from '../../utils/User';
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -18,6 +19,8 @@ const TrackChartPage = () => {
 
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
+
+  const { user } = useContext(UserContext);
 
   const metadata = useContext(MetadataContext);
   const track = metadata.tracks?.find((t) => t.id === id);
@@ -52,7 +55,10 @@ const TrackChartPage = () => {
             </thead>
             <tbody>
               {scores?.map((score) => (
-                <tr key={score.id}>
+                <tr
+                  key={score.id}
+                  className={user && score.player.id === user.player ? 'highlighted' : ''}
+                >
                   <td>{score.rank}</td>
                   <td>
                     <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />

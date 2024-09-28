@@ -1,6 +1,8 @@
+apis/CoreApi.ts
 apis/TimetrialsApi.ts
 apis/index.ts
 index.ts
+models/Auth.ts
 models/CategoryEnum.ts
 models/Player.ts
 models/PlayerBasic.ts
@@ -13,5 +15,7 @@ models/Standard.ts
 models/StandardLevel.ts
 models/Track.ts
 models/TrackCup.ts
+models/User.ts
+models/VerificationToken.ts
 models/index.ts
 runtime.ts

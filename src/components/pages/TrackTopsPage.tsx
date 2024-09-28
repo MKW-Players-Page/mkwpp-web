@@ -11,6 +11,7 @@ import { useApiArray } from '../../hooks/ApiHook';
 import { formatTime } from '../../utils/Formatters';
 import { getRegionById, MetadataContext } from '../../utils/Metadata';
 import { integerOr } from '../../utils/Numbers';
+import { UserContext } from '../../utils/User';
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -40,6 +41,8 @@ const TrackTopsPage = () => {
 
   const region = metadata.regions?.find((r) => r.code.toLowerCase() === regionCode && r.isRanked);
   const cup = metadata.cups?.find((c) => c.id === cupId);
+
+  const { user } = useContext(UserContext);
 
   const tops = useApiArray(
     (params) => api.timetrialsTracksTopsList(params),
@@ -94,7 +97,9 @@ const TrackTopsPage = () => {
         <CategorySelect value={category} onChange={setCategory} />
         <LapModeSelect value={lapMode} onChange={setLapMode} />
         <div className="module-row">
-          {cup && metadata.tracks?.filter((track) => cup.tracks.includes(track.id)).map((track, index) => (
+          {cup && metadata.tracks?.filter(
+            (track) => cup.tracks.includes(track.id)
+          ).map((track, index) => (
             <div key={track.id}>
               <h1>{track.name}</h1>
               <div className="module">
@@ -102,7 +107,10 @@ const TrackTopsPage = () => {
                   <table>
                     <tbody>
                       {tops[index].data?.map((score) => (
-                        <tr key={score.id}>
+                        <tr
+                          key={score.id}
+                          className={user && score.player.id === user.player ? 'highlighted' : ''}
+                        >
                           <td>{score.rank}</td>
                           <td>
                             <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />

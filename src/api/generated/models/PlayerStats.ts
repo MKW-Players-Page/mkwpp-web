@@ -92,6 +92,18 @@ export interface PlayerStats {
      * @memberof PlayerStats
      */
     totalRecordRatio: number;
+    /**
+     * Sum of track records
+     * @type {number}
+     * @memberof PlayerStats
+     */
+    totalRecords: number;
+    /**
+     * Sum of leaderboard points
+     * @type {number}
+     * @memberof PlayerStats
+     */
+    leaderboardPoints: number;
 }
 
 
@@ -109,6 +121,8 @@ export function instanceOfPlayerStats(value: object): value is PlayerStats {
     if (!('totalRank' in value) || value['totalRank'] === undefined) return false;
     if (!('totalStandard' in value) || value['totalStandard'] === undefined) return false;
     if (!('totalRecordRatio' in value) || value['totalRecordRatio'] === undefined) return false;
+    if (!('totalRecords' in value) || value['totalRecords'] === undefined) return false;
+    if (!('leaderboardPoints' in value) || value['leaderboardPoints'] === undefined) return false;
     return true;
 }
 
@@ -132,6 +146,8 @@ export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'totalRank': json['total_rank'],
         'totalStandard': json['total_standard'],
         'totalRecordRatio': json['total_record_ratio'],
+        'totalRecords': json['total_records'],
+        'leaderboardPoints': json['leaderboard_points'],
     };
 }
 
@@ -151,6 +167,8 @@ export function PlayerStatsToJSON(value?: PlayerStats | null): any {
         'total_rank': value['totalRank'],
         'total_standard': value['totalStandard'],
         'total_record_ratio': value['totalRecordRatio'],
+        'total_records': value['totalRecords'],
+        'leaderboard_points': value['leaderboardPoints'],
     };
 }
 

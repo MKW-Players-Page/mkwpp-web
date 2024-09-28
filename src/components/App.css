@@ -30,3 +30,17 @@
   font-style: italic;
   color: var(--alt-text-color);
 }
+
+.highlighted td:not([rowspan="2"]) {
+  background-color: var(--module-background-color-focus);
+}
+
+.highlighted td:first-child, .highlighted td[rowspan="2"] + td {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.highlighted td:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
