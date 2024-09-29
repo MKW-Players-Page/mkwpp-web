@@ -6,7 +6,7 @@ import { Pages, resolvePage } from "../pages";
 import { logoutUser, UserContext } from "../../utils/User";
 
 const Header = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { isLoading, user, setUser } = useContext(UserContext);
 
   const onLogout = () => {
     logoutUser(setUser);
@@ -17,11 +17,12 @@ const Header = () => {
       <Link to={resolvePage(Pages.Home)}>
         <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
       </Link>
-      <div className="account-actions">
+      {!isLoading && <div className="account-actions">
         {user ? (
           <>
             {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
             <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>{user.username}</Link>
+            <Link to={resolvePage(Pages.Submission)}>Submit</Link>
             <button onClick={onLogout}>Log Out</button>
           </>
         ) : (
@@ -30,7 +31,7 @@ const Header = () => {
             <Link to={resolvePage(Pages.UserJoin)}>Join</Link>
           </>
         )}
-      </div>
+      </div>}
     </header>
   );
 };

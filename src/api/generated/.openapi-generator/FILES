@@ -10,9 +10,11 @@ models/PlayerStats.ts
 models/Region.ts
 models/RegionTypeEnum.ts
 models/Score.ts
+models/ScoreSubmission.ts
 models/ScoreWithPlayer.ts
 models/Standard.ts
 models/StandardLevel.ts
+models/StatusEnum.ts
 models/Track.ts
 models/TrackCup.ts
 models/User.ts

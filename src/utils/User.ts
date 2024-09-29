@@ -4,12 +4,14 @@ import { Auth, coreApi, User } from "../api";
 import { clearToken, setToken } from "./Auth";
 
 export interface UserContextType {
+  isLoading: boolean;
   user?: User;
   setUser: (user?: User) => void;
 }
 
 /** Information about the currently authenticated user. */
 export const UserContext = createContext<UserContextType>({
+  isLoading: false,
   setUser: () => {},
 });
 

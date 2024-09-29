@@ -104,6 +104,12 @@ export interface ScoreWithPlayer {
      * @memberof ScoreWithPlayer
      */
     ghostLink?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScoreWithPlayer
+     */
+    comment?: string | null;
 }
 
 
@@ -145,6 +151,7 @@ export function ScoreWithPlayerFromJSONTyped(json: any, ignoreDiscriminator: boo
         'date': json['date'] == null ? undefined : (new Date(json['date'])),
         'videoLink': json['video_link'] == null ? undefined : json['video_link'],
         'ghostLink': json['ghost_link'] == null ? undefined : json['ghost_link'],
+        'comment': json['comment'] == null ? undefined : json['comment'],
     };
 }
 
@@ -165,6 +172,7 @@ export function ScoreWithPlayerToJSON(value?: Omit<ScoreWithPlayer, 'id'> | null
         'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
         'video_link': value['videoLink'],
         'ghost_link': value['ghostLink'],
+        'comment': value['comment'],
     };
 }
 

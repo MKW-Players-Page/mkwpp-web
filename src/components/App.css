@@ -22,8 +22,25 @@
   gap: 16px;
 }
 
-.col-icon {
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card {
+  padding: 6px 12px;
+  border: 1px solid var(--module-border-color);
+}
+
+.icon-cell {
   width: 16px;
+  padding: 0 2px;
+}
+
+.icon-cell:last-child {
+  padding-right: 6px;
 }
 
 .fallthrough,

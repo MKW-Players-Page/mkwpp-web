@@ -8,10 +8,22 @@ import { Header, Navbar } from "./global";
 import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";
 
+
+interface AppUserState {
+  isLoading: boolean;
+  user?: User;
+};
+
+
 const App = () => {
   const metadata = useMetadata();
 
-  const [user, setUser] = useState<User>();
+  const initialUserState = { isLoading: true };
+  const [user, setUserState] = useState<AppUserState>(initialUserState);
+
+  const setUser = (user?: User) => {
+    setUserState({ isLoading: false, user });
+  };
 
   useEffect(() => {
     fetchCurrentUser(setUser);
@@ -19,7 +31,7 @@ const App = () => {
 
   return (
     <>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
         <Header />
         <Navbar />
         <div className="content">

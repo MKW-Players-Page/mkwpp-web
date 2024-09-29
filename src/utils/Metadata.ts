@@ -96,3 +96,16 @@ export const getStandardLevel = (metadata: Metadata, standardId: number) => {
 
   return undefined;
 };
+
+/**
+ * @param metadata The Metadata object returned from `useContext(MetadataContext)`
+ * @param trackId The id of the track
+ * @returns A Track object, or `undefined` if no track with the given id exists.
+ */
+export const getTrackById = (metadata: Metadata, trackId: number) => {
+  if (!metadata.tracks) {
+    return undefined;
+  }
+
+  return metadata.tracks?.find((track) => track.id === trackId);
+};

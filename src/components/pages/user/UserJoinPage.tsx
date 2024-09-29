@@ -13,6 +13,7 @@ interface UserJoinState {
   password: string;
   password2: string;
   errors: { [key: string]: string[] };
+  submitting: boolean;
 }
 
 const UserJoinPage = () => {
@@ -24,12 +25,13 @@ const UserJoinPage = () => {
     password: "",
     password2: "",
     errors: {},
+    submitting: false,
   };
   const [state, setState] = useState<UserJoinState>(initialState);
 
   const { user } = useContext(UserContext);
 
-  const submit = () => {
+  const submit = (done: () => void) => {
     setState((prev) => ({ ...prev, errors: {} }));
 
     if (state.password !== state.password2) {
@@ -43,25 +45,20 @@ const UserJoinPage = () => {
       return;
     }
 
-    coreApi
-      .coreSignupCreate({
-        user: {
-          username: state.username,
-          email: state.email,
-          password: state.password,
-        },
-      })
-      .then(() => {
-        navigate(resolvePage(Pages.UserJoinSuccess));
-      })
-      .catch((error: ResponseError) => {
-        error.response.json().then((json) => {
-          setState((prev) => ({
-            ...prev,
-            errors: { ...json },
-          }));
-        });
+    coreApi.coreSignupCreate({
+      user: { username: state.username, email: state.email, password: state.password }
+    }).then(() => {
+      navigate(resolvePage(Pages.UserJoinSuccess));
+      done();
+    }).catch((error: ResponseError) => {
+      error.response.json().then((json) => {
+        setState((prev) => ({
+          ...prev,
+          errors: { ...json },
+        }));
       });
+      done();
+    });
   };
 
   return (
