@@ -7,7 +7,7 @@
 .deferred {
   width: 32px;
   height: 32px;
-  border: 4px dotted #FFF;
+  border: 4px dotted #fff;
   border-radius: 50%;
   display: inline-block;
   animation: deferred-rotation 4s linear infinite;

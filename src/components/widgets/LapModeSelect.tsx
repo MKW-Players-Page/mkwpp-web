@@ -1,9 +1,8 @@
-
 export enum LapModeEnum {
-  Course = 'course',
-  Lap = 'lap',
-  Overall = 'overall',
-};
+  Course = "course",
+  Lap = "lap",
+  Overall = "overall",
+}
 
 export interface LapModeSelectProps {
   /** Whether to include Overall as an option. Defaults to false if not defined. */
@@ -12,7 +11,7 @@ export interface LapModeSelectProps {
   value: LapModeEnum;
   /** Callback to invoke when user attempts to select a new lap mode */
   onChange: (lapMode: LapModeEnum) => void;
-};
+}
 
 const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) => {
   const options = [

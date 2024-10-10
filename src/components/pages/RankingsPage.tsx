@@ -1,23 +1,23 @@
-import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
-import { Pages, resolvePage } from './Pages';
-import Deferred from '../global/Deferred';
-import { CategorySelect, FlagIcon, LapModeSelect } from '../widgets';
-import { LapModeEnum } from '../widgets/LapModeSelect';
-import api, { CategoryEnum } from '../../api';
-import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from '../../api/generated';
-import { useApi } from '../../hooks';
-import { formatTime } from '../../utils/Formatters';
-import { getRegionById, MetadataContext } from '../../utils/Metadata';
-import { UserContext } from '../../utils/User';
+import { Pages, resolvePage } from "./Pages";
+import Deferred from "../global/Deferred";
+import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { LapModeEnum } from "../widgets/LapModeSelect";
+import api, { CategoryEnum } from "../../api";
+import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
+import { useApi } from "../../hooks";
+import { formatTime } from "../../utils/Formatters";
+import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { UserContext } from "../../utils/User";
 
 export interface RankingsMetric {
   title: string;
   description: string;
   metric: MetricEnum;
   getValueString: (player: PlayerStats) => string;
-};
+}
 
 export type RankingsMetricMap = {
   [key: string]: RankingsMetric;
@@ -28,7 +28,7 @@ export const RankingsMetrics: RankingsMetricMap = {
     title: "Average Finish",
     description:
       "Average Finish (AF for short) is the average of a player's ranking across all tracks.",
-    metric: 'total_rank',
+    metric: "total_rank",
     getValueString: (stats) => String(stats.totalRank / stats.scoreCount),
   },
   AverageStandard: {
@@ -36,7 +36,7 @@ export const RankingsMetrics: RankingsMetricMap = {
     description:
       "Average Rank Rating (ARR for short) is the average standard of a player's time across all " +
       "tracks.",
-    metric: 'total_standard',
+    metric: "total_standard",
     getValueString: (stats) => String(stats.totalStandard / stats.scoreCount),
   },
   AverageRecordRatio: {
@@ -45,22 +45,20 @@ export const RankingsMetrics: RankingsMetricMap = {
       "Personal Record to World Record ratio (PR:WR) is calculated by dividing the world record " +
       "time by the player's time. Players are ranked by the average of their PR:WR across all " +
       "tracks.",
-    metric: 'total_record_ratio',
-    getValueString: (stats) => (
-      (stats.totalRecordRatio / stats.scoreCount * 100).toFixed(4) + "%"
-    ),
+    metric: "total_record_ratio",
+    getValueString: (stats) => ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%",
   },
   TotalTime: {
     title: "Total Time",
     description: "Total time is the sum of a player's fastest times across all tracks.",
-    metric: 'total_score',
+    metric: "total_score",
     getValueString: (stats) => formatTime(stats.totalScore),
   },
 };
 
 export interface RankingsProps {
   metric: RankingsMetric;
-};
+}
 
 const RankingsPage = ({ metric }: RankingsProps) => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
@@ -70,15 +68,16 @@ const RankingsPage = ({ metric }: RankingsProps) => {
 
   const { user } = useContext(UserContext);
 
-  const {
-    isLoading,
-    data: rankings,
-  } = useApi(() => api.timetrialsRankingsList({
-    category,
-    lapMode,
-    region: 1,
-    metric: metric.metric,
-  }), [category, lapMode]);
+  const { isLoading, data: rankings } = useApi(
+    () =>
+      api.timetrialsRankingsList({
+        category,
+        lapMode,
+        region: 1,
+        metric: metric.metric,
+      }),
+    [category, lapMode],
+  );
 
   return (
     <>
@@ -100,12 +99,16 @@ const RankingsPage = ({ metric }: RankingsProps) => {
               {rankings?.map((stats) => (
                 <tr
                   key={stats.player.id}
-                  className={user && stats.player.id === user.player ? 'highlighted' : ''}
+                  className={user && stats.player.id === user.player ? "highlighted" : ""}
                 >
                   <td>{stats.rank}</td>
                   <td>
                     <FlagIcon region={getRegionById(metadata, stats.player.region || 0)} />
-                    <Link to={resolvePage(Pages.PlayerProfile, { id: stats.player.id })}>
+                    <Link
+                      to={resolvePage(Pages.PlayerProfile, {
+                        id: stats.player.id,
+                      })}
+                    >
                       {stats.player.alias || stats.player.name}
                     </Link>
                   </td>

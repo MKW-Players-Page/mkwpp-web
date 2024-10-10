@@ -1,4 +1,3 @@
-
 const RulesPage = () => {
   return (
     <>

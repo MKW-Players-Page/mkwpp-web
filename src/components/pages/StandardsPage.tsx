@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import { Pages, resolvePage } from './Pages';
-import Deferred from '../global/Deferred';
-import { getCategoryName } from '../../utils/EnumUtils';
-import { formatTime } from '../../utils/Formatters';
-import { MetadataContext } from '../../utils/Metadata';
+import { Pages, resolvePage } from "./Pages";
+import Deferred from "../global/Deferred";
+import { getCategoryName } from "../../utils/EnumUtils";
+import { formatTime } from "../../utils/Formatters";
+import { MetadataContext } from "../../utils/Metadata";
 
 const StandardsPage = () => {
   const [levelId, setLevelId] = useState<number>(0);
@@ -49,7 +49,11 @@ const StandardsPage = () => {
                 return (
                   <tr key={standard.id}>
                     <td>
-                      <Link to={resolvePage(Pages.TrackChart, { id: track?.id || 0 })}>
+                      <Link
+                        to={resolvePage(Pages.TrackChart, {
+                          id: track?.id || 0,
+                        })}
+                      >
                         {track?.name}
                       </Link>
                     </td>

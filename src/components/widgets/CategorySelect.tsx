@@ -1,5 +1,5 @@
-import { CategoryEnum } from '../../api';
-import { getCategoryName } from '../../utils/EnumUtils';
+import { CategoryEnum } from "../../api";
+import { getCategoryName } from "../../utils/EnumUtils";
 
 export interface CategorySelectProps {
   /** Categories to include in select element. Default to all categories if not defined. */
@@ -8,7 +8,7 @@ export interface CategorySelectProps {
   value: CategoryEnum;
   /** Callback to invoke when user attempts to select a new category */
   onChange: (category: CategoryEnum) => void;
-};
+}
 
 const CategorySelect = ({ options, value, onChange }: CategorySelectProps) => {
   if (!options) {

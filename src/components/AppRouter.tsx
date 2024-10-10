@@ -1,25 +1,25 @@
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 
-import App from './App';
-import { Pages } from './pages/Pages';
+import App from "./App";
+import { Pages } from "./pages/Pages";
 
 const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: "/",
       element: <App />,
       children: [
         ...Object.values(Pages),
         {
-          path: '*',
-          element: <Navigate to="/" />
+          path: "*",
+          element: <Navigate to="/" />,
         },
-      ]
+      ],
     },
   ],
   {
-    basename: '/mkw/',
-  }
+    basename: "/mkw/",
+  },
 );
 
 const AppRouter = () => <RouterProvider router={router} />;

@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
-import { Pages, resolvePage } from '../Pages';
-import Form, { Field } from '../../widgets/Form';
-import { coreApi } from '../../../api';
-import { ResponseError } from '../../../api/generated';
-import { UserContext } from '../../../utils/User';
+import { Pages, resolvePage } from "../Pages";
+import Form, { Field } from "../../widgets/Form";
+import { coreApi } from "../../../api";
+import { ResponseError } from "../../../api/generated";
+import { UserContext } from "../../../utils/User";
 
 interface UserJoinState {
   email: string;
@@ -13,12 +13,18 @@ interface UserJoinState {
   password: string;
   password2: string;
   errors: { [key: string]: string[] };
-};
+}
 
 const UserJoinPage = () => {
   const navigate = useNavigate();
 
-  const initialState = { email: "", username: "", password: "", password2: "", errors: {} };
+  const initialState = {
+    email: "",
+    username: "",
+    password: "",
+    password2: "",
+    errors: {},
+  };
   const [state, setState] = useState<UserJoinState>(initialState);
 
   const { user } = useContext(UserContext);
@@ -37,18 +43,25 @@ const UserJoinPage = () => {
       return;
     }
 
-    coreApi.coreSignupCreate({
-      user: { username: state.username, email: state.email, password: state.password }
-    }).then(() => {
-      navigate(resolvePage(Pages.UserJoinSuccess));
-    }).catch((error: ResponseError) => {
-      error.response.json().then((json) => {
-        setState((prev) => ({
-          ...prev,
-          errors: { ...json },
-        }));
+    coreApi
+      .coreSignupCreate({
+        user: {
+          username: state.username,
+          email: state.email,
+          password: state.password,
+        },
+      })
+      .then(() => {
+        navigate(resolvePage(Pages.UserJoinSuccess));
+      })
+      .catch((error: ResponseError) => {
+        error.response.json().then((json) => {
+          setState((prev) => ({
+            ...prev,
+            errors: { ...json },
+          }));
+        });
       });
-    });
   };
 
   return (
@@ -79,9 +92,7 @@ export const UserJoinSuccessPage = () => {
             The activation link for your account will expire in 48 hours. Make sure to follow it
             before then, as you will have to recreate your account otherwise!
           </p>
-          <p>
-            Thank you for joining the Players' Page!
-          </p>
+          <p>Thank you for joining the Players' Page!</p>
         </div>
       </div>
     </>
