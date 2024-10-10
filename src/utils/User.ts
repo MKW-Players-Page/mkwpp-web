@@ -1,12 +1,13 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
-import { Auth, coreApi, User } from "../api";
-import { clearToken, setToken } from "./Auth";
+import { Auth, coreApi, User } from '../api';
+import { clearToken, setToken } from './Auth';
+
 
 export interface UserContextType {
   user?: User;
   setUser: (user?: User) => void;
-}
+};
 
 /** Information about the currently authenticated user. */
 export const UserContext = createContext<UserContextType>({
@@ -17,14 +18,11 @@ export const UserContext = createContext<UserContextType>({
  * using the given callback.
  */
 export const fetchCurrentUser = (setUser: (user?: User) => void) => {
-  coreApi
-    .coreUserRetrieve()
-    .then((user) => {
-      setUser(user);
-    })
-    .catch(() => {
-      setUser();
-    });
+  coreApi.coreUserRetrieve().then((user) => {
+    setUser(user);
+  }).catch(() => {
+    setUser();
+  });
 };
 
 /** Store API token in local storage and update user context by fetching API. */

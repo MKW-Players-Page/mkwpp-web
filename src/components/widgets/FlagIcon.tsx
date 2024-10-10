@@ -1,5 +1,5 @@
-import { Region } from "../../api";
-import "./FlagIcon.css";
+import { Region } from '../../api';
+import './FlagIcon.css';
 
 export interface FlagIconProps {
   region?: Region;
@@ -8,14 +8,9 @@ export interface FlagIconProps {
 const FlagIcon = ({ region }: FlagIconProps) => {
   return (
     <span className="flag-icon">
-      {region && (
-        <img
-          src={`/mkw/flags/${region.code.toLowerCase()}.svg`}
-          alt={region.name}
-        />
-      )}
+      {region && <img src={`/mkw/flags/${region.code.toLowerCase()}.svg`} alt={region.name} />}
     </span>
-  );
+  )
 };
 
 export default FlagIcon;

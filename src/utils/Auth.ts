@@ -1,8 +1,9 @@
-const AUTH_TOKEN_KEY = "mkw-auth-token";
-const AUTH_TOKEN_EXPIRY_KEY = "mkw-auth-token-expiry";
+
+const AUTH_TOKEN_KEY = 'mkw-auth-token';
+const AUTH_TOKEN_EXPIRY_KEY = 'mkw-auth-token-expiry';
 
 /** Set the authentication token to be included with every request.
- *
+ * 
  * @param token The token returned from a successful login.
  */
 export const setToken = (token: string, expiry: string) => {
@@ -16,7 +17,7 @@ export const setToken = (token: string, expiry: string) => {
 /** The authentication token to be included with every request. */
 export const getToken = () => {
   return isAuthenticated() ? window.localStorage.getItem(AUTH_TOKEN_KEY) : null;
-};
+}
 
 /** Clear the authentication token. */
 export const clearToken = () => {
@@ -36,4 +37,4 @@ export const isAuthenticated = () => {
     return false;
   }
   return window.localStorage.getItem(AUTH_TOKEN_KEY) !== null;
-};
+}

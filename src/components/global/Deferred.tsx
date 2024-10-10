@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import "./Deferred.css";
+import './Deferred.css';
 
 export interface DeferredProps {
   isWaiting: boolean;

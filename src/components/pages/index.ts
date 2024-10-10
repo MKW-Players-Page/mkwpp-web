@@ -1,3 +1,6 @@
-import { Pages, resolvePage } from "./Pages";
+import { Pages, resolvePage } from './Pages';
 
-export { Pages, resolvePage };
+export {
+  Pages,
+  resolvePage,
+};

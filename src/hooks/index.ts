@@ -1,3 +1,5 @@
-import { useApi } from "./ApiHook";
+import { useApi } from './ApiHook';
 
-export { useApi };
+export {
+  useApi,
+};

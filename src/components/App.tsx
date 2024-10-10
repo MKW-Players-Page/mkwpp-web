@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { MetadataContext, useMetadata } from "../utils/Metadata";
+import { MetadataContext, useMetadata } from '../utils/Metadata';
 
-import "./App.css";
-import { Header, Navbar } from "./global";
-import { User } from "../api";
-import { fetchCurrentUser, UserContext } from "../utils/User";
+import './App.css';
+import { Header, Navbar } from './global';
+import { User } from '../api';
+import { fetchCurrentUser, UserContext } from '../utils/User';
 
 const App = () => {
   const metadata = useMetadata();

@@ -1,11 +1,11 @@
-import { Configuration, CoreApi, TimetrialsApi } from "./generated";
-import { getToken, isAuthenticated } from "../utils/Auth";
+import { Configuration, CoreApi, TimetrialsApi } from './generated';
+import { getToken, isAuthenticated } from '../utils/Auth';
 
-export * from "./generated/models";
+export * from './generated/models';
 
 const apiConfiguration = new Configuration({
-  basePath: "http://localhost:8000",
-  apiKey: () => (isAuthenticated() ? `Token ${getToken()}` : ""),
+  basePath: 'http://localhost:8000',
+  apiKey: () => isAuthenticated() ? `Token ${getToken()}` : "",
 });
 
 export const coreApi = new CoreApi(apiConfiguration);
