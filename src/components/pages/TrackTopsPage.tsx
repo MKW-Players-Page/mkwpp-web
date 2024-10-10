@@ -34,16 +34,12 @@ const TrackTopsPage = () => {
   const { region: regionCode, cup: cupStr } = useParams();
   const cupId = Math.max(integerOr(cupStr, 0), 0);
 
-  const [category, setCategory] = useState<CategoryEnum>(
-    CategoryEnum.NonShortcut,
-  );
+  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
 
   const metadata = useContext(MetadataContext);
 
-  const region = metadata.regions?.find(
-    (r) => r.code.toLowerCase() === regionCode && r.isRanked,
-  );
+  const region = metadata.regions?.find((r) => r.code.toLowerCase() === regionCode && r.isRanked);
   const cup = metadata.cups?.find((c) => c.id === cupId);
 
   const { user } = useContext(UserContext);
@@ -62,9 +58,7 @@ const TrackTopsPage = () => {
 
   return (
     <>
-      {metadata.regions && !region && (
-        <Navigate to={resolvePage(Pages.TrackTopsHome)} />
-      )}
+      {metadata.regions && !region && <Navigate to={resolvePage(Pages.TrackTopsHome)} />}
       {metadata.cups && !metadata.cups.find((cup) => cup.id === cupId) && (
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
@@ -120,18 +114,13 @@ const TrackTopsPage = () => {
                             <tr
                               key={score.id}
                               className={
-                                user && score.player.id === user.player
-                                  ? "highlighted"
-                                  : ""
+                                user && score.player.id === user.player ? "highlighted" : ""
                               }
                             >
                               <td>{score.rank}</td>
                               <td>
                                 <FlagIcon
-                                  region={getRegionById(
-                                    metadata,
-                                    score.player.region || 0,
-                                  )}
+                                  region={getRegionById(metadata, score.player.region || 0)}
                                 />
                                 <Link
                                   to={resolvePage(Pages.PlayerProfile, {

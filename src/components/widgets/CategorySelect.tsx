@@ -16,10 +16,7 @@ const CategorySelect = ({ options, value, onChange }: CategorySelectProps) => {
   }
 
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value as CategoryEnum)}
-    >
+    <select value={value} onChange={(e) => onChange(e.target.value as CategoryEnum)}>
       {options.map((category) => (
         <option key={category} value={category}>
           {getCategoryName(category)}

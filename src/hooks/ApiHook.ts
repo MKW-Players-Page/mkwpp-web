@@ -7,10 +7,7 @@ export interface ApiState<T> {
   error?: ResponseError;
 }
 
-export const useApi = <T>(
-  apiCallback: () => Promise<T>,
-  dependencies: DependencyList = [],
-) => {
+export const useApi = <T>(apiCallback: () => Promise<T>, dependencies: DependencyList = []) => {
   const initialState = { isLoading: true };
   const [state, setState] = useState<ApiState<T>>(initialState);
 

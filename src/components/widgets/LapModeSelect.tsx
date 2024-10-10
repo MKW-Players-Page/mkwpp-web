@@ -13,11 +13,7 @@ export interface LapModeSelectProps {
   onChange: (lapMode: LapModeEnum) => void;
 }
 
-const LapModeSelect = ({
-  includeOverall,
-  value,
-  onChange,
-}: LapModeSelectProps) => {
+const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) => {
   const options = [
     ...(includeOverall ? [LapModeEnum.Overall] : []),
     LapModeEnum.Course,
@@ -25,10 +21,7 @@ const LapModeSelect = ({
   ];
 
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value as LapModeEnum)}
-    >
+    <select value={value} onChange={(e) => onChange(e.target.value as LapModeEnum)}>
       {options.map((option) => (
         <option key={option} value={option}>
           {Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}

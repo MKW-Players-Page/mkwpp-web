@@ -19,8 +19,5 @@ export const getCategoryName = (category: CategoryEnum) => {
  * restrictive ruleset, and Unrestricted returns all categories, since it has no rules.
  */
 export const eligibleCategories = (category: CategoryEnum) => {
-  return Object.values(CategoryEnum).slice(
-    0,
-    Object.values(CategoryEnum).indexOf(category) + 1,
-  );
+  return Object.values(CategoryEnum).slice(0, Object.values(CategoryEnum).indexOf(category) + 1);
 };

@@ -43,13 +43,7 @@ const UserLoginPage = () => {
     <>
       {/* Redirect users to home page if they are already logged in. */}
       {user && <Navigate to={resolvePage(Pages.Home)} />}
-      <Form
-        state={state}
-        setState={setState}
-        title="Log In"
-        submitLabel="Log In"
-        submit={submit}
-      >
+      <Form state={state} setState={setState} title="Log In" submitLabel="Log In" submit={submit}>
         <Field type="text" field="username" label="Username" />
         <Field type="password" field="password" label="Password" />
       </Form>

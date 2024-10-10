@@ -1,12 +1,6 @@
 import { createContext } from "react";
 
-import api, {
-  Region,
-  Track,
-  TrackCup,
-  RegionTypeEnum,
-  StandardLevel,
-} from "../api";
+import api, { Region, Track, TrackCup, RegionTypeEnum, StandardLevel } from "../api";
 import { useApi } from "../hooks";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
@@ -29,11 +23,7 @@ export const useMetadata = (): Metadata => {
   const tracks = useApi(() => api.timetrialsTracksList());
 
   return {
-    isLoading:
-      regions.isLoading ||
-      standards.isLoading ||
-      cups.isLoading ||
-      tracks.isLoading,
+    isLoading: regions.isLoading || standards.isLoading || cups.isLoading || tracks.isLoading,
     regions: regions.data,
     standards: standards.data,
     cups: cups.data,

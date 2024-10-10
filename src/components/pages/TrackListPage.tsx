@@ -22,14 +22,8 @@ const TrackListPage = () => {
                   <ul>
                     {cup.tracks.map((trackId) => (
                       <li key={trackId}>
-                        <Link
-                          to={resolvePage(Pages.TrackChart, { id: trackId })}
-                        >
-                          {
-                            metadata.tracks?.find(
-                              (track) => track.id === trackId,
-                            )?.name
-                          }
+                        <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
+                          {metadata.tracks?.find((track) => track.id === trackId)?.name}
                         </Link>
                       </li>
                     ))}

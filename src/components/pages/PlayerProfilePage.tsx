@@ -20,9 +20,7 @@ const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
-  const [category, setCategory] = useState<CategoryEnum>(
-    CategoryEnum.NonShortcut,
-  );
+  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
   const metadata = useContext(MetadataContext);
@@ -78,9 +76,7 @@ const PlayerProfilePage = () => {
                 </tr>
                 <tr>
                   <td>Last Activity</td>
-                  <td>
-                    {player?.lastActivity && formatDate(player.lastActivity)}
-                  </td>
+                  <td>{player?.lastActivity && formatDate(player.lastActivity)}</td>
                 </tr>
               </tbody>
             </table>
@@ -93,27 +89,20 @@ const PlayerProfilePage = () => {
                 <tr>
                   <td>Average Finish</td>
                   <td>
-                    {stats && stats.scoreCount > 0
-                      ? stats.totalRank / stats.scoreCount
-                      : "-"}
+                    {stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}
                   </td>
                 </tr>
                 <tr>
                   <td>ARR</td>
                   <td>
-                    {stats && stats.scoreCount > 0
-                      ? stats.totalStandard / stats.scoreCount
-                      : "-"}
+                    {stats && stats.scoreCount > 0 ? stats.totalStandard / stats.scoreCount : "-"}
                   </td>
                 </tr>
                 <tr>
                   <td>PR:WR</td>
                   <td>
                     {stats && stats.scoreCount > 0
-                      ? (
-                          (stats.totalRecordRatio / stats.scoreCount) *
-                          100
-                        ).toFixed(4) + "%"
+                      ? ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"
                       : "-"}
                   </td>
                 </tr>
@@ -128,10 +117,7 @@ const PlayerProfilePage = () => {
         <div className="module">
           <Deferred isWaiting={playerLoading}>
             {/* Temporary until better solution implemented, like a popup dialog. */}
-            <div
-              className="module-content"
-              style={{ overflowY: "scroll", maxHeight: 128 }}
-            >
+            <div className="module-content" style={{ overflowY: "scroll", maxHeight: 128 }}>
               <p>
                 {player?.bio ? (
                   player.bio.split("\n").map((line: string) => (
@@ -141,9 +127,7 @@ const PlayerProfilePage = () => {
                     </>
                   ))
                 ) : (
-                  <i>
-                    This player doesn't have anything to say about themselves...
-                  </i>
+                  <i>This player doesn't have anything to say about themselves...</i>
                 )}
               </p>
             </div>
@@ -170,59 +154,36 @@ const PlayerProfilePage = () => {
               {metadata.tracks?.map((track) =>
                 [false, true].map((isLap) => {
                   const score = scores?.find(
-                    (score) =>
-                      score.track === track.id && score.isLap === isLap,
+                    (score) => score.track === track.id && score.isLap === isLap,
                   );
                   return (
                     <tr key={`${isLap ? "l" : "c"}${track.id}`}>
                       {!isLap && (
                         <td rowSpan={2}>
-                          <Link
-                            to={resolvePage(Pages.TrackChart, { id: track.id })}
-                          >
+                          <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
                             {track.name}
                           </Link>
                         </td>
                       )}
                       {isLap && <td />}
-                      <td
-                        className={
-                          score?.category !== category ? "fallthrough" : ""
-                        }
-                      >
+                      <td className={score?.category !== category ? "fallthrough" : ""}>
                         {score ? formatTime(score.value) : "-"}
                       </td>
                       {!isLap && <td />}
                       <td>{score?.rank || "-"}</td>
-                      <td>
-                        {score
-                          ? getStandardLevel(metadata, score.standard)?.name
-                          : "-"}
-                      </td>
-                      <td>
-                        {score
-                          ? (score.recordRatio * 100).toFixed(2) + "%"
-                          : "-"}
-                      </td>
+                      <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
+                      <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
                       <td>{score?.date ? formatDate(score.date) : "-"}</td>
                       <td>
                         {score?.videoLink && (
-                          <a
-                            href={score.videoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
                             V
                           </a>
                         )}
                       </td>
                       <td>
                         {score?.ghostLink && (
-                          <a
-                            href={score.ghostLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
                             G
                           </a>
                         )}

@@ -15,19 +15,13 @@ const Header = () => {
   return (
     <header className="header">
       <Link to={resolvePage(Pages.Home)}>
-        <img
-          className="logo"
-          src="/mariokartwiilogo.png"
-          alt="Mario Kart Wii"
-        />
+        <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
       </Link>
       <div className="account-actions">
         {user ? (
           <>
             {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
-            <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
-              {user.username}
-            </Link>
+            <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>{user.username}</Link>
             <button onClick={onLogout}>Log Out</button>
           </>
         ) : (

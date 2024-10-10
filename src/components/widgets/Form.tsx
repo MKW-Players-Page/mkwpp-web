@@ -18,8 +18,7 @@ interface FormFieldAccess {
   getErrors: (field: string) => string[];
 }
 
-const NOT_A_FORM_CHILD_ERROR =
-  "<Field> element must appear as a child of a <Form> element.";
+const NOT_A_FORM_CHILD_ERROR = "<Field> element must appear as a child of a <Form> element.";
 
 /** Context to provide a Field element access to the state of the parent Form. */
 const FormContext = createContext<FormFieldAccess>({
@@ -60,9 +59,7 @@ const Form = <T extends FormState>({
   submit,
 }: FormProps<T>) => {
   const getValue = (field: string) =>
-    Object.hasOwn(state, field)
-      ? (state[field as keyof T] as string)
-      : undefined;
+    Object.hasOwn(state, field) ? (state[field as keyof T] as string) : undefined;
 
   const setValue = (field: string, value: string) => {
     if (Object.hasOwn(state, field)) {

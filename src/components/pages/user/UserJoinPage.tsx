@@ -68,13 +68,7 @@ const UserJoinPage = () => {
     <>
       {/* Redirect users to home page if they are already logged in. */}
       {user && <Navigate to={resolvePage(Pages.Home)} />}
-      <Form
-        state={state}
-        setState={setState}
-        title="Join"
-        submitLabel="Join"
-        submit={submit}
-      >
+      <Form state={state} setState={setState} title="Join" submitLabel="Join" submit={submit}>
         <Field type="email" field="email" label="Email" />
         <Field type="text" field="username" label="Username" />
         <Field type="password" field="password" label="Password" />
@@ -91,13 +85,12 @@ export const UserJoinSuccessPage = () => {
       <div className="module">
         <div className="module-content">
           <p>
-            Your account has been successfully created! A verification email has
-            been sent to the address you provided.
+            Your account has been successfully created! A verification email has been sent to the
+            address you provided.
           </p>
           <p>
-            The activation link for your account will expire in 48 hours. Make
-            sure to follow it before then, as you will have to recreate your
-            account otherwise!
+            The activation link for your account will expire in 48 hours. Make sure to follow it
+            before then, as you will have to recreate your account otherwise!
           </p>
           <p>Thank you for joining the Players' Page!</p>
         </div>

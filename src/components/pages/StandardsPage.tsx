@@ -18,8 +18,7 @@ const StandardsPage = () => {
     }
   }, [levelId, metadata]);
 
-  const level =
-    metadata.standards && metadata.standards.find((l) => l.id === levelId);
+  const level = metadata.standards && metadata.standards.find((l) => l.id === levelId);
 
   return (
     <>
@@ -46,9 +45,7 @@ const StandardsPage = () => {
             </thead>
             <tbody>
               {level?.standards.map((standard) => {
-                const track = metadata.tracks?.find(
-                  (track) => track.id === standard.track,
-                );
+                const track = metadata.tracks?.find((track) => track.id === standard.track);
                 return (
                   <tr key={standard.id}>
                     <td>

@@ -9,11 +9,7 @@ import api, { CategoryEnum } from "../../api";
 import { TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
-import {
-  getRegionById,
-  getStandardLevel,
-  MetadataContext,
-} from "../../utils/Metadata";
+import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 
@@ -21,9 +17,7 @@ const TrackChartPage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
-  const [category, setCategory] = useState<CategoryEnum>(
-    CategoryEnum.NonShortcut,
-  );
+  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
 
   const { user } = useContext(UserContext);
@@ -44,16 +38,10 @@ const TrackChartPage = () => {
   return (
     <>
       {/* Redirect to courses list if id is invalid or does not exist. */}
-      {metadata.tracks && !track && (
-        <Navigate to={resolvePage(Pages.TrackList)} />
-      )}
+      {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
       <h1>{track?.name}</h1>
-      <CategorySelect
-        options={track?.categories}
-        value={category}
-        onChange={setCategory}
-      />
+      <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
       <LapModeSelect value={lapMode} onChange={setLapMode} />
       <div className="module">
         <Deferred isWaiting={metadata.isLoading || isLoading}>
@@ -73,15 +61,11 @@ const TrackChartPage = () => {
               {scores?.map((score) => (
                 <tr
                   key={score.id}
-                  className={
-                    user && score.player.id === user.player ? "highlighted" : ""
-                  }
+                  className={user && score.player.id === user.player ? "highlighted" : ""}
                 >
                   <td>{score.rank}</td>
                   <td>
-                    <FlagIcon
-                      region={getRegionById(metadata, score.player.region || 0)}
-                    />
+                    <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
                     <Link
                       to={resolvePage(Pages.PlayerProfile, {
                         id: score.player.id,
@@ -90,31 +74,21 @@ const TrackChartPage = () => {
                       {score.player.name}
                     </Link>
                   </td>
-                  <td
-                    className={score.category !== category ? "fallthrough" : ""}
-                  >
+                  <td className={score.category !== category ? "fallthrough" : ""}>
                     {formatTime(score.value)}
                   </td>
                   <td>{getStandardLevel(metadata, score.standard)?.name}</td>
                   <td>{score.date && formatDate(score.date)}</td>
                   <td>
                     {score.videoLink && (
-                      <a
-                        href={score.videoLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
                         V
                       </a>
                     )}
                   </td>
                   <td>
                     {score.ghostLink && (
-                      <a
-                        href={score.ghostLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
                         G
                       </a>
                     )}
