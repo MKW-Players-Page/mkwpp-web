@@ -35,8 +35,9 @@ upgrading to a paid account, but do make sure to follow this rule. It would be g
 
 ### Code quality
 
-This repository has an automatic lint step on every commit running ESLint. Code must pass this test
-before being approved and pushed to `main`. You run the linter locally with `npm run lint`.
+This repository has an automatic lint step on every commit running ESLint and Prettier. Code must
+pass these tests before being approved and pushed to `main`. You must format your changes by running
+`npm run format`. You can also run the linter locally with `npm run lint`.
 
 ## Project structure
 
