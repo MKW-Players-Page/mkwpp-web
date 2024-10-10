@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import { Pages, resolvePage } from './Pages';
-import Deferred from '../global/Deferred';
-import { MetadataContext } from '../../utils/Metadata';
+import { Pages, resolvePage } from "./Pages";
+import Deferred from "../global/Deferred";
+import { MetadataContext } from "../../utils/Metadata";
 
 const TrackListPage = () => {
   const metadata = useContext(MetadataContext);
@@ -22,8 +22,14 @@ const TrackListPage = () => {
                   <ul>
                     {cup.tracks.map((trackId) => (
                       <li key={trackId}>
-                        <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
-                          {metadata.tracks?.find((track) => track.id === trackId)?.name}
+                        <Link
+                          to={resolvePage(Pages.TrackChart, { id: trackId })}
+                        >
+                          {
+                            metadata.tracks?.find(
+                              (track) => track.id === trackId,
+                            )?.name
+                          }
                         </Link>
                       </li>
                     ))}

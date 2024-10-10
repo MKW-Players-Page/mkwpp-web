@@ -1,19 +1,18 @@
-import { RouteObject, generatePath } from 'react-router-dom';
+import { RouteObject, generatePath } from "react-router-dom";
 
-import HomePage from './HomePage';
-import PlayerListPage from './PlayerListPage';
-import PlayerProfilePage from './PlayerProfilePage';
-import RankingsPage, { RankingsMetrics } from './RankingsPage';
-import RulesPage from './RulesPage';
-import StandardsPage from './StandardsPage';
-import TrackChartPage from './TrackChartPage';
-import TrackListPage from './TrackListPage';
-import TrackRecordsPage from './TrackRecordsPage';
-import TrackTopsPage, { TrackTopsHomePage } from './TrackTopsPage';
-import UserActivationPage from './user/UserActivationPage';
-import UserJoinPage, { UserJoinSuccessPage } from './user/UserJoinPage';
-import UserLoginPage from './user/UserLoginPage';
-
+import HomePage from "./HomePage";
+import PlayerListPage from "./PlayerListPage";
+import PlayerProfilePage from "./PlayerProfilePage";
+import RankingsPage, { RankingsMetrics } from "./RankingsPage";
+import RulesPage from "./RulesPage";
+import StandardsPage from "./StandardsPage";
+import TrackChartPage from "./TrackChartPage";
+import TrackListPage from "./TrackListPage";
+import TrackRecordsPage from "./TrackRecordsPage";
+import TrackTopsPage, { TrackTopsHomePage } from "./TrackTopsPage";
+import UserActivationPage from "./user/UserActivationPage";
+import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
+import UserLoginPage from "./user/UserLoginPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -25,76 +24,80 @@ export const Pages: PageMap = {
     element: <HomePage />,
   },
   PlayerList: {
-    path: '/players',
+    path: "/players",
     element: <PlayerListPage />,
   },
   PlayerProfile: {
-    path: '/players/:id',
+    path: "/players/:id",
     element: <PlayerProfilePage />,
   },
   RankingsAverageFinish: {
-    path: '/rankings/af',
-    element: <RankingsPage key='af' metric={RankingsMetrics.AverageFinish} />,
+    path: "/rankings/af",
+    element: <RankingsPage key="af" metric={RankingsMetrics.AverageFinish} />,
   },
   RankingsAverageStandard: {
-    path: '/rankings/arr',
-    element: <RankingsPage key='arr' metric={RankingsMetrics.AverageStandard} />,
+    path: "/rankings/arr",
+    element: (
+      <RankingsPage key="arr" metric={RankingsMetrics.AverageStandard} />
+    ),
   },
   RankingsAverageRecordRatio: {
-    path: '/rankings/prwr',
-    element: <RankingsPage key='prwr' metric={RankingsMetrics.AverageRecordRatio} />,
+    path: "/rankings/prwr",
+    element: (
+      <RankingsPage key="prwr" metric={RankingsMetrics.AverageRecordRatio} />
+    ),
   },
   RankingsTotalTime: {
-    path: '/rankings/totals',
-    element: <RankingsPage key='totals' metric={RankingsMetrics.TotalTime} />,
+    path: "/rankings/totals",
+    element: <RankingsPage key="totals" metric={RankingsMetrics.TotalTime} />,
   },
   Rules: {
-    path: '/rules',
+    path: "/rules",
     element: <RulesPage />,
   },
   TrackChart: {
-    path: '/courses/:id',
+    path: "/courses/:id",
     element: <TrackChartPage />,
   },
   TrackList: {
-    path: '/courses',
+    path: "/courses",
     element: <TrackListPage />,
   },
   TrackRecords: {
-    path: '/records',
+    path: "/records",
     element: <TrackRecordsPage />,
   },
   TrackTopsHome: {
-    path: '/tops',
+    path: "/tops",
     element: <TrackTopsHomePage />,
   },
   TrackTops: {
-    path: '/tops/:region/:cup',
+    path: "/tops/:region/:cup",
     element: <TrackTopsPage />,
   },
   Standards: {
-    path: '/standards',
+    path: "/standards",
     element: <StandardsPage />,
   },
   UserActivation: {
-    path: '/activate',
+    path: "/activate",
     element: <UserActivationPage />,
   },
   UserJoin: {
-    path: '/join',
+    path: "/join",
     element: <UserJoinPage />,
   },
   UserJoinSuccess: {
-    path: '/join/success',
+    path: "/join/success",
     element: <UserJoinSuccessPage />,
   },
   UserLogin: {
-    path: '/login',
+    path: "/login",
     element: <UserLoginPage />,
   },
 };
 
 /** Generates path for given page optionally with given params. */
 export const resolvePage = (page: RouteObject, params = {}) => {
-  return page.index || !page.path ? '/' : generatePath(page.path, params);
+  return page.index || !page.path ? "/" : generatePath(page.path, params);
 };

@@ -1,8 +1,7 @@
-
 /** Converts a given value to a number using the unary `+` operator. If the given value is falsy
  * but not zero, or if conversion results in `NaN`, return the fallback value. Otherwise, return
  * the converted value.
- * 
+ *
  * @param value The value to convert to a number
  * @param fallback The value to return if `value` can't be converted to a number
  * @returns The converted number, or the fallback if conversion failed
@@ -13,7 +12,7 @@ export const numberOr = (value: any, fallback: number) => {
 
 /** Return the given value converted using `numberOr` if it is a whole number. Otherwise, return
  * the fallback value.
- * 
+ *
  * @param value The value to convert to a whole number
  * @param fallback The value to return if `value` can't be converted to a whole number
  * @returns The converted number, or the fallback if conversion failed

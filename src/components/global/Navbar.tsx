@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import './Navbar.css';
-import { Pages, resolvePage } from '../pages';
+import "./Navbar.css";
+import { Pages, resolvePage } from "../pages";
 
 /** Properties of a link element in the navbar */
 interface NavbarItem {
@@ -11,7 +11,7 @@ interface NavbarItem {
   url: string;
   /** Whether the link is external and should be a regular `a` element, or is internal and should
    * use React Router DOM's `Link` element.
-   * 
+   *
    * Omitting this field has the same effect as the value `false`.
    */
   external?: boolean;
@@ -19,7 +19,7 @@ interface NavbarItem {
 
 /** A section within the navbar. It consists of a title or heading, followed by an arbitrary amount
  * of navbar items.
- * 
+ *
  * If the title is omitted, no heading will be displayed. Only the first section should omit title.
  */
 interface NavbarSection {
@@ -91,42 +91,42 @@ const SECTIONS: NavbarSection[] = [
     items: [
       {
         label: "SMK Players' Page",
-        url: 'https://www.mariokart64.com/smk/',
+        url: "https://www.mariokart64.com/smk/",
         external: true,
       },
       {
         label: "MK64 Players' Page",
-        url: 'https://www.mariokart64.com/mk64/',
+        url: "https://www.mariokart64.com/mk64/",
         external: true,
       },
       {
         label: "MKSC Players' Page",
-        url: 'https://www.mariokart64.com/mksc/',
+        url: "https://www.mariokart64.com/mksc/",
         external: true,
       },
       {
         label: "MKDD Players' Page",
-        url: 'https://www.mariokart64.com/mkdd/',
+        url: "https://www.mariokart64.com/mkdd/",
         external: true,
       },
       {
         label: "MKDS Players' Page",
-        url: 'https://www.mariokart64.com/mkds/',
+        url: "https://www.mariokart64.com/mkds/",
         external: true,
       },
       {
         label: "MK7 Players' Page",
-        url: 'https://www.mariokart64.com/mk7/',
+        url: "https://www.mariokart64.com/mk7/",
         external: true,
       },
       {
         label: "MK8 Players' Page",
-        url: 'https://www.mariokart64.com/mk8/',
+        url: "https://www.mariokart64.com/mk8/",
         external: true,
       },
       {
         label: "Combined Ranks",
-        url: 'https://www.mariokart64.com/combinedranks/',
+        url: "https://www.mariokart64.com/combinedranks/",
         external: true,
       },
     ],
@@ -144,7 +144,9 @@ const Navbar = () => {
               {section.items.map((item) => (
                 <li key={item.label}>
                   {item.external ? (
-                    <a href={item.url} rel="noopener noreferrer">{item.label}</a>
+                    <a href={item.url} rel="noopener noreferrer">
+                      {item.label}
+                    </a>
                   ) : (
                     <Link to={item.url}>{item.label}</Link>
                   )}
