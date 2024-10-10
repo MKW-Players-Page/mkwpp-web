@@ -1,7 +1,13 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-import api, { Region, Track, TrackCup, RegionTypeEnum, StandardLevel } from '../api';
-import { useApi } from '../hooks';
+import api, {
+  Region,
+  Track,
+  TrackCup,
+  RegionTypeEnum,
+  StandardLevel,
+} from "../api";
+import { useApi } from "../hooks";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
 export interface Metadata {
@@ -10,10 +16,10 @@ export interface Metadata {
   standards?: StandardLevel[];
   cups?: TrackCup[];
   tracks?: Track[];
-};
+}
 
 /** Calls the various API endpoints to load app metadata, such as tracks and regions.
- * 
+ *
  * @returns A stateful object containing the fetched metadata if the loading flag is cleared.
  */
 export const useMetadata = (): Metadata => {
@@ -23,7 +29,11 @@ export const useMetadata = (): Metadata => {
   const tracks = useApi(() => api.timetrialsTracksList());
 
   return {
-    isLoading: regions.isLoading || standards.isLoading || cups.isLoading || tracks.isLoading,
+    isLoading:
+      regions.isLoading ||
+      standards.isLoading ||
+      cups.isLoading ||
+      tracks.isLoading,
     regions: regions.data,
     standards: standards.data,
     cups: cups.data,
@@ -50,11 +60,11 @@ export const getRegionById = (metadata: Metadata, regionId: number) => {
 };
 
 /** The full name of a region is constructed as follows:
- * 
+ *
  * 1. If the region type is `Subnational`, return the name of the region followed by the name of
  *    its parent separated by a comma.
  * 2. Otherwise, simply return the region name.
- * 
+ *
  * @param metadata The Metadata object returned from `useContext(MetadataContext)`
  * @param regionId The id of the region
  * @returns The full name of the region, or `undefined` if no region with the given id exists.
@@ -76,7 +86,7 @@ export const getRegionNameFull = (metadata: Metadata, regionId: number) => {
 };
 
 /** The standard level of the standard with the given id.
- * 
+ *
  * @param metadata The Metadata object returned from `useContext(MetadataContext)`
  * @param standardId The id of the standard
  * @returns A StandardLevel object, or `undefined` if no standard with the given id exists.
@@ -95,4 +105,4 @@ export const getStandardLevel = (metadata: Metadata, standardId: number) => {
   }
 
   return undefined;
-}
+};

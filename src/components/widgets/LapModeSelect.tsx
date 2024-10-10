@@ -1,9 +1,8 @@
-
 export enum LapModeEnum {
-  Course = 'course',
-  Lap = 'lap',
-  Overall = 'overall',
-};
+  Course = "course",
+  Lap = "lap",
+  Overall = "overall",
+}
 
 export interface LapModeSelectProps {
   /** Whether to include Overall as an option. Defaults to false if not defined. */
@@ -12,9 +11,13 @@ export interface LapModeSelectProps {
   value: LapModeEnum;
   /** Callback to invoke when user attempts to select a new lap mode */
   onChange: (lapMode: LapModeEnum) => void;
-};
+}
 
-const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) => {
+const LapModeSelect = ({
+  includeOverall,
+  value,
+  onChange,
+}: LapModeSelectProps) => {
   const options = [
     ...(includeOverall ? [LapModeEnum.Overall] : []),
     LapModeEnum.Course,
@@ -22,7 +25,10 @@ const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) 
   ];
 
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value as LapModeEnum)}>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value as LapModeEnum)}
+    >
       {options.map((option) => (
         <option key={option} value={option}>
           {Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}

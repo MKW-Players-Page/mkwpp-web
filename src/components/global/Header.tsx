@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import './Header.css';
-import { Pages, resolvePage } from '../pages';
-import { logoutUser, UserContext } from '../../utils/User';
+import "./Header.css";
+import { Pages, resolvePage } from "../pages";
+import { logoutUser, UserContext } from "../../utils/User";
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
@@ -15,7 +15,11 @@ const Header = () => {
   return (
     <header className="header">
       <Link to={resolvePage(Pages.Home)}>
-        <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
+        <img
+          className="logo"
+          src="/mariokartwiilogo.png"
+          alt="Mario Kart Wii"
+        />
       </Link>
       <div className="account-actions">
         {user ? (
@@ -28,12 +32,8 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to={resolvePage(Pages.UserLogin)}>
-              Log In
-            </Link>
-            <Link to={resolvePage(Pages.UserJoin)}>
-              Join
-            </Link>
+            <Link to={resolvePage(Pages.UserLogin)}>Log In</Link>
+            <Link to={resolvePage(Pages.UserJoin)}>Join</Link>
           </>
         )}
       </div>
