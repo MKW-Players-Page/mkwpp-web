@@ -68,7 +68,11 @@ const TrackChartPage = () => {
                   <td>{score.rank}</td>
                   <td>
                     <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
-                    <Link to={resolvePage(Pages.PlayerProfile, { id: score.player.id })}>
+                    <Link
+                      to={resolvePage(Pages.PlayerProfile, {
+                        id: score.player.id,
+                      })}
+                    >
                       {score.player.name}
                     </Link>
                   </td>

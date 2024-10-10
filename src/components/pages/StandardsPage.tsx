@@ -53,7 +53,11 @@ const StandardsPage = () => {
                 return (
                   <tr key={standard.id}>
                     <td>
-                      <Link to={resolvePage(Pages.TrackChart, { id: track?.id || 0 })}>
+                      <Link
+                        to={resolvePage(Pages.TrackChart, {
+                          id: track?.id || 0,
+                        })}
+                      >
                         {track?.name}
                       </Link>
                     </td>

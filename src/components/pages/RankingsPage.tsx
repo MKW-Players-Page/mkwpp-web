@@ -106,7 +106,11 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                   <td>{stats.rank}</td>
                   <td>
                     <FlagIcon region={getRegionById(metadata, stats.player.region || 0)} />
-                    <Link to={resolvePage(Pages.PlayerProfile, { id: stats.player.id })}>
+                    <Link
+                      to={resolvePage(Pages.PlayerProfile, {
+                        id: stats.player.id,
+                      })}
+                    >
                       {stats.player.alias || stats.player.name}
                     </Link>
                   </td>

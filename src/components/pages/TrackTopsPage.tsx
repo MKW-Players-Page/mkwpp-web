@@ -125,7 +125,9 @@ const TrackTopsPage = () => {
                                   region={getRegionById(metadata, score.player.region || 0)}
                                 />
                                 <Link
-                                  to={resolvePage(Pages.PlayerProfile, { id: score.player.id })}
+                                  to={resolvePage(Pages.PlayerProfile, {
+                                    id: score.player.id,
+                                  })}
                                 >
                                   {score.player.alias || score.player.name}
                                 </Link>
@@ -135,7 +137,11 @@ const TrackTopsPage = () => {
                           ))}
                           <tr>
                             <th colSpan={3}>
-                              <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+                              <Link
+                                to={resolvePage(Pages.TrackChart, {
+                                  id: track.id,
+                                })}
+                              >
                                 View full leaderboards
                               </Link>
                             </th>
