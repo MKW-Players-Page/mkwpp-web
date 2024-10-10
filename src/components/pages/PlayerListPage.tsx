@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import { Pages, resolvePage } from './Pages';
-import Deferred from '../global/Deferred';
-import { FlagIcon } from '../widgets';
-import api from '../../api';
-import { useApi } from '../../hooks/ApiHook';
-import { getRegionById, getRegionNameFull, MetadataContext } from '../../utils/Metadata';
-import { UserContext } from '../../utils/User';
+import { Pages, resolvePage } from "./Pages";
+import Deferred from "../global/Deferred";
+import { FlagIcon } from "../widgets";
+import api from "../../api";
+import { useApi } from "../../hooks/ApiHook";
+import { getRegionById, getRegionNameFull, MetadataContext } from "../../utils/Metadata";
+import { UserContext } from "../../utils/User";
 
 const PlayerListPage = () => {
   const { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
@@ -32,7 +32,7 @@ const PlayerListPage = () => {
               {players?.map((player) => (
                 <tr
                   key={player.id}
-                  className={user && player.id === user.player ? 'highlighted' : ''}
+                  className={user && player.id === user.player ? "highlighted" : ""}
                 >
                   <td>
                     <FlagIcon region={getRegionById(metadata, player.region || 0)} />

@@ -1,11 +1,15 @@
-import { CategoryEnum } from '../api';
+import { CategoryEnum } from "../api";
 
 export const getCategoryName = (category: CategoryEnum) => {
   switch (category) {
-    case 'nonsc': return "Non-SC";
-    case 'sc': return "Shortcut";
-    case 'unres': return "Unrestricted";
-    default: return "Unknown";
+    case "nonsc":
+      return "Non-SC";
+    case "sc":
+      return "Shortcut";
+    case "unres":
+      return "Unrestricted";
+    default:
+      return "Unknown";
   }
 };
 
@@ -16,4 +20,4 @@ export const getCategoryName = (category: CategoryEnum) => {
  */
 export const eligibleCategories = (category: CategoryEnum) => {
   return Object.values(CategoryEnum).slice(0, Object.values(CategoryEnum).indexOf(category) + 1);
-}
+};

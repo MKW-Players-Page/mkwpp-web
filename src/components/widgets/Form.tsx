@@ -1,24 +1,36 @@
 import {
-  ChangeEvent, createContext, Dispatch, FormEvent, HTMLInputTypeAttribute, ReactNode,
-  SetStateAction, useContext
-} from 'react';
+  ChangeEvent,
+  createContext,
+  Dispatch,
+  FormEvent,
+  HTMLInputTypeAttribute,
+  ReactNode,
+  SetStateAction,
+  useContext,
+} from "react";
 
-import './Form.css';
+import "./Form.css";
 
 /** Methods to provide a Field element with its data from the state of the parent Form. */
 interface FormFieldAccess {
   getValue: (field: string) => string | undefined;
   setValue: (field: string, value: string) => void;
   getErrors: (field: string) => string[];
-};
+}
 
 const NOT_A_FORM_CHILD_ERROR = "<Field> element must appear as a child of a <Form> element.";
 
 /** Context to provide a Field element access to the state of the parent Form. */
 const FormContext = createContext<FormFieldAccess>({
-  getValue: () => { throw TypeError(NOT_A_FORM_CHILD_ERROR); },
-  setValue: () => { throw TypeError(NOT_A_FORM_CHILD_ERROR); },
-  getErrors: () => { throw TypeError(NOT_A_FORM_CHILD_ERROR); },
+  getValue: () => {
+    throw TypeError(NOT_A_FORM_CHILD_ERROR);
+  },
+  setValue: () => {
+    throw TypeError(NOT_A_FORM_CHILD_ERROR);
+  },
+  getErrors: () => {
+    throw TypeError(NOT_A_FORM_CHILD_ERROR);
+  },
 });
 
 /** Constraint interface to make sure state given to a Form element has the `errors` field. */
@@ -26,8 +38,8 @@ export interface FormState {
   /** Mapping of field name to error strings. `non_field_errors` is a special key which will
    * display errors globally, above all fields.
    */
-  errors: { [key: string]: string[]; };
-};
+  errors: { [key: string]: string[] };
+}
 
 export interface FormProps<T extends FormState> {
   children?: ReactNode;
@@ -36,9 +48,9 @@ export interface FormProps<T extends FormState> {
   title: string;
   submitLabel: string;
   submit: () => void;
-};
+}
 
-const Form = <T extends FormState,>({
+const Form = <T extends FormState>({
   state,
   setState,
   children,
@@ -46,9 +58,8 @@ const Form = <T extends FormState,>({
   submitLabel,
   submit,
 }: FormProps<T>) => {
-  const getValue = (field: string) => (
-    Object.hasOwn(state, field) ? state[field as keyof T] as string : undefined
-  );
+  const getValue = (field: string) =>
+    Object.hasOwn(state, field) ? (state[field as keyof T] as string) : undefined;
 
   const setValue = (field: string, value: string) => {
     if (Object.hasOwn(state, field)) {
@@ -63,7 +74,7 @@ const Form = <T extends FormState,>({
     submit();
   };
 
-  const errors = state.errors['non_field_errors'];
+  const errors = state.errors["non_field_errors"];
 
   return (
     <form className="form" onSubmit={onSubmit}>
@@ -83,7 +94,7 @@ export interface FieldProps {
   type: HTMLInputTypeAttribute;
   field: string;
   label: string;
-};
+}
 
 export const Field = ({ type, field, label }: FieldProps) => {
   const { getValue, setValue, getErrors } = useContext(FormContext);

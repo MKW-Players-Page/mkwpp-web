@@ -9,6 +9,7 @@
     "@types/node": "^16.18.107",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-app-polyfill": "^3.0.0",
     "react-dom": "^18.3.1",
@@ -22,8 +23,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/ --max-warnings=0",
+    "lint": "npx prettier . --write",
     "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 100
   },
   "eslintConfig": {
     "extends": [
