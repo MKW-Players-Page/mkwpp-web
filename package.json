@@ -27,7 +27,8 @@
     "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml"
   },
   "prettier": {
-    "tabWidth": 2
+    "tabWidth": 2,
+    "printWidth": 100
   },
   "eslintConfig": {
     "extends": [
