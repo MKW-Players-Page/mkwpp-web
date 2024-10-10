@@ -8,12 +8,10 @@ import { Header, Navbar } from "./global";
 import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";
 
-
 interface AppUserState {
   isLoading: boolean;
   user?: User;
-};
-
+}
 
 const App = () => {
   const metadata = useMetadata();

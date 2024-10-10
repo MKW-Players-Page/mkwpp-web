@@ -28,7 +28,8 @@
   margin-right: 6px;
   border-width: 3px;
   border-style: solid;
-  border-color: var(--tooltip-background-color) var(--tooltip-background-color) transparent transparent;
+  border-color: var(--tooltip-background-color) var(--tooltip-background-color) transparent
+    transparent;
 }
 
 .tooltip:hover .tooltip-text {

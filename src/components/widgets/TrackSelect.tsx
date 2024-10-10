@@ -1,7 +1,7 @@
-import { ChangeEvent, useContext } from 'react';
+import { ChangeEvent, useContext } from "react";
 
-import { FormContext } from './Form';
-import { Metadata } from '../../utils/Metadata'
+import { FormContext } from "./Form";
+import { Metadata } from "../../utils/Metadata";
 
 export interface TrackSelectProps {
   /** Metadata object */
@@ -10,7 +10,7 @@ export interface TrackSelectProps {
   field: string;
   /** Select label */
   label?: string;
-};
+}
 
 const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
@@ -26,7 +26,9 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
       {label && <p>{label}</p>}
       <select disabled={disabled} value={getValue(field)} onChange={onChange}>
         {metadata.tracks?.map((track) => (
-          <option key={track.id} value={track.id}>{track.name}</option>
+          <option key={track.id} value={track.id}>
+            {track.name}
+          </option>
         ))}
       </select>
       {errors.map((error) => (

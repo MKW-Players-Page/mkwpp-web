@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import './Tooltip.css';
+import "./Tooltip.css";
 
 export interface TooltipProps {
   children?: ReactNode;
   text: string;
-};
+}
 
 const Tooltip = ({ children, text }: TooltipProps) => {
   return (

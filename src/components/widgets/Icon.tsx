@@ -1,9 +1,9 @@
-import { Region } from '../../api';
-import './Icon.css';
+import { Region } from "../../api";
+import "./Icon.css";
 
-import { ReactComponent as CommentIcon } from './icons/comment.svg';
-import { ReactComponent as GhostIcon } from './icons/ghost.svg';
-import { ReactComponent as VideoIcon } from './icons/video.svg';
+import { ReactComponent as CommentIcon } from "./icons/comment.svg";
+import { ReactComponent as GhostIcon } from "./icons/ghost.svg";
+import { ReactComponent as VideoIcon } from "./icons/video.svg";
 
 export const Icons = {
   Comment: CommentIcon,
@@ -13,7 +13,7 @@ export const Icons = {
 
 export interface IconProps {
   icon: keyof typeof Icons;
-};
+}
 
 const Icon = ({ icon }: IconProps) => {
   const IconElement = Icons[icon];
@@ -34,7 +34,7 @@ export const FlagIcon = ({ region }: FlagIconProps) => {
     <span className="flag-icon">
       {region && <img src={`/mkw/flags/${region.code.toLowerCase()}.svg`} alt={region.name} />}
     </span>
-  )
+  );
 };
 
 export default Icon;

@@ -1,23 +1,23 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from "react";
 
-import Deferred from '../global/Deferred';
-import { CategoryField, Icon, LapModeField, Tooltip, TrackSelect } from '../widgets';
-import api, { CategoryEnum, ScoreSubmission } from '../../api';
-import { getTrackById, MetadataContext } from '../../utils/Metadata';
-import { LapModeEnum } from '../widgets/LapModeSelect';
-import Form, { Field } from '../widgets/Form';
-import { formatTime, parseTime } from '../../utils/Formatters';
-import { UserContext } from '../../utils/User';
-import TabbedModule, { Tab } from '../widgets/TabbedModule';
-import { Navigate } from 'react-router-dom';
-import { Pages, resolvePage } from './Pages';
-import { useApi } from '../../hooks';
-import { getCategoryName } from '../../utils/EnumUtils';
+import Deferred from "../global/Deferred";
+import { CategoryField, Icon, LapModeField, Tooltip, TrackSelect } from "../widgets";
+import api, { CategoryEnum, ScoreSubmission } from "../../api";
+import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { LapModeEnum } from "../widgets/LapModeSelect";
+import Form, { Field } from "../widgets/Form";
+import { formatTime, parseTime } from "../../utils/Formatters";
+import { UserContext } from "../../utils/User";
+import TabbedModule, { Tab } from "../widgets/TabbedModule";
+import { Navigate } from "react-router-dom";
+import { Pages, resolvePage } from "./Pages";
+import { useApi } from "../../hooks";
+import { getCategoryName } from "../../utils/EnumUtils";
 
 enum SubmitStateEnum {
-  Form = 'form',
-  Success = 'success',
-};
+  Form = "form",
+  Success = "success",
+}
 
 interface SubmitTabState {
   state: SubmitStateEnum;
@@ -30,9 +30,9 @@ interface SubmitTabState {
   ghostLink: string;
   videoLink: string;
   comment: string;
-  errors: { [key: string]: string[]; };
+  errors: { [key: string]: string[] };
   submitting: boolean;
-};
+}
 
 const SubmitTab = () => {
   const initialState = {
@@ -76,7 +76,8 @@ const SubmitTab = () => {
 
     if (!user) {
       setState((prev) => ({
-        ...prev, errors: { non_field_errors: ["No player profile linked."] }
+        ...prev,
+        errors: { non_field_errors: ["No player profile linked."] },
       }));
       return;
     }
@@ -84,7 +85,8 @@ const SubmitTab = () => {
     const value = parseTime(state.value);
     if (!value) {
       setState((prev) => ({
-        ...prev, errors: { ...prev.errors, value: ["Invalid time value."] }
+        ...prev,
+        errors: { ...prev.errors, value: ["Invalid time value."] },
       }));
       errored = true;
     }
@@ -92,7 +94,8 @@ const SubmitTab = () => {
     const date = Date.parse(state.date);
     if (Number.isNaN(date)) {
       setState((prev) => ({
-        ...prev, errors: { ...prev.errors, date: ["Invalid date."] }
+        ...prev,
+        errors: { ...prev.errors, date: ["Invalid date."] },
       }));
       errored = true;
     }
@@ -102,36 +105,34 @@ const SubmitTab = () => {
       return;
     }
 
-    api.timetrialsSubmissionsCreateCreate({
-      scoreSubmission: {
-        value: value as number,
-        player: user.player,
-        track: +state.track,
-        category: state.category,
-        isLap: state.lapMode === LapModeEnum.Lap,
-        date: new Date(date),
-        ghostLink: state.ghostLink,
-        videoLink: state.videoLink,
-        comment: state.comment,
-      } as ScoreSubmission
-    }).then(() => {
-      setState({ ...initialState, state: SubmitStateEnum.Success });
-      done();
-    }).catch(() => {
-      done();
-    });
+    api
+      .timetrialsSubmissionsCreateCreate({
+        scoreSubmission: {
+          value: value as number,
+          player: user.player,
+          track: +state.track,
+          category: state.category,
+          isLap: state.lapMode === LapModeEnum.Lap,
+          date: new Date(date),
+          ghostLink: state.ghostLink,
+          videoLink: state.videoLink,
+          comment: state.comment,
+        } as ScoreSubmission,
+      })
+      .then(() => {
+        setState({ ...initialState, state: SubmitStateEnum.Success });
+        done();
+      })
+      .catch(() => {
+        done();
+      });
   };
 
   return (
     <div className="module-content">
       <Deferred isWaiting={metadata.isLoading}>
         {state.state === SubmitStateEnum.Form && (
-          <Form
-            state={state}
-            setState={setState}
-            submitLabel="Submit"
-            submit={submit}
-          >
+          <Form state={state} setState={setState} submitLabel="Submit" submit={submit}>
             <TrackSelect metadata={metadata} field="track" label="Track" />
             <CategoryField options={categories} field="category" label="Category" />
             <LapModeField field="lapMode" label="Mode" />
@@ -157,18 +158,13 @@ const SubmitTab = () => {
 };
 
 const BulkSubmitTab = () => {
-  return (
-    <div className="module-content">Under construction...</div>
-  );
+  return <div className="module-content">Under construction...</div>;
 };
 
 const SubmissionsTab = () => {
   const metadata = useContext(MetadataContext);
 
-  const {
-    isLoading,
-    data: submissions,
-  } = useApi(() => api.timetrialsSubmissionsList());
+  const { isLoading, data: submissions } = useApi(() => api.timetrialsSubmissionsList());
 
   return (
     <div className="module-content">

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { FormContext } from "./Form";
 
 export enum LapModeEnum {
@@ -50,7 +51,7 @@ export interface LapModeFieldProps {
   field: string;
   /** Field label */
   label: string;
-};
+}
 
 export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps) => {
   const { getValue, setValue, disabled } = useContext(FormContext);
@@ -61,7 +62,9 @@ export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps
       <LapModeSelect
         includeOverall={includeOverall}
         value={getValue(field) as LapModeEnum}
-        onChange={(lapMode) => { setValue(field, lapMode); }}
+        onChange={(lapMode) => {
+          setValue(field, lapMode);
+        }}
         disabled={disabled}
       />
     </div>

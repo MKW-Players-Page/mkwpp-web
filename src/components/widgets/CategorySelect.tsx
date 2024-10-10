@@ -1,7 +1,8 @@
-import { FormContext } from './Form';
+import { useContext } from "react";
+
+import { FormContext } from "./Form";
 import { CategoryEnum } from "../../api";
 import { getCategoryName } from "../../utils/EnumUtils";
-import { useContext } from 'react';
 
 export interface CategorySelectProps {
   /** Categories to include in select element. Default to all categories if not defined. */
@@ -44,7 +45,7 @@ export interface CategoryFieldProps {
   field: string;
   /** Field label */
   label: string;
-};
+}
 
 export const CategoryField = ({ options, field, label }: CategoryFieldProps) => {
   const { getValue, setValue, disabled } = useContext(FormContext);
@@ -55,7 +56,9 @@ export const CategoryField = ({ options, field, label }: CategoryFieldProps) => 
       <CategorySelect
         options={options}
         value={getValue(field) as CategoryEnum}
-        onChange={(category) => { setValue(field, category); }}
+        onChange={(category) => {
+          setValue(field, category);
+        }}
         disabled={disabled}
       />
     </div>

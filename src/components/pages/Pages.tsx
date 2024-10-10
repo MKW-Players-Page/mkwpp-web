@@ -1,20 +1,19 @@
 import { RouteObject, generatePath } from "react-router-dom";
 
-import HomePage from './HomePage';
-import PlayerListPage from './PlayerListPage';
-import PlayerProfilePage from './PlayerProfilePage';
-import RankingsPage, { RankingsMetrics } from './RankingsPage';
-import RulesPage from './RulesPage';
-import StandardsPage from './StandardsPage';
-import TrackChartPage from './TrackChartPage';
-import TrackListPage from './TrackListPage';
-import TrackRecordsPage from './TrackRecordsPage';
-import TrackTopsPage, { TrackTopsHomePage } from './TrackTopsPage';
-import UserActivationPage from './user/UserActivationPage';
-import UserJoinPage, { UserJoinSuccessPage } from './user/UserJoinPage';
-import UserLoginPage from './user/UserLoginPage';
-import SubmissionPage from './SubmissionPage';
-
+import HomePage from "./HomePage";
+import PlayerListPage from "./PlayerListPage";
+import PlayerProfilePage from "./PlayerProfilePage";
+import RankingsPage, { RankingsMetrics } from "./RankingsPage";
+import RulesPage from "./RulesPage";
+import StandardsPage from "./StandardsPage";
+import TrackChartPage from "./TrackChartPage";
+import TrackListPage from "./TrackListPage";
+import TrackRecordsPage from "./TrackRecordsPage";
+import TrackTopsPage, { TrackTopsHomePage } from "./TrackTopsPage";
+import UserActivationPage from "./user/UserActivationPage";
+import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
+import UserLoginPage from "./user/UserLoginPage";
+import SubmissionPage from "./SubmissionPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -78,7 +77,7 @@ export const Pages: PageMap = {
     element: <StandardsPage />,
   },
   Submission: {
-    path: '/submit',
+    path: "/submit",
     element: <SubmissionPage />,
   },
   UserActivation: {

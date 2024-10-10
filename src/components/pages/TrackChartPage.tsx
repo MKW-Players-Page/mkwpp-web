@@ -82,21 +82,27 @@ const TrackChartPage = () => {
                   </td>
                   <td>{getStandardLevel(metadata, score.standard)?.name}</td>
                   <td>{score.date && formatDate(score.date)}</td>
-                  <td className="icon-cell">{score?.videoLink && (
-                    <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                      <Icon icon="Video" />
-                    </a>
-                  )}</td>
-                  <td className="icon-cell">{score?.ghostLink && (
-                    <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                      <Icon icon="Ghost" />
-                    </a>
-                  )}</td>
-                  <td className="icon-cell">{score?.comment && (
-                    <Tooltip text={score.comment}>
-                      <Icon icon="Comment" />
-                    </Tooltip>
-                  )}</td>
+                  <td className="icon-cell">
+                    {score?.videoLink && (
+                      <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                        <Icon icon="Video" />
+                      </a>
+                    )}
+                  </td>
+                  <td className="icon-cell">
+                    {score?.ghostLink && (
+                      <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                        <Icon icon="Ghost" />
+                      </a>
+                    )}
+                  </td>
+                  <td className="icon-cell">
+                    {score?.comment && (
+                      <Tooltip text={score.comment}>
+                        <Icon icon="Comment" />
+                      </Tooltip>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

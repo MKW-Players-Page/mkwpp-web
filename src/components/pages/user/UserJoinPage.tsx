@@ -45,20 +45,23 @@ const UserJoinPage = () => {
       return;
     }
 
-    coreApi.coreSignupCreate({
-      user: { username: state.username, email: state.email, password: state.password }
-    }).then(() => {
-      navigate(resolvePage(Pages.UserJoinSuccess));
-      done();
-    }).catch((error: ResponseError) => {
-      error.response.json().then((json) => {
-        setState((prev) => ({
-          ...prev,
-          errors: { ...json },
-        }));
+    coreApi
+      .coreSignupCreate({
+        user: { username: state.username, email: state.email, password: state.password },
+      })
+      .then(() => {
+        navigate(resolvePage(Pages.UserJoinSuccess));
+        done();
+      })
+      .catch((error: ResponseError) => {
+        error.response.json().then((json) => {
+          setState((prev) => ({
+            ...prev,
+            errors: { ...json },
+          }));
+        });
+        done();
       });
-      done();
-    });
   };
 
   return (

@@ -79,7 +79,9 @@ const Form = <T extends FormState>({
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setState((prev) => ({ ...prev, submitting: true }));
-    submit(() => { setState((prev) => ({ ...prev, submitting: false })); });
+    submit(() => {
+      setState((prev) => ({ ...prev, submitting: false }));
+    });
   };
 
   const errors = state.errors["non_field_errors"];
@@ -125,17 +127,19 @@ export const Field = ({ type, field, label, placeholder }: FieldProps) => {
         placeholder={placeholder}
       />
       {errors.map((error, index) => (
-        <p key={index} className="field-error">{error}</p>
+        <p key={index} className="field-error">
+          {error}
+        </p>
       ))}
     </div>
   );
 };
 
 export interface SelectFieldProps {
-  options: { label: string; value: string; }[];
+  options: { label: string; value: string }[];
   field: string;
   label: string;
-};
+}
 
 export const SelectField = ({ options, field, label }: SelectFieldProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
@@ -157,7 +161,9 @@ export const SelectField = ({ options, field, label }: SelectFieldProps) => {
         ))}
       </select>
       {errors.map((error, index) => (
-        <p key={index} className="field-error">{error}</p>
+        <p key={index} className="field-error">
+          {error}
+        </p>
       ))}
     </div>
   );

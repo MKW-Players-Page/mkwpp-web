@@ -154,46 +154,54 @@ const PlayerProfilePage = () => {
               </tr>
             </thead>
             <tbody>
-              {metadata.tracks?.map((track) => [false, true].map((isLap) => {
-                const score = scores?.find(
-                  (score) => score.track === track.id && score.isLap === isLap
-                );
-                return (
-                  <tr key={`${isLap ? 'l' : 'c'}${track.id}`}>
-                    {!isLap && (
-                      <td rowSpan={2}>
-                        <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                          {track.name}
-                        </Link>
+              {metadata.tracks?.map((track) =>
+                [false, true].map((isLap) => {
+                  const score = scores?.find(
+                    (score) => score.track === track.id && score.isLap === isLap,
+                  );
+                  return (
+                    <tr key={`${isLap ? "l" : "c"}${track.id}`}>
+                      {!isLap && (
+                        <td rowSpan={2}>
+                          <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+                            {track.name}
+                          </Link>
+                        </td>
+                      )}
+                      {isLap && <td />}
+                      <td className={score?.category !== category ? "fallthrough" : ""}>
+                        {score ? formatTime(score.value) : "-"}
                       </td>
-                    )}
-                    {isLap && <td />}
-                    <td className={score?.category !== category ? 'fallthrough' : ''}>
-                      {score ? formatTime(score.value) : "-"}
-                    </td>
-                    {!isLap && <td />}
-                    <td>{score?.rank || "-"}</td>
-                    <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
-                    <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
-                    <td>{score?.date ? formatDate(score.date) : "-"}</td>
-                    <td className="icon-cell">{score?.videoLink && (
-                      <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                        <Icon icon="Video" />
-                      </a>
-                    )}</td>
-                    <td className="icon-cell">{score?.ghostLink && (
-                      <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                        <Icon icon="Ghost" />
-                      </a>
-                    )}</td>
-                    <td className="icon-cell">{score?.comment && (
-                      <Tooltip text={score.comment}>
-                        <Icon icon="Comment" />
-                      </Tooltip>
-                    )}</td>
-                  </tr>
-                );
-              }))}
+                      {!isLap && <td />}
+                      <td>{score?.rank || "-"}</td>
+                      <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
+                      <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
+                      <td>{score?.date ? formatDate(score.date) : "-"}</td>
+                      <td className="icon-cell">
+                        {score?.videoLink && (
+                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Video" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score?.ghostLink && (
+                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Ghost" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score?.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                }),
+              )}
             </tbody>
           </table>
         </Deferred>

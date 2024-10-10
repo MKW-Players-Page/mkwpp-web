@@ -17,21 +17,25 @@ const Header = () => {
       <Link to={resolvePage(Pages.Home)}>
         <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
       </Link>
-      {!isLoading && <div className="account-actions">
-        {user ? (
-          <>
-            {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
-            <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>{user.username}</Link>
-            <Link to={resolvePage(Pages.Submission)}>Submit</Link>
-            <button onClick={onLogout}>Log Out</button>
-          </>
-        ) : (
-          <>
-            <Link to={resolvePage(Pages.UserLogin)}>Log In</Link>
-            <Link to={resolvePage(Pages.UserJoin)}>Join</Link>
-          </>
-        )}
-      </div>}
+      {!isLoading && (
+        <div className="account-actions">
+          {user ? (
+            <>
+              {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
+              <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
+                {user.username}
+              </Link>
+              <Link to={resolvePage(Pages.Submission)}>Submit</Link>
+              <button onClick={onLogout}>Log Out</button>
+            </>
+          ) : (
+            <>
+              <Link to={resolvePage(Pages.UserLogin)}>Log In</Link>
+              <Link to={resolvePage(Pages.UserJoin)}>Join</Link>
+            </>
+          )}
+        </div>
+      )}
     </header>
   );
 };

@@ -15,11 +15,11 @@ export const formatTime = (time: number) => {
 };
 
 /** Parses a time string which follows either of these formats:
- * 
+ *
  * `m'ss"000`, `ss"000`, `s"000`, `m:ss.000`, `ss.000`, `s.000`
- * 
+ *
  * where `m` stands for minutes, `s` stands for seconds, and `0` stands for milliseconds.
- * 
+ *
  * @param time The formatted time string
  * @returns The parsed time in milliseconds
  */
@@ -33,7 +33,7 @@ export const parseTime = (time: string) => {
   const minutes = groups[1] ? +groups[1] : 0;
   const seconds = groups[2] ? +groups[2] : +groups[3];
   const milliseconds = +groups[4];
-  return ((minutes * 60) + seconds) * 1000 + milliseconds;
+  return (minutes * 60 + seconds) * 1000 + milliseconds;
 };
 
 /** Format a date in the form of

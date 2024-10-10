@@ -1,11 +1,11 @@
-import { Children, isValidElement, ReactElement, ReactNode, useEffect, useState } from 'react';
+import { Children, isValidElement, ReactElement, ReactNode, useEffect, useState } from "react";
 
-import './TabbedModule.css';
+import "./TabbedModule.css";
 
 export interface TabProps {
   title: string;
   element: ReactElement;
-};
+}
 
 export const Tab = (props: TabProps) => {
   throw TypeError("<Tab> element must be a child of <TabbedModule>.");
@@ -13,11 +13,11 @@ export const Tab = (props: TabProps) => {
 
 export interface TabbedModuleProps {
   children?: ReactNode;
-};
+}
 
 export interface TabbedModuleState {
   activeTabIndex: number;
-};
+}
 
 const TabbedModule = ({ children }: TabbedModuleProps) => {
   const initialState = { activeTabIndex: -1 };

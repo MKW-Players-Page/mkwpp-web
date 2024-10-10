@@ -23,20 +23,23 @@ const UserLoginPage = () => {
   const [state, setState] = useState<UserLoginState>(initialState);
 
   const submit = (done: () => void) => {
-    coreApi.coreLoginCreate({
-      auth: { username: state.username, password: state.password }
-    }).then((auth) => {
-      loginUser(setUser, auth);
-      navigate(resolvePage(Pages.Home));
-      done();
-    }).catch((reason: ResponseError) => {
-      if (reason.response) {
-        reason.response.json().then((json) => {
-          setState((prev) => ({ ...prev, errors: { ...json } }));
-        });
-      }
-      done();
-    });
+    coreApi
+      .coreLoginCreate({
+        auth: { username: state.username, password: state.password },
+      })
+      .then((auth) => {
+        loginUser(setUser, auth);
+        navigate(resolvePage(Pages.Home));
+        done();
+      })
+      .catch((reason: ResponseError) => {
+        if (reason.response) {
+          reason.response.json().then((json) => {
+            setState((prev) => ({ ...prev, errors: { ...json } }));
+          });
+        }
+        done();
+      });
   };
 
   return (
