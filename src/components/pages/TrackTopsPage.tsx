@@ -97,8 +97,10 @@ const TrackTopsPage = () => {
             </div>
           ))}
         </div>
-        <CategorySelect value={category} onChange={setCategory} />
-        <LapModeSelect value={lapMode} onChange={setLapMode} />
+        <div className="module-row">
+          <CategorySelect value={category} onChange={setCategory} />
+          <LapModeSelect value={lapMode} onChange={setLapMode} />
+        </div>
         <div className="module-row">
           {cup &&
             metadata.tracks

@@ -41,8 +41,10 @@ const TrackChartPage = () => {
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
       <h1>{track?.name}</h1>
-      <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
-      <LapModeSelect value={lapMode} onChange={setLapMode} />
+      <div className="module-row">
+        <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
+        <LapModeSelect value={lapMode} onChange={setLapMode} />
+      </div>
       <div className="module">
         <Deferred isWaiting={metadata.isLoading || isLoading}>
           <table>

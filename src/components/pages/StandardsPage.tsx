@@ -23,7 +23,11 @@ const StandardsPage = () => {
   return (
     <>
       <h1>Legacy Standards</h1>
-      <select value={levelId} onChange={(e) => setLevelId(+e.target.value)}>
+      <select
+        className="module filter-select"
+        value={levelId}
+        onChange={(e) => setLevelId(+e.target.value)}
+      >
         {metadata.standards?.map((l) => (
           <option key={l.id} value={l.id}>
             {l.name}

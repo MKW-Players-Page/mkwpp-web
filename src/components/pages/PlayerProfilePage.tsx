@@ -55,8 +55,10 @@ const PlayerProfilePage = () => {
         <FlagIcon region={getRegionById(metadata, player?.region || 0)} />
         {player?.name || <>&nbsp;</>}
       </h1>
-      <CategorySelect value={category} onChange={setCategory} />
-      <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+      <div className="module-row">
+        <CategorySelect value={category} onChange={setCategory} />
+        <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+      </div>
       <div className="module-row">
         <div className="module">
           <Deferred isWaiting={playerLoading}>

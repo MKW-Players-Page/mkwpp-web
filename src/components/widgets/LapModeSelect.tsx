@@ -21,7 +21,11 @@ const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) 
   ];
 
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value as LapModeEnum)}>
+    <select
+      className="module filter-select"
+      value={value}
+      onChange={(e) => onChange(e.target.value as LapModeEnum)}
+    >
       {options.map((option) => (
         <option key={option} value={option}>
           {Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}

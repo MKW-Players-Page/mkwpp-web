@@ -83,8 +83,10 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     <>
       <h1>{metric.title}</h1>
       <p>{metric.description}</p>
-      <CategorySelect value={category} onChange={setCategory} />
-      <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+      <div className="module-row">
+        <CategorySelect value={category} onChange={setCategory} />
+        <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+      </div>
       <div className="module">
         <Deferred isWaiting={isLoading}>
           <table>
