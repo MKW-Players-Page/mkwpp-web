@@ -1,5 +1,3 @@
-import './LapModeSelect.css'
-
 export enum LapModeEnum {
     Course = 'course',
     Lap = 'lap',
@@ -23,7 +21,7 @@ const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) 
     ];
 
     return (
-        <select className="module lap-mode-select" value={value} onChange={(e) => onChange(e.target.value as LapModeEnum)}>
+        <select className="module filter-select" value={value} onChange={(e) => onChange(e.target.value as LapModeEnum)}>
             {options.map((option) => (
                 <option key={option} value={option}>
                     {Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}

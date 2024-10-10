@@ -1,6 +1,5 @@
 import { CategoryEnum } from '../../api';
 import { getCategoryName } from '../../utils/EnumUtils';
-import './CategorySelect.css';
 
 export interface CategorySelectProps {
     /** Categories to include in select element. Default to all categories if not defined. */
@@ -17,7 +16,7 @@ const CategorySelect = ({ options, value, onChange }: CategorySelectProps) => {
     }
 
     return (
-        <select className="category-select module" value={value} onChange={(e) => onChange(e.target.value as CategoryEnum)}>
+        <select className="filter-select module" value={value} onChange={(e) => onChange(e.target.value as CategoryEnum)}>
             {options.map((category) => (
                 <option key={category} value={category}>
                     {getCategoryName(category)}
