@@ -101,7 +101,15 @@ const TrackTopsPage = () => {
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect value={lapMode} onChange={setLapMode} />
         </div>
-        <div className="module-row">
+        <div
+          className="module-row"
+          style={
+            {
+              display: "grid",
+              gridTemplateColumns: "repeat(4,1fr)",
+            } as React.CSSProperties
+          }
+        >
           {cup &&
             metadata.tracks
               ?.filter((track) => cup.tracks.includes(track.id))
