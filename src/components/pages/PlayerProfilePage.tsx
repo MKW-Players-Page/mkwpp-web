@@ -29,7 +29,7 @@ const PlayerProfilePage = () => {
     isLoading: playerLoading,
     data: player,
     error: playerError,
-  } = useApi(() => api.timetrialsPlayersRetrieve({ id }));
+  } = useApi(() => api.timetrialsPlayersRetrieve({ id }), [id]);
 
   const { isLoading: statsLoading, data: stats } = useApi(
     () =>
@@ -39,12 +39,12 @@ const PlayerProfilePage = () => {
         lapMode,
         region: 1,
       }),
-    [category, lapMode],
+    [id, category, lapMode],
   );
 
   const { isLoading: scoresLoading, data: scores } = useApi(
     () => api.timetrialsPlayersScoresList({ id, category }),
-    [category],
+    [id, category],
   );
 
   return (
