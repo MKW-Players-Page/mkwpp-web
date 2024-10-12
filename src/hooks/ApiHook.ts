@@ -12,6 +12,7 @@ export const useApi = <T>(apiCallback: () => Promise<T>, dependencies: Dependenc
   const [state, setState] = useState<ApiState<T>>(initialState);
 
   useEffect(() => {
+    setState((prev) => ({ ...prev, isLoading: true }));
     apiCallback()
       .then((data: T) => {
         setState({ isLoading: false, data });
@@ -43,6 +44,12 @@ export const useApiArray = <T, R>(
       if (i >= paramArray.length) {
         return;
       }
+
+      setState((prev) => [
+        ...prev.slice(0, i),
+        { ...prev[i], isLoading: true },
+        ...prev.slice(i + 1),
+      ]);
 
       apiCallback(paramArray[i])
         .then((data: T) => {
