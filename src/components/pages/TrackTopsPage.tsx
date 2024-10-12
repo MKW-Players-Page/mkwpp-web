@@ -64,7 +64,7 @@ const TrackTopsPage = () => {
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
       <Deferred isWaiting={metadata.isLoading}>
-        <ComplexRegionSelection regions={metadata.regions || []} cupId={cupId} />
+        <ComplexRegionSelection region={region} cupId={cupId} />
         <div className="module-row">
           {metadata.cups?.map((c) => (
             <div key={c.id} className="module">
