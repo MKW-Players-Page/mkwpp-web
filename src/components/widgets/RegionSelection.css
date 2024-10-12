@@ -5,11 +5,12 @@
 }
 
 .show-region-row {
-  max-height: 100px; /* this can be done other ways */
+  /* this can be done other ways */
+  max-height: 100px;
   overflow: hidden;
   transition: all 0.5s;
 }
 
 .selected-region {
-  border: 1px solid #0f0;
+  background-color: var(--navbar-background-color-hover);
 }
