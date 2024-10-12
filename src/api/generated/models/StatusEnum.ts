@@ -14,9 +14,9 @@
 
 
 /**
- * * `pending` - Pending
- * * `accepted` - Accepted
- * * `rejected` - Rejected
+ * * `pending` - pending
+ * * `accepted` - accepted
+ * * `rejected` - rejected
  * @export
  */
 export const StatusEnum = {

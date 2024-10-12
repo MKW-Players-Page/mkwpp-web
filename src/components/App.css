@@ -67,3 +67,7 @@
 .filter-select {
   color: #fff;
 }
+
+.nobr {
+  white-space: nowrap;
+}

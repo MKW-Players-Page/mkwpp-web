@@ -83,7 +83,7 @@ export interface TimetrialsStandardsListRequest {
 }
 
 export interface TimetrialsSubmissionsCreateCreateRequest {
-    scoreSubmission: Omit<ScoreSubmission, 'id'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'>;
+    scoreSubmission: Omit<ScoreSubmission, 'id'|'player'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'>;
 }
 
 export interface TimetrialsTracksScoresListRequest {
@@ -467,6 +467,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
 
         const response = await this.request({
             path: `/api/timetrials/submissions/create/`,

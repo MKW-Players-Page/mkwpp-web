@@ -1,14 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 
 import Deferred from "../global/Deferred";
-import { CategoryField, Icon, LapModeField, Tooltip, TrackSelect } from "../widgets";
+import {
+  CategoryField,
+  Icon,
+  LapModeField,
+  Tab,
+  TabbedModule,
+  Tooltip,
+  TrackSelect,
+} from "../widgets";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
+import { ResponseError } from "../../api/generated";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import Form, { Field } from "../widgets/Form";
 import { formatTime, parseTime } from "../../utils/Formatters";
 import { UserContext } from "../../utils/User";
-import TabbedModule, { Tab } from "../widgets/TabbedModule";
 import { Navigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
@@ -109,7 +117,6 @@ const SubmitTab = () => {
       .timetrialsSubmissionsCreateCreate({
         scoreSubmission: {
           value: value as number,
-          player: user.player,
           track: +state.track,
           category: state.category,
           isLap: state.lapMode === LapModeEnum.Lap,
@@ -123,7 +130,15 @@ const SubmitTab = () => {
         setState({ ...initialState, state: SubmitStateEnum.Success });
         done();
       })
-      .catch(() => {
+      .catch((error: ResponseError) => {
+        error.response
+          .json()
+          .then((json) => {
+            setState((prev) => ({ ...prev, errors: { ...json } }));
+          })
+          .catch(() => {
+            setState((prev) => ({ ...prev, errors: { non_field_errors: ["An error occured."] } }));
+          });
         done();
       });
   };
@@ -172,7 +187,7 @@ const SubmissionsTab = () => {
         <div className="card-container">
           {submissions?.map((submission) => (
             <div key={submission.id} className="card">
-              <p>
+              <p className="nobr">
                 {getTrackById(metadata, submission.track)?.name}&nbsp;
                 {getCategoryName(submission.category)}&nbsp;
                 {submission.isLap ? "Lap" : "Course"}

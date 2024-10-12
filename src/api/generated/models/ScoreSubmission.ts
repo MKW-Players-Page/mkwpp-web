@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PlayerBasic } from './PlayerBasic';
+import {
+    PlayerBasicFromJSON,
+    PlayerBasicFromJSONTyped,
+    PlayerBasicToJSON,
+} from './PlayerBasic';
 import type { StatusEnum } from './StatusEnum';
 import {
     StatusEnumFromJSON,
@@ -46,10 +52,10 @@ export interface ScoreSubmission {
     value: number;
     /**
      * 
-     * @type {number}
+     * @type {PlayerBasic}
      * @memberof ScoreSubmission
      */
-    player: number;
+    readonly player: PlayerBasic;
     /**
      * 
      * @type {number}
@@ -148,7 +154,7 @@ export function ScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'id': json['id'],
         'value': json['value'],
-        'player': json['player'],
+        'player': PlayerBasicFromJSON(json['player']),
         'track': json['track'],
         'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
@@ -163,14 +169,13 @@ export function ScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ScoreSubmissionToJSON(value?: Omit<ScoreSubmission, 'id'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'> | null): any {
+export function ScoreSubmissionToJSON(value?: Omit<ScoreSubmission, 'id'|'player'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'> | null): any {
     if (value == null) {
         return value;
     }
     return {
         
         'value': value['value'],
-        'player': value['player'],
         'track': value['track'],
         'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
