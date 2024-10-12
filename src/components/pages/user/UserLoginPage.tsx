@@ -11,6 +11,7 @@ interface UserLoginState {
   username: string;
   password: string;
   errors: { [key: string]: string[] };
+  submitting: boolean;
 }
 
 const UserLoginPage = () => {
@@ -18,10 +19,10 @@ const UserLoginPage = () => {
 
   const { user, setUser } = useContext(UserContext);
 
-  const initialState = { username: "", password: "", errors: {} };
+  const initialState = { username: "", password: "", errors: {}, submitting: false };
   const [state, setState] = useState<UserLoginState>(initialState);
 
-  const submit = () => {
+  const submit = (done: () => void) => {
     coreApi
       .coreLoginCreate({
         auth: { username: state.username, password: state.password },
@@ -29,6 +30,7 @@ const UserLoginPage = () => {
       .then((auth) => {
         loginUser(setUser, auth);
         navigate(resolvePage(Pages.Home));
+        done();
       })
       .catch((reason: ResponseError) => {
         if (reason.response) {
@@ -36,6 +38,7 @@ const UserLoginPage = () => {
             setState((prev) => ({ ...prev, errors: { ...json } }));
           });
         }
+        done();
       });
   };
 

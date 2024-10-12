@@ -20,6 +20,7 @@ import type {
   PlayerStats,
   Region,
   Score,
+  ScoreSubmission,
   ScoreWithPlayer,
   StandardLevel,
   Track,
@@ -36,6 +37,8 @@ import {
     RegionToJSON,
     ScoreFromJSON,
     ScoreToJSON,
+    ScoreSubmissionFromJSON,
+    ScoreSubmissionToJSON,
     ScoreWithPlayerFromJSON,
     ScoreWithPlayerToJSON,
     StandardLevelFromJSON,
@@ -77,6 +80,10 @@ export interface TimetrialsRecordsListRequest {
 
 export interface TimetrialsStandardsListRequest {
     isLegacy?: boolean;
+}
+
+export interface TimetrialsSubmissionsCreateCreateRequest {
+    scoreSubmission: Omit<ScoreSubmission, 'id'|'player'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'>;
 }
 
 export interface TimetrialsTracksScoresListRequest {
@@ -442,6 +449,72 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsStandardsList(requestParameters: TimetrialsStandardsListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StandardLevel>> {
         const response = await this.timetrialsStandardsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsCreateCreateRaw(requestParameters: TimetrialsSubmissionsCreateCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ScoreSubmission>> {
+        if (requestParameters['scoreSubmission'] == null) {
+            throw new runtime.RequiredError(
+                'scoreSubmission',
+                'Required parameter "scoreSubmission" was null or undefined when calling timetrialsSubmissionsCreateCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/create/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ScoreSubmissionToJSON(requestParameters['scoreSubmission']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ScoreSubmissionFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsCreateCreate(requestParameters: TimetrialsSubmissionsCreateCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ScoreSubmission> {
+        const response = await this.timetrialsSubmissionsCreateCreateRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreSubmissionFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+        const response = await this.timetrialsSubmissionsListRaw(initOverrides);
         return await response.value();
     }
 

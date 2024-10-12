@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import { CategorySelect, FlagIcon } from "../widgets";
+import { CategorySelect, FlagIcon, Icon, Tooltip } from "../widgets";
 import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
@@ -37,8 +37,9 @@ const TrackRecordsPage = () => {
                 <th>Lap</th>
                 <th>Standard</th>
                 <th>Date</th>
-                <th className="col-icon" />
-                <th className="col-icon" />
+                <th className="icon-cell" />
+                <th className="icon-cell" />
+                <th className="icon-cell" />
               </tr>
             </thead>
             <tbody>
@@ -63,11 +64,7 @@ const TrackRecordsPage = () => {
                         {score ? (
                           <>
                             <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
-                            <Link
-                              to={resolvePage(Pages.PlayerProfile, {
-                                id: score?.player.id,
-                              })}
-                            >
+                            <Link to={resolvePage(Pages.PlayerProfile, { id: score?.player.id })}>
                               {score.player.alias || score.player.name}
                             </Link>
                           </>
@@ -82,18 +79,25 @@ const TrackRecordsPage = () => {
                       {!isLap && <td />}
                       <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
                       <td>{score?.date ? formatDate(score.date) : "-"}</td>
-                      <td>
+                      <td className="icon-cell">
                         {score?.videoLink && (
                           <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                            V
+                            <Icon icon="Video" />
                           </a>
                         )}
                       </td>
-                      <td>
+                      <td className="icon-cell">
                         {score?.ghostLink && (
                           <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                            G
+                            <Icon icon="Ghost" />
                           </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score?.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
                         )}
                       </td>
                     </tr>

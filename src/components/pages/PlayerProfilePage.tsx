@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
 import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
@@ -148,8 +148,9 @@ const PlayerProfilePage = () => {
                 <th>Standard</th>
                 <th>PR:WR</th>
                 <th>Date</th>
-                <th className="col-icon" />
-                <th className="col-icon" />
+                <th className="icon-cell" />
+                <th className="icon-cell" />
+                <th className="icon-cell" />
               </tr>
             </thead>
             <tbody>
@@ -176,18 +177,25 @@ const PlayerProfilePage = () => {
                       <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
                       <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
                       <td>{score?.date ? formatDate(score.date) : "-"}</td>
-                      <td>
+                      <td className="icon-cell">
                         {score?.videoLink && (
                           <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                            V
+                            <Icon icon="Video" />
                           </a>
                         )}
                       </td>
-                      <td>
+                      <td className="icon-cell">
                         {score?.ghostLink && (
                           <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                            G
+                            <Icon icon="Ghost" />
                           </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score?.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
                         )}
                       </td>
                     </tr>

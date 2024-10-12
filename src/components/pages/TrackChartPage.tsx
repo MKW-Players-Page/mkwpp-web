@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import api, { CategoryEnum } from "../../api";
 import { TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
@@ -55,8 +55,9 @@ const TrackChartPage = () => {
                 <th>Time</th>
                 <th>Standard</th>
                 <th>Date</th>
-                <th className="col-icon" />
-                <th className="col-icon" />
+                <th className="icon-cell" />
+                <th className="icon-cell" />
+                <th className="icon-cell" />
               </tr>
             </thead>
             <tbody>
@@ -73,7 +74,7 @@ const TrackChartPage = () => {
                         id: score.player.id,
                       })}
                     >
-                      {score.player.name}
+                      {score.player.alias || score.player.name}
                     </Link>
                   </td>
                   <td className={score.category !== category ? "fallthrough" : ""}>
@@ -81,18 +82,25 @@ const TrackChartPage = () => {
                   </td>
                   <td>{getStandardLevel(metadata, score.standard)?.name}</td>
                   <td>{score.date && formatDate(score.date)}</td>
-                  <td>
-                    {score.videoLink && (
+                  <td className="icon-cell">
+                    {score?.videoLink && (
                       <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                        V
+                        <Icon icon="Video" />
                       </a>
                     )}
                   </td>
-                  <td>
-                    {score.ghostLink && (
+                  <td className="icon-cell">
+                    {score?.ghostLink && (
                       <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                        G
+                        <Icon icon="Ghost" />
                       </a>
+                    )}
+                  </td>
+                  <td className="icon-cell">
+                    {score?.comment && (
+                      <Tooltip text={score.comment}>
+                        <Icon icon="Comment" />
+                      </Tooltip>
                     )}
                   </td>
                 </tr>

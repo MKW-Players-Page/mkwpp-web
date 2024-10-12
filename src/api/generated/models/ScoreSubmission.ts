@@ -13,6 +13,18 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PlayerBasic } from './PlayerBasic';
+import {
+    PlayerBasicFromJSON,
+    PlayerBasicFromJSONTyped,
+    PlayerBasicToJSON,
+} from './PlayerBasic';
+import type { StatusEnum } from './StatusEnum';
+import {
+    StatusEnumFromJSON,
+    StatusEnumFromJSONTyped,
+    StatusEnumToJSON,
+} from './StatusEnum';
 import type { CategoryEnum } from './CategoryEnum';
 import {
     CategoryEnumFromJSON,
@@ -23,146 +35,150 @@ import {
 /**
  * 
  * @export
- * @interface Score
+ * @interface ScoreSubmission
  */
-export interface Score {
+export interface ScoreSubmission {
     /**
      * 
      * @type {number}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     readonly id: number;
     /**
-     * 
-     * @type {number}
-     * @memberof Score
-     */
-    rank: number;
-    /**
      * Finish time in milliseconds (e.g. 69999 for 1:09.999).
      * @type {number}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     value: number;
     /**
      * 
-     * @type {number}
-     * @memberof Score
+     * @type {PlayerBasic}
+     * @memberof ScoreSubmission
      */
-    player: number;
+    readonly player: PlayerBasic;
     /**
      * 
      * @type {number}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     track: number;
     /**
      * 
      * @type {CategoryEnum}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     category: CategoryEnum;
     /**
      * Off for 3lap, on for flap.
      * @type {boolean}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     isLap?: boolean;
     /**
      * 
-     * @type {number}
-     * @memberof Score
-     */
-    standard: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Score
-     */
-    recordRatio: number;
-    /**
-     * 
      * @type {Date}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     date?: Date;
     /**
      * 
      * @type {string}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     videoLink?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     ghostLink?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof Score
+     * @memberof ScoreSubmission
      */
     comment?: string | null;
+    /**
+     * 
+     * @type {StatusEnum}
+     * @memberof ScoreSubmission
+     */
+    readonly status: StatusEnum;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ScoreSubmission
+     */
+    readonly timeSubmitted: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ScoreSubmission
+     */
+    readonly timeReviewed: Date | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ScoreSubmission
+     */
+    readonly reviewedBy: number | null;
 }
 
 
 
 /**
- * Check if a given object implements the Score interface.
+ * Check if a given object implements the ScoreSubmission interface.
  */
-export function instanceOfScore(value: object): value is Score {
+export function instanceOfScoreSubmission(value: object): value is ScoreSubmission {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('rank' in value) || value['rank'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
     if (!('player' in value) || value['player'] === undefined) return false;
     if (!('track' in value) || value['track'] === undefined) return false;
     if (!('category' in value) || value['category'] === undefined) return false;
-    if (!('standard' in value) || value['standard'] === undefined) return false;
-    if (!('recordRatio' in value) || value['recordRatio'] === undefined) return false;
+    if (!('status' in value) || value['status'] === undefined) return false;
+    if (!('timeSubmitted' in value) || value['timeSubmitted'] === undefined) return false;
+    if (!('timeReviewed' in value) || value['timeReviewed'] === undefined) return false;
+    if (!('reviewedBy' in value) || value['reviewedBy'] === undefined) return false;
     return true;
 }
 
-export function ScoreFromJSON(json: any): Score {
-    return ScoreFromJSONTyped(json, false);
+export function ScoreSubmissionFromJSON(json: any): ScoreSubmission {
+    return ScoreSubmissionFromJSONTyped(json, false);
 }
 
-export function ScoreFromJSONTyped(json: any, ignoreDiscriminator: boolean): Score {
+export function ScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boolean): ScoreSubmission {
     if (json == null) {
         return json;
     }
     return {
         
         'id': json['id'],
-        'rank': json['rank'],
         'value': json['value'],
-        'player': json['player'],
+        'player': PlayerBasicFromJSON(json['player']),
         'track': json['track'],
         'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
-        'standard': json['standard'],
-        'recordRatio': json['record_ratio'],
         'date': json['date'] == null ? undefined : (new Date(json['date'])),
         'videoLink': json['video_link'] == null ? undefined : json['video_link'],
         'ghostLink': json['ghost_link'] == null ? undefined : json['ghost_link'],
         'comment': json['comment'] == null ? undefined : json['comment'],
+        'status': StatusEnumFromJSON(json['status']),
+        'timeSubmitted': (new Date(json['time_submitted'])),
+        'timeReviewed': (json['time_reviewed'] == null ? null : new Date(json['time_reviewed'])),
+        'reviewedBy': json['reviewed_by'],
     };
 }
 
-export function ScoreToJSON(value?: Omit<Score, 'id'> | null): any {
+export function ScoreSubmissionToJSON(value?: Omit<ScoreSubmission, 'id'|'player'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'> | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'rank': value['rank'],
         'value': value['value'],
-        'player': value['player'],
         'track': value['track'],
         'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
-        'standard': value['standard'],
-        'record_ratio': value['recordRatio'],
         'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
         'video_link': value['videoLink'],
         'ghost_link': value['ghostLink'],

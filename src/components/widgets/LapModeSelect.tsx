@@ -1,3 +1,7 @@
+import { useContext } from "react";
+
+import { FormContext } from "./Form";
+
 export enum LapModeEnum {
   Course = "course",
   Lap = "lap",
@@ -11,9 +15,13 @@ export interface LapModeSelectProps {
   value: LapModeEnum;
   /** Callback to invoke when user attempts to select a new lap mode */
   onChange: (lapMode: LapModeEnum) => void;
+  /** Whether this element is disabled */
+  disabled?: boolean;
 }
 
-const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) => {
+const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSelectProps) => {
+  disabled = !!disabled;
+
   const options = [
     ...(includeOverall ? [LapModeEnum.Overall] : []),
     LapModeEnum.Course,
@@ -23,6 +31,7 @@ const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) 
   return (
     <select
       className="module filter-select"
+      disabled={disabled}
       value={value}
       onChange={(e) => onChange(e.target.value as LapModeEnum)}
     >
@@ -32,6 +41,33 @@ const LapModeSelect = ({ includeOverall, value, onChange }: LapModeSelectProps) 
         </option>
       ))}
     </select>
+  );
+};
+
+export interface LapModeFieldProps {
+  /** Categories to include in select element. Default to all categories if not defined. */
+  includeOverall?: boolean;
+  /** Name of the state property to manage */
+  field: string;
+  /** Field label */
+  label: string;
+}
+
+export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps) => {
+  const { getValue, setValue, disabled } = useContext(FormContext);
+
+  return (
+    <div className="field">
+      <p>{label}</p>
+      <LapModeSelect
+        includeOverall={includeOverall}
+        value={getValue(field) as LapModeEnum}
+        onChange={(lapMode) => {
+          setValue(field, lapMode);
+        }}
+        disabled={disabled}
+      />
+    </div>
   );
 };
 

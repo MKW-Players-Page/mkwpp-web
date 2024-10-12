@@ -13,6 +13,7 @@ import TrackTopsPage, { TrackTopsHomePage } from "./TrackTopsPage";
 import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
+import SubmissionPage from "./SubmissionPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -74,6 +75,10 @@ export const Pages: PageMap = {
   Standards: {
     path: "/standards",
     element: <StandardsPage />,
+  },
+  Submission: {
+    path: "/submit",
+    element: <SubmissionPage />,
   },
   UserActivation: {
     path: "/activate",
