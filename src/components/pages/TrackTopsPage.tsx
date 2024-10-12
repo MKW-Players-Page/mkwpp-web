@@ -102,7 +102,7 @@ const TrackTopsPage = () => {
                   borderRadius: "50%",
                   aspectRatio: "1/1",
                   width: "auto",
-                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : ""
+                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
                 } as React.CSSProperties
               }
             >
