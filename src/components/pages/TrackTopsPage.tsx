@@ -82,24 +82,58 @@ const TrackTopsPage = () => {
             ))}
         </div>
         <div className="module-row">
+          <CategorySelect value={category} onChange={setCategory} />
+          <LapModeSelect value={lapMode} onChange={setLapMode} />
+        </div>
+        <div
+          className="module-row"
+          style={
+            {
+              justifyContent: "center",
+            } as React.CSSProperties
+          }
+        >
           {metadata.cups?.map((c) => (
-            <div key={c.id} className="module">
-              <div className="module-content">
+            <div
+              key={c.id}
+              className="module"
+              style={
+                {
+                  borderRadius: "50%",
+                  aspectRatio: "1/1",
+                  width: "auto",
+                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
+                } as React.CSSProperties
+              }
+            >
+              <div
+                style={
+                  {
+                    textAlign: "center",
+                  } as React.CSSProperties
+                }
+                className="module-content"
+              >
                 <Link
                   to={resolvePage(Pages.TrackTops, {
                     region: region?.code.toLowerCase() || 0,
                     cup: c.id,
                   })}
                 >
-                  {c.name}
+                  <img
+                    style={
+                      {
+                        aspectRatio: "1/1",
+                        height: "60px",
+                      } as React.CSSProperties
+                    }
+                    src={`/mkw/cups/${c.id}.png`}
+                    alt="Cup Icon"
+                  />
                 </Link>
               </div>
             </div>
           ))}
-        </div>
-        <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect value={lapMode} onChange={setLapMode} />
         </div>
         <div
           className="module-row"
