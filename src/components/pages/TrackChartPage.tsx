@@ -60,7 +60,7 @@ const TrackChartPage = () => {
                 <th className="icon-cell" />
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-hover-rows">
               {scores?.map((score) => (
                 <tr
                   key={score.id}

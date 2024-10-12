@@ -137,7 +137,7 @@ const TrackTopsPage = () => {
                   <div className="module">
                     <Deferred isWaiting={tops[index].isLoading}>
                       <table>
-                        <tbody>
+                        <tbody className="table-hover-rows">
                           {tops[index].data?.map((score) => (
                             <tr
                               key={score.id}

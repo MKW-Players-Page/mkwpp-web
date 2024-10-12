@@ -47,7 +47,7 @@ const StandardsPage = () => {
                 <th>Lap</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-hover-rows">
               {level?.standards.map((standard) => {
                 const track = metadata.tracks?.find((track) => track.id === standard.track);
                 return (

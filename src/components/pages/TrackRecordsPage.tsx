@@ -42,7 +42,7 @@ const TrackRecordsPage = () => {
                 <th className="icon-cell" />
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-hover-rows">
               {metadata.tracks?.map((track) =>
                 [false, true].map((isLap) => {
                   const score = scores?.find(

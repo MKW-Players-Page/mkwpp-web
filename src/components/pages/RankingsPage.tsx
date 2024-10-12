@@ -97,7 +97,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                 <th>{metric.title}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-hover-rows">
               {rankings?.map((stats) => (
                 <tr
                   key={stats.player.id}

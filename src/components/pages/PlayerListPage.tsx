@@ -28,7 +28,7 @@ const PlayerListPage = () => {
                 <th>Location</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-hover-rows">
               {players?.map((player) => (
                 <tr
                   key={player.id}
