@@ -24,7 +24,12 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   return (
     <div className="field">
       {label && <p>{label}</p>}
-      <select disabled={disabled} value={getValue(field)} onChange={onChange}>
+      <select
+        className="module filter-select"
+        disabled={disabled}
+        value={getValue(field)}
+        onChange={onChange}
+      >
         {metadata.tracks?.map((track) => (
           <option key={track.id} value={track.id}>
             {track.name}
