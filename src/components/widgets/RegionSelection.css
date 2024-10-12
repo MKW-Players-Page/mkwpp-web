@@ -1,0 +1,16 @@
+.hide-region-row {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.show-region-row {
+  /* this can be done other ways */
+  max-height: 100px;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.selected-region {
+  background-color: var(--navbar-background-color-hover);
+}

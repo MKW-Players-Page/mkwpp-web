@@ -12,6 +12,7 @@ import { formatTime } from "../../utils/Formatters";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
+import ComplexRegionSelection from "../widgets/RegionSelection";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -63,24 +64,7 @@ const TrackTopsPage = () => {
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
       <Deferred isWaiting={metadata.isLoading}>
-        <div className="module-row">
-          {metadata.regions
-            ?.filter((r) => r.isRanked)
-            .map((r) => (
-              <div key={r.id} className="module">
-                <div className="module-content">
-                  <Link
-                    to={resolvePage(Pages.TrackTops, {
-                      region: r.code.toLowerCase(),
-                      cup: cupId,
-                    })}
-                  >
-                    {r.name}
-                  </Link>
-                </div>
-              </div>
-            ))}
-        </div>
+        <ComplexRegionSelection region={region} cupId={cupId} />
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect value={lapMode} onChange={setLapMode} />
