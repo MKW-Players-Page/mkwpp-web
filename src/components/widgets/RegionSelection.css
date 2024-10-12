@@ -1,11 +1,15 @@
-.hide-row {
+.hide-region-row {
   max-height: 0;
   overflow: hidden;
   transition: all 0.5s;
 }
 
-.show-row {
-  max-height: 1000px;
+.show-region-row {
+  max-height: 100px; /* this can be done other ways */
   overflow: hidden;
   transition: all 0.5s;
+}
+
+.selected-region {
+  border: 1px solid #0f0;
 }
