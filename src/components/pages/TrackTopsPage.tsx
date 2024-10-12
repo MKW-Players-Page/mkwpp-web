@@ -81,6 +81,10 @@ const TrackTopsPage = () => {
               </div>
             ))}
         </div>
+        <div className="module-row">
+          <CategorySelect value={category} onChange={setCategory} />
+          <LapModeSelect value={lapMode} onChange={setLapMode} />
+        </div>
         <div
           className="module-row"
           style={
@@ -129,10 +133,6 @@ const TrackTopsPage = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect value={lapMode} onChange={setLapMode} />
         </div>
         <div
           className="module-row"
