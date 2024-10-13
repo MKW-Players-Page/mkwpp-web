@@ -90,6 +90,7 @@ export interface TimetrialsTracksScoresListRequest {
     category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
     lapMode: TimetrialsTracksScoresListLapModeEnum;
+    region?: number;
 }
 
 export interface TimetrialsTracksTopsListRequest {
@@ -574,6 +575,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['lapMode'] != null) {
             queryParameters['lap_mode'] = requestParameters['lapMode'];
+        }
+
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
