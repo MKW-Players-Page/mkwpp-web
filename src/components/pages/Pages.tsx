@@ -14,6 +14,7 @@ import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
 import SubmissionPage from "./SubmissionPage";
+import BlogPostPage from "./BlogPostPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -23,6 +24,10 @@ export const Pages: PageMap = {
   Home: {
     index: true,
     element: <HomePage />,
+  },
+  BlogPost: {
+    path: "/archive/:id",
+    element: <BlogPostPage />,
   },
   PlayerList: {
     path: "/players",
