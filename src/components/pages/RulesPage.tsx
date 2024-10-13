@@ -504,9 +504,18 @@ const RulesPage = () => {
               <></>
             </TrackCategory>
             <TrackCategory trackName="N64 Bowser's Castle">
-              <p>It is allowed to perform the <Lnk url="//youtu.be/twZes-RI6Sc?t=107">Rail cut</Lnk> on the last turn.</p>
-              <p>It is allowed to perform the <Lnk url="//youtu.be/3PYp8-IrY_0?t=41">Spiral Skip</Lnk>.</p>
-              <p>It is allowed to perform the <Lnk url="//youtu.be/ylcEVLHzwJA?t=17">Respawn Glitch</Lnk>.</p>
+              <p>
+                It is allowed to perform the <Lnk url="//youtu.be/twZes-RI6Sc?t=107">Rail cut</Lnk>{" "}
+                on the last turn.
+              </p>
+              <p>
+                It is allowed to perform the{" "}
+                <Lnk url="//youtu.be/3PYp8-IrY_0?t=41">Spiral Skip</Lnk>.
+              </p>
+              <p>
+                It is allowed to perform the{" "}
+                <Lnk url="//youtu.be/ylcEVLHzwJA?t=17">Respawn Glitch</Lnk>.
+              </p>
             </TrackCategory>
           </ul>
         </div>
