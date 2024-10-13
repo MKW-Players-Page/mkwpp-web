@@ -13,7 +13,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
-import MouseFollow from "../widgets/MouseFollow";
+import MouseFollow, { MouseFollowState } from "../widgets/MouseFollow";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -39,12 +39,11 @@ const TrackTopsPage = () => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [showMouseFollower, setShowMouseFollower] = useState(false);
+  const [mouseData, setMouseData] = useState<MouseFollowState>({ x: 0, y: 0, show: false });
   const [hoverTrackNames, setHoverTrackNames] = useState(["", "", "", ""]);
 
   const detectMousePos = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
+    setMouseData({ x: e.clientX, y: e.clientY, show: mouseData.show });
   };
 
   const metadata = useContext(MetadataContext);
@@ -72,25 +71,24 @@ const TrackTopsPage = () => {
       {metadata.cups && !metadata.cups.find((cup) => cup.id === cupId) && (
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
-      <MouseFollow
-        className="module"
-        style={
-          {
-            display: "flex",
-            flexDirection: "column",
-            width: "auto",
-            padding: "5px",
-            textAlign: "center",
-          } as React.CSSProperties
-        }
-        posX={mousePos.x + 30}
-        posY={mousePos.y + 30}
-        show={showMouseFollower}
-      >
-        <span>{hoverTrackNames[0]}</span>
-        <span>{hoverTrackNames[1]}</span>
-        <span>{hoverTrackNames[2]}</span>
-        <span>{hoverTrackNames[3]}</span>
+      <MouseFollow>
+        <div
+          className="module"
+          style={
+            {
+              display: "flex",
+              flexDirection: "column",
+              width: "auto",
+              padding: "5px",
+              textAlign: "center",
+            } as React.CSSProperties
+          }
+        >
+          <span>{hoverTrackNames[0]}</span>
+          <span>{hoverTrackNames[1]}</span>
+          <span>{hoverTrackNames[2]}</span>
+          <span>{hoverTrackNames[3]}</span>
+        </div>
       </MouseFollow>
       <Deferred isWaiting={metadata.isLoading}>
         <ComplexRegionSelection region={region} cupId={cupId} />
@@ -118,10 +116,10 @@ const TrackTopsPage = () => {
                       (metadata.tracks || []).find((track) => track.id === trackId)?.name || "",
                   ),
                 );
-                setShowMouseFollower(true);
+                setMouseData({ x: mouseData.x, y: mouseData.y, show: true });
               }}
               onMouseLeave={() => {
-                setShowMouseFollower(false);
+                setMouseData({ x: mouseData.x, y: mouseData.y, show: false });
               }}
               style={
                 {

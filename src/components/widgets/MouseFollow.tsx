@@ -1,19 +1,21 @@
+import { useState } from "react";
+
 export interface MouseFollowProp {
-  children: JSX.Element[];
-  className: string;
-  style: React.CSSProperties;
-  posX: number;
-  posY: number;
+  children: JSX.Element;
+}
+
+export interface MouseFollowState {
+  x: number;
+  y: number;
   show: boolean;
 }
 
-const MouseFollow = ({ children, style, posX, posY, show, className }: MouseFollowProp) => {
-  style.display = show ? style.display : "none";
-  style.position = "absolute";
-  style.left = posX;
-  style.top = posY;
+const MouseFollow = ({ children }: MouseFollowProp) => {
+  const [mouseData, setMouseData] = useState<MouseFollowState>({ x: 0, y: 0, show: false });
   return (
-    <div className={className} style={style}>
+    <div
+      style={{ position: "absolute", left: mouseData.x, top: mouseData.y } as React.CSSProperties}
+    >
       {children}
     </div>
   );
