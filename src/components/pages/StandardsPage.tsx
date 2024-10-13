@@ -21,7 +21,6 @@ const StandardsPage = () => {
       setLevelId(metadata.standards?.at(0)?.id || 0);
     }
   }, [levelId, metadata]);
-
   const level =
     (metadata.standards && metadata.standards.find((l) => l.id === levelId)) ||
     ({ standards: [] } as unknown as StandardLevel);
@@ -29,7 +28,7 @@ const StandardsPage = () => {
   let lastChecked = {} as Standard;
   level?.standards
     .filter((r) => getCategoryNumerical(r.category) <= getCategoryNumerical(category))
-    .sort((a, b) => b.id - a.id) // Sort this reverse order
+    .sort((a, b) => getCategoryNumerical(b.category) - getCategoryNumerical(a.category)) // Sort these in reverse order
     .sort((a, b) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0))
     .sort((a, b) => a.track - b.track)
     .forEach((r) => {
