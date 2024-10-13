@@ -41,9 +41,8 @@ const TrackTopsPage = () => {
 
   const [mouseData, setMouseData] = useState<MouseFollowState>({ x: 0, y: 0, show: false });
   const [hoverTrackNames, setHoverTrackNames] = useState(["", "", "", ""]);
-
   const detectMousePos = (e: React.MouseEvent) => {
-    setMouseData({ x: e.clientX, y: e.clientY, show: mouseData.show });
+    setMouseData({ x: e.clientX, y: e.clientY, show: true });
   };
 
   const metadata = useContext(MetadataContext);
@@ -71,7 +70,7 @@ const TrackTopsPage = () => {
       {metadata.cups && !metadata.cups.find((cup) => cup.id === cupId) && (
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
-      <MouseFollow>
+      <MouseFollow mouseData={mouseData}>
         <div
           className="module"
           style={
@@ -116,7 +115,6 @@ const TrackTopsPage = () => {
                       (metadata.tracks || []).find((track) => track.id === trackId)?.name || "",
                   ),
                 );
-                setMouseData({ x: mouseData.x, y: mouseData.y, show: true });
               }}
               onMouseLeave={() => {
                 setMouseData({ x: mouseData.x, y: mouseData.y, show: false });
