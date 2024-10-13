@@ -16,12 +16,15 @@
 import * as runtime from '../runtime';
 import type {
   Auth,
+  BlogPost,
   User,
   VerificationToken,
 } from '../models/index';
 import {
     AuthFromJSON,
     AuthToJSON,
+    BlogPostFromJSON,
+    BlogPostToJSON,
     UserFromJSON,
     UserToJSON,
     VerificationTokenFromJSON,
@@ -44,6 +47,30 @@ export interface CoreVerifyCreateRequest {
  * 
  */
 export class CoreApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async coreBlogLatestListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BlogPost>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/core/blog/latest/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BlogPostFromJSON));
+    }
+
+    /**
+     */
+    async coreBlogLatestList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BlogPost>> {
+        const response = await this.coreBlogLatestListRaw(initOverrides);
+        return await response.value();
+    }
 
     /**
      */

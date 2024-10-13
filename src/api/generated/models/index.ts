@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './Auth';
+export * from './BlogPost';
 export * from './CategoryEnum';
 export * from './Player';
 export * from './PlayerBasic';

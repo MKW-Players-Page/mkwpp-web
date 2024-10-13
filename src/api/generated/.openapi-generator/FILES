@@ -3,6 +3,7 @@ apis/TimetrialsApi.ts
 apis/index.ts
 index.ts
 models/Auth.ts
+models/BlogPost.ts
 models/CategoryEnum.ts
 models/Player.ts
 models/PlayerBasic.ts
