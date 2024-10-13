@@ -68,6 +68,10 @@
   color: #fff;
 }
 
+.underlined {
+  text-decoration-line: underline;
+}
+
 .nobr {
   white-space: nowrap;
 }
