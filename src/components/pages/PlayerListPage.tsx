@@ -72,29 +72,26 @@ const PlayerListPage = () => {
               </tr>
             </thead>
             <tbody className="table-hover-rows">
-              {players?.map((player) => (
-                <tr
-                  style={
-                    {
-                      display: (player as PlayerForFilter).simplifiedName.includes(
-                        playerFilter.toLowerCase().normalize("NFKD"),
-                      )
-                        ? ""
-                        : "none",
-                    } as React.CSSProperties
-                  }
-                  key={player.id}
-                  className={user && player.id === user.player ? "highlighted" : ""}
-                >
-                  <td>
-                    <FlagIcon region={getRegionById(metadata, player.region || 0)} />
-                    <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
-                      {player.name}
-                    </Link>
-                  </td>
-                  <td>{getRegionNameFull(metadata, player.region || 0)}</td>
-                </tr>
-              ))}
+              {players?.map((player) =>
+                (player as PlayerForFilter).simplifiedName.includes(
+                  playerFilter.toLowerCase().normalize("NFKD"),
+                ) ? (
+                  <tr
+                    key={player.id}
+                    className={user && player.id === user.player ? "highlighted" : ""}
+                  >
+                    <td>
+                      <FlagIcon region={getRegionById(metadata, player.region || 0)} />
+                      <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
+                        {player.name}
+                      </Link>
+                    </td>
+                    <td>{getRegionNameFull(metadata, player.region || 0)}</td>
+                  </tr>
+                ) : (
+                  <></>
+                ),
+              )}
             </tbody>
           </table>
         </Deferred>
