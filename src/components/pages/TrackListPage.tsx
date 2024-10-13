@@ -7,7 +7,6 @@ import { MetadataContext } from "../../utils/Metadata";
 
 const TrackListPage = () => {
   const metadata = useContext(MetadataContext);
-  console.log(metadata.cups);
   return (
     <>
       <h1>Courses</h1>
