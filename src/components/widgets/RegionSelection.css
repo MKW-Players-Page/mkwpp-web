@@ -11,15 +11,15 @@
 }
 
 @supports (calc-size(auto)) {
-    .hide-region-row {
-      height: 0;
-      max-height: initial;
-    }
-    
-    .show-region-row {
-      height: calc-size(auto);
-      max-height: initial;
-    }
+  .hide-region-row {
+    height: 0;
+    max-height: initial;
+  }
+
+  .show-region-row {
+    height: calc-size(auto);
+    max-height: initial;
+  }
 }
 
 .selected-region {
@@ -27,7 +27,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .show-region-row, .hide-region-row {
-      transition: none;
+  .show-region-row,
+  .hide-region-row {
+    transition: none;
   }
 }
