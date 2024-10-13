@@ -5,12 +5,29 @@
 }
 
 .show-region-row {
-  /* this can be done other ways */
   max-height: 100px;
   overflow: hidden;
   transition: all 0.5s;
 }
 
+@supports (calc-size(auto)) {
+    .hide-region-row {
+      height: 0;
+      max-height: initial;
+    }
+    
+    .show-region-row {
+      height: calc-size(auto);
+      max-height: initial;
+    }
+}
+
 .selected-region {
   background-color: var(--navbar-background-color-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .show-region-row, .hide-region-row {
+      transition: none;
+  }
 }
