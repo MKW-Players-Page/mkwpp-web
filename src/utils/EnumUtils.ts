@@ -13,6 +13,19 @@ export const getCategoryName = (category: CategoryEnum) => {
   }
 };
 
+export const getCategoryNumerical = (category: CategoryEnum) => {
+  switch (category) {
+    case "nonsc":
+      return 0;
+    case "sc":
+      return 1;
+    case "unres":
+      return 2;
+    default:
+      return -1;
+  }
+};
+
 /** Return all categories eligible for a given category. For example, eligible categories for
  * Shortcut are Shortcut, since it is the category itself, as well as NonShortcut, since the rules
  * of Shortcut all apply to NonShortcut. NonShortcut returns only itself since it is has the most
