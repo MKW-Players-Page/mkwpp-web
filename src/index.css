@@ -3,31 +3,32 @@
 /* Variables */
 
 :root {
+  --site-hue: 216;
   /* General */
-  --background-color: hsl(216, 40%, 13%);
-  --text-color: hsl(216, 73%, 91%);
-  --alt-text-color: hsl(216, 25%, 65%);
+  --background-color: hsl(var(--site-hue), 40%, 13%);
+  --text-color: hsl(var(--site-hue), 73%, 91%);
+  --alt-text-color: hsl(var(--site-hue), 25%, 65%);
   /* Header */
   --header-height: 76px;
-  --header-background-color: hsl(216, 38%, 22%);
-  --header-border-color: hsl(216, 25%, 25%);
+  --header-background-color: hsl(var(--site-hue), 38%, 22%);
+  --header-border-color: hsl(var(--site-hue), 25%, 25%);
   /* Navbar */
   --navbar-width: 200px;
-  --navbar-background-color: hsl(216, 38%, 18%);
-  --navbar-background-color-hover: hsl(216, 40%, 26%);
-  --navbar-border-color: hsl(216, 29%, 22%);
-  --navbar-text-color: hsl(216, 33%, 81%);
+  --navbar-background-color: hsl(var(--site-hue), 38%, 18%);
+  --navbar-background-color-hover: hsl(var(--site-hue), 40%, 26%);
+  --navbar-border-color: hsl(var(--site-hue), 29%, 22%);
+  --navbar-text-color: hsl(var(--site-hue), 33%, 81%);
   /* Modules */
   --module-background-color: var(--navbar-background-color);
   --module-background-color-alt: var(--navbar-background-color-hover);
-  --module-background-color-focus: hsl(216, 59%, 25%);
-  --module-border-color: hsl(216, 37%, 30%);
+  --module-background-color-focus: hsl(var(--site-hue), 59%, 25%);
+  --module-border-color: hsl(var(--site-hue), 37%, 30%);
   /* Inputs */
-  --input-background-color: hsl(216, 37%, 27%);
-  --input-background-color-hover: hsl(216, 34%, 32%);
-  --input-background-color-disabled: hsl(216, 21%, 35%);
-  --input-background-color-disabled-hover: hsl(216, 19%, 40%);
-  --input-border-color: hsl(216, 21%, 32%);
+  --input-background-color: hsl(var(--site-hue), 37%, 27%);
+  --input-background-color-hover: hsl(var(--site-hue), 34%, 32%);
+  --input-background-color-disabled: hsl(var(--site-hue), 21%, 35%);
+  --input-background-color-disabled-hover: hsl(var(--site-hue), 19%, 40%);
+  --input-border-color: hsl(var(--site-hue), 21%, 32%);
   /* Other */
   --tooltip-background-color: rgba(0, 0, 0, 0.9);
 }
