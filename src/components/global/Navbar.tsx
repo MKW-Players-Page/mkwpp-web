@@ -91,42 +91,47 @@ const SECTIONS: NavbarSection[] = [
     items: [
       {
         label: "SMK Players' Page",
-        url: "https://www.mariokart64.com/smk/",
+        url: "//www.mariokart64.com/smk/",
         external: true,
       },
       {
         label: "MK64 Players' Page",
-        url: "https://www.mariokart64.com/mk64/",
+        url: "//www.mariokart64.com/mk64/",
         external: true,
       },
       {
         label: "MKSC Players' Page",
-        url: "https://www.mariokart64.com/mksc/",
+        url: "//www.mariokart64.com/mksc/",
         external: true,
       },
       {
         label: "MKDD Players' Page",
-        url: "https://www.mariokart64.com/mkdd/",
+        url: "//www.mariokart64.com/mkdd/",
         external: true,
       },
       {
         label: "MKDS Players' Page",
-        url: "https://www.mariokart64.com/mkds/",
+        url: "//www.mariokart64.com/mkds/",
         external: true,
       },
       {
         label: "MK7 Players' Page",
-        url: "https://www.mariokart64.com/mk7/",
+        url: "//www.mariokart64.com/mk7/",
         external: true,
       },
       {
         label: "MK8 Players' Page",
-        url: "https://www.mariokart64.com/mk8/",
+        url: "//www.mariokart64.com/mk8/",
         external: true,
       },
       {
         label: "Combined Ranks",
-        url: "https://www.mariokart64.com/combinedranks/",
+        url: "//www.mariokart64.com/combinedranks/",
+        external: true,
+      },
+      {
+        label: "Forums",
+        url: "//www.mariokart64.com/yabb",
         external: true,
       },
     ],
