@@ -29,17 +29,15 @@ const StandardsPage = () => {
   let lastChecked = {} as Standard;
   level?.standards
     .filter((r) => getCategoryNumerical(r.category) <= getCategoryNumerical(category))
-    .sort((a, b) => b.id - a.id) // Sort it reverse order
-    .sort((a, b) => (a.isLap ? 0 : 1) - (b.isLap ? 0 : 1))
-    .sort((a, b) => b.track - a.track)
+    .sort((a, b) => b.id - a.id) // Sort this reverse order
+    .sort((a, b) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0))
+    .sort((a, b) => a.track - b.track)
     .forEach((r) => {
       if (lastChecked.track !== r.track || lastChecked.isLap !== r.isLap) {
         filteredStandards.push(r);
         lastChecked = r;
       }
     });
-  filteredStandards = filteredStandards.reverse();
-  console.log(filteredStandards);
 
   return (
     <>
