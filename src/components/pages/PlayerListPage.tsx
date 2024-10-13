@@ -8,17 +8,60 @@ import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { getRegionById, getRegionNameFull, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
+import { PlayerBasic } from "../../api";
+import { useState } from "react";
+
+interface PlayerForFilter extends PlayerBasic {
+  simplifiedName: string;
+}
 
 const PlayerListPage = () => {
-  const { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
+  let { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
+  players?.forEach(
+    (r) => ((r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD")),
+  );
 
   const metadata = useContext(MetadataContext);
 
   const { user } = useContext(UserContext);
 
+  let [playerFilter, setPlayerFilter] = useState("");
+
   return (
     <>
       <h1>Players</h1>
+      <div
+        style={
+          {
+            display: "grid",
+            gridTemplateColumns: "4fr 1fr",
+            gridGap: "5px",
+          } as React.CSSProperties
+        }
+      >
+        <input
+          id="filterText"
+          type="text"
+          className="module"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") document.getElementById("searchBtn")?.click();
+          }}
+        />
+        <button
+          style={
+            {
+              borderRadius: 0,
+            } as React.CSSProperties
+          }
+          id="searchBtn"
+          className="module"
+          onClick={(e) => {
+            setPlayerFilter((document.getElementById("filterText") as HTMLInputElement).value);
+          }}
+        >
+          Search
+        </button>
+      </div>
       <div className="module">
         <Deferred isWaiting={isLoading}>
           <table>
@@ -31,6 +74,15 @@ const PlayerListPage = () => {
             <tbody className="table-hover-rows">
               {players?.map((player) => (
                 <tr
+                  style={
+                    {
+                      display: (player as PlayerForFilter).simplifiedName.includes(
+                        playerFilter.toLowerCase().normalize("NFKD"),
+                      )
+                        ? ""
+                        : "none",
+                    } as React.CSSProperties
+                  }
                   key={player.id}
                   className={user && player.id === user.player ? "highlighted" : ""}
                 >
