@@ -9,6 +9,7 @@ import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
 
 const TrackRecordsPage = () => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
@@ -22,11 +23,15 @@ const TrackRecordsPage = () => {
     [category],
   );
 
+  const siteHue = getCategorySiteHue(category);
+
   return (
     <>
       <h1>World Records</h1>
-      <CategorySelect value={category} onChange={setCategory} />
-      <div className="module">
+      <div className="overwrite-color" style={siteHue}>
+        <CategorySelect value={category} onChange={setCategory} />
+      </div>
+      <div className="module overwrite-color" style={siteHue}>
         <Deferred isWaiting={isLoading || metadata.isLoading}>
           <table>
             <thead>

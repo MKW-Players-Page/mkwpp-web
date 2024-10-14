@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import { getCategoryName } from "../../utils/EnumUtils";
+import { getCategoryName, getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { CategorySelect } from "../widgets";
@@ -38,10 +38,12 @@ const StandardsPage = () => {
       }
     });
 
+  const siteHue = getCategorySiteHue(category);
+
   return (
     <>
       <h1>Legacy Standards</h1>
-      <div className="module-row">
+      <div className="module-row overwrite-color" style={siteHue}>
         <select
           className="module filter-select"
           value={levelId}
@@ -55,7 +57,7 @@ const StandardsPage = () => {
         </select>
         <CategorySelect value={category} onChange={setCategory} />
       </div>
-      <div className="module">
+      <div className="module overwrite-color" style={siteHue}>
         <Deferred isWaiting={metadata.isLoading}>
           <table>
             <thead>

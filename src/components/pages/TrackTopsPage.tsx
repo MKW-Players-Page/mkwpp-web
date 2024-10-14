@@ -58,7 +58,7 @@ const TrackTopsPage = () => {
     [category, cup, lapMode, region],
   );
 
-  let siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category);
 
   return (
     <>

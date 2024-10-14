@@ -11,6 +11,7 @@ import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
 
 export interface RankingsMetric {
   title: string;
@@ -79,15 +80,17 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     [category, lapMode],
   );
 
+  const siteHue = getCategorySiteHue(category);
+
   return (
     <>
       <h1>{metric.title}</h1>
       <p>{metric.description}</p>
-      <div className="module-row">
+      <div className="module-row overwrite-color" style={siteHue}>
         <CategorySelect value={category} onChange={setCategory} />
         <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
       </div>
-      <div className="module">
+      <div className="module overwrite-color" style={siteHue}>
         <Deferred isWaiting={isLoading}>
           <table>
             <thead>

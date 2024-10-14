@@ -12,6 +12,7 @@ import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
+import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -35,17 +36,25 @@ const TrackChartPage = () => {
     [category, lapMode],
   );
 
+  const siteHue = getCategorySiteHue(category);
+
   return (
     <>
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
       <h1>{track?.name}</h1>
-      <div className="module-row">
-        <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
+      <div className="module-row overwrite-color" style={siteHue}>
+        <CategorySelect
+          options={track?.categories.sort(
+            (a, b) => getCategoryNumerical(a) - getCategoryNumerical(b),
+          )}
+          value={category}
+          onChange={setCategory}
+        />
         <LapModeSelect value={lapMode} onChange={setLapMode} />
       </div>
-      <div className="module">
+      <div className="module overwrite-color" style={siteHue}>
         <Deferred isWaiting={metadata.isLoading || isLoading}>
           <table>
             <thead>
