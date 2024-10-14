@@ -87,6 +87,20 @@ const SECTIONS: NavbarSection[] = [
     ],
   },
   {
+    title: "Historical",
+    items: [
+      {
+        label: "WR History",
+        url: "//mkwrs.com/mkwii/",
+        external: true,
+      },
+      {
+        label: "News Archive",
+        url: resolvePage(Pages.BlogList),
+      },
+    ],
+  },
+  {
     title: "Links",
     items: [
       {

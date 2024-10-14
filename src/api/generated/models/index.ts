@@ -2,6 +2,7 @@
 /* eslint-disable */
 export * from './Auth';
 export * from './BlogPost';
+export * from './BlogPostSummary';
 export * from './CategoryEnum';
 export * from './Player';
 export * from './PlayerBasic';

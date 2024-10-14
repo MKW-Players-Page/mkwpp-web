@@ -4,6 +4,7 @@ apis/index.ts
 index.ts
 models/Auth.ts
 models/BlogPost.ts
+models/BlogPostSummary.ts
 models/CategoryEnum.ts
 models/Player.ts
 models/PlayerBasic.ts

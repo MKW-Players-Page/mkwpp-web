@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   Auth,
   BlogPost,
+  BlogPostSummary,
   User,
   VerificationToken,
 } from '../models/index';
@@ -25,6 +26,8 @@ import {
     AuthToJSON,
     BlogPostFromJSON,
     BlogPostToJSON,
+    BlogPostSummaryFromJSON,
+    BlogPostSummaryToJSON,
     UserFromJSON,
     UserToJSON,
     VerificationTokenFromJSON,
@@ -73,6 +76,30 @@ export class CoreApi extends runtime.BaseAPI {
      */
     async coreBlogLatestList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BlogPost>> {
         const response = await this.coreBlogLatestListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async coreBlogListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BlogPostSummary>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/core/blog/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BlogPostSummaryFromJSON));
+    }
+
+    /**
+     */
+    async coreBlogList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BlogPostSummary>> {
+        const response = await this.coreBlogListRaw(initOverrides);
         return await response.value();
     }
 
