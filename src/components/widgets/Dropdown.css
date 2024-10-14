@@ -18,12 +18,11 @@
 }
 
 .dropdown-item {
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dropdown-item:hover {
-    background-color: var(--header-background-color);
+  background-color: var(--header-background-color);
 }
-
