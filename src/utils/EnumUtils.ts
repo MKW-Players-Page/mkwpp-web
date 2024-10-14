@@ -1,5 +1,17 @@
 import { CategoryEnum } from "../api";
 
+export const getCategorySiteHue = (category: CategoryEnum) => {
+  let hue = 216;
+  if (category === "nonsc") {
+    hue = 0;
+  } else if (category === "sc") {
+    hue = 100;
+  }
+  return {
+    "--site-hue": hue,
+  } as React.CSSProperties;
+};
+
 export const getCategoryName = (category: CategoryEnum) => {
   switch (category) {
     case "nonsc":

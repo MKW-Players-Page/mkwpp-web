@@ -13,6 +13,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -56,9 +57,8 @@ const TrackTopsPage = () => {
     })) || [],
     [category, cup, lapMode, region],
   );
-  let siteHue = {
-    "--site-hue": category === "unres" ? 216 : category === "sc" ? 100 : 0,
-  } as React.CSSProperties;
+
+  let siteHue = getCategorySiteHue(category);
 
   return (
     <>
