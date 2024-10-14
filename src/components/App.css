@@ -76,10 +76,6 @@
   white-space: nowrap;
 }
 
-.table-hover-rows tr:hover td:not([rowspan="2"]) {
-  background-color: var(--header-background-color);
-}
-
 .table-hover-rows tr:hover td:not([rowspan="2"]),
 .table-hover-rows tr:has(td[rowspan="2"]:hover) + tr,
 .table-hover-rows td[rowspan="2"]:hover {
