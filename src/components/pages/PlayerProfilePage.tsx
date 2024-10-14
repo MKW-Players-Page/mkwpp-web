@@ -15,6 +15,7 @@ import {
 } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { LapModeEnum } from "../widgets/LapModeSelect";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -47,6 +48,8 @@ const PlayerProfilePage = () => {
     [id, category],
   );
 
+  const siteHue = getCategorySiteHue(category);
+
   return (
     <>
       {/* Redirect to player list if id is invalid or does not exist. */}
@@ -55,11 +58,11 @@ const PlayerProfilePage = () => {
         <FlagIcon region={getRegionById(metadata, player?.region || 0)} />
         {player?.name || <>&nbsp;</>}
       </h1>
-      <div className="module-row">
+      <div className="module-row overwrite-color" style={siteHue}>
         <CategorySelect value={category} onChange={setCategory} />
         <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
       </div>
-      <div className="module-row">
+      <div className="module-row overwrite-color" style={siteHue}>
         <div className="module">
           <Deferred isWaiting={playerLoading}>
             <table>
@@ -136,7 +139,7 @@ const PlayerProfilePage = () => {
           </Deferred>
         </div>
       </div>
-      <div className="module">
+      <div className="module overwrite-color" style={siteHue}>
         <Deferred isWaiting={metadata.isLoading || scoresLoading}>
           <table>
             <thead>
