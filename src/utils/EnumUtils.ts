@@ -1,5 +1,18 @@
 import { CategoryEnum } from "../api";
 
+export const getCategorySiteHue = (category: CategoryEnum) => {
+  switch (category) {
+    case "nonsc":
+      return 0;
+    case "sc":
+      return 100;
+    case "unres":
+      return 216;
+    default:
+      return 216;
+  }
+};
+
 export const getCategoryName = (category: CategoryEnum) => {
   switch (category) {
     case "nonsc":

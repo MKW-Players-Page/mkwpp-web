@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import { getCategoryName } from "../../utils/EnumUtils";
+import { getCategoryName, getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { CategorySelect } from "../widgets";
 import { CategoryEnum, Standard, StandardLevel } from "../../api";
 import { getCategoryNumerical } from "../../utils/EnumUtils";
+import OverwriteColor from "../widgets/OverwriteColor";
 
 const StandardsPage = () => {
   const [levelId, setLevelId] = useState<number>(0);
@@ -38,67 +39,71 @@ const StandardsPage = () => {
       }
     });
 
+  const siteHue = getCategorySiteHue(category);
+
   return (
     <>
       <h1>Legacy Standards</h1>
-      <div className="module-row">
-        <select
-          className="module filter-select"
-          value={levelId}
-          onChange={(e) => setLevelId(+e.target.value)}
-        >
-          {metadata.standards?.map((l) => (
-            <option key={l.id} value={l.id}>
-              {l.name}
-            </option>
-          ))}
-        </select>
-        <CategorySelect value={category} onChange={setCategory} />
-      </div>
-      <div className="module">
-        <Deferred isWaiting={metadata.isLoading}>
-          <table>
-            <thead>
-              <tr>
-                <th>Track</th>
-                <th>Category</th>
-                <th>Standard</th>
-                <th>Points</th>
-                <th>Course</th>
-                <th>Lap</th>
-              </tr>
-            </thead>
-            <tbody className="table-hover-rows">
-              {filteredStandards.map((standard) => {
-                const track = metadata.tracks?.find((track) => track.id === standard.track);
-                return (
-                  <tr key={standard.id}>
-                    {!standard.isLap ? (
-                      <td rowSpan={2}>
-                        <Link
-                          to={resolvePage(Pages.TrackChart, {
-                            id: track?.id || 0,
-                          })}
-                        >
-                          {track?.name}
-                        </Link>
-                      </td>
-                    ) : (
-                      <></>
-                    )}
-                    <td>{getCategoryName(standard.category)}</td>
-                    <td>{level.name}</td>
-                    <td>{level.value}</td>
-                    {standard.isLap && <td />}
-                    <td>{standard.value ? formatTime(standard.value) : "*"}</td>
-                    {!standard.isLap && <td />}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </Deferred>
-      </div>
+      <OverwriteColor hue={siteHue}>
+        <div className="module-row ">
+          <select
+            className="module filter-select"
+            value={levelId}
+            onChange={(e) => setLevelId(+e.target.value)}
+          >
+            {metadata.standards?.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.name}
+              </option>
+            ))}
+          </select>
+          <CategorySelect value={category} onChange={setCategory} />
+        </div>
+        <div className="module ">
+          <Deferred isWaiting={metadata.isLoading}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Track</th>
+                  <th>Category</th>
+                  <th>Standard</th>
+                  <th>Points</th>
+                  <th>Course</th>
+                  <th>Lap</th>
+                </tr>
+              </thead>
+              <tbody className="table-hover-rows">
+                {filteredStandards.map((standard) => {
+                  const track = metadata.tracks?.find((track) => track.id === standard.track);
+                  return (
+                    <tr key={standard.id}>
+                      {!standard.isLap ? (
+                        <td rowSpan={2}>
+                          <Link
+                            to={resolvePage(Pages.TrackChart, {
+                              id: track?.id || 0,
+                            })}
+                          >
+                            {track?.name}
+                          </Link>
+                        </td>
+                      ) : (
+                        <></>
+                      )}
+                      <td>{getCategoryName(standard.category)}</td>
+                      <td>{level.name}</td>
+                      <td>{level.value}</td>
+                      {standard.isLap && <td />}
+                      <td>{standard.value ? formatTime(standard.value) : "*"}</td>
+                      {!standard.isLap && <td />}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </Deferred>
+        </div>
+      </OverwriteColor>
     </>
   );
 };
