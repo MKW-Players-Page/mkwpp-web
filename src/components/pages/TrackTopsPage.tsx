@@ -14,6 +14,7 @@ import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
+import OverwriteColor from "../widgets/OverwriteColor";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -67,125 +68,123 @@ const TrackTopsPage = () => {
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
       <Deferred isWaiting={metadata.isLoading}>
-        <div className="overwrite-color" style={siteHue}>
+        <OverwriteColor hue={siteHue}>
           <ComplexRegionSelection region={region} cupId={cupId} />
-        </div>
-        <div className="module-row overwrite-color" style={siteHue}>
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect value={lapMode} onChange={setLapMode} />
-        </div>
-        <div
-          className="module-row overwrite-color"
-          style={
-            {
-              justifyContent: "center",
-              ...siteHue,
-            } as React.CSSProperties
-          }
-        >
-          {metadata.cups?.map((c) => (
-            <div
-              key={c.id}
-              className="module"
-              style={
-                {
-                  borderRadius: "50%",
-                  aspectRatio: "1/1",
-                  width: "auto",
-                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
-                } as React.CSSProperties
-              }
-            >
+          <div className="module-row ">
+            <CategorySelect value={category} onChange={setCategory} />
+            <LapModeSelect value={lapMode} onChange={setLapMode} />
+          </div>
+          <div
+            className="module-row "
+            style={
+              {
+                justifyContent: "center",
+              } as React.CSSProperties
+            }
+          >
+            {metadata.cups?.map((c) => (
               <div
+                key={c.id}
+                className="module"
                 style={
                   {
-                    textAlign: "center",
+                    borderRadius: "50%",
+                    aspectRatio: "1/1",
+                    width: "auto",
+                    backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
                   } as React.CSSProperties
                 }
-                className="module-content"
               >
-                <Link
-                  to={resolvePage(Pages.TrackTops, {
-                    region: region?.code.toLowerCase() || 0,
-                    cup: c.id,
-                  })}
+                <div
+                  style={
+                    {
+                      textAlign: "center",
+                    } as React.CSSProperties
+                  }
+                  className="module-content"
                 >
-                  <img
-                    style={
-                      {
-                        aspectRatio: "1/1",
-                        height: "60px",
-                      } as React.CSSProperties
-                    }
-                    src={`/mkw/cups/${c.id}.png`}
-                    alt="Cup Icon"
-                  />
-                </Link>
+                  <Link
+                    to={resolvePage(Pages.TrackTops, {
+                      region: region?.code.toLowerCase() || 0,
+                      cup: c.id,
+                    })}
+                  >
+                    <img
+                      style={
+                        {
+                          aspectRatio: "1/1",
+                          height: "60px",
+                        } as React.CSSProperties
+                      }
+                      src={`/mkw/cups/${c.id}.png`}
+                      alt="Cup Icon"
+                    />
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div
-          className="module-row overwrite-color"
-          style={
-            {
-              ...siteHue,
-              display: "grid",
-              gridTemplateColumns: "repeat(4,1fr)",
-            } as React.CSSProperties
-          }
-        >
-          {cup &&
-            metadata.tracks
-              ?.filter((track) => cup.tracks.includes(track.id))
-              .map((track, index) => (
-                <div key={track.id}>
-                  <h1>{track.name}</h1>
-                  <div className="module">
-                    <Deferred isWaiting={tops[index].isLoading}>
-                      <table>
-                        <tbody className="table-hover-rows">
-                          {tops[index].data?.map((score) => (
-                            <tr
-                              key={score.id}
-                              className={
-                                user && score.player.id === user.player ? "highlighted" : ""
-                              }
-                            >
-                              <td>{score.rank}</td>
-                              <td>
-                                <FlagIcon
-                                  region={getRegionById(metadata, score.player.region || 0)}
-                                />
+            ))}
+          </div>
+          <div
+            className="module-row "
+            style={
+              {
+                display: "grid",
+                gridTemplateColumns: "repeat(4,1fr)",
+              } as React.CSSProperties
+            }
+          >
+            {cup &&
+              metadata.tracks
+                ?.filter((track) => cup.tracks.includes(track.id))
+                .map((track, index) => (
+                  <div key={track.id}>
+                    <h1>{track.name}</h1>
+                    <div className="module">
+                      <Deferred isWaiting={tops[index].isLoading}>
+                        <table>
+                          <tbody className="table-hover-rows">
+                            {tops[index].data?.map((score) => (
+                              <tr
+                                key={score.id}
+                                className={
+                                  user && score.player.id === user.player ? "highlighted" : ""
+                                }
+                              >
+                                <td>{score.rank}</td>
+                                <td>
+                                  <FlagIcon
+                                    region={getRegionById(metadata, score.player.region || 0)}
+                                  />
+                                  <Link
+                                    to={resolvePage(Pages.PlayerProfile, {
+                                      id: score.player.id,
+                                    })}
+                                  >
+                                    {score.player.alias || score.player.name}
+                                  </Link>
+                                </td>
+                                <td>{formatTime(score.value)}</td>
+                              </tr>
+                            ))}
+                            <tr>
+                              <th colSpan={3}>
                                 <Link
-                                  to={resolvePage(Pages.PlayerProfile, {
-                                    id: score.player.id,
+                                  to={resolvePage(Pages.TrackChart, {
+                                    id: track.id,
                                   })}
                                 >
-                                  {score.player.alias || score.player.name}
+                                  View full leaderboards
                                 </Link>
-                              </td>
-                              <td>{formatTime(score.value)}</td>
+                              </th>
                             </tr>
-                          ))}
-                          <tr>
-                            <th colSpan={3}>
-                              <Link
-                                to={resolvePage(Pages.TrackChart, {
-                                  id: track.id,
-                                })}
-                              >
-                                View full leaderboards
-                              </Link>
-                            </th>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </Deferred>
+                          </tbody>
+                        </table>
+                      </Deferred>
+                    </div>
                   </div>
-                </div>
-              ))}
-        </div>
+                ))}
+          </div>
+        </OverwriteColor>
       </Deferred>
     </>
   );

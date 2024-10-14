@@ -13,6 +13,7 @@ import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Me
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
+import OverwriteColor from "../widgets/OverwriteColor";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -44,80 +45,82 @@ const TrackChartPage = () => {
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
       <h1>{track?.name}</h1>
-      <div className="module-row overwrite-color" style={siteHue}>
-        <CategorySelect
-          options={track?.categories.sort(
-            (a, b) => getCategoryNumerical(a) - getCategoryNumerical(b),
-          )}
-          value={category}
-          onChange={setCategory}
-        />
-        <LapModeSelect value={lapMode} onChange={setLapMode} />
-      </div>
-      <div className="module overwrite-color" style={siteHue}>
-        <Deferred isWaiting={metadata.isLoading || isLoading}>
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Time</th>
-                <th>Standard</th>
-                <th>Date</th>
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-              </tr>
-            </thead>
-            <tbody className="table-hover-rows">
-              {scores?.map((score) => (
-                <tr
-                  key={score.id}
-                  className={user && score.player.id === user.player ? "highlighted" : ""}
-                >
-                  <td>{score.rank}</td>
-                  <td>
-                    <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
-                    <Link
-                      to={resolvePage(Pages.PlayerProfile, {
-                        id: score.player.id,
-                      })}
-                    >
-                      {score.player.alias || score.player.name}
-                    </Link>
-                  </td>
-                  <td className={score.category !== category ? "fallthrough" : ""}>
-                    {formatTime(score.value)}
-                  </td>
-                  <td>{getStandardLevel(metadata, score.standard)?.name}</td>
-                  <td>{score.date && formatDate(score.date)}</td>
-                  <td className="icon-cell">
-                    {score?.videoLink && (
-                      <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                        <Icon icon="Video" />
-                      </a>
-                    )}
-                  </td>
-                  <td className="icon-cell">
-                    {score?.ghostLink && (
-                      <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                        <Icon icon="Ghost" />
-                      </a>
-                    )}
-                  </td>
-                  <td className="icon-cell">
-                    {score?.comment && (
-                      <Tooltip text={score.comment}>
-                        <Icon icon="Comment" />
-                      </Tooltip>
-                    )}
-                  </td>
+      <OverwriteColor hue={siteHue}>
+        <div className="module-row">
+          <CategorySelect
+            options={track?.categories.sort(
+              (a, b) => getCategoryNumerical(a) - getCategoryNumerical(b),
+            )}
+            value={category}
+            onChange={setCategory}
+          />
+          <LapModeSelect value={lapMode} onChange={setLapMode} />
+        </div>
+        <div className="module ">
+          <Deferred isWaiting={metadata.isLoading || isLoading}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Player</th>
+                  <th>Time</th>
+                  <th>Standard</th>
+                  <th>Date</th>
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </Deferred>
-      </div>
+              </thead>
+              <tbody className="table-hover-rows">
+                {scores?.map((score) => (
+                  <tr
+                    key={score.id}
+                    className={user && score.player.id === user.player ? "highlighted" : ""}
+                  >
+                    <td>{score.rank}</td>
+                    <td>
+                      <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
+                      <Link
+                        to={resolvePage(Pages.PlayerProfile, {
+                          id: score.player.id,
+                        })}
+                      >
+                        {score.player.alias || score.player.name}
+                      </Link>
+                    </td>
+                    <td className={score.category !== category ? "fallthrough" : ""}>
+                      {formatTime(score.value)}
+                    </td>
+                    <td>{getStandardLevel(metadata, score.standard)?.name}</td>
+                    <td>{score.date && formatDate(score.date)}</td>
+                    <td className="icon-cell">
+                      {score?.videoLink && (
+                        <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                          <Icon icon="Video" />
+                        </a>
+                      )}
+                    </td>
+                    <td className="icon-cell">
+                      {score?.ghostLink && (
+                        <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                          <Icon icon="Ghost" />
+                        </a>
+                      )}
+                    </td>
+                    <td className="icon-cell">
+                      {score?.comment && (
+                        <Tooltip text={score.comment}>
+                          <Icon icon="Comment" />
+                        </Tooltip>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Deferred>
+        </div>
+      </OverwriteColor>
     </>
   );
 };
