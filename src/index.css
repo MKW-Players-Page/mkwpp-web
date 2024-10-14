@@ -2,7 +2,8 @@
 
 /* Variables */
 
-:root {
+:root,
+.overwrite-color {
   --site-hue: 216;
   /* General */
   --background-color: hsl(var(--site-hue), 40%, 13%);

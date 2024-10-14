@@ -56,6 +56,7 @@ const TrackTopsPage = () => {
     })) || [],
     [category, cup, lapMode, region],
   );
+  let siteHue = category === "unres" ? 216 : category === "sc" ? 100 : 0;
 
   return (
     <>
@@ -64,16 +65,22 @@ const TrackTopsPage = () => {
         <Navigate to={resolvePage(Pages.TrackTopsHome)} />
       )}
       <Deferred isWaiting={metadata.isLoading}>
-        <ComplexRegionSelection region={region} cupId={cupId} />
-        <div className="module-row">
+        <div className="overwrite-color" style={{ "--site-hue": siteHue } as React.CSSProperties}>
+          <ComplexRegionSelection region={region} cupId={cupId} />
+        </div>
+        <div
+          className="module-row overwrite-color"
+          style={{ "--site-hue": siteHue } as React.CSSProperties}
+        >
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect value={lapMode} onChange={setLapMode} />
         </div>
         <div
-          className="module-row"
+          className="module-row overwrite-color"
           style={
             {
               justifyContent: "center",
+              "--site-hue": siteHue,
             } as React.CSSProperties
           }
         >
@@ -120,9 +127,10 @@ const TrackTopsPage = () => {
           ))}
         </div>
         <div
-          className="module-row"
+          className="module-row overwrite-color"
           style={
             {
+              "--site-hue": siteHue,
               display: "grid",
               gridTemplateColumns: "repeat(4,1fr)",
             } as React.CSSProperties
