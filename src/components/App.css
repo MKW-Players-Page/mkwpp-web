@@ -12,6 +12,11 @@
   margin-bottom: 16px;
 }
 
+.module-header {
+  background-color: var(--module-background-color-alt);
+  padding: 8px;
+}
+
 .module-content {
   padding: 12px;
 }

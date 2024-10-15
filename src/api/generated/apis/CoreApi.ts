@@ -16,17 +16,27 @@
 import * as runtime from '../runtime';
 import type {
   Auth,
+  BlogPost,
+  BlogPostSummary,
   User,
   VerificationToken,
 } from '../models/index';
 import {
     AuthFromJSON,
     AuthToJSON,
+    BlogPostFromJSON,
+    BlogPostToJSON,
+    BlogPostSummaryFromJSON,
+    BlogPostSummaryToJSON,
     UserFromJSON,
     UserToJSON,
     VerificationTokenFromJSON,
     VerificationTokenToJSON,
 } from '../models/index';
+
+export interface CoreBlogRetrieveRequest {
+    id: number;
+}
 
 export interface CoreLoginCreateRequest {
     auth: Omit<Auth, 'token'|'expiry'>;
@@ -44,6 +54,85 @@ export interface CoreVerifyCreateRequest {
  * 
  */
 export class CoreApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async coreBlogLatestListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BlogPost>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/core/blog/latest/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BlogPostFromJSON));
+    }
+
+    /**
+     */
+    async coreBlogLatestList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BlogPost>> {
+        const response = await this.coreBlogLatestListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async coreBlogListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<BlogPostSummary>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/core/blog/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(BlogPostSummaryFromJSON));
+    }
+
+    /**
+     */
+    async coreBlogList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<BlogPostSummary>> {
+        const response = await this.coreBlogListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async coreBlogRetrieveRaw(requestParameters: CoreBlogRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BlogPost>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling coreBlogRetrieve().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/core/blog/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BlogPostFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async coreBlogRetrieve(requestParameters: CoreBlogRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BlogPost> {
+        const response = await this.coreBlogRetrieveRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      */

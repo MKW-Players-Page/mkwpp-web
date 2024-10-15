@@ -10,10 +10,12 @@ import TrackChartPage from "./TrackChartPage";
 import TrackListPage from "./TrackListPage";
 import TrackRecordsPage from "./TrackRecordsPage";
 import TrackTopsPage, { TrackTopsHomePage } from "./TrackTopsPage";
+import SubmissionPage from "./SubmissionPage";
+import BlogListPage from "./blog/BlogListPage";
+import BlogPostPage from "./blog/BlogPostPage";
 import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
-import SubmissionPage from "./SubmissionPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -23,6 +25,14 @@ export const Pages: PageMap = {
   Home: {
     index: true,
     element: <HomePage />,
+  },
+  BlogList: {
+    path: "/archive",
+    element: <BlogListPage />,
+  },
+  BlogPost: {
+    path: "/archive/:id",
+    element: <BlogPostPage />,
   },
   PlayerList: {
     path: "/players",
