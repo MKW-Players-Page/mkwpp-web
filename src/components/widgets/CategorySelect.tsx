@@ -24,7 +24,7 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   }
 
   return (
-    <Dropdown disabled={disabled} valueSetter={onChange}>
+    <Dropdown value={value} disabled={disabled} valueSetter={onChange}>
       {options.map((category) => (
         <DropdownItem text={getCategoryName(category)} value={category} />
       ))}

@@ -47,7 +47,7 @@ const StandardsPage = () => {
       <h1>Legacy Standards</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <Dropdown valueSetter={setLevelId}>
+          <Dropdown value={levelId} valueSetter={setLevelId}>
             {metadata.standards?.map((l) => <DropdownItem text={l.name} value={l.id} />)}
           </Dropdown>
           <CategorySelect value={category} onChange={setCategory} />

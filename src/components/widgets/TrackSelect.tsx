@@ -25,13 +25,8 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   return (
     <div className="field">
       {label && <p>{label}</p>}
-      <Dropdown
-        disabled={disabled}
-        valueSetter={onChange}
-      >
-        {metadata.tracks?.map((track) => (
-          <DropdownItem text={track.name} value={track.id}/>
-        ))}
+      <Dropdown value={getValue(field)} disabled={disabled} valueSetter={onChange}>
+        {metadata.tracks?.map((track) => <DropdownItem text={track.name} value={track.id} />)}
       </Dropdown>
       {errors.map((error) => (
         <p className="field-error">{error}</p>

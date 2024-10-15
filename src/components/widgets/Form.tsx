@@ -154,7 +154,7 @@ export const SelectField = ({ options, field, label }: SelectFieldProps) => {
   return (
     <div className="field">
       <p>{label}</p>
-      <Dropdown disabled={disabled} valueSetter={onChange}>
+      <Dropdown disabled={disabled} valueSetter={onChange} value={getValue(field)}>
         {options.map((option) => (
           <DropdownItem value={option.value} text={option.label} />
         ))}

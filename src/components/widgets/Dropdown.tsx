@@ -2,20 +2,22 @@ import "./Dropdown.css";
 import Icon from "./Icon";
 import { useEffect, useRef, useState, cloneElement } from "react";
 
-export interface DropdownProp {
+export interface DropdownProp<T> {
+  /** Default value, or previously selected value. Will default to children[0].value if invalid. */
+  value: T;
   /** Only <DropdownItem> is accepted */
   children: JSX.Element[] | JSX.Element | undefined;
   /** useState() value setter callback */
-  valueSetter: React.Dispatch<React.SetStateAction<any>>;
+  valueSetter: React.Dispatch<React.SetStateAction<T>>;
   /** Disables onClick event for <DropdownItem> and for <Dropdown> */
   disabled?: boolean;
 }
 
-export interface DropdownItemProp {
+export interface DropdownItemProp<T> {
   /** Displayed Text */
   text: string;
   /** Item Value */
-  value: any;
+  value: T;
   /** Optional Left-side Icon */
   leftIcon?: JSX.Element;
   /** Optional Right-side Icon */
@@ -28,7 +30,7 @@ export interface DropdownItemProp {
     }>
   >;
   /** Do not set this value. This is automatically set by <Dropdown>. */
-  _valueSetter?: React.Dispatch<React.SetStateAction<any>>;
+  _valueSetter?: React.Dispatch<React.SetStateAction<T>>;
 }
 
 interface DropdownListProp {
@@ -39,11 +41,11 @@ interface DropdownListProp {
   width: number;
 }
 
-function selectIconForHead(x: DropdownItemProp) {
+function selectIconForHead(x: DropdownItemProp<any>) {
   return x.rightIcon ?? x.leftIcon ?? <></>;
 }
 
-const Dropdown = ({ children, disabled, valueSetter }: DropdownProp) => {
+const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>) => {
   if (!Array.isArray(children)) {
     if (children === undefined) {
       children = [<DropdownItem text="Error!" value="" />];
@@ -51,6 +53,9 @@ const Dropdown = ({ children, disabled, valueSetter }: DropdownProp) => {
       children = [children];
     }
   } else if (children[0] === undefined) children = [<DropdownItem text="Error!" value="" />];
+
+  let selectedIndex = children.findIndex((r) => r.props.value === value);
+  if (selectedIndex < 0) selectedIndex = 0;
 
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
@@ -120,7 +125,7 @@ export const DropdownItem = ({
   value,
   _selectedSetter,
   _valueSetter,
-}: DropdownItemProp) => {
+}: DropdownItemProp<any>) => {
   if (_selectedSetter === undefined) return <></>;
   if (_valueSetter === undefined) return <></>;
   return (

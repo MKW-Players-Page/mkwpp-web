@@ -30,7 +30,7 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
   ];
 
   return (
-    <Dropdown disabled={disabled} valueSetter={onChange}>
+    <Dropdown value={value} disabled={disabled} valueSetter={onChange}>
       {options.map((option) => (
         <DropdownItem
           text={Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}
