@@ -69,6 +69,7 @@ const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>)
   useEffect(() => {
     if (!dropdown.current) return;
     const resizeObserver = new ResizeObserver(() => {
+      if (!dropdown.current) return;
       let boundingBox = (dropdown.current as any).getBoundingClientRect();
       setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
     });
