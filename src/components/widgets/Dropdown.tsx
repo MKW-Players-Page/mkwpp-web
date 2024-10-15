@@ -2,28 +2,28 @@ import "./Dropdown.css";
 import Icon from "./Icon";
 import { useEffect, useRef, useState, cloneElement } from "react";
 
-export interface DropdownProp<T> {
+export interface DropdownProp {
   /** Default value, or previously selected value. Will default to children[0].value if invalid. */
-  value: T;
+  value: any;
   /** Only <DropdownItem> is accepted */
   children: JSX.Element[] | JSX.Element | undefined;
   /** useState() value setter callback */
-  valueSetter: React.Dispatch<React.SetStateAction<T>>;
+  valueSetter: React.Dispatch<React.SetStateAction<any>>;
   /** Disables onClick event for <DropdownItem> and for <Dropdown> */
   disabled?: boolean;
 }
 
-export interface DropdownItemProp<T> {
+export interface DropdownItemProp {
   /** Displayed Text */
   text: string;
   /** Item Value */
-  value: T;
+  value: any;
   /** Optional Left-side Icon */
   leftIcon?: JSX.Element;
   /** Optional Right-side Icon */
   rightIcon?: JSX.Element;
   /** Do not set this value. This is automatically set by <Dropdown>. */
-  _valueSetter?: React.Dispatch<React.SetStateAction<T>>;
+  _valueSetter?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 interface DropdownListProp {
@@ -34,7 +34,7 @@ interface DropdownListProp {
   width: number;
 }
 
-const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>) => {
+const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp) => {
   if (!Array.isArray(children)) {
     if (children === undefined) {
       children = [<DropdownItem text="Error!" value="" />];
@@ -110,7 +110,7 @@ export const DropdownItem = ({
   rightIcon,
   value,
   _valueSetter,
-}: DropdownItemProp<any>) => {
+}: DropdownItemProp) => {
   if (_valueSetter === undefined) return <></>;
   return (
     <div
