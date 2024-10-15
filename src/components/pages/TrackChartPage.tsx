@@ -48,9 +48,7 @@ const TrackChartPage = () => {
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect
-            options={track?.categories.sort(
-              (a, b) => getCategoryNumerical(a) - getCategoryNumerical(b),
-            )}
+            options={track?.categories}
             value={category}
             onChange={setCategory}
           />
