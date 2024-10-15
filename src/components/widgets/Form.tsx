@@ -8,6 +8,7 @@ import {
   SetStateAction,
   useContext,
 } from "react";
+import Dropdown, { DropdownItem } from "./Dropdown";
 
 import "./Form.css";
 
@@ -153,13 +154,11 @@ export const SelectField = ({ options, field, label }: SelectFieldProps) => {
   return (
     <div className="field">
       <p>{label}</p>
-      <select disabled={disabled} value={getValue(field)} onChange={onChange}>
+      <Dropdown disabled={disabled} valueSetter={onChange}>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
+          <DropdownItem value={option.value} text={option.label} />
         ))}
-      </select>
+      </Dropdown>
       {errors.map((error, index) => (
         <p key={index} className="field-error">
           {error}

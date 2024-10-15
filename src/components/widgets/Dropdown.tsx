@@ -1,11 +1,10 @@
 import "./Dropdown.css";
 import Icon from "./Icon";
 import { useEffect, useRef, useState, cloneElement } from "react";
-import { normalizeIntoArray } from "../../utils/ArrayUtils";
 
 export interface DropdownProp {
   /** Only <DropdownItem> is accepted */
-  children: JSX.Element[] | JSX.Element;
+  children: JSX.Element[] | JSX.Element | undefined;
   /** useState() value setter callback */
   valueSetter: React.Dispatch<React.SetStateAction<any>>;
   /** Disables onClick event for <DropdownItem> and for <Dropdown> */
@@ -45,7 +44,13 @@ function selectIconForHead(x: DropdownItemProp) {
 }
 
 const Dropdown = ({ children, disabled, valueSetter }: DropdownProp) => {
-  children = normalizeIntoArray(children);
+  if (!Array.isArray(children)) {
+    if (children === undefined) {
+      children = [<DropdownItem text="Error!" value="" />];
+    } else {
+      children = [children];
+    }
+  } else if (children[0] === undefined) children = [<DropdownItem text="Error!" value="" />];
 
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
