@@ -4,11 +4,13 @@ import "./Icon.css";
 import { ReactComponent as CommentIcon } from "./icons/comment.svg";
 import { ReactComponent as GhostIcon } from "./icons/ghost.svg";
 import { ReactComponent as VideoIcon } from "./icons/video.svg";
+import { ReactComponent as DropdownCaret } from "./icons/dropdowncaret.svg";
 
 export const Icons = {
   Comment: CommentIcon,
   Ghost: GhostIcon,
   Video: VideoIcon,
+  Caret: DropdownCaret,
 };
 
 export interface IconProps {

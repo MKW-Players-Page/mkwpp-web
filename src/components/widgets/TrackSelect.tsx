@@ -1,7 +1,8 @@
-import { ChangeEvent, useContext } from "react";
+import { useContext } from "react";
 
 import { FormContext } from "./Form";
 import { Metadata } from "../../utils/Metadata";
+import Dropdown, { DropdownItem } from "./Dropdown";
 
 export interface TrackSelectProps {
   /** Metadata object */
@@ -15,8 +16,8 @@ export interface TrackSelectProps {
 const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setValue(field, e.target.value);
+  const onChange = (e: string) => {
+    setValue(field, e);
   };
 
   const errors = getErrors(field);
@@ -24,18 +25,9 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   return (
     <div className="field">
       {label && <p>{label}</p>}
-      <select
-        className="module filter-select"
-        disabled={disabled}
-        value={getValue(field)}
-        onChange={onChange}
-      >
-        {metadata.tracks?.map((track) => (
-          <option key={track.id} value={track.id}>
-            {track.name}
-          </option>
-        ))}
-      </select>
+      <Dropdown value={getValue(field)} disabled={disabled} valueSetter={onChange}>
+        {metadata.tracks?.map((track) => <DropdownItem text={track.name} value={track.id} />)}
+      </Dropdown>
       {errors.map((error) => (
         <p className="field-error">{error}</p>
       ))}

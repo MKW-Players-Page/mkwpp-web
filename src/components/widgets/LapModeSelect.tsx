@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Dropdown, { DropdownItem } from "./Dropdown";
 
 import { FormContext } from "./Form";
 
@@ -29,18 +30,14 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
   ];
 
   return (
-    <select
-      className="module filter-select"
-      disabled={disabled}
-      value={value}
-      onChange={(e) => onChange(e.target.value as LapModeEnum)}
-    >
+    <Dropdown value={value} disabled={disabled} valueSetter={onChange}>
       {options.map((option) => (
-        <option key={option} value={option}>
-          {Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}
-        </option>
+        <DropdownItem
+          text={Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}
+          value={option}
+        />
       ))}
-    </select>
+    </Dropdown>
   );
 };
 
