@@ -22,13 +22,6 @@ export interface DropdownItemProp<T> {
   leftIcon?: JSX.Element;
   /** Optional Right-side Icon */
   rightIcon?: JSX.Element;
-  /** Do not set this value. This is needed for graphical logic. */
-  _selectedSetter?: React.Dispatch<
-    React.SetStateAction<{
-      text: string;
-      icon: JSX.Element;
-    }>
-  >;
   /** Do not set this value. This is automatically set by <Dropdown>. */
   _valueSetter?: React.Dispatch<React.SetStateAction<T>>;
 }
@@ -39,10 +32,6 @@ interface DropdownListProp {
   x: number;
   y: number;
   width: number;
-}
-
-function selectIconForHead(x: DropdownItemProp<any>) {
-  return x.rightIcon ?? x.leftIcon ?? <></>;
 }
 
 const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>) => {
@@ -59,15 +48,10 @@ const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>)
 
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
-  const [selectedItemData, setSelectedItemData] = useState({
-    text: children[selectedIndex].props.text,
-    icon: selectIconForHead(children[selectedIndex].props),
-  });
-
+  
   children = children.map((child) =>
     cloneElement(child, {
       ...child.props,
-      _selectedSetter: setSelectedItemData,
       _valueSetter: valueSetter,
     }),
   );
@@ -103,7 +87,8 @@ const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>)
           setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
         }}
       >
-        {selectedItemData.text}
+        {children[selectedIndex].props.leftIcon ?? children[selectedIndex].props.rightIcon ?? <></>}
+        {children[selectedIndex].props.text}
         {disabled ? <></> : <Icon icon="Caret" />}
       </div>
       <DropdownList
@@ -123,19 +108,13 @@ export const DropdownItem = ({
   leftIcon,
   rightIcon,
   value,
-  _selectedSetter,
   _valueSetter,
 }: DropdownItemProp<any>) => {
-  if (_selectedSetter === undefined) return <></>;
   if (_valueSetter === undefined) return <></>;
   return (
     <div
       className="dropdown-item"
       onClick={() => {
-        _selectedSetter({
-          text: text,
-          icon: rightIcon ?? leftIcon ?? <></>,
-        });
         _valueSetter(value);
       }}
     >
