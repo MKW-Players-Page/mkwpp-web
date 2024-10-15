@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FormContext } from "./Form";
 import { CategoryEnum } from "../../api";
 import { getCategoryName } from "../../utils/EnumUtils";
+import Dropdown, { DropdownItem } from "./Dropdown";
 
 export interface CategorySelectProps {
   /** Categories to include in select element. Default to all categories if not defined. */
@@ -23,18 +24,11 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   }
 
   return (
-    <select
-      className="filter-select module"
-      disabled={disabled}
-      value={value}
-      onChange={(e) => onChange(e.target.value as CategoryEnum)}
-    >
+    <Dropdown disabled={disabled} valueSetter={onChange}>
       {options.map((category) => (
-        <option key={category} value={category}>
-          {getCategoryName(category)}
-        </option>
+        <DropdownItem text={getCategoryName(category)} value={category} />
       ))}
-    </select>
+    </Dropdown>
   );
 };
 
