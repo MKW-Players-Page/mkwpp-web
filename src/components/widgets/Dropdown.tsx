@@ -48,7 +48,7 @@ const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>)
 
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
-  
+
   children = children.map((child) =>
     cloneElement(child, {
       ...child.props,
