@@ -60,8 +60,8 @@ const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp<any>)
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
   const [selectedItemData, setSelectedItemData] = useState({
-    text: children[0].props.text,
-    icon: selectIconForHead(children[0].props),
+    text: children[selectedIndex].props.text,
+    icon: selectIconForHead(children[selectedIndex].props),
   });
 
   children = children.map((child) =>
