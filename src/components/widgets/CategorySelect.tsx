@@ -43,7 +43,9 @@ export interface CategoryFieldProps {
 
 export const CategoryField = ({ options, field, label }: CategoryFieldProps) => {
   const { getValue, setValue, disabled } = useContext(FormContext);
-
+  
+  if (options === undefined || options[0] === undefined) options = ["nonsc"];
+  
   return (
     <div className="field">
       <p>{label}</p>
