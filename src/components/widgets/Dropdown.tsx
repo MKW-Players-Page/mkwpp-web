@@ -94,7 +94,7 @@ const Dropdown = ({ children, disabled, valueSetter }: DropdownProp) => {
         }}
       >
         {selectedItemData.text}
-        <Icon icon="Caret" />
+        {disabled ? <></> : <Icon icon="Caret" />}
       </div>
       <DropdownList
         shown={dropdownListShown}
