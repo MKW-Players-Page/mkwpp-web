@@ -22,7 +22,7 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   if (!options) {
     options = Object.values(CategoryEnum);
   }
-  options.sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b))
+  options.sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b));
 
   return (
     <Dropdown value={value} disabled={disabled} valueSetter={onChange}>

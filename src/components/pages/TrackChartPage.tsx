@@ -12,7 +12,7 @@ import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
-import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 
 const TrackChartPage = () => {
@@ -47,11 +47,7 @@ const TrackChartPage = () => {
       <h1>{track?.name}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect
-            options={track?.categories}
-            value={category}
-            onChange={setCategory}
-          />
+          <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
           <LapModeSelect value={lapMode} onChange={setLapMode} />
         </div>
         <div className="module ">
