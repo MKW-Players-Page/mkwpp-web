@@ -16,8 +16,8 @@ export interface TrackSelectProps {
 const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setValue(field, e.target.value);
+  const onChange = (e: string) => {
+    setValue(field, e);
   };
 
   const errors = getErrors(field);
