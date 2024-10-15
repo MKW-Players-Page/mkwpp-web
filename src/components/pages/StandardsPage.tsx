@@ -10,6 +10,7 @@ import { CategorySelect } from "../widgets";
 import { CategoryEnum, Standard, StandardLevel } from "../../api";
 import { getCategoryNumerical } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import Dropdown, { DropdownItem } from "../widgets/Dropdown";
 
 const StandardsPage = () => {
   const [levelId, setLevelId] = useState<number>(0);
@@ -45,18 +46,14 @@ const StandardsPage = () => {
     <>
       <h1>Legacy Standards</h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row ">
-          <select
-            className="module filter-select"
-            value={levelId}
-            onChange={(e) => setLevelId(+e.target.value)}
+        <div className="module-row">
+          <Dropdown
+            valueSetter={setLevelId}
           >
-            {metadata.standards?.map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.name}
-              </option>
+            {(metadata.standards as StandardLevel[]).map((l) => (
+                <DropdownItem text={l.name} value={l.id} />
             ))}
-          </select>
+          </Dropdown>
           <CategorySelect value={category} onChange={setCategory} />
         </div>
         <div className="module ">
