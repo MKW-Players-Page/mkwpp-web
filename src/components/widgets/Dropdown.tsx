@@ -4,22 +4,31 @@ import { useEffect, useRef, useState, cloneElement } from "react";
 import { normalizeIntoArray } from "../../utils/ArrayUtils";
 
 export interface DropdownProp {
+  /** Only <DropdownItem> is accepted */
   children: JSX.Element[] | JSX.Element;
+  /** useState() value setter callback */
   valueSetter: React.Dispatch<React.SetStateAction<any>>;
+  /** Disables onClick event for <DropdownItem> and for <Dropdown> */
   disabled?: boolean;
 }
 
 export interface DropdownItemProp {
+  /** Displayed Text */
   text: string;
+  /** Item Value */
   value: any;
+  /** Optional Left-side Icon */
   leftIcon?: JSX.Element;
+  /** Optional Right-side Icon */
   rightIcon?: JSX.Element;
+  /** Do not set this value. This is needed for graphical logic. */
   _selectedSetter?: React.Dispatch<
     React.SetStateAction<{
       text: string;
       icon: JSX.Element;
     }>
   >;
+  /** Do not set this value. This is automatically set by <Dropdown>. */
   _valueSetter?: React.Dispatch<React.SetStateAction<any>>;
 }
 
@@ -38,16 +47,12 @@ function selectIconForHead(x: DropdownItemProp) {
 const Dropdown = ({ children, disabled, valueSetter }: DropdownProp) => {
   children = normalizeIntoArray(children);
 
-  disabled = !!disabled;
-
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
   const [selectedItemData, setSelectedItemData] = useState({
     text: children[0].props.text,
     icon: selectIconForHead(children[0].props),
   });
-
-  if (disabled) setDropdownListShown = () => {};
 
   children = children.map((child) =>
     cloneElement(child, {
@@ -56,6 +61,10 @@ const Dropdown = ({ children, disabled, valueSetter }: DropdownProp) => {
       _valueSetter: valueSetter,
     }),
   );
+
+  disabled = !!disabled;
+  if (children.length === 1) disabled = true;
+  if (disabled) setDropdownListShown = () => {};
 
   document.addEventListener("click", (e) => {
     if (dropdownListShown && e.target && e.target !== dropdown.current) setDropdownListShown(false);
