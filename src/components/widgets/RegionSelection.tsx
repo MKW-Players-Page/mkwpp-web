@@ -6,6 +6,7 @@ import { Region } from "../../api";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
+import { FlagIcon } from "./Icon";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;
@@ -26,11 +27,18 @@ export interface RegionModuleProps {
 }
 
 const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => {
-  let classes = "module";
+  let classes = "module region-selection-button";
   if (selectedRegions.includes(region.id)) classes += " selected-region";
 
   return (
-    <div className={classes}>
+    <div
+      style={
+        {
+            backgroundImage: `url(/mkw/flags/${region.code.toLowerCase()}.svg)`,
+        } as React.CSSProperties
+      }
+      className={classes}
+    >
       <Link
         to={resolvePage(Pages.TrackTops, {
           region: region.code.toLowerCase(),

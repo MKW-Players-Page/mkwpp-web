@@ -1,34 +1,44 @@
 .hide-region-row {
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.5s;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
 }
 
 .show-region-row {
-  max-height: 100px;
-  overflow: hidden;
-  transition: all 0.5s;
+    max-height: 100px;
+    overflow: hidden;
+    transition: all 0.5s;
 }
 
 @supports (calc-size(auto)) {
-  .hide-region-row {
-    height: 0;
-    max-height: initial;
-  }
+    .hide-region-row {
+        height: 0;
+        max-height: initial;
+    }
 
-  .show-region-row {
-    height: calc-size(auto);
-    max-height: initial;
-  }
+    .show-region-row {
+        height: calc-size(auto);
+        max-height: initial;
+    }
 }
 
 .selected-region {
-  background-color: var(--navbar-background-color-hover);
+    background-color: var(--navbar-background-color-hover);
+}
+
+.region-selection-button {
+    background-repeat: no-repeat;
+    background-position-x: right 2px;
+    background-position-y: 50%;
+    background-size: auto 90%;
+    background-clip: border-box;
+    height: 50px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .show-region-row,
-  .hide-region-row {
-    transition: none;
-  }
+
+    .show-region-row,
+    .hide-region-row {
+        transition: none;
+    }
 }
