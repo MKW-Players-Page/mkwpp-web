@@ -5,7 +5,7 @@
   z-index: 50;
   background-color: var(--navbar-background-color);
   border-right: 1px solid var(--navbar-border-color);
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 12px 0 #000;
   padding-top: var(--header-height);
 }
 
