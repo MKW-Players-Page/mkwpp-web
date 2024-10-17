@@ -5,7 +5,6 @@ import { ReactComponent as CommentIcon } from "./icons/comment.svg";
 import { ReactComponent as GhostIcon } from "./icons/ghost.svg";
 import { ReactComponent as VideoIcon } from "./icons/video.svg";
 import { ReactComponent as DropdownCaret } from "./icons/dropdowncaret.svg";
-import Flag, { Flags } from "./Flags";
 
 export const Icons = {
   Comment: CommentIcon,
@@ -35,7 +34,7 @@ export interface FlagIconProps {
 export const FlagIcon = ({ region }: FlagIconProps) => {
   return (
     <span className="flag-icon">
-      {region && <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />}
+      {region && <img src={`/mkw/flags/${region.code.toLowerCase()}.svg`} alt={region.name} />}
     </span>
   );
 };
