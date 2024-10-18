@@ -37,7 +37,7 @@
 }
 
 .region-selection-button .module-content {
-  padding: .5vw;
+  padding: 0.5vw;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

@@ -334,7 +334,7 @@ export const Flags = {
   er: FlagER,
   es: FlagES,
   et: FlagET,
-  eu: FlagEU,
+  eur: FlagEU, // TEMPORARY!
   fi: FlagFI,
   fj: FlagFJ,
   fk: FlagFK,
