@@ -530,6 +530,7 @@ export interface FlagProps {
 
 const Flag = ({ flag }: FlagProps) => {
   const FlagSVG = Flags[flag];
+  if (FlagSVG === undefined) return <></>;
   return <FlagSVG />;
 };
 

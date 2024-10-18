@@ -6,6 +6,7 @@ import { Region } from "../../api";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
+import Flag, { Flags } from "./Flags";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;
@@ -37,7 +38,10 @@ const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => 
           cup: cupId,
         })}
       >
-        <div className="module-content">{region.name}</div>
+        <div className="module-content">
+          {region.name}
+          <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
+        </div>
       </Link>
     </div>
   );
@@ -63,6 +67,7 @@ const RegionSelection = ({ regions, cupId, shown, selectedRegions }: RegionSelec
 
 const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) => {
   const metadata = useContext(MetadataContext);
+  if (metadata.isLoading) return <></>;
   const regions = metadata.regions || [];
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
