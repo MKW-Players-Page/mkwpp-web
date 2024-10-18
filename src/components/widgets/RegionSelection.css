@@ -22,8 +22,27 @@
   }
 }
 
-.selected-region {
+.selected-region,
+.region-selection-button:hover {
   background-color: var(--navbar-background-color-hover);
+}
+
+.region-selection-button svg {
+  height: 100%;
+}
+
+.region-selection-button,
+.region-selection-button .module-content {
+  height: 50px;
+}
+
+.region-selection-button .module-content {
+  padding: 0.5vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

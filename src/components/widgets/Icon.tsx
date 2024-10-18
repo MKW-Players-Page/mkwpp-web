@@ -1,5 +1,7 @@
 import { Region } from "../../api";
 import "./Icon.css";
+import Flag from "./Flags";
+import { Flags } from "./Flags";
 
 import { ReactComponent as CommentIcon } from "./icons/comment.svg";
 import { ReactComponent as GhostIcon } from "./icons/ghost.svg";
@@ -34,7 +36,7 @@ export interface FlagIconProps {
 export const FlagIcon = ({ region }: FlagIconProps) => {
   return (
     <span className="flag-icon">
-      {region && <img src={`/mkw/flags/${region.code.toLowerCase()}.svg`} alt={region.name} />}
+      {region && <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />}
     </span>
   );
 };
