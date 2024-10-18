@@ -9,126 +9,121 @@ import "./RegionSelection.css";
 import { FlagIcon } from "./Icon";
 
 export interface ComplexRegionSelectionProps {
-  region?: Region;
-  cupId: number;
+    region?: Region;
+    cupId: number;
 }
 
 export interface RegionSelectionRowProps {
-  regions: Region[];
-  cupId: number;
-  shown: boolean;
-  selectedRegions: number[];
+    regions: Region[];
+    cupId: number;
+    shown: boolean;
+    selectedRegions: number[];
 }
 
 export interface RegionModuleProps {
-  region: Region;
-  cupId: number;
-  selectedRegions: number[];
+    region: Region;
+    cupId: number;
+    selectedRegions: number[];
 }
 
 const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => {
-  let classes = "module region-selection-button";
-  if (selectedRegions.includes(region.id)) classes += " selected-region";
+    let classes = "module region-selection-button";
+    if (selectedRegions.includes(region.id)) classes += " selected-region";
 
-  return (
-    <div
-      style={
-        {
-            backgroundImage: `url(/mkw/flags/${region.code.toLowerCase()}.svg)`,
-        } as React.CSSProperties
-      }
-      className={classes}
-    >
-      <Link
-        to={resolvePage(Pages.TrackTops, {
-          region: region.code.toLowerCase(),
-          cup: cupId,
-        })}
-      >
-        <div className="module-content">{region.name}</div>
-      </Link>
-    </div>
-  );
+    return (
+        <div
+            className={classes}
+        >
+            <Link
+                to={resolvePage(Pages.TrackTops, {
+                    region: region.code.toLowerCase(),
+                    cup: cupId,
+                })}
+            >
+                <div className="module-content">{region.name}</div>
+            </Link>
+        </div>
+    );
 };
 
 const RegionSelection = ({ regions, cupId, shown, selectedRegions }: RegionSelectionRowProps) => {
-  let classes = `module-row`;
-  classes += shown ? ` show-region-row` : ` hide-region-row`;
+    let classes = `module-row`;
+    classes += shown ? ` show-region-row` : ` hide-region-row`;
 
-  return (
-    <div className={classes}>
-      {regions?.map((region) => (
-        <RegionModule
-          key={region.id}
-          region={region}
-          cupId={cupId}
-          selectedRegions={selectedRegions}
-        />
-      ))}
-    </div>
-  );
+    return (
+        <div className={classes}>
+            {regions?.map((region) => (
+                <RegionModule
+                    key={region.id}
+                    region={region}
+                    cupId={cupId}
+                    selectedRegions={selectedRegions}
+                />
+            ))}
+        </div>
+    );
 };
 
 const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) => {
-  const metadata = useContext(MetadataContext);
-  const regions = metadata.regions || [];
+    const metadata = useContext(MetadataContext);
+    const regions = metadata.regions || [];
 
-  const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-    arr.reduce(
-      (groups, item) => {
-        (groups[key(item)] ||= []).push(item);
-        return groups;
-      },
-      {} as Record<K, T[]>,
+    const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+        arr.reduce(
+            (groups, item) => {
+                (groups[key(item)] ||= []).push(item);
+                return groups;
+            },
+            {} as Record<K, T[]>,
+        );
+
+    const sortedRegions = groupBy(
+        regions.filter((r) => r.isRanked),
+        (i) => i.type,
+    );
+    const sortedSubregions = groupBy(
+        [...sortedRegions.country_group, ...sortedRegions.country],
+        (i) => i.parent || -1,
     );
 
-  const sortedRegions = groupBy(
-    regions.filter((r) => r.isRanked),
-    (i) => i.type,
-  );
-  const sortedSubregions = groupBy(
-    [...sortedRegions.country_group, ...sortedRegions.country],
-    (i) => i.parent || -1,
-  );
+    const getRegionHierarchy = (region: Region): Region[] => {
+        if (!region.parent) {
+            return [region];
+        }
+        const parent = getRegionById(metadata, region.parent);
+        if (!parent) {
+            return [region];
+        }
+        return [...getRegionHierarchy(parent), region];
+    };
 
-  const getRegionHierarchy = (region: Region): Region[] => {
-    if (!region.parent) {
-      return [region];
-    }
-    const parent = getRegionById(metadata, region.parent);
-    if (!parent) {
-      return [region];
-    }
-    return [...getRegionHierarchy(parent), region];
-  };
+    const selectedRegions = region ? getRegionHierarchy(region).map((region) => region.id) : [];
 
-  const selectedRegions = region ? getRegionHierarchy(region).map((region) => region.id) : [];
-
-  return (
-    <>
-      <RegionSelection
-        shown={true}
-        cupId={cupId}
-        regions={sortedRegions.world}
-        selectedRegions={selectedRegions}
-      />
-      <RegionSelection
-        shown={true}
-        cupId={cupId}
-        regions={sortedRegions.continent}
-        selectedRegions={selectedRegions}
-      />
-      {Object.keys(sortedSubregions).map((sortedSubregionsKey) => (
-        <RegionSelection
-          key={sortedSubregionsKey}
-          shown={selectedRegions.includes(parseInt(sortedSubregionsKey))}
-          cupId={cupId}
-          regions={sortedSubregions[parseInt(sortedSubregionsKey)]}
-          selectedRegions={selectedRegions}
-        />
-      ))}
-    </>
-  );
+    return (
+        <>
+            <RegionSelection
+                shown={true}
+                cupId={cupId}
+                regions={sortedRegions.world}
+                selectedRegions={selectedRegions}
+            />
+            <RegionSelection
+                shown={true}
+                cupId={cupId}
+                regions={sortedRegions.continent}
+                selectedRegions={selectedRegions}
+            />
+            {Object.keys(sortedSubregions).map((sortedSubregionsKey) => (
+                <RegionSelection
+                    key={sortedSubregionsKey}
+                    shown={selectedRegions.includes(parseInt(sortedSubregionsKey))}
+                    cupId={cupId}
+                    regions={sortedSubregions[parseInt(sortedSubregionsKey)]}
+                    selectedRegions={selectedRegions}
+                />
+            ))}
+        </>
+    );
 };
 
 export default ComplexRegionSelection;

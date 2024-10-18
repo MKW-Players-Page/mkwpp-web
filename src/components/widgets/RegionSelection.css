@@ -27,11 +27,6 @@
 }
 
 .region-selection-button {
-    background-repeat: no-repeat;
-    background-position-x: right 2px;
-    background-position-y: 50%;
-    background-size: auto 90%;
-    background-clip: border-box;
     height: 50px;
 }
 
