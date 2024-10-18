@@ -1,11 +1,12 @@
 import { Region } from "../../api";
 import "./Icon.css";
+import Flag from "./Flags";
+import { Flags } from "./Flags";
 
 import { ReactComponent as CommentIcon } from "./icons/comment.svg";
 import { ReactComponent as GhostIcon } from "./icons/ghost.svg";
 import { ReactComponent as VideoIcon } from "./icons/video.svg";
 import { ReactComponent as DropdownCaret } from "./icons/dropdowncaret.svg";
-import Flag, { Flags } from "./Flags";
 
 export const Icons = {
   Comment: CommentIcon,
