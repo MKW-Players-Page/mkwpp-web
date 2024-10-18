@@ -27,16 +27,17 @@
   background-color: var(--navbar-background-color-hover);
 }
 
+.region-selection-button svg {
+  height: 100%;
+}
+
 .region-selection-button,
 .region-selection-button .module-content {
   height: 50px;
 }
 
-.region-selection-button svg {
-  height: 100%;
-}
-
 .region-selection-button .module-content {
+  padding: .5vw;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
