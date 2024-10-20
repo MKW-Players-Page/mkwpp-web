@@ -54,6 +54,27 @@
   color: var(--alt-text-color);
 }
 
+.winner {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.loser {
+  color: var(--alt-text-color);
+}
+
+.diff-lt {
+  color: #9d9;
+}
+
+.diff-eq {
+  color: #dd9;
+}
+
+.diff-gt {
+  color: #d99;
+}
+
 .highlighted td:not([rowspan="2"]) {
   background-color: var(--module-background-color-focus);
 }

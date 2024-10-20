@@ -69,7 +69,8 @@ table {
   width: 100%;
 }
 
-thead {
+thead,
+tfoot {
   background-color: var(--module-background-color-alt);
 }
 
