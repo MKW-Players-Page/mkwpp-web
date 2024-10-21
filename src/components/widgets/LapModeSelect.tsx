@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Dropdown, { DropdownItem } from "./Dropdown";
+import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 
 import { FormContext } from "./Form";
 
@@ -30,14 +30,30 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
   ];
 
   return (
-    <Dropdown value={value} disabled={disabled} valueSetter={onChange}>
-      {options.map((option) => (
-        <DropdownItem
-          text={Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)]}
-          value={option}
-        />
-      ))}
-    </Dropdown>
+    <Dropdown
+      data={
+        {
+          value: value,
+          valueSetter: onChange,
+          disabled: disabled,
+          defaultItemSet: 0,
+          data: [
+            {
+              id: 0,
+              children: options.map((option) => {
+                return {
+                  type: "DropdownItemData",
+                  element: {
+                    text: Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)],
+                    value: option,
+                  },
+                } as DropdownItemSetDataChild;
+              }),
+            },
+          ],
+        } as DropdownData
+      }
+    />
   );
 };
 
