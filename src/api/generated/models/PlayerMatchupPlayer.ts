@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { PlayerMatchupStats } from './PlayerMatchupStats';
+import {
+    PlayerMatchupStatsFromJSON,
+    PlayerMatchupStatsFromJSONTyped,
+    PlayerMatchupStatsToJSON,
+} from './PlayerMatchupStats';
 import type { PlayerMatchupScore } from './PlayerMatchupScore';
 import {
     PlayerMatchupScoreFromJSON,
@@ -58,6 +64,12 @@ export interface PlayerMatchupPlayer {
     scores: Array<PlayerMatchupScore>;
     /**
      * 
+     * @type {PlayerMatchupStats}
+     * @memberof PlayerMatchupPlayer
+     */
+    stats: PlayerMatchupStats;
+    /**
+     * 
      * @type {number}
      * @memberof PlayerMatchupPlayer
      */
@@ -77,6 +89,7 @@ export function instanceOfPlayerMatchupPlayer(value: object): value is PlayerMat
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
     if (!('scores' in value) || value['scores'] === undefined) return false;
+    if (!('stats' in value) || value['stats'] === undefined) return false;
     if (!('totalWins' in value) || value['totalWins'] === undefined) return false;
     if (!('totalTies' in value) || value['totalTies'] === undefined) return false;
     return true;
@@ -97,6 +110,7 @@ export function PlayerMatchupPlayerFromJSONTyped(json: any, ignoreDiscriminator:
         'region': json['region'] == null ? undefined : json['region'],
         'alias': json['alias'] == null ? undefined : json['alias'],
         'scores': ((json['scores'] as Array<any>).map(PlayerMatchupScoreFromJSON)),
+        'stats': PlayerMatchupStatsFromJSON(json['stats']),
         'totalWins': json['total_wins'],
         'totalTies': json['total_ties'],
     };
@@ -112,6 +126,7 @@ export function PlayerMatchupPlayerToJSON(value?: Omit<PlayerMatchupPlayer, 'id'
         'region': value['region'],
         'alias': value['alias'],
         'scores': ((value['scores'] as Array<any>).map(PlayerMatchupScoreToJSON)),
+        'stats': PlayerMatchupStatsToJSON(value['stats']),
         'total_wins': value['totalWins'],
         'total_ties': value['totalTies'],
     };

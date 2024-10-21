@@ -54,6 +54,7 @@ import {
 
 export interface TimetrialsMatchupsRetrieveRequest {
     category: TimetrialsMatchupsRetrieveCategoryEnum;
+    lapMode: TimetrialsMatchupsRetrieveLapModeEnum;
     pk1: number;
     pk2: number;
 }
@@ -148,6 +149,13 @@ export class TimetrialsApi extends runtime.BaseAPI {
             );
         }
 
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsMatchupsRetrieve().'
+            );
+        }
+
         if (requestParameters['pk1'] == null) {
             throw new runtime.RequiredError(
                 'pk1',
@@ -166,6 +174,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -726,6 +738,15 @@ export const TimetrialsMatchupsRetrieveCategoryEnum = {
     Unrestricted: 'unres'
 } as const;
 export type TimetrialsMatchupsRetrieveCategoryEnum = typeof TimetrialsMatchupsRetrieveCategoryEnum[keyof typeof TimetrialsMatchupsRetrieveCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsMatchupsRetrieveLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap',
+    Overall: 'overall'
+} as const;
+export type TimetrialsMatchupsRetrieveLapModeEnum = typeof TimetrialsMatchupsRetrieveLapModeEnum[keyof typeof TimetrialsMatchupsRetrieveLapModeEnum];
 /**
  * @export
  */

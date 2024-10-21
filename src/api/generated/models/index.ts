@@ -9,6 +9,7 @@ export * from './PlayerBasic';
 export * from './PlayerMatchup';
 export * from './PlayerMatchupPlayer';
 export * from './PlayerMatchupScore';
+export * from './PlayerMatchupStats';
 export * from './PlayerStats';
 export * from './Region';
 export * from './RegionTypeEnum';
