@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { FormContext } from "./Form";
 import { Metadata } from "../../utils/Metadata";
-import Dropdown, { DropdownItem } from "./Dropdown";
+import Dropdown, { DropdownItem, DropdownItemSet } from "./Dropdown";
 
 export interface TrackSelectProps {
   /** Metadata object */
@@ -25,8 +25,15 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   return (
     <div className="field">
       {label && <p>{label}</p>}
-      <Dropdown value={getValue(field)} disabled={disabled} valueSetter={onChange}>
-        {metadata.tracks?.map((track) => <DropdownItem text={track.name} value={track.id} />)}
+      <Dropdown
+        defaultItemSet={0}
+        value={getValue(field)}
+        disabled={disabled}
+        valueSetter={onChange}
+      >
+        <DropdownItemSet id={0}>
+          {metadata.tracks?.map((track) => <DropdownItem text={track.name} value={track.id} />)}
+        </DropdownItemSet>
       </Dropdown>
       {errors.map((error) => (
         <p className="field-error">{error}</p>

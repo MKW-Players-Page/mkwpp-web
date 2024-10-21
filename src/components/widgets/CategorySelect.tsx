@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { FormContext } from "./Form";
 import { CategoryEnum } from "../../api";
-import Dropdown, { DropdownItem } from "./Dropdown";
+import Dropdown, { DropdownItem, DropdownItemSet } from "./Dropdown";
 import { getCategoryName, getCategoryNumerical } from "../../utils/EnumUtils";
 
 export interface CategorySelectProps {
@@ -25,10 +25,12 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   options.sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b));
 
   return (
-    <Dropdown value={value} disabled={disabled} valueSetter={onChange}>
-      {options.map((category) => (
-        <DropdownItem text={getCategoryName(category)} value={category} />
-      ))}
+    <Dropdown defaultItemSet={0} value={value} disabled={disabled} valueSetter={onChange}>
+      <DropdownItemSet id={0}>
+        {options.map((category) => (
+          <DropdownItem text={getCategoryName(category)} value={category} />
+        ))}
+      </DropdownItemSet>
     </Dropdown>
   );
 };
