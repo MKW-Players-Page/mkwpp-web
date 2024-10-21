@@ -70,12 +70,12 @@ const TrackTopsPage = () => {
       <Deferred isWaiting={metadata.isLoading}>
         <OverwriteColor hue={siteHue}>
           <ComplexRegionSelection region={region} cupId={cupId} />
-          <div className="module-row ">
+          <div className="module-row">
             <CategorySelect value={category} onChange={setCategory} />
             <LapModeSelect value={lapMode} onChange={setLapMode} />
           </div>
           <div
-            className="module-row "
+            className="module-row"
             style={
               {
                 justifyContent: "center",

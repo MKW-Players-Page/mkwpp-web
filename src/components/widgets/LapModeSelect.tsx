@@ -30,8 +30,7 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
   ];
 
   return (
-      
-  <Dropdown
+    <Dropdown
       data={
         {
           value: value,
@@ -44,7 +43,10 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
               children: options.map((option) => {
                 return {
                   type: "DropdownItemData",
-                  element: { text: Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)], value: option },
+                  element: {
+                    text: Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)],
+                    value: option,
+                  },
                 } as DropdownItemSetDataChild;
               }),
             },

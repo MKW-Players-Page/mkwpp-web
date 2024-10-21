@@ -78,10 +78,10 @@ const RankingsPage = ({ metric }: RankingsProps) => {
       api.timetrialsRankingsList({
         category,
         lapMode,
-        region: 1,
+        region: region?.id || 1,
         metric: metric.metric,
       }),
-    [category, lapMode],
+    [category, lapMode, region],
   );
 
   const siteHue = getCategorySiteHue(category);
@@ -94,6 +94,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <RegionSelectionDropdown ranked={true} value={region} setValue={setRegion} />
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading}>

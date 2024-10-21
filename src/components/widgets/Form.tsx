@@ -155,26 +155,26 @@ export const SelectField = ({ options, field, label }: SelectFieldProps) => {
     <div className="field">
       <p>{label}</p>
       <Dropdown
-          data={
-            {
-              value: getValue(field),
-              valueSetter: onChange,
-              disabled: disabled,
-              defaultItemSet: 0,
-              data: [
-                {
-                  id: 0,
-                  children: options.map((option) => {
-                    return {
-                      type: "DropdownItemData",
-                      element: { text: option.label, value: option.value },
-                    } as DropdownItemSetDataChild;
-                  }),
-                },
-              ],
-            } as DropdownData
-          }
-        />
+        data={
+          {
+            value: getValue(field),
+            valueSetter: onChange,
+            disabled: disabled,
+            defaultItemSet: 0,
+            data: [
+              {
+                id: 0,
+                children: options.map((option) => {
+                  return {
+                    type: "DropdownItemData",
+                    element: { text: option.label, value: option.value },
+                  } as DropdownItemSetDataChild;
+                }),
+              },
+            ],
+          } as DropdownData
+        }
+      />
       {errors.map((error, index) => (
         <p key={index} className="field-error">
           {error}

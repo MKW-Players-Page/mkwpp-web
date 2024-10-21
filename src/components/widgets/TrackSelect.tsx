@@ -26,26 +26,26 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
     <div className="field">
       {label && <p>{label}</p>}
       <Dropdown
-          data={
-            {
-              value: getValue(field),
-              valueSetter: onChange,
-              disabled: disabled,
-              defaultItemSet: 0,
-              data: [
-                {
-                  id: 0,
-                  children: metadata.tracks?.map((track) => {
-                    return {
-                      type: "DropdownItemData",
-                      element: { text: track.name, value: track.id },
-                    } as DropdownItemSetDataChild;
-                  }),
-                },
-              ],
-            } as DropdownData
-          }
-        />
+        data={
+          {
+            value: getValue(field),
+            valueSetter: onChange,
+            disabled: disabled,
+            defaultItemSet: 0,
+            data: [
+              {
+                id: 0,
+                children: metadata.tracks?.map((track) => {
+                  return {
+                    type: "DropdownItemData",
+                    element: { text: track.name, value: track.id },
+                  } as DropdownItemSetDataChild;
+                }),
+              },
+            ],
+          } as DropdownData
+        }
+      />
       {errors.map((error) => (
         <p className="field-error">{error}</p>
       ))}

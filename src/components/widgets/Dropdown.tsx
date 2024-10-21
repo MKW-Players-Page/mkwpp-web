@@ -93,11 +93,12 @@ const Dropdown = ({ data }: DropdownProp) => {
   const [selectedItemSet, setSelectedItemSet] = useState<number>(data.defaultItemSet);
   const [selectedValueItemSet, setSelectedValueItemSet] = useState<number>(data.defaultItemSet);
 
-  let selectedItemSetIndex = data.data.findIndex((r) => r.id === selectedItemSet);
-  let selectedIndex = data.data[selectedItemSetIndex].children.findIndex(
+  const selectedValueItemSetIndex = data.data.findIndex((r) => r.id === selectedValueItemSet);
+  const selectedItemSetIndex = data.data.findIndex((r) => r.id === selectedItemSet);
+  let selectedValueIndex = data.data[selectedValueItemSetIndex].children.findIndex(
     (r) => r.type === "DropdownItemData" && (r.element as DropdownItemData).value === data.value,
   );
-  if (selectedIndex < 0) selectedIndex = 0;
+  if (selectedValueIndex < 0) selectedValueIndex = 0;
 
   data.disabled = !!data.disabled;
   if (data.disabled) setDropdownListShown = () => {};
@@ -138,9 +139,13 @@ const Dropdown = ({ data }: DropdownProp) => {
           setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
         }}
       >
-        {data.data[selectedItemSetIndex].children[selectedIndex].element.leftIcon ??
-          data.data[selectedItemSetIndex].children[selectedIndex].element.rightIcon ?? <></>}
-        <span>{data.data[selectedItemSetIndex].children[selectedIndex].element.text}</span>
+        {data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.leftIcon ??
+          data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.rightIcon ?? (
+            <></>
+          )}
+        <span>
+          {data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
+        </span>
         {data.disabled ? <></> : <Icon icon="Caret" />}
       </div>
       <DropdownList
@@ -150,7 +155,7 @@ const Dropdown = ({ data }: DropdownProp) => {
         y={dropdownListPos.y}
         width={dropdownListPos.width}
       >
-        {data.data[selectedItemSet].children.map((dropdownItem) => {
+        {data.data[selectedItemSetIndex].children.map((dropdownItem) => {
           if (dropdownItem.type === "DropdownItemData")
             return (
               <DropdownItem
@@ -159,7 +164,7 @@ const Dropdown = ({ data }: DropdownProp) => {
                 leftIcon={dropdownItem.element.leftIcon}
                 value={(dropdownItem.element as DropdownItemData).value}
                 _valueSetter={data.valueSetter}
-                _itemSetId={data.data[selectedItemSet].id}
+                _itemSetId={data.data[selectedItemSetIndex].id}
                 _selectedValueItemSetSetter={setSelectedValueItemSet}
               />
             );

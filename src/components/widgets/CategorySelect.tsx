@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { FormContext } from "./Form";
 import { CategoryEnum } from "../../api";
-import Dropdown, { DropdownData, DropdownItemData, DropdownItemSetDataChild } from "./Dropdown";
+import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 import { getCategoryName, getCategoryNumerical } from "../../utils/EnumUtils";
 
 export interface CategorySelectProps {
