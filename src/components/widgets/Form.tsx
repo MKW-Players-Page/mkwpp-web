@@ -8,7 +8,7 @@ import {
   SetStateAction,
   useContext,
 } from "react";
-import Dropdown, { DropdownItem, DropdownItemSet } from "./Dropdown";
+import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 
 import "./Form.css";
 
@@ -155,17 +155,26 @@ export const SelectField = ({ options, field, label }: SelectFieldProps) => {
     <div className="field">
       <p>{label}</p>
       <Dropdown
-        defaultItemSet={0}
-        disabled={disabled}
-        valueSetter={onChange}
-        value={getValue(field)}
-      >
-        <DropdownItemSet id={0}>
-          {options.map((option) => (
-            <DropdownItem value={option.value} text={option.label} />
-          ))}
-        </DropdownItemSet>
-      </Dropdown>
+          data={
+            {
+              value: getValue(field),
+              valueSetter: onChange,
+              disabled: disabled,
+              defaultItemSet: 0,
+              data: [
+                {
+                  id: 0,
+                  children: options.map((option) => {
+                    return {
+                      type: "DropdownItemData",
+                      element: { text: option.label, value: option.value },
+                    } as DropdownItemSetDataChild;
+                  }),
+                },
+              ],
+            } as DropdownData
+          }
+        />
       {errors.map((error, index) => (
         <p key={index} className="field-error">
           {error}

@@ -13,6 +13,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import RegionSelectionDropdown from "../widgets/RegionDropdown";
 
 export interface RankingsMetric {
   title: string;
@@ -67,6 +68,8 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
   const metadata = useContext(MetadataContext);
+
+  const [region, setRegion] = useState((metadata.regions || [])[0]);
 
   const { user } = useContext(UserContext);
 
