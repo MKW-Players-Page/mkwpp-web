@@ -1,19 +1,12 @@
 import "./Dropdown.css";
 import Icon from "./Icon";
-import { useEffect, useRef, useState, cloneElement } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface DropdownProp {
-  /** Default value, or previously selected value. Will default to children[0].value if invalid. */
-  value: any;
-  /** Only <DropdownItem> is accepted */
-  children: JSX.Element[] | JSX.Element | undefined;
-  /** useState() value setter callback */
-  valueSetter: React.Dispatch<React.SetStateAction<any>>;
-  /** Disables onClick event for <DropdownItem> and for <Dropdown> */
-  disabled?: boolean;
+  data: DropdownData;
 }
 
-export interface DropdownItemProp {
+interface DropdownItemProp {
   /** Displayed Text */
   text: string;
   /** Item Value */
@@ -22,46 +15,104 @@ export interface DropdownItemProp {
   leftIcon?: JSX.Element;
   /** Optional Right-side Icon */
   rightIcon?: JSX.Element;
-  /** Do not set this value. This is automatically set by <Dropdown>. */
+  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
   _valueSetter?: React.Dispatch<React.SetStateAction<any>>;
+  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
+  _selectedValueItemSetSetter?: React.Dispatch<React.SetStateAction<any>>;
+  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
+  _itemSetId?: number;
 }
 
 interface DropdownListProp {
   shown: boolean;
-  children: JSX.Element[] | JSX.Element;
+  children: JSX.Element[];
   x: number;
   y: number;
   width: number;
+  selectedItemSet: number;
 }
 
-const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp) => {
-  if (!Array.isArray(children)) {
-    if (children === undefined) {
-      children = [<DropdownItem text="Error!" value="" />];
-    } else {
-      children = [children];
-    }
-  } else if (children[0] === undefined) children = [<DropdownItem text="Error!" value="" />];
+interface DropdownItemSetSetterProp {
+  /** Displayed Text */
+  text: string;
+  /** Optional Left-side Icon */
+  leftIcon?: JSX.Element;
+  /** Optional Right-side Icon */
+  rightIcon?: JSX.Element;
+  /** Value of item set ID to go to. */
+  toItemSetId: number;
+  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
+  _selectedItemSetSetter?: React.Dispatch<React.SetStateAction<any>>;
+}
 
-  let selectedIndex = children.findIndex((r) => r.props.value === value);
-  if (selectedIndex < 0) selectedIndex = 0;
+export interface DropdownData {
+  /** Dropdown Data */
+  data: DropdownItemSetData[];
+  /** Default ItemSet by ID. MUST match value. */
+  defaultItemSet: number;
+  /** Default value, or previously selected value. Will default to children[0].value if invalid. */
+  value: any;
+  /** useState() value setter callback */
+  valueSetter: React.Dispatch<React.SetStateAction<any>>;
+  /** Disables onClick event for <DropdownItem> and for <Dropdown> */
+  disabled?: boolean;
+}
+export interface DropdownItemSetData {
+  id: number;
+  children: DropdownItemSetDataChild[];
+}
+export interface DropdownItemSetDataChild {
+  type: "DropdownItemData" | "DropdownItemSetSetterData";
+  element: DropdownItemData | DropdownItemSetSetterData;
+}
+export interface DropdownItemData {
+  /** Displayed Text */
+  text: string;
+  /** Item Value */
+  value: any;
+  /** Optional Left-side Icon */
+  leftIcon?: JSX.Element;
+  /** Optional Right-side Icon */
+  rightIcon?: JSX.Element;
+}
 
+export interface DropdownItemSetSetterData {
+  /** Displayed Text */
+  text: string;
+  /** Optional Left-side Icon */
+  leftIcon?: JSX.Element;
+  /** Optional Right-side Icon */
+  rightIcon?: JSX.Element;
+  /** Value of item set ID to go to. */
+  toItemSetId: number;
+}
+
+const Dropdown = ({ data }: DropdownProp) => {
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
+  const [selectedItemSet, setSelectedItemSet] = useState<number>(data.defaultItemSet);
+  const [selectedValueItemSet, setSelectedValueItemSet] = useState<number>(data.defaultItemSet);
 
-  children = children.map((child) =>
-    cloneElement(child, {
-      ...child.props,
-      _valueSetter: valueSetter,
-    }),
+  const selectedValueItemSetIndex = data.data.findIndex((r) => r.id === selectedValueItemSet);
+  const selectedItemSetIndex = data.data.findIndex((r) => r.id === selectedItemSet);
+  let selectedValueIndex = data.data[selectedValueItemSetIndex].children.findIndex(
+    (r) => r.type === "DropdownItemData" && (r.element as DropdownItemData).value === data.value,
   );
+  if (selectedValueIndex < 0) selectedValueIndex = 0;
 
-  disabled = !!disabled;
-  if (children.length === 1) disabled = true;
-  if (disabled) setDropdownListShown = () => {};
+  data.disabled = !!data.disabled;
+  if (data.disabled) setDropdownListShown = () => {};
 
   document.addEventListener("click", (e) => {
-    if (dropdownListShown && e.target && e.target !== dropdown.current) setDropdownListShown(false);
+    if (
+      dropdownListShown &&
+      e.target &&
+      e.target !== dropdown.current &&
+      !(e.target as any).classList.contains("dropdown-itemset-setter")
+    ) {
+      setDropdownListShown(false);
+      setSelectedItemSet(selectedValueItemSet);
+    }
   });
 
   const dropdown = useRef(null);
@@ -88,35 +139,69 @@ const Dropdown = ({ children, disabled, valueSetter, value }: DropdownProp) => {
           setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
         }}
       >
-        {children[selectedIndex].props.leftIcon ?? children[selectedIndex].props.rightIcon ?? <></>}
-        {children[selectedIndex].props.text}
-        {disabled ? <></> : <Icon icon="Caret" />}
+        {data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.leftIcon ??
+          data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.rightIcon ?? (
+            <></>
+          )}
+        <span>
+          {data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
+        </span>
+        {data.disabled ? <></> : <Icon icon="Caret" />}
       </div>
       <DropdownList
+        selectedItemSet={selectedItemSet}
         shown={dropdownListShown}
         x={dropdownListPos.x}
         y={dropdownListPos.y}
         width={dropdownListPos.width}
       >
-        {children}
+        {data.data[selectedItemSetIndex].children.map((dropdownItem) => {
+          if (dropdownItem.type === "DropdownItemData")
+            return (
+              <DropdownItem
+                text={dropdownItem.element.text}
+                rightIcon={dropdownItem.element.rightIcon}
+                leftIcon={dropdownItem.element.leftIcon}
+                value={(dropdownItem.element as DropdownItemData).value}
+                _valueSetter={data.valueSetter}
+                _itemSetId={data.data[selectedItemSetIndex].id}
+                _selectedValueItemSetSetter={setSelectedValueItemSet}
+              />
+            );
+          if (dropdownItem.type === "DropdownItemSetSetterData")
+            return (
+              <DropdownItemSetSetter
+                text={dropdownItem.element.text}
+                rightIcon={dropdownItem.element.rightIcon}
+                leftIcon={dropdownItem.element.leftIcon}
+                toItemSetId={(dropdownItem.element as DropdownItemSetSetterData).toItemSetId}
+                _selectedItemSetSetter={setSelectedItemSet}
+              />
+            );
+          return <></>;
+        })}
       </DropdownList>
     </>
   );
 };
 
-export const DropdownItem = ({
+const DropdownItem = ({
   text,
   leftIcon,
   rightIcon,
   value,
   _valueSetter,
+  _selectedValueItemSetSetter,
+  _itemSetId,
 }: DropdownItemProp) => {
   if (_valueSetter === undefined) return <></>;
+  if (_selectedValueItemSetSetter === undefined) return <></>;
   return (
     <div
       className="dropdown-item"
       onClick={() => {
         _valueSetter(value);
+        _selectedValueItemSetSetter(_itemSetId);
       }}
     >
       {leftIcon !== undefined ? leftIcon : <></>}
@@ -135,6 +220,28 @@ const DropdownList = ({ shown, children, x, y, width }: DropdownListProp) => {
   return (
     <div className="module dropdown-list" style={style}>
       {children}
+    </div>
+  );
+};
+
+const DropdownItemSetSetter = ({
+  text,
+  leftIcon,
+  rightIcon,
+  toItemSetId,
+  _selectedItemSetSetter,
+}: DropdownItemSetSetterProp) => {
+  if (_selectedItemSetSetter === undefined) return <></>;
+  return (
+    <div
+      className="dropdown-item dropdown-itemset-setter"
+      onClick={() => {
+        _selectedItemSetSetter(toItemSetId);
+      }}
+    >
+      {leftIcon !== undefined ? leftIcon : <></>}
+      {text}
+      {rightIcon !== undefined ? rightIcon : <></>}
     </div>
   );
 };

@@ -1,0 +1,7 @@
+.dropdown-item svg {
+  height: 100%;
+}
+
+.dropdown > svg {
+  height: 100%;
+}
