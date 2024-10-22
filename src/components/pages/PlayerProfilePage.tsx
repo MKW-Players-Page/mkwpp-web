@@ -141,7 +141,7 @@ const PlayerProfilePage = () => {
             </Deferred>
           </div>
         </div>
-        <div className="module ">
+        <div className="module">
           <Deferred isWaiting={metadata.isLoading || scoresLoading}>
             <table>
               <thead>

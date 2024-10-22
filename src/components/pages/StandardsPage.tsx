@@ -69,7 +69,7 @@ const StandardsPage = () => {
           />
           <CategorySelect value={category} onChange={setCategory} />
         </div>
-        <div className="module ">
+        <div className="module">
           <Deferred isWaiting={metadata.isLoading}>
             <table>
               <thead>

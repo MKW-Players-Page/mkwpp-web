@@ -14,18 +14,20 @@ import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import RegionSelectionDropdown from "../widgets/RegionDropdown";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
-
   const { user } = useContext(UserContext);
 
   const metadata = useContext(MetadataContext);
   const track = metadata.tracks?.find((t) => t.id === id);
+
+  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
+  const [region, setRegion] = useState((metadata.regions || [])[0]);
 
   const { isLoading, data: scores } = useApi(
     () =>
@@ -33,8 +35,9 @@ const TrackChartPage = () => {
         id,
         category,
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
+        region: region?.id || 1,
       }),
-    [category, lapMode],
+    [category, lapMode, region],
   );
 
   const siteHue = getCategorySiteHue(category);
@@ -49,8 +52,9 @@ const TrackChartPage = () => {
         <div className="module-row">
           <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
           <LapModeSelect value={lapMode} onChange={setLapMode} />
+          <RegionSelectionDropdown ranked={false} value={region} setValue={setRegion} />
         </div>
-        <div className="module ">
+        <div className="module">
           <Deferred isWaiting={metadata.isLoading || isLoading}>
             <table>
               <thead>
