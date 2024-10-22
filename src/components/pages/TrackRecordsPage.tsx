@@ -31,7 +31,7 @@ const TrackRecordsPage = () => {
       <h1>World Records</h1>
       <OverwriteColor hue={siteHue}>
         <CategorySelect value={category} onChange={setCategory} />
-        <div className="module ">
+        <div className="module">
           <Deferred isWaiting={isLoading || metadata.isLoading}>
             <table>
               <thead>

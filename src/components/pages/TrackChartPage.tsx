@@ -54,7 +54,7 @@ const TrackChartPage = () => {
           <LapModeSelect value={lapMode} onChange={setLapMode} />
           <RegionSelectionDropdown ranked={false} value={region} setValue={setRegion} />
         </div>
-        <div className="module ">
+        <div className="module">
           <Deferred isWaiting={metadata.isLoading || isLoading}>
             <table>
               <thead>
