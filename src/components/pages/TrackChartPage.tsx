@@ -35,7 +35,7 @@ const TrackChartPage = () => {
         id,
         category,
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
-        region: region.id,
+        region: region?.id || 1,
       }),
     [category, lapMode, region],
   );
