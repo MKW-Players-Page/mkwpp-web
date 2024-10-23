@@ -6,7 +6,7 @@ import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import api, { CategoryEnum } from "../../api";
-import { TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
+import { Region, TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
@@ -17,7 +17,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 
 const TrackChartPage = () => {
-  const { id: idStr } = useParams();
+  const { id: idStr, regionCode: regCode } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const { user } = useContext(UserContext);
@@ -27,7 +27,10 @@ const TrackChartPage = () => {
 
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
-  const [region, setRegion] = useState((metadata.regions || [])[0]);
+  const [region, setRegion] = useState(
+    ([metadata.regions?.find((r) => r.code.toLowerCase() === regCode ?? "world") as Region] ||
+      [])[0],
+  );
 
   const { isLoading, data: scores } = useApi(
     () =>

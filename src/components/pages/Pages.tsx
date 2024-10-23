@@ -63,7 +63,11 @@ export const Pages: PageMap = {
     element: <RulesPage />,
   },
   TrackChart: {
-    path: "/courses/:id",
+    path: "/courses/:id/",
+    element: <TrackChartPage />,
+  },
+  TrackChartReg: {
+    path: "/courses/:id/reg/:regionCode",
     element: <TrackChartPage />,
   },
   TrackList: {

@@ -33,7 +33,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
     );
 
   const dropdownData: DropdownData = {
-    defaultItemSet: 0,
+    defaultItemSet: value.parent || 0,
     value: value,
     valueSetter: setValue,
     data: [],

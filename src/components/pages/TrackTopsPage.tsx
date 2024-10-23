@@ -169,8 +169,9 @@ const TrackTopsPage = () => {
                             <tr>
                               <th colSpan={3}>
                                 <Link
-                                  to={resolvePage(Pages.TrackChart, {
+                                  to={resolvePage(Pages.TrackChartReg, {
                                     id: track.id,
+                                    regionCode: region?.code.toLowerCase(),
                                   })}
                                 >
                                   View full leaderboards
