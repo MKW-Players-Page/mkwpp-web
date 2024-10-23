@@ -4,7 +4,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import api, { CategoryEnum } from "../../api";
+import api, { CategoryEnum, Region } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import {
@@ -17,15 +17,18 @@ import { integerOr } from "../../utils/Numbers";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import Dropdown, { DropdownData } from "../widgets/Dropdown";
+import Flag, { Flags } from "../widgets/Flags";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
+  const metadata = useContext(MetadataContext);
+
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
-
-  const metadata = useContext(MetadataContext);
+  const [region, setRegion] = useState((metadata.regions || [])[0]);
 
   const {
     isLoading: playerLoading,
@@ -39,9 +42,9 @@ const PlayerProfilePage = () => {
         id,
         category,
         lapMode,
-        region: 1,
+        region: region?.id || 1,
       }),
-    [id, category, lapMode],
+    [id, category, lapMode, region],
   );
 
   const { isLoading: scoresLoading, data: scores } = useApi(
@@ -50,6 +53,14 @@ const PlayerProfilePage = () => {
   );
 
   const siteHue = getCategorySiteHue(category);
+
+  const getAllRegions = (arr: Region[], startId: number): Region[] => {
+    let region = getRegionById(metadata, startId);
+    if (region === undefined) return arr;
+    arr.push(region);
+    if (region.parent === undefined || region.parent === null) return arr;
+    return getAllRegions(arr, region.parent);
+  };
 
   return (
     <>
@@ -63,6 +74,35 @@ const PlayerProfilePage = () => {
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <Dropdown
+            data={
+              {
+                disabled: player?.region === undefined,
+                defaultItemSet: 0,
+                value: region,
+                valueSetter: setRegion,
+                data: [
+                  {
+                    id: 0,
+                    children: getAllRegions([], player?.region || 1)
+                      .reverse()
+                      .map((region) => {
+                        return {
+                          type: "DropdownItemData",
+                          element: {
+                            text: region.name,
+                            value: region,
+                            rightIcon: (
+                              <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
+                            ),
+                          },
+                        };
+                      }),
+                  },
+                ],
+              } as DropdownData
+            }
+          />
         </div>
         <div className="module-row ">
           <div className="module">
