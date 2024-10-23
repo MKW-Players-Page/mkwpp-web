@@ -74,35 +74,38 @@ const PlayerProfilePage = () => {
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
-          <Dropdown
-            data={
-              {
-                disabled: player?.region === undefined,
-                defaultItemSet: 0,
-                value: region,
-                valueSetter: setRegion,
-                data: [
-                  {
-                    id: 0,
-                    children: getAllRegions([], player?.region || 1)
-                      .reverse()
-                      .map((region) => {
-                        return {
-                          type: "DropdownItemData",
-                          element: {
-                            text: region.name,
-                            value: region,
-                            rightIcon: (
-                              <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
-                            ),
-                          },
-                        };
-                      }),
-                  },
-                ],
-              } as DropdownData
-            }
-          />
+          {player?.region !== undefined && player?.region !== null && player?.region !== 1 ? (
+            <Dropdown
+              data={
+                {
+                  defaultItemSet: 0,
+                  value: region,
+                  valueSetter: setRegion,
+                  data: [
+                    {
+                      id: 0,
+                      children: getAllRegions([], player?.region || 1)
+                        .reverse()
+                        .map((region) => {
+                          return {
+                            type: "DropdownItemData",
+                            element: {
+                              text: region.name,
+                              value: region,
+                              rightIcon: (
+                                <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
+                              ),
+                            },
+                          };
+                        }),
+                    },
+                  ],
+                } as DropdownData
+              }
+            />
+          ) : (
+            <></>
+          )}
         </div>
         <div className="module-row ">
           <div className="module">
