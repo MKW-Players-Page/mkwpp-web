@@ -4,7 +4,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import api, { CategoryEnum, Region } from "../../api";
+import api, { CategoryEnum, Region, Score } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import {
@@ -20,6 +20,11 @@ import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import Flag, { Flags } from "../widgets/Flags";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
+
+interface ScoreDoubled extends Score {
+  precedesRepeat: boolean;
+  repeat: boolean;
+}
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -53,6 +58,35 @@ const PlayerProfilePage = () => {
     () => api.timetrialsPlayersScoresList({ id, category, region: region?.id ?? 1 }),
     [id, category, region],
   );
+
+  const Sorting = {
+    trackAsc: (a: Score, b: Score) => a.track - b.track,
+    trackDesc: (a: Score, b: Score) => b.track - a.track,
+    lapAsc: (a: Score, b: Score) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
+    lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
+  };
+
+  const Filtering = {
+    flapOnly: (a: Score) => a.isLap,
+    courseOnly: (a: Score) => !a.isLap,
+    overall: (a: Score) => true,
+  };
+
+  let sortedScores = scores
+    ?.sort(Sorting.lapAsc)
+    .sort(Sorting.trackAsc)
+    .filter(
+      lapMode === LapModeEnum.Overall
+        ? Filtering.overall
+        : lapMode === LapModeEnum.Course
+          ? Filtering.courseOnly
+          : Filtering.flapOnly,
+    )
+    .map((score, index, arr) => {
+      (score as ScoreDoubled).repeat = score.track === arr[index - 1]?.track;
+      (score as ScoreDoubled).precedesRepeat = score.track === arr[index + 1]?.track;
+      return score as ScoreDoubled;
+    });
 
   const siteHue = getCategorySiteHue(category);
 
@@ -242,81 +276,76 @@ const PlayerProfilePage = () => {
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
-                {metadata.tracks?.map((track) => {
-                  const lapArr =
-                    lapMode === LapModeEnum.Overall ? [false, true] : [lapMode === LapModeEnum.Lap];
-                  return lapArr.map((isLap) => {
-                    const score = scores?.find(
-                      (score) => score.track === track.id && score.isLap === isLap,
-                    );
-                    return (
-                      <tr key={`${isLap ? "l" : "c"}${track.id}`}>
-                        {!isLap && lapMode === LapModeEnum.Overall ? (
-                          <td rowSpan={2}>
-                            <Link
-                              to={resolvePage(
-                                Pages.TrackChart,
-                                { id: track.id },
-                                {
-                                  reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
-                                },
-                              )}
-                            >
-                              {track.name}
-                            </Link>
-                          </td>
-                        ) : isLap && lapMode === LapModeEnum.Overall ? (
-                          <td />
-                        ) : (
-                          <td>
-                            <Link
-                              to={resolvePage(
-                                Pages.TrackChart,
-                                { id: track.id },
-                                {
-                                  reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
-                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
-                                },
-                              )}
-                            >
-                              {track.name}
-                            </Link>
-                          </td>
+                {sortedScores?.map((score) => {
+                  const track = metadata.tracks?.find((r) => r.id === score.track);
+                  return (
+                    <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
+                      {score.precedesRepeat ? (
+                        <td rowSpan={2}>
+                          <Link
+                            to={resolvePage(
+                              Pages.TrackChart,
+                              { id: score.track },
+                              {
+                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                              },
+                            )}
+                          >
+                            {track?.name}
+                          </Link>
+                        </td>
+                      ) : score.repeat ? (
+                        <td />
+                      ) : (
+                        <td>
+                          <Link
+                            to={resolvePage(
+                              Pages.TrackChart,
+                              { id: score.track },
+                              {
+                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                              },
+                            )}
+                          >
+                            {track?.name}
+                          </Link>
+                        </td>
+                      )}
+                      <td className={score?.category !== category ? "fallthrough" : ""}>
+                        {formatTime(score.value)}
+                      </td>
+                      {!score.repeat && lapMode === LapModeEnum.Overall && <td />}
+                      <td>{score.rank}</td>
+                      <td>{getStandardLevel(metadata, score.standard)?.name}</td>
+                      <td>{(score.recordRatio * 100).toFixed(2) + "%"}</td>
+                      <td>{score.date ? formatDate(score.date) : "????-??-??"}</td>
+                      <td className="icon-cell">
+                        {score.videoLink && (
+                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Video" />
+                          </a>
                         )}
-                        <td className={score?.category !== category ? "fallthrough" : ""}>
-                          {score ? formatTime(score.value) : "-"}
-                        </td>
-                        {!isLap && lapMode === LapModeEnum.Overall && <td />}
-                        <td>{score?.rank ?? "-"}</td>
-                        <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
-                        <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
-                        <td>{score?.date ? formatDate(score.date) : "-"}</td>
-                        <td className="icon-cell">
-                          {score?.videoLink && (
-                            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Video" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.ghostLink && (
-                            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Ghost" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.comment && (
-                            <Tooltip text={score.comment}>
-                              <Icon icon="Comment" />
-                            </Tooltip>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  });
+                      </td>
+                      <td className="icon-cell">
+                        {score.ghostLink && (
+                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Ghost" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
+                        )}
+                      </td>
+                    </tr>
+                  );
                 })}
               </tbody>
             </table>
