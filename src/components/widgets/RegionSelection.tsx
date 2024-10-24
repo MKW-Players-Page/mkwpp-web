@@ -7,7 +7,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
 import Flag, { Flags } from "./Flags";
-import { WorldRegion } from "../../utils/Region";
+import { WorldRegion } from "../../utils/Defaults";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;

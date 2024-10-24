@@ -11,7 +11,7 @@ import Dropdown, {
   DropdownItemSetDataChild,
   DropdownItemSetSetterData,
 } from "./Dropdown";
-import { WorldRegion } from "../../utils/Region";
+import { WorldRegion } from "../../utils/Defaults";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;

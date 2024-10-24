@@ -3,7 +3,7 @@ import { SetURLSearchParams } from "react-router-dom";
 import { CategoryEnum, Region } from "../api";
 import { LapModeEnum } from "../components/widgets/LapModeSelect";
 import { MetadataContext } from "./Metadata";
-import { WorldRegion } from "./Region";
+import { WorldRegion } from "./Defaults";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
