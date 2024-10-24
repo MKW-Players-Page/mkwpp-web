@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
@@ -14,11 +14,11 @@ import {
   MetadataContext,
 } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
-import { LapModeEnum } from "../widgets/LapModeSelect";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import Flag, { Flags } from "../widgets/Flags";
+import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -26,9 +26,10 @@ const PlayerProfilePage = () => {
 
   const metadata = useContext(MetadataContext);
 
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
-  const [region, setRegion] = useState((metadata.regions || [])[0]);
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
+  const [region, setRegion] = useState(metadata.regions[0]);
 
   const {
     isLoading: playerLoading,
