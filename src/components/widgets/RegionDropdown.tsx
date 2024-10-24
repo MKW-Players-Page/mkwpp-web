@@ -22,7 +22,7 @@ export interface RegionSelectionDropdownProps {
 const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDropdownProps) => {
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
-  const regions = metadata.regions ?? [WorldRegion];
+  const regions = metadata.regions ?? [value];
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     arr.reduce(
@@ -34,7 +34,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
     );
 
   const dropdownData: DropdownData = {
-    defaultItemSet: 0,
+    defaultItemSet: value.parent ?? 0,
     value: value,
     valueSetter: setValue,
     data: [],
