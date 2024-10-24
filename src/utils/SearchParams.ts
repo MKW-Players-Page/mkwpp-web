@@ -32,7 +32,7 @@ export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boole
   const lapMode =
     Object.values(LapModeEnum).find(
       (value) =>
-        restrictedSet && value !== LapModeEnum.Overall && value === searchParams[0].get("lap"),
+        restrictedSet ? (value !== LapModeEnum.Overall && value === searchParams[0].get("lap")) : value === searchParams[0].get("lap"),
     ) ?? defVal;
   return {
     lapMode,
