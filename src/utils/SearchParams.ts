@@ -7,7 +7,7 @@ import { WorldRegion } from "./Defaults";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
-const replace = (prev: URLSearchParams, param: string, value: string | undefined) => {
+export const paramReplace = (prev: URLSearchParams, param: string, value: string | undefined) => {
   return {
     ...(({ [param]: omit, ...rest }) => rest)(Object.fromEntries(prev)),
     ...(value ? { [param]: value } : {}),
@@ -22,7 +22,7 @@ export const useCategoryParam = (searchParams: SearchParams) => {
     category,
     setCategory: (category: CategoryEnum) => {
       const cat = category === CategoryEnum.NonShortcut ? undefined : category;
-      searchParams[1]((prev) => replace(prev, "cat", cat));
+      searchParams[1]((prev) => paramReplace(prev, "cat", cat));
     },
   };
 };
@@ -30,15 +30,16 @@ export const useCategoryParam = (searchParams: SearchParams) => {
 export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
-    Object.values(LapModeEnum).find(
-      (value) =>
-        restrictedSet ? (value !== LapModeEnum.Overall && value === searchParams[0].get("lap")) : value === searchParams[0].get("lap"),
+    Object.values(LapModeEnum).find((value) =>
+      restrictedSet
+        ? value !== LapModeEnum.Overall && value === searchParams[0].get("lap")
+        : value === searchParams[0].get("lap"),
     ) ?? defVal;
   return {
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
       const lap = lapMode === defVal ? undefined : lapMode;
-      searchParams[1]((prev) => replace(prev, "lap", lap));
+      searchParams[1]((prev) => paramReplace(prev, "lap", lap));
     },
   };
 };
@@ -53,7 +54,7 @@ export const useRegionParam = (searchParams: SearchParams) => {
     region,
     setRegion: (region: Region) => {
       const reg = region.code === WorldRegion.code ? undefined : region;
-      searchParams[1]((prev) => replace(prev, "reg", reg?.code.toLowerCase()));
+      searchParams[1]((prev) => paramReplace(prev, "reg", reg?.code.toLowerCase()));
     },
   };
 };
@@ -68,7 +69,7 @@ export const useStandardLevelIdParam = (searchParams: SearchParams) => {
     levelId,
     setLevelId: (levelId: number) => {
       const std = levelId === 1 ? undefined : levelId;
-      searchParams[1]((prev) => replace(prev, "std", std?.toString()));
+      searchParams[1]((prev) => paramReplace(prev, "std", std?.toString()));
     },
   };
 };

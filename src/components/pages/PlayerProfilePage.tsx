@@ -4,7 +4,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import api, { CategoryEnum, Region } from "../../api";
+import api, { CategoryEnum, Region, Score } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import {
@@ -18,8 +18,96 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import Flag, { Flags } from "../widgets/Flags";
-import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
+import {
+  paramReplace,
+  SearchParams,
+  useCategoryParam,
+  useLapModeParam,
+  useRegionParam,
+} from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
+
+interface ScoreDoubled extends Score {
+  precedesRepeat: boolean;
+  repeat: boolean;
+}
+
+type SortType =
+  | "trackAsc"
+  | "trackDesc"
+  | "lapAsc"
+  | "lapDesc"
+  | "timeAsc"
+  | "timeDesc"
+  | "rankAsc"
+  | "rankDesc"
+  | "stdAsc"
+  | "stdDesc"
+  | "prwrAsc"
+  | "prwrDesc"
+  | "dateAsc"
+  | "dateDesc";
+
+const Sorting: Record<string, any> = {
+  trackAsc: (a: Score, b: Score) => a.track - b.track,
+  trackDesc: (a: Score, b: Score) => b.track - a.track,
+  lapAsc: (a: Score, b: Score) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
+  lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
+  rankAsc: (a: Score, b: Score) => a.rank - b.rank,
+  rankDesc: (a: Score, b: Score) => b.rank - a.rank,
+  timeAsc: (a: Score, b: Score) => a.value - b.value,
+  timeDesc: (a: Score, b: Score) => b.value - a.value,
+  stdAsc: (a: Score, b: Score) => a.standard - b.standard,
+  stdDesc: (a: Score, b: Score) => b.standard - a.standard,
+  prwrAsc: (a: Score, b: Score) => a.recordRatio - b.recordRatio,
+  prwrDesc: (a: Score, b: Score) => b.recordRatio - a.recordRatio,
+  dateAsc: (a: Score, b: Score) =>
+    (a.date ? a.date.valueOf() : -1000) - (b.date ? b.date.valueOf() : -1000),
+  dateDesc: (a: Score, b: Score) =>
+    (b.date ? b.date.valueOf() : -1000) - (a.date ? a.date.valueOf() : -1000),
+};
+
+const Filtering = {
+  flapOnly: (a: Score) => a.isLap,
+  courseOnly: (a: Score) => !a.isLap,
+  overall: (a: Score) => true,
+};
+
+const useProfileTableSortParam = (searchParams: SearchParams) => {
+  const sortType: SortType =
+    (Object.keys(Sorting).find((key) => key === searchParams[0].get("sort")) as
+      | SortType
+      | undefined) ?? "trackAsc";
+  return {
+    sortType,
+    setSortType: (sortType: SortType) => {
+      const sort = sortType === "trackAsc" ? undefined : sortType;
+      searchParams[1]((prev) => paramReplace(prev, "sort", sort));
+    },
+  };
+};
+
+interface ThSortProps {
+  children: string;
+  states: SortType[];
+  sortType: SortType;
+  setSortType: (sortType: SortType) => void;
+}
+
+const ThSort = ({ children, states, sortType, setSortType }: ThSortProps) => {
+  const stateIndex = states.findIndex((r) => r === sortType);
+  const setTo = stateIndex < 0 ? 1 : states.length === stateIndex + 1 ? 0 : stateIndex + 1;
+  return (
+    <th
+      style={{ cursor: "pointer" } as React.CSSProperties}
+      onClick={() => {
+        setSortType(states[setTo]);
+      }}
+    >
+      {children}
+    </th>
+  );
+};
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -31,6 +119,7 @@ const PlayerProfilePage = () => {
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
   const { region, setRegion } = useRegionParam(searchParams);
+  const { sortType, setSortType } = useProfileTableSortParam(searchParams);
 
   const {
     isLoading: playerLoading,
@@ -54,6 +143,22 @@ const PlayerProfilePage = () => {
     [id, category, region],
   );
 
+  let sortedScores = scores
+    ?.filter(
+      lapMode === LapModeEnum.Overall
+        ? Filtering.overall
+        : lapMode === LapModeEnum.Course
+          ? Filtering.courseOnly
+          : Filtering.flapOnly,
+    )
+    .sort(Sorting.lapAsc)
+    .sort(Sorting[sortType])
+    .map((score, index, arr) => {
+      (score as ScoreDoubled).repeat = score.track === arr[index - 1]?.track;
+      (score as ScoreDoubled).precedesRepeat = score.track === arr[index + 1]?.track;
+      return score as ScoreDoubled;
+    });
+
   const siteHue = getCategorySiteHue(category);
 
   const getAllRegions = (arr: Region[], startId: number): Region[] => {
@@ -64,13 +169,19 @@ const PlayerProfilePage = () => {
     return getAllRegions(arr, region.parent);
   };
 
+  const rankingsRedirectParams = {
+    reg: region.id !== 1 ? region.code.toLowerCase() : null,
+    cat: category !== CategoryEnum.NonShortcut ? category : null,
+    lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
+  };
+
   return (
     <>
       {/* Redirect to player list if id is invalid or does not exist. */}
       {playerError && <Navigate to={resolvePage(Pages.PlayerList)} />}
       <h1>
-        <FlagIcon region={getRegionById(metadata, player?.region || 0)} />
-        {player?.name || <>&nbsp;</>}
+        <FlagIcon region={getRegionById(metadata, player?.region ?? 1)} />
+        {player?.name ?? <>&nbsp;</>}
       </h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
@@ -86,7 +197,7 @@ const PlayerProfilePage = () => {
                   data: [
                     {
                       id: 0,
-                      children: getAllRegions([], player?.region || 1)
+                      children: getAllRegions([], player?.region ?? 1)
                         .reverse()
                         .map((region) => {
                           return {
@@ -116,7 +227,7 @@ const PlayerProfilePage = () => {
                 <tbody>
                   <tr>
                     <td>Location</td>
-                    <td>{getRegionNameFull(metadata, player?.region || 0)}</td>
+                    <td>{getRegionNameFull(metadata, player?.region ?? 0)}</td>
                   </tr>
                   <tr>
                     <td>Alias</td>
@@ -139,19 +250,41 @@ const PlayerProfilePage = () => {
               <table>
                 <tbody>
                   <tr>
-                    <td>Average Finish</td>
+                    <td>
+                      <Link
+                        to={resolvePage(Pages.RankingsAverageFinish, {}, rankingsRedirectParams)}
+                      >
+                        Average Finish
+                      </Link>
+                    </td>
                     <td>
                       {stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}
                     </td>
                   </tr>
                   <tr>
-                    <td>ARR</td>
+                    <td>
+                      <Link
+                        to={resolvePage(Pages.RankingsAverageStandard, {}, rankingsRedirectParams)}
+                      >
+                        ARR
+                      </Link>
+                    </td>
                     <td>
                       {stats && stats.scoreCount > 0 ? stats.totalStandard / stats.scoreCount : "-"}
                     </td>
                   </tr>
                   <tr>
-                    <td>PR:WR</td>
+                    <td>
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsAverageRecordRatio,
+                          {},
+                          rankingsRedirectParams,
+                        )}
+                      >
+                        PR:WR
+                      </Link>
+                    </td>
                     <td>
                       {stats && stats.scoreCount > 0
                         ? ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"
@@ -159,7 +292,11 @@ const PlayerProfilePage = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>Total Time</td>
+                    <td>
+                      <Link to={resolvePage(Pages.RankingsTotalTime, {}, rankingsRedirectParams)}>
+                        Total Time
+                      </Link>
+                    </td>
                     <td>{stats ? formatTime(stats.totalScore) : "-"}</td>
                   </tr>
                 </tbody>
@@ -191,77 +328,146 @@ const PlayerProfilePage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Track</th>
-                  <th>Course</th>
-                  <th>Lap</th>
-                  <th>Rank</th>
-                  <th>Standard</th>
-                  <th>PR:WR</th>
-                  <th>Date</th>
+                  <th
+                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    onClick={() => {
+                      setSortType("trackAsc");
+                    }}
+                  >
+                    Track
+                  </th>
+                  {lapMode === LapModeEnum.Overall ? (
+                    <>
+                      <ThSort
+                        states={["trackAsc", "timeAsc", "timeDesc"]}
+                        sortType={sortType}
+                        setSortType={setSortType}
+                      >
+                        Course
+                      </ThSort>
+                      <ThSort
+                        states={["trackAsc", "timeAsc", "timeDesc"]}
+                        sortType={sortType}
+                        setSortType={setSortType}
+                      >
+                        Lap
+                      </ThSort>
+                    </>
+                  ) : (
+                    <ThSort
+                      states={["trackAsc", "timeAsc", "timeDesc"]}
+                      sortType={sortType}
+                      setSortType={setSortType}
+                    >
+                      Time
+                    </ThSort>
+                  )}
+                  <ThSort
+                    states={["trackAsc", "rankAsc", "rankDesc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    Rank
+                  </ThSort>
+                  <ThSort
+                    states={["trackAsc", "stdAsc", "stdDesc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    Standard
+                  </ThSort>
+                  <ThSort
+                    states={["trackAsc", "prwrDesc", "prwrAsc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    PR:WR
+                  </ThSort>
+                  <ThSort
+                    states={["trackAsc", "dateAsc", "dateDesc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    Date
+                  </ThSort>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
-                {metadata.tracks?.map((track) =>
-                  [false, true].map((isLap) => {
-                    const score = scores?.find(
-                      (score) => score.track === track.id && score.isLap === isLap,
-                    );
-                    return (
-                      <tr key={`${isLap ? "l" : "c"}${track.id}`}>
-                        {!isLap && (
-                          <td rowSpan={2}>
-                            <Link
-                              to={resolvePage(
-                                Pages.TrackChart,
-                                { id: track.id },
-                                {
-                                  reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
-                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
-                                },
-                              )}
-                            >
-                              {track.name}
-                            </Link>
-                          </td>
+                {sortedScores?.map((score) => {
+                  const track = metadata.tracks?.find((r) => r.id === score.track);
+                  return (
+                    <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
+                      {score.precedesRepeat ? (
+                        <td rowSpan={2}>
+                          <Link
+                            to={resolvePage(
+                              Pages.TrackChart,
+                              { id: score.track },
+                              {
+                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                              },
+                            )}
+                          >
+                            {track?.name}
+                          </Link>
+                        </td>
+                      ) : score.repeat ? (
+                        <></>
+                      ) : (
+                        <td>
+                          <Link
+                            to={resolvePage(
+                              Pages.TrackChart,
+                              { id: score.track },
+                              {
+                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                              },
+                            )}
+                          >
+                            {track?.name}
+                          </Link>
+                        </td>
+                      )}
+                      {score.isLap && lapMode === LapModeEnum.Overall && <td />}
+                      <td className={score?.category !== category ? "fallthrough" : ""}>
+                        {formatTime(score.value)}
+                      </td>
+                      {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
+                      <td>{score.rank}</td>
+                      <td>{getStandardLevel(metadata, score.standard)?.name}</td>
+                      <td>{(score.recordRatio * 100).toFixed(2) + "%"}</td>
+                      <td>{score.date ? formatDate(score.date) : "????-??-??"}</td>
+                      <td className="icon-cell">
+                        {score.videoLink && (
+                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Video" />
+                          </a>
                         )}
-                        {isLap && <td />}
-                        <td className={score?.category !== category ? "fallthrough" : ""}>
-                          {score ? formatTime(score.value) : "-"}
-                        </td>
-                        {!isLap && <td />}
-                        <td>{score?.rank || "-"}</td>
-                        <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
-                        <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
-                        <td>{score?.date ? formatDate(score.date) : "-"}</td>
-                        <td className="icon-cell">
-                          {score?.videoLink && (
-                            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Video" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.ghostLink && (
-                            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Ghost" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.comment && (
-                            <Tooltip text={score.comment}>
-                              <Icon icon="Comment" />
-                            </Tooltip>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  }),
-                )}
+                      </td>
+                      <td className="icon-cell">
+                        {score.ghostLink && (
+                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Ghost" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </Deferred>
