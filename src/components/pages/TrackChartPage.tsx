@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import { LapModeEnum } from "../widgets/LapModeSelect";
-import api, { CategoryEnum } from "../../api";
+import api from "../../api";
 import { TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
@@ -15,6 +14,7 @@ import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -22,12 +22,13 @@ const TrackChartPage = () => {
 
   const { user } = useContext(UserContext);
 
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams);
+  const { region, setRegion } = useRegionParam(searchParams);
+
   const metadata = useContext(MetadataContext);
   const track = metadata.tracks?.find((t) => t.id === id);
-
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
-  const [region, setRegion] = useState((metadata.regions || [])[0]);
 
   const { isLoading, data: scores } = useApi(
     () =>
@@ -35,7 +36,7 @@ const TrackChartPage = () => {
         id,
         category,
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
-        region: region?.id || 1,
+        region: region.id,
       }),
     [category, lapMode, region],
   );

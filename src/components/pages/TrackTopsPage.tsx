@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
@@ -13,8 +13,10 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import { WorldRegion } from "../../utils/Defaults";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -37,12 +39,14 @@ const TrackTopsPage = () => {
   const { region: regionCode, cup: cupStr } = useParams();
   const cupId = Math.max(integerOr(cupStr, 0), 0);
 
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
-  const region = metadata.regions?.find((r) => r.code.toLowerCase() === regionCode && r.isRanked);
+  const region =
+    metadata.regions.find((r) => r.code.toLowerCase() === regionCode && r.isRanked) ?? WorldRegion;
   const cup = metadata.cups?.find((c) => c.id === cupId);
 
   const { user } = useContext(UserContext);
@@ -54,7 +58,7 @@ const TrackTopsPage = () => {
       id: track,
       category,
       lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
-      region: region?.id,
+      region: region.id,
     })) || [],
     [category, cup, lapMode, region],
   );
@@ -105,7 +109,7 @@ const TrackTopsPage = () => {
                 >
                   <Link
                     to={resolvePage(Pages.TrackTops, {
-                      region: region?.code.toLowerCase() || 0,
+                      region: region.code.toLowerCase(),
                       cup: c.id,
                     })}
                   >
@@ -169,9 +173,24 @@ const TrackTopsPage = () => {
                             <tr>
                               <th colSpan={3}>
                                 <Link
-                                  to={resolvePage(Pages.TrackChart, {
-                                    id: track.id,
-                                  })}
+                                  to={resolvePage(
+                                    Pages.TrackChart,
+                                    {
+                                      id: track.id,
+                                    },
+                                    {
+                                      cat:
+                                        track.categories.filter(
+                                          (r) =>
+                                            getCategoryNumerical(r) <=
+                                            getCategoryNumerical(category),
+                                        )[0] !== CategoryEnum.NonShortcut
+                                          ? category
+                                          : null,
+                                      lap: lapMode !== LapModeEnum.Course ? lapMode : null,
+                                      reg: region?.id !== 1 ? region?.code.toLowerCase() : null,
+                                    },
+                                  )}
                                 >
                                   View full leaderboards
                                 </Link>

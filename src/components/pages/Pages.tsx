@@ -16,6 +16,7 @@ import BlogPostPage from "./blog/BlogPostPage";
 import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
+import { buildQueryParamString } from "../../utils/SearchParams";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -109,6 +110,8 @@ export const Pages: PageMap = {
 };
 
 /** Generates path for given page optionally with given params. */
-export const resolvePage = (page: RouteObject, params = {}) => {
-  return page.index || !page.path ? "/" : generatePath(page.path, params);
+export const resolvePage = (page: RouteObject, params = {}, queryParams = {}) => {
+  return page.index || !page.path
+    ? "/"
+    : generatePath(page.path, params) + buildQueryParamString(queryParams);
 };

@@ -2,11 +2,12 @@ import { createContext } from "react";
 
 import api, { Region, Track, TrackCup, RegionTypeEnum, StandardLevel } from "../api";
 import { useApi } from "../hooks";
+import { WorldRegion } from "./Defaults";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
 export interface Metadata {
   isLoading: boolean;
-  regions?: Region[];
+  regions: Region[];
   standards?: StandardLevel[];
   cups?: TrackCup[];
   tracks?: Track[];
@@ -24,7 +25,7 @@ export const useMetadata = (): Metadata => {
 
   return {
     isLoading: regions.isLoading || standards.isLoading || cups.isLoading || tracks.isLoading,
-    regions: regions.data,
+    regions: regions.data ?? [WorldRegion],
     standards: standards.data,
     cups: cups.data,
     tracks: tracks.data,
@@ -32,7 +33,7 @@ export const useMetadata = (): Metadata => {
 };
 
 /** Context providing metadata to the app's components. */
-export const MetadataContext = createContext<Metadata>({ isLoading: true });
+export const MetadataContext = createContext<Metadata>({ isLoading: true, regions: [WorldRegion] });
 
 // Helper functions
 
