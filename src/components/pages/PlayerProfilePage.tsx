@@ -213,11 +213,17 @@ const PlayerProfilePage = () => {
                       <tr key={`${isLap ? "l" : "c"}${track.id}`}>
                         {!isLap && (
                           <td rowSpan={2}>
-                            <Link to={resolvePage(Pages.TrackChart, { id: track.id }, {
-                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
-                                cat: category !== CategoryEnum.NonShortcut ? category : null
-                            })}>
+                            <Link
+                              to={resolvePage(
+                                Pages.TrackChart,
+                                { id: track.id },
+                                {
+                                  reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                },
+                              )}
+                            >
                               {track.name}
                             </Link>
                           </td>
