@@ -66,10 +66,6 @@ export const Pages: PageMap = {
     path: "/courses/:id/",
     element: <TrackChartPage />,
   },
-  TrackChartReg: {
-    path: "/courses/:id/reg/:regionCode",
-    element: <TrackChartPage />,
-  },
   TrackList: {
     path: "/courses",
     element: <TrackListPage />,
@@ -113,6 +109,19 @@ export const Pages: PageMap = {
 };
 
 /** Generates path for given page optionally with given params. */
-export const resolvePage = (page: RouteObject, params = {}) => {
-  return page.index || !page.path ? "/" : generatePath(page.path, params);
+export const resolvePage = (
+  page: RouteObject,
+  params = {},
+  queryParams: Record<string, any> = {},
+) => {
+  return page.index || !page.path
+    ? "/"
+    : generatePath(page.path, params) +
+        (Object.entries(queryParams).length > 0
+          ? "?" +
+            Object.entries(queryParams)
+              .filter(([k, v]) => v !== null && v !== undefined)
+              .map(([k, v]) => `${k}=${v}`)
+              .join("&")
+          : "");
 };

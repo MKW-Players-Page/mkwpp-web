@@ -21,7 +21,7 @@ export interface RegionSelectionDropdownProps {
 const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDropdownProps) => {
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
-  const regions = metadata.regions || [];
+  const regions = metadata.regions ?? [];
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     arr.reduce(

@@ -13,7 +13,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 
 export const TrackTopsHomePage = () => {
@@ -169,10 +169,24 @@ const TrackTopsPage = () => {
                             <tr>
                               <th colSpan={3}>
                                 <Link
-                                  to={resolvePage(Pages.TrackChartReg, {
-                                    id: track.id,
-                                    regionCode: region?.code.toLowerCase(),
-                                  })}
+                                  to={resolvePage(
+                                    Pages.TrackChart,
+                                    {
+                                      id: track.id,
+                                    },
+                                    {
+                                      cat:
+                                        track.categories.filter(
+                                          (r) =>
+                                            getCategoryNumerical(r) <=
+                                            getCategoryNumerical(category),
+                                        )[0] !== CategoryEnum.NonShortcut
+                                          ? category
+                                          : null,
+                                      lap: lapMode !== LapModeEnum.Course ? lapMode : null,
+                                      reg: region?.id !== 1 ? region?.code.toLowerCase() : null,
+                                    },
+                                  )}
                                 >
                                   View full leaderboards
                                 </Link>

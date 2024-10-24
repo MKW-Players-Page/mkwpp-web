@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
@@ -17,7 +17,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 
 const TrackChartPage = () => {
-  const { id: idStr, regionCode: regCode } = useParams();
+  const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const { user } = useContext(UserContext);
@@ -25,11 +25,15 @@ const TrackChartPage = () => {
   const metadata = useContext(MetadataContext);
   const track = metadata.tracks?.find((t) => t.id === id);
 
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Course);
+  const searchParams = useSearchParams()[0];
+  const regCodeParam = searchParams.get("reg") ?? "world";
+  const categoryParam = (searchParams.get("cat") ?? CategoryEnum.NonShortcut) as CategoryEnum;
+  const lapModeParam = (searchParams.get("lap") ?? LapModeEnum.Course) as LapModeEnum;
+
+  const [category, setCategory] = useState<CategoryEnum>(categoryParam);
+  const [lapMode, setLapMode] = useState<LapModeEnum>(lapModeParam);
   const [region, setRegion] = useState(
-    ([metadata.regions?.find((r) => r.code.toLowerCase() === regCode ?? "world") as Region] ||
-      [])[0],
+    ([metadata.regions?.find((r) => r.code.toLowerCase() === regCodeParam) as Region] ?? [])[0],
   );
 
   const { isLoading, data: scores } = useApi(
