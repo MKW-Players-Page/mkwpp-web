@@ -42,14 +42,14 @@ const PlayerProfilePage = () => {
         id,
         category,
         lapMode,
-        region: region?.id || 1,
+        region: region?.id ?? 1,
       }),
     [id, category, lapMode, region],
   );
 
   const { isLoading: scoresLoading, data: scores } = useApi(
-    () => api.timetrialsPlayersScoresList({ id, category }),
-    [id, category],
+    () => api.timetrialsPlayersScoresList({ id, category, region: region?.id ?? 1 }),
+    [id, category, region],
   );
 
   const siteHue = getCategorySiteHue(category);
