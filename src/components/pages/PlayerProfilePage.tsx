@@ -4,7 +4,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import api, { Region } from "../../api";
+import api, { CategoryEnum, Region } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import {
@@ -19,6 +19,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import Flag, { Flags } from "../widgets/Flags";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -212,7 +213,11 @@ const PlayerProfilePage = () => {
                       <tr key={`${isLap ? "l" : "c"}${track.id}`}>
                         {!isLap && (
                           <td rowSpan={2}>
-                            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+                            <Link to={resolvePage(Pages.TrackChart, { id: track.id }, {
+                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                                cat: category !== CategoryEnum.NonShortcut ? category : null
+                            })}>
                               {track.name}
                             </Link>
                           </td>
