@@ -41,7 +41,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
 
   const sortedRegions = groupBy(
     regions.filter((r) => r.isRanked || !ranked),
-    (i) => i.parent || 0,
+    (i) => i.parent ?? 0,
   );
 
   for (let [parentId, children] of Object.entries(sortedRegions)) {
@@ -53,7 +53,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
     if (parent !== undefined)
       outChildren.push({
         type: "DropdownItemSetSetterData",
-        element: { text: "<< Back", toItemSetId: parent.parent || 0 } as DropdownItemSetSetterData,
+        element: { text: "<< Back", toItemSetId: parent.parent ?? 0 } as DropdownItemSetSetterData,
       });
 
     children
