@@ -73,15 +73,15 @@ const PlayerProfilePage = () => {
   };
 
   let sortedScores = scores
-    ?.sort(Sorting.lapAsc)
-    .sort(Sorting.trackAsc)
-    .filter(
+    ?.filter(
       lapMode === LapModeEnum.Overall
         ? Filtering.overall
         : lapMode === LapModeEnum.Course
           ? Filtering.courseOnly
           : Filtering.flapOnly,
     )
+    .sort(Sorting.lapAsc)
+    .sort(Sorting.trackAsc)
     .map((score, index, arr) => {
       (score as ScoreDoubled).repeat = score.track === arr[index - 1]?.track;
       (score as ScoreDoubled).precedesRepeat = score.track === arr[index + 1]?.track;
@@ -297,7 +297,7 @@ const PlayerProfilePage = () => {
                           </Link>
                         </td>
                       ) : score.repeat ? (
-                        <td />
+                        <></>
                       ) : (
                         <td>
                           <Link
@@ -315,10 +315,11 @@ const PlayerProfilePage = () => {
                           </Link>
                         </td>
                       )}
+                      {score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td className={score?.category !== category ? "fallthrough" : ""}>
                         {formatTime(score.value)}
                       </td>
-                      {!score.repeat && lapMode === LapModeEnum.Overall && <td />}
+                      {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td>{score.rank}</td>
                       <td>{getStandardLevel(metadata, score.standard)?.name}</td>
                       <td>{(score.recordRatio * 100).toFixed(2) + "%"}</td>
