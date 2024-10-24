@@ -24,14 +24,14 @@ export const useCategoryParam = (searchParams: SearchParams) => {
   };
 };
 
-export const useLapModeParam = (searchParams: SearchParams) => {
+export const useLapModeParam = (searchParams: SearchParams, defVal = LapModeEnum.Course) => {
   const lapMode =
     Object.values(LapModeEnum).find((value) => value === searchParams[0].get("lap")) ??
-    LapModeEnum.Course;
+    defVal;
   return {
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
-      const lap = lapMode === LapModeEnum.Course ? undefined : lapMode;
+      const lap = lapMode === defVal ? undefined : lapMode;
       searchParams[1]((prev) => replace(prev, "lap", lap));
     },
   };

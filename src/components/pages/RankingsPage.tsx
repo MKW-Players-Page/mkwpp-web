@@ -14,6 +14,7 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 export interface RankingsMetric {
   title: string;
@@ -66,7 +67,7 @@ export interface RankingsProps {
 const RankingsPage = ({ metric }: RankingsProps) => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
-  const { lapMode, setLapMode } = useLapModeParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, LapModeEnum.Overall);
 
   const metadata = useContext(MetadataContext);
 
