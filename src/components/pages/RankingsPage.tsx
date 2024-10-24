@@ -67,7 +67,7 @@ export interface RankingsProps {
 const RankingsPage = ({ metric }: RankingsProps) => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
-  const { lapMode, setLapMode } = useLapModeParam(searchParams, LapModeEnum.Overall);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
   const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);

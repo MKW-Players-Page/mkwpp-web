@@ -17,7 +17,6 @@ import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
-import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -25,7 +24,7 @@ const PlayerProfilePage = () => {
 
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
-  const { lapMode, setLapMode } = useLapModeParam(searchParams, LapModeEnum.Overall);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
 
   const metadata = useContext(MetadataContext);
 
