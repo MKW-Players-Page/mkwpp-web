@@ -4,7 +4,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import api, { CategoryEnum, Region } from "../../api";
+import api, { Region } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import {
@@ -18,7 +18,7 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import Flag, { Flags } from "../widgets/Flags";
-import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -29,7 +29,7 @@ const PlayerProfilePage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
-  const [region, setRegion] = useState(metadata.regions[0]);
+  const { region, setRegion } = useRegionParam(searchParams);
 
   const {
     isLoading: playerLoading,
