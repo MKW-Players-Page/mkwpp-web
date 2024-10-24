@@ -4,7 +4,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
-import api from "../../api";
+import api, { CategoryEnum, Region } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import {
@@ -16,17 +16,21 @@ import {
 import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
-import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import Dropdown, { DropdownData } from "../widgets/Dropdown";
+import Flag, { Flags } from "../widgets/Flags";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
+  const metadata = useContext(MetadataContext);
+
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
-
-  const metadata = useContext(MetadataContext);
+  const { region, setRegion } = useRegionParam(searchParams);
 
   const {
     isLoading: playerLoading,
@@ -40,17 +44,25 @@ const PlayerProfilePage = () => {
         id,
         category,
         lapMode,
-        region: 1,
+        region: region?.id ?? 1,
       }),
-    [id, category, lapMode],
+    [id, category, lapMode, region],
   );
 
   const { isLoading: scoresLoading, data: scores } = useApi(
-    () => api.timetrialsPlayersScoresList({ id, category }),
-    [id, category],
+    () => api.timetrialsPlayersScoresList({ id, category, region: region?.id ?? 1 }),
+    [id, category, region],
   );
 
   const siteHue = getCategorySiteHue(category);
+
+  const getAllRegions = (arr: Region[], startId: number): Region[] => {
+    let region = getRegionById(metadata, startId);
+    if (region === undefined) return arr;
+    arr.push(region);
+    if (region.parent === undefined || region.parent === null) return arr;
+    return getAllRegions(arr, region.parent);
+  };
 
   return (
     <>
@@ -64,6 +76,38 @@ const PlayerProfilePage = () => {
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          {player?.region !== undefined && player?.region !== null && player?.region !== 1 ? (
+            <Dropdown
+              data={
+                {
+                  defaultItemSet: 0,
+                  value: region,
+                  valueSetter: setRegion,
+                  data: [
+                    {
+                      id: 0,
+                      children: getAllRegions([], player?.region || 1)
+                        .reverse()
+                        .map((region) => {
+                          return {
+                            type: "DropdownItemData",
+                            element: {
+                              text: region.name,
+                              value: region,
+                              rightIcon: (
+                                <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
+                              ),
+                            },
+                          };
+                        }),
+                    },
+                  ],
+                } as DropdownData
+              }
+            />
+          ) : (
+            <></>
+          )}
         </div>
         <div className="module-row ">
           <div className="module">
@@ -169,7 +213,17 @@ const PlayerProfilePage = () => {
                       <tr key={`${isLap ? "l" : "c"}${track.id}`}>
                         {!isLap && (
                           <td rowSpan={2}>
-                            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+                            <Link
+                              to={resolvePage(
+                                Pages.TrackChart,
+                                { id: track.id },
+                                {
+                                  reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                },
+                              )}
+                            >
                               {track.name}
                             </Link>
                           </td>

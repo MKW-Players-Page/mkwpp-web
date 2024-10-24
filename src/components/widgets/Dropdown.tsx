@@ -100,6 +100,23 @@ const Dropdown = ({ data }: DropdownProp) => {
   );
   if (selectedValueIndex < 0) selectedValueIndex = 0;
 
+  if (
+    data.data.length === 0 ||
+    data.data[selectedValueItemSetIndex].children.length === 0 ||
+    data.data[selectedItemSetIndex].children.length === 0
+  ) {
+    if (data.data[selectedValueItemSetIndex].children.length === 0)
+      data.data[selectedValueItemSetIndex].children.push({
+        type: "DropdownItemData",
+        element: { value: data.value, text: "Error" },
+      });
+    if (data.data[selectedItemSetIndex].children.length === 0)
+      data.data[selectedItemSetIndex].children.push({
+        type: "DropdownItemData",
+        element: { value: data.value, text: "Error" },
+      });
+  }
+
   data.disabled = !!data.disabled;
   if (data.disabled) setDropdownListShown = () => {};
 

@@ -57,6 +57,7 @@ export interface TimetrialsPlayersScoresListRequest {
     category: TimetrialsPlayersScoresListCategoryEnum;
     id: number;
     lapMode?: TimetrialsPlayersScoresListLapModeEnum;
+    region?: number;
 }
 
 export interface TimetrialsPlayersStatsRetrieveRequest {
@@ -209,6 +210,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['lapMode'] != null) {
             queryParameters['lap_mode'] = requestParameters['lapMode'];
+        }
+
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

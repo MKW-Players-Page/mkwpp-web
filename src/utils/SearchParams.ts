@@ -52,7 +52,7 @@ export const useRegionParam = (searchParams: SearchParams) => {
   return {
     region,
     setRegion: (region: Region) => {
-      const reg = region === WorldRegion ? undefined : region;
+      const reg = region.code === WorldRegion.code ? undefined : region;
       searchParams[1]((prev) => replace(prev, "reg", reg?.code.toLowerCase()));
     },
   };
