@@ -63,12 +63,12 @@ const PlayerProfilePage = () => {
     if (region.parent === undefined || region.parent === null) return arr;
     return getAllRegions(arr, region.parent);
   };
-  
+
   const rankingsRedirectParams = {
-      reg: region.id !== 1 ? region.code.toLowerCase() : null,
-        cat: category !== CategoryEnum.NonShortcut ? category : null,
-        lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
-  }
+    reg: region.id !== 1 ? region.code.toLowerCase() : null,
+    cat: category !== CategoryEnum.NonShortcut ? category : null,
+    lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
+  };
 
   return (
     <>
@@ -145,19 +145,41 @@ const PlayerProfilePage = () => {
               <table>
                 <tbody>
                   <tr>
-                    <td><Link to={resolvePage(Pages.RankingsAverageFinish, {}, rankingsRedirectParams)}>Average Finish</Link></td>
+                    <td>
+                      <Link
+                        to={resolvePage(Pages.RankingsAverageFinish, {}, rankingsRedirectParams)}
+                      >
+                        Average Finish
+                      </Link>
+                    </td>
                     <td>
                       {stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}
                     </td>
                   </tr>
                   <tr>
-                      <td><Link to={resolvePage(Pages.RankingsAverageStandard, {}, rankingsRedirectParams)}>ARR</Link></td>
+                    <td>
+                      <Link
+                        to={resolvePage(Pages.RankingsAverageStandard, {}, rankingsRedirectParams)}
+                      >
+                        ARR
+                      </Link>
+                    </td>
                     <td>
                       {stats && stats.scoreCount > 0 ? stats.totalStandard / stats.scoreCount : "-"}
                     </td>
                   </tr>
                   <tr>
-                      <td><Link to={resolvePage(Pages.RankingsAverageRecordRatio, {}, rankingsRedirectParams)}>PR:WR</Link></td>
+                    <td>
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsAverageRecordRatio,
+                          {},
+                          rankingsRedirectParams,
+                        )}
+                      >
+                        PR:WR
+                      </Link>
+                    </td>
                     <td>
                       {stats && stats.scoreCount > 0
                         ? ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"
@@ -165,7 +187,11 @@ const PlayerProfilePage = () => {
                     </td>
                   </tr>
                   <tr>
-                      <td><Link to={resolvePage(Pages.RankingsTotalTime, {}, rankingsRedirectParams)}>Total Time</Link></td>
+                    <td>
+                      <Link to={resolvePage(Pages.RankingsTotalTime, {}, rankingsRedirectParams)}>
+                        Total Time
+                      </Link>
+                    </td>
                     <td>{stats ? formatTime(stats.totalScore) : "-"}</td>
                   </tr>
                 </tbody>
