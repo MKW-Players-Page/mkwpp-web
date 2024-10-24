@@ -37,6 +37,8 @@ type SortType =
   | "trackDesc"
   | "lapAsc"
   | "lapDesc"
+  | "timeAsc"
+  | "timeDesc"
   | "rankAsc"
   | "rankDesc"
   | "stdAsc"
@@ -53,6 +55,8 @@ const Sorting: Record<string, any> = {
   lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
   rankAsc: (a: Score, b: Score) => a.rank - b.rank,
   rankDesc: (a: Score, b: Score) => b.rank - a.rank,
+  timeAsc: (a: Score, b: Score) => a.value - b.value,
+  timeDesc: (a: Score, b: Score) => b.value - a.value,
   stdAsc: (a: Score, b: Score) => a.standard - b.standard,
   stdDesc: (a: Score, b: Score) => b.standard - a.standard,
   prwrAsc: (a: Score, b: Score) => a.recordRatio - b.recordRatio,
@@ -84,21 +88,26 @@ const useProfileTableSortParam = (searchParams: SearchParams) => {
 };
 
 interface ThSortProps {
-    children: string
-    states: SortType[]
-    sortType: SortType
-    setSortType: (sortType: SortType) => void
+  children: string;
+  states: SortType[];
+  sortType: SortType;
+  setSortType: (sortType: SortType) => void;
 }
 
-const ThSort = ({children,states,sortType,setSortType}: ThSortProps) => { 
-    const stateIndex = states.findIndex(r => r === sortType);
-    const setTo = stateIndex < 0 ? 1 : (states.length === stateIndex + 1 ? 0 : stateIndex + 1);
-    return <th 
-        style={{ cursor: "pointer" } as React.CSSProperties}
-          onClick={() => {
-              setSortType(states[setTo])
-          }}>{children}</th>
-}
+const ThSort = ({ children, states, sortType, setSortType }: ThSortProps) => {
+  const stateIndex = states.findIndex((r) => r === sortType);
+  const setTo = stateIndex < 0 ? 1 : states.length === stateIndex + 1 ? 0 : stateIndex + 1;
+  return (
+    <th
+      style={{ cursor: "pointer" } as React.CSSProperties}
+      onClick={() => {
+        setSortType(states[setTo]);
+      }}
+    >
+      {children}
+    </th>
+  );
+};
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -329,16 +338,58 @@ const PlayerProfilePage = () => {
                   </th>
                   {lapMode === LapModeEnum.Overall ? (
                     <>
-                      <th>Course</th>
-                      <th>Lap</th>
+                      <ThSort
+                        states={["trackAsc", "timeAsc", "timeDesc"]}
+                        sortType={sortType}
+                        setSortType={setSortType}
+                      >
+                        Course
+                      </ThSort>
+                      <ThSort
+                        states={["trackAsc", "timeAsc", "timeDesc"]}
+                        sortType={sortType}
+                        setSortType={setSortType}
+                      >
+                        Lap
+                      </ThSort>
                     </>
                   ) : (
-                    <th>Time</th>
+                    <ThSort
+                      states={["trackAsc", "timeAsc", "timeDesc"]}
+                      sortType={sortType}
+                      setSortType={setSortType}
+                    >
+                      Time
+                    </ThSort>
                   )}
-                  <ThSort states={["trackAsc","rankAsc","rankDesc"]} sortType={sortType} setSortType={setSortType}>Rank</ThSort>
-                  <ThSort states={["trackAsc","stdAsc","stdDesc"]} sortType={sortType} setSortType={setSortType}>Standard</ThSort>
-                  <ThSort states={["trackAsc","prwrDesc","prwrAsc"]} sortType={sortType} setSortType={setSortType}>PR:WR</ThSort>
-                  <ThSort states={["trackAsc","dateAsc","dateDesc"]} sortType={sortType} setSortType={setSortType}>Date</ThSort>
+                  <ThSort
+                    states={["trackAsc", "rankAsc", "rankDesc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    Rank
+                  </ThSort>
+                  <ThSort
+                    states={["trackAsc", "stdAsc", "stdDesc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    Standard
+                  </ThSort>
+                  <ThSort
+                    states={["trackAsc", "prwrDesc", "prwrAsc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    PR:WR
+                  </ThSort>
+                  <ThSort
+                    states={["trackAsc", "dateAsc", "dateDesc"]}
+                    sortType={sortType}
+                    setSortType={setSortType}
+                  >
+                    Date
+                  </ThSort>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
