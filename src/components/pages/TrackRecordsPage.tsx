@@ -1,19 +1,21 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, Tooltip } from "../widgets";
-import api, { CategoryEnum } from "../../api";
-import { useApi } from "../../hooks";
-import { formatDate, formatTime } from "../../utils/Formatters";
-import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
-import { UserContext } from "../../utils/User";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import api from "../../api";
+import { useApi } from "../../hooks";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { formatDate, formatTime } from "../../utils/Formatters";
+import { useCategoryParam } from "../../utils/SearchParams";
+import { UserContext } from "../../utils/User";
 
 const TrackRecordsPage = () => {
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+  const searchParams = useSearchParams();
+
+  const { category, setCategory } = useCategoryParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
