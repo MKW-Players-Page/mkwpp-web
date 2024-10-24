@@ -21,7 +21,7 @@ const TrackChartPage = () => {
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const { user } = useContext(UserContext);
-  
+
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams);
