@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
@@ -78,7 +78,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
       api.timetrialsRankingsList({
         category,
         lapMode,
-        region: region?.id || 1,
+        region: region.id,
         metric: metric.metric,
       }),
     [category, lapMode, region],

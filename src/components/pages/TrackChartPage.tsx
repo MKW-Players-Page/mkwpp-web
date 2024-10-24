@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
@@ -36,7 +36,7 @@ const TrackChartPage = () => {
         id,
         category,
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
-        region: region?.id ?? 1,
+        region: region.id,
       }),
     [category, lapMode, region],
   );

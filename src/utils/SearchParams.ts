@@ -29,8 +29,7 @@ export const useCategoryParam = (searchParams: SearchParams) => {
 
 export const useLapModeParam = (searchParams: SearchParams, defVal = LapModeEnum.Course) => {
   const lapMode =
-    Object.values(LapModeEnum).find((value) => value === searchParams[0].get("lap")) ??
-    defVal;
+    Object.values(LapModeEnum).find((value) => value === searchParams[0].get("lap")) ?? defVal;
   return {
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
@@ -42,7 +41,7 @@ export const useLapModeParam = (searchParams: SearchParams, defVal = LapModeEnum
 
 export const useRegionParam = (searchParams: SearchParams) => {
   const metadata = useContext(MetadataContext);
-    
+
   const region =
     metadata.regions?.find((region) => region.code.toLowerCase() === searchParams[0].get("reg")) ??
     WorldRegion;

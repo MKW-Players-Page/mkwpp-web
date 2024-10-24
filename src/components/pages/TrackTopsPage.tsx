@@ -16,6 +16,7 @@ import ComplexRegionSelection from "../widgets/RegionSelection";
 import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import { WorldRegion } from "../../utils/Defaults";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -44,7 +45,8 @@ const TrackTopsPage = () => {
 
   const metadata = useContext(MetadataContext);
 
-  const region = metadata.regions?.find((r) => r.code.toLowerCase() === regionCode && r.isRanked);
+  const region =
+    metadata.regions.find((r) => r.code.toLowerCase() === regionCode && r.isRanked) ?? WorldRegion;
   const cup = metadata.cups?.find((c) => c.id === cupId);
 
   const { user } = useContext(UserContext);
@@ -56,7 +58,7 @@ const TrackTopsPage = () => {
       id: track,
       category,
       lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
-      region: region?.id,
+      region: region.id,
     })) || [],
     [category, cup, lapMode, region],
   );
@@ -107,7 +109,7 @@ const TrackTopsPage = () => {
                 >
                   <Link
                     to={resolvePage(Pages.TrackTops, {
-                      region: region?.code.toLowerCase() || 0,
+                      region: region.code.toLowerCase(),
                       cup: c.id,
                     })}
                   >
