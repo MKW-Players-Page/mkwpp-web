@@ -11,6 +11,7 @@ import Dropdown, {
   DropdownItemSetDataChild,
   DropdownItemSetSetterData,
 } from "./Dropdown";
+import { WorldRegion } from "../../utils/Region";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -21,7 +22,7 @@ export interface RegionSelectionDropdownProps {
 const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDropdownProps) => {
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
-  const regions = metadata.regions || [];
+  const regions = metadata.regions ?? [WorldRegion];
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     arr.reduce(

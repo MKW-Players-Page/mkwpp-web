@@ -14,7 +14,7 @@ import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
-import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -25,10 +25,10 @@ const TrackChartPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams);
+  const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
   const track = metadata.tracks?.find((t) => t.id === id);
-  const [region, setRegion] = useState((metadata.regions || [])[0]);
 
   const { isLoading, data: scores } = useApi(
     () =>
@@ -36,7 +36,7 @@ const TrackChartPage = () => {
         id,
         category,
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
-        region: region?.id || 1,
+        region: region?.id ?? 1,
       }),
     [category, lapMode, region],
   );

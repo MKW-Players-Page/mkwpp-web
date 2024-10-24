@@ -13,7 +13,7 @@ import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
-import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 
 export interface RankingsMetric {
@@ -68,11 +68,9 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, LapModeEnum.Overall);
+  const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
-
-  const [region, setRegion] = useState((metadata.regions || [])[0]);
-
   const { user } = useContext(UserContext);
 
   const { isLoading, data: rankings } = useApi(
@@ -116,7 +114,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                   >
                     <td>{stats.rank}</td>
                     <td>
-                      <FlagIcon region={getRegionById(metadata, stats.player.region || 0)} />
+                      <FlagIcon region={getRegionById(metadata, stats.player.region ?? 0)} />
                       <Link
                         to={resolvePage(Pages.PlayerProfile, {
                           id: stats.player.id,

@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { SetURLSearchParams } from "react-router-dom";
-import { CategoryEnum } from "../api";
+import { CategoryEnum, Region } from "../api";
 import { LapModeEnum } from "../components/widgets/LapModeSelect";
+import { MetadataContext } from "./Metadata";
+import { WorldRegion } from "./Region";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -33,6 +36,21 @@ export const useLapModeParam = (searchParams: SearchParams, defVal = LapModeEnum
     setLapMode: (lapMode: LapModeEnum) => {
       const lap = lapMode === defVal ? undefined : lapMode;
       searchParams[1]((prev) => replace(prev, "lap", lap));
+    },
+  };
+};
+
+export const useRegionParam = (searchParams: SearchParams) => {
+  const metadata = useContext(MetadataContext);
+    
+  const region =
+    metadata.regions?.find((region) => region.code.toLowerCase() === searchParams[0].get("reg")) ??
+    WorldRegion;
+  return {
+    region,
+    setRegion: (region: Region) => {
+      const reg = region === WorldRegion ? undefined : region;
+      searchParams[1]((prev) => replace(prev, "reg", reg?.code.toLowerCase()));
     },
   };
 };
