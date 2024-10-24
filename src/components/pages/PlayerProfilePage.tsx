@@ -18,13 +18,70 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import Flag, { Flags } from "../widgets/Flags";
-import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
+import {
+  paramReplace,
+  SearchParams,
+  useCategoryParam,
+  useLapModeParam,
+  useRegionParam,
+} from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
   repeat: boolean;
 }
+
+type SortType =
+  | "trackAsc"
+  | "trackDesc"
+  | "lapAsc"
+  | "lapDesc"
+  | "rankAsc"
+  | "rankDesc"
+  | "stdAsc"
+  | "stdDesc"
+  | "prwrAsc"
+  | "prwrDesc"
+  | "dateAsc"
+  | "dateDesc";
+
+const Sorting: Record<string, any> = {
+  trackAsc: (a: Score, b: Score) => a.track - b.track,
+  trackDesc: (a: Score, b: Score) => b.track - a.track,
+  lapAsc: (a: Score, b: Score) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
+  lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
+  rankAsc: (a: Score, b: Score) => a.rank - b.rank,
+  rankDesc: (a: Score, b: Score) => b.rank - a.rank,
+  stdAsc: (a: Score, b: Score) => a.standard - b.standard,
+  stdDesc: (a: Score, b: Score) => b.standard - a.standard,
+  prwrAsc: (a: Score, b: Score) => a.recordRatio - b.recordRatio,
+  prwrDesc: (a: Score, b: Score) => b.recordRatio - a.recordRatio,
+  dateAsc: (a: Score, b: Score) =>
+    (a.date ? a.date.valueOf() : -1000) - (b.date ? b.date.valueOf() : -1000),
+  dateDesc: (a: Score, b: Score) =>
+    (b.date ? b.date.valueOf() : -1000) - (a.date ? a.date.valueOf() : -1000),
+};
+
+const Filtering = {
+  flapOnly: (a: Score) => a.isLap,
+  courseOnly: (a: Score) => !a.isLap,
+  overall: (a: Score) => true,
+};
+
+const useProfileTableSortParam = (searchParams: SearchParams) => {
+  const sortType: SortType =
+    (Object.keys(Sorting).find((key) => key === searchParams[0].get("sort")) as
+      | SortType
+      | undefined) ?? "trackAsc";
+  return {
+    sortType,
+    setSortType: (sortType: SortType) => {
+      const sort = sortType === "trackAsc" ? undefined : sortType;
+      searchParams[1]((prev) => paramReplace(prev, "sort", sort));
+    },
+  };
+};
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -36,6 +93,7 @@ const PlayerProfilePage = () => {
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
   const { region, setRegion } = useRegionParam(searchParams);
+  const { sortType, setSortType } = useProfileTableSortParam(searchParams);
 
   const {
     isLoading: playerLoading,
@@ -59,27 +117,6 @@ const PlayerProfilePage = () => {
     [id, category, region],
   );
 
-  const Sorting = {
-    trackAsc: (a: Score, b: Score) => a.track - b.track,
-    trackDesc: (a: Score, b: Score) => b.track - a.track,
-    lapAsc: (a: Score, b: Score) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
-    lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
-    rankAsc: (a: Score, b: Score) => a.rank - b.rank,
-    rankDesc: (a: Score, b: Score) => b.rank - a.rank,
-    stdAsc: (a: Score, b: Score) => a.standard - b.standard,
-    stdDesc: (a: Score, b: Score) => b.standard - a.standard,
-    prwrAsc: (a: Score, b: Score) => a.recordRatio - b.recordRatio,
-    prwrDesc: (a: Score, b: Score) => b.recordRatio - a.recordRatio,
-    dateAsc: (a: Score, b: Score) => (a.date ? a.date.valueOf() : -1000) - (b.date ? b.date.valueOf() : -1000),
-    dateDesc: (a: Score, b: Score) => (b.date ? b.date.valueOf() : -1000) - (a.date ? a.date.valueOf() : -1000),
-  };
-
-  const Filtering = {
-    flapOnly: (a: Score) => a.isLap,
-    courseOnly: (a: Score) => !a.isLap,
-    overall: (a: Score) => true,
-  };
-
   let sortedScores = scores
     ?.filter(
       lapMode === LapModeEnum.Overall
@@ -89,7 +126,7 @@ const PlayerProfilePage = () => {
           : Filtering.flapOnly,
     )
     .sort(Sorting.lapAsc)
-    .sort(Sorting.trackAsc)
+    .sort(Sorting[sortType])
     .map((score, index, arr) => {
       (score as ScoreDoubled).repeat = score.track === arr[index - 1]?.track;
       (score as ScoreDoubled).precedesRepeat = score.track === arr[index + 1]?.track;
@@ -265,7 +302,14 @@ const PlayerProfilePage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Track</th>
+                  <th
+                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    onClick={() => {
+                      setSortType("trackAsc");
+                    }}
+                  >
+                    Track
+                  </th>
                   {lapMode === LapModeEnum.Overall ? (
                     <>
                       <th>Course</th>
@@ -274,10 +318,62 @@ const PlayerProfilePage = () => {
                   ) : (
                     <th>Time</th>
                   )}
-                  <th>Rank</th>
-                  <th>Standard</th>
-                  <th>PR:WR</th>
-                  <th>Date</th>
+                  <th
+                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    onClick={() => {
+                      if (sortType === "rankAsc") {
+                        setSortType("rankDesc");
+                      } else if (sortType === "rankDesc") {
+                        setSortType("trackAsc");
+                      } else {
+                        setSortType("rankAsc");
+                      }
+                    }}
+                  >
+                    Rank
+                  </th>
+                  <th
+                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    onClick={() => {
+                      if (sortType === "stdAsc") {
+                        setSortType("stdDesc");
+                      } else if (sortType === "stdDesc") {
+                        setSortType("trackAsc");
+                      } else {
+                        setSortType("stdAsc");
+                      }
+                    }}
+                  >
+                    Standard
+                  </th>
+                  <th
+                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    onClick={() => {
+                      if (sortType === "prwrAsc") {
+                        setSortType("prwrDesc");
+                      } else if (sortType === "prwrDesc") {
+                        setSortType("trackAsc");
+                      } else {
+                        setSortType("prwrAsc");
+                      }
+                    }}
+                  >
+                    PR:WR
+                  </th>
+                  <th
+                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    onClick={() => {
+                      if (sortType === "dateAsc") {
+                        setSortType("dateDesc");
+                      } else if (sortType === "dateDesc") {
+                        setSortType("trackAsc");
+                      } else {
+                        setSortType("dateAsc");
+                      }
+                    }}
+                  >
+                    Date
+                  </th>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
