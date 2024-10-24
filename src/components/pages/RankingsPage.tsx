@@ -14,7 +14,6 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
-import { LapModeEnum } from "../widgets/LapModeSelect";
 
 export interface RankingsMetric {
   title: string;

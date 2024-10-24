@@ -58,6 +58,21 @@ export const useRegionParam = (searchParams: SearchParams) => {
   };
 };
 
+export const useStandardLevelIdParam = (searchParams: SearchParams) => {
+  const metadata = useContext(MetadataContext);
+
+  let levelId = parseInt(searchParams[0].get("std") ?? "1");
+  const lastLevelId = metadata.standards?.map((std) => std.id).sort((a, b) => b - a)[0] ?? 1;
+  if (lastLevelId < levelId) levelId = lastLevelId;
+  return {
+    levelId,
+    setLevelId: (levelId: number) => {
+      const std = levelId === 1 ? undefined : levelId;
+      searchParams[1]((prev) => replace(prev, "std", std?.toString()));
+    },
+  };
+};
+
 export const purgeQueryParamsFromRecord = (params: Record<string, any>) => {
   let out: Record<string, string> = {};
   for (let [k, v] of Object.entries(params)) {
