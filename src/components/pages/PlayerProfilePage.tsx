@@ -64,6 +64,14 @@ const PlayerProfilePage = () => {
     trackDesc: (a: Score, b: Score) => b.track - a.track,
     lapAsc: (a: Score, b: Score) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
     lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
+    rankAsc: (a: Score, b: Score) => a.rank - b.rank,
+    rankDesc: (a: Score, b: Score) => b.rank - a.rank,
+    stdAsc: (a: Score, b: Score) => a.standard - b.standard,
+    stdDesc: (a: Score, b: Score) => b.standard - a.standard,
+    prwrAsc: (a: Score, b: Score) => a.recordRatio - b.recordRatio,
+    prwrDesc: (a: Score, b: Score) => b.recordRatio - a.recordRatio,
+    dateAsc: (a: Score, b: Score) => (a.date ? a.date.valueOf() : -1000) - (b.date ? b.date.valueOf() : -1000),
+    dateDesc: (a: Score, b: Score) => (b.date ? b.date.valueOf() : -1000) - (a.date ? a.date.valueOf() : -1000),
   };
 
   const Filtering = {
