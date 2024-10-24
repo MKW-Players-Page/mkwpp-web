@@ -30,9 +30,10 @@ export const useCategoryParam = (searchParams: SearchParams) => {
 export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
-    Object.values(LapModeEnum).find(
-      (value) =>
-        restrictedSet ? (value !== LapModeEnum.Overall && value === searchParams[0].get("lap")) : value === searchParams[0].get("lap"),
+    Object.values(LapModeEnum).find((value) =>
+      restrictedSet
+        ? value !== LapModeEnum.Overall && value === searchParams[0].get("lap")
+        : value === searchParams[0].get("lap"),
     ) ?? defVal;
   return {
     lapMode,

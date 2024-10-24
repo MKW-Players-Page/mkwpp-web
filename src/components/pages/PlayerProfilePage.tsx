@@ -192,8 +192,14 @@ const PlayerProfilePage = () => {
               <thead>
                 <tr>
                   <th>Track</th>
-                  <th>Course</th>
-                  <th>Lap</th>
+                  {lapMode === LapModeEnum.Overall ? (
+                    <>
+                      <th>Course</th>
+                      <th>Lap</th>
+                    </>
+                  ) : (
+                    <th>Time</th>
+                  )}
                   <th>Rank</th>
                   <th>Standard</th>
                   <th>PR:WR</th>
@@ -204,14 +210,16 @@ const PlayerProfilePage = () => {
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
-                {metadata.tracks?.map((track) =>
-                  [false, true].map((isLap) => {
+                {metadata.tracks?.map((track) => {
+                  const lapArr =
+                    lapMode === LapModeEnum.Overall ? [false, true] : [lapMode === LapModeEnum.Lap];
+                  return lapArr.map((isLap) => {
                     const score = scores?.find(
                       (score) => score.track === track.id && score.isLap === isLap,
                     );
                     return (
                       <tr key={`${isLap ? "l" : "c"}${track.id}`}>
-                        {!isLap && (
+                        {!isLap && lapMode === LapModeEnum.Overall ? (
                           <td rowSpan={2}>
                             <Link
                               to={resolvePage(
@@ -219,7 +227,6 @@ const PlayerProfilePage = () => {
                                 { id: track.id },
                                 {
                                   reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
                                   cat: category !== CategoryEnum.NonShortcut ? category : null,
                                 },
                               )}
@@ -227,12 +234,30 @@ const PlayerProfilePage = () => {
                               {track.name}
                             </Link>
                           </td>
+                        ) : isLap && lapMode === LapModeEnum.Overall ? (
+                          <></>
+                        ) : (
+                          <td>
+                            <Link
+                              to={resolvePage(
+                                Pages.TrackChart,
+                                { id: track.id },
+                                {
+                                  reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                                },
+                              )}
+                            >
+                              {track.name}
+                            </Link>
+                          </td>
                         )}
-                        {isLap && <td />}
+                        {isLap && lapMode === LapModeEnum.Overall && <td />}
                         <td className={score?.category !== category ? "fallthrough" : ""}>
                           {score ? formatTime(score.value) : "-"}
                         </td>
-                        {!isLap && <td />}
+                        {!isLap && lapMode === LapModeEnum.Overall && <td />}
                         <td>{score?.rank || "-"}</td>
                         <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
                         <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
@@ -260,8 +285,8 @@ const PlayerProfilePage = () => {
                         </td>
                       </tr>
                     );
-                  }),
-                )}
+                  });
+                })}
               </tbody>
             </table>
           </Deferred>
