@@ -63,14 +63,20 @@ const PlayerProfilePage = () => {
     if (region.parent === undefined || region.parent === null) return arr;
     return getAllRegions(arr, region.parent);
   };
+  
+  const rankingsRedirectParams = {
+      reg: region.id !== 1 ? region.code.toLowerCase() : null,
+        cat: category !== CategoryEnum.NonShortcut ? category : null,
+        lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
+  }
 
   return (
     <>
       {/* Redirect to player list if id is invalid or does not exist. */}
       {playerError && <Navigate to={resolvePage(Pages.PlayerList)} />}
       <h1>
-        <FlagIcon region={getRegionById(metadata, player?.region || 0)} />
-        {player?.name || <>&nbsp;</>}
+        <FlagIcon region={getRegionById(metadata, player?.region ?? 1)} />
+        {player?.name ?? <>&nbsp;</>}
       </h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
@@ -86,7 +92,7 @@ const PlayerProfilePage = () => {
                   data: [
                     {
                       id: 0,
-                      children: getAllRegions([], player?.region || 1)
+                      children: getAllRegions([], player?.region ?? 1)
                         .reverse()
                         .map((region) => {
                           return {
@@ -116,7 +122,7 @@ const PlayerProfilePage = () => {
                 <tbody>
                   <tr>
                     <td>Location</td>
-                    <td>{getRegionNameFull(metadata, player?.region || 0)}</td>
+                    <td>{getRegionNameFull(metadata, player?.region ?? 0)}</td>
                   </tr>
                   <tr>
                     <td>Alias</td>
@@ -139,19 +145,19 @@ const PlayerProfilePage = () => {
               <table>
                 <tbody>
                   <tr>
-                    <td>Average Finish</td>
+                    <td><Link to={resolvePage(Pages.RankingsAverageFinish, {}, rankingsRedirectParams)}>Average Finish</Link></td>
                     <td>
                       {stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}
                     </td>
                   </tr>
                   <tr>
-                    <td>ARR</td>
+                      <td><Link to={resolvePage(Pages.RankingsAverageStandard, {}, rankingsRedirectParams)}>ARR</Link></td>
                     <td>
                       {stats && stats.scoreCount > 0 ? stats.totalStandard / stats.scoreCount : "-"}
                     </td>
                   </tr>
                   <tr>
-                    <td>PR:WR</td>
+                      <td><Link to={resolvePage(Pages.RankingsAverageRecordRatio, {}, rankingsRedirectParams)}>PR:WR</Link></td>
                     <td>
                       {stats && stats.scoreCount > 0
                         ? ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"
@@ -159,7 +165,7 @@ const PlayerProfilePage = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>Total Time</td>
+                      <td><Link to={resolvePage(Pages.RankingsTotalTime, {}, rankingsRedirectParams)}>Total Time</Link></td>
                     <td>{stats ? formatTime(stats.totalScore) : "-"}</td>
                   </tr>
                 </tbody>
@@ -257,7 +263,7 @@ const PlayerProfilePage = () => {
                           {score ? formatTime(score.value) : "-"}
                         </td>
                         {!isLap && lapMode === LapModeEnum.Overall && <td />}
-                        <td>{score?.rank || "-"}</td>
+                        <td>{score?.rank ?? "-"}</td>
                         <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
                         <td>{score ? (score.recordRatio * 100).toFixed(2) + "%" : "-"}</td>
                         <td>{score?.date ? formatDate(score.date) : "-"}</td>
