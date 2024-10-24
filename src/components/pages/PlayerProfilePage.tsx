@@ -235,7 +235,7 @@ const PlayerProfilePage = () => {
                             </Link>
                           </td>
                         ) : isLap && lapMode === LapModeEnum.Overall ? (
-                          <></>
+                          <td />
                         ) : (
                           <td>
                             <Link
@@ -253,7 +253,6 @@ const PlayerProfilePage = () => {
                             </Link>
                           </td>
                         )}
-                        {isLap && lapMode === LapModeEnum.Overall && <td />}
                         <td className={score?.category !== category ? "fallthrough" : ""}>
                           {score ? formatTime(score.value) : "-"}
                         </td>
