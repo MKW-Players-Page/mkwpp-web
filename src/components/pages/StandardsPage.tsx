@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
@@ -7,14 +7,17 @@ import { getCategoryName, getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { CategorySelect } from "../widgets";
-import { CategoryEnum, Standard, StandardLevel } from "../../api";
+import { Standard, StandardLevel } from "../../api";
 import { getCategoryNumerical } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../widgets/Dropdown";
+import { useCategoryParam } from "../../utils/SearchParams";
 
 const StandardsPage = () => {
   const [levelId, setLevelId] = useState<number>(0);
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
@@ -59,7 +62,7 @@ const StandardsPage = () => {
                     children: metadata.standards?.map((l) => {
                       return {
                         type: "DropdownItemData",
-                        element: { text: l.name, value: l.id },
+                        element: { text: l.name, value: l.value },
                       } as DropdownItemSetDataChild;
                     }),
                   },

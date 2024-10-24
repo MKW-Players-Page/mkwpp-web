@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
-import { LapModeEnum } from "../widgets/LapModeSelect";
-import api, { CategoryEnum } from "../../api";
+import api from "../../api";
 import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
@@ -14,6 +13,7 @@ import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
+import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 
 export interface RankingsMetric {
   title: string;
@@ -64,8 +64,9 @@ export interface RankingsProps {
 }
 
 const RankingsPage = ({ metric }: RankingsProps) => {
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
