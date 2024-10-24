@@ -83,6 +83,23 @@ const useProfileTableSortParam = (searchParams: SearchParams) => {
   };
 };
 
+interface ThSortProps {
+    children: string
+    states: SortType[]
+    sortType: SortType
+    setSortType: (sortType: SortType) => void
+}
+
+const ThSort = ({children,states,sortType,setSortType}: ThSortProps) => { 
+    const stateIndex = states.findIndex(r => r === sortType);
+    const setTo = stateIndex < 0 ? 1 : (states.length === stateIndex + 1 ? 0 : stateIndex + 1);
+    return <th 
+        style={{ cursor: "pointer" } as React.CSSProperties}
+          onClick={() => {
+              setSortType(states[setTo])
+          }}>{children}</th>
+}
+
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
@@ -318,62 +335,10 @@ const PlayerProfilePage = () => {
                   ) : (
                     <th>Time</th>
                   )}
-                  <th
-                    style={{ cursor: "pointer" } as React.CSSProperties}
-                    onClick={() => {
-                      if (sortType === "rankAsc") {
-                        setSortType("rankDesc");
-                      } else if (sortType === "rankDesc") {
-                        setSortType("trackAsc");
-                      } else {
-                        setSortType("rankAsc");
-                      }
-                    }}
-                  >
-                    Rank
-                  </th>
-                  <th
-                    style={{ cursor: "pointer" } as React.CSSProperties}
-                    onClick={() => {
-                      if (sortType === "stdAsc") {
-                        setSortType("stdDesc");
-                      } else if (sortType === "stdDesc") {
-                        setSortType("trackAsc");
-                      } else {
-                        setSortType("stdAsc");
-                      }
-                    }}
-                  >
-                    Standard
-                  </th>
-                  <th
-                    style={{ cursor: "pointer" } as React.CSSProperties}
-                    onClick={() => {
-                      if (sortType === "prwrAsc") {
-                        setSortType("prwrDesc");
-                      } else if (sortType === "prwrDesc") {
-                        setSortType("trackAsc");
-                      } else {
-                        setSortType("prwrAsc");
-                      }
-                    }}
-                  >
-                    PR:WR
-                  </th>
-                  <th
-                    style={{ cursor: "pointer" } as React.CSSProperties}
-                    onClick={() => {
-                      if (sortType === "dateAsc") {
-                        setSortType("dateDesc");
-                      } else if (sortType === "dateDesc") {
-                        setSortType("trackAsc");
-                      } else {
-                        setSortType("dateAsc");
-                      }
-                    }}
-                  >
-                    Date
-                  </th>
+                  <ThSort states={["trackAsc","rankAsc","rankDesc"]} sortType={sortType} setSortType={setSortType}>Rank</ThSort>
+                  <ThSort states={["trackAsc","stdAsc","stdDesc"]} sortType={sortType} setSortType={setSortType}>Standard</ThSort>
+                  <ThSort states={["trackAsc","prwrDesc","prwrAsc"]} sortType={sortType} setSortType={setSortType}>PR:WR</ThSort>
+                  <ThSort states={["trackAsc","dateAsc","dateDesc"]} sortType={sortType} setSortType={setSortType}>Date</ThSort>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
