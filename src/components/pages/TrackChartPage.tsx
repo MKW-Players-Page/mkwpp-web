@@ -28,7 +28,15 @@ const TrackChartPage = () => {
   const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
-  const track = metadata.tracks?.find((t) => t.id === id);
+
+  let track,
+    prevTrack,
+    nextTrack = undefined;
+  for (const t of metadata.tracks ?? []) {
+    if (t.id === id) track = t;
+    if (t.id === id - 1) prevTrack = t;
+    if (t.id === id + 1) nextTrack = t;
+  }
 
   const { isLoading, data: scores } = useApi(
     () =>
@@ -38,7 +46,7 @@ const TrackChartPage = () => {
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
         region: region.id,
       }),
-    [category, lapMode, region],
+    [category, lapMode, region, id],
   );
 
   const siteHue = getCategorySiteHue(category);
@@ -47,8 +55,31 @@ const TrackChartPage = () => {
     <>
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
-      <Link to={resolvePage(Pages.TrackList)}>{"< Back"}</Link>
-      <h1>{track?.name}</h1>
+      <Link to={resolvePage(Pages.TrackList)}>{"< Track List"}</Link>
+      <div
+        style={{ justifyContent: "space-between" } as React.CSSProperties}
+        className="module-row"
+      >
+        <div style={{ width: "200px" } as React.CSSProperties}>
+          {prevTrack !== undefined ? (
+            <Link to={resolvePage(Pages.TrackChart, { id: prevTrack.id })}>
+              {"< " + prevTrack.name}
+            </Link>
+          ) : (
+            <></>
+          )}
+        </div>
+        <h1>{track?.name}</h1>
+        <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
+          {nextTrack !== undefined ? (
+            <Link to={resolvePage(Pages.TrackChart, { id: nextTrack.id })}>
+              {nextTrack.name + " >"}
+            </Link>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
