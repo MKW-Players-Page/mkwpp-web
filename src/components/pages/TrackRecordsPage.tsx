@@ -33,7 +33,7 @@ const TrackRecordsPage = () => {
 
   return (
     <>
-      <h1>World Records</h1>
+      <h1>{region.name} Records</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
