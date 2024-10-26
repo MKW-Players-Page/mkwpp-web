@@ -20,5 +20,5 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Lint
+          commit_message: Automatic Linting Process
           branch: ${{ github.head_ref }}
