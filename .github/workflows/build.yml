@@ -3,24 +3,19 @@ name: Build
 on: [push]
 
 jobs:
-  run-linters:
-    name: Run linters
+  lint:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
         with:
-          node-version: 12
-
-      - name: Install Node.js dependencies
-        run: npm ci
-
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v3
         with:
-          eslint: true
-          prettier: true
+          node-version: "16.x"
+      - run: npm ci
+      - run: npm run lint -- --write
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Lint
+          branch: ${{ github.head_ref }}
