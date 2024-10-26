@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   Player,
   PlayerBasic,
+  PlayerMatchup,
   PlayerStats,
   Region,
   Score,
@@ -31,6 +32,8 @@ import {
     PlayerToJSON,
     PlayerBasicFromJSON,
     PlayerBasicToJSON,
+    PlayerMatchupFromJSON,
+    PlayerMatchupToJSON,
     PlayerStatsFromJSON,
     PlayerStatsToJSON,
     RegionFromJSON,
@@ -48,6 +51,13 @@ import {
     TrackCupFromJSON,
     TrackCupToJSON,
 } from '../models/index';
+
+export interface TimetrialsMatchupsRetrieveRequest {
+    category: TimetrialsMatchupsRetrieveCategoryEnum;
+    lapMode: TimetrialsMatchupsRetrieveLapModeEnum;
+    pk1: number;
+    pk2: number;
+}
 
 export interface TimetrialsPlayersRetrieveRequest {
     id: number;
@@ -77,6 +87,7 @@ export interface TimetrialsRankingsListRequest {
 export interface TimetrialsRecordsListRequest {
     category: TimetrialsRecordsListCategoryEnum;
     lapMode?: TimetrialsRecordsListLapModeEnum;
+    region?: number;
 }
 
 export interface TimetrialsStandardsListRequest {
@@ -127,6 +138,66 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsCupsList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TrackCup>> {
         const response = await this.timetrialsCupsListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsMatchupsRetrieveRaw(requestParameters: TimetrialsMatchupsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PlayerMatchup>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsMatchupsRetrieve().'
+            );
+        }
+
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsMatchupsRetrieve().'
+            );
+        }
+
+        if (requestParameters['pk1'] == null) {
+            throw new runtime.RequiredError(
+                'pk1',
+                'Required parameter "pk1" was null or undefined when calling timetrialsMatchupsRetrieve().'
+            );
+        }
+
+        if (requestParameters['pk2'] == null) {
+            throw new runtime.RequiredError(
+                'pk2',
+                'Required parameter "pk2" was null or undefined when calling timetrialsMatchupsRetrieve().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/matchups/{pk1}/{pk2}/`.replace(`{${"pk1"}}`, encodeURIComponent(String(requestParameters['pk1']))).replace(`{${"pk2"}}`, encodeURIComponent(String(requestParameters['pk2']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerMatchupFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async timetrialsMatchupsRetrieve(requestParameters: TimetrialsMatchupsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PlayerMatchup> {
+        const response = await this.timetrialsMatchupsRetrieveRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -385,6 +456,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['lapMode'] != null) {
             queryParameters['lap_mode'] = requestParameters['lapMode'];
+        }
+
+        if (requestParameters['region'] != null) {
+            queryParameters['region'] = requestParameters['region'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -664,6 +739,24 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
 }
 
+/**
+ * @export
+ */
+export const TimetrialsMatchupsRetrieveCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsMatchupsRetrieveCategoryEnum = typeof TimetrialsMatchupsRetrieveCategoryEnum[keyof typeof TimetrialsMatchupsRetrieveCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsMatchupsRetrieveLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap',
+    Overall: 'overall'
+} as const;
+export type TimetrialsMatchupsRetrieveLapModeEnum = typeof TimetrialsMatchupsRetrieveLapModeEnum[keyof typeof TimetrialsMatchupsRetrieveLapModeEnum];
 /**
  * @export
  */

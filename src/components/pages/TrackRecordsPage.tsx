@@ -9,22 +9,24 @@ import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatDate, formatTime } from "../../utils/Formatters";
-import { useCategoryParam } from "../../utils/SearchParams";
+import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import RegionSelectionDropdown from "../widgets/RegionDropdown";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
 
   const { category, setCategory } = useCategoryParam(searchParams);
+  const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
   const { user } = useContext(UserContext);
 
   const { isLoading, data: scores } = useApi(
-    () => api.timetrialsRecordsList({ category }),
-    [category],
+    () => api.timetrialsRecordsList({ category, region: region.id }),
+    [category, region],
   );
 
   const siteHue = getCategorySiteHue(category);
@@ -33,7 +35,10 @@ const TrackRecordsPage = () => {
     <>
       <h1>World Records</h1>
       <OverwriteColor hue={siteHue}>
-        <CategorySelect value={category} onChange={setCategory} />
+        <div className="module-row">
+          <CategorySelect value={category} onChange={setCategory} />
+          <RegionSelectionDropdown ranked={false} value={region} setValue={setRegion} />
+        </div>
         <div className="module">
           <Deferred isWaiting={isLoading || metadata.isLoading}>
             <table>
