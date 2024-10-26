@@ -8,6 +8,10 @@ models/BlogPostSummary.ts
 models/CategoryEnum.ts
 models/Player.ts
 models/PlayerBasic.ts
+models/PlayerMatchup.ts
+models/PlayerMatchupPlayer.ts
+models/PlayerMatchupScore.ts
+models/PlayerMatchupStats.ts
 models/PlayerStats.ts
 models/Region.ts
 models/RegionTypeEnum.ts

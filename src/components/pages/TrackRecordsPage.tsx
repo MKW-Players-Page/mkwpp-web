@@ -1,36 +1,44 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, Tooltip } from "../widgets";
-import api, { CategoryEnum } from "../../api";
-import { useApi } from "../../hooks";
-import { formatDate, formatTime } from "../../utils/Formatters";
-import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
-import { UserContext } from "../../utils/User";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
+import api from "../../api";
+import { useApi } from "../../hooks";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { formatDate, formatTime } from "../../utils/Formatters";
+import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
+import { UserContext } from "../../utils/User";
+import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import RegionSelectionDropdown from "../widgets/RegionDropdown";
 
 const TrackRecordsPage = () => {
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+  const searchParams = useSearchParams();
+
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
   const { user } = useContext(UserContext);
 
   const { isLoading, data: scores } = useApi(
-    () => api.timetrialsRecordsList({ category }),
-    [category],
+    () => api.timetrialsRecordsList({ category, region: region.id }),
+    [category, region],
   );
 
   const siteHue = getCategorySiteHue(category);
 
   return (
     <>
-      <h1>World Records</h1>
+      <h1>{region.name} Records</h1>
       <OverwriteColor hue={siteHue}>
-        <CategorySelect value={category} onChange={setCategory} />
+        <div className="module-row">
+          <CategorySelect value={category} onChange={setCategory} />
+          <RegionSelectionDropdown ranked={false} value={region} setValue={setRegion} />
+        </div>
         <div className="module">
           <Deferred isWaiting={isLoading || metadata.isLoading}>
             <table>

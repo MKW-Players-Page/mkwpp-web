@@ -68,7 +68,7 @@ const RegionSelection = ({ regions, cupId, shown, selectedRegions }: RegionSelec
 const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) => {
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
-  const regions = metadata.regions || [];
+  const regions = metadata.regions;
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     arr.reduce(
@@ -85,7 +85,7 @@ const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) 
   );
   const sortedSubregions = groupBy(
     [...sortedRegions.country_group, ...sortedRegions.country],
-    (i) => i.parent || -1,
+    (i) => i.parent ?? -1,
   );
 
   const getRegionHierarchy = (region: Region): Region[] => {
