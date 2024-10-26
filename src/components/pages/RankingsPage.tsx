@@ -57,6 +57,15 @@ export const RankingsMetrics: RankingsMetricMap = {
     metric: "total_score",
     getValueString: (stats) => formatTime(stats.totalScore),
   },
+  TallyPoints: {
+    title: "Tally Points",
+    description:
+      "Tally Points is the sum of points gained by a Player on Track Top 10s. Each rank in a Top " +
+      "10 is worth (11 - rank) points, meaning 1st place gains 10pts, 2nd place gains 9pts, and " +
+      "so on. Everyone outside of the Top 10 gains no points.",
+    metric: "leaderboard_points",
+    getValueString: (stats) => String(stats.leaderboardPoints),
+  },
 };
 
 export interface RankingsProps {
