@@ -59,6 +59,10 @@ export const Pages: PageMap = {
     path: "/rankings/totals",
     element: <RankingsPage key="totals" metric={RankingsMetrics.TotalTime} />,
   },
+  RankingsTallyPoints: {
+    path: "/rankings/tally",
+    element: <RankingsPage key="tally" metric={RankingsMetrics.TallyPoints} />,
+  },
   Rules: {
     path: "/rules",
     element: <RulesPage />,

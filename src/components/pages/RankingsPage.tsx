@@ -57,6 +57,13 @@ export const RankingsMetrics: RankingsMetricMap = {
     metric: "total_score",
     getValueString: (stats) => formatTime(stats.totalScore),
   },
+  TallyPoints: {
+    title: "Tally Points",
+    description:
+      "Tally Points are calculated by the amount of Top 10s a player holds, 1st counts 10pts while 10th counts 1pt.",
+    metric: "leaderboard_points",
+    getValueString: (stats) => String(stats.leaderboardPoints),
+  },
 };
 
 export interface RankingsProps {
