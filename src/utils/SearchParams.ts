@@ -14,7 +14,10 @@ export const paramReplace = (prev: URLSearchParams, param: string, value: string
   };
 };
 
-export const useCategoryParam = (searchParams: SearchParams, overwriteHighlightParam: boolean = false) => {
+export const useCategoryParam = (
+  searchParams: SearchParams,
+  overwriteHighlightParam: boolean = false,
+) => {
   const category =
     Object.values(CategoryEnum).find((value) => value === searchParams[0].get("cat")) ??
     CategoryEnum.NonShortcut;
@@ -41,7 +44,11 @@ export const useRowHighlightParam = (searchParams: SearchParams) => {
   };
 };
 
-export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true, overwriteHighlightParam: boolean = false) => {
+export const useLapModeParam = (
+  searchParams: SearchParams,
+  restrictedSet: boolean = true,
+  overwriteHighlightParam: boolean = false,
+) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
     Object.values(LapModeEnum).find((value) =>
