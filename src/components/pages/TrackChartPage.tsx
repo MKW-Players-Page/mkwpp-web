@@ -65,9 +65,7 @@ const TrackChartPage = () => {
 
   const highlightElement = useRef(null);
   useEffect(() => {
-    console.log("asd1");
     if (highlightElement !== null) {
-      console.log("asd2");
       (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
         inline: "center",
         block: "center",
