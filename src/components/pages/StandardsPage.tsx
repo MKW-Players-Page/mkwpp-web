@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
@@ -7,24 +7,27 @@ import { getCategoryName, getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { CategorySelect } from "../widgets";
-import { CategoryEnum, Standard, StandardLevel } from "../../api";
+import { Standard, StandardLevel } from "../../api";
 import { getCategoryNumerical } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../widgets/Dropdown";
+import { useCategoryParam, useStandardLevelIdParam } from "../../utils/SearchParams";
 
 const StandardsPage = () => {
-  const [levelId, setLevelId] = useState<number>(0);
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { levelId, setLevelId } = useStandardLevelIdParam(searchParams);
 
   const metadata = useContext(MetadataContext);
 
   useEffect(() => {
     if (levelId === 0 && !metadata.isLoading) {
-      setLevelId(metadata.standards?.at(0)?.id || 0);
+      setLevelId(metadata.standards?.at(0)?.id ?? 1);
     }
-  }, [levelId, metadata]);
+  }, [levelId, setLevelId, metadata]);
+
   const level =
-    (metadata.standards && metadata.standards.find((l) => l.id === levelId)) ||
+    metadata.standards?.find((l) => l.id === levelId) ??
     ({ standards: [] } as unknown as StandardLevel);
   let filteredStandards: Standard[] = [];
   let lastChecked = {} as Standard;
@@ -61,7 +64,7 @@ const StandardsPage = () => {
                         type: "DropdownItemData",
                         element: { text: l.name, value: l.id },
                       } as DropdownItemSetDataChild;
-                    }),
+                    }) ?? [{ type: "DropdownItemData", element: { text: "God", value: 1 } }],
                   },
                 ],
               } as DropdownData

@@ -21,7 +21,7 @@ export interface RegionSelectionDropdownProps {
 const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDropdownProps) => {
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
-  const regions = metadata.regions || [];
+  const regions = metadata.regions.length === 1 ? [value] : metadata.regions;
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     arr.reduce(
@@ -33,7 +33,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
     );
 
   const dropdownData: DropdownData = {
-    defaultItemSet: 0,
+    defaultItemSet: value.parent ?? 0,
     value: value,
     valueSetter: setValue,
     data: [],
@@ -41,7 +41,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
 
   const sortedRegions = groupBy(
     regions.filter((r) => r.isRanked || !ranked),
-    (i) => i.parent || 0,
+    (i) => i.parent ?? 0,
   );
 
   for (let [parentId, children] of Object.entries(sortedRegions)) {
@@ -53,7 +53,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
     if (parent !== undefined)
       outChildren.push({
         type: "DropdownItemSetSetterData",
-        element: { text: "<< Back", toItemSetId: parent.parent || 0 } as DropdownItemSetSetterData,
+        element: { text: "<< Back", toItemSetId: parent.parent ?? 0 } as DropdownItemSetSetterData,
       });
 
     children

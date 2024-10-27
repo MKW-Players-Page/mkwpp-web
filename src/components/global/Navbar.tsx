@@ -84,6 +84,10 @@ const SECTIONS: NavbarSection[] = [
         label: "Total Times",
         url: resolvePage(Pages.RankingsTotalTime),
       },
+      {
+        label: "Tally Points",
+        url: resolvePage(Pages.RankingsTallyPoints),
+      },
     ],
   },
   {
