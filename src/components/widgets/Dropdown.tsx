@@ -118,6 +118,7 @@ const Dropdown = ({ data }: DropdownProp) => {
   }
 
   data.disabled = !!data.disabled;
+  if (data.data[selectedValueItemSetIndex].children.length <= 1) data.disabled = true;
   if (data.disabled) setDropdownListShown = () => {};
 
   document.addEventListener("click", (e) => {
