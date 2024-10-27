@@ -29,20 +29,10 @@ const TrackChartPage = () => {
   const { user } = useContext(UserContext);
 
   const searchParams = useSearchParams();
-  let { category, setCategory } = useCategoryParam(searchParams);
-  let { lapMode, setLapMode } = useLapModeParam(searchParams);
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams);
   const { region, setRegion } = useRegionParam(searchParams);
-  const { highlight, setHighlight } = useRowHighlightParam(searchParams);
-  const wrappedSetLapMode = setLapMode;
-  setLapMode = (lapMode: LapModeEnum) => {
-    setHighlight(-1);
-    wrappedSetLapMode(lapMode);
-  };
-  const wrappedSetCategory = setCategory;
-  setCategory = (category: CategoryEnum) => {
-    setHighlight(-1);
-    wrappedSetCategory(category);
-  };
+  const highlight = useRowHighlightParam(searchParams).highlight;
 
   const metadata = useContext(MetadataContext);
 
