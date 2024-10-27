@@ -30,7 +30,7 @@ export const useCategoryParam = (searchParams: SearchParams) => {
 export const useRowHighlightParam = (searchParams: SearchParams) => {
   const highlight =
     searchParams[0].get("hl") !== null
-      ? +parseFloat(searchParams[0].get("hl") as string).toFixed(2)
+      ? +parseFloat(searchParams[0].get("hl") as string).toFixed(4)
       : null;
   return {
     highlight,

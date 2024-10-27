@@ -56,14 +56,17 @@ const TrackChartPage = () => {
   );
 
   const highlightElement = useRef(null);
-    useEffect(()=>{
-        console.log("asd1");
-        if (highlightElement !== null) {
-            console.log("asd2");
-            (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({inline: "center", block:"center"});
-        }
-    }, [highlightElement, isLoading, metadata.isLoading])
-    
+  useEffect(() => {
+    console.log("asd1");
+    if (highlightElement !== null) {
+      console.log("asd2");
+      (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
+        inline: "center",
+        block: "center",
+      });
+    }
+  }, [highlightElement, isLoading, metadata.isLoading]);
+
   const siteHue = getCategorySiteHue(category);
 
   return (
@@ -144,7 +147,7 @@ const TrackChartPage = () => {
                           ? "highlighted"
                           : ""
                       }
-                       ref={score.value === highlight ? highlightElement : undefined}
+                      ref={score.value === highlight ? highlightElement : undefined}
                     >
                       <td>{score.rank}</td>
                       <td>

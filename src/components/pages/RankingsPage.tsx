@@ -40,7 +40,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "Average Finish (AF for short) is the average of a player's ranking across all tracks.",
     metric: "total_rank",
     metricOrder: +1,
-    getHighlightValue: (stats) => +(stats.totalRank / stats.scoreCount).toFixed(2),
+    getHighlightValue: (stats) => +(stats.totalRank / stats.scoreCount).toFixed(4),
     getValueString: (stats) => String(stats.totalRank / stats.scoreCount),
   },
   AverageStandard: {
@@ -50,7 +50,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "tracks.",
     metric: "total_standard",
     metricOrder: +1,
-    getHighlightValue: (stats) => +(stats.totalStandard / stats.scoreCount).toFixed(2),
+    getHighlightValue: (stats) => +(stats.totalStandard / stats.scoreCount).toFixed(4),
     getValueString: (stats) => String(stats.totalStandard / stats.scoreCount),
   },
   AverageRecordRatio: {
@@ -61,7 +61,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "tracks.",
     metric: "total_record_ratio",
     metricOrder: -1,
-    getHighlightValue: (stats) => +((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(2),
+    getHighlightValue: (stats) => +((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4),
     getValueString: (stats) => ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%",
   },
   TotalTime: {
@@ -111,11 +111,14 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   );
 
   const highlightElement = useRef(null);
-  useEffect(()=>{
-      if (highlightElement !== null) {
-          (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({inline: "center", block:"center"});
-      }
-  }, [highlightElement, isLoading])
+  useEffect(() => {
+    if (highlightElement !== null) {
+      (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
+        inline: "center",
+        block: "center",
+      });
+    }
+  }, [highlightElement, isLoading]);
 
   const siteHue = getCategorySiteHue(category);
 
@@ -175,7 +178,9 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                           ? "highlighted"
                           : ""
                       }
-                      ref={(metric.getHighlightValue(stats) === highlight) ? highlightElement : undefined}
+                      ref={
+                        metric.getHighlightValue(stats) === highlight ? highlightElement : undefined
+                      }
                     >
                       <td>{stats.rank}</td>
                       <td>

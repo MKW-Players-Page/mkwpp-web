@@ -258,7 +258,19 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? stats.totalRank / stats.scoreCount : "-"}
+                      {stats && stats.scoreCount > 0 ? (
+                        <Link
+                          to={resolvePage(
+                            Pages.RankingsAverageFinish,
+                            {},
+                            { ...rankingsRedirectParams, hl: stats.totalRank / stats.scoreCount },
+                          )}
+                        >
+                          {stats.totalRank / stats.scoreCount}
+                        </Link>
+                      ) : (
+                        "-"
+                      )}
                     </td>
                   </tr>
                   <tr>
@@ -270,7 +282,22 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? stats.totalStandard / stats.scoreCount : "-"}
+                      {stats && stats.scoreCount > 0 ? (
+                        <Link
+                          to={resolvePage(
+                            Pages.RankingsAverageStandard,
+                            {},
+                            {
+                              ...rankingsRedirectParams,
+                              hl: stats.totalStandard / stats.scoreCount,
+                            },
+                          )}
+                        >
+                          {stats.totalStandard / stats.scoreCount}
+                        </Link>
+                      ) : (
+                        "-"
+                      )}
                     </td>
                   </tr>
                   <tr>
@@ -286,9 +313,22 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0
-                        ? ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"
-                        : "-"}
+                      {stats && stats.scoreCount > 0 ? (
+                        <Link
+                          to={resolvePage(
+                            Pages.RankingsAverageRecordRatio,
+                            {},
+                            {
+                              ...rankingsRedirectParams,
+                              hl: ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4),
+                            },
+                          )}
+                        >
+                          {((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"}
+                        </Link>
+                      ) : (
+                        "-"
+                      )}
                     </td>
                   </tr>
                   <tr>
@@ -297,7 +337,24 @@ const PlayerProfilePage = () => {
                         Total Time
                       </Link>
                     </td>
-                    <td>{stats ? formatTime(stats.totalScore) : "-"}</td>
+                    <td>
+                      {stats ? (
+                        <Link
+                          to={resolvePage(
+                            Pages.RankingsTotalTime,
+                            {},
+                            {
+                              ...rankingsRedirectParams,
+                              hl: stats.totalScore,
+                            },
+                          )}
+                        >
+                          {formatTime(stats.totalScore)}
+                        </Link>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -437,7 +494,20 @@ const PlayerProfilePage = () => {
                       )}
                       {score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td className={score?.category !== category ? "fallthrough" : ""}>
-                        {formatTime(score.value)}
+                        <Link
+                          to={resolvePage(
+                            Pages.TrackChart,
+                            { id: score.track },
+                            {
+                              reg: region.id !== 1 ? region.code.toLowerCase() : null,
+                              cat: category !== CategoryEnum.NonShortcut ? category : null,
+                              lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                              hl: score.value,
+                            },
+                          )}
+                        >
+                          {formatTime(score.value)}
+                        </Link>
                       </td>
                       {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td>{score.rank}</td>
