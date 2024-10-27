@@ -14,7 +14,7 @@ export const paramReplace = (prev: URLSearchParams, param: string, value: string
   };
 };
 
-export const useCategoryParam = (searchParams: SearchParams) => {
+export const useCategoryParam = (searchParams: SearchParams, overwriteHighlightParam: boolean = false) => {
   const category =
     Object.values(CategoryEnum).find((value) => value === searchParams[0].get("cat")) ??
     CategoryEnum.NonShortcut;
@@ -22,6 +22,7 @@ export const useCategoryParam = (searchParams: SearchParams) => {
     category,
     setCategory: (category: CategoryEnum) => {
       const cat = category === CategoryEnum.NonShortcut ? undefined : category;
+      if (overwriteHighlightParam) searchParams[1]((prev) => paramReplace(prev, "hl", undefined));
       searchParams[1]((prev) => paramReplace(prev, "cat", cat));
     },
   };
@@ -40,7 +41,7 @@ export const useRowHighlightParam = (searchParams: SearchParams) => {
   };
 };
 
-export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true) => {
+export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true, overwriteHighlightParam: boolean = false) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
     Object.values(LapModeEnum).find((value) =>
@@ -52,6 +53,7 @@ export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boole
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
       const lap = lapMode === defVal ? undefined : lapMode;
+      if (overwriteHighlightParam) searchParams[1]((prev) => paramReplace(prev, "hl", undefined));
       searchParams[1]((prev) => paramReplace(prev, "lap", lap));
     },
   };
