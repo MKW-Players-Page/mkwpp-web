@@ -91,8 +91,8 @@ export interface RankingsProps {
 
 const RankingsPage = ({ metric }: RankingsProps) => {
   const searchParams = useSearchParams();
-  const { category, setCategory } = useCategoryParam(searchParams, true);
-  const { lapMode, setLapMode } = useLapModeParam(searchParams, false, true);
+  const { category, setCategory } = useCategoryParam(searchParams, ["hl"]);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, false, ["hl"]);
   const { region, setRegion } = useRegionParam(searchParams);
   const highlight = useRowHighlightParam(searchParams).highlight;
 

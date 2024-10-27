@@ -7,17 +7,23 @@ import { WorldRegion } from "./Defaults";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
-export const paramReplace = (prev: URLSearchParams, param: string, value: string | undefined) => {
+export const paramReplace = (
+  prev: URLSearchParams,
+  param: string,
+  value: string | undefined,
+  overwriteParams: string[] = [],
+) => {
   return {
-    ...(({ [param]: omit, ...rest }) => rest)(Object.fromEntries(prev)),
+    ...Object.fromEntries(
+      Object.entries(Object.fromEntries(prev)).filter(
+        ([k, v]) => ![param, ...overwriteParams].includes(k),
+      ),
+    ),
     ...(value ? { [param]: value } : {}),
   };
 };
 
-export const useCategoryParam = (
-  searchParams: SearchParams,
-  overwriteHighlightParam: boolean = false,
-) => {
+export const useCategoryParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
   const category =
     Object.values(CategoryEnum).find((value) => value === searchParams[0].get("cat")) ??
     CategoryEnum.NonShortcut;
@@ -25,8 +31,7 @@ export const useCategoryParam = (
     category,
     setCategory: (category: CategoryEnum) => {
       const cat = category === CategoryEnum.NonShortcut ? undefined : category;
-      if (overwriteHighlightParam) searchParams[1]((prev) => paramReplace(prev, "hl", undefined));
-      searchParams[1]((prev) => paramReplace(prev, "cat", cat));
+      searchParams[1]((prev) => paramReplace(prev, "cat", cat, overwriteParams));
     },
   };
 };
@@ -47,7 +52,7 @@ export const useRowHighlightParam = (searchParams: SearchParams) => {
 export const useLapModeParam = (
   searchParams: SearchParams,
   restrictedSet: boolean = true,
-  overwriteHighlightParam: boolean = false,
+  overwriteParams: string[] = [],
 ) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
@@ -60,8 +65,7 @@ export const useLapModeParam = (
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
       const lap = lapMode === defVal ? undefined : lapMode;
-      if (overwriteHighlightParam) searchParams[1]((prev) => paramReplace(prev, "hl", undefined));
-      searchParams[1]((prev) => paramReplace(prev, "lap", lap));
+      searchParams[1]((prev) => paramReplace(prev, "lap", lap, overwriteParams));
     },
   };
 };
