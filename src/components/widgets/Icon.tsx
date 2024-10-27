@@ -3,10 +3,10 @@ import "./Icon.css";
 import Flag from "./Flags";
 import { Flags } from "./Flags";
 
-import { ReactComponent as CommentIcon } from "./icons/comment.svg";
-import { ReactComponent as GhostIcon } from "./icons/ghost.svg";
-import { ReactComponent as VideoIcon } from "./icons/video.svg";
-import { ReactComponent as DropdownCaret } from "./icons/dropdowncaret.svg";
+import { ReactComponent as CommentIcon } from "../../assets/icons/comment.svg";
+import { ReactComponent as GhostIcon } from "../../assets/icons/ghost.svg";
+import { ReactComponent as VideoIcon } from "../../assets/icons/video.svg";
+import { ReactComponent as DropdownCaret } from "../../assets/icons/dropdowncaret.svg";
 
 export const Icons = {
   Comment: CommentIcon,
