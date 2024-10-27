@@ -35,7 +35,8 @@ export const useRowHighlightParam = (searchParams: SearchParams) => {
   return {
     highlight,
     setHighlight: (highlight: number) => {
-      searchParams[1]((prev) => paramReplace(prev, "hl", highlight.toString()));
+      const hl = highlight < 0 ? undefined : highlight.toString();
+      searchParams[1]((prev) => paramReplace(prev, "hl", hl));
     },
   };
 };

@@ -5,7 +5,11 @@ import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
 import api from "../../api";
-import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
+import {
+  CategoryEnum,
+  PlayerStats,
+  TimetrialsRankingsListMetricEnum as MetricEnum,
+} from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
@@ -19,6 +23,7 @@ import {
   useRegionParam,
   useRowHighlightParam,
 } from "../../utils/SearchParams";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 export interface RankingsMetric {
   title: string;
@@ -91,10 +96,20 @@ export interface RankingsProps {
 
 const RankingsPage = ({ metric }: RankingsProps) => {
   const searchParams = useSearchParams();
-  const { category, setCategory } = useCategoryParam(searchParams);
-  const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
+  let { category, setCategory } = useCategoryParam(searchParams);
+  let { lapMode, setLapMode } = useLapModeParam(searchParams, false);
   const { region, setRegion } = useRegionParam(searchParams);
-  const highlight = useRowHighlightParam(searchParams).highlight;
+  const { highlight, setHighlight } = useRowHighlightParam(searchParams);
+  const wrappedSetLapMode = setLapMode;
+  setLapMode = (lapMode: LapModeEnum) => {
+    setHighlight(-1);
+    wrappedSetLapMode(lapMode);
+  };
+  const wrappedSetCategory = setCategory;
+  setCategory = (category: CategoryEnum) => {
+    setHighlight(-1);
+    wrappedSetCategory(category);
+  };
 
   const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
