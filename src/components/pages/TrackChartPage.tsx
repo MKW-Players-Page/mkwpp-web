@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
@@ -55,6 +55,15 @@ const TrackChartPage = () => {
     [category, lapMode, region, id],
   );
 
+  const highlightElement = useRef(null);
+    useEffect(()=>{
+        console.log("asd1");
+        if (highlightElement !== null) {
+            console.log("asd2");
+            (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({inline: "center", block:"center"});
+        }
+    }, [highlightElement, isLoading, metadata.isLoading])
+    
   const siteHue = getCategorySiteHue(category);
 
   return (
@@ -114,7 +123,7 @@ const TrackChartPage = () => {
                     score.value > highlight &&
                     (arr[idx - 1] === undefined || arr[idx - 1].value < highlight) ? (
                       <>
-                        <tr key={highlight} className="highlighted">
+                        <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
                           <td>Your Highlighted Value</td>
                           <td>{formatTime(highlight)}</td>
@@ -135,6 +144,7 @@ const TrackChartPage = () => {
                           ? "highlighted"
                           : ""
                       }
+                       ref={score.value === highlight ? highlightElement : undefined}
                     >
                       <td>{score.rank}</td>
                       <td>
