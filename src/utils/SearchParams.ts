@@ -27,6 +27,19 @@ export const useCategoryParam = (searchParams: SearchParams) => {
   };
 };
 
+export const useRowHighlightParam = (searchParams: SearchParams) => {
+  const highlight =
+    searchParams[0].get("hl") !== null
+      ? +parseFloat(searchParams[0].get("hl") as string).toFixed(2)
+      : null;
+  return {
+    highlight,
+    setHighlight: (highlight: number) => {
+      searchParams[1]((prev) => paramReplace(prev, "hl", highlight.toString()));
+    },
+  };
+};
+
 export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
