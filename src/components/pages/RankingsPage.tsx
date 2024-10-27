@@ -131,7 +131,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                   <>
                     {highlight &&
                     metric.getHighlightValue(stats) < highlight &&
-                    metric.getHighlightValue(arr[idx + 1]) > highlight ? (
+                    metric.getHighlightValue(arr[idx - 1]) > highlight ? (
                       <>
                         <tr key={highlight} className={"highlighted"}>
                           <td />
