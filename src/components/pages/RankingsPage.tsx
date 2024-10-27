@@ -24,6 +24,7 @@ export interface RankingsMetric {
   title: string;
   description: string;
   metric: MetricEnum;
+  metricOrder: number;
   getHighlightValue: (player: PlayerStats) => number;
   getValueString: (player: PlayerStats) => string;
 }
@@ -38,6 +39,7 @@ export const RankingsMetrics: RankingsMetricMap = {
     description:
       "Average Finish (AF for short) is the average of a player's ranking across all tracks.",
     metric: "total_rank",
+    metricOrder: +1,
     getHighlightValue: (stats) => +(stats.totalRank / stats.scoreCount).toFixed(2),
     getValueString: (stats) => String(stats.totalRank / stats.scoreCount),
   },
@@ -47,6 +49,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "Average Rank Rating (ARR for short) is the average standard of a player's time across all " +
       "tracks.",
     metric: "total_standard",
+    metricOrder: +1,
     getHighlightValue: (stats) => +(stats.totalStandard / stats.scoreCount).toFixed(2),
     getValueString: (stats) => String(stats.totalStandard / stats.scoreCount),
   },
@@ -57,6 +60,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "time by the player's time. Players are ranked by the average of their PR:WR across all " +
       "tracks.",
     metric: "total_record_ratio",
+    metricOrder: -1,
     getHighlightValue: (stats) => +((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(2),
     getValueString: (stats) => ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%",
   },
@@ -64,6 +68,7 @@ export const RankingsMetrics: RankingsMetricMap = {
     title: "Total Time",
     description: "Total time is the sum of a player's fastest times across all tracks.",
     metric: "total_score",
+    metricOrder: +1,
     getHighlightValue: (stats) => stats.totalScore,
     getValueString: (stats) => formatTime(stats.totalScore),
   },
@@ -74,6 +79,7 @@ export const RankingsMetrics: RankingsMetricMap = {
       "10 is worth (11 - rank) points, meaning 1st place gains 10pts, 2nd place gains 9pts, and " +
       "so on. Everyone outside of the Top 10 gains no points.",
     metric: "leaderboard_points",
+    metricOrder: -1,
     getHighlightValue: (stats) => stats.leaderboardPoints,
     getValueString: (stats) => String(stats.leaderboardPoints),
   },
@@ -130,13 +136,17 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                 {rankings?.map((stats, idx, arr) => (
                   <>
                     {highlight &&
-                    metric.getHighlightValue(stats) < highlight &&
-                    metric.getHighlightValue(arr[idx - 1]) > highlight ? (
+                    ((metric.metricOrder < 0 &&
+                      metric.getHighlightValue(stats) < highlight &&
+                      (arr[idx - 1] === undefined || (metric.getHighlightValue(arr[idx - 1]) > highlight))) ||
+                      (metric.metricOrder > 0 &&
+                        metric.getHighlightValue(stats) > highlight &&
+                        (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
                       <>
-                        <tr key={highlight} className={"highlighted"}>
+                        <tr key={highlight} className="highlighted">
                           <td />
                           <td>Your Highlighted Value</td>
-                          <td>{highlight}</td>
+                          <td>{metric.metric === "total_record_ratio" ? highlight.toFixed(4) + "%"  : ( metric.metric === "total_score" ? formatTime(highlight) : highlight)}</td>
                         </tr>
                       </>
                     ) : (
