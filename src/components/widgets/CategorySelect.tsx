@@ -28,6 +28,7 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
     <Dropdown
       data={
         {
+          type: "Normal",
           value: value,
           valueSetter: onChange,
           disabled: disabled,

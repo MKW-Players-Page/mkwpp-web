@@ -46,6 +46,8 @@ interface DropdownItemSetSetterProp {
 }
 
 export interface DropdownData {
+  /** Dropdown Type */
+  type: "Normal" | "TextInput";
   /** Dropdown Data */
   data: DropdownItemSetData[];
   /** Default ItemSet by ID. MUST match value. */
@@ -100,8 +102,27 @@ const Dropdown = ({ data }: DropdownProp) => {
   );
   if (selectedValueIndex < 0) selectedValueIndex = 0;
 
-  if (
-    data.data.length === 0 ||
+  if (data.data.length === 0) {
+    data.data.push({
+      id: data.defaultItemSet,
+      children: [
+        {
+          type: "DropdownItemData",
+          element: { value: data.value, text: "Error" },
+        },
+      ],
+    });
+    if (data.defaultItemSet !== selectedValueItemSetIndex)
+      data.data.push({
+        id: selectedValueItemSetIndex,
+        children: [
+          {
+            type: "DropdownItemData",
+            element: { value: data.value, text: "Error" },
+          },
+        ],
+      });
+  } else if (
     data.data[selectedValueItemSetIndex].children.length === 0 ||
     data.data[selectedItemSetIndex].children.length === 0
   ) {
@@ -117,55 +138,30 @@ const Dropdown = ({ data }: DropdownProp) => {
       });
   }
 
-  data.disabled = !!data.disabled;
-  if (data.data[selectedValueItemSetIndex].children.length <= 1) data.disabled = true;
-  if (data.disabled) setDropdownListShown = () => {};
-
-  document.addEventListener("click", (e) => {
-    if (
-      dropdownListShown &&
-      e.target &&
-      e.target !== dropdown.current &&
-      !(e.target as any).classList.contains("dropdown-itemset-setter")
-    ) {
-      setDropdownListShown(false);
-      setSelectedItemSet(selectedValueItemSet);
-    }
-  });
-
-  const dropdown = useRef(null);
-
-  useEffect(() => {
-    if (!dropdown.current) return;
-    const resizeObserver = new ResizeObserver(() => {
-      if (!dropdown.current) return;
-      let boundingBox = (dropdown.current as any).getBoundingClientRect();
-      setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
-    });
-    resizeObserver.observe(dropdown.current);
-    return () => resizeObserver.disconnect();
-  }, []);
-
   return (
     <>
-      <div
-        ref={dropdown}
-        className="module dropdown"
-        onClick={(e) => {
-          setDropdownListShown(!dropdownListShown);
-          let boundingBox = (e.target as any).getBoundingClientRect();
-          setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
-        }}
-      >
-        {data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.leftIcon ??
-          data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.rightIcon ?? (
-            <></>
-          )}
-        <span>
-          {data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
-        </span>
-        {data.disabled ? <></> : <Icon icon="Caret" />}
-      </div>
+      {data.type === "Normal" ? (
+        <NormalDropdown
+          disabled={!!data.disabled}
+          selectedValueItemSetChildrenLength={data.data[selectedValueItemSetIndex].children.length}
+          dropdownListShown={dropdownListShown}
+          setDropdownListShown={setDropdownListShown}
+          setSelectedItemSet={setSelectedItemSet}
+          setDropdownListPos={setDropdownListPos}
+          selectedValueItemSet={selectedValueItemSet}
+          leftIcon={
+            data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.leftIcon
+          }
+          rightIcon={
+            data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.rightIcon
+          }
+          text={data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
+        />
+      ) : data.type === "TextInput" ? (
+        <></>
+      ) : (
+        <></>
+      )}
       <DropdownList
         selectedItemSet={selectedItemSet}
         shown={dropdownListShown}
@@ -200,6 +196,76 @@ const Dropdown = ({ data }: DropdownProp) => {
         })}
       </DropdownList>
     </>
+  );
+};
+
+interface NormalDropdownProp {
+  disabled: boolean;
+  selectedValueItemSetChildrenLength: number;
+  setDropdownListShown: React.Dispatch<React.SetStateAction<boolean>>;
+  dropdownListShown: boolean;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
+  text: string;
+  setSelectedItemSet: React.Dispatch<React.SetStateAction<number>>;
+  setDropdownListPos: React.Dispatch<React.SetStateAction<any>>;
+  selectedValueItemSet: number;
+}
+
+const NormalDropdown = ({
+  disabled,
+  selectedValueItemSetChildrenLength,
+  setDropdownListShown,
+  dropdownListShown,
+  leftIcon,
+  rightIcon,
+  text,
+  setSelectedItemSet,
+  setDropdownListPos,
+  selectedValueItemSet,
+}: NormalDropdownProp) => {
+  if (selectedValueItemSetChildrenLength <= 1) disabled = true;
+  if (disabled) setDropdownListShown = () => {};
+
+  document.addEventListener("click", (e) => {
+    if (
+      dropdownListShown &&
+      e.target &&
+      e.target !== dropdown.current &&
+      !(e.target as any).classList.contains("dropdown-itemset-setter")
+    ) {
+      setDropdownListShown(false);
+      setSelectedItemSet(selectedValueItemSet);
+    }
+  });
+
+  const dropdown = useRef(null);
+
+  useEffect(() => {
+    if (!dropdown.current) return;
+    const resizeObserver = new ResizeObserver(() => {
+      if (!dropdown.current) return;
+      let boundingBox = (dropdown.current as any).getBoundingClientRect();
+      setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+    });
+    resizeObserver.observe(dropdown.current);
+    return () => resizeObserver.disconnect();
+  }, [setDropdownListPos]);
+
+  return (
+    <div
+      ref={dropdown}
+      className="module dropdown"
+      onClick={(e) => {
+        setDropdownListShown(!dropdownListShown);
+        let boundingBox = (e.target as any).getBoundingClientRect();
+        setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+      }}
+    >
+      {leftIcon ?? rightIcon ?? <></>}
+      <span>{text}</span>
+      {disabled ? <></> : <Icon icon="Caret" />}
+    </div>
   );
 };
 

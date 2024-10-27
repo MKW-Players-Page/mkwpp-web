@@ -191,6 +191,7 @@ const PlayerProfilePage = () => {
             <Dropdown
               data={
                 {
+                  type: "Normal",
                   defaultItemSet: 0,
                   value: region,
                   valueSetter: setRegion,
