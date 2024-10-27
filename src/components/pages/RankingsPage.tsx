@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
@@ -110,6 +110,13 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     [category, lapMode, region],
   );
 
+  const highlightElement = useRef(null);
+  useEffect(()=>{
+      if (highlightElement !== null) {
+          (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({inline: "center", block:"center"});
+      }
+  }, [highlightElement, isLoading])
+
   const siteHue = getCategorySiteHue(category);
 
   return (
@@ -145,7 +152,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                         (arr[idx - 1] === undefined ||
                           metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
                       <>
-                        <tr key={highlight} className="highlighted">
+                        <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
                           <td>Your Highlighted Value</td>
                           <td>
@@ -168,6 +175,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                           ? "highlighted"
                           : ""
                       }
+                      ref={(metric.getHighlightValue(stats) === highlight) ? highlightElement : undefined}
                     >
                       <td>{stats.rank}</td>
                       <td>
