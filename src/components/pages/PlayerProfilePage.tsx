@@ -501,7 +501,7 @@ const PlayerProfilePage = () => {
                             {
                               reg: region.id !== 1 ? region.code.toLowerCase() : null,
                               cat: category !== CategoryEnum.NonShortcut ? category : null,
-                              lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                              lap: score.isLap ? LapModeEnum.Lap : null,
                               hl: score.value,
                             },
                           )}
