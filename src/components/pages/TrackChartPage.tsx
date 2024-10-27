@@ -110,7 +110,7 @@ const TrackChartPage = () => {
               <tbody className="table-hover-rows">
                 {scores?.map((score, idx, arr) => (
                   <>
-                    {highlight && score.value > highlight && arr[idx - 1]?.value < highlight ? (
+                    {highlight && score.value > highlight && (arr[idx - 1] === undefined || arr[idx - 1].value < highlight) ? (
                       <>
                         <tr key={highlight} className="highlighted">
                           <td />
