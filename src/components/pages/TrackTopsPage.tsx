@@ -13,7 +13,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
-import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 import { WorldRegion } from "../../utils/Defaults";
@@ -140,68 +140,67 @@ const TrackTopsPage = () => {
             {cup &&
               metadata.tracks
                 ?.filter((track) => cup.tracks.includes(track.id))
-                .map((track, index) => (
-                  <div key={track.id}>
-                    <h1>{track.name}</h1>
-                    <div className="module">
-                      <Deferred isWaiting={tops[index].isLoading}>
-                        <table>
-                          <tbody className="table-hover-rows">
-                            {tops[index].data?.map((score) => (
-                              <tr
-                                key={score.id}
-                                className={
-                                  user && score.player.id === user.player ? "highlighted" : ""
-                                }
-                              >
-                                <td>{score.rank}</td>
-                                <td>
-                                  <FlagIcon
-                                    region={getRegionById(metadata, score.player.region || 0)}
-                                  />
-                                  <Link
-                                    to={resolvePage(Pages.PlayerProfile, {
-                                      id: score.player.id,
-                                    })}
-                                  >
-                                    {score.player.alias || score.player.name}
-                                  </Link>
-                                </td>
-                                <td>{formatTime(score.value)}</td>
-                              </tr>
-                            ))}
-                            <tr>
-                              <th colSpan={3}>
-                                <Link
-                                  to={resolvePage(
-                                    Pages.TrackChart,
-                                    {
-                                      id: track.id,
-                                    },
-                                    {
-                                      cat:
-                                        track.categories.filter(
-                                          (r) =>
-                                            getCategoryNumerical(r) <=
-                                            getCategoryNumerical(category),
-                                        )[0] !== CategoryEnum.NonShortcut
-                                          ? category
-                                          : null,
-                                      lap: lapMode !== LapModeEnum.Course ? lapMode : null,
-                                      reg: region?.id !== 1 ? region?.code.toLowerCase() : null,
-                                    },
-                                  )}
+                .map((track, index) => {
+                  const trackCategory = getHighestValid(category, track?.categories ?? []);
+                  return (
+                    <div key={track.id}>
+                      <h1>{track.name}</h1>
+                      <div className="module">
+                        <Deferred isWaiting={tops[index].isLoading}>
+                          <table>
+                            <tbody className="table-hover-rows">
+                              {tops[index].data?.map((score) => (
+                                <tr
+                                  key={score.id}
+                                  className={
+                                    user && score.player.id === user.player ? "highlighted" : ""
+                                  }
                                 >
-                                  View full leaderboards
-                                </Link>
-                              </th>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </Deferred>
+                                  <td>{score.rank}</td>
+                                  <td>
+                                    <FlagIcon
+                                      region={getRegionById(metadata, score.player.region || 0)}
+                                    />
+                                    <Link
+                                      to={resolvePage(Pages.PlayerProfile, {
+                                        id: score.player.id,
+                                      })}
+                                    >
+                                      {score.player.alias || score.player.name}
+                                    </Link>
+                                  </td>
+                                  <td>{formatTime(score.value)}</td>
+                                </tr>
+                              ))}
+                              <tr>
+                                <th colSpan={3}>
+                                  <Link
+                                    to={resolvePage(
+                                      Pages.TrackChart,
+                                      {
+                                        id: track.id,
+                                      },
+                                      {
+                                        cat:
+                                          trackCategory !== CategoryEnum.NonShortcut
+                                            ? trackCategory
+                                            : null,
+                                        lap: lapMode !== LapModeEnum.Course ? lapMode : null,
+                                        reg: region?.id !== 1 ? region?.code.toLowerCase() : null,
+                                      },
+                                    )}
+                                  >
+                                    View full leaderboards
+                                  </Link>
+                                </th>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </Deferred>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
           </div>
         </OverwriteColor>
       </Deferred>
