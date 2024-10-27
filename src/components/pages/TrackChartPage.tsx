@@ -5,16 +5,17 @@ import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
 import api from "../../api";
-import { TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
+import { CategoryEnum, TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -37,6 +38,11 @@ const TrackChartPage = () => {
     if (t.id === id - 1) prevTrack = t;
     if (t.id === id + 1) nextTrack = t;
   }
+
+  const queryParamsBaseForRedirect = {
+    reg: region.id !== 1 ? region.code.toLowerCase() : null,
+    lap: lapMode !== LapModeEnum.Course ? lapMode : null,
+  };
 
   const { isLoading, data: scores } = useApi(
     () =>
@@ -62,7 +68,21 @@ const TrackChartPage = () => {
       >
         <div style={{ width: "200px" } as React.CSSProperties}>
           {prevTrack !== undefined ? (
-            <Link to={resolvePage(Pages.TrackChart, { id: prevTrack.id })}>
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: prevTrack.id },
+                {
+                  ...queryParamsBaseForRedirect,
+                  cat:
+                    prevTrack?.categories.filter(
+                      (r) => getCategoryNumerical(r) <= getCategoryNumerical(category),
+                    )[0] !== CategoryEnum.NonShortcut
+                      ? category
+                      : null,
+                },
+              )}
+            >
               {"< " + prevTrack.name}
             </Link>
           ) : (
@@ -72,7 +92,21 @@ const TrackChartPage = () => {
         <h1>{track?.name}</h1>
         <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
           {nextTrack !== undefined ? (
-            <Link to={resolvePage(Pages.TrackChart, { id: nextTrack.id })}>
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: nextTrack.id },
+                {
+                  ...queryParamsBaseForRedirect,
+                  cat:
+                    nextTrack?.categories.filter(
+                      (r) => getCategoryNumerical(r) <= getCategoryNumerical(category),
+                    )[0] !== CategoryEnum.NonShortcut
+                      ? category
+                      : null,
+                },
+              )}
+            >
               {nextTrack.name + " >"}
             </Link>
           ) : (
