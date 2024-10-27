@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
@@ -14,7 +14,12 @@ import { UserContext } from "../../utils/User";
 import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
-import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
+import {
+  useCategoryParam,
+  useLapModeParam,
+  useRegionParam,
+  useRowHighlightParam,
+} from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const TrackChartPage = () => {
@@ -24,9 +29,10 @@ const TrackChartPage = () => {
   const { user } = useContext(UserContext);
 
   const searchParams = useSearchParams();
-  const { category, setCategory } = useCategoryParam(searchParams);
-  const { lapMode, setLapMode } = useLapModeParam(searchParams);
+  const { category, setCategory } = useCategoryParam(searchParams, ["hl"]);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, true, ["hl"]);
   const { region, setRegion } = useRegionParam(searchParams);
+  const highlight = useRowHighlightParam(searchParams).highlight;
 
   const metadata = useContext(MetadataContext);
 
@@ -56,6 +62,16 @@ const TrackChartPage = () => {
       }),
     [category, lapMode, region, id],
   );
+
+  const highlightElement = useRef(null);
+  useEffect(() => {
+    if (highlightElement !== null) {
+      (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
+        inline: "center",
+        block: "center",
+      });
+    }
+  }, [highlightElement, isLoading, metadata.isLoading]);
 
   const siteHue = getCategorySiteHue(category);
 
@@ -128,49 +144,74 @@ const TrackChartPage = () => {
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
-                {scores?.map((score) => (
-                  <tr
-                    key={score.id}
-                    className={user && score.player.id === user.player ? "highlighted" : ""}
-                  >
-                    <td>{score.rank}</td>
-                    <td>
-                      <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
-                      <Link
-                        to={resolvePage(Pages.PlayerProfile, {
-                          id: score.player.id,
-                        })}
-                      >
-                        {score.player.alias || score.player.name}
-                      </Link>
-                    </td>
-                    <td className={score.category !== category ? "fallthrough" : ""}>
-                      {formatTime(score.value)}
-                    </td>
-                    <td>{getStandardLevel(metadata, score.standard)?.name}</td>
-                    <td>{score.date && formatDate(score.date)}</td>
-                    <td className="icon-cell">
-                      {score?.videoLink && (
-                        <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                          <Icon icon="Video" />
-                        </a>
-                      )}
-                    </td>
-                    <td className="icon-cell">
-                      {score?.ghostLink && (
-                        <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                          <Icon icon="Ghost" />
-                        </a>
-                      )}
-                    </td>
-                    <td className="icon-cell">
-                      {score?.comment && (
-                        <Tooltip text={score.comment}>
-                          <Icon icon="Comment" />
-                        </Tooltip>
-                      )}
-                    </td>
-                  </tr>
+                {scores?.map((score, idx, arr) => (
+                  <>
+                    {highlight &&
+                    score.value > highlight &&
+                    (arr[idx - 1] === undefined || arr[idx - 1].value < highlight) ? (
+                      <>
+                        <tr ref={highlightElement} key={highlight} className="highlighted">
+                          <td />
+                          <td>Your Highlighted Value</td>
+                          <td>{formatTime(highlight)}</td>
+                          <td />
+                          <td />
+                          <td />
+                          <td />
+                          <td />
+                        </tr>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    <tr
+                      key={score.id}
+                      className={
+                        score.player.id === user?.player || score.value === highlight
+                          ? "highlighted"
+                          : ""
+                      }
+                      ref={score.value === highlight ? highlightElement : undefined}
+                    >
+                      <td>{score.rank}</td>
+                      <td>
+                        <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
+                        <Link
+                          to={resolvePage(Pages.PlayerProfile, {
+                            id: score.player.id,
+                          })}
+                        >
+                          {score.player.alias || score.player.name}
+                        </Link>
+                      </td>
+                      <td className={score.category !== category ? "fallthrough" : ""}>
+                        {formatTime(score.value)}
+                      </td>
+                      <td>{getStandardLevel(metadata, score.standard)?.name}</td>
+                      <td>{score.date && formatDate(score.date)}</td>
+                      <td className="icon-cell">
+                        {score?.videoLink && (
+                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Video" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score?.ghostLink && (
+                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Ghost" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score?.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
+                        )}
+                      </td>
+                    </tr>
+                  </>
                 ))}
               </tbody>
             </table>

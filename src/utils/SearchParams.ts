@@ -7,14 +7,23 @@ import { WorldRegion } from "./Defaults";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
-export const paramReplace = (prev: URLSearchParams, param: string, value: string | undefined) => {
+export const paramReplace = (
+  prev: URLSearchParams,
+  param: string,
+  value: string | undefined,
+  overwriteParams: string[] = [],
+) => {
   return {
-    ...(({ [param]: omit, ...rest }) => rest)(Object.fromEntries(prev)),
+    ...Object.fromEntries(
+      Object.entries(Object.fromEntries(prev)).filter(
+        ([k, v]) => ![param, ...overwriteParams].includes(k),
+      ),
+    ),
     ...(value ? { [param]: value } : {}),
   };
 };
 
-export const useCategoryParam = (searchParams: SearchParams) => {
+export const useCategoryParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
   const category =
     Object.values(CategoryEnum).find((value) => value === searchParams[0].get("cat")) ??
     CategoryEnum.NonShortcut;
@@ -22,12 +31,29 @@ export const useCategoryParam = (searchParams: SearchParams) => {
     category,
     setCategory: (category: CategoryEnum) => {
       const cat = category === CategoryEnum.NonShortcut ? undefined : category;
-      searchParams[1]((prev) => paramReplace(prev, "cat", cat));
+      searchParams[1]((prev) => paramReplace(prev, "cat", cat, overwriteParams));
     },
   };
 };
 
-export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boolean = true) => {
+export const useRowHighlightParam = (searchParams: SearchParams) => {
+  const highlight =
+    searchParams[0].get("hl") !== null
+      ? +parseFloat(searchParams[0].get("hl") as string).toFixed(4)
+      : null;
+  return {
+    highlight,
+    setHighlight: (highlight: number) => {
+      searchParams[1]((prev) => paramReplace(prev, "hl", highlight.toString()));
+    },
+  };
+};
+
+export const useLapModeParam = (
+  searchParams: SearchParams,
+  restrictedSet: boolean = true,
+  overwriteParams: string[] = [],
+) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
   const lapMode =
     Object.values(LapModeEnum).find((value) =>
@@ -39,7 +65,7 @@ export const useLapModeParam = (searchParams: SearchParams, restrictedSet: boole
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
       const lap = lapMode === defVal ? undefined : lapMode;
-      searchParams[1]((prev) => paramReplace(prev, "lap", lap));
+      searchParams[1]((prev) => paramReplace(prev, "lap", lap, overwriteParams));
     },
   };
 };
