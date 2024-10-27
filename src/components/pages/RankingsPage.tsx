@@ -138,15 +138,23 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                     {highlight &&
                     ((metric.metricOrder < 0 &&
                       metric.getHighlightValue(stats) < highlight &&
-                      (arr[idx - 1] === undefined || (metric.getHighlightValue(arr[idx - 1]) > highlight))) ||
+                      (arr[idx - 1] === undefined ||
+                        metric.getHighlightValue(arr[idx - 1]) > highlight)) ||
                       (metric.metricOrder > 0 &&
                         metric.getHighlightValue(stats) > highlight &&
-                        (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
+                        (arr[idx - 1] === undefined ||
+                          metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
                       <>
                         <tr key={highlight} className="highlighted">
                           <td />
                           <td>Your Highlighted Value</td>
-                          <td>{metric.metric === "total_record_ratio" ? highlight.toFixed(4) + "%"  : ( metric.metric === "total_score" ? formatTime(highlight) : highlight)}</td>
+                          <td>
+                            {metric.metric === "total_record_ratio"
+                              ? highlight.toFixed(4) + "%"
+                              : metric.metric === "total_score"
+                                ? formatTime(highlight)
+                                : highlight}
+                          </td>
                         </tr>
                       </>
                     ) : (
