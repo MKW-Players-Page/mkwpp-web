@@ -11,7 +11,7 @@ import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
-import { getCategoryNumerical, getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
@@ -43,6 +43,8 @@ const TrackChartPage = () => {
     reg: region.id !== 1 ? region.code.toLowerCase() : null,
     lap: lapMode !== LapModeEnum.Course ? lapMode : null,
   };
+  const prevTrackCat = getHighestValid(category, prevTrack?.categories ?? []);
+  const nextTrackCat = getHighestValid(category, nextTrack?.categories ?? []);
 
   const { isLoading, data: scores } = useApi(
     () =>
@@ -74,12 +76,7 @@ const TrackChartPage = () => {
                 { id: prevTrack.id },
                 {
                   ...queryParamsBaseForRedirect,
-                  cat:
-                    prevTrack?.categories.filter(
-                      (r) => getCategoryNumerical(r) <= getCategoryNumerical(category),
-                    )[0] !== CategoryEnum.NonShortcut
-                      ? category
-                      : null,
+                  cat: prevTrackCat !== CategoryEnum.NonShortcut ? prevTrackCat : null,
                 },
               )}
             >
@@ -98,12 +95,7 @@ const TrackChartPage = () => {
                 { id: nextTrack.id },
                 {
                   ...queryParamsBaseForRedirect,
-                  cat:
-                    nextTrack?.categories.filter(
-                      (r) => getCategoryNumerical(r) <= getCategoryNumerical(category),
-                    )[0] !== CategoryEnum.NonShortcut
-                      ? category
-                      : null,
+                  cat: nextTrackCat !== CategoryEnum.NonShortcut ? nextTrackCat : null,
                 },
               )}
             >

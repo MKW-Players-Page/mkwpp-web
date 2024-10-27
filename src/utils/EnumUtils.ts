@@ -39,6 +39,13 @@ export const getCategoryNumerical = (category: CategoryEnum) => {
   }
 };
 
+export const getHighestValid = (category: CategoryEnum, trackCategories: CategoryEnum[]) => {
+  const x = trackCategories
+    .sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b))
+    .filter((r) => getCategoryNumerical(r) <= getCategoryNumerical(category));
+  return x.at(-1);
+};
+
 /** Return all categories eligible for a given category. For example, eligible categories for
  * Shortcut are Shortcut, since it is the category itself, as well as NonShortcut, since the rules
  * of Shortcut all apply to NonShortcut. NonShortcut returns only itself since it is has the most
