@@ -49,6 +49,8 @@ export interface DropdownItemSetData {
 export interface DropdownItemSetDataChild {
   type: "DropdownItemData" | "DropdownItemSetSetterData";
   element: DropdownItemData | DropdownItemSetSetterData;
+  /** Determines whether this element is rendered or not */
+  hidden?: boolean;
 }
 export interface DropdownItemData {
   /** Displayed Text */
@@ -171,6 +173,7 @@ const Dropdown = ({ data }: DropdownProp) => {
         width={dropdownListPos.width}
       >
         {data.data[selectedItemSetIndex].children.map((dropdownItem) => {
+          if (dropdownItem.hidden) return <></>;
           if (dropdownItem.type === "DropdownItemData")
             if (
               filterString === "" ||

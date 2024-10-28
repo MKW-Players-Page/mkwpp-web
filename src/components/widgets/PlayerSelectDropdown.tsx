@@ -1,6 +1,6 @@
 import api from "../../api";
 import { useApi } from "../../hooks";
-import Dropdown from "./Dropdown";
+import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";
 
 export interface PlayerSelectDropdownProps {
   setId: React.Dispatch<React.SetStateAction<number>>;
@@ -9,6 +9,10 @@ export interface PlayerSelectDropdownProps {
 
 const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
   const { data: players } = useApi(() => api.timetrialsPlayersList());
+  const defaultValue: DropdownItemSetDataChild = {
+    type: "DropdownItemData",
+    element: { text: "Select Player", value: 0 },
+  };
   return (
     <Dropdown
       data={{
@@ -19,13 +23,15 @@ const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
         data: [
           {
             id: 0,
-            children:
-              players?.map((player) => {
+            children: [
+              ...((players?.map((player) => {
                 return {
                   type: "DropdownItemData",
                   element: { text: player.alias ?? player.name, value: player.id },
                 };
-              }) ?? [],
+              }) as DropdownItemSetDataChild[]) ?? []),
+              defaultValue,
+            ],
           },
         ],
       }}
