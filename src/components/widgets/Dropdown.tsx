@@ -1,7 +1,6 @@
 import "./Dropdown.css";
 import Icon from "./Icon";
 import { useEffect, useRef, useState } from "react";
-import { AnyTxtRecord } from "dns";
 
 export interface DropdownProp {
   data: DropdownData;
