@@ -14,24 +14,45 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import LapModeSelect, { LapModeEnum } from "../widgets/LapModeSelect";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 
+interface PlayerSelectFieldProp {
+  nth: number;
+  setId: React.Dispatch<React.SetStateAction<number>>;
+  id: number;
+}
+const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
+  return (
+    <div className="module-row">
+      <span>Player&nbsp;{nth}</span>
+      <PlayerSelectDropdown setId={setId} id={id} />
+    </div>
+  );
+};
+
 export const MatchupHomePage = () => {
-  const [id1, setId1] = useState(0);
-  const [id2, setId2] = useState(0);
+  const idStates = [
+    useState(0),
+    useState(0),
+    useState(0),
+    useState(0),
+    useState(0),
+    useState(0),
+    useState(0),
+    useState(0),
+  ];
 
   return (
     <>
       <h1>Matchup</h1>
       <div className="module">
         <div className="module-content">
-          <div className="module-row">
-            <span>Player&nbsp;1</span>
-            <PlayerSelectDropdown setId={setId1} id={id1} />
-          </div>
-          <div className="module-row">
-            <span>Player&nbsp;2</span>
-            <PlayerSelectDropdown setId={setId2} id={id2} />
-          </div>
-          <Link className="submit-style" to={resolvePage(Pages.Matchup, { id1: id1, id2: id2 })}>Compare</Link>
+          <PlayerSelectField nth={1} id={idStates[0][0]} setId={idStates[0][1]} />
+          <PlayerSelectField nth={2} id={idStates[1][0]} setId={idStates[1][1]} />
+          <Link
+            className="submit-style"
+            to={resolvePage(Pages.Matchup, { id1: idStates[0][0], id2: idStates[1][0] })}
+          >
+            Compare
+          </Link>
         </div>
       </div>
     </>
