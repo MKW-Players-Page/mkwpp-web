@@ -23,10 +23,14 @@ export const MatchupHomePage = () => {
       <h1>Matchup</h1>
       <div className="module">
         <div className="module-content">
-          <p>Player 1</p>
-          <PlayerSelectDropdown setId={setId1} id={id1} />
-          <p>Player 2</p>
-          <PlayerSelectDropdown setId={setId2} id={id2} />
+          <div className="module-row">
+            <span>Player&nbsp;1</span>
+            <PlayerSelectDropdown setId={setId1} id={id1} />
+          </div>
+          <div className="module-row">
+            <span>Player&nbsp;2</span>
+            <PlayerSelectDropdown setId={setId2} id={id2} />
+          </div>
           <Link to={resolvePage(Pages.Matchup, { id1: id1, id2: id2 })}>Compare</Link>
         </div>
       </div>
