@@ -1,26 +1,10 @@
 import "./Dropdown.css";
 import Icon from "./Icon";
 import { useEffect, useRef, useState } from "react";
+import { AnyTxtRecord } from "dns";
 
 export interface DropdownProp {
   data: DropdownData;
-}
-
-interface DropdownItemProp {
-  /** Displayed Text */
-  text: string;
-  /** Item Value */
-  value: any;
-  /** Optional Left-side Icon */
-  leftIcon?: JSX.Element;
-  /** Optional Right-side Icon */
-  rightIcon?: JSX.Element;
-  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
-  _valueSetter?: React.Dispatch<React.SetStateAction<any>>;
-  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
-  _selectedValueItemSetSetter?: React.Dispatch<React.SetStateAction<any>>;
-  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
-  _itemSetId?: number;
 }
 
 interface DropdownListProp {
@@ -138,6 +122,8 @@ const Dropdown = ({ data }: DropdownProp) => {
       });
   }
 
+  const [filterString, setFilterString] = useState("");
+
   return (
     <>
       {data.type === "Normal" ? (
@@ -158,7 +144,23 @@ const Dropdown = ({ data }: DropdownProp) => {
           text={data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
         />
       ) : data.type === "TextInput" ? (
-        <></>
+        <TextInputDropdown
+          disabled={!!data.disabled}
+          selectedValueItemSetChildrenLength={data.data[selectedValueItemSetIndex].children.length}
+          dropdownListShown={dropdownListShown}
+          setDropdownListShown={setDropdownListShown}
+          setSelectedItemSet={setSelectedItemSet}
+          setDropdownListPos={setDropdownListPos}
+          selectedValueItemSet={selectedValueItemSet}
+          setFilterString={setFilterString}
+          leftIcon={
+            data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.leftIcon
+          }
+          rightIcon={
+            data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.rightIcon
+          }
+          text={data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
+        />
       ) : (
         <></>
       )}
@@ -171,17 +173,22 @@ const Dropdown = ({ data }: DropdownProp) => {
       >
         {data.data[selectedItemSetIndex].children.map((dropdownItem) => {
           if (dropdownItem.type === "DropdownItemData")
-            return (
-              <DropdownItem
-                text={dropdownItem.element.text}
-                rightIcon={dropdownItem.element.rightIcon}
-                leftIcon={dropdownItem.element.leftIcon}
-                value={(dropdownItem.element as DropdownItemData).value}
-                _valueSetter={data.valueSetter}
-                _itemSetId={data.data[selectedItemSetIndex].id}
-                _selectedValueItemSetSetter={setSelectedValueItemSet}
-              />
-            );
+            if (
+              filterString === "" ||
+              dropdownItem.element.text.toLowerCase().includes(filterString)
+            )
+              return (
+                <DropdownItem
+                  text={dropdownItem.element.text}
+                  rightIcon={dropdownItem.element.rightIcon}
+                  leftIcon={dropdownItem.element.leftIcon}
+                  value={(dropdownItem.element as DropdownItemData).value}
+                  valueSetter={data.valueSetter}
+                  itemSetId={data.data[selectedItemSetIndex].id}
+                  selectedValueItemSetSetter={setSelectedValueItemSet}
+                  setDropdownListShown={setDropdownListShown}
+                />
+              );
           if (dropdownItem.type === "DropdownItemSetSetterData")
             return (
               <DropdownItemSetSetter
@@ -227,18 +234,6 @@ const NormalDropdown = ({
   if (selectedValueItemSetChildrenLength <= 1) disabled = true;
   if (disabled) setDropdownListShown = () => {};
 
-  document.addEventListener("click", (e) => {
-    if (
-      dropdownListShown &&
-      e.target &&
-      e.target !== dropdown.current &&
-      !(e.target as any).classList.contains("dropdown-itemset-setter")
-    ) {
-      setDropdownListShown(false);
-      setSelectedItemSet(selectedValueItemSet);
-    }
-  });
-
   const dropdown = useRef(null);
 
   useEffect(() => {
@@ -255,12 +250,25 @@ const NormalDropdown = ({
   return (
     <div
       ref={dropdown}
-      className="module dropdown"
-      onClick={(e) => {
-        setDropdownListShown(!dropdownListShown);
-        let boundingBox = (e.target as any).getBoundingClientRect();
+      tabIndex={-1}
+      onFocus={() => {
+        setDropdownListShown(true);
+        let boundingBox = (dropdown.current as any).getBoundingClientRect();
         setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
       }}
+      onBlur={(e) => {
+        if (
+          !(
+            e.relatedTarget?.classList.contains("dropdown-itemset-setter") ||
+            e.relatedTarget?.classList.contains("dropdown-item")
+          ) &&
+          dropdownListShown
+        ) {
+          setSelectedItemSet(selectedValueItemSet);
+          setDropdownListShown(false);
+        }
+      }}
+      className="module dropdown"
     >
       {leftIcon ?? rightIcon ?? <></>}
       <span>{text}</span>
@@ -269,23 +277,154 @@ const NormalDropdown = ({
   );
 };
 
+interface TextInputDropdownProp {
+  disabled: boolean;
+  selectedValueItemSetChildrenLength: number;
+  setDropdownListShown: React.Dispatch<React.SetStateAction<boolean>>;
+  dropdownListShown: boolean;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
+  text: string;
+  setSelectedItemSet: React.Dispatch<React.SetStateAction<number>>;
+  setDropdownListPos: React.Dispatch<React.SetStateAction<any>>;
+  selectedValueItemSet: number;
+  setFilterString: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const TextInputDropdown = ({
+  disabled,
+  selectedValueItemSetChildrenLength,
+  setDropdownListShown,
+  dropdownListShown,
+  leftIcon,
+  rightIcon,
+  text,
+  setSelectedItemSet,
+  setDropdownListPos,
+  selectedValueItemSet,
+  setFilterString,
+}: TextInputDropdownProp) => {
+  if (selectedValueItemSetChildrenLength <= 1) disabled = true;
+  if (disabled) setDropdownListShown = () => {};
+
+  const textarea = useRef(null);
+  const dropdown = useRef(null);
+
+  useEffect(() => {
+    if (!dropdown.current) return;
+    (textarea.current as any).value = text;
+    setFilterString("");
+    const resizeObserver = new ResizeObserver(() => {
+      if (!dropdown.current) return;
+      let boundingBox = (dropdown.current as any).getBoundingClientRect();
+      setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+    });
+    resizeObserver.observe(dropdown.current);
+    return () => resizeObserver.disconnect();
+  }, [setDropdownListPos, text, setFilterString]);
+
+  return (
+    <div
+      tabIndex={-1}
+      onFocus={(e) => {
+        if (e.target.children[0] !== undefined) (e.target.children[0] as any).focus();
+      }}
+      ref={dropdown}
+      className="module dropdown"
+    >
+      {leftIcon ?? rightIcon ?? <></>}
+      <textarea
+        ref={textarea}
+        onFocus={() => {
+          setDropdownListShown(true);
+          let boundingBox = (dropdown.current as any).getBoundingClientRect();
+          setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+          setFilterString("");
+        }}
+        onBlur={(e) => {
+          if (
+            !(
+              e.relatedTarget?.classList.contains("dropdown-itemset-setter") ||
+              e.relatedTarget?.classList.contains("dropdown-item")
+            ) &&
+            dropdownListShown
+          ) {
+            setSelectedItemSet(selectedValueItemSet);
+            setDropdownListShown(false);
+            (textarea.current as any).value = text;
+          }
+        }}
+        onChange={() => {
+          setFilterString((textarea.current as any).value.toLowerCase());
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            if ((dropdown.current as any).nextElementSibling.children[0] !== undefined) {
+              (dropdown.current as any).nextElementSibling.children[0].focus();
+              (textarea.current as any).value = text;
+            } else {
+              (textarea.current as any).value = (textarea.current as any).value.replaceAll(
+                /\n/g,
+                "",
+              );
+            }
+          }
+        }}
+        rows={1}
+        style={
+          {
+            resize: "none",
+            height: "100%",
+            background: "transparent",
+            border: 0,
+            color: "#fff",
+            whiteSpace: "pre-line",
+          } as React.CSSProperties
+        }
+      />
+      {disabled ? <></> : <Icon icon="Caret" />}
+    </div>
+  );
+};
+
+interface DropdownItemProp {
+  /** Displayed Text */
+  text: string;
+  /** Item Value */
+  value: any;
+  /** Optional Left-side Icon */
+  leftIcon?: JSX.Element;
+  /** Optional Right-side Icon */
+  rightIcon?: JSX.Element;
+  /** Value State Setter */
+  valueSetter: React.Dispatch<React.SetStateAction<any>>;
+  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
+  selectedValueItemSetSetter: React.Dispatch<React.SetStateAction<any>>;
+  /** Do not set this value. This is automatically set by <DropdownItemSet>. */
+  setDropdownListShown: React.Dispatch<React.SetStateAction<boolean>>;
+  itemSetId: number;
+}
+
 const DropdownItem = ({
   text,
   leftIcon,
   rightIcon,
   value,
-  _valueSetter,
-  _selectedValueItemSetSetter,
-  _itemSetId,
+  valueSetter,
+  selectedValueItemSetSetter,
+  itemSetId,
+  setDropdownListShown,
 }: DropdownItemProp) => {
-  if (_valueSetter === undefined) return <></>;
-  if (_selectedValueItemSetSetter === undefined) return <></>;
+  if (valueSetter === undefined) return <></>;
+  if (selectedValueItemSetSetter === undefined) return <></>;
   return (
     <div
+      tabIndex={-1}
       className="dropdown-item"
-      onClick={() => {
-        _valueSetter(value);
-        _selectedValueItemSetSetter(_itemSetId);
+      onFocus={(e) => {
+        valueSetter(value);
+        selectedValueItemSetSetter(itemSetId);
+        setDropdownListShown(false);
       }}
     >
       {leftIcon !== undefined ? leftIcon : <></>}
@@ -302,7 +441,7 @@ const DropdownList = ({ shown, children, x, y, width }: DropdownListProp) => {
   style.width = width;
 
   return (
-    <div className="module dropdown-list" style={style}>
+    <div tabIndex={-1} className="module dropdown-list" style={style}>
       {children}
     </div>
   );
@@ -318,9 +457,11 @@ const DropdownItemSetSetter = ({
   if (_selectedItemSetSetter === undefined) return <></>;
   return (
     <div
+      tabIndex={-1}
       className="dropdown-item dropdown-itemset-setter"
-      onClick={() => {
+      onFocus={(e) => {
         _selectedItemSetSetter(toItemSetId);
+        (e.target.parentElement?.previousElementSibling as any).focus();
       }}
     >
       {leftIcon !== undefined ? leftIcon : <></>}
