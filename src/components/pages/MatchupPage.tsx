@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
@@ -11,36 +11,23 @@ import { integerOr } from "../../utils/Numbers";
 import { CategorySelect, FlagIcon } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
-import Form, { Field } from "../widgets/Form";
 import LapModeSelect, { LapModeEnum } from "../widgets/LapModeSelect";
-
-interface MatchupHomePageState {
-  id1: string;
-  id2: string;
-  errors: { [key: string]: string[] };
-  submitting: boolean;
-}
+import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 
 export const MatchupHomePage = () => {
-  const navigate = useNavigate();
-
-  const initialState = { id1: "", id2: "", errors: {}, submitting: false };
-  const [state, setState] = useState<MatchupHomePageState>(initialState);
-
-  const submit = (done: () => void) => {
-    navigate(resolvePage(Pages.Matchup, { id1: state.id1, id2: state.id2 }));
-    done();
-  };
+  const [id1, setId1] = useState(0);
+  const [id2, setId2] = useState(0);
 
   return (
     <>
       <h1>Matchup</h1>
       <div className="module">
         <div className="module-content">
-          <Form state={state} setState={setState} submitLabel="Compare" submit={submit}>
-            <Field type="text" field="id1" label="Player 1" />
-            <Field type="text" field="id2" label="Player 2" />
-          </Form>
+          <p>Player 1</p>
+          <PlayerSelectDropdown setId={setId1} id={id1} />
+          <p>Player 2</p>
+          <PlayerSelectDropdown setId={setId2} id={id2} />
+          <Link to={resolvePage(Pages.Matchup, { id1: id1, id2: id2 })}>Compare</Link>
         </div>
       </div>
     </>
