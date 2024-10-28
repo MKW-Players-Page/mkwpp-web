@@ -31,7 +31,7 @@ export const MatchupHomePage = () => {
             <span>Player&nbsp;2</span>
             <PlayerSelectDropdown setId={setId2} id={id2} />
           </div>
-          <Link to={resolvePage(Pages.Matchup, { id1: id1, id2: id2 })}>Compare</Link>
+          <Link className="submit-style" to={resolvePage(Pages.Matchup, { id1: id1, id2: id2 })}>Compare</Link>
         </div>
       </div>
     </>

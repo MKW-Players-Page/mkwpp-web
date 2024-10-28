@@ -96,7 +96,8 @@ ul {
 }
 
 button,
-input[type="submit"] {
+input[type="submit"],
+.submit-style {
   appearance: none;
   background-color: var(--input-background-color);
   color: var(--text-color);
@@ -118,6 +119,7 @@ input {
 
 button:hover,
 input:hover,
+.submit-style:hover,
 input[type="submit"]:hover {
   background-color: var(--input-background-color-hover);
 }
