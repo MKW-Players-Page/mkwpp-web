@@ -22,7 +22,16 @@ interface PlayerSelectFieldProp {
 const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
   return (
     <div className="module-row">
-      <span>Player&nbsp;{nth}</span>
+      <span
+        style={
+          {
+            textDecorationColor: id === 0 ? "red" : "white",
+            textDecorationLine: id === 0 ? "underline" : "none",
+          } as React.CSSProperties
+        }
+      >
+        Player&nbsp;{nth}
+      </span>
       <PlayerSelectDropdown setId={setId} id={id} />
     </div>
   );
@@ -49,7 +58,11 @@ export const MatchupHomePage = () => {
           <PlayerSelectField nth={2} id={idStates[1][0]} setId={idStates[1][1]} />
           <Link
             className="submit-style"
-            to={resolvePage(Pages.Matchup, { id1: idStates[0][0], id2: idStates[1][0] })}
+            to={
+              idStates[0][0] === 0 || idStates[1][0] === 0
+                ? ""
+                : resolvePage(Pages.Matchup, { id1: idStates[0][0], id2: idStates[1][0] })
+            }
           >
             Compare
           </Link>
