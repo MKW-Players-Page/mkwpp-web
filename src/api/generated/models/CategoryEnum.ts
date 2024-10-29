@@ -14,15 +14,15 @@
 
 
 /**
- * * `0` - Non-Shortcut
- * * `1` - Shortcut
- * * `2` - Unrestricted
+ * * `nonsc` - nonsc
+ * * `sc` - sc
+ * * `unres` - unres
  * @export
  */
 export const CategoryEnum = {
-    NUMBER_0: 0,
-    NUMBER_1: 1,
-    NUMBER_2: 2
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
 } as const;
 export type CategoryEnum = typeof CategoryEnum[keyof typeof CategoryEnum];
 

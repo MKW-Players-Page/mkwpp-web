@@ -13,12 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CategoryEf7Enum } from './CategoryEf7Enum';
+import type { CategoryEnum } from './CategoryEnum';
 import {
-    CategoryEf7EnumFromJSON,
-    CategoryEf7EnumFromJSONTyped,
-    CategoryEf7EnumToJSON,
-} from './CategoryEf7Enum';
+    CategoryEnumFromJSON,
+    CategoryEnumFromJSONTyped,
+    CategoryEnumToJSON,
+} from './CategoryEnum';
 
 /**
  * 
@@ -58,10 +58,10 @@ export interface Score {
     track: number;
     /**
      * 
-     * @type {CategoryEf7Enum}
+     * @type {CategoryEnum}
      * @memberof Score
      */
-    category: CategoryEf7Enum;
+    category: CategoryEnum;
     /**
      * Off for 3lap, on for flap.
      * @type {boolean}
@@ -138,7 +138,7 @@ export function ScoreFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sco
         'value': json['value'],
         'player': json['player'],
         'track': json['track'],
-        'category': CategoryEf7EnumFromJSON(json['category']),
+        'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'standard': json['standard'],
         'recordRatio': json['record_ratio'],
@@ -159,7 +159,7 @@ export function ScoreToJSON(value?: Omit<Score, 'id'> | null): any {
         'value': value['value'],
         'player': value['player'],
         'track': value['track'],
-        'category': CategoryEf7EnumToJSON(value['category']),
+        'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
         'standard': value['standard'],
         'record_ratio': value['recordRatio'],

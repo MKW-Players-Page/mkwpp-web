@@ -49,7 +49,7 @@ export interface RegionStats {
      * @type {CategoryEnum}
      * @memberof RegionStats
      */
-    category?: CategoryEnum;
+    category: CategoryEnum;
     /**
      * OFF for course, ON for lap, and null for both
      * @type {boolean}
@@ -114,6 +114,7 @@ export interface RegionStats {
 export function instanceOfRegionStats(value: object): value is RegionStats {
     if (!('region' in value) || value['region'] === undefined) return false;
     if (!('topScoreCount' in value) || value['topScoreCount'] === undefined) return false;
+    if (!('category' in value) || value['category'] === undefined) return false;
     if (!('rank' in value) || value['rank'] === undefined) return false;
     if (!('participationCount' in value) || value['participationCount'] === undefined) return false;
     if (!('scoreCount' in value) || value['scoreCount'] === undefined) return false;
@@ -137,7 +138,7 @@ export function RegionStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'region': RegionFromJSON(json['region']),
         'topScoreCount': json['top_score_count'],
-        'category': json['category'] == null ? undefined : CategoryEnumFromJSON(json['category']),
+        'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'rank': json['rank'],
         'participationCount': json['participation_count'],

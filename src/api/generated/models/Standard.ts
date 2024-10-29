@@ -13,12 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CategoryEf7Enum } from './CategoryEf7Enum';
+import type { CategoryEnum } from './CategoryEnum';
 import {
-    CategoryEf7EnumFromJSON,
-    CategoryEf7EnumFromJSONTyped,
-    CategoryEf7EnumToJSON,
-} from './CategoryEf7Enum';
+    CategoryEnumFromJSON,
+    CategoryEnumFromJSONTyped,
+    CategoryEnumToJSON,
+} from './CategoryEnum';
 
 /**
  * 
@@ -46,10 +46,10 @@ export interface Standard {
     track: number;
     /**
      * 
-     * @type {CategoryEf7Enum}
+     * @type {CategoryEnum}
      * @memberof Standard
      */
-    category: CategoryEf7Enum;
+    category: CategoryEnum;
     /**
      * Off for 3lap, on for flap.
      * @type {boolean}
@@ -90,7 +90,7 @@ export function StandardFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'id': json['id'],
         'level': json['level'],
         'track': json['track'],
-        'category': CategoryEf7EnumFromJSON(json['category']),
+        'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'value': json['value'] == null ? undefined : json['value'],
     };
@@ -104,7 +104,7 @@ export function StandardToJSON(value?: Omit<Standard, 'id'> | null): any {
         
         'level': value['level'],
         'track': value['track'],
-        'category': CategoryEf7EnumToJSON(value['category']),
+        'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
         'value': value['value'],
     };

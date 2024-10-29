@@ -19,12 +19,12 @@ import {
     PlayerBasicFromJSONTyped,
     PlayerBasicToJSON,
 } from './PlayerBasic';
-import type { CategoryEf7Enum } from './CategoryEf7Enum';
+import type { CategoryEnum } from './CategoryEnum';
 import {
-    CategoryEf7EnumFromJSON,
-    CategoryEf7EnumFromJSONTyped,
-    CategoryEf7EnumToJSON,
-} from './CategoryEf7Enum';
+    CategoryEnumFromJSON,
+    CategoryEnumFromJSONTyped,
+    CategoryEnumToJSON,
+} from './CategoryEnum';
 
 /**
  * 
@@ -52,10 +52,10 @@ export interface PlayerStats {
     region: number;
     /**
      * 
-     * @type {CategoryEf7Enum}
+     * @type {CategoryEnum}
      * @memberof PlayerStats
      */
-    category: CategoryEf7Enum;
+    category: CategoryEnum;
     /**
      * OFF for course, ON for lap, and null for both
      * @type {boolean}
@@ -139,7 +139,7 @@ export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'rank': json['rank'],
         'player': PlayerBasicFromJSON(json['player']),
         'region': json['region'],
-        'category': CategoryEf7EnumFromJSON(json['category']),
+        'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'scoreCount': json['score_count'],
         'totalScore': json['total_score'],
@@ -160,7 +160,7 @@ export function PlayerStatsToJSON(value?: PlayerStats | null): any {
         'rank': value['rank'],
         'player': PlayerBasicToJSON(value['player']),
         'region': value['region'],
-        'category': CategoryEf7EnumToJSON(value['category']),
+        'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
         'score_count': value['scoreCount'],
         'total_score': value['totalScore'],
