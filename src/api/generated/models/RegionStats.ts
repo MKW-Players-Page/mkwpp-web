@@ -13,162 +13,161 @@
  */
 
 import { mapValues } from '../runtime';
-import type { PlayerBasic } from './PlayerBasic';
+import type { CategoryEnum } from './CategoryEnum';
 import {
-    PlayerBasicFromJSON,
-    PlayerBasicFromJSONTyped,
-    PlayerBasicToJSON,
-} from './PlayerBasic';
-import type { CategoryEf7Enum } from './CategoryEf7Enum';
+    CategoryEnumFromJSON,
+    CategoryEnumFromJSONTyped,
+    CategoryEnumToJSON,
+} from './CategoryEnum';
+import type { Region } from './Region';
 import {
-    CategoryEf7EnumFromJSON,
-    CategoryEf7EnumFromJSONTyped,
-    CategoryEf7EnumToJSON,
-} from './CategoryEf7Enum';
+    RegionFromJSON,
+    RegionFromJSONTyped,
+    RegionToJSON,
+} from './Region';
 
 /**
  * 
  * @export
- * @interface PlayerStats
+ * @interface RegionStats
  */
-export interface PlayerStats {
+export interface RegionStats {
     /**
      * 
+     * @type {Region}
+     * @memberof RegionStats
+     */
+    region: Region;
+    /**
+     * Number of top region score per track
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
-    rank: number;
+    topScoreCount: number;
     /**
      * 
-     * @type {PlayerBasic}
-     * @memberof PlayerStats
+     * @type {CategoryEnum}
+     * @memberof RegionStats
      */
-    player: PlayerBasic;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlayerStats
-     */
-    region: number;
-    /**
-     * 
-     * @type {CategoryEf7Enum}
-     * @memberof PlayerStats
-     */
-    category: CategoryEf7Enum;
+    category?: CategoryEnum;
     /**
      * OFF for course, ON for lap, and null for both
      * @type {boolean}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     isLap?: boolean | null;
     /**
+     * 
+     * @type {number}
+     * @memberof RegionStats
+     */
+    rank: number;
+    /**
+     * Number of track-lap combination with enough scores to qualify
+     * @type {number}
+     * @memberof RegionStats
+     */
+    participationCount: number;
+    /**
      * Number of scores qualifying for the category
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     scoreCount: number;
     /**
      * Sum of all lowest scores
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     totalScore: number;
     /**
      * Sum of the rank of all lowest scores
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     totalRank: number;
     /**
      * Sum of the standard of all lowest scores
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     totalStandard: number;
     /**
      * Sum of lowest score to record ratios
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     totalRecordRatio: number;
     /**
      * Sum of track records
      * @type {number}
-     * @memberof PlayerStats
+     * @memberof RegionStats
      */
     totalRecords: number;
-    /**
-     * Sum of leaderboard points
-     * @type {number}
-     * @memberof PlayerStats
-     */
-    leaderboardPoints: number;
 }
 
 
 
 /**
- * Check if a given object implements the PlayerStats interface.
+ * Check if a given object implements the RegionStats interface.
  */
-export function instanceOfPlayerStats(value: object): value is PlayerStats {
-    if (!('rank' in value) || value['rank'] === undefined) return false;
-    if (!('player' in value) || value['player'] === undefined) return false;
+export function instanceOfRegionStats(value: object): value is RegionStats {
     if (!('region' in value) || value['region'] === undefined) return false;
-    if (!('category' in value) || value['category'] === undefined) return false;
+    if (!('topScoreCount' in value) || value['topScoreCount'] === undefined) return false;
+    if (!('rank' in value) || value['rank'] === undefined) return false;
+    if (!('participationCount' in value) || value['participationCount'] === undefined) return false;
     if (!('scoreCount' in value) || value['scoreCount'] === undefined) return false;
     if (!('totalScore' in value) || value['totalScore'] === undefined) return false;
     if (!('totalRank' in value) || value['totalRank'] === undefined) return false;
     if (!('totalStandard' in value) || value['totalStandard'] === undefined) return false;
     if (!('totalRecordRatio' in value) || value['totalRecordRatio'] === undefined) return false;
     if (!('totalRecords' in value) || value['totalRecords'] === undefined) return false;
-    if (!('leaderboardPoints' in value) || value['leaderboardPoints'] === undefined) return false;
     return true;
 }
 
-export function PlayerStatsFromJSON(json: any): PlayerStats {
-    return PlayerStatsFromJSONTyped(json, false);
+export function RegionStatsFromJSON(json: any): RegionStats {
+    return RegionStatsFromJSONTyped(json, false);
 }
 
-export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean): PlayerStats {
+export function RegionStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean): RegionStats {
     if (json == null) {
         return json;
     }
     return {
         
-        'rank': json['rank'],
-        'player': PlayerBasicFromJSON(json['player']),
-        'region': json['region'],
-        'category': CategoryEf7EnumFromJSON(json['category']),
+        'region': RegionFromJSON(json['region']),
+        'topScoreCount': json['top_score_count'],
+        'category': json['category'] == null ? undefined : CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
+        'rank': json['rank'],
+        'participationCount': json['participation_count'],
         'scoreCount': json['score_count'],
         'totalScore': json['total_score'],
         'totalRank': json['total_rank'],
         'totalStandard': json['total_standard'],
         'totalRecordRatio': json['total_record_ratio'],
         'totalRecords': json['total_records'],
-        'leaderboardPoints': json['leaderboard_points'],
     };
 }
 
-export function PlayerStatsToJSON(value?: PlayerStats | null): any {
+export function RegionStatsToJSON(value?: RegionStats | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'rank': value['rank'],
-        'player': PlayerBasicToJSON(value['player']),
-        'region': value['region'],
-        'category': CategoryEf7EnumToJSON(value['category']),
+        'region': RegionToJSON(value['region']),
+        'top_score_count': value['topScoreCount'],
+        'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
+        'rank': value['rank'],
+        'participation_count': value['participationCount'],
         'score_count': value['scoreCount'],
         'total_score': value['totalScore'],
         'total_rank': value['totalRank'],
         'total_standard': value['totalStandard'],
         'total_record_ratio': value['totalRecordRatio'],
         'total_records': value['totalRecords'],
-        'leaderboard_points': value['leaderboardPoints'],
     };
 }
 

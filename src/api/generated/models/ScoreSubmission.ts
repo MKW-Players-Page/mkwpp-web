@@ -25,12 +25,12 @@ import {
     StatusEnumFromJSONTyped,
     StatusEnumToJSON,
 } from './StatusEnum';
-import type { CategoryEnum } from './CategoryEnum';
+import type { CategoryEf7Enum } from './CategoryEf7Enum';
 import {
-    CategoryEnumFromJSON,
-    CategoryEnumFromJSONTyped,
-    CategoryEnumToJSON,
-} from './CategoryEnum';
+    CategoryEf7EnumFromJSON,
+    CategoryEf7EnumFromJSONTyped,
+    CategoryEf7EnumToJSON,
+} from './CategoryEf7Enum';
 
 /**
  * 
@@ -64,10 +64,10 @@ export interface ScoreSubmission {
     track: number;
     /**
      * 
-     * @type {CategoryEnum}
+     * @type {CategoryEf7Enum}
      * @memberof ScoreSubmission
      */
-    category: CategoryEnum;
+    category: CategoryEf7Enum;
     /**
      * Off for 3lap, on for flap.
      * @type {boolean}
@@ -156,7 +156,7 @@ export function ScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boo
         'value': json['value'],
         'player': PlayerBasicFromJSON(json['player']),
         'track': json['track'],
-        'category': CategoryEnumFromJSON(json['category']),
+        'category': CategoryEf7EnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'date': json['date'] == null ? undefined : (new Date(json['date'])),
         'videoLink': json['video_link'] == null ? undefined : json['video_link'],
@@ -177,7 +177,7 @@ export function ScoreSubmissionToJSON(value?: Omit<ScoreSubmission, 'id'|'player
         
         'value': value['value'],
         'track': value['track'],
-        'category': CategoryEnumToJSON(value['category']),
+        'category': CategoryEf7EnumToJSON(value['category']),
         'is_lap': value['isLap'],
         'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
         'video_link': value['videoLink'],

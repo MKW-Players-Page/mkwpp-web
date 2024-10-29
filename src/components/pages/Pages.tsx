@@ -17,6 +17,7 @@ import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
 import { buildQueryParamString } from "../../utils/SearchParams";
+import CountryRankingsPage from "./CountryRankingsPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -62,6 +63,10 @@ export const Pages: PageMap = {
   RankingsTallyPoints: {
     path: "/rankings/tally",
     element: <RankingsPage key="tally" metric={RankingsMetrics.TallyPoints} />,
+  },
+  CountryAF: {
+    path: "/rankings/country",
+    element: <CountryRankingsPage />,
   },
   Rules: {
     path: "/rules",

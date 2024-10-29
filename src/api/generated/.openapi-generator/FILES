@@ -5,6 +5,7 @@ index.ts
 models/Auth.ts
 models/BlogPost.ts
 models/BlogPostSummary.ts
+models/CategoryEf7Enum.ts
 models/CategoryEnum.ts
 models/Player.ts
 models/PlayerBasic.ts
@@ -14,6 +15,7 @@ models/PlayerMatchupScore.ts
 models/PlayerMatchupStats.ts
 models/PlayerStats.ts
 models/Region.ts
+models/RegionStats.ts
 models/RegionTypeEnum.ts
 models/Score.ts
 models/ScoreSubmission.ts

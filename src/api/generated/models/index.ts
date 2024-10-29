@@ -3,6 +3,7 @@
 export * from './Auth';
 export * from './BlogPost';
 export * from './BlogPostSummary';
+export * from './CategoryEf7Enum';
 export * from './CategoryEnum';
 export * from './Player';
 export * from './PlayerBasic';
@@ -12,6 +13,7 @@ export * from './PlayerMatchupScore';
 export * from './PlayerMatchupStats';
 export * from './PlayerStats';
 export * from './Region';
+export * from './RegionStats';
 export * from './RegionTypeEnum';
 export * from './Score';
 export * from './ScoreSubmission';
