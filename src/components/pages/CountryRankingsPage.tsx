@@ -7,25 +7,33 @@ import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
-import { useCategoryParam, useLapModeParam, useRowHighlightParam } from "../../utils/SearchParams";
+import {
+  useCategoryParam,
+  useLapModeParam,
+  useRegionTypeRestrictedParam,
+  useRowHighlightParam,
+  useTopParam,
+} from "../../utils/SearchParams";
+import Dropdown, { DropdownData } from "../widgets/Dropdown";
+import { TimetrialsRegionsRankingsListTypeEnum } from "../../api/generated";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams, ["hl"]);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false, ["hl"]);
+  const { top, setTopNumber } = useTopParam(searchParams, ["hl"]);
+  const { regionType, setRegionType } = useRegionTypeRestrictedParam(searchParams, ["hl"]);
+
   const highlight = useRowHighlightParam(searchParams).highlight;
-
-  const top = 3;
-
   const { isLoading, data } = useApi(
     () =>
       api.timetrialsRegionsRankingsList({
         category,
         lapMode,
         top,
-        type: "continent",
+        type: regionType,
       }),
-    [category, lapMode],
+    [category, lapMode, top, regionType],
   );
 
   const highlightElement = useRef(null);
@@ -40,6 +48,7 @@ const CountryRankingsPage = () => {
 
   const siteHue = getCategorySiteHue(category);
 
+  console.log(regionType);
   return (
     <>
       <h1>Country Rankings</h1>
@@ -51,6 +60,47 @@ const CountryRankingsPage = () => {
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <Dropdown
+            data={
+              {
+                defaultItemSet: 0,
+                value: top,
+                valueSetter: setTopNumber,
+                data: [
+                  {
+                    id: 0,
+                    children: [1, 3, 5, 10].map((r) => {
+                      return { type: "DropdownItemData", element: { text: `Top ${r}`, value: r } };
+                    }),
+                  },
+                ],
+              } as DropdownData
+            }
+          />
+          <Dropdown
+            data={
+              {
+                defaultItemSet: 0,
+                value: regionType,
+                valueSetter: setRegionType,
+                data: [
+                  {
+                    id: 0,
+                    children: [
+                      [TimetrialsRegionsRankingsListTypeEnum.Country, "Countries"],
+                      [TimetrialsRegionsRankingsListTypeEnum.Continent, "Continents"],
+                      [TimetrialsRegionsRankingsListTypeEnum.Subnational, "Subregions"],
+                    ].map(([value, text]) => {
+                      return {
+                        type: "DropdownItemData",
+                        element: { text, value },
+                      };
+                    }),
+                  },
+                ],
+              } as DropdownData
+            }
+          />
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading}>
@@ -90,7 +140,7 @@ const CountryRankingsPage = () => {
                         <td>{stats.rank}</td>
                         <td>
                           <FlagIcon region={stats.region} />
-                          <p>{stats.region.name}</p>
+                          <span>{stats.region.name}</span>
                         </td>
                         <td>{calculatedValueStr}</td>
                       </tr>
