@@ -48,7 +48,6 @@ const CountryRankingsPage = () => {
 
   const siteHue = getCategorySiteHue(category);
 
-  console.log(regionType);
   return (
     <>
       <h1>Country Rankings</h1>
