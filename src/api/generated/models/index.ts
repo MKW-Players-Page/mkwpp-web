@@ -12,6 +12,7 @@ export * from './PlayerMatchupScore';
 export * from './PlayerMatchupStats';
 export * from './PlayerStats';
 export * from './Region';
+export * from './RegionStats';
 export * from './RegionTypeEnum';
 export * from './Score';
 export * from './ScoreSubmission';

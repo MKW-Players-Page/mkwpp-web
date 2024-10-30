@@ -14,9 +14,9 @@
 
 
 /**
- * * `nonsc` - Non-Shortcut
- * * `sc` - Shortcut
- * * `unres` - Unrestricted
+ * * `nonsc` - nonsc
+ * * `sc` - sc
+ * * `unres` - unres
  * @export
  */
 export const CategoryEnum = {
