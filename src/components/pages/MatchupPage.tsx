@@ -287,9 +287,39 @@ const MatchupPage = () => {
                 )}
                 <tr>
                   <th>Tally</th>
-                  <th colSpan={cellSpan}>{matchupData[0].data?.wins} win(s)</th>
-                  <th className={diffClass(0)}>{matchupData[0].data?.ties} draw(s)</th>
-                  <th colSpan={cellSpan}>{matchupData[0].data?.losses} win(s)</th>
+                  <th colSpan={cellSpan}>
+                    {matchupData[0].data !== undefined
+                      ? lapMode === "overall"
+                        ? matchupData[0].data.isLapStats.wins +
+                          matchupData[0].data.isntLapStats.wins
+                        : lapMode === "lap"
+                          ? matchupData[0].data.isLapStats.wins
+                          : matchupData[0].data.isntLapStats.wins
+                      : 0}{" "}
+                    win(s)
+                  </th>
+                  <th className={diffClass(0)}>
+                    {matchupData[0].data !== undefined
+                      ? lapMode === "overall"
+                        ? matchupData[0].data.isLapStats.ties +
+                          matchupData[0].data.isntLapStats.ties
+                        : lapMode === "lap"
+                          ? matchupData[0].data.isLapStats.ties
+                          : matchupData[0].data.isntLapStats.ties
+                      : 0}{" "}
+                    draw(s)
+                  </th>
+                  <th colSpan={cellSpan}>
+                    {matchupData[0].data !== undefined
+                      ? lapMode === "overall"
+                        ? matchupData[0].data.isLapStats.losses +
+                          matchupData[0].data.isntLapStats.losses
+                        : lapMode === "lap"
+                          ? matchupData[0].data.isLapStats.losses
+                          : matchupData[0].data.isntLapStats.losses
+                      : 0}{" "}
+                    win(s)
+                  </th>
                 </tr>
               </tfoot>
             </table>
