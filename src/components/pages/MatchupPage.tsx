@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import api, { CategoryEnum, PlayerMatchupScore, PlayerMatchupStats } from "../../api";
+import { CategoryEnum, PlayerStats } from "../../api";
 import { useApi } from "../../hooks";
 import { formatTime, formatTimeDiff } from "../../utils/Formatters";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
@@ -13,6 +13,12 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import LapModeSelect, { LapModeEnum } from "../widgets/LapModeSelect";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
+import {
+  compareTwoPlayers,
+  getPlayerData,
+  MatchupData,
+  MatchupScore,
+} from "../../utils/MatchupDataCrunch";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -72,6 +78,8 @@ export const MatchupHomePage = () => {
   );
 };
 
+/*  The code of this function is a little clunky, but it can easily be refactored.
+    Mostly waiting on whether this should be used for Rivalries too. */
 const MatchupPage = () => {
   const { id1: id1Str, id2: id2Str } = useParams();
   const id1 = Math.max(integerOr(id1Str, 0), 0);
@@ -87,18 +95,23 @@ const MatchupPage = () => {
   const lapModes = [...(hasCourse ? [false] : []), ...(hasLap ? [true] : [])];
   const cellSpan = lapMode === LapModeEnum.Overall ? 2 : 1;
 
-  const { isLoading, data: matchup } = useApi(
-    () =>
-      api.timetrialsMatchupsRetrieve({
-        pk1: id1,
-        pk2: id2,
-        category,
-        lapMode,
-      }),
-    [id1, id2, category, lapMode],
-  );
+  const matchupData = [
+    useApi(() => getPlayerData(id1, category, lapMode), [id1, category, lapMode]),
+    useApi(() => getPlayerData(id2, category, lapMode), [id2, category, lapMode]),
+  ];
 
-  const scoreClasses = (score?: PlayerMatchupScore) => {
+  const isLoading = matchupData[0].isLoading || matchupData[1].isLoading;
+
+  const newData = compareTwoPlayers(
+    metadata.tracks ?? [],
+    matchupData[0].data,
+    matchupData[1].data,
+  );
+  if (!isLoading) {
+    matchupData[0].data = (newData as MatchupData[])[0];
+    matchupData[1].data = (newData as MatchupData[])[1];
+  }
+  const scoreClasses = (score?: MatchupScore) => {
     if (!score) {
       return "";
     }
@@ -108,7 +121,7 @@ const MatchupPage = () => {
     );
   };
 
-  const diff = (p1Score?: PlayerMatchupScore) => {
+  const diff = (p1Score?: MatchupScore) => {
     if (p1Score) {
       return p1Score.difference !== null ? formatTimeDiff(p1Score.difference) : "-";
     } else {
@@ -123,27 +136,37 @@ const MatchupPage = () => {
     return diff === 0 ? "diff-eq" : diff > 0 ? "diff-gt" : "diff-lt";
   };
 
-  const total = (stats: PlayerMatchupStats, metric: keyof PlayerMatchupStats) => {
-    return stats[metric];
+  const total = (stats: PlayerStats, metric: keyof PlayerStats) => {
+    if (stats === undefined || typeof stats[metric] !== "number") return 0;
+    return stats[metric] as number;
   };
 
-  const average = (stats: PlayerMatchupStats, metric: keyof PlayerMatchupStats) => {
-    return stats.scoreCount > 0 ? stats[metric] / stats.scoreCount : 0;
+  const average = (stats: PlayerStats, metric: keyof PlayerStats) => {
+    if (
+      stats !== undefined &&
+      stats !== null &&
+      typeof stats[metric] === "number" &&
+      stats.scoreCount > 0
+    ) {
+      return (stats[metric] as number) / stats.scoreCount;
+    } else {
+      return 0;
+    }
   };
 
   const statsRow = (
     label: string,
-    metric: keyof PlayerMatchupStats,
+    metric: keyof PlayerStats,
     ascending: boolean,
-    calcFunc: (stats: PlayerMatchupStats, metric: keyof PlayerMatchupStats) => number,
+    calcFunc: (stats: PlayerStats, metric: keyof PlayerStats) => number,
     displayFunc: (value: number, isDiff: boolean) => string,
   ) => {
-    if (!matchup) {
+    if (!matchupData) {
       return <></>;
     }
 
-    const p1Value = calcFunc(matchup.p1.stats, metric);
-    const p2Value = calcFunc(matchup.p2.stats, metric);
+    const p1Value = calcFunc(matchupData[0].data?.statsData as PlayerStats, metric);
+    const p2Value = calcFunc(matchupData[1].data?.statsData as PlayerStats, metric);
     const diff = p1Value - p2Value;
 
     return (
@@ -161,9 +184,7 @@ const MatchupPage = () => {
   return (
     <>
       {/** Redirect if any id is invalid or API fetch failed */}
-      {(id1 === 0 || id2 === 0 || (!isLoading && !matchup)) && (
-        <Navigate to={resolvePage(Pages.MatchupHome)} />
-      )}
+      {(id1 === 0 || id2 === 0) && <Navigate to={resolvePage(Pages.MatchupHome)} />}
       <Link to={resolvePage(Pages.MatchupHome)}>&lt; Back</Link>
       <h1>Matchup</h1>
       <OverwriteColor hue={siteHue}>
@@ -173,103 +194,105 @@ const MatchupPage = () => {
         </div>
         <div className="module">
           <Deferred isWaiting={metadata.isLoading || isLoading}>
-            {matchup && (
-              <table>
-                <thead>
-                  <tr>
-                    <th />
-                    <th colSpan={cellSpan}>
-                      <FlagIcon region={getRegionById(metadata, matchup.p1.region || 0)} />
-                      {matchup.p1.alias || matchup.p1.name}
-                    </th>
-                    <th />
-                    <th colSpan={cellSpan}>
-                      <FlagIcon region={getRegionById(metadata, matchup.p2.region || 0)} />
-                      {matchup.p2.alias || matchup.p2.name}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>Track</th>
-                    {hasCourse && <th>Course</th>}
-                    {hasLap && <th>Lap</th>}
-                    <th>Diff</th>
-                    {hasCourse && <th>Course</th>}
-                    {hasLap && <th>Lap</th>}
-                  </tr>
-                </thead>
-                <tbody className="table-hover-rows">
-                  {metadata.tracks?.map((track) =>
-                    lapModes.map((isLap) => {
-                      const p1Score = matchup.p1.scores.find(
-                        (score) => score.track === track.id && score.isLap === isLap,
-                      );
-                      const p2Score = matchup.p2.scores.find(
-                        (score) => score.track === track.id && score.isLap === isLap,
-                      );
-                      return (
-                        <tr key={`${isLap ? "l" : "c"}${track.id}`}>
-                          {(!isLap || lapMode === LapModeEnum.Lap) && (
-                            <td rowSpan={cellSpan}>
-                              <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                                {track.name}
-                              </Link>
-                            </td>
-                          )}
-                          {isLap && lapMode === LapModeEnum.Overall && <td />}
-                          <td className={scoreClasses(p1Score)}>
-                            {p1Score ? formatTime(p1Score.value) : "-"}
+            <table>
+              <thead>
+                <tr>
+                  <th />
+                  <th colSpan={cellSpan}>
+                    <FlagIcon
+                      region={getRegionById(metadata, matchupData[0].data?.playerData.region ?? 0)}
+                    />
+                    {matchupData[0].data?.playerData.alias ?? matchupData[0].data?.playerData.name}
+                  </th>
+                  <th />
+                  <th colSpan={cellSpan}>
+                    <FlagIcon
+                      region={getRegionById(metadata, matchupData[1].data?.playerData.region ?? 0)}
+                    />
+                    {matchupData[1].data?.playerData.alias ?? matchupData[1].data?.playerData.name}
+                  </th>
+                </tr>
+                <tr>
+                  <th>Track</th>
+                  {hasCourse && <th>Course</th>}
+                  {hasLap && <th>Lap</th>}
+                  <th>Diff</th>
+                  {hasCourse && <th>Course</th>}
+                  {hasLap && <th>Lap</th>}
+                </tr>
+              </thead>
+              <tbody className="table-hover-rows">
+                {metadata.tracks?.map((track) =>
+                  lapModes.map((isLap) => {
+                    const p1Score = matchupData[0].data?.scoreData.find(
+                      (score) => score.track === track.id && score.isLap === isLap,
+                    ) as MatchupScore | undefined;
+                    const p2Score = matchupData[1].data?.scoreData.find(
+                      (score) => score.track === track.id && score.isLap === isLap,
+                    ) as MatchupScore | undefined;
+                    return (
+                      <tr key={`${isLap ? "l" : "c"}${track.id}`}>
+                        {(!isLap || lapMode === LapModeEnum.Lap) && (
+                          <td rowSpan={cellSpan}>
+                            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+                              {track.name}
+                            </Link>
                           </td>
-                          {!isLap && lapMode === LapModeEnum.Overall && <td />}
-                          <td className={diffClass(p1Score?.difference)}>{diff(p1Score)}</td>
-                          {isLap && lapMode === LapModeEnum.Overall && <td />}
-                          <td className={scoreClasses(p2Score)}>
-                            {p2Score ? formatTime(p2Score.value) : "-"}
-                          </td>
-                          {!isLap && lapMode === LapModeEnum.Overall && <td />}
-                        </tr>
-                      );
-                    }),
-                  )}
-                </tbody>
-                <tfoot>
-                  {statsRow("Total", "totalScore", true, total, (value, isDiff) =>
-                    isDiff ? formatTimeDiff(value) : formatTime(value),
-                  )}
-                  {statsRow(
-                    "AF",
-                    "totalRank",
-                    true,
-                    average,
-                    (value, isDiff) =>
-                      (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
-                  )}
-                  {statsRow(
-                    "ARR",
-                    "totalStandard",
-                    true,
-                    average,
-                    (value, isDiff) =>
-                      (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
-                  )}
-                  {statsRow(
-                    "PR:WR",
-                    "totalRecordRatio",
-                    false,
-                    average,
-                    (value, isDiff) =>
-                      (isDiff ? (value < 0 ? "-" : "+") : "") +
-                      (Math.abs(value) * 100).toFixed(4) +
-                      "%",
-                  )}
-                  <tr>
-                    <th>Tally</th>
-                    <th colSpan={cellSpan}>{matchup.p1.totalWins} win(s)</th>
-                    <th className={diffClass(0)}>{matchup.p1.totalTies} draw(s)</th>
-                    <th colSpan={cellSpan}>{matchup.p2.totalWins} win(s)</th>
-                  </tr>
-                </tfoot>
-              </table>
-            )}
+                        )}
+                        {isLap && lapMode === LapModeEnum.Overall && <td />}
+                        <td className={scoreClasses(p1Score)}>
+                          {p1Score ? formatTime(p1Score.value) : "-"}
+                        </td>
+                        {!isLap && lapMode === LapModeEnum.Overall && <td />}
+                        <td className={diffClass(p1Score?.difference)}>{diff(p1Score)}</td>
+                        {isLap && lapMode === LapModeEnum.Overall && <td />}
+                        <td className={scoreClasses(p2Score)}>
+                          {p2Score ? formatTime(p2Score.value) : "-"}
+                        </td>
+                        {!isLap && lapMode === LapModeEnum.Overall && <td />}
+                      </tr>
+                    );
+                  }),
+                )}
+              </tbody>
+              <tfoot>
+                {statsRow("Total", "totalScore", true, total, (value, isDiff) =>
+                  isDiff ? formatTimeDiff(value) : formatTime(value),
+                )}
+                {statsRow(
+                  "AF",
+                  "totalRank",
+                  true,
+                  average,
+                  (value, isDiff) =>
+                    (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
+                )}
+                {statsRow(
+                  "ARR",
+                  "totalStandard",
+                  true,
+                  average,
+                  (value, isDiff) =>
+                    (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
+                )}
+                {statsRow(
+                  "PR:WR",
+                  "totalRecordRatio",
+                  false,
+                  average,
+                  (value, isDiff) =>
+                    (isDiff ? (value < 0 ? "-" : "+") : "") +
+                    (Math.abs(value) * 100).toFixed(4) +
+                    "%",
+                )}
+                <tr>
+                  <th>Tally</th>
+                  <th colSpan={cellSpan}>{matchupData[0].data?.wins} win(s)</th>
+                  <th className={diffClass(0)}>{matchupData[0].data?.ties} draw(s)</th>
+                  <th colSpan={cellSpan}>{matchupData[0].data?.losses} win(s)</th>
+                </tr>
+              </tfoot>
+            </table>
           </Deferred>
         </div>
       </OverwriteColor>

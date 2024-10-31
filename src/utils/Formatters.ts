@@ -29,9 +29,9 @@ export const formatTimeDiff = (diff: number) => {
   const seconds = Math.trunc((Math.abs(diff) % 60000) / 1000);
   const milliseconds = Math.abs(diff) % 1000;
   if (minutes > 0) {
-    return `${diff < 0 ? "-" : "\xa0"}${minutes}'${String(seconds).padStart(2, "0")}"${String(milliseconds).padStart(3, "0")}`;
+    return `${diff < 0 ? "-" : diff > 0 ? "+" : "\xa0"}${minutes}'${String(seconds).padStart(2, "0")}"${String(milliseconds).padStart(3, "0")}`;
   } else {
-    return `${diff < 0 ? "-" : "\xa0"}${seconds}"${String(milliseconds).padStart(3, "0")}`;
+    return `${diff < 0 ? "-" : diff > 0 ? "+" : "\xa0"}${seconds}"${String(milliseconds).padStart(3, "0")}`;
   }
 };
 
