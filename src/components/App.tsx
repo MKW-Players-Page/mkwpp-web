@@ -8,6 +8,7 @@ import { Header, Navbar } from "./global";
 import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";
 import { getLang, I18nContext, Language } from "../utils/i18n/i18n";
+import i18nJson from "../utils/i18n/i18n.json";
 
 interface AppUserState {
   isLoading: boolean;
@@ -37,7 +38,7 @@ const App = () => {
   return (
     <>
       <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
-        <I18nContext.Provider value={{ lang: langCode, setLang }}>
+        <I18nContext.Provider value={{ lang: langCode, setLang, translations: i18nJson }}>
           <Header />
           <Navbar />
           <div className="content">
