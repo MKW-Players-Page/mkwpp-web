@@ -1,250 +1,560 @@
 {
   "headerSubmit": {
     "it": "Carica",
-    "en": "Submit"
+    "en": "Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "headerLogOut": {
     "it": "Esci",
-    "en": "Log Out"
+    "en": "Log Out",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "headerLogIn": {
     "it": "Entra",
-    "en": "Log In"
+    "en": "Log In",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "headerJoin": {
     "it": "Registrati",
-    "en": "Join"
+    "en": "Join",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelHome": {
     "it": "Home",
-    "en": "Home"
+    "en": "Home",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelRules": {
     "it": "Regole",
-    "en": "Rules"
+    "en": "Rules",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelPlayers": {
     "it": "Player",
-    "en": "Players"
+    "en": "Players",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarTitleCourses": {
     "it": "Tempi",
-    "en": "Courses"
+    "en": "Courses",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelRecords": {
     "it": "Record",
-    "en": "Records"
+    "en": "Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelTop10s": {
     "it": "Top 10",
-    "en": "Top 10s"
+    "en": "Top 10s",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelCharts": {
     "it": "Classifiche",
-    "en": "Charts"
+    "en": "Charts",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelStandards": {
     "it": "Standards",
-    "en": "Standards"
+    "en": "Standards",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarTitlePlayers": {
     "it": "Giocatori",
-    "en": "Players"
+    "en": "Players",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelAverageFinish": {
     "it": "Media Posizioni",
-    "en": "Average Finish"
+    "en": "Average Finish",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelAverageStandardTitle": {
     "it": "Media Standard",
-    "en": "Average Rank Rating"
+    "en": "Average Rank Rating",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelAverageRecordRatioTitle": {
     "it": "PR:WR",
-    "en": "PR:WR"
+    "en": "PR:WR",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelTotalTimeTitle": {
     "it": "Tempo Totale",
-    "en": "Total Time"
+    "en": "Total Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelTallyPointsTitle": {
     "it": "Conteggio Punti",
-    "en": "Tally Points"
+    "en": "Tally Points",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelCountryAverageFinishTitle": {
     "it": "AF Nazioni",
-    "en": "Country AF"
+    "en": "Country AF",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarTitleInteractive": {
     "it": "Interattivo",
-    "en": "Interactive"
+    "en": "Interactive",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMatchups": {
     "it": "Scontri",
-    "en": "Matchups"
+    "en": "Matchups",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarTitleHistorical": {
     "it": "Storico",
-    "en": "Historical"
+    "en": "Historical",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelWRHistory": {
     "it": "Storico Record",
-    "en": "WR History"
+    "en": "WR History",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelNewsArchive": {
     "it": "Archivio Notizie",
-    "en": "News Archive"
+    "en": "News Archive",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarTitleLinks": {
     "it": "Link",
-    "en": "Links"
+    "en": "Links",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelSMKPlayersPage": {
     "it": "Players' Page di SMK",
-    "en": "SMK Players' Page"
+    "en": "SMK Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMK64PlayersPage": {
     "it": "Players' Page di MK64",
-    "en": "MK64 Players' Page"
+    "en": "MK64 Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMKSCPlayersPage": {
     "it": "Players' Page di MKSC",
-    "en": "MKSC Players' Page"
+    "en": "MKSC Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMKDDPlayersPage": {
     "it": "Players' Page di MKDD",
-    "en": "MKDD Players' Page"
+    "en": "MKDD Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMKDSPlayersPage": {
     "it": "Players' Page di MKDS",
-    "en": "MKDS Players' Page"
+    "en": "MKDS Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMK7PlayersPage": {
     "it": "Players' Page di MK7",
-    "en": "MK7 Players' Page"
+    "en": "MK7 Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelMK8PlayersPage": {
     "it": "Players' Page di MK8",
-    "en": "MK8 Players' Page"
+    "en": "MK8 Players' Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelCombinedRanks": {
     "it": "Combined Ranks",
-    "en": "Combined Ranks"
+    "en": "Combined Ranks",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "navbarLabelForums": {
     "it": "Forum",
-    "en": "Forums"
+    "en": "Forums",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageAverageFinishTitle": {
     "it": "Media Posizioni",
-    "en": "Average Finish"
+    "en": "Average Finish",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageAverageFinishDescription": {
     "it": "Media Posizioni (AF in inglese, da Average Finish) è la media delle posizioni di un player su tutte le piste.",
-    "en": "Average Finish (AF for short) is the average of a player's ranking across all tracks."
+    "en": "Average Finish (AF for short) is the average of a player's ranking across all tracks.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageAverageStandardTitle": {
     "it": "Media Standard",
-    "en": "Average Rank Rating"
+    "en": "Average Rank Rating",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageAverageStandardDescription": {
     "it": "Media Standard (ARR in Inglese, da Average Rank Rating) è lo standard corrispondente alla media degli standard di un player su tutte le piste.",
-    "en": "Average Rank Rating (ARR for short) is the average standard of a player's time across all tracks."
+    "en": "Average Rank Rating (ARR for short) is the average standard of a player's time across all tracks.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageAverageRecordRatioTitle": {
     "it": "PR:WR",
-    "en": "PR:WR"
+    "en": "PR:WR",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageAverageRecordRatioDescription": {
     "it": "il PR:WR, dall'Inglese \"Personal Record to World Record ratio\", è la media tra le proporzioni dei tempi dei PB di un player rispetto ai Record Mondiali di tutte le piste.",
-    "en": "Personal Record to World Record ratio (PR:WR for short) is calculated by dividing the world record time by the player's time. Players are ranked by the average of their PR:WR across all tracks."
+    "en": "Personal Record to World Record ratio (PR:WR for short) is calculated by dividing the world record time by the player's time. Players are ranked by the average of their PR:WR across all tracks.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageTotalTimeTitle": {
     "it": "Tempo Totale",
-    "en": "Total Time"
+    "en": "Total Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageTotalTimeDescription": {
     "it": "Il Tempo Totale è la somma di tutti i tempi di un player.",
-    "en": "Total time is the sum of a player's fastest times across all tracks."
+    "en": "Total time is the sum of a player's fastest times across all tracks.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageTallyPointsTitle": {
     "it": "Conteggio Punti",
-    "en": "Tally Points"
+    "en": "Tally Points",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "rankingsPageTallyPointsDescription": {
     "it": "Il Conteggio Punti è la somma dei punti guadagnati da un player sulle Top 10 di ogni pista. Ogni posizione in una Top 10 vale (11 - posizione) punti, ciò vuol dire che il 1° guadagna 10 punti, il 2° guadagna 9 punti, e così via fino al 10°.",
-    "en": "Tally Points is the sum of points gained by a Player on Track Top 10s. Each rank in a Top 10 is worth (11 - rank) points, meaning 1st place gains 10pts, 2nd place gains 9pts, and so on. Everyone outside of the Top 10 gains no points."
+    "en": "Tally Points is the sum of points gained by a Player on Track Top 10s. Each rank in a Top 10 is worth (11 - rank) points, meaning 1st place gains 10pts, 2nd place gains 9pts, and so on. Everyone outside of the Top 10 gains no points.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageLocation": {
     "it": "Locazione",
-    "en": "Location"
+    "en": "Location",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageAlias": {
     "it": "Alias",
-    "en": "Alias"
+    "en": "Alias",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageDateJoined": {
     "it": "Data di Registrazione",
-    "en": "Date Joined"
+    "en": "Date Joined",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageLastActivity": {
     "it": "Ultima Attività",
-    "en": "Last Activity"
+    "en": "Last Activity",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageAverageFinishTitle": {
     "it": "Media Posizioni",
-    "en": "Average Finish"
+    "en": "Average Finish",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageAverageStandardTitle": {
     "it": "Media Standard",
-    "en": "Average Rank Rating"
+    "en": "Average Rank Rating",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageAverageRecordRatioTitle": {
     "it": "PR:WR",
-    "en": "PR:WR"
+    "en": "PR:WR",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageTotalTimeTitle": {
     "it": "Tempo Totale",
-    "en": "Total Time"
+    "en": "Total Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageTallyPointsTitle": {
     "it": "Conteggio Punti",
-    "en": "Tally Points"
+    "en": "Tally Points",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageDefaultBio": {
     "it": "Questo player non ha nulla da dire su se stesso...",
-    "en": "This player doesn't have anything to say about themselves..."
+    "en": "This player doesn't have anything to say about themselves...",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageTrackColumn": {
     "it": "Pista",
-    "en": "Track"
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageCourseTimeColumn": {
     "it": "3 Giri",
-    "en": "Course"
+    "en": "Course",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageLapTimeColumn": {
     "it": "Giro",
-    "en": "Lap"
+    "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageTimeColumn": {
     "it": "Tempo",
-    "en": "Time"
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageRankColumn": {
     "it": "Posizione",
-    "en": "Rank"
+    "en": "Rank",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageStandardColumn": {
     "it": "Standard",
-    "en": "Standard"
+    "en": "Standard",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePagePRWRColumn": {
     "it": "PR:WR",
-    "en": "PR:WR"
+    "en": "PR:WR",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   },
   "playerProfilePageDateColumn": {
     "it": "Data",
-    "en": "Date"
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   }
 }

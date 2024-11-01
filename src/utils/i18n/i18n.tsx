@@ -11,6 +11,11 @@ export type TranslationKey = keyof typeof i18nJson;
 export enum Language {
   Italian = "it",
   English = "en",
+  French = "fr",
+  German = "de",
+  Japanese = "jp",
+  Portuguese = "pt",
+  Spanish = "es",
 }
 
 /** Get selected language from localStorage. */
@@ -50,6 +55,11 @@ export const LanguageDropdown = () => {
               children: [
                 [Language.English, "English", <Flag flag={"gb" as keyof typeof Flags} />],
                 [Language.Italian, "Italiano", <Flag flag={"it" as keyof typeof Flags} />],
+                [Language.French, "Français", <Flag flag={"fr" as keyof typeof Flags} />],
+                [Language.German, "Deutsch", <Flag flag={"de" as keyof typeof Flags} />],
+                [Language.Japanese, "日本語", <Flag flag={"jp" as keyof typeof Flags} />],
+                [Language.Portuguese, "Português", <Flag flag={"pt" as keyof typeof Flags} />],
+                [Language.Spanish, "Español", <Flag flag={"es" as keyof typeof Flags} />],
               ].map(([value, text, rightIcon]) => {
                 return {
                   type: "DropdownItemData",
