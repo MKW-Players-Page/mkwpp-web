@@ -38,5 +38,77 @@
   "rankingsPageTallyPointsDescription": {
     "it": "Il Conteggio Punti è la somma dei punti guadagnati da un player sulle Top 10 di ogni pista. Ogni posizione in una Top 10 vale (11 - posizione) punti, ciò vuol dire che il 1° guadagna 10 punti, il 2° guadagna 9 punti, e così via fino al 10°.",
     "en": "Tally Points is the sum of points gained by a Player on Track Top 10s. Each rank in a Top 10 is worth (11 - rank) points, meaning 1st place gains 10pts, 2nd place gains 9pts, and so on. Everyone outside of the Top 10 gains no points."
+  },
+  "playerProfilePageLocation": {
+    "it": "Locazione",
+    "en": "Location"
+  },
+  "playerProfilePageAlias": {
+    "it": "Alias",
+    "en": "Alias"
+  },
+  "playerProfilePageDateJoined": {
+    "it": "Data di Registrazione",
+    "en": "Date Joined"
+  },
+  "playerProfilePageLastActivity": {
+    "it": "Ultima Attività",
+    "en": "Last Activity"
+  },
+  "playerProfilePageAverageFinishTitle": {
+    "it": "Media Posizioni",
+    "en": "Average Finish"
+  },
+  "playerProfilePageAverageStandardTitle": {
+    "it": "Media Standard",
+    "en": "Average Rank Rating"
+  },
+  "playerProfilePageAverageRecordRatioTitle": {
+    "it": "PR:WR",
+    "en": "PR:WR"
+  },
+  "playerProfilePageTotalTimeTitle": {
+    "it": "Tempo Totale",
+    "en": "Total Time"
+  },
+  "playerProfilePageTallyPointsTitle": {
+    "it": "Conteggio Punti",
+    "en": "Tally Points"
+  },
+  "playerProfilePageDefaultBio": {
+    "it": "Questo player non ha nulla da dire su se stesso...",
+    "en": "This player doesn't have anything to say about themselves..."
+  },
+  "playerProfilePageTrackColumn": {
+    "it": "Pista",
+    "en": "Track"
+  },
+  "playerProfilePageCourseTimeColumn": {
+    "it": "3 Giri",
+    "en": "Course"
+  },
+  "playerProfilePageLapTimeColumn": {
+    "it": "Giro",
+    "en": "Lap"
+  },
+  "playerProfilePageTimeColumn": {
+    "it": "Tempo",
+    "en": "Time"
+  },
+  "playerProfilePageRankColumn": {
+    "it": "Posizione",
+    "en": "Rank"
+  },
+  "playerProfilePageStandardColumn": {
+    "it": "Standard",
+    "en": "Standard"
+  },
+  "playerProfilePagePRWRColumn": {
+    "it": "PR:WR",
+    "en": "PR:WR"
+  },
+  "playerProfilePageDateColumn": {
+    "it": "Data",
+    "en": "Date"
   }
 }
