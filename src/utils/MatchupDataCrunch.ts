@@ -102,8 +102,8 @@ export const compareTwoPlayers = (
         (p2Score as MatchupScore).difference = null;
         continue;
       } else if (p2Score === undefined) {
-        newData[0][winLossTxt].losses++;
-        newData[1][winLossTxt].wins++;
+        newData[0][winLossTxt].wins++;
+        newData[1][winLossTxt].losses++;
         p1Score.difference = null;
         continue;
       }
