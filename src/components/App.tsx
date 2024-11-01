@@ -7,6 +7,7 @@ import "./App.css";
 import { Header, Navbar } from "./global";
 import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";
+import { getLang, I18nContext, Language } from "../utils/i18n/i18n";
 
 interface AppUserState {
   isLoading: boolean;
@@ -18,6 +19,12 @@ const App = () => {
 
   const initialUserState = { isLoading: true };
   const [user, setUserState] = useState<AppUserState>(initialUserState);
+  const [langCode, setLangCodeState] = useState(getLang());
+
+  const setLang = (langCode: Language): void => {
+    setLangCodeState(langCode);
+    window.localStorage.setItem("langCode", langCode);
+  };
 
   const setUser = (user?: User) => {
     setUserState({ isLoading: false, user });
@@ -30,13 +37,15 @@ const App = () => {
   return (
     <>
       <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
-        <Header />
-        <Navbar />
-        <div className="content">
-          <MetadataContext.Provider value={metadata}>
-            <Outlet />
-          </MetadataContext.Provider>
-        </div>
+        <I18nContext.Provider value={{ lang: langCode, setLang }}>
+          <Header />
+          <Navbar />
+          <div className="content">
+            <MetadataContext.Provider value={metadata}>
+              <Outlet />
+            </MetadataContext.Provider>
+          </div>
+        </I18nContext.Provider>
       </UserContext.Provider>
     </>
   );

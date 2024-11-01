@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import "./Navbar.css";
 import { Pages, resolvePage } from "../pages";
+import { LanguageDropdown } from "../../utils/i18n/i18n";
 
 /** Properties of a link element in the navbar */
 interface NavbarItem {
@@ -173,6 +174,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-content">
+        <LanguageDropdown />
         {SECTIONS.map((section) => (
           <section key={section.title || "Default"}>
             {section.title && <h5>{section.title}</h5>}

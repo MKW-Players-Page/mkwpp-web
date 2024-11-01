@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  max-height: 50%;
+  max-height: 50vh;
   overflow-y: scroll;
 }
 
