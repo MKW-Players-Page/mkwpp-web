@@ -28,6 +28,7 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
       <Dropdown
         data={
           {
+            type: "Normal",
             value: getValue(field),
             valueSetter: onChange,
             disabled: disabled,

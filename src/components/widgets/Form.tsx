@@ -157,6 +157,7 @@ export const SelectField = ({ options, field, label }: SelectFieldProps) => {
       <Dropdown
         data={
           {
+            type: "Normal",
             value: getValue(field),
             valueSetter: onChange,
             disabled: disabled,

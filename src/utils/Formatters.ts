@@ -14,6 +14,27 @@ export const formatTime = (time: number) => {
   return `${minutes}'${String(seconds).padStart(2, "0")}"${String(milliseconds).padStart(3, "0")}`;
 };
 
+/** Given a time difference in milliseconds, format it to a string in the form of
+ *
+ * `-m'ss"000` or `-s"000`
+ *
+ * where `-` is present if diff is negative, `m` stands for minutes and only when greater than 0,
+ * `s` stands for seconds, and `0` stands for milliseconds.
+ *
+ * @param time The time difference in milliseconds
+ * @returns A human readable time difference string
+ */
+export const formatTimeDiff = (diff: number) => {
+  const minutes = Math.trunc(Math.abs(diff) / 60000);
+  const seconds = Math.trunc((Math.abs(diff) % 60000) / 1000);
+  const milliseconds = Math.abs(diff) % 1000;
+  if (minutes > 0) {
+    return `${diff < 0 ? "-" : diff > 0 ? "+" : "\xa0"}${minutes}'${String(seconds).padStart(2, "0")}"${String(milliseconds).padStart(3, "0")}`;
+  } else {
+    return `${diff < 0 ? "-" : diff > 0 ? "+" : "\xa0"}${seconds}"${String(milliseconds).padStart(3, "0")}`;
+  }
+};
+
 /** Parses a time string which follows either of these formats:
  *
  * `m'ss"000`, `ss"000`, `s"000`, `m:ss.000`, `ss.000`, `s.000`

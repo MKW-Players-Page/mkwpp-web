@@ -91,6 +91,15 @@ const SECTIONS: NavbarSection[] = [
     ],
   },
   {
+    title: "Interactive",
+    items: [
+      {
+        label: "Matchups",
+        url: resolvePage(Pages.MatchupHome),
+      },
+    ],
+  },
+  {
     title: "Historical",
     items: [
       {

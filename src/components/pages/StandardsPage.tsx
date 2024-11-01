@@ -53,6 +53,7 @@ const StandardsPage = () => {
           <Dropdown
             data={
               {
+                type: "Normal",
                 value: levelId,
                 valueSetter: setLevelId,
                 defaultItemSet: 0,

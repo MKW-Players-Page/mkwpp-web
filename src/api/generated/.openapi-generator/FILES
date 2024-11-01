@@ -14,6 +14,7 @@ models/PlayerMatchupScore.ts
 models/PlayerMatchupStats.ts
 models/PlayerStats.ts
 models/Region.ts
+models/RegionStats.ts
 models/RegionTypeEnum.ts
 models/Score.ts
 models/ScoreSubmission.ts

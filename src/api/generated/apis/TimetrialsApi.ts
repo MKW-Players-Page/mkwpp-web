@@ -20,6 +20,7 @@ import type {
   PlayerMatchup,
   PlayerStats,
   Region,
+  RegionStats,
   Score,
   ScoreSubmission,
   ScoreWithPlayer,
@@ -38,6 +39,8 @@ import {
     PlayerStatsToJSON,
     RegionFromJSON,
     RegionToJSON,
+    RegionStatsFromJSON,
+    RegionStatsToJSON,
     ScoreFromJSON,
     ScoreToJSON,
     ScoreSubmissionFromJSON,
@@ -88,6 +91,13 @@ export interface TimetrialsRecordsListRequest {
     category: TimetrialsRecordsListCategoryEnum;
     lapMode?: TimetrialsRecordsListLapModeEnum;
     region?: number;
+}
+
+export interface TimetrialsRegionsRankingsListRequest {
+    category: TimetrialsRegionsRankingsListCategoryEnum;
+    lapMode: TimetrialsRegionsRankingsListLapModeEnum;
+    top: number;
+    type: TimetrialsRegionsRankingsListTypeEnum;
 }
 
 export interface TimetrialsStandardsListRequest {
@@ -507,6 +517,74 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
+    async timetrialsRegionsRankingsListRaw(requestParameters: TimetrialsRegionsRankingsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RegionStats>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsRegionsRankingsList().'
+            );
+        }
+
+        if (requestParameters['lapMode'] == null) {
+            throw new runtime.RequiredError(
+                'lapMode',
+                'Required parameter "lapMode" was null or undefined when calling timetrialsRegionsRankingsList().'
+            );
+        }
+
+        if (requestParameters['top'] == null) {
+            throw new runtime.RequiredError(
+                'top',
+                'Required parameter "top" was null or undefined when calling timetrialsRegionsRankingsList().'
+            );
+        }
+
+        if (requestParameters['type'] == null) {
+            throw new runtime.RequiredError(
+                'type',
+                'Required parameter "type" was null or undefined when calling timetrialsRegionsRankingsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['lapMode'] != null) {
+            queryParameters['lap_mode'] = requestParameters['lapMode'];
+        }
+
+        if (requestParameters['top'] != null) {
+            queryParameters['top'] = requestParameters['top'];
+        }
+
+        if (requestParameters['type'] != null) {
+            queryParameters['type'] = requestParameters['type'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/regions/rankings/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RegionStatsFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsRegionsRankingsList(requestParameters: TimetrialsRegionsRankingsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RegionStats>> {
+        const response = await this.timetrialsRegionsRankingsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
     async timetrialsStandardsListRaw(requestParameters: TimetrialsStandardsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StandardLevel>>> {
         const queryParameters: any = {};
 
@@ -839,6 +917,33 @@ export const TimetrialsRecordsListLapModeEnum = {
     Lap: 'lap'
 } as const;
 export type TimetrialsRecordsListLapModeEnum = typeof TimetrialsRecordsListLapModeEnum[keyof typeof TimetrialsRecordsListLapModeEnum];
+/**
+ * @export
+ */
+export const TimetrialsRegionsRankingsListCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsRegionsRankingsListCategoryEnum = typeof TimetrialsRegionsRankingsListCategoryEnum[keyof typeof TimetrialsRegionsRankingsListCategoryEnum];
+/**
+ * @export
+ */
+export const TimetrialsRegionsRankingsListLapModeEnum = {
+    Course: 'course',
+    Lap: 'lap',
+    Overall: 'overall'
+} as const;
+export type TimetrialsRegionsRankingsListLapModeEnum = typeof TimetrialsRegionsRankingsListLapModeEnum[keyof typeof TimetrialsRegionsRankingsListLapModeEnum];
+/**
+ * @export
+ */
+export const TimetrialsRegionsRankingsListTypeEnum = {
+    Continent: 'continent',
+    Country: 'country',
+    Subnational: 'subnational'
+} as const;
+export type TimetrialsRegionsRankingsListTypeEnum = typeof TimetrialsRegionsRankingsListTypeEnum[keyof typeof TimetrialsRegionsRankingsListTypeEnum];
 /**
  * @export
  */
