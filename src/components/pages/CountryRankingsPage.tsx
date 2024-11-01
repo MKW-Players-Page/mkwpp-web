@@ -55,16 +55,30 @@ const CountryRankingsPage = () => {
 
   const siteHue = getCategorySiteHue(category);
 
-    const text = "";
+    let text = "err";
     switch (top) {
-        case TimetrialsRegionsRankingsListTopEnum.All
-    }
+        case TimetrialsRegionsRankingsListTopEnum.Records:
+          text = "The best";
+          break;
+        case TimetrialsRegionsRankingsListTopEnum.Top3:
+          text = "The best 3";
+          break;
+        case TimetrialsRegionsRankingsListTopEnum.Top5:
+          text = "The best 5";
+          break;
+        case TimetrialsRegionsRankingsListTopEnum.Top10:
+          text = "The best 10";
+          break;
+        case TimetrialsRegionsRankingsListTopEnum.All:
+          text = "All the";
+          break;
+      }
   
   return (
     <>
       <h1>Country Rankings</h1>
       <p>
-        The best {top} times for each country are taken for each track, and averaged. This value is
+        {text} times for each country are taken for each track, and averaged. This value is
         then averaged over all tracks, like Average Finish.
       </p>
       <OverwriteColor hue={siteHue}>
