@@ -88,6 +88,7 @@ const CountryRankingsPage = () => {
           <Dropdown
             data={
               {
+                type: "Normal",
                 defaultItemSet: 0,
                 value: top,
                 valueSetter: setTopNumber,
@@ -110,6 +111,7 @@ const CountryRankingsPage = () => {
           <Dropdown
             data={
               {
+                type: "Normal",
                 defaultItemSet: 0,
                 value: regionType,
                 valueSetter: setRegionType,
