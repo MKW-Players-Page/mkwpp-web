@@ -15,6 +15,126 @@
     "it": "Registrati",
     "en": "Join"
   },
+  "navbarLabelHome": {
+    "it": "Home",
+    "en": "Home"
+  },
+  "navbarLabelRules": {
+    "it": "Regole",
+    "en": "Rules"
+  },
+  "navbarLabelPlayers": {
+    "it": "Player",
+    "en": "Players"
+  },
+  "navbarTitleCourses": {
+    "it": "Tempi",
+    "en": "Courses"
+  },
+  "navbarLabelRecords": {
+    "it": "Record",
+    "en": "Records"
+  },
+  "navbarLabelTop10s": {
+    "it": "Top 10",
+    "en": "Top 10s"
+  },
+  "navbarLabelCharts": {
+    "it": "Classifiche",
+    "en": "Charts"
+  },
+  "navbarLabelStandards": {
+    "it": "Standards",
+    "en": "Standards"
+  },
+  "navbarTitlePlayers": {
+    "it": "Giocatori",
+    "en": "Players"
+  },
+  "navbarLabelAverageFinish": {
+    "it": "Media Posizioni",
+    "en": "Average Finish"
+  },
+  "navbarLabelAverageStandardTitle": {
+    "it": "Media Standard",
+    "en": "Average Rank Rating"
+  },
+  "navbarLabelAverageRecordRatioTitle": {
+    "it": "PR:WR",
+    "en": "PR:WR"
+  },
+  "navbarLabelTotalTimeTitle": {
+    "it": "Tempo Totale",
+    "en": "Total Time"
+  },
+  "navbarLabelTallyPointsTitle": {
+    "it": "Conteggio Punti",
+    "en": "Tally Points"
+  },
+  "navbarLabelCountryAverageFinishTitle": {
+    "it": "AF Nazioni",
+    "en": "Country AF"
+  },
+  "navbarTitleInteractive": {
+    "it": "Interattivo",
+    "en": "Interactive"
+  },
+  "navbarLabelMatchups": {
+    "it": "Scontri",
+    "en": "Matchups"
+  },
+  "navbarTitleHistorical": {
+    "it": "Storico",
+    "en": "Historical"
+  },
+  "navbarLabelWRHistory": {
+    "it": "Storico Record",
+    "en": "WR History"
+  },
+  "navbarLabelNewsArchive": {
+    "it": "Archivio Notizie",
+    "en": "News Archive"
+  },
+  "navbarTitleLinks": {
+    "it": "Link",
+    "en": "Links"
+  },
+  "navbarLabelSMKPlayersPage": {
+    "it": "Players' Page di SMK",
+    "en": "SMK Players' Page"
+  },
+  "navbarLabelMK64PlayersPage": {
+    "it": "Players' Page di MK64",
+    "en": "MK64 Players' Page"
+  },
+  "navbarLabelMKSCPlayersPage": {
+    "it": "Players' Page di MKSC",
+    "en": "MKSC Players' Page"
+  },
+  "navbarLabelMKDDPlayersPage": {
+    "it": "Players' Page di MKDD",
+    "en": "MKDD Players' Page"
+  },
+  "navbarLabelMKDSPlayersPage": {
+    "it": "Players' Page di MKDS",
+    "en": "MKDS Players' Page"
+  },
+  "navbarLabelMK7PlayersPage": {
+    "it": "Players' Page di MK7",
+    "en": "MK7 Players' Page"
+  },
+  "navbarLabelMK8PlayersPage": {
+    "it": "Players' Page di MK8",
+    "en": "MK8 Players' Page"
+  },
+  "navbarLabelCombinedRanks": {
+    "it": "Combined Ranks",
+    "en": "Combined Ranks"
+  },
+  "navbarLabelForums": {
+    "it": "Forum",
+    "en": "Forums"
+  },
   "rankingsPageAverageFinishTitle": {
     "it": "Media Posizioni",
     "en": "Average Finish"

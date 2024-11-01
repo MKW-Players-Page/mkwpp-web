@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 
 import "./Navbar.css";
 import { Pages, resolvePage } from "../pages";
-import { LanguageDropdown } from "../../utils/i18n/i18n";
+import { I18nContext, LanguageDropdown, TranslationKey } from "../../utils/i18n/i18n";
+import { useContext } from "react";
 
 /** Properties of a link element in the navbar */
 interface NavbarItem {
   /** The label displayed by the link element */
-  label: string;
+  label: TranslationKey;
   /** Where the item should navigate to */
   url: string;
   /** Whether the link is external and should be a regular `a` element, or is internal and should
@@ -24,7 +25,7 @@ interface NavbarItem {
  * If the title is omitted, no heading will be displayed. Only the first section should omit title.
  */
 interface NavbarSection {
-  title?: string;
+  title?: TranslationKey;
   items: NavbarItem[];
 }
 
@@ -32,137 +33,137 @@ const SECTIONS: NavbarSection[] = [
   {
     items: [
       {
-        label: "Home",
+        label: "navbarLabelHome",
         url: resolvePage(Pages.Home),
       },
       {
-        label: "Rules",
+        label: "navbarLabelRules",
         url: resolvePage(Pages.Rules),
       },
       {
-        label: "Players",
+        label: "navbarLabelPlayers",
         url: resolvePage(Pages.PlayerList),
       },
     ],
   },
   {
-    title: "Courses",
+    title: "navbarTitleCourses",
     items: [
       {
-        label: "Records",
+        label: "navbarLabelRecords",
         url: resolvePage(Pages.TrackRecords),
       },
       {
-        label: "Top 10s",
+        label: "navbarLabelTop10s",
         url: resolvePage(Pages.TrackTopsHome),
       },
       {
-        label: "Charts",
+        label: "navbarLabelCharts",
         url: resolvePage(Pages.TrackList),
       },
       {
-        label: "Standards",
+        label: "navbarLabelStandards",
         url: resolvePage(Pages.Standards),
       },
     ],
   },
   {
-    title: "Players",
+    title: "navbarTitlePlayers",
     items: [
       {
-        label: "Average Finish",
+        label: "navbarLabelAverageFinish",
         url: resolvePage(Pages.RankingsAverageFinish),
       },
       {
-        label: "ARR",
+        label: "navbarLabelAverageStandardTitle",
         url: resolvePage(Pages.RankingsAverageStandard),
       },
       {
-        label: "PR:WR",
+        label: "navbarLabelAverageRecordRatioTitle",
         url: resolvePage(Pages.RankingsAverageRecordRatio),
       },
       {
-        label: "Total Times",
+        label: "navbarLabelTotalTimeTitle",
         url: resolvePage(Pages.RankingsTotalTime),
       },
       {
-        label: "Tally Points",
+        label: "navbarLabelTallyPointsTitle",
         url: resolvePage(Pages.RankingsTallyPoints),
       },
       {
-        label: "Country AF",
+        label: "navbarLabelCountryAverageFinishTitle",
         url: resolvePage(Pages.CountryAF),
       },
     ],
   },
   {
-    title: "Interactive",
+    title: "navbarTitleInteractive",
     items: [
       {
-        label: "Matchups",
+        label: "navbarLabelMatchups",
         url: resolvePage(Pages.MatchupHome),
       },
     ],
   },
   {
-    title: "Historical",
+    title: "navbarTitleHistorical",
     items: [
       {
-        label: "WR History",
+        label: "navbarLabelWRHistory",
         url: "//mkwrs.com/mkwii/",
         external: true,
       },
       {
-        label: "News Archive",
+        label: "navbarLabelNewsArchive",
         url: resolvePage(Pages.BlogList),
       },
     ],
   },
   {
-    title: "Links",
+    title: "navbarTitleLinks",
     items: [
       {
-        label: "SMK Players' Page",
+        label: "navbarLabelSMKPlayersPage",
         url: "//www.mariokart64.com/smk/",
         external: true,
       },
       {
-        label: "MK64 Players' Page",
+        label: "navbarLabelMK64PlayersPage",
         url: "//www.mariokart64.com/mk64/",
         external: true,
       },
       {
-        label: "MKSC Players' Page",
+        label: "navbarLabelMKSCPlayersPage",
         url: "//www.mariokart64.com/mksc/",
         external: true,
       },
       {
-        label: "MKDD Players' Page",
+        label: "navbarLabelMKDDPlayersPage",
         url: "//www.mariokart64.com/mkdd/",
         external: true,
       },
       {
-        label: "MKDS Players' Page",
+        label: "navbarLabelMKDSPlayersPage",
         url: "//www.mariokart64.com/mkds/",
         external: true,
       },
       {
-        label: "MK7 Players' Page",
+        label: "navbarLabelMK7PlayersPage",
         url: "//www.mariokart64.com/mk7/",
         external: true,
       },
       {
-        label: "MK8 Players' Page",
+        label: "navbarLabelMK8PlayersPage",
         url: "//www.mariokart64.com/mk8/",
         external: true,
       },
       {
-        label: "Combined Ranks",
+        label: "navbarLabelCombinedRanks",
         url: "//www.mariokart64.com/combinedranks/",
         external: true,
       },
       {
-        label: "Forums",
+        label: "navbarLabelForums",
         url: "//www.mariokart64.com/yabb",
         external: true,
       },
@@ -171,22 +172,24 @@ const SECTIONS: NavbarSection[] = [
 ];
 
 const Navbar = () => {
+  const { translations, lang } = useContext(I18nContext);
+
   return (
     <nav className="navbar">
       <div className="navbar-content">
         <LanguageDropdown />
         {SECTIONS.map((section) => (
-          <section key={section.title || "Default"}>
-            {section.title && <h5>{section.title}</h5>}
+          <section key={section.title ?? "Default"}>
+            {section.title && <h5>{translations[section.title][lang]}</h5>}
             <ul>
               {section.items.map((item) => (
                 <li key={item.label}>
                   {item.external ? (
                     <a href={item.url} rel="noopener noreferrer">
-                      {item.label}
+                      {translations[item.label][lang]}
                     </a>
                   ) : (
-                    <Link to={item.url}>{item.label}</Link>
+                    <Link to={item.url}>{translations[item.label][lang]}</Link>
                   )}
                 </li>
               ))}
