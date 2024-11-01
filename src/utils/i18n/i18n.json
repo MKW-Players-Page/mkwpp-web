@@ -1,41 +1,41 @@
 {
-  "rankingsAverageFinishTitle": {
+  "rankingsPageAverageFinishTitle": {
     "it": "Media Posizioni",
     "en": "Average Finish"
   },
-  "rankingsAverageFinishDescription": {
+  "rankingsPageAverageFinishDescription": {
     "it": "Media Posizioni (AF in inglese, da Average Finish) è la media delle posizioni di un player su tutte le piste.",
     "en": "Average Finish (AF for short) is the average of a player's ranking across all tracks."
   },
-  "rankingsAverageStandardTitle": {
+  "rankingsPageAverageStandardTitle": {
     "it": "Media Standard",
     "en": "Average Rank Rating"
   },
-  "rankingsAverageStandardDescription": {
+  "rankingsPageAverageStandardDescription": {
     "it": "Media Standard (ARR in Inglese, da Average Rank Rating) è lo standard corrispondente alla media degli standard di un player su tutte le piste.",
     "en": "Average Rank Rating (ARR for short) is the average standard of a player's time across all tracks."
   },
-  "rankingsAverageRecordRatioTitle": {
+  "rankingsPageAverageRecordRatioTitle": {
     "it": "PR:WR",
     "en": "PR:WR"
   },
-  "rankingsAverageRecordRatioDescription": {
+  "rankingsPageAverageRecordRatioDescription": {
     "it": "il PR:WR, dall'Inglese \"Personal Record to World Record ratio\", è la media tra le proporzioni dei tempi dei PB di un player rispetto ai Record Mondiali di tutte le piste.",
     "en": "Personal Record to World Record ratio (PR:WR for short) is calculated by dividing the world record time by the player's time. Players are ranked by the average of their PR:WR across all tracks."
   },
-  "rankingsTotalTimeTitle": {
+  "rankingsPageTotalTimeTitle": {
     "it": "Tempo Totale",
     "en": "Total Time"
   },
-  "rankingsTotalTimeDescription": {
+  "rankingsPageTotalTimeDescription": {
     "it": "Il Tempo Totale è la somma di tutti i tempi di un player.",
     "en": "Total time is the sum of a player's fastest times across all tracks."
   },
-  "rankingsTallyPointsTitle": {
+  "rankingsPageTallyPointsTitle": {
     "it": "Conteggio Punti",
     "en": "Tally Points"
   },
-  "rankingsTallyPointsDescription": {
+  "rankingsPageTallyPointsDescription": {
     "it": "Il Conteggio Punti è la somma dei punti guadagnati da un player sulle Top 10 di ogni pista. Ogni posizione in una Top 10 vale (11 - posizione) punti, ciò vuol dire che il 1° guadagna 10 punti, il 2° guadagna 9 punti, e così via fino al 10°.",
     "en": "Tally Points is the sum of points gained by a Player on Track Top 10s. Each rank in a Top 10 is worth (11 - rank) points, meaning 1st place gains 10pts, 2nd place gains 9pts, and so on. Everyone outside of the Top 10 gains no points."
   }

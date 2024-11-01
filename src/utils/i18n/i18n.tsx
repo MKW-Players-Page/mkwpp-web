@@ -1,7 +1,9 @@
 import Dropdown, { DropdownData } from "../../components/widgets/Dropdown";
 
 import { createContext, useContext } from "react";
+/* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
+
 import Flag, { Flags } from "../../components/widgets/Flags";
 
 export type TranslationKey = keyof typeof i18nJson;
