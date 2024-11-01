@@ -47,6 +47,21 @@ export const getHighestValid = (category: CategoryEnum, trackCategories: Categor
   return x.at(-1);
 };
 
+export const countryAFTopNumerical = (x: TimetrialsRegionsRankingsListTopEnum) => {
+  switch (x) {
+    case "records":
+      return 1;
+    case "top3":
+      return 2;
+    case "top5":
+      return 3;
+    case "top10":
+      return 4;
+    case "all":
+      return 5;
+  }
+};
+
 export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) => {
   switch (x) {
     case "records":

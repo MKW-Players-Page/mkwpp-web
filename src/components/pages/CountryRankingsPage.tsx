@@ -5,7 +5,11 @@ import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks";
-import { countryAFTopToString, getCategorySiteHue } from "../../utils/EnumUtils";
+import {
+  countryAFTopNumerical,
+  countryAFTopToString,
+  getCategorySiteHue,
+} from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import {
   useCategoryParam,
@@ -71,12 +75,14 @@ const CountryRankingsPage = () => {
                 data: [
                   {
                     id: 0,
-                    children: Object.values(TimetrialsRegionsRankingsListTopEnum).map((r) => {
-                      return {
-                        type: "DropdownItemData",
-                        element: { text: countryAFTopToString(r), value: r },
-                      };
-                    }),
+                    children: Object.values(TimetrialsRegionsRankingsListTopEnum)
+                      .sort((a, b) => countryAFTopNumerical(a) - countryAFTopNumerical(b))
+                      .map((r) => {
+                        return {
+                          type: "DropdownItemData",
+                          element: { text: countryAFTopToString(r), value: r },
+                        };
+                      }),
                   },
                 ],
               } as DropdownData
