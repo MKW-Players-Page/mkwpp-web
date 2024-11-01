@@ -51,6 +51,8 @@ export interface DropdownItemSetDataChild {
   element: DropdownItemData | DropdownItemSetSetterData;
   /** Determines whether this element is rendered or not */
   hidden?: boolean;
+  /** This only applies on Dropdown type TextInput. The text gets deleted on focus. */
+  autodeleteText?: boolean;
 }
 export interface DropdownItemData {
   /** Displayed Text */
@@ -161,6 +163,9 @@ const Dropdown = ({ data }: DropdownProp) => {
             data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.rightIcon
           }
           text={data.data[selectedValueItemSetIndex].children[selectedValueIndex].element.text}
+          autodeleteText={
+            !!data.data[selectedValueItemSetIndex].children[selectedValueIndex].autodeleteText
+          }
         />
       ) : (
         <></>
@@ -291,6 +296,7 @@ interface TextInputDropdownProp {
   setDropdownListPos: React.Dispatch<React.SetStateAction<any>>;
   selectedValueItemSet: number;
   setFilterString: React.Dispatch<React.SetStateAction<string>>;
+  autodeleteText: boolean;
 }
 
 const TextInputDropdown = ({
@@ -305,6 +311,7 @@ const TextInputDropdown = ({
   setDropdownListPos,
   selectedValueItemSet,
   setFilterString,
+  autodeleteText,
 }: TextInputDropdownProp) => {
   if (selectedValueItemSetChildrenLength <= 1) disabled = true;
   if (disabled) setDropdownListShown = () => {};
@@ -338,6 +345,7 @@ const TextInputDropdown = ({
       <textarea
         ref={textarea}
         onFocus={() => {
+          if (autodeleteText) (textarea.current as any).value = "";
           setDropdownListShown(true);
           let boundingBox = (dropdown.current as any).getBoundingClientRect();
           setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });

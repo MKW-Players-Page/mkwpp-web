@@ -11,6 +11,8 @@ const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
   const { data: players } = useApi(() => api.timetrialsPlayersList());
   const defaultValue: DropdownItemSetDataChild = {
     type: "DropdownItemData",
+    hidden: true,
+    autodeleteText: true,
     element: { text: "Select Player", value: 0 },
   };
   return (
