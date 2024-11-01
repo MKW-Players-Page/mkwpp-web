@@ -88,6 +88,10 @@ const SECTIONS: NavbarSection[] = [
         label: "Tally Points",
         url: resolvePage(Pages.RankingsTallyPoints),
       },
+      {
+        label: "Country AF",
+        url: resolvePage(Pages.CountryAF),
+      },
     ],
   },
   {

@@ -96,7 +96,7 @@ export interface TimetrialsRecordsListRequest {
 export interface TimetrialsRegionsRankingsListRequest {
     category: TimetrialsRegionsRankingsListCategoryEnum;
     lapMode: TimetrialsRegionsRankingsListLapModeEnum;
-    top: number;
+    top: TimetrialsRegionsRankingsListTopEnum;
     type: TimetrialsRegionsRankingsListTypeEnum;
 }
 
@@ -935,6 +935,17 @@ export const TimetrialsRegionsRankingsListLapModeEnum = {
     Overall: 'overall'
 } as const;
 export type TimetrialsRegionsRankingsListLapModeEnum = typeof TimetrialsRegionsRankingsListLapModeEnum[keyof typeof TimetrialsRegionsRankingsListLapModeEnum];
+/**
+ * @export
+ */
+export const TimetrialsRegionsRankingsListTopEnum = {
+    All: 'all',
+    Records: 'records',
+    Top10: 'top10',
+    Top3: 'top3',
+    Top5: 'top5'
+} as const;
+export type TimetrialsRegionsRankingsListTopEnum = typeof TimetrialsRegionsRankingsListTopEnum[keyof typeof TimetrialsRegionsRankingsListTopEnum];
 /**
  * @export
  */

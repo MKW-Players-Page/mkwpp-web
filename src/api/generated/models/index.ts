@@ -20,6 +20,7 @@ export * from './ScoreWithPlayer';
 export * from './Standard';
 export * from './StandardLevel';
 export * from './StatusEnum';
+export * from './TopScoreCountEnum';
 export * from './Track';
 export * from './TrackCup';
 export * from './User';

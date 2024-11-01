@@ -4,6 +4,10 @@ import { CategoryEnum, Region } from "../api";
 import { LapModeEnum } from "../components/widgets/LapModeSelect";
 import { MetadataContext } from "./Metadata";
 import { WorldRegion } from "./Defaults";
+import {
+  TimetrialsRegionsRankingsListTopEnum,
+  TimetrialsRegionsRankingsListTypeEnum,
+} from "../api/generated";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -66,6 +70,53 @@ export const useLapModeParam = (
     setLapMode: (lapMode: LapModeEnum) => {
       const lap = lapMode === defVal ? undefined : lapMode;
       searchParams[1]((prev) => paramReplace(prev, "lap", lap, overwriteParams));
+    },
+  };
+};
+
+export const useTopParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
+  const gottenTop = searchParams[0].get("top") ?? TimetrialsRegionsRankingsListTopEnum.Records;
+  const top =
+    Object.values(TimetrialsRegionsRankingsListTopEnum).find((value) => value === gottenTop) ??
+    TimetrialsRegionsRankingsListTopEnum.Records;
+  return {
+    top,
+    setTopNumber: (top: TimetrialsRegionsRankingsListTopEnum) => {
+      searchParams[1]((prev) =>
+        paramReplace(
+          prev,
+          "top",
+          top === TimetrialsRegionsRankingsListTopEnum.Records ? undefined : top,
+          overwriteParams,
+        ),
+      );
+    },
+  };
+};
+
+export const useRegionTypeRestrictedParam = (
+  searchParams: SearchParams,
+  overwriteParams: string[] = [],
+) => {
+  const gottenRegionType =
+    (searchParams[0].get("regty") as TimetrialsRegionsRankingsListTypeEnum) ??
+    TimetrialsRegionsRankingsListTypeEnum.Country;
+  const regionType =
+    [
+      TimetrialsRegionsRankingsListTypeEnum.Subnational,
+      TimetrialsRegionsRankingsListTypeEnum.Continent,
+    ].find((value) => value === gottenRegionType) ?? TimetrialsRegionsRankingsListTypeEnum.Country;
+  return {
+    regionType,
+    setRegionType: (regionType: TimetrialsRegionsRankingsListTypeEnum) => {
+      searchParams[1]((prev) =>
+        paramReplace(
+          prev,
+          "regty",
+          regionType === TimetrialsRegionsRankingsListTypeEnum.Country ? undefined : regionType,
+          overwriteParams,
+        ),
+      );
     },
   };
 };

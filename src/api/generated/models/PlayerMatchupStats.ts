@@ -50,7 +50,7 @@ export interface PlayerMatchupStats {
      */
     totalRecordRatio: number;
     /**
-     * Sum of track records
+     * Number of records
      * @type {number}
      * @memberof PlayerMatchupStats
      */
