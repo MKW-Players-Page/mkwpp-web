@@ -33,6 +33,7 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
     <Dropdown
       data={
         {
+          type: "Normal",
           value: value,
           valueSetter: onChange,
           disabled: disabled,
