@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TopScoreCountEnum } from './TopScoreCountEnum';
+import {
+    TopScoreCountEnumFromJSON,
+    TopScoreCountEnumFromJSONTyped,
+    TopScoreCountEnumToJSON,
+} from './TopScoreCountEnum';
 import type { CategoryEnum } from './CategoryEnum';
 import {
     CategoryEnumFromJSON,
@@ -39,11 +45,11 @@ export interface RegionStats {
      */
     region: Region;
     /**
-     * Number of top region score per track
-     * @type {number}
+     * 
+     * @type {TopScoreCountEnum}
      * @memberof RegionStats
      */
-    topScoreCount: number;
+    topScoreCount: TopScoreCountEnum;
     /**
      * 
      * @type {CategoryEnum}
@@ -99,7 +105,7 @@ export interface RegionStats {
      */
     totalRecordRatio: number;
     /**
-     * Sum of track records
+     * Number of records
      * @type {number}
      * @memberof RegionStats
      */
@@ -137,7 +143,7 @@ export function RegionStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
     return {
         
         'region': RegionFromJSON(json['region']),
-        'topScoreCount': json['top_score_count'],
+        'topScoreCount': TopScoreCountEnumFromJSON(json['top_score_count']),
         'category': CategoryEnumFromJSON(json['category']),
         'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
         'rank': json['rank'],
@@ -158,7 +164,7 @@ export function RegionStatsToJSON(value?: RegionStats | null): any {
     return {
         
         'region': RegionToJSON(value['region']),
-        'top_score_count': value['topScoreCount'],
+        'top_score_count': TopScoreCountEnumToJSON(value['topScoreCount']),
         'category': CategoryEnumToJSON(value['category']),
         'is_lap': value['isLap'],
         'rank': value['rank'],

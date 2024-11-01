@@ -4,7 +4,10 @@ import { CategoryEnum, Region } from "../api";
 import { LapModeEnum } from "../components/widgets/LapModeSelect";
 import { MetadataContext } from "./Metadata";
 import { WorldRegion } from "./Defaults";
-import { TimetrialsRegionsRankingsListTypeEnum } from "../api/generated";
+import {
+  TimetrialsRegionsRankingsListTopEnum,
+  TimetrialsRegionsRankingsListTypeEnum,
+} from "../api/generated";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -72,13 +75,20 @@ export const useLapModeParam = (
 };
 
 export const useTopParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
-  const gottenTop = parseInt(searchParams[0].get("top") ?? "1");
-  const top = [1, 3, 5, 10].find((value) => value === gottenTop) ?? 1;
+  const gottenTop = searchParams[0].get("top") ?? TimetrialsRegionsRankingsListTopEnum.Records;
+  const top =
+    Object.values(TimetrialsRegionsRankingsListTopEnum).find((value) => value === gottenTop) ??
+    TimetrialsRegionsRankingsListTopEnum.Records;
   return {
     top,
-    setTopNumber: (top: number) => {
+    setTopNumber: (top: TimetrialsRegionsRankingsListTopEnum) => {
       searchParams[1]((prev) =>
-        paramReplace(prev, "top", top === 1 ? undefined : top.toString(), overwriteParams),
+        paramReplace(
+          prev,
+          "top",
+          top === TimetrialsRegionsRankingsListTopEnum.Records ? undefined : top,
+          overwriteParams,
+        ),
       );
     },
   };

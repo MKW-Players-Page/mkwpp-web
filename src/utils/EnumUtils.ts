@@ -1,4 +1,5 @@
 import { CategoryEnum } from "../api";
+import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
 
 export const getCategorySiteHue = (category: CategoryEnum) => {
   switch (category) {
@@ -44,6 +45,21 @@ export const getHighestValid = (category: CategoryEnum, trackCategories: Categor
     .sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b))
     .filter((r) => getCategoryNumerical(r) <= getCategoryNumerical(category));
   return x.at(-1);
+};
+
+export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) => {
+  switch (x) {
+    case "records":
+      return "Records";
+    case "top3":
+      return "Top 3";
+    case "top5":
+      return "Top 5";
+    case "top10":
+      return "Top 10";
+    case "all":
+      return "All";
+  }
 };
 
 /** Return all categories eligible for a given category. For example, eligible categories for

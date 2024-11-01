@@ -5,7 +5,7 @@ import Deferred from "../global/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { countryAFTopToString, getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import {
   useCategoryParam,
@@ -15,7 +15,10 @@ import {
   useTopParam,
 } from "../../utils/SearchParams";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import { TimetrialsRegionsRankingsListTypeEnum } from "../../api/generated";
+import {
+  TimetrialsRegionsRankingsListTopEnum,
+  TimetrialsRegionsRankingsListTypeEnum,
+} from "../../api/generated";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -68,8 +71,11 @@ const CountryRankingsPage = () => {
                 data: [
                   {
                     id: 0,
-                    children: [1, 3, 5, 10].map((r) => {
-                      return { type: "DropdownItemData", element: { text: `Top ${r}`, value: r } };
+                    children: Object.values(TimetrialsRegionsRankingsListTopEnum).map((r) => {
+                      return {
+                        type: "DropdownItemData",
+                        element: { text: countryAFTopToString(r), value: r },
+                      };
                     }),
                   },
                 ],

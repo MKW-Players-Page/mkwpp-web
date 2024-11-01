@@ -22,6 +22,7 @@ models/ScoreWithPlayer.ts
 models/Standard.ts
 models/StandardLevel.ts
 models/StatusEnum.ts
+models/TopScoreCountEnum.ts
 models/Track.ts
 models/TrackCup.ts
 models/User.ts

@@ -93,7 +93,7 @@ export interface PlayerStats {
      */
     totalRecordRatio: number;
     /**
-     * Sum of track records
+     * Number of records
      * @type {number}
      * @memberof PlayerStats
      */
