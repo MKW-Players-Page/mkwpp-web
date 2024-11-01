@@ -55,6 +55,11 @@ const CountryRankingsPage = () => {
 
   const siteHue = getCategorySiteHue(category);
 
+    const text = "";
+    switch (top) {
+        case TimetrialsRegionsRankingsListTopEnum.All
+    }
+  
   return (
     <>
       <h1>Country Rankings</h1>

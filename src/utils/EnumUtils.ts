@@ -49,30 +49,30 @@ export const getHighestValid = (category: CategoryEnum, trackCategories: Categor
 
 export const countryAFTopNumerical = (x: TimetrialsRegionsRankingsListTopEnum) => {
   switch (x) {
-    case "records":
+    case TimetrialsRegionsRankingsListTopEnum.Records:
       return 1;
-    case "top3":
+    case TimetrialsRegionsRankingsListTopEnum.Top3:
       return 2;
-    case "top5":
+    case TimetrialsRegionsRankingsListTopEnum.Top5:
       return 3;
-    case "top10":
+    case TimetrialsRegionsRankingsListTopEnum.Top10:
       return 4;
-    case "all":
+    case TimetrialsRegionsRankingsListTopEnum.All:
       return 5;
   }
 };
 
 export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) => {
   switch (x) {
-    case "records":
+    case TimetrialsRegionsRankingsListTopEnum.Records:
       return "Records";
-    case "top3":
+    case TimetrialsRegionsRankingsListTopEnum.Top3:
       return "Top 3";
-    case "top5":
+    case TimetrialsRegionsRankingsListTopEnum.Top5:
       return "Top 5";
-    case "top10":
+    case TimetrialsRegionsRankingsListTopEnum.Top10:
       return "Top 10";
-    case "all":
+    case TimetrialsRegionsRankingsListTopEnum.All:
       return "All";
   }
 };
