@@ -1,4 +1,20 @@
 {
+  "headerSubmit": {
+    "it": "Carica",
+    "en": "Submit"
+  },
+  "headerLogOut": {
+    "it": "Esci",
+    "en": "Log Out"
+  },
+  "headerLogIn": {
+    "it": "Entra",
+    "en": "Log In"
+  },
+  "headerJoin": {
+    "it": "Registrati",
+    "en": "Join"
+  },
   "rankingsPageAverageFinishTitle": {
     "it": "Media Posizioni",
     "en": "Average Finish"
