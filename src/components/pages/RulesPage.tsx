@@ -820,7 +820,7 @@ const RulesPage = () => {
               </p>
               <p>
                 {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDKMNoSC[lang], [
+                  handleBars(translations.rulesPageTrackCategoriesRDKMSC[lang], [
                     [
                       "rulesPageTrackCategoriesRDKMSCWallBypassLinkText",
                       <Lnk url="//youtu.be/s3uqTaxr_4A?t=43">
@@ -868,9 +868,6 @@ const RulesPage = () => {
                     ],
                   ]),
                 )}
-              </p>
-              <p>
-                It is allowed to perform the <Lnk url="//youtu.be/ylcEVLHzwJA?t=17"></Lnk>.
               </p>
             </TrackCategory>
           </ul>
