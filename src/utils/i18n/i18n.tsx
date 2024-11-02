@@ -1,5 +1,5 @@
 import Dropdown, { DropdownData } from "../../components/widgets/Dropdown";
-
+import ReactDOMServer from "react-dom/server";
 import { createContext, useContext } from "react";
 /* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
@@ -38,6 +38,18 @@ export const I18nContext = createContext<I18nContextType>({
   setLang: () => {},
   translations: i18nJson,
 });
+
+export const handleBars = (
+  stringWithHandleBars: string,
+  handleBarKeyReplPairs: (string | JSX.Element)[][],
+) => {
+  let out = stringWithHandleBars;
+  for (let [key, replace] of handleBarKeyReplPairs) {
+    out = out.replaceAll(`{{${key as string}}}`, ReactDOMServer.renderToString(replace));
+  }
+
+  return out;
+};
 
 export const LanguageDropdown = () => {
   const context = useContext(I18nContext);
