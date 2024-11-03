@@ -41,7 +41,10 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
               children: options.map((category) => {
                 return {
                   type: "DropdownItemData",
-                  element: { text: translations[getCategoryNameTranslationKey(category)][lang], value: category },
+                  element: {
+                    text: translations[getCategoryNameTranslationKey(category)][lang],
+                    value: category,
+                  },
                 } as DropdownItemSetDataChild;
               }),
             },
