@@ -150,7 +150,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                       <>
                         <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
-                          <td>Your Highlighted Value</td>
+                          <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
                           <td>
                             {metric.metric === "total_record_ratio"
                               ? highlight.toFixed(4) + "%"

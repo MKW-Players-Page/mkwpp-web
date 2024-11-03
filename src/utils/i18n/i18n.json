@@ -2258,6 +2258,141 @@
     "pt": "",
     "es": ""
   },
+  "genericRankingsYourHighlightedValue": {
+    "it": "Il Tuo Valore Evidenziato",
+    "en": "Your Highlighted Value",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageHeading": {
+    "it": "AF Nazioni",
+    "en": "Country Rankings",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageExplanation": {
+    "it": "{{countryRankingsTopType}} tempi per ogni nazione sono presi per ogni pista, e viene fatta una media, come la Media Posizioni.",
+    "en": "{{countryRankingsTopType}} times for each country are taken for each track, then averaged, like Average Finish.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageExplanationRecords": {
+    "it": "I migliori",
+    "en": "The best",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageExplanationTop3": {
+    "it": "I migliori 3",
+    "en": "The best 3",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageExplanationTop5": {
+    "it": "I migliori 5",
+    "en": "The best 5",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageExplanationTop10": {
+    "it": "I migliori 10",
+    "en": "The best 10",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageExplanationAll": {
+    "it": "Tutti i",
+    "en": "All the",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageDropdownCountries": {
+    "it": "Nazioni",
+    "en": "Countries",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageDropdownContinents": {
+    "it": "Continenti",
+    "en": "Continents",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageDropdownSubregions": {
+    "it": "Regioni",
+    "en": "Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageRank": {
+    "it": "Posizione",
+    "en": "Rank",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageCountry": {
+    "it": "Nazione",
+    "en": "Country",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPageAverageFinish": {
+    "it": "Media Posizioni",
+    "en": "Average Finish",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "countryRankingsPage": {
+    "it": "",
+    "en": "",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "playerProfilePageLocation": {
     "it": "Locazione",
     "en": "Location",

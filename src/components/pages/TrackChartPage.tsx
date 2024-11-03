@@ -161,7 +161,7 @@ const TrackChartPage = () => {
                       <>
                         <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
-                          <td>Your Highlighted Value</td>
+                          <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
                           <td>{formatTime(highlight)}</td>
                           <td />
                           <td />
