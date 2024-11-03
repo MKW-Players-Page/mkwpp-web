@@ -1323,7 +1323,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMNoSC": {
-    "it": "",
+    "it": "Le strat che {{rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText}} senza andare Out of Bounds o saltare checkpoint chiave sono permesse.",
     "en": "Strats that {{rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText}} without going Out of Bounds or skipping key checkpoints are allowed.",
     "fr": "",
     "de": "",
@@ -1332,7 +1332,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText": {
-    "it": "",
+    "it": "evitano la strada principale",
     "en": "avoid the main road",
     "fr": "",
     "de": "",
@@ -1341,8 +1341,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMSC": {
-    "it": "",
-    "en": "when doing the Turnskip is not allowed.",
+    "it": "{{rulesPageTrackCategoriesWGMSCTurnskipLinkText}} durante il Turnskip non è permesso.",
+    "en": "{{rulesPageTrackCategoriesWGMSCTurnskipLinkText}} when doing the Turnskip is not allowed.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1350,7 +1350,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMSCTurnskipLinkText": {
-    "it": "",
+    "it": "Toccare la trave",
     "en": "Touching the beam",
     "fr": "",
     "de": "",
@@ -1359,7 +1359,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMUnres": {
-    "it": "",
+    "it": "Qualsiasi variazione della Ultra, come {{rulesPageTrackCategoriesWGMUnresPipebounceLinkText}} o {{rulesPageTrackCategoriesWGMUnresRespawnLinkText}} o {{rulesPageTrackCategoriesWGMUnresShroomlessLinkText}}, è permessa.",
     "en": "Any variation of the Ultra, such as {{rulesPageTrackCategoriesWGMUnresPipebounceLinkText}} or {{rulesPageTrackCategoriesWGMUnresRespawnLinkText}} or {{rulesPageTrackCategoriesWGMUnresShroomlessLinkText}}, are allowed.",
     "fr": "",
     "de": "",
@@ -1368,7 +1368,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMUnresPipebounceLinkText": {
-    "it": "",
+    "it": "il Pipebounce",
     "en": "the Pipebounce",
     "fr": "",
     "de": "",
@@ -1377,7 +1377,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMUnresRespawnLinkText": {
-    "it": "",
+    "it": "il Respawn",
     "en": "the Respawn",
     "fr": "",
     "de": "",
@@ -1386,7 +1386,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesWGMUnresShroomlessLinkText": {
-    "it": "",
+    "it": "la Shroomless",
     "en": "the Shroomless",
     "fr": "",
     "de": "",
@@ -1404,8 +1404,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesKCUnres": {
-    "it": "",
-    "en": "{{rulesPageTrackCategoriesKCUnresLinkText}} it's allowed.",
+    "it": "{{rulesPageTrackCategoriesKCUnresLinkText}}, è permesso.",
+    "en": "{{rulesPageTrackCategoriesKCUnresLinkText}}, it's allowed.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1413,7 +1413,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesKCUnresLinkText": {
-    "it": "",
+    "it": "Qualsiasi cosa questa sia",
     "en": "Whatever this trickery is",
     "fr": "",
     "de": "",
@@ -1422,7 +1422,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesMTNoSC": {
-    "it": "",
+    "it": "Qualsiasi forma di Out Of Bounds e No Lap Count glitch, nonostante siano più lenti, non sono permessi. È però permesso {{rulesPageTrackCategoriesMTNoSCTurnskipLinkText}}.",
     "en": "Any form of Out Of Bounds and No Lap Count glitches, despite being slower, are not allowed. You are allowed to perform {{rulesPageTrackCategoriesMTNoSCTurnskipLinkText}}.",
     "fr": "",
     "de": "",
@@ -1431,7 +1431,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesMTNoSCTurnskipLinkText": {
-    "it": "",
+    "it": "il Turnskip",
     "en": "the Turnskip",
     "fr": "",
     "de": "",
@@ -1440,7 +1440,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesMTUnres": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesMTUnresLinkText}} è permesso.",
     "en": "{{rulesPageTrackCategoriesMTUnresLinkText}} is allowed.",
     "fr": "",
     "de": "",
@@ -1449,7 +1449,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesMTUnresLinkText": {
-    "it": "",
+    "it": "Saltare la prima curva",
     "en": "Skipping the first turn",
     "fr": "",
     "de": "",
@@ -1467,7 +1467,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesGVSC": {
-    "it": "",
+    "it": "Guidare sulle rocce (come {{rulesPageTrackCategoriesGVSCRockhopLinkText}}) è permesso finché non salta un giro. È oltretutto permesso {{rulesPageTrackCategoriesGVSCRockhopRespawnLinkText}}",
     "en": "Driving on the rocks (such as {{rulesPageTrackCategoriesGVSCRockhopLinkText}}) is allowed as far as it doesn't skip a lap. It is also allowed to do {{rulesPageTrackCategoriesGVSCRockhopRespawnLinkText}}.",
     "fr": "",
     "de": "",
@@ -1476,7 +1476,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesGVSCRockhopLinkText": {
-    "it": "",
+    "it": "il Rockhop",
     "en": "the Rockhop",
     "fr": "",
     "de": "",
@@ -1485,7 +1485,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesGVSCRockhopRespawnLinkText": {
-    "it": "",
+    "it": "il Respawn",
     "en": "the Respawn shortcut",
     "fr": "",
     "de": "",
@@ -1494,7 +1494,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesGVUnres": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesGVUnresLinkText}} per saltare giri è permesso.",
     "en": "{{rulesPageTrackCategoriesGVUnresLinkText}} to skip laps is allowed.",
     "fr": "",
     "de": "",
@@ -1503,7 +1503,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesGVUnresLinkText": {
-    "it": "",
+    "it": "Guidare attorno la roccia all'inizio",
     "en": "Driving around the left-side rock",
     "fr": "",
     "de": "",
@@ -1539,7 +1539,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesBCSC": {
-    "it": "",
+    "it": "Sia {{rulesPageTrackCategoriesBCSCSpiralSkipLinkText}} che {{rulesPageTrackCategoriesBCSCRampCutLinkText}} a seguire sono permessi.",
     "en": "Both {{rulesPageTrackCategoriesBCSCSpiralSkipLinkText}} and the subsequent {{rulesPageTrackCategoriesBCSCRampCutLinkText}} are allowed.",
     "fr": "",
     "de": "",
@@ -1548,7 +1548,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesBCSCSpiralSkipLinkText": {
-    "it": "",
+    "it": "lo Spiralskip",
     "en": "the Spiralskip",
     "fr": "",
     "de": "",
@@ -1557,7 +1557,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesBCSCRampCutLinkText": {
-    "it": "",
+    "it": "il Ramp cut",
     "en": "Ramp cut",
     "fr": "",
     "de": "",
@@ -1566,7 +1566,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRRNoSC": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesRRNoSCMoonjumpLinkText}}, {{rulesPageTrackCategoriesRRNoSCSnakeCutLinkText}} e {{rulesPageTrackCategoriesRRNoSCPathswitchLinkText}} sono permessi.",
     "en": "{{rulesPageTrackCategoriesRRNoSCMoonjumpLinkText}}, {{rulesPageTrackCategoriesRRNoSCSnakeCutLinkText}} and {{rulesPageTrackCategoriesRRNoSCPathswitchLinkText}} are all allowed.",
     "fr": "",
     "de": "",
@@ -1584,7 +1584,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRRNoSCSnakeCutLinkText": {
-    "it": "",
+    "it": "tagliare la curva ad S",
     "en": "the S-Turn cut",
     "fr": "",
     "de": "",
@@ -1593,7 +1593,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRRNoSCPathswitchLinkText": {
-    "it": "",
+    "it": "il Pathswitch",
     "en": "the Pathswitch",
     "fr": "",
     "de": "",
@@ -1602,7 +1602,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRRUnres": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesRRUnresWallclipsLinkText}} sono permessi.",
     "en": "{{rulesPageTrackCategoriesRRUnresWallclipsLinkText}} are allowed.",
     "fr": "",
     "de": "",
@@ -1611,7 +1611,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRRUnresWallclipsLinkText": {
-    "it": "",
+    "it": "I wallclip vicino l'inizio",
     "en": "Wallclips near the beginning",
     "fr": "",
     "de": "",
@@ -1620,8 +1620,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRPBUnres": {
-    "it": "",
-    "en": "{{rulesPageTrackCategoriesRPBUnresWallclipsLinkText}} are allowed",
+    "it": "{{rulesPageTrackCategoriesRPBUnresWallclipsLinkText}} sono permessi.",
+    "en": "{{rulesPageTrackCategoriesRPBUnresWallclipsLinkText}} are allowed.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1629,7 +1629,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRPBUnresWallclipsLinkText": {
-    "it": "",
+    "it": "I wallclip vicino la fine",
     "en": "Wallclips near the finish line",
     "fr": "",
     "de": "",
@@ -1638,7 +1638,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRYFNoSC": {
-    "it": "",
+    "it": "Non c'è alcuna scorciatoia possibile RTA su DS Cascate di Yoshi.",
     "en": "There is no known RTA-viable DS Yoshi Falls shortcut.",
     "fr": "",
     "de": "",
@@ -1647,8 +1647,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRGV2Unres": {
-    "it": "",
-    "en": "{{rulesPageTrackCategoriesRGV2UnresWallclipLinkText}} and all subsequent wallclips are allowed",
+    "it": "{{rulesPageTrackCategoriesRGV2UnresWallclipLinkText}} e tutti i wallclip a seguire sono permessi.",
+    "en": "{{rulesPageTrackCategoriesRGV2UnresWallclipLinkText}} and all subsequent wallclips are allowed.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1656,7 +1656,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRGV2UnresWallclipLinkText": {
-    "it": "",
+    "it": "Saltare la prima curva via wallclip",
     "en": "Skipping the first turn via a wallclip",
     "fr": "",
     "de": "",
@@ -1665,7 +1665,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRMRNoSC": {
-    "it": "",
+    "it": "Non c'è alcuna scorciatoia possibile RTA su N64 Pista di Mario.",
     "en": "There is no known RTA-viable N64 Mario Raceway shortcut.",
     "fr": "",
     "de": "",
@@ -1674,7 +1674,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSLNoSC": {
-    "it": "",
+    "it": "Saltare i dirupi nelle linee interne è permesso.",
     "en": "Cutting the gaps on the inside line of turns is allowed.",
     "fr": "",
     "de": "",
@@ -1683,7 +1683,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSLSC": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesRSLSCWallclipLinkText}} è permesso.",
     "en": "{{rulesPageTrackCategoriesRSLSCWallclipLinkText}} is allowed.",
     "fr": "",
     "de": "",
@@ -1692,7 +1692,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSLSCWallclipLinkText": {
-    "it": "",
+    "it": "Usare dei wallclip per rimbalzare sul terreno di più per tagliare meglio i dirupi",
     "en": "Using wallclips to bounce off the floor to cut more of the gaps",
     "fr": "",
     "de": "",
@@ -1701,7 +1701,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSLUnres": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesRSLUnresPoleclipLinkText}} è permesso.",
     "en": "{{rulesPageTrackCategoriesRSLUnresPoleclipLinkText}} is allowed.",
     "fr": "",
     "de": "",
@@ -1710,7 +1710,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSLUnresPoleclipLinkText": {
-    "it": "",
+    "it": "Il Poleclip all'inizio",
     "en": "The Poleclip near the start",
     "fr": "",
     "de": "",
@@ -1719,7 +1719,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSGBNoSC": {
-    "it": "",
+    "it": "Saltare grosse porzioni di fuoristrada col Magikruiser è permesso.",
     "en": "Skipping large portions of the off-road with the Magikruiser is allowed",
     "fr": "",
     "de": "",
@@ -1728,7 +1728,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSGBUnres": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesRSGBUnresBombClipLinkText}} o {{rulesPageTrackCategoriesRSGBUnresFloorClipLinkText}} per respawnare dietro il traguardo è permesso.",
     "en": "{{rulesPageTrackCategoriesRSGBUnresBombClipLinkText}} or {{rulesPageTrackCategoriesRSGBUnresFloorClipLinkText}} to respawn behind the finish line are allowed.",
     "fr": "",
     "de": "",
@@ -1737,7 +1737,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSGBUnresBombClipLinkText": {
-    "it": "",
+    "it": "Clippare una bomba",
     "en": "Clipping a bomb",
     "fr": "",
     "de": "",
@@ -1746,7 +1746,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRSGBUnresFloorClipLinkText": {
-    "it": "",
+    "it": "clippare il terreno",
     "en": "clipping the floor",
     "fr": "",
     "de": "",
@@ -1755,7 +1755,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDSNoSC": {
-    "it": "",
+    "it": "Non c'è alcuna scorciatoia possibile RTA su N64 Pista di Mario. Tutti i tagli della darsena sono permessi.",
     "en": "There is no known RTA-viable DS Delfino Square shortcut. The dock cuts are all allowed.",
     "fr": "",
     "de": "",
@@ -1764,7 +1764,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRWSNoSC": {
-    "it": "",
+    "it": "Non è permesso eseguire la {{rulesPageTrackCategoriesRWSNoSCTurn2LinkText}} perché il player attraversa il lato non solido di un muro.",
     "en": "It is not allowed to do the {{rulesPageTrackCategoriesRWSNoSCTurn2LinkText}} as it takes the player through the non-solid side of a wall.",
     "fr": "",
     "de": "",
@@ -1773,7 +1773,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRWSNoSCTurn2LinkText": {
-    "it": "",
+    "it": "scorciatoia No Lap Count sulla seconda curva",
     "en": "No Lap Count shortcut on Turn 2",
     "fr": "",
     "de": "",
@@ -1782,7 +1782,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRWSUnres": {
-    "it": "",
+    "it": "È permesso fare {{rulesPageTrackCategoriesRWSUnresGlitchTextLink}}.",
     "en": "It is allowed to do {{rulesPageTrackCategoriesRWSUnresGlitchTextLink}}.",
     "fr": "",
     "de": "",
@@ -1791,7 +1791,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRWSUnresGlitchTextLink": {
-    "it": "",
+    "it": "il glitch all'inizio",
     "en": "the glitch at the start",
     "fr": "",
     "de": "",
@@ -1800,8 +1800,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHNoSC": {
-    "it": "",
-    "en": "Unlike older rulesets, it is allowed to <{{rulesPageTrackCategoriesRDHNoSCWallTouchLinkText}}. This is only useful at the end of flap runs.",
+    "it": "A differenza dei vecchi regolamenti, è permesso {{rulesPageTrackCategoriesRDHNoSCWallTouchLinkText}}. Questo è utile solo alla fine dei flap.",
+    "en": "Unlike older rulesets, it is allowed to {{rulesPageTrackCategoriesRDHNoSCWallTouchLinkText}}. This is only useful at the end of flap runs.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1809,7 +1809,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHNoSCWallTouchLinkText": {
-    "it": "",
+    "it": "toccare il muro alla fine del giro",
     "en": "touch the wall at the end of a lap",
     "fr": "",
     "de": "",
@@ -1818,7 +1818,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHSC": {
-    "it": "",
+    "it": "{{rulesPageTrackCategoriesRDHSCLakeCutLinkText}} è considerato una scorciatoia.",
     "en": "{{rulesPageTrackCategoriesRDHSCLakeCutLinkText}} is considered as a Shortcut.",
     "fr": "",
     "de": "",
@@ -1827,8 +1827,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHSCLakeCutLinkText": {
-    "it": "",
-    "en": "<a href=\"//youtu.be/\">Any method used to skip the lake</a> is considered as a Shortcut.",
+    "it": "Qualsiasi metodo per saltare il lago",
+    "en": "Any method used to skip the lake",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1836,8 +1836,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHUnres": {
-    "it": "",
-    "en": "Although it's not yet been pulled off RTA, it is allowed to do {{rulesPageTrackCategoriesRDHUnresODBLinkText}}",
+    "it": "Nonostante non sia stato fatto RTA, è permesso {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
+    "en": "Although it's not yet been pulled off RTA, it is allowed to do {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1845,7 +1845,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHUnresODBLinkText": {
-    "it": "",
+    "it": "questo glitch",
     "en": "this glitch",
     "fr": "",
     "de": "",
@@ -1854,7 +1854,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBC3SC": {
-    "it": "",
+    "it": "È permesso tagliare le curve utilizzando le {{rulesPageTrackCategoriesRBC3SCUltraLinkText}}, è altrettanto permesos {{rulesPageTrackCategoriesRBC3SCWallclipsLinkText}}.",
     "en": "It is allowed to skip turns through the use of {{rulesPageTrackCategoriesRBC3SCUltraLinkText}}, it is also allowed to {{rulesPageTrackCategoriesRBC3SCWallclipsLinkText}}.",
     "fr": "",
     "de": "",
@@ -1863,7 +1863,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBC3SCUltraLinkText": {
-    "it": "",
+    "it": "meccaniche delle rampe bumper",
     "en": "bumper ramp mechanics",
     "fr": "",
     "de": "",
@@ -1872,7 +1872,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBC3SCWallclipsLinkText": {
-    "it": "",
+    "it": "tagliare gli angoli con dei wallclip",
     "en": "cut corners with wallclips",
     "fr": "",
     "de": "",
@@ -1881,7 +1881,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKJPSC": {
-    "it": "",
+    "it": "È permesso fare il {{rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText}} prima del cannone.",
     "en": "It is allowed to perform the {{rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText}} before the cannon.",
     "fr": "",
     "de": "",
@@ -1890,7 +1890,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText": {
-    "it": "",
+    "it": "Turnskip/Spiralskip",
     "en": "Turnskip/Spiralskip",
     "fr": "",
     "de": "",
@@ -1899,8 +1899,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKJPUnres": {
-    "it": "",
-    "en": "It is allowed to go from the finish line into the cave with either {{rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText}} or {{rulesPageTrackCategoriesRDKJPUnresSignClipLinkText}}.",
+    "it": "È permesso andare dal traguardo alla caverna con sia il {{rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText}} che il {{rulesPageTrackCategoriesRDKJPUnresSignClipLinkText}}.",
+    "en": "It is allowed to go from the finish line into the cave with either the {{rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText}} or the {{rulesPageTrackCategoriesRDKJPUnresSignClipLinkText}}.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1908,7 +1908,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText": {
-    "it": "",
+    "it": "Treeclip",
     "en": "Treeclip",
     "fr": "",
     "de": "",
@@ -1917,7 +1917,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKJPUnresSignClipLinkText": {
-    "it": "",
+    "it": "Signclip",
     "en": "Signclip",
     "fr": "",
     "de": "",
@@ -1926,8 +1926,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRMCSC": {
-    "it": "",
-    "en": "It is allowed to {{rulesPageTrackCategoriesRMCSCWallclipLinkText}}",
+    "it": "È permesso {{rulesPageTrackCategoriesRMCSCWallclipLinkText}}.",
+    "en": "It is allowed to {{rulesPageTrackCategoriesRMCSCWallclipLinkText}}.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1935,7 +1935,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRMCSCWallclipLinkText": {
-    "it": "",
+    "it": "saltare la penultima curva",
     "en": "skip the second-last turn",
     "fr": "",
     "de": "",
@@ -1944,7 +1944,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRMC3NoSC": {
-    "it": "",
+    "it": "Non c'è alcuna scorciatoia possibile RTA su SNES Circuito di Mario 3. {{rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText}} è permesso a causa dell'approvazione dalla community.",
     "en": "There is no known RTA-viable SNES Mario Circuit 3 shortcut. {{rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText}} is allowed due to community approval.",
     "fr": "",
     "de": "",
@@ -1953,7 +1953,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText": {
-    "it": "",
+    "it": "Il wallclip sulla curva 4",
     "en": "The wallclip on Turn 4",
     "fr": "",
     "de": "",
@@ -1962,7 +1962,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRPGSC": {
-    "it": "",
+    "it": "Il {{rulesPageTrackCategoriesRPGSCTreeClipLinkText}} è una scorciatoia.",
     "en": "The {{rulesPageTrackCategoriesRPGSCTreeClipLinkText}} is a shortcut.",
     "fr": "",
     "de": "",
@@ -1971,7 +1971,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRPGSCTreeClipLinkText": {
-    "it": "",
+    "it": "treeclip vicino alla penultima curva",
     "en": "treeclip near the second-last turn",
     "fr": "",
     "de": "",
@@ -1980,7 +1980,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKMNoSC": {
-    "it": "",
+    "it": "È permesso {{rulesPageTrackCategoriesRDKMNoSCGapLinkText}} alla fine della montagna.",
     "en": "It is allowed to {{rulesPageTrackCategoriesRDKMNoSCGapLinkText}} at the end of the mountain.",
     "fr": "",
     "de": "",
@@ -1989,7 +1989,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKMNoSCGapLinkText": {
-    "it": "",
+    "it": "saltare oltre il gap",
     "en": "jump over the gap",
     "fr": "",
     "de": "",
@@ -1998,7 +1998,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKMSC": {
-    "it": "",
+    "it": "È permesso {{rulesPageTrackCategoriesRDKMSCWallBypassLinkText}}.",
     "en": "It is allowed to {{rulesPageTrackCategoriesRDKMSCWallBypassLinkText}}.",
     "fr": "",
     "de": "",
@@ -2007,7 +2007,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDKMSCWallBypassLinkText": {
-    "it": "",
+    "it": "clippare attraverso il muro vicino allo zipper",
     "en": "clip through the wall nearing the zipper ramp",
     "fr": "",
     "de": "",
@@ -2016,7 +2016,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBCNoSC": {
-    "it": "",
+    "it": "È permesso fare il {{rulesPageTrackCategoriesRBCNoSCRailCutLinkText}} sull'ultima curva",
     "en": "It is allowed to perform the {{rulesPageTrackCategoriesRBCNoSCRailCutLinkText}} on the last turn.",
     "fr": "",
     "de": "",
@@ -2025,7 +2025,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBCNoSCRailCutLinkText": {
-    "it": "",
+    "it": "rail cut",
     "en": "Rail cut",
     "fr": "",
     "de": "",
@@ -2034,7 +2034,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBCSC": {
-    "it": "",
+    "it": "È permesso fare lo {{rulesPageTrackCategoriesRBCSCSpiralSkipLinkText}}.",
     "en": "It is allowed to perform the {{rulesPageTrackCategoriesRBCSCSpiralSkipLinkText}}.",
     "fr": "",
     "de": "",
@@ -2043,7 +2043,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBCSCSpiralSkipLinkText": {
-    "it": "",
+    "it": "Spiral Skip",
     "en": "Spiral Skip",
     "fr": "",
     "de": "",
@@ -2052,7 +2052,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBCUnres": {
-    "it": "",
+    "it": "È permesso fare il {{rulesPageTrackCategoriesRBCUnresPoleclipLinkText}}.",
     "en": "It is allowed to perform the {{rulesPageTrackCategoriesRBCUnresPoleclipLinkText}}.",
     "fr": "",
     "de": "",
@@ -2061,7 +2061,7 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRBCUnresPoleclipLinkText": {
-    "it": "",
+    "it": "Respawn",
     "en": "Respawn Glitch",
     "fr": "",
     "de": "",
