@@ -71,7 +71,11 @@ const TrackRecordsPage = () => {
                         {!isLap && (
                           <td rowSpan={2}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {translations[track.name as TranslationKey][lang]}
+                              {
+                                translations[
+                                  `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                                ][lang]
+                              }
                             </Link>
                           </td>
                         )}

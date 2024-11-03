@@ -237,7 +237,11 @@ const MatchupPage = () => {
                         {(!isLap || lapMode === LapModeEnum.Lap) && (
                           <td rowSpan={cellSpan}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {translations[track.name as TranslationKey][lang]}
+                              {
+                                translations[
+                                  `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                                ][lang]
+                              }
                             </Link>
                           </td>
                         )}

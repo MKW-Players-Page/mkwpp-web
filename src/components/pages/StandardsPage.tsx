@@ -100,7 +100,11 @@ const StandardsPage = () => {
                               id: track?.id || 0,
                             })}
                           >
-                            {translations[track?.name as TranslationKey][lang]}
+                            {
+                              translations[
+                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                              ][lang]
+                            }
                           </Link>
                         </td>
                       ) : (

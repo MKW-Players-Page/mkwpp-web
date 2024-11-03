@@ -33,8 +33,9 @@ const TrackListPage = () => {
                       <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
                         {
                           translations[
-                            metadata.tracks?.find((track) => track.id === trackId)
-                              ?.name as TranslationKey
+                            `constantTrackName${metadata.tracks
+                              ?.find((track) => track.id === trackId)
+                              ?.abbr.toUpperCase()}` as TranslationKey
                           ][lang]
                         }
                       </Link>

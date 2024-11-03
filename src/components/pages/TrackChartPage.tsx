@@ -98,13 +98,18 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {"< " + translations[prevTrack.name as TranslationKey][lang]}
+              {"< " +
+                translations[`constantTrackName${prevTrack?.abbr.toUpperCase()}` as TranslationKey][
+                  lang
+                ]}
             </Link>
           ) : (
             <></>
           )}
         </div>
-        <h1>{translations[track?.name as TranslationKey][lang]}</h1>
+        <h1>
+          {translations[`constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey][lang]}
+        </h1>
         <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
           {nextTrack !== undefined ? (
             <Link
@@ -117,7 +122,9 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {translations[nextTrack.name as TranslationKey][lang] + " >"}
+              {translations[`constantTrackName${nextTrack?.abbr.toUpperCase()}` as TranslationKey][
+                lang
+              ] + " >"}
             </Link>
           ) : (
             <></>
@@ -183,7 +190,7 @@ const TrackChartPage = () => {
                             id: score.player.id,
                           })}
                         >
-                          {score.player.alias || score.player.name}
+                          {score.player.alias ?? score.player.name}
                         </Link>
                       </td>
                       <td className={score.category !== category ? "fallthrough" : ""}>

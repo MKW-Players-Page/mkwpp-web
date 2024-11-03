@@ -191,9 +191,9 @@ const SubmissionsTab = () => {
             <div key={submission.id} className="card">
               <p className="nobr">
                 {
-                  translations[getTrackById(metadata, submission.track)?.name as TranslationKey][
-                    lang
-                  ]
+                  translations[
+                    `constantTrackName${getTrackById(metadata, submission.track)?.abbr.toUpperCase()}` as TranslationKey
+                  ][lang]
                 }
                 &nbsp;
                 {translations[getCategoryNameTranslationKey(submission.category)][lang]}&nbsp;

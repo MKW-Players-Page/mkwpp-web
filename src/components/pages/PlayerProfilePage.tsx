@@ -473,7 +473,11 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {translations[track?.name as TranslationKey][lang]}
+                            {
+                              translations[
+                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                              ][lang]
+                            }
                           </Link>
                         </td>
                       ) : score.repeat ? (
@@ -491,7 +495,11 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {translations[track?.name as TranslationKey][lang]}
+                            {
+                              translations[
+                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                              ][lang]
+                            }
                           </Link>
                         </td>
                       )}

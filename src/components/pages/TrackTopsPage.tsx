@@ -146,7 +146,13 @@ const TrackTopsPage = () => {
                   const trackCategory = getHighestValid(category, track?.categories ?? []);
                   return (
                     <div key={track.id}>
-                      <h1>{translations[track.name as TranslationKey][lang]}</h1>
+                      <h1>
+                        {
+                          translations[
+                            `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                          ][lang]
+                        }
+                      </h1>
                       <div className="module">
                         <Deferred isWaiting={tops[index].isLoading}>
                           <table>
