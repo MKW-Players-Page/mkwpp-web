@@ -21,6 +21,7 @@ import {
   useRowHighlightParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -35,6 +36,7 @@ const TrackChartPage = () => {
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   let track,
     prevTrack,
@@ -96,13 +98,13 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {"< " + prevTrack.name}
+              {"< " + translations[prevTrack.name as TranslationKey][lang]}
             </Link>
           ) : (
             <></>
           )}
         </div>
-        <h1>{track?.name}</h1>
+        <h1>{translations[track?.name as TranslationKey][lang]}</h1>
         <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
           {nextTrack !== undefined ? (
             <Link
@@ -115,7 +117,7 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {nextTrack.name + " >"}
+              {translations[nextTrack.name as TranslationKey][lang] + " >"}
             </Link>
           ) : (
             <></>

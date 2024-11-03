@@ -17,6 +17,7 @@ import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 import { WorldRegion } from "../../utils/Defaults";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -44,6 +45,7 @@ const TrackTopsPage = () => {
   const { lapMode, setLapMode } = useLapModeParam(searchParams);
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const region =
     metadata.regions.find((r) => r.code.toLowerCase() === regionCode && r.isRanked) ?? WorldRegion;
@@ -144,7 +146,7 @@ const TrackTopsPage = () => {
                   const trackCategory = getHighestValid(category, track?.categories ?? []);
                   return (
                     <div key={track.id}>
-                      <h1>{track.name}</h1>
+                      <h1>{translations[track.name as TranslationKey][lang]}</h1>
                       <div className="module">
                         <Deferred isWaiting={tops[index].isLoading}>
                           <table>
@@ -166,7 +168,7 @@ const TrackTopsPage = () => {
                                         id: score.player.id,
                                       })}
                                     >
-                                      {score.player.alias || score.player.name}
+                                      {score.player.alias ?? score.player.name}
                                     </Link>
                                   </td>
                                   <td>{formatTime(score.value)}</td>

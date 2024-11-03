@@ -13,6 +13,7 @@ import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ const TrackRecordsPage = () => {
   const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const { user } = useContext(UserContext);
 
@@ -69,7 +71,7 @@ const TrackRecordsPage = () => {
                         {!isLap && (
                           <td rowSpan={2}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {track.name}
+                              {translations[track.name as TranslationKey][lang]}
                             </Link>
                           </td>
                         )}
@@ -80,7 +82,7 @@ const TrackRecordsPage = () => {
                                 region={getRegionById(metadata, score.player.region || 0)}
                               />
                               <Link to={resolvePage(Pages.PlayerProfile, { id: score?.player.id })}>
-                                {score.player.alias || score.player.name}
+                                {score.player.alias ?? score.player.name}
                               </Link>
                             </>
                           ) : (

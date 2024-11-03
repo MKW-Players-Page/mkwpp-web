@@ -21,7 +21,7 @@ import { Navigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
 import { getCategoryNameTranslationKey } from "../../utils/EnumUtils";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -190,7 +190,12 @@ const SubmissionsTab = () => {
           {submissions?.map((submission) => (
             <div key={submission.id} className="card">
               <p className="nobr">
-                {getTrackById(metadata, submission.track)?.name}&nbsp;
+                {
+                  translations[getTrackById(metadata, submission.track)?.name as TranslationKey][
+                    lang
+                  ]
+                }
+                &nbsp;
                 {translations[getCategoryNameTranslationKey(submission.category)][lang]}&nbsp;
                 {submission.isLap ? "Lap" : "Course"}
               </p>

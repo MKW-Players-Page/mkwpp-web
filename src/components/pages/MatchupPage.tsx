@@ -19,6 +19,7 @@ import {
   MatchupData,
   MatchupScore,
 } from "../../utils/MatchupDataCrunch";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -88,6 +89,7 @@ const MatchupPage = () => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
+  const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
 
   const hasCourse = lapMode !== LapModeEnum.Lap;
@@ -235,7 +237,7 @@ const MatchupPage = () => {
                         {(!isLap || lapMode === LapModeEnum.Lap) && (
                           <td rowSpan={cellSpan}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {track.name}
+                              {translations[track.name as TranslationKey][lang]}
                             </Link>
                           </td>
                         )}

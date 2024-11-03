@@ -26,7 +26,7 @@ import {
   useRegionParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -473,7 +473,7 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {track?.name}
+                            {translations[track?.name as TranslationKey][lang]}
                           </Link>
                         </td>
                       ) : score.repeat ? (
@@ -491,7 +491,7 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {track?.name}
+                            {translations[track?.name as TranslationKey][lang]}
                           </Link>
                         </td>
                       )}

@@ -12,7 +12,7 @@ import { getCategoryNumerical } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../widgets/Dropdown";
 import { useCategoryParam, useStandardLevelIdParam } from "../../utils/SearchParams";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const StandardsPage = () => {
   const searchParams = useSearchParams();
@@ -100,7 +100,7 @@ const StandardsPage = () => {
                               id: track?.id || 0,
                             })}
                           >
-                            {track?.name}
+                            {translations[track?.name as TranslationKey][lang]}
                           </Link>
                         </td>
                       ) : (
