@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { FormContext } from "./Form";
 import { CategoryEnum } from "../../api";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
-import { getCategoryName, getCategoryNumerical } from "../../utils/EnumUtils";
+import { getCategoryNameTranslationKey, getCategoryNumerical } from "../../utils/EnumUtils";
+import { I18nContext } from "../../utils/i18n/i18n";
 
 export interface CategorySelectProps {
   /** Categories to include in select element. Default to all categories if not defined. */
@@ -18,6 +19,7 @@ export interface CategorySelectProps {
 
 const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectProps) => {
   disabled = !!disabled;
+  const { translations, lang } = useContext(I18nContext);
 
   if (!options) {
     options = Object.values(CategoryEnum);
@@ -39,7 +41,7 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
               children: options.map((category) => {
                 return {
                   type: "DropdownItemData",
-                  element: { text: getCategoryName(category), value: category },
+                  element: { text: translations[getCategoryNameTranslationKey(category)][lang], value: category },
                 } as DropdownItemSetDataChild;
               }),
             },

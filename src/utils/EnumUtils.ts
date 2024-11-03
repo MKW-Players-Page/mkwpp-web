@@ -1,5 +1,6 @@
 import { CategoryEnum } from "../api";
 import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
+import { TranslationKey } from "./i18n/i18n";
 
 export const getCategorySiteHue = (category: CategoryEnum) => {
   switch (category) {
@@ -14,16 +15,14 @@ export const getCategorySiteHue = (category: CategoryEnum) => {
   }
 };
 
-export const getCategoryName = (category: CategoryEnum) => {
+export const getCategoryNameTranslationKey = (category: CategoryEnum): TranslationKey => {
   switch (category) {
     case "nonsc":
-      return "Non-SC";
+      return "constantCategoryNameNoSCShort";
     case "sc":
-      return "Shortcut";
+      return "constantCategoryNameSCShort";
     case "unres":
-      return "Unrestricted";
-    default:
-      return "Unknown";
+      return "constantCategoryNameUnresLong";
   }
 };
 
