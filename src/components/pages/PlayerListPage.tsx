@@ -10,6 +10,7 @@ import { getRegionById, getRegionNameFull, MetadataContext } from "../../utils/M
 import { UserContext } from "../../utils/User";
 import { PlayerBasic } from "../../api";
 import { useState } from "react";
+import { I18nContext } from "../../utils/i18n/i18n";
 
 interface PlayerForFilter extends PlayerBasic {
   simplifiedName: string;
@@ -22,6 +23,7 @@ const PlayerListPage = () => {
   );
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const { user } = useContext(UserContext);
 
@@ -29,7 +31,7 @@ const PlayerListPage = () => {
 
   return (
     <>
-      <h1>Players</h1>
+        <h1>{translations.playerListPageHeading[lang]}</h1>
       <div
         style={
           {
@@ -59,7 +61,8 @@ const PlayerListPage = () => {
             setPlayerFilter((document.getElementById("filterText") as HTMLInputElement).value);
           }}
         >
-          Search
+        {translations.playerListPageSearchBtn[lang]}
+
         </button>
       </div>
       <div className="module">
@@ -67,8 +70,8 @@ const PlayerListPage = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Location</th>
+                <th>{translations.playerListPageNameCol[lang]}</th>
+                <th>{translations.playerListPageLocationCol[lang]}</th>
               </tr>
             </thead>
             <tbody className="table-hover-rows">

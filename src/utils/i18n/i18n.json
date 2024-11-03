@@ -2069,6 +2069,42 @@
     "pt": "",
     "es": ""
   },
+  "playerListPageHeading": {
+    "it": "I Player",
+    "en": "Players",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "playerListPageSearchBtn": {
+    "it": "Cerca",
+    "en": "Search",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "playerListPageNameCol": {
+    "it": "Nome",
+    "en": "Name",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "playerListPageLocationCol": {
+    "it": "Locazione",
+    "en": "Location",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "rankingsPageAverageFinishTitle": {
     "it": "Media Posizioni",
     "en": "Average Finish",
