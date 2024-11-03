@@ -341,6 +341,69 @@
     "pt": "",
     "es": "N64 Castillo de Bowser"
   },
+  "constantWorld": {
+    "it": "Mondo",
+    "en": "World",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantContinentAfrica": {
+    "it": "Africa",
+    "en": "Africa",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantContinentAmerica": {
+    "it": "America",
+    "en": "America",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantContinentAntarctica": {
+    "it": "Antartide",
+    "en": "Antarctica",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantContinentAsia": {
+    "it": "Asia",
+    "en": "Asia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantContinentEuropa": {
+    "it": "Europa",
+    "en": "Europa",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantContinentOceania": {
+    "it": "Oceania",
+    "en": "Oceania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "headerSubmit": {
     "it": "Carica",
     "en": "Submit",
