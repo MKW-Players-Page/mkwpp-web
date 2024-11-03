@@ -31,7 +31,7 @@ const PlayerListPage = () => {
 
   return (
     <>
-        <h1>{translations.playerListPageHeading[lang]}</h1>
+      <h1>{translations.playerListPageHeading[lang]}</h1>
       <div
         style={
           {
@@ -61,8 +61,7 @@ const PlayerListPage = () => {
             setPlayerFilter((document.getElementById("filterText") as HTMLInputElement).value);
           }}
         >
-        {translations.playerListPageSearchBtn[lang]}
-
+          {translations.playerListPageSearchBtn[lang]}
         </button>
       </div>
       <div className="module">
