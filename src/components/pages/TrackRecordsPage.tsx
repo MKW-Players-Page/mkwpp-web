@@ -35,6 +35,7 @@ const TrackRecordsPage = () => {
 
   return (
     <>
+      {/* This heading will eventually have an i18n key for literally every region indexed */}
       <h1>{region.name} Records</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
@@ -46,12 +47,12 @@ const TrackRecordsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Track</th>
-                  <th>Player</th>
-                  <th>Course</th>
-                  <th>Lap</th>
-                  <th>Standard</th>
-                  <th>Date</th>
+                  <th>{translations.trackRecordsPageTrackCol[lang]}</th>
+                  <th>{translations.trackRecordsPagePlayerCol[lang]}</th>
+                  <th>{translations.trackRecordsPageCourseCol[lang]}</th>
+                  <th>{translations.trackRecordsPageLapCol[lang]}</th>
+                  <th>{translations.trackRecordsPageStandardCol[lang]}</th>
+                  <th>{translations.trackRecordsPageDateCol[lang]}</th>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
