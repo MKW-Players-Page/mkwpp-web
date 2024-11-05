@@ -2366,6 +2366,69 @@
     "pt": "",
     "es": ""
   },
+  "standardsPageHeading": {
+    "it": "Standard Storici",
+    "en": "Legacy Standards",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageCategoryCol": {
+    "it": "Categoria",
+    "en": "Category",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardCol": {
+    "it": "Standard",
+    "en": "Standard",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPagePointsCol": {
+    "it": "Punti",
+    "en": "Points",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageCourseCol": {
+    "it": "Pista",
+    "en": "Course",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageLapCol": {
+    "it": "Giro",
+    "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "countryRankingsPageExplanation": {
     "it": "{{countryRankingsTopType}} tempi per ogni nazione sono presi per ogni pista, e viene fatta una media, come la Media Posizioni.",
     "en": "{{countryRankingsTopType}} times for each country are taken for each track, then averaged, like Average Finish.",

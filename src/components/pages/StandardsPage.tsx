@@ -49,7 +49,7 @@ const StandardsPage = () => {
 
   return (
     <>
-      <h1>Legacy Standards</h1>
+      <h1>{translations.standardsPageHeading[lang]}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <Dropdown
@@ -80,12 +80,12 @@ const StandardsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Track</th>
-                  <th>Category</th>
-                  <th>Standard</th>
-                  <th>Points</th>
-                  <th>Course</th>
-                  <th>Lap</th>
+                  <th>{translations.standardsPageTrackCol[lang]}</th>
+                  <th>{translations.standardsPageCategoryCol[lang]}</th>
+                  <th>{translations.standardsPageStandardCol[lang]}</th>
+                  <th>{translations.standardsPagePointsCol[lang]}</th>
+                  <th>{translations.standardsPageCourseCol[lang]}</th>
+                  <th>{translations.standardsPageLapCol[lang]}</th>
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
