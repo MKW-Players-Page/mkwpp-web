@@ -97,7 +97,7 @@ const StandardsPage = () => {
                         <td rowSpan={2}>
                           <Link
                             to={resolvePage(Pages.TrackChart, {
-                              id: track?.id || 0,
+                              id: track?.id ?? 0,
                             })}
                           >
                             {

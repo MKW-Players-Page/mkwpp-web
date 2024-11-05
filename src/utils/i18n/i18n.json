@@ -368,7 +368,7 @@
     "pt": "",
     "es": "N64 Castillo de Bowser"
   },
-  "constantWorld": {
+  "constantRegionWORLD": {
     "it": "Mondo",
     "en": "World",
     "fr": "",
@@ -377,7 +377,7 @@
     "pt": "",
     "es": ""
   },
-  "constantContinentAfrica": {
+  "constantRegionAFR": {
     "it": "Africa",
     "en": "Africa",
     "fr": "",
@@ -386,7 +386,7 @@
     "pt": "",
     "es": ""
   },
-  "constantContinentAmerica": {
+  "constantRegionAME": {
     "it": "America",
     "en": "America",
     "fr": "",
@@ -395,7 +395,7 @@
     "pt": "",
     "es": ""
   },
-  "constantContinentAntarctica": {
+  "constantRegionANT": {
     "it": "Antartide",
     "en": "Antarctica",
     "fr": "",
@@ -404,7 +404,7 @@
     "pt": "",
     "es": ""
   },
-  "constantContinentAsia": {
+  "constantRegionASI": {
     "it": "Asia",
     "en": "Asia",
     "fr": "",
@@ -413,7 +413,7 @@
     "pt": "",
     "es": ""
   },
-  "constantContinentEuropa": {
+  "constantRegionEUR": {
     "it": "Europa",
     "en": "Europa",
     "fr": "",
@@ -422,7 +422,7 @@
     "pt": "",
     "es": ""
   },
-  "constantContinentOceania": {
+  "constantRegionOCE": {
     "it": "Oceania",
     "en": "Oceania",
     "fr": "",
@@ -2537,9 +2537,153 @@
     "pt": "",
     "es": ""
   },
-  "countryRankingsPage": {
-    "it": "",
-    "en": "",
+  "matchupPageHeading": {
+    "it": "Scontri",
+    "en": "Matchup",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPagePlayerText": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageCompareButtonText": {
+    "it": "Compara",
+    "en": "Compare",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageDefaultValue": {
+    "it": "Seleziona Player",
+    "en": "Select Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageCourseCol": {
+    "it": "3 Giri",
+    "en": "Course",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageLapCol": {
+    "it": "Giro",
+    "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageDiffCol": {
+    "it": "Diff",
+    "en": "Diff",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTotalRow": {
+    "it": "Totale",
+    "en": "Total",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageAFRow": {
+    "it": "AF",
+    "en": "AF",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageARRRow": {
+    "it": "ARR",
+    "en": "ARR",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPagePRWRRow": {
+    "it": "PR:WR",
+    "en": "PR:WR",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTallyRow": {
+    "it": "Conta",
+    "en": "Tally",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTallyRowWinsSingular": {
+    "it": "Vittoria",
+    "en": "Win",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTallyRowWinsPlural": {
+    "it": "Vittorie",
+    "en": "Wins",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTallyRowDrawsSingular": {
+    "it": "Pareggio",
+    "en": "Draw",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTallyRowDrawsPlural": {
+    "it": "Pareggi",
+    "en": "Draws",
     "fr": "",
     "de": "",
     "jp": "",
