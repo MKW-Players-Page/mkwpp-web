@@ -11,7 +11,7 @@ const TrackListPage = () => {
   const metadata = useContext(MetadataContext);
   return (
     <>
-      <h1>Courses</h1>
+      <h1>{translations.trackListPageHeading[lang]}</h1>
       <Deferred isWaiting={metadata.isLoading}>
         <div
           style={
