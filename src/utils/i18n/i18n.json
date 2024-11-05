@@ -377,9 +377,45 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionRecordWORLD": {
+    "it": "Record Mondiale",
+    "en": "World Record",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsWORLD": {
+    "it": "Sottoregioni del Mondo",
+    "en": "World Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionAFR": {
     "it": "Africa",
     "en": "Africa",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAFR": {
+    "it": "Record Africani",
+    "en": "African Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAFR": {
+    "it": "Sottoregioni Africane",
+    "en": "African Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -395,9 +431,45 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionRecordAME": {
+    "it": "Record Americani",
+    "en": "American Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAME": {
+    "it": "Sottregioni Americane",
+    "en": "American Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionANT": {
     "it": "Antartide",
     "en": "Antarctica",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordANT": {
+    "it": "Record Antartici",
+    "en": "Antarctic Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsANT": {
+    "it": "Sottoregioni Antartiche",
+    "en": "Antarctic Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -413,9 +485,45 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionRecordASI": {
+    "it": "Record Asiatici",
+    "en": "Asian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsASI": {
+    "it": "Sottoregioni Asiatiche",
+    "en": "Asian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionEUR": {
     "it": "Europa",
-    "en": "Europa",
+    "en": "Europe",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordEUR": {
+    "it": "Record Europei",
+    "en": "European Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsEUR": {
+    "it": "Sottoregioni Europee",
+    "en": "European Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -425,6 +533,51 @@
   "constantRegionOCE": {
     "it": "Oceania",
     "en": "Oceania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordOCE": {
+    "it": "Record Oceanici",
+    "en": "Oceanic Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsOCE": {
+    "it": "Sottoregioni Oceaniche",
+    "en": "Oceanic Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAI": {
+    "it": "Anguilla",
+    "en": "Anguilla",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAG": {
+    "it": "Antigua e Barbuda",
+    "en": "Antigua and Barbuda",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAW": {
+    "it": "Aruba",
+    "en": "Aruba",
     "fr": "",
     "de": "",
     "jp": "",
