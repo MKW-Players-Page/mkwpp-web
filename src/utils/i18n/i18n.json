@@ -2285,6 +2285,24 @@
     "pt": "",
     "es": ""
   },
+  "rankingsPageRankCol": {
+    "it": "Posizione",
+    "en": "Rank",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "rankingsPagePlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "genericRankingsYourHighlightedValue": {
     "it": "Il Tuo Valore Evidenziato",
     "en": "Your Highlighted Value",

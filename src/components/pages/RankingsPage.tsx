@@ -130,8 +130,8 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             <table>
               <thead>
                 <tr>
-                  <th>Rank</th>
-                  <th>Player</th>
+                  <th>{translations.rankingsPageRankCol[lang]}</th>
+                  <th>{translations.rankingsPagePlayerCol[lang]}</th>
                   <th>{translations[metric.titleKey][lang]}</th>
                 </tr>
               </thead>
