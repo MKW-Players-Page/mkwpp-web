@@ -167,7 +167,7 @@ const TrackTopsPage = () => {
                                   <td>{score.rank}</td>
                                   <td>
                                     <FlagIcon
-                                      region={getRegionById(metadata, score.player.region || 0)}
+                                      region={getRegionById(metadata, score.player.region ?? 0)}
                                     />
                                     <Link
                                       to={resolvePage(Pages.PlayerProfile, {
@@ -198,7 +198,7 @@ const TrackTopsPage = () => {
                                       },
                                     )}
                                   >
-                                    View full leaderboards
+                                    {translations.trackTopsPageViewFullLeaderboards[lang]}
                                   </Link>
                                 </th>
                               </tr>

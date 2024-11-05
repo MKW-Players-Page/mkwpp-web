@@ -1,4 +1,31 @@
 {
+  "constantLapModeOverall": {
+    "it": "Complessivo",
+    "en": "Overall",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantLapModeCourse": {
+    "it": "3 Giri",
+    "en": "Course",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantLapModeLap": {
+    "it": "Giro",
+    "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantCategoryNameNoSCLong": {
     "it": "Normale",
     "en": "No-Shortcut",
@@ -2324,6 +2351,15 @@
   "trackRecordsPageDateCol": {
     "it": "Data",
     "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackTopsPageViewFullLeaderboards": {
+    "it": "Vedi classifiche",
+    "en": "View full leaderboards",
     "fr": "",
     "de": "",
     "jp": "",
