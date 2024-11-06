@@ -773,7 +773,6341 @@
     "pt": "",
     "es": ""
   },
-
+  "constantRegionAO": {
+    "it": "Angola",
+    "en": "Angola",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAO": {
+    "it": "Record Angolani",
+    "en": "Angolan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAO": {
+    "it": "Sottoregioni Angolane",
+    "en": "Angolan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAZ": {
+    "it": "Azerbaigian",
+    "en": "Azerbaijan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAZ": {
+    "it": "Record Azeri",
+    "en": "Azeri Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAZ": {
+    "it": "Sottoregioni Azere",
+    "en": "Azeri Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAR": {
+    "it": "Argentina",
+    "en": "Argentina",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAR": {
+    "it": "Record Argentini",
+    "en": "Argentine Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAR": {
+    "it": "Sottoregioni Argentine",
+    "en": "Argentine Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAU": {
+    "it": "Australia",
+    "en": "Australia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAU": {
+    "it": "Record Australiani",
+    "en": "Australian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAU": {
+    "it": "Sottoregioni Australiane",
+    "en": "Australian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAT": {
+    "it": "Austria",
+    "en": "Austria",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAT": {
+    "it": "Record Austrici",
+    "en": "Austrian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAT": {
+    "it": "Sottoregioni Austriche",
+    "en": "Austrian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBS": {
+    "it": "Bahamas",
+    "en": "Bahamas",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBS": {
+    "it": "Record Bahamensi",
+    "en": "Bahamian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBS": {
+    "it": "Sottoregioni Bahamense",
+    "en": "Bahamian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBH": {
+    "it": "",
+    "en": "Bahrain",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBD": {
+    "it": "",
+    "en": "Bangladesh",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBD": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBD": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAM": {
+    "it": "",
+    "en": "Armenia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBB": {
+    "it": "",
+    "en": "Barbados",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBB": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBB": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBE": {
+    "it": "",
+    "en": "Belgium",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBM": {
+    "it": "",
+    "en": "Bermuda",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBT": {
+    "it": "",
+    "en": "Bhutan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBO": {
+    "it": "",
+    "en": "Bolivia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBA": {
+    "it": "",
+    "en": "Bosnia and Herzegovina",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBW": {
+    "it": "",
+    "en": "Botswana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBV": {
+    "it": "",
+    "en": "Bouvet Island",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBV": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBV": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBR": {
+    "it": "",
+    "en": "Brazil",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBZ": {
+    "it": "",
+    "en": "Belize",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIO": {
+    "it": "",
+    "en": "British Indian Ocean Territory",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordIO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSB": {
+    "it": "",
+    "en": "Solomon Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSB": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSB": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVG": {
+    "it": "",
+    "en": "British Virgin Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBN": {
+    "it": "",
+    "en": "Brunei",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBG": {
+    "it": "",
+    "en": "Bulgaria",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMM": {
+    "it": "",
+    "en": "Myanmar",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBI": {
+    "it": "",
+    "en": "Burundi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBY": {
+    "it": "",
+    "en": "Belarus",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKH": {
+    "it": "",
+    "en": "Cambodia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCM": {
+    "it": "",
+    "en": "Cameroon",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCA": {
+    "it": "",
+    "en": "Canada",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCV": {
+    "it": "",
+    "en": "Cape Verde",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCV": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCV": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKY": {
+    "it": "",
+    "en": "Cayman Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCF": {
+    "it": "",
+    "en": "Central African Republic",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLK": {
+    "it": "",
+    "en": "Sri Lanka",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTD": { "it": "", "en": "Chad", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordTD": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTD": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCL": { "it": "", "en": "Chile", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordCL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCN": { "it": "", "en": "China", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordCN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTW": {
+    "it": "",
+    "en": "Taiwan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCX": {
+    "it": "",
+    "en": "Christmas Island",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCX": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCX": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCC": {
+    "it": "",
+    "en": "Cocos Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCO": {
+    "it": "",
+    "en": "Colombia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKM": {
+    "it": "",
+    "en": "Comoros",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionYT": {
+    "it": "",
+    "en": "Mayotte",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordYT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsYT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCG": {
+    "it": "",
+    "en": "Republic of the Congo",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCK": {
+    "it": "",
+    "en": "Cook Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCR": {
+    "it": "",
+    "en": "Costa Rica",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionHR": {
+    "it": "",
+    "en": "Croatia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordHR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsHR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCU": { "it": "", "en": "Cuba", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordCU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCY": {
+    "it": "",
+    "en": "Cyprus",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCZ": {
+    "it": "",
+    "en": "Czech Republic",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBJ": { "it": "", "en": "Benin", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordBJ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBJ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDK": {
+    "it": "",
+    "en": "Denmark",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDM": {
+    "it": "",
+    "en": "Dominica",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDO": {
+    "it": "",
+    "en": "Dominican Republic",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionEC": {
+    "it": "",
+    "en": "Ecuador",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordEC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsEC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSV": {
+    "it": "",
+    "en": "El Salvador",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSV": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSV": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGQ": {
+    "it": "",
+    "en": "Equatorial Guinea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGQ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGQ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionET": {
+    "it": "",
+    "en": "Ethiopia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordET": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsET": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionER": {
+    "it": "",
+    "en": "Eritrea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordER": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsER": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionEE": {
+    "it": "",
+    "en": "Estonia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordEE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsEE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionFO": {
+    "it": "",
+    "en": "Faroe Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordFO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionFK": {
+    "it": "",
+    "en": "Falkland Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordFK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGS": {
+    "it": "",
+    "en": "South Georgia and the South Sandwich Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionFJ": { "it": "", "en": "Fiji", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordFJ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFJ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionFI": {
+    "it": "",
+    "en": "Finland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordFI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAX": {
+    "it": "",
+    "en": "Åland Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAX": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAX": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionFR": {
+    "it": "",
+    "en": "France",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordFR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGF": {
+    "it": "",
+    "en": "French Guiana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPF": {
+    "it": "",
+    "en": "French Polynesia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTF": {
+    "it": "",
+    "en": "French Southern Territories",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDJ": {
+    "it": "",
+    "en": "Djibouti",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDJ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDJ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGA": { "it": "", "en": "Gabon", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordGA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGE": {
+    "it": "",
+    "en": "Georgia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGM": {
+    "it": "",
+    "en": "Gambia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDE": {
+    "it": "",
+    "en": "Germany",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGH": { "it": "", "en": "Ghana", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordGH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGI": {
+    "it": "",
+    "en": "Gibraltar",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKI": {
+    "it": "",
+    "en": "Kiribati",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGR": {
+    "it": "",
+    "en": "Greece",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGL": {
+    "it": "",
+    "en": "Greenland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGD": {
+    "it": "",
+    "en": "Grenada",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGD": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGD": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGP": {
+    "it": "",
+    "en": "Guadeloupe",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGP": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGP": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGU": { "it": "", "en": "Guam", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordGU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGT": {
+    "it": "",
+    "en": "Guatemala",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGN": {
+    "it": "",
+    "en": "Guinea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGY": {
+    "it": "",
+    "en": "Guyana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionHT": { "it": "", "en": "Haiti", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordHT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsHT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionHM": {
+    "it": "",
+    "en": "Heard Island and McDonald Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordHM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsHM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVA": {
+    "it": "",
+    "en": "Vatican City",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionHN": {
+    "it": "",
+    "en": "Honduras",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordHN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsHN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionHK": {
+    "it": "",
+    "en": "Hong Kong",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordHK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsHK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionHU": {
+    "it": "",
+    "en": "Hungary",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordHU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsHU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIS": {
+    "it": "",
+    "en": "Iceland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordIS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIN": { "it": "", "en": "India", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordIN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionID": {
+    "it": "",
+    "en": "Indonesia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordID": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsID": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIR": { "it": "", "en": "Iran", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordIR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIQ": { "it": "", "en": "Iraq", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordIQ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIQ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIE": {
+    "it": "",
+    "en": "Ireland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordIE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIL": {
+    "it": "",
+    "en": "Israel",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordIL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT": { "it": "", "en": "Italy", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordIT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCI": {
+    "it": "",
+    "en": "Ivory Coast",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionJM": {
+    "it": "",
+    "en": "Jamaica",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordJM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsJM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionJP": { "it": "", "en": "Japan", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordJP": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsJP": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKZ": {
+    "it": "",
+    "en": "Kazakhstan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionJO": {
+    "it": "",
+    "en": "Jordan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordJO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsJO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKE": { "it": "", "en": "Kenya", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordKE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKP": {
+    "it": "",
+    "en": "North Korea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKP": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKP": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKR": {
+    "it": "",
+    "en": "South Korea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionXK": {
+    "it": "",
+    "en": "Kosovo",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordXK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsXK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKW": {
+    "it": "",
+    "en": "Kuwait",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKG": {
+    "it": "",
+    "en": "Kyrgyzstan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLA": { "it": "", "en": "Laos", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordLA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLB": {
+    "it": "",
+    "en": "Lebanon",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLB": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLB": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLS": {
+    "it": "",
+    "en": "Lesotho",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLV": {
+    "it": "",
+    "en": "Latvia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLV": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLV": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLR": {
+    "it": "",
+    "en": "Liberia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLY": { "it": "", "en": "Libya", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordLY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLI": {
+    "it": "",
+    "en": "Liechtenstein",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLT": {
+    "it": "",
+    "en": "Lithuania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLU": {
+    "it": "",
+    "en": "Luxembourg",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMG": {
+    "it": "",
+    "en": "Madagascar",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMW": {
+    "it": "",
+    "en": "Malawi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMY": {
+    "it": "",
+    "en": "Malaysia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMV": {
+    "it": "",
+    "en": "Maldives",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMV": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMV": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionML": { "it": "", "en": "Mali", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordML": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsML": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMT": { "it": "", "en": "Malta", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordMT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMQ": {
+    "it": "",
+    "en": "Martinique",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMQ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMQ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMR": {
+    "it": "",
+    "en": "Mauritania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMU": {
+    "it": "",
+    "en": "Mauritius",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMX": {
+    "it": "",
+    "en": "Mexico",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMX": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMX": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMC": {
+    "it": "",
+    "en": "Monaco",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMN": {
+    "it": "",
+    "en": "Mongolia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMD": {
+    "it": "",
+    "en": "Moldova",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMD": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMD": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionME": {
+    "it": "",
+    "en": "Montenegro",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordME": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsME": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMS": {
+    "it": "",
+    "en": "Montserrat",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMA": {
+    "it": "",
+    "en": "Morocco",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMZ": {
+    "it": "",
+    "en": "Mozambique",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionOM": { "it": "", "en": "Oman", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordOM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsOM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNA": {
+    "it": "",
+    "en": "Namibia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNR": { "it": "", "en": "Nauru", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordNR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNP": { "it": "", "en": "Nepal", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordNP": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNP": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNL": {
+    "it": "",
+    "en": "Netherlands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCW": {
+    "it": "",
+    "en": "Curaçao",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSX": {
+    "it": "",
+    "en": "Sint Maarten",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSX": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSX": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBQ": {
+    "it": "",
+    "en": "Bonaire",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBQ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBQ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNC": {
+    "it": "",
+    "en": "New Caledonia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVU": {
+    "it": "",
+    "en": "Vanuatu",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNZ": {
+    "it": "",
+    "en": "New Zealand",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNI": {
+    "it": "",
+    "en": "Nicaragua",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNE": { "it": "", "en": "Niger", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordNE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNG": {
+    "it": "",
+    "en": "Nigeria",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNU": { "it": "", "en": "Niue", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordNU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNF": {
+    "it": "",
+    "en": "Norfolk Island",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNO": {
+    "it": "",
+    "en": "Norway",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMP": {
+    "it": "",
+    "en": "Northern Mariana Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMP": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMP": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUM": {
+    "it": "",
+    "en": "United States Minor Outlying Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionFM": {
+    "it": "",
+    "en": "Micronesia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordFM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMH": {
+    "it": "",
+    "en": "Marshall Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPW": { "it": "", "en": "Palau", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordPW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPK": {
+    "it": "",
+    "en": "Pakistan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPS": {
+    "it": "",
+    "en": "Palestine",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPA": {
+    "it": "",
+    "en": "Panama",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPG": {
+    "it": "",
+    "en": "Papua New Guinea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPY": {
+    "it": "",
+    "en": "Paraguay",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPE": { "it": "", "en": "Peru", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordPE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPH": {
+    "it": "",
+    "en": "Philippines",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPN": {
+    "it": "",
+    "en": "Pitcairn Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPL": {
+    "it": "",
+    "en": "Poland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPT": {
+    "it": "",
+    "en": "Portugal",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGW": {
+    "it": "",
+    "en": "Guinea-Bissau",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTL": {
+    "it": "",
+    "en": "East Timor",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPR": {
+    "it": "",
+    "en": "Puerto Rico",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionQA": { "it": "", "en": "Qatar", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordQA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsQA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRE": {
+    "it": "",
+    "en": "Reunion",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordRE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsRE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRO": {
+    "it": "",
+    "en": "Romania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordRO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsRO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRU": {
+    "it": "",
+    "en": "Russian Federation",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordRU": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsRU": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRW": {
+    "it": "",
+    "en": "Rwanda",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordRW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsRW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBL": {
+    "it": "",
+    "en": "Saint Barthelemy",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSH": {
+    "it": "",
+    "en": "Saint Helena",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionKN": {
+    "it": "",
+    "en": "Saint Kitts and Nevis",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordKN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsKN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLC": {
+    "it": "",
+    "en": "Saint Lucia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMF": {
+    "it": "",
+    "en": "Saint Martin",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionPM": {
+    "it": "",
+    "en": "Saint Pierre and Miquelon",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordPM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsPM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVC": {
+    "it": "",
+    "en": "Saint Vincent and the Grenadines",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSM": {
+    "it": "",
+    "en": "San Marino",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionST": {
+    "it": "",
+    "en": "São Tomé and Príncipe",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordST": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsST": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSA": {
+    "it": "",
+    "en": "Saudi Arabia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSN": {
+    "it": "",
+    "en": "Senegal",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRS": {
+    "it": "",
+    "en": "Serbia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordRS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsRS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSC": {
+    "it": "",
+    "en": "Seychelles",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSL": {
+    "it": "",
+    "en": "Sierra Leone",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSL": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSL": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSG": {
+    "it": "",
+    "en": "Singapore",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSK": {
+    "it": "",
+    "en": "Slovakia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVN": {
+    "it": "",
+    "en": "Vietnam",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSI": {
+    "it": "",
+    "en": "Slovenia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSO": {
+    "it": "",
+    "en": "Somalia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionZA": {
+    "it": "",
+    "en": "South Africa",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordZA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsZA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionZW": {
+    "it": "",
+    "en": "Zimbabwe",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordZW": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsZW": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionES": { "it": "", "en": "Spain", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordES": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsES": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSS": {
+    "it": "",
+    "en": "South Sudan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSD": { "it": "", "en": "Sudan", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordSD": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSD": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionEH": {
+    "it": "",
+    "en": "Sahrawi Arab Democratic Republic",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordEH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsEH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSR": {
+    "it": "",
+    "en": "Suriname",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSJ": {
+    "it": "",
+    "en": "Svalbard & Jan Mayen Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSJ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSJ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSZ": {
+    "it": "",
+    "en": "Eswatini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSE": {
+    "it": "",
+    "en": "Sweden",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCH": {
+    "it": "",
+    "en": "Switzerland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSY": {
+    "it": "",
+    "en": "Syrian Arab Republic",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordSY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsSY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTJ": {
+    "it": "",
+    "en": "Tajikistan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTJ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTJ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTH": {
+    "it": "",
+    "en": "Thailand",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTH": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTH": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTG": { "it": "", "en": "Togo", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordTG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTK": {
+    "it": "",
+    "en": "Tokelau",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTO": { "it": "", "en": "Tonga", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordTO": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTO": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTT": {
+    "it": "",
+    "en": "Trinidad and Tobago",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAE": {
+    "it": "",
+    "en": "United Arab Emirates",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTN": {
+    "it": "",
+    "en": "Tunisia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTN": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTN": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTR": {
+    "it": "",
+    "en": "Turkey",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTR": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTR": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTM": {
+    "it": "",
+    "en": "Turkmenistan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTC": {
+    "it": "",
+    "en": "Turks and Caicos Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTV": {
+    "it": "",
+    "en": "Tuvalu",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTV": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTV": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUG": {
+    "it": "",
+    "en": "Uganda",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUA": {
+    "it": "",
+    "en": "Ukraine",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUA": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUA": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionMK": {
+    "it": "",
+    "en": "North Macedonia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordMK": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsMK": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionEG": { "it": "", "en": "Egypt", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordEG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsEG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGB": {
+    "it": "",
+    "en": "United Kingdom",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGB": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGB": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGG": {
+    "it": "",
+    "en": "Guernsey",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGG": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGG": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionJE": {
+    "it": "",
+    "en": "Jersey",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordJE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsJE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIM": {
+    "it": "",
+    "en": "Isle of Man",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordIM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionTZ": {
+    "it": "",
+    "en": "Tanzania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordTZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsTZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUS": {
+    "it": "",
+    "en": "United States",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVI": {
+    "it": "",
+    "en": "United States Virgin Islands",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVI": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVI": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBF": {
+    "it": "",
+    "en": "Burkina Faso",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUY": {
+    "it": "",
+    "en": "Uruguay",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUY": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUY": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUZ": {
+    "it": "",
+    "en": "Uzbekistan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUZ": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUZ": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionVE": {
+    "it": "",
+    "en": "Venezuela",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordVE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsVE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionWF": {
+    "it": "",
+    "en": "Wallis and Futuna",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordWF": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsWF": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionWS": { "it": "", "en": "Samoa", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordWS": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsWS": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionYE": { "it": "", "en": "Yemen", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionRecordYE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsYE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionZM": {
+    "it": "",
+    "en": "Zambia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordZM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsZM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionLATAM": {
+    "it": "",
+    "en": "Latin America",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordLATAM": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsLATAM": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionGBIE": {
+    "it": "",
+    "en": "UK & Ireland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordGBIE": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsGBIE": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionESPT": {
+    "it": "",
+    "en": "Spain & Portugal",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordESPT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsESPT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEAT": {
+    "it": "",
+    "en": "Germany & Austria",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDEAT": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEAT": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionBENELUX": {
+    "it": "",
+    "en": "Benelux",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordBENELUX": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsBENELUX": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionNORDIC": {
+    "it": "",
+    "en": "Nordic",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordNORDIC": {
+    "it": "Record ",
+    "en": " Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsNORDIC": {
+    "it": "Sottoregioni ",
+    "en": " Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "headerSubmit": {
     "it": "Carica",
     "en": "Submit",
