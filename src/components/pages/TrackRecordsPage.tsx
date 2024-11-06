@@ -36,7 +36,7 @@ const TrackRecordsPage = () => {
   return (
     <>
       {/* This heading will eventually have an i18n key for literally every region indexed */}
-      <h1>{region.name} Records</h1>
+      <h1>{translations[`constantRegionRecord${region.code}` as TranslationKey][lang]}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />

@@ -11,6 +11,7 @@ import Dropdown, {
   DropdownItemSetDataChild,
   DropdownItemSetSetterData,
 } from "./Dropdown";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -19,6 +20,7 @@ export interface RegionSelectionDropdownProps {
 }
 
 const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDropdownProps) => {
+  const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
   const regions = metadata.regions.length === 1 ? [value] : metadata.regions;
@@ -63,7 +65,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
         outChildren.push({
           type: "DropdownItemData",
           element: {
-            text: region.name,
+            text: translations[`constantRegion${region.code}` as TranslationKey][lang],
             rightIcon: <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />,
             value: region,
           } as DropdownItemData,
@@ -73,7 +75,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
           outChildren.push({
             type: "DropdownItemSetSetterData",
             element: {
-              text: `${region.name} Subregions`,
+              text: translations[`constantRegionSubregions${region.code}` as TranslationKey][lang],
               toItemSetId: region.id,
             } as DropdownItemSetSetterData,
           });

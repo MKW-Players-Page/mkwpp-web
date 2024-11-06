@@ -7,6 +7,7 @@ import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
 import Flag, { Flags } from "./Flags";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;
@@ -29,6 +30,7 @@ export interface RegionModuleProps {
 const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => {
   let classes = "module region-selection-button";
   if (selectedRegions.includes(region.id)) classes += " selected-region";
+  const { translations, lang } = useContext(I18nContext);
 
   return (
     <div className={classes}>
@@ -39,7 +41,7 @@ const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => 
         })}
       >
         <div className="module-content">
-          {region.name}
+          {translations[`constantRegion${region.code}` as TranslationKey][lang]}
           <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
         </div>
       </Link>

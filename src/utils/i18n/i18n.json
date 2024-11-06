@@ -936,7 +936,7 @@
     "es": ""
   },
   "constantRegionBH": {
-    "it": "",
+    "it": "Bahrein",
     "en": "Bahrain",
     "fr": "",
     "de": "",
@@ -945,8 +945,8 @@
     "es": ""
   },
   "constantRegionRecordBH": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Bahreiniti",
+    "en": "Bahraini Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -954,8 +954,8 @@
     "es": ""
   },
   "constantRegionSubregionsBH": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Bahreinite",
+    "en": "Bahraini Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -963,7 +963,7 @@
     "es": ""
   },
   "constantRegionBD": {
-    "it": "",
+    "it": "Bangladesh",
     "en": "Bangladesh",
     "fr": "",
     "de": "",
@@ -972,8 +972,8 @@
     "es": ""
   },
   "constantRegionRecordBD": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Bengalesi",
+    "en": "Bangladeshi Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -981,8 +981,8 @@
     "es": ""
   },
   "constantRegionSubregionsBD": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Bengalesi",
+    "en": "Bangladeshi Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -990,7 +990,7 @@
     "es": ""
   },
   "constantRegionAM": {
-    "it": "",
+    "it": "Armenia",
     "en": "Armenia",
     "fr": "",
     "de": "",
@@ -999,8 +999,8 @@
     "es": ""
   },
   "constantRegionRecordAM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Armeni",
+    "en": "Armenian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1008,8 +1008,8 @@
     "es": ""
   },
   "constantRegionSubregionsAM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Armene",
+    "en": "Armenian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1017,7 +1017,7 @@
     "es": ""
   },
   "constantRegionBB": {
-    "it": "",
+    "it": "Barbados",
     "en": "Barbados",
     "fr": "",
     "de": "",
@@ -1026,8 +1026,8 @@
     "es": ""
   },
   "constantRegionRecordBB": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Barbadiani",
+    "en": "Barbadian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1035,8 +1035,8 @@
     "es": ""
   },
   "constantRegionSubregionsBB": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Barbadiane",
+    "en": "Barbadian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1044,7 +1044,7 @@
     "es": ""
   },
   "constantRegionBE": {
-    "it": "",
+    "it": "Belgio",
     "en": "Belgium",
     "fr": "",
     "de": "",
@@ -1053,8 +1053,8 @@
     "es": ""
   },
   "constantRegionRecordBE": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Belgi",
+    "en": "Belgian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1062,8 +1062,8 @@
     "es": ""
   },
   "constantRegionSubregionsBE": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Belghe",
+    "en": "Belgian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1071,7 +1071,7 @@
     "es": ""
   },
   "constantRegionBM": {
-    "it": "",
+    "it": "Bermuda",
     "en": "Bermuda",
     "fr": "",
     "de": "",
@@ -1080,8 +1080,8 @@
     "es": ""
   },
   "constantRegionRecordBM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Bermuda",
+    "en": "Bermudan Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1089,8 +1089,8 @@
     "es": ""
   },
   "constantRegionSubregionsBM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Bermuda",
+    "en": "Bermudan Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1098,7 +1098,7 @@
     "es": ""
   },
   "constantRegionBT": {
-    "it": "",
+    "it": "Bhutan",
     "en": "Bhutan",
     "fr": "",
     "de": "",
@@ -1107,8 +1107,8 @@
     "es": ""
   },
   "constantRegionRecordBT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Bhutanesi",
+    "en": "Bhutanese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1116,8 +1116,8 @@
     "es": ""
   },
   "constantRegionSubregionsBT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Bhutanesi",
+    "en": "Bhutanese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1125,7 +1125,7 @@
     "es": ""
   },
   "constantRegionBO": {
-    "it": "",
+    "it": "Bolivia",
     "en": "Bolivia",
     "fr": "",
     "de": "",
@@ -1134,8 +1134,8 @@
     "es": ""
   },
   "constantRegionRecordBO": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Boliviani",
+    "en": "Bolivian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1143,8 +1143,8 @@
     "es": ""
   },
   "constantRegionSubregionsBO": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Boliviane",
+    "en": "Bolivian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1152,7 +1152,7 @@
     "es": ""
   },
   "constantRegionBA": {
-    "it": "",
+    "it": "Bosnia ed Erzegovina",
     "en": "Bosnia and Herzegovina",
     "fr": "",
     "de": "",
@@ -1161,8 +1161,8 @@
     "es": ""
   },
   "constantRegionRecordBA": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Bosniaci",
+    "en": "Bosnian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1170,8 +1170,8 @@
     "es": ""
   },
   "constantRegionSubregionsBA": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Bosniaci",
+    "en": "Bosnian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1179,7 +1179,7 @@
     "es": ""
   },
   "constantRegionBW": {
-    "it": "",
+    "it": "Botswana",
     "en": "Botswana",
     "fr": "",
     "de": "",
@@ -1188,8 +1188,8 @@
     "es": ""
   },
   "constantRegionRecordBW": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Botswani",
+    "en": "Botswanan Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1197,8 +1197,8 @@
     "es": ""
   },
   "constantRegionSubregionsBW": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Botswane",
+    "en": "Botswanan Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1206,7 +1206,7 @@
     "es": ""
   },
   "constantRegionBV": {
-    "it": "",
+    "it": "Isola Bouvet",
     "en": "Bouvet Island",
     "fr": "",
     "de": "",
@@ -1215,8 +1215,8 @@
     "es": ""
   },
   "constantRegionRecordBV": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record dell'Isola Bouvet",
+    "en": "Bouvet Island Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1224,8 +1224,8 @@
     "es": ""
   },
   "constantRegionSubregionsBV": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni dell'Isola Bouvet",
+    "en": "Bouvet Island Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1233,7 +1233,7 @@
     "es": ""
   },
   "constantRegionBR": {
-    "it": "",
+    "it": "Brasile",
     "en": "Brazil",
     "fr": "",
     "de": "",
@@ -1242,8 +1242,8 @@
     "es": ""
   },
   "constantRegionRecordBR": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Brasiliani",
+    "en": "Brazilian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1251,8 +1251,8 @@
     "es": ""
   },
   "constantRegionSubregionsBR": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Brasiliane",
+    "en": "Brazilian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1260,7 +1260,7 @@
     "es": ""
   },
   "constantRegionBZ": {
-    "it": "",
+    "it": "Belize",
     "en": "Belize",
     "fr": "",
     "de": "",
@@ -1269,8 +1269,8 @@
     "es": ""
   },
   "constantRegionRecordBZ": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Belize",
+    "en": "Belizean Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1278,8 +1278,8 @@
     "es": ""
   },
   "constantRegionSubregionsBZ": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Belize",
+    "en": "Belizean Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1287,7 +1287,7 @@
     "es": ""
   },
   "constantRegionIO": {
-    "it": "",
+    "it": "Territori Britannici dell'Oceano Indiano",
     "en": "British Indian Ocean Territory",
     "fr": "",
     "de": "",
@@ -1296,8 +1296,8 @@
     "es": ""
   },
   "constantRegionRecordIO": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record BIOT",
+    "en": "BIOT Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1305,8 +1305,8 @@
     "es": ""
   },
   "constantRegionSubregionsIO": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni BIOT",
+    "en": "BIOT Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1314,7 +1314,7 @@
     "es": ""
   },
   "constantRegionSB": {
-    "it": "",
+    "it": "Isole Salomone",
     "en": "Solomon Islands",
     "fr": "",
     "de": "",
@@ -1323,8 +1323,8 @@
     "es": ""
   },
   "constantRegionRecordSB": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Salomone",
+    "en": "Solomon Island Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1332,8 +1332,8 @@
     "es": ""
   },
   "constantRegionSubregionsSB": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Salomone",
+    "en": "Solomon Island Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1341,7 +1341,7 @@
     "es": ""
   },
   "constantRegionVG": {
-    "it": "",
+    "it": "Isole Vergini Britanniche",
     "en": "British Virgin Islands",
     "fr": "",
     "de": "",
@@ -1350,8 +1350,8 @@
     "es": ""
   },
   "constantRegionRecordVG": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Vergini Britanniche",
+    "en": "British Virgin Island Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1359,8 +1359,8 @@
     "es": ""
   },
   "constantRegionSubregionsVG": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Vergini Britanniche",
+    "en": "British Virgin Island Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1368,7 +1368,7 @@
     "es": ""
   },
   "constantRegionBN": {
-    "it": "",
+    "it": "Brunei",
     "en": "Brunei",
     "fr": "",
     "de": "",
@@ -1377,8 +1377,8 @@
     "es": ""
   },
   "constantRegionRecordBN": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Brunei",
+    "en": "Bruneian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1386,8 +1386,8 @@
     "es": ""
   },
   "constantRegionSubregionsBN": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Brunei",
+    "en": " SubregionBruneians",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1395,7 +1395,7 @@
     "es": ""
   },
   "constantRegionBG": {
-    "it": "",
+    "it": "Bulgaria",
     "en": "Bulgaria",
     "fr": "",
     "de": "",
@@ -1404,8 +1404,8 @@
     "es": ""
   },
   "constantRegionRecordBG": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Bulgare",
+    "en": "Bulgarian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1413,8 +1413,8 @@
     "es": ""
   },
   "constantRegionSubregionsBG": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Bulgare",
+    "en": "Bulgarian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1422,7 +1422,7 @@
     "es": ""
   },
   "constantRegionMM": {
-    "it": "",
+    "it": "Myanmar",
     "en": "Myanmar",
     "fr": "",
     "de": "",
@@ -1431,8 +1431,8 @@
     "es": ""
   },
   "constantRegionRecordMM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Birmani",
+    "en": "Myanma Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1440,8 +1440,8 @@
     "es": ""
   },
   "constantRegionSubregionsMM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Birmane",
+    "en": "Myanma Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1449,7 +1449,7 @@
     "es": ""
   },
   "constantRegionBI": {
-    "it": "",
+    "it": "Burundi",
     "en": "Burundi",
     "fr": "",
     "de": "",
@@ -1458,8 +1458,8 @@
     "es": ""
   },
   "constantRegionRecordBI": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Burundesi",
+    "en": "Burundian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1467,8 +1467,8 @@
     "es": ""
   },
   "constantRegionSubregionsBI": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Burundesi",
+    "en": "Burundian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1476,7 +1476,7 @@
     "es": ""
   },
   "constantRegionBY": {
-    "it": "",
+    "it": "Bielorussia",
     "en": "Belarus",
     "fr": "",
     "de": "",
@@ -1485,8 +1485,8 @@
     "es": ""
   },
   "constantRegionRecordBY": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Bielorussi",
+    "en": "Belarusian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1494,8 +1494,8 @@
     "es": ""
   },
   "constantRegionSubregionsBY": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Bielorusse",
+    "en": "Belarusian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1503,7 +1503,7 @@
     "es": ""
   },
   "constantRegionKH": {
-    "it": "",
+    "it": "Cambogia",
     "en": "Cambodia",
     "fr": "",
     "de": "",
@@ -1512,8 +1512,8 @@
     "es": ""
   },
   "constantRegionRecordKH": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Cambogiani",
+    "en": "Cambodian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1521,8 +1521,8 @@
     "es": ""
   },
   "constantRegionSubregionsKH": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Cambogiane",
+    "en": "Cambodian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1530,7 +1530,7 @@
     "es": ""
   },
   "constantRegionCM": {
-    "it": "",
+    "it": "Camerun",
     "en": "Cameroon",
     "fr": "",
     "de": "",
@@ -1539,8 +1539,8 @@
     "es": ""
   },
   "constantRegionRecordCM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Camerunesi",
+    "en": "Cameroonian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1548,8 +1548,8 @@
     "es": ""
   },
   "constantRegionSubregionsCM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Camerunesi",
+    "en": "Cameroonian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1557,7 +1557,7 @@
     "es": ""
   },
   "constantRegionCA": {
-    "it": "",
+    "it": "Canada",
     "en": "Canada",
     "fr": "",
     "de": "",
@@ -1566,8 +1566,8 @@
     "es": ""
   },
   "constantRegionRecordCA": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Canadesi",
+    "en": "Canadian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1575,8 +1575,8 @@
     "es": ""
   },
   "constantRegionSubregionsCA": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Canadesi",
+    "en": "Canadian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1584,8 +1584,8 @@
     "es": ""
   },
   "constantRegionCV": {
-    "it": "",
-    "en": "Cape Verde",
+    "it": "Capo Verde",
+    "en": "Cabo Verde",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1593,8 +1593,8 @@
     "es": ""
   },
   "constantRegionRecordCV": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Capoverdiani",
+    "en": "Cabo Verdean Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1602,8 +1602,8 @@
     "es": ""
   },
   "constantRegionSubregionsCV": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Capoverdiane",
+    "en": "Cabo Verdean Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1611,7 +1611,7 @@
     "es": ""
   },
   "constantRegionKY": {
-    "it": "",
+    "it": "Isole Cayman",
     "en": "Cayman Islands",
     "fr": "",
     "de": "",
@@ -1620,8 +1620,8 @@
     "es": ""
   },
   "constantRegionRecordKY": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Cayman",
+    "en": "Cayman Island Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1629,8 +1629,8 @@
     "es": ""
   },
   "constantRegionSubregionsKY": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Cayman",
+    "en": "Cayman Island Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1638,7 +1638,7 @@
     "es": ""
   },
   "constantRegionCF": {
-    "it": "",
+    "it": "Repubblica Centrafricana",
     "en": "Central African Republic",
     "fr": "",
     "de": "",
@@ -1647,8 +1647,8 @@
     "es": ""
   },
   "constantRegionRecordCF": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Centrafricani",
+    "en": "Central African Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1656,8 +1656,8 @@
     "es": ""
   },
   "constantRegionSubregionsCF": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Centrafricane",
+    "en": "Central African Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1665,7 +1665,7 @@
     "es": ""
   },
   "constantRegionLK": {
-    "it": "",
+    "it": "Sri Lanka",
     "en": "Sri Lanka",
     "fr": "",
     "de": "",
@@ -1674,8 +1674,8 @@
     "es": ""
   },
   "constantRegionRecordLK": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Cingalesi",
+    "en": "Sri Lankan Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1683,18 +1683,26 @@
     "es": ""
   },
   "constantRegionSubregionsLK": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Cingalesi",
+    "en": "Sri Lankan Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionTD": { "it": "", "en": "Chad", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionTD": {
+    "it": "Ciad",
+    "en": "Chad",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordTD": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Ciadiani",
+    "en": "Chadian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1702,18 +1710,26 @@
     "es": ""
   },
   "constantRegionSubregionsTD": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Ciadiane",
+    "en": "Chadian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionCL": { "it": "", "en": "Chile", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionCL": {
+    "it": "Cile",
+    "en": "Chile",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordCL": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Cileni",
+    "en": "Chilean Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1721,18 +1737,26 @@
     "es": ""
   },
   "constantRegionSubregionsCL": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Cilene",
+    "en": "Chilean Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionCN": { "it": "", "en": "China", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionCN": {
+    "it": "Cina",
+    "en": "China",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordCN": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Cinesi",
+    "en": "Chinese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1740,8 +1764,8 @@
     "es": ""
   },
   "constantRegionSubregionsCN": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Cinesi",
+    "en": "Chinese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1749,7 +1773,7 @@
     "es": ""
   },
   "constantRegionTW": {
-    "it": "",
+    "it": "Taiwan",
     "en": "Taiwan",
     "fr": "",
     "de": "",
@@ -1758,8 +1782,8 @@
     "es": ""
   },
   "constantRegionRecordTW": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Taiwanesi",
+    "en": "Taiwanese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1767,8 +1791,8 @@
     "es": ""
   },
   "constantRegionSubregionsTW": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Taiwanesi",
+    "en": "Taiwanese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1776,7 +1800,7 @@
     "es": ""
   },
   "constantRegionCX": {
-    "it": "",
+    "it": "Isola di Natale",
     "en": "Christmas Island",
     "fr": "",
     "de": "",
@@ -1785,8 +1809,8 @@
     "es": ""
   },
   "constantRegionRecordCX": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record dell'Isola di Natale",
+    "en": "Christmas Island Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1794,8 +1818,8 @@
     "es": ""
   },
   "constantRegionSubregionsCX": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni dell'Isola di Natale",
+    "en": "Christmas Island Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1803,7 +1827,7 @@
     "es": ""
   },
   "constantRegionCC": {
-    "it": "",
+    "it": "Isole Cocos",
     "en": "Cocos Islands",
     "fr": "",
     "de": "",
@@ -1812,8 +1836,8 @@
     "es": ""
   },
   "constantRegionRecordCC": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Cocos",
+    "en": "Cocos Islands Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1821,8 +1845,8 @@
     "es": ""
   },
   "constantRegionSubregionsCC": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Cocos",
+    "en": "Cocos Islands Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1830,7 +1854,7 @@
     "es": ""
   },
   "constantRegionCO": {
-    "it": "",
+    "it": "Colombia",
     "en": "Colombia",
     "fr": "",
     "de": "",
@@ -1839,8 +1863,8 @@
     "es": ""
   },
   "constantRegionRecordCO": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Colombiani",
+    "en": "Colombian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1848,8 +1872,8 @@
     "es": ""
   },
   "constantRegionSubregionsCO": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Colombiane",
+    "en": "Colombian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1857,7 +1881,7 @@
     "es": ""
   },
   "constantRegionKM": {
-    "it": "",
+    "it": "Comore",
     "en": "Comoros",
     "fr": "",
     "de": "",
@@ -1866,8 +1890,8 @@
     "es": ""
   },
   "constantRegionRecordKM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Comoriani",
+    "en": "Comoran Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1875,8 +1899,8 @@
     "es": ""
   },
   "constantRegionSubregionsKM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Comoriane",
+    "en": "Comoran Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1884,7 +1908,7 @@
     "es": ""
   },
   "constantRegionYT": {
-    "it": "",
+    "it": "Mayotte",
     "en": "Mayotte",
     "fr": "",
     "de": "",
@@ -1893,8 +1917,8 @@
     "es": ""
   },
   "constantRegionRecordYT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record di Mayotte",
+    "en": "Mahoran Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1902,8 +1926,8 @@
     "es": ""
   },
   "constantRegionSubregionsYT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni di Mayotte",
+    "en": "Mahoran Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1911,7 +1935,7 @@
     "es": ""
   },
   "constantRegionCG": {
-    "it": "",
+    "it": "Repubblica del Congo",
     "en": "Republic of the Congo",
     "fr": "",
     "de": "",
@@ -1920,8 +1944,8 @@
     "es": ""
   },
   "constantRegionRecordCG": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Congolesi",
+    "en": "Congolese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1929,8 +1953,8 @@
     "es": ""
   },
   "constantRegionSubregionsCG": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Congolesi",
+    "en": "Congolese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1938,7 +1962,7 @@
     "es": ""
   },
   "constantRegionCK": {
-    "it": "",
+    "it": "Isole Cook",
     "en": "Cook Islands",
     "fr": "",
     "de": "",
@@ -1947,8 +1971,8 @@
     "es": ""
   },
   "constantRegionRecordCK": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Cook",
+    "en": "Cook Islands Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1956,8 +1980,8 @@
     "es": ""
   },
   "constantRegionSubregionsCK": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Cook",
+    "en": "Cook Islands Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1965,7 +1989,7 @@
     "es": ""
   },
   "constantRegionCR": {
-    "it": "",
+    "it": "Costa Rica",
     "en": "Costa Rica",
     "fr": "",
     "de": "",
@@ -1974,8 +1998,8 @@
     "es": ""
   },
   "constantRegionRecordCR": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Costaricani",
+    "en": "Costa Rican Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1983,8 +2007,8 @@
     "es": ""
   },
   "constantRegionSubregionsCR": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Costaricane",
+    "en": "Costa Rican Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1992,7 +2016,7 @@
     "es": ""
   },
   "constantRegionHR": {
-    "it": "",
+    "it": "Croazia",
     "en": "Croatia",
     "fr": "",
     "de": "",
@@ -2001,8 +2025,8 @@
     "es": ""
   },
   "constantRegionRecordHR": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Croati",
+    "en": "Croatian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2010,18 +2034,26 @@
     "es": ""
   },
   "constantRegionSubregionsHR": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Croate",
+    "en": "Croatian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionCU": { "it": "", "en": "Cuba", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionCU": {
+    "it": "Cuba",
+    "en": "Cuba",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordCU": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Cubani",
+    "en": "Cuban Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2029,8 +2061,8 @@
     "es": ""
   },
   "constantRegionSubregionsCU": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Cubane",
+    "en": "Cuban Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2038,7 +2070,7 @@
     "es": ""
   },
   "constantRegionCY": {
-    "it": "",
+    "it": "Cipro",
     "en": "Cyprus",
     "fr": "",
     "de": "",
@@ -2047,8 +2079,8 @@
     "es": ""
   },
   "constantRegionRecordCY": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Ciprioti",
+    "en": "Cypriot Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2056,8 +2088,8 @@
     "es": ""
   },
   "constantRegionSubregionsCY": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Cipriote",
+    "en": "Cypriot Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2065,8 +2097,8 @@
     "es": ""
   },
   "constantRegionCZ": {
-    "it": "",
-    "en": "Czech Republic",
+    "it": "Cechia",
+    "en": "Czechia",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2074,8 +2106,8 @@
     "es": ""
   },
   "constantRegionRecordCZ": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Cechi",
+    "en": "Czech Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2083,18 +2115,26 @@
     "es": ""
   },
   "constantRegionSubregionsCZ": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Ceche",
+    "en": "Czech Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionBJ": { "it": "", "en": "Benin", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionBJ": {
+    "it": "Benin",
+    "en": "Benin",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordBJ": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Beninesi",
+    "en": "Beninese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2102,8 +2142,8 @@
     "es": ""
   },
   "constantRegionSubregionsBJ": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Beninesi",
+    "en": "Beninese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2111,7 +2151,7 @@
     "es": ""
   },
   "constantRegionDK": {
-    "it": "",
+    "it": "Danimarca",
     "en": "Denmark",
     "fr": "",
     "de": "",
@@ -2120,8 +2160,8 @@
     "es": ""
   },
   "constantRegionRecordDK": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Danesi",
+    "en": "Danish Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2129,8 +2169,8 @@
     "es": ""
   },
   "constantRegionSubregionsDK": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Danesi",
+    "en": "Danish Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2138,7 +2178,7 @@
     "es": ""
   },
   "constantRegionDM": {
-    "it": "",
+    "it": "Dominica",
     "en": "Dominica",
     "fr": "",
     "de": "",
@@ -2147,8 +2187,8 @@
     "es": ""
   },
   "constantRegionRecordDM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Dominicensi",
+    "en": "Dominican Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2156,8 +2196,8 @@
     "es": ""
   },
   "constantRegionSubregionsDM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Dominicense",
+    "en": "Dominican Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2165,7 +2205,7 @@
     "es": ""
   },
   "constantRegionDO": {
-    "it": "",
+    "it": "Repubblica Dominicana",
     "en": "Dominican Republic",
     "fr": "",
     "de": "",
@@ -2174,8 +2214,8 @@
     "es": ""
   },
   "constantRegionRecordDO": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Dominicani",
+    "en": "Dominican Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2183,8 +2223,8 @@
     "es": ""
   },
   "constantRegionSubregionsDO": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Dominicane",
+    "en": "Dominican Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2192,7 +2232,7 @@
     "es": ""
   },
   "constantRegionEC": {
-    "it": "",
+    "it": "Ecuador",
     "en": "Ecuador",
     "fr": "",
     "de": "",
@@ -2201,8 +2241,8 @@
     "es": ""
   },
   "constantRegionRecordEC": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Ecuadoregni",
+    "en": "Ecuadorian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2210,8 +2250,8 @@
     "es": ""
   },
   "constantRegionSubregionsEC": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Ecuadoregne",
+    "en": "Ecuadorian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2219,7 +2259,7 @@
     "es": ""
   },
   "constantRegionSV": {
-    "it": "",
+    "it": "El Salvador",
     "en": "El Salvador",
     "fr": "",
     "de": "",
@@ -2228,8 +2268,8 @@
     "es": ""
   },
   "constantRegionRecordSV": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Salvadoregni",
+    "en": "Salvadoran Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2237,8 +2277,8 @@
     "es": ""
   },
   "constantRegionSubregionsSV": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Salvadoregne",
+    "en": "Salvadoran Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2246,7 +2286,7 @@
     "es": ""
   },
   "constantRegionGQ": {
-    "it": "",
+    "it": "Guinea Equatoriale",
     "en": "Equatorial Guinea",
     "fr": "",
     "de": "",
@@ -2255,8 +2295,8 @@
     "es": ""
   },
   "constantRegionRecordGQ": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Equatoguineani",
+    "en": "Equatoguinean Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2264,8 +2304,8 @@
     "es": ""
   },
   "constantRegionSubregionsGQ": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Equatoguineane",
+    "en": "Equatoguinean Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2273,7 +2313,7 @@
     "es": ""
   },
   "constantRegionET": {
-    "it": "",
+    "it": "Etiopia",
     "en": "Ethiopia",
     "fr": "",
     "de": "",
@@ -2282,8 +2322,8 @@
     "es": ""
   },
   "constantRegionRecordET": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Etiopi",
+    "en": "Ethiopian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2291,8 +2331,8 @@
     "es": ""
   },
   "constantRegionSubregionsET": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Etiope",
+    "en": "Ethiopian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2300,7 +2340,7 @@
     "es": ""
   },
   "constantRegionER": {
-    "it": "",
+    "it": "Eritrea",
     "en": "Eritrea",
     "fr": "",
     "de": "",
@@ -2309,8 +2349,8 @@
     "es": ""
   },
   "constantRegionRecordER": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Eritrei",
+    "en": "Eritrean Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2318,8 +2358,8 @@
     "es": ""
   },
   "constantRegionSubregionsER": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Eritree",
+    "en": "Eritrean Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2327,7 +2367,7 @@
     "es": ""
   },
   "constantRegionEE": {
-    "it": "",
+    "it": "Estonia",
     "en": "Estonia",
     "fr": "",
     "de": "",
@@ -2336,8 +2376,8 @@
     "es": ""
   },
   "constantRegionRecordEE": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Estoni",
+    "en": "Estonian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2345,8 +2385,8 @@
     "es": ""
   },
   "constantRegionSubregionsEE": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Estone",
+    "en": "Estonian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2354,7 +2394,7 @@
     "es": ""
   },
   "constantRegionFO": {
-    "it": "",
+    "it": "Isole Faroe",
     "en": "Faroe Islands",
     "fr": "",
     "de": "",
@@ -2363,8 +2403,8 @@
     "es": ""
   },
   "constantRegionRecordFO": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Faroesi",
+    "en": "Faroese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2372,8 +2412,8 @@
     "es": ""
   },
   "constantRegionSubregionsFO": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Faroese",
+    "en": "Faroese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2381,7 +2421,7 @@
     "es": ""
   },
   "constantRegionFK": {
-    "it": "",
+    "it": "Isole Falkland",
     "en": "Falkland Islands",
     "fr": "",
     "de": "",
@@ -2390,8 +2430,8 @@
     "es": ""
   },
   "constantRegionRecordFK": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Falkland",
+    "en": "Falkland Islands Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2399,8 +2439,8 @@
     "es": ""
   },
   "constantRegionSubregionsFK": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Falkland",
+    "en": "Falkland Islands Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2408,7 +2448,7 @@
     "es": ""
   },
   "constantRegionGS": {
-    "it": "",
+    "it": "Georgia del Sud e Isole Sandwich Australi",
     "en": "South Georgia and the South Sandwich Islands",
     "fr": "",
     "de": "",
@@ -2417,8 +2457,8 @@
     "es": ""
   },
   "constantRegionRecordGS": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Sudgeorgiani",
+    "en": "South Georgian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2426,18 +2466,26 @@
     "es": ""
   },
   "constantRegionSubregionsGS": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Sudgeorgiane",
+    "en": "South Georgian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionFJ": { "it": "", "en": "Fiji", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionFJ": {
+    "it": "Figi",
+    "en": "Fiji",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordFJ": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Figiani",
+    "en": "Fijian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2445,8 +2493,8 @@
     "es": ""
   },
   "constantRegionSubregionsFJ": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Figiane",
+    "en": "Fijian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2454,7 +2502,7 @@
     "es": ""
   },
   "constantRegionFI": {
-    "it": "",
+    "it": "Finlandia",
     "en": "Finland",
     "fr": "",
     "de": "",
@@ -2463,8 +2511,8 @@
     "es": ""
   },
   "constantRegionRecordFI": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Finlandesi",
+    "en": "Finnish Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2472,8 +2520,8 @@
     "es": ""
   },
   "constantRegionSubregionsFI": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Finlandesi",
+    "en": "Finnish Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2481,7 +2529,7 @@
     "es": ""
   },
   "constantRegionAX": {
-    "it": "",
+    "it": "Isole Åland",
     "en": "Åland Islands",
     "fr": "",
     "de": "",
@@ -2490,8 +2538,8 @@
     "es": ""
   },
   "constantRegionRecordAX": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Isole Åland",
+    "en": "Åland Islands Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2499,8 +2547,8 @@
     "es": ""
   },
   "constantRegionSubregionsAX": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Isole Åland",
+    "en": "Åland Islands Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2508,7 +2556,7 @@
     "es": ""
   },
   "constantRegionFR": {
-    "it": "",
+    "it": "Francia",
     "en": "France",
     "fr": "",
     "de": "",
@@ -2517,8 +2565,8 @@
     "es": ""
   },
   "constantRegionRecordFR": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Francesi",
+    "en": "French Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2526,8 +2574,8 @@
     "es": ""
   },
   "constantRegionSubregionsFR": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Francesi",
+    "en": "French Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2535,7 +2583,7 @@
     "es": ""
   },
   "constantRegionGF": {
-    "it": "",
+    "it": "Guyana francese",
     "en": "French Guiana",
     "fr": "",
     "de": "",
@@ -2544,8 +2592,8 @@
     "es": ""
   },
   "constantRegionRecordGF": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record della Guyana francese",
+    "en": "French Guianese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2553,8 +2601,8 @@
     "es": ""
   },
   "constantRegionSubregionsGF": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni della Guyana francese",
+    "en": "French Guianese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2562,7 +2610,7 @@
     "es": ""
   },
   "constantRegionPF": {
-    "it": "",
+    "it": "Polinesia Francese",
     "en": "French Polynesia",
     "fr": "",
     "de": "",
@@ -2571,8 +2619,8 @@
     "es": ""
   },
   "constantRegionRecordPF": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Polinesiani",
+    "en": "French Polynesian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2580,8 +2628,8 @@
     "es": ""
   },
   "constantRegionSubregionsPF": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Polinesiane",
+    "en": "French Polynesian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2589,7 +2637,7 @@
     "es": ""
   },
   "constantRegionTF": {
-    "it": "",
+    "it": "Terre Meridionali e Antartiche Francesi",
     "en": "French Southern Territories",
     "fr": "",
     "de": "",
@@ -2598,8 +2646,8 @@
     "es": ""
   },
   "constantRegionRecordTF": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record delle Terre Meridionali e Antartiche Francesi",
+    "en": "French Southern Territories Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2607,8 +2655,8 @@
     "es": ""
   },
   "constantRegionSubregionsTF": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni delle Terre Meridionali e Antartiche Francesi",
+    "en": "French Southern Territories Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2616,7 +2664,7 @@
     "es": ""
   },
   "constantRegionDJ": {
-    "it": "",
+    "it": "Gibuti",
     "en": "Djibouti",
     "fr": "",
     "de": "",
@@ -2625,8 +2673,8 @@
     "es": ""
   },
   "constantRegionRecordDJ": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Gibuti",
+    "en": "Djiboutian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2634,18 +2682,26 @@
     "es": ""
   },
   "constantRegionSubregionsDJ": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Gibuti",
+    "en": "Djiboutian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionGA": { "it": "", "en": "Gabon", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionGA": {
+    "it": "Gabon",
+    "en": "Gabon",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordGA": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Gabonesi",
+    "en": "Gabonese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2653,8 +2709,8 @@
     "es": ""
   },
   "constantRegionSubregionsGA": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Gabonesi",
+    "en": "Gabonese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2662,7 +2718,7 @@
     "es": ""
   },
   "constantRegionGE": {
-    "it": "",
+    "it": "Georgia",
     "en": "Georgia",
     "fr": "",
     "de": "",
@@ -2671,8 +2727,8 @@
     "es": ""
   },
   "constantRegionRecordGE": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Georgiani",
+    "en": "Georgian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2680,8 +2736,8 @@
     "es": ""
   },
   "constantRegionSubregionsGE": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Georgiane",
+    "en": "Georgian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2689,8 +2745,8 @@
     "es": ""
   },
   "constantRegionGM": {
-    "it": "",
-    "en": "Gambia",
+    "it": "Gambia",
+    "en": "The Gambia",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2698,8 +2754,8 @@
     "es": ""
   },
   "constantRegionRecordGM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Gambiani",
+    "en": "Gambian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2707,8 +2763,8 @@
     "es": ""
   },
   "constantRegionSubregionsGM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Gambiane",
+    "en": "Gambian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2716,7 +2772,7 @@
     "es": ""
   },
   "constantRegionDE": {
-    "it": "",
+    "it": "Germania",
     "en": "Germany",
     "fr": "",
     "de": "",
@@ -2725,8 +2781,8 @@
     "es": ""
   },
   "constantRegionRecordDE": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Tedeschi",
+    "en": "German Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2734,18 +2790,26 @@
     "es": ""
   },
   "constantRegionSubregionsDE": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Tedesche",
+    "en": "German Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionGH": { "it": "", "en": "Ghana", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionGH": {
+    "it": "Ghana",
+    "en": "Ghana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordGH": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Ghanesi",
+    "en": "Ghanaian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2753,8 +2817,8 @@
     "es": ""
   },
   "constantRegionSubregionsGH": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Ghanesi",
+    "en": "Ghanaian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2762,7 +2826,7 @@
     "es": ""
   },
   "constantRegionGI": {
-    "it": "",
+    "it": "Gibilterra",
     "en": "Gibraltar",
     "fr": "",
     "de": "",
@@ -2771,8 +2835,8 @@
     "es": ""
   },
   "constantRegionRecordGI": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Gilbertese",
+    "en": "Gibraltar Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2780,8 +2844,8 @@
     "es": ""
   },
   "constantRegionSubregionsGI": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Gilbertese",
+    "en": "Gibraltar Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2789,7 +2853,7 @@
     "es": ""
   },
   "constantRegionKI": {
-    "it": "",
+    "it": "Kiribati",
     "en": "Kiribati",
     "fr": "",
     "de": "",
@@ -2798,8 +2862,8 @@
     "es": ""
   },
   "constantRegionRecordKI": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Kiribati",
+    "en": "Kiribati Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2807,8 +2871,8 @@
     "es": ""
   },
   "constantRegionSubregionsKI": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Kiribati",
+    "en": "Kiribati Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2816,7 +2880,7 @@
     "es": ""
   },
   "constantRegionGR": {
-    "it": "",
+    "it": "Grecia",
     "en": "Greece",
     "fr": "",
     "de": "",
@@ -2825,8 +2889,8 @@
     "es": ""
   },
   "constantRegionRecordGR": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Greci",
+    "en": "Greek Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2834,8 +2898,8 @@
     "es": ""
   },
   "constantRegionSubregionsGR": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Greche",
+    "en": "Greek Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2843,7 +2907,7 @@
     "es": ""
   },
   "constantRegionGL": {
-    "it": "",
+    "it": "Groenlandia",
     "en": "Greenland",
     "fr": "",
     "de": "",
@@ -2852,8 +2916,8 @@
     "es": ""
   },
   "constantRegionRecordGL": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Groenlandesi",
+    "en": "Greenlandic Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2861,8 +2925,8 @@
     "es": ""
   },
   "constantRegionSubregionsGL": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Groenlandesi",
+    "en": "Greenlandic Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2870,7 +2934,7 @@
     "es": ""
   },
   "constantRegionGD": {
-    "it": "",
+    "it": "Grenada",
     "en": "Grenada",
     "fr": "",
     "de": "",
@@ -2879,8 +2943,8 @@
     "es": ""
   },
   "constantRegionRecordGD": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Grenadini",
+    "en": "Grenadian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2888,8 +2952,8 @@
     "es": ""
   },
   "constantRegionSubregionsGD": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Grenadine",
+    "en": "Grenadian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2897,7 +2961,7 @@
     "es": ""
   },
   "constantRegionGP": {
-    "it": "",
+    "it": "Guadalupa",
     "en": "Guadeloupe",
     "fr": "",
     "de": "",
@@ -2906,8 +2970,8 @@
     "es": ""
   },
   "constantRegionRecordGP": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record della Guadalupa",
+    "en": "Guadeloupe Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2915,18 +2979,26 @@
     "es": ""
   },
   "constantRegionSubregionsGP": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni della Guadalupa",
+    "en": "Guadeloupe Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionGU": { "it": "", "en": "Guam", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionGU": {
+    "it": "Guam",
+    "en": "Guam",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordGU": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Guam",
+    "en": "Guamanian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2934,8 +3006,8 @@
     "es": ""
   },
   "constantRegionSubregionsGU": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Guam",
+    "en": "Guamanian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2943,7 +3015,7 @@
     "es": ""
   },
   "constantRegionGT": {
-    "it": "",
+    "it": "Guatemala",
     "en": "Guatemala",
     "fr": "",
     "de": "",
@@ -2952,8 +3024,8 @@
     "es": ""
   },
   "constantRegionRecordGT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Guatemaltechi",
+    "en": "Guatemalan Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2961,8 +3033,8 @@
     "es": ""
   },
   "constantRegionSubregionsGT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Guatemalteche",
+    "en": "Guatemalan Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2970,7 +3042,7 @@
     "es": ""
   },
   "constantRegionGN": {
-    "it": "",
+    "it": "Guinea",
     "en": "Guinea",
     "fr": "",
     "de": "",
@@ -2979,8 +3051,8 @@
     "es": ""
   },
   "constantRegionRecordGN": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Guineani",
+    "en": "Guinean Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2988,8 +3060,8 @@
     "es": ""
   },
   "constantRegionSubregionsGN": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Guineane",
+    "en": "Guinean Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2997,7 +3069,7 @@
     "es": ""
   },
   "constantRegionGY": {
-    "it": "",
+    "it": "Guyana",
     "en": "Guyana",
     "fr": "",
     "de": "",
@@ -3006,8 +3078,8 @@
     "es": ""
   },
   "constantRegionRecordGY": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record della Guyana",
+    "en": "Guyanese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3015,18 +3087,26 @@
     "es": ""
   },
   "constantRegionSubregionsGY": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni della Guyana",
+    "en": "Guyanese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "constantRegionHT": { "it": "", "en": "Haiti", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionHT": {
+    "it": "Haiti",
+    "en": "Haiti",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordHT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Haitiani",
+    "en": "Haitian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3034,8 +3114,8 @@
     "es": ""
   },
   "constantRegionSubregionsHT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Haitiane",
+    "en": "Haitian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3342,10 +3422,18 @@
     "pt": "",
     "es": ""
   },
-  "constantRegionIT": { "it": "", "en": "Italy", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionIT": {
+    "it": "Italia",
+    "en": "Italy",
+    "fr": "Italie",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordIT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Italiani",
+    "en": "Italian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3353,8 +3441,8 @@
     "es": ""
   },
   "constantRegionSubregionsIT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Italiane",
+    "en": "Italian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3415,10 +3503,18 @@
     "pt": "",
     "es": ""
   },
-  "constantRegionJP": { "it": "", "en": "Japan", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionJP": {
+    "it": "Giappone",
+    "en": "Japan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordJP": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Giapponesi",
+    "en": "Japanese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3426,8 +3522,8 @@
     "es": ""
   },
   "constantRegionSubregionsJP": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Giapponesi",
+    "en": "Japanese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -5895,10 +5991,18 @@
     "pt": "",
     "es": ""
   },
-  "constantRegionES": { "it": "", "en": "Spain", "fr": "", "de": "", "jp": "", "pt": "", "es": "" },
+  "constantRegionES": {
+    "it": "Spagna",
+    "en": "Spain",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionRecordES": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Spagnoli",
+    "en": "Spanish Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -5906,8 +6010,8 @@
     "es": ""
   },
   "constantRegionSubregionsES": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Spagnole",
+    "en": "Spanish Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6693,7 +6797,7 @@
     "es": ""
   },
   "constantRegionUS": {
-    "it": "",
+    "it": "Stati Uniti",
     "en": "United States",
     "fr": "",
     "de": "",
@@ -6702,8 +6806,8 @@
     "es": ""
   },
   "constantRegionRecordUS": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Stat'unitensi",
+    "en": "American Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6711,8 +6815,8 @@
     "es": ""
   },
   "constantRegionSubregionsUS": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Stat'unitensi",
+    "en": "American Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6947,7 +7051,7 @@
     "es": ""
   },
   "constantRegionLATAM": {
-    "it": "",
+    "it": "America Latina",
     "en": "Latin America",
     "fr": "",
     "de": "",
@@ -6956,8 +7060,8 @@
     "es": ""
   },
   "constantRegionRecordLATAM": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Latini Americani",
+    "en": "Latin American Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6965,8 +7069,8 @@
     "es": ""
   },
   "constantRegionSubregionsLATAM": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Latino Americane",
+    "en": "Latin American Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6974,7 +7078,7 @@
     "es": ""
   },
   "constantRegionGBIE": {
-    "it": "",
+    "it": "UK e Irlanda",
     "en": "UK & Ireland",
     "fr": "",
     "de": "",
@@ -6983,8 +7087,8 @@
     "es": ""
   },
   "constantRegionRecordGBIE": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Irlandesi e Britannici",
+    "en": "Irish and British Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6992,8 +7096,8 @@
     "es": ""
   },
   "constantRegionSubregionsGBIE": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Irlandesi e Britanniche",
+    "en": "Irish and British Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7001,7 +7105,7 @@
     "es": ""
   },
   "constantRegionESPT": {
-    "it": "",
+    "it": "Spagna e Portogallo",
     "en": "Spain & Portugal",
     "fr": "",
     "de": "",
@@ -7010,8 +7114,8 @@
     "es": ""
   },
   "constantRegionRecordESPT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Spagnoli e Portoghesi",
+    "en": "Spanish & Portuguese Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7019,8 +7123,8 @@
     "es": ""
   },
   "constantRegionSubregionsESPT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Spagnole e Portoghesi",
+    "en": "Spanish & Portuguese Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7028,7 +7132,7 @@
     "es": ""
   },
   "constantRegionDEAT": {
-    "it": "",
+    "it": "Germania e Austria",
     "en": "Germany & Austria",
     "fr": "",
     "de": "",
@@ -7037,8 +7141,8 @@
     "es": ""
   },
   "constantRegionRecordDEAT": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Tedeschi e Austriaci",
+    "en": "German & Austrian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7046,8 +7150,8 @@
     "es": ""
   },
   "constantRegionSubregionsDEAT": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Tedesche e Austriache",
+    "en": "German & Austrian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7055,7 +7159,7 @@
     "es": ""
   },
   "constantRegionBENELUX": {
-    "it": "",
+    "it": "Benelux",
     "en": "Benelux",
     "fr": "",
     "de": "",
@@ -7064,8 +7168,8 @@
     "es": ""
   },
   "constantRegionRecordBENELUX": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record del Benelux",
+    "en": "Benelux Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7073,8 +7177,8 @@
     "es": ""
   },
   "constantRegionSubregionsBENELUX": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni del Benelux",
+    "en": "Benelux Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7082,7 +7186,7 @@
     "es": ""
   },
   "constantRegionNORDIC": {
-    "it": "",
+    "it": "Nordici",
     "en": "Nordic",
     "fr": "",
     "de": "",
@@ -7091,8 +7195,8 @@
     "es": ""
   },
   "constantRegionRecordNORDIC": {
-    "it": "Record ",
-    "en": " Records",
+    "it": "Record Nordici",
+    "en": "Nordic Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7100,8 +7204,8 @@
     "es": ""
   },
   "constantRegionSubregionsNORDIC": {
-    "it": "Sottoregioni ",
-    "en": " Subregions",
+    "it": "Sottoregioni Nordiche",
+    "en": "Nordic Subregions",
     "fr": "",
     "de": "",
     "jp": "",
