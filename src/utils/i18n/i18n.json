@@ -566,9 +566,45 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionRecordAI": {
+    "it": "Record Anguillani",
+    "en": "Anguillan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAI": {
+    "it": "Sottoregioni Anguillane",
+    "en": "Anguillan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionAG": {
     "it": "Antigua e Barbuda",
     "en": "Antigua and Barbuda",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAG": {
+    "it": "Record Antiguo-Barbudani",
+    "en": "Antiguan and Barbudan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAG": {
+    "it": "Sottoregioni Antiguo-Barbudane",
+    "en": "Antiguan and Barbudan Subregions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -584,6 +620,160 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionRecordAW": {
+    "it": "Record dell'Aruba",
+    "en": "Aruban Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAW": {
+    "it": "Sottoregioni dell'Aruba",
+    "en": "Aruban Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAF": {
+    "it": "Afghanistan",
+    "en": "Afghanistan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAF": {
+    "it": "Record Afghani",
+    "en": "Afghan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAF": {
+    "it": "Sottoregioni Afghane",
+    "en": "Afghan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAL": {
+    "it": "Albania",
+    "en": "Albania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAL": {
+    "it": "Record Albanesi",
+    "en": "Albanian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAL": {
+    "it": "Sottoregioni Albanesi",
+    "en": "Albanian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDZ": {
+    "it": "Algeria",
+    "en": "Algeria",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordDZ": {
+    "it": "Record Algerini",
+    "en": "Algerian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDZ": {
+    "it": "Sottoregioni Algerine",
+    "en": "Algerian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAS": {
+    "it": "Samoa Americana",
+    "en": "American Samoa",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAS": {
+    "it": "Record Samoa Americani",
+    "en": "American Samoan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAS": {
+    "it": "Sottoregioni Samoa Americane",
+    "en": "American Samoan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionAD": {
+    "it": "Andorra",
+    "en": "Andorra",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordAD": {
+    "it": "Record Andorrani",
+    "en": "Andorran Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsAD": {
+    "it": "Sottoregioni Andorrane",
+    "en": "Andorran Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+
   "headerSubmit": {
     "it": "Carica",
     "en": "Submit",
