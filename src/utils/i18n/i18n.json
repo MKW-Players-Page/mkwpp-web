@@ -10042,5 +10042,185 @@
     "jp": "",
     "pt": "",
     "es": ""
+  },
+  "submissionPageTabbedModuleHeading": {
+    "it": "Carica Tempi",
+    "en": "Submit Times",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabTitle": {
+    "it": "Carica",
+    "en": "Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabTitle": {
+    "it": "Carica Molteplici",
+    "en": "Bulk Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmissionsTabTitle": {
+    "it": "In attesa",
+    "en": "My Submissions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabSubmitSubmitLabel": {
+    "it": "Carica",
+    "en": "Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabTrackLabel": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabCategoryLabel": {
+    "it": "Categoria",
+    "en": "Category",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabModeLabel": {
+    "it": "Tipo",
+    "en": "Mode",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabTimeLabel": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabDateLabel": {
+    "it": "Data",
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabGhostLabel": {
+    "it": "Ghost",
+    "en": "Ghost",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabVideoLabel": {
+    "it": "Video",
+    "en": "Video",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabCommentLabel": {
+    "it": "Commento",
+    "en": "Comment",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabNoPlayerProfileLinkErr": {
+    "it": "Nessun profilo player collegato.",
+    "en": "No player profile linked.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabInvalidTimeErr": {
+    "it": "Valore tempo non valido.",
+    "en": "Invalid time value.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabInvalidDateErr": {
+    "it": "Data non valida.",
+    "en": "Invalid date.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabGenericErr": {
+    "it": "C'è stato un errore.",
+    "en": "An error occurred.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabSuccessStateParagraph": {
+    "it": "Il tuo tempo è stato caricato con successo! Si prega di attendere perché un moderatore lo esamini.",
+    "en": "Your time has been submitted successfully! Please wait for a moderator to review it.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabSuccessStateButton": {
+    "it": "Carica un altro tempo",
+    "en": "Submit Another Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabUnderConstruction": {
+    "it": "In costruzione...",
+    "en": "Under construction...",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   }
 }
