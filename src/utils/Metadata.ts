@@ -3,6 +3,7 @@ import { createContext } from "react";
 import api, { Region, Track, TrackCup, RegionTypeEnum, StandardLevel } from "../api";
 import { useApi } from "../hooks";
 import { WorldRegion } from "./Defaults";
+import { Language, TranslationJson, TranslationKey } from "./i18n/i18n";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
 export interface Metadata {
@@ -60,7 +61,12 @@ export const getRegionById = (metadata: Metadata, regionId: number) => {
  * @param regionId The id of the region
  * @returns The full name of the region, or `undefined` if no region with the given id exists.
  */
-export const getRegionNameFull = (metadata: Metadata, regionId: number) => {
+export const getRegionNameFull = (
+  metadata: Metadata,
+  translations: TranslationJson,
+  lang: Language,
+  regionId: number,
+) => {
   const region = getRegionById(metadata, regionId);
   if (!region) {
     return undefined;
@@ -69,11 +75,11 @@ export const getRegionNameFull = (metadata: Metadata, regionId: number) => {
   if (region.parent && region.type === RegionTypeEnum.Subnational) {
     const parent = getRegionById(metadata, region.parent);
     if (parent) {
-      return `${region.name}, ${parent.name}`;
+      return `${translations[`constantRegion${region.code}` as TranslationKey][lang]}, ${translations[`constantRegion${parent.code}` as TranslationKey][lang]}`;
     }
   }
 
-  return region.name;
+  return translations[`constantRegion${region.code}` as TranslationKey][lang];
 };
 
 /** The standard level of the standard with the given id.

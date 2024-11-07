@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../global/Deferred";
@@ -23,6 +23,7 @@ import {
   TimetrialsRegionsRankingsListTopEnum,
   TimetrialsRegionsRankingsListTypeEnum,
 } from "../../api/generated";
+import { handleBars, I18nContext } from "../../utils/i18n/i18n";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -30,6 +31,8 @@ const CountryRankingsPage = () => {
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false, ["hl"]);
   const { top, setTopNumber } = useTopParam(searchParams, ["hl"]);
   const { regionType, setRegionType } = useRegionTypeRestrictedParam(searchParams, ["hl"]);
+
+  const { translations, lang } = useContext(I18nContext);
 
   const highlight = useRowHighlightParam(searchParams).highlight;
   const { isLoading, data } = useApi(
@@ -58,28 +61,29 @@ const CountryRankingsPage = () => {
   let text = "err";
   switch (top) {
     case TimetrialsRegionsRankingsListTopEnum.Records:
-      text = "The best";
+      text = translations.countryRankingsPageExplanationRecords[lang];
       break;
     case TimetrialsRegionsRankingsListTopEnum.Top3:
-      text = "The best 3";
+      text = translations.countryRankingsPageExplanationTop3[lang];
       break;
     case TimetrialsRegionsRankingsListTopEnum.Top5:
-      text = "The best 5";
+      text = translations.countryRankingsPageExplanationTop5[lang];
       break;
     case TimetrialsRegionsRankingsListTopEnum.Top10:
-      text = "The best 10";
+      text = translations.countryRankingsPageExplanationTop10[lang];
       break;
     case TimetrialsRegionsRankingsListTopEnum.All:
-      text = "All the";
+      text = translations.countryRankingsPageExplanationAll[lang];
       break;
   }
 
   return (
     <>
-      <h1>Country Rankings</h1>
+      <h1>{translations.countryRankingsPageHeading[lang]}</h1>
       <p>
-        {text} times for each country are taken for each track, and averaged. This value is then
-        averaged over all tracks, like Average Finish.
+        {handleBars(translations.countryRankingsPageExplanation[lang], [
+          ["countryRankingsTopType", text],
+        ])}
       </p>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
@@ -119,9 +123,18 @@ const CountryRankingsPage = () => {
                   {
                     id: 0,
                     children: [
-                      [TimetrialsRegionsRankingsListTypeEnum.Country, "Countries"],
-                      [TimetrialsRegionsRankingsListTypeEnum.Continent, "Continents"],
-                      [TimetrialsRegionsRankingsListTypeEnum.Subnational, "Subregions"],
+                      [
+                        TimetrialsRegionsRankingsListTypeEnum.Country,
+                        translations.countryRankingsPageDropdownCountries[lang],
+                      ],
+                      [
+                        TimetrialsRegionsRankingsListTypeEnum.Continent,
+                        translations.countryRankingsPageDropdownContinents[lang],
+                      ],
+                      [
+                        TimetrialsRegionsRankingsListTypeEnum.Subnational,
+                        translations.countryRankingsPageDropdownSubregions[lang],
+                      ],
                     ].map(([value, text]) => {
                       return {
                         type: "DropdownItemData",
@@ -139,9 +152,9 @@ const CountryRankingsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Rank</th>
-                  <th>Country</th>
-                  <th>Average Finish</th>
+                  <th>{translations.countryRankingsPageRank[lang]}</th>
+                  <th>{translations.countryRankingsPageCountry[lang]}</th>
+                  <th>{translations.countryRankingsPageAverageFinish[lang]}</th>
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
@@ -157,7 +170,7 @@ const CountryRankingsPage = () => {
                         <>
                           <tr ref={highlightElement} key={highlight} className="highlighted">
                             <td />
-                            <td>Your Highlighted Value</td>
+                            <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
                             <td>{highlight}</td>
                           </tr>
                         </>

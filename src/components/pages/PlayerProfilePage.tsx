@@ -26,6 +26,7 @@ import {
   useRegionParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -114,6 +115,7 @@ const PlayerProfilePage = () => {
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
@@ -204,7 +206,9 @@ const PlayerProfilePage = () => {
                           return {
                             type: "DropdownItemData",
                             element: {
-                              text: region.name,
+                              text: translations[`constantRegion${region.code}` as TranslationKey][
+                                lang
+                              ],
                               value: region,
                               rightIcon: (
                                 <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
@@ -227,19 +231,19 @@ const PlayerProfilePage = () => {
               <table>
                 <tbody>
                   <tr>
-                    <td>Location</td>
-                    <td>{getRegionNameFull(metadata, player?.region ?? 0)}</td>
+                    <td>{translations.playerProfilePageLocation[lang]}</td>
+                    <td>{getRegionNameFull(metadata, translations, lang, player?.region ?? 0)}</td>
                   </tr>
                   <tr>
-                    <td>Alias</td>
+                    <td>{translations.playerProfilePageAlias[lang]}</td>
                     <td>{player?.alias}</td>
                   </tr>
                   <tr>
-                    <td>Date Joined</td>
+                    <td>{translations.playerProfilePageDateJoined[lang]}</td>
                     <td>{player?.joinedDate && formatDate(player.joinedDate)}</td>
                   </tr>
                   <tr>
-                    <td>Last Activity</td>
+                    <td>{translations.playerProfilePageLastActivity[lang]}</td>
                     <td>{player?.lastActivity && formatDate(player.lastActivity)}</td>
                   </tr>
                 </tbody>
@@ -255,7 +259,7 @@ const PlayerProfilePage = () => {
                       <Link
                         to={resolvePage(Pages.RankingsAverageFinish, {}, rankingsRedirectParams)}
                       >
-                        Average Finish
+                        {translations.playerProfilePageAverageFinishTitle[lang]}
                       </Link>
                     </td>
                     <td>
@@ -279,7 +283,7 @@ const PlayerProfilePage = () => {
                       <Link
                         to={resolvePage(Pages.RankingsAverageStandard, {}, rankingsRedirectParams)}
                       >
-                        ARR
+                        {translations.playerProfilePageAverageStandardTitle[lang]}
                       </Link>
                     </td>
                     <td>
@@ -310,7 +314,7 @@ const PlayerProfilePage = () => {
                           rankingsRedirectParams,
                         )}
                       >
-                        PR:WR
+                        {translations.playerProfilePageAverageRecordRatioTitle[lang]}
                       </Link>
                     </td>
                     <td>
@@ -335,7 +339,7 @@ const PlayerProfilePage = () => {
                   <tr>
                     <td>
                       <Link to={resolvePage(Pages.RankingsTotalTime, {}, rankingsRedirectParams)}>
-                        Total Time
+                        {translations.playerProfilePageTotalTimeTitle[lang]}
                       </Link>
                     </td>
                     <td>
@@ -374,7 +378,7 @@ const PlayerProfilePage = () => {
                       </>
                     ))
                   ) : (
-                    <i>This player doesn't have anything to say about themselves...</i>
+                    <i>{translations.playerProfilePageDefaultBio[lang]}</i>
                   )}
                 </p>
               </div>
@@ -392,7 +396,7 @@ const PlayerProfilePage = () => {
                       setSortType("trackAsc");
                     }}
                   >
-                    Track
+                    {translations.playerProfilePageTrackColumn[lang]}
                   </th>
                   {lapMode === LapModeEnum.Overall ? (
                     <>
@@ -401,14 +405,14 @@ const PlayerProfilePage = () => {
                         sortType={sortType}
                         setSortType={setSortType}
                       >
-                        Course
+                        {translations.playerProfilePageCourseTimeColumn[lang]}
                       </ThSort>
                       <ThSort
                         states={["trackAsc", "timeAsc", "timeDesc"]}
                         sortType={sortType}
                         setSortType={setSortType}
                       >
-                        Lap
+                        {translations.playerProfilePageLapTimeColumn[lang]}
                       </ThSort>
                     </>
                   ) : (
@@ -417,7 +421,7 @@ const PlayerProfilePage = () => {
                       sortType={sortType}
                       setSortType={setSortType}
                     >
-                      Time
+                      {translations.playerProfilePageTimeColumn[lang]}
                     </ThSort>
                   )}
                   <ThSort
@@ -425,28 +429,28 @@ const PlayerProfilePage = () => {
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    Rank
+                    {translations.playerProfilePageRankColumn[lang]}
                   </ThSort>
                   <ThSort
                     states={["trackAsc", "stdAsc", "stdDesc"]}
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    Standard
+                    {translations.playerProfilePageStandardColumn[lang]}
                   </ThSort>
                   <ThSort
                     states={["trackAsc", "prwrDesc", "prwrAsc"]}
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    PR:WR
+                    {translations.playerProfilePagePRWRColumn[lang]}
                   </ThSort>
                   <ThSort
                     states={["trackAsc", "dateAsc", "dateDesc"]}
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    Date
+                    {translations.playerProfilePageDateColumn[lang]}
                   </ThSort>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
@@ -471,7 +475,11 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {track?.name}
+                            {
+                              translations[
+                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                              ][lang]
+                            }
                           </Link>
                         </td>
                       ) : score.repeat ? (
@@ -489,7 +497,11 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {track?.name}
+                            {
+                              translations[
+                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                              ][lang]
+                            }
                           </Link>
                         </td>
                       )}

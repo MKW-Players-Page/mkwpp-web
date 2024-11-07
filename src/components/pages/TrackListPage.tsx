@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
 import { MetadataContext } from "../../utils/Metadata";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const TrackListPage = () => {
+  const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   return (
     <>
-      <h1>Courses</h1>
+      <h1>{translations.trackListPageHeading[lang]}</h1>
       <Deferred isWaiting={metadata.isLoading}>
         <div
           style={
@@ -24,12 +26,20 @@ const TrackListPage = () => {
           {metadata.cups?.map((cup) => (
             <div key={cup.id} className="module">
               <div className="module-content">
-                <b>{cup.name}</b>
+                <b>
+                  {translations[`constantCup${cup.code.toUpperCase()}` as TranslationKey][lang]}
+                </b>
                 <ul>
                   {cup.tracks.map((trackId) => (
                     <li key={trackId}>
                       <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
-                        {metadata.tracks?.find((track) => track.id === trackId)?.name}
+                        {
+                          translations[
+                            `constantTrackName${metadata.tracks
+                              ?.find((track) => track.id === trackId)
+                              ?.abbr.toUpperCase()}` as TranslationKey
+                          ][lang]
+                        }
                       </Link>
                     </li>
                   ))}

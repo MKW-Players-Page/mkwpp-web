@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { Pages, resolvePage } from "../pages";
 import { logoutUser, UserContext } from "../../utils/User";
+import { I18nContext } from "../../utils/i18n/i18n";
 
 const Header = () => {
   const { isLoading, user, setUser } = useContext(UserContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const onLogout = () => {
     logoutUser(setUser);
@@ -25,13 +27,15 @@ const Header = () => {
               <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
                 {user.username}
               </Link>
-              <Link to={resolvePage(Pages.Submission)}>Submit</Link>
-              <button onClick={onLogout}>Log Out</button>
+              <Link to={resolvePage(Pages.Submission)}>{translations.headerSubmit[lang]}</Link>
+              <Link onClick={onLogout} to="">
+                {translations.headerLogOut[lang]}
+              </Link>
             </>
           ) : (
             <>
-              <Link to={resolvePage(Pages.UserLogin)}>Log In</Link>
-              <Link to={resolvePage(Pages.UserJoin)}>Join</Link>
+              <Link to={resolvePage(Pages.UserLogin)}>{translations.headerLogIn[lang]}</Link>
+              <Link to={resolvePage(Pages.UserJoin)}>{translations.headerJoin[lang]}</Link>
             </>
           )}
         </div>

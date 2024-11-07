@@ -7,6 +7,8 @@ models/BlogPost.ts
 models/BlogPostSummary.ts
 models/CategoryEnum.ts
 models/Player.ts
+models/PlayerAward.ts
+models/PlayerAwardTypeEnum.ts
 models/PlayerBasic.ts
 models/PlayerMatchup.ts
 models/PlayerMatchupPlayer.ts
@@ -19,6 +21,7 @@ models/RegionTypeEnum.ts
 models/Score.ts
 models/ScoreSubmission.ts
 models/ScoreWithPlayer.ts
+models/SiteChampion.ts
 models/Standard.ts
 models/StandardLevel.ts
 models/StatusEnum.ts

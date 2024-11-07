@@ -106,9 +106,11 @@ export interface FieldProps {
   field: string;
   label: string;
   placeholder?: string;
+  max?: string;
+  min?: string;
 }
 
-export const Field = ({ type, field, label, placeholder }: FieldProps) => {
+export const Field = ({ type, field, label, placeholder, max, min }: FieldProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -126,6 +128,8 @@ export const Field = ({ type, field, label, placeholder }: FieldProps) => {
         value={getValue(field)}
         onChange={onChange}
         placeholder={placeholder}
+        max={max}
+        min={min}
       />
       {errors.map((error, index) => (
         <p key={index} className="field-error">

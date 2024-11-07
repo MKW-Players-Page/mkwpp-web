@@ -21,6 +21,7 @@ import {
   useRowHighlightParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -35,6 +36,7 @@ const TrackChartPage = () => {
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   let track,
     prevTrack,
@@ -96,13 +98,18 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {"< " + prevTrack.name}
+              {"< " +
+                translations[`constantTrackName${prevTrack?.abbr.toUpperCase()}` as TranslationKey][
+                  lang
+                ]}
             </Link>
           ) : (
             <></>
           )}
         </div>
-        <h1>{track?.name}</h1>
+        <h1>
+          {translations[`constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey][lang]}
+        </h1>
         <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
           {nextTrack !== undefined ? (
             <Link
@@ -115,7 +122,9 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {nextTrack.name + " >"}
+              {translations[`constantTrackName${nextTrack?.abbr.toUpperCase()}` as TranslationKey][
+                lang
+              ] + " >"}
             </Link>
           ) : (
             <></>
@@ -152,7 +161,7 @@ const TrackChartPage = () => {
                       <>
                         <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
-                          <td>Your Highlighted Value</td>
+                          <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
                           <td>{formatTime(highlight)}</td>
                           <td />
                           <td />
@@ -181,7 +190,7 @@ const TrackChartPage = () => {
                             id: score.player.id,
                           })}
                         >
-                          {score.player.alias || score.player.name}
+                          {score.player.alias ?? score.player.name}
                         </Link>
                       </td>
                       <td className={score.category !== category ? "fallthrough" : ""}>

@@ -13,6 +13,7 @@ import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ const TrackRecordsPage = () => {
   const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const { user } = useContext(UserContext);
 
@@ -33,7 +35,8 @@ const TrackRecordsPage = () => {
 
   return (
     <>
-      <h1>{region.name} Records</h1>
+      {/* This heading will eventually have an i18n key for literally every region indexed */}
+      <h1>{translations[`constantRegionRecord${region.code}` as TranslationKey][lang]}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
@@ -44,12 +47,12 @@ const TrackRecordsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Track</th>
-                  <th>Player</th>
-                  <th>Course</th>
-                  <th>Lap</th>
-                  <th>Standard</th>
-                  <th>Date</th>
+                  <th>{translations.trackRecordsPageTrackCol[lang]}</th>
+                  <th>{translations.trackRecordsPagePlayerCol[lang]}</th>
+                  <th>{translations.trackRecordsPageCourseCol[lang]}</th>
+                  <th>{translations.trackRecordsPageLapCol[lang]}</th>
+                  <th>{translations.trackRecordsPageStandardCol[lang]}</th>
+                  <th>{translations.trackRecordsPageDateCol[lang]}</th>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
@@ -69,7 +72,11 @@ const TrackRecordsPage = () => {
                         {!isLap && (
                           <td rowSpan={2}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {track.name}
+                              {
+                                translations[
+                                  `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                                ][lang]
+                              }
                             </Link>
                           </td>
                         )}
@@ -80,7 +87,7 @@ const TrackRecordsPage = () => {
                                 region={getRegionById(metadata, score.player.region || 0)}
                               />
                               <Link to={resolvePage(Pages.PlayerProfile, { id: score?.player.id })}>
-                                {score.player.alias || score.player.name}
+                                {score.player.alias ?? score.player.name}
                               </Link>
                             </>
                           ) : (

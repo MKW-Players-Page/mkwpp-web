@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FormContext } from "./Form";
 import { Metadata } from "../../utils/Metadata";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 export interface TrackSelectProps {
   /** Metadata object */
@@ -15,6 +16,7 @@ export interface TrackSelectProps {
 
 const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const onChange = (e: string) => {
     setValue(field, e);
@@ -39,7 +41,12 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
                 children: metadata.tracks?.map((track) => {
                   return {
                     type: "DropdownItemData",
-                    element: { text: track.name, value: track.id },
+                    element: {
+                      text: translations[
+                        `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                      ][lang],
+                      value: track.id,
+                    },
                   } as DropdownItemSetDataChild;
                 }),
               },

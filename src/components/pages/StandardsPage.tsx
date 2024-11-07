@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../global/Deferred";
-import { getCategoryName, getCategorySiteHue } from "../../utils/EnumUtils";
+import { getCategoryNameTranslationKey, getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { CategorySelect } from "../widgets";
@@ -12,12 +12,14 @@ import { getCategoryNumerical } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../widgets/Dropdown";
 import { useCategoryParam, useStandardLevelIdParam } from "../../utils/SearchParams";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 const StandardsPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { levelId, setLevelId } = useStandardLevelIdParam(searchParams);
 
+  const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const StandardsPage = () => {
 
   return (
     <>
-      <h1>Legacy Standards</h1>
+      <h1>{translations.standardsPageHeading[lang]}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <Dropdown
@@ -78,12 +80,12 @@ const StandardsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Track</th>
-                  <th>Category</th>
-                  <th>Standard</th>
-                  <th>Points</th>
-                  <th>Course</th>
-                  <th>Lap</th>
+                  <th>{translations.standardsPageTrackCol[lang]}</th>
+                  <th>{translations.standardsPageCategoryCol[lang]}</th>
+                  <th>{translations.standardsPageStandardCol[lang]}</th>
+                  <th>{translations.standardsPagePointsCol[lang]}</th>
+                  <th>{translations.standardsPageCourseCol[lang]}</th>
+                  <th>{translations.standardsPageLapCol[lang]}</th>
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
@@ -95,16 +97,22 @@ const StandardsPage = () => {
                         <td rowSpan={2}>
                           <Link
                             to={resolvePage(Pages.TrackChart, {
-                              id: track?.id || 0,
+                              id: track?.id ?? 0,
                             })}
                           >
-                            {track?.name}
+                            {
+                              translations[
+                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                              ][lang]
+                            }
                           </Link>
                         </td>
                       ) : (
                         <></>
                       )}
-                      <td>{getCategoryName(standard.category)}</td>
+                      <td>
+                        {translations[getCategoryNameTranslationKey(standard.category)][lang]}
+                      </td>
                       <td>{level.name}</td>
                       <td>{level.value}</td>
                       {standard.isLap && <td />}

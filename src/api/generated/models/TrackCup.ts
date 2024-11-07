@@ -33,6 +33,12 @@ export interface TrackCup {
     name: string;
     /**
      * 
+     * @type {string}
+     * @memberof TrackCup
+     */
+    code: string;
+    /**
+     * 
      * @type {Array<number>}
      * @memberof TrackCup
      */
@@ -45,6 +51,7 @@ export interface TrackCup {
 export function instanceOfTrackCup(value: object): value is TrackCup {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('code' in value) || value['code'] === undefined) return false;
     if (!('tracks' in value) || value['tracks'] === undefined) return false;
     return true;
 }
@@ -61,6 +68,7 @@ export function TrackCupFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         
         'id': json['id'],
         'name': json['name'],
+        'code': json['code'],
         'tracks': json['tracks'],
     };
 }
@@ -72,6 +80,7 @@ export function TrackCupToJSON(value?: Omit<TrackCup, 'id'> | null): any {
     return {
         
         'name': value['name'],
+        'code': value['code'],
         'tracks': value['tracks'],
     };
 }

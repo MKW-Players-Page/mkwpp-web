@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { I18nContext } from "../../utils/i18n/i18n";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 
 import { FormContext } from "./Form";
@@ -22,6 +23,7 @@ export interface LapModeSelectProps {
 
 const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSelectProps) => {
   disabled = !!disabled;
+  const { translations, lang } = useContext(I18nContext);
 
   const options = [
     ...(includeOverall ? [LapModeEnum.Overall] : []),
@@ -45,7 +47,12 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
                 return {
                   type: "DropdownItemData",
                   element: {
-                    text: Object.keys(LapModeEnum)[Object.values(LapModeEnum).indexOf(option)],
+                    text:
+                      option === LapModeEnum.Overall
+                        ? translations.constantLapModeOverall[lang]
+                        : option === LapModeEnum.Course
+                          ? translations.constantLapModeCourse[lang]
+                          : translations.constantLapModeLap[lang],
                     value: option,
                   },
                 } as DropdownItemSetDataChild;

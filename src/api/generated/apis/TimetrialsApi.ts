@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   Player,
+  PlayerAward,
   PlayerBasic,
   PlayerMatchup,
   PlayerStats,
@@ -24,6 +25,7 @@ import type {
   Score,
   ScoreSubmission,
   ScoreWithPlayer,
+  SiteChampion,
   StandardLevel,
   Track,
   TrackCup,
@@ -31,6 +33,8 @@ import type {
 import {
     PlayerFromJSON,
     PlayerToJSON,
+    PlayerAwardFromJSON,
+    PlayerAwardToJSON,
     PlayerBasicFromJSON,
     PlayerBasicToJSON,
     PlayerMatchupFromJSON,
@@ -47,6 +51,8 @@ import {
     ScoreSubmissionToJSON,
     ScoreWithPlayerFromJSON,
     ScoreWithPlayerToJSON,
+    SiteChampionFromJSON,
+    SiteChampionToJSON,
     StandardLevelFromJSON,
     StandardLevelToJSON,
     TrackFromJSON,
@@ -54,6 +60,14 @@ import {
     TrackCupFromJSON,
     TrackCupToJSON,
 } from '../models/index';
+
+export interface TimetrialsAwardsListRequest {
+    type: TimetrialsAwardsListTypeEnum;
+}
+
+export interface TimetrialsChampionsListRequest {
+    category: TimetrialsChampionsListCategoryEnum;
+}
 
 export interface TimetrialsMatchupsRetrieveRequest {
     category: TimetrialsMatchupsRetrieveCategoryEnum;
@@ -126,6 +140,76 @@ export interface TimetrialsTracksTopsListRequest {
  * 
  */
 export class TimetrialsApi extends runtime.BaseAPI {
+
+    /**
+     */
+    async timetrialsAwardsListRaw(requestParameters: TimetrialsAwardsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerAward>>> {
+        if (requestParameters['type'] == null) {
+            throw new runtime.RequiredError(
+                'type',
+                'Required parameter "type" was null or undefined when calling timetrialsAwardsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['type'] != null) {
+            queryParameters['type'] = requestParameters['type'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/awards/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PlayerAwardFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsAwardsList(requestParameters: TimetrialsAwardsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerAward>> {
+        const response = await this.timetrialsAwardsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsChampionsListRaw(requestParameters: TimetrialsChampionsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SiteChampion>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsChampionsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/champions/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SiteChampionFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsChampionsList(requestParameters: TimetrialsChampionsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SiteChampion>> {
+        const response = await this.timetrialsChampionsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      */
@@ -817,6 +901,25 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
 }
 
+/**
+ * @export
+ */
+export const TimetrialsAwardsListTypeEnum = {
+    Monthly: 'monthly',
+    Quarterly: 'quarterly',
+    Weekly: 'weekly',
+    Yearly: 'yearly'
+} as const;
+export type TimetrialsAwardsListTypeEnum = typeof TimetrialsAwardsListTypeEnum[keyof typeof TimetrialsAwardsListTypeEnum];
+/**
+ * @export
+ */
+export const TimetrialsChampionsListCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsChampionsListCategoryEnum = typeof TimetrialsChampionsListCategoryEnum[keyof typeof TimetrialsChampionsListCategoryEnum];
 /**
  * @export
  */

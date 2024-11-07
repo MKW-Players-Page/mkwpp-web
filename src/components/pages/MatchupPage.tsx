@@ -19,6 +19,7 @@ import {
   MatchupData,
   MatchupScore,
 } from "../../utils/MatchupDataCrunch";
+import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -26,6 +27,7 @@ interface PlayerSelectFieldProp {
   id: number;
 }
 const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
+  const { translations, lang } = useContext(I18nContext);
   return (
     <div className="module-row">
       <span
@@ -36,7 +38,7 @@ const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
           } as React.CSSProperties
         }
       >
-        Player&nbsp;{nth}
+        {translations.matchupPagePlayerText[lang]}&nbsp;{nth}
       </span>
       <PlayerSelectDropdown setId={setId} id={id} />
     </div>
@@ -54,10 +56,11 @@ export const MatchupHomePage = () => {
     useState(0),
     useState(0),
   ];
+  const { translations, lang } = useContext(I18nContext);
 
   return (
     <>
-      <h1>Matchup</h1>
+      <h1>{translations.matchupPageHeading[lang]}</h1>
       <div className="module">
         <div className="module-content">
           <PlayerSelectField nth={1} id={idStates[0][0]} setId={idStates[0][1]} />
@@ -70,7 +73,7 @@ export const MatchupHomePage = () => {
                 : resolvePage(Pages.Matchup, { id1: idStates[0][0], id2: idStates[1][0] })
             }
           >
-            Compare
+            {translations.matchupPageCompareButtonText[lang]}
           </Link>
         </div>
       </div>
@@ -88,6 +91,7 @@ const MatchupPage = () => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
+  const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
 
   const hasCourse = lapMode !== LapModeEnum.Lap;
@@ -186,7 +190,7 @@ const MatchupPage = () => {
       {/** Redirect if any id is invalid or API fetch failed */}
       {(id1 === 0 || id2 === 0) && <Navigate to={resolvePage(Pages.MatchupHome)} />}
       <Link to={resolvePage(Pages.MatchupHome)}>&lt; Back</Link>
-      <h1>Matchup</h1>
+      <h1>{translations.matchupPageHeading[lang]}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
@@ -213,12 +217,12 @@ const MatchupPage = () => {
                   </th>
                 </tr>
                 <tr>
-                  <th>Track</th>
-                  {hasCourse && <th>Course</th>}
-                  {hasLap && <th>Lap</th>}
-                  <th>Diff</th>
-                  {hasCourse && <th>Course</th>}
-                  {hasLap && <th>Lap</th>}
+                  <th>{translations.matchupPageTrackCol[lang]}</th>
+                  {hasCourse && <th>{translations.matchupPageCourseCol[lang]}</th>}
+                  {hasLap && <th>{translations.matchupPageLapCol[lang]}</th>}
+                  <th>{translations.matchupPageDiffCol[lang]}</th>
+                  {hasCourse && <th>{translations.matchupPageCourseCol[lang]}</th>}
+                  {hasLap && <th>{translations.matchupPageLapCol[lang]}</th>}
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
@@ -235,7 +239,11 @@ const MatchupPage = () => {
                         {(!isLap || lapMode === LapModeEnum.Lap) && (
                           <td rowSpan={cellSpan}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {track.name}
+                              {
+                                translations[
+                                  `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                                ][lang]
+                              }
                             </Link>
                           </td>
                         )}
@@ -256,11 +264,15 @@ const MatchupPage = () => {
                 )}
               </tbody>
               <tfoot>
-                {statsRow("Total", "totalScore", true, total, (value, isDiff) =>
-                  isDiff ? formatTimeDiff(value) : formatTime(value),
+                {statsRow(
+                  translations.matchupPageTotalRow[lang],
+                  "totalScore",
+                  true,
+                  total,
+                  (value, isDiff) => (isDiff ? formatTimeDiff(value) : formatTime(value)),
                 )}
                 {statsRow(
-                  "AF",
+                  translations.matchupPageAFRow[lang],
                   "totalRank",
                   true,
                   average,
@@ -268,7 +280,7 @@ const MatchupPage = () => {
                     (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
                 )}
                 {statsRow(
-                  "ARR",
+                  translations.matchupPageARRRow[lang],
                   "totalStandard",
                   true,
                   average,
@@ -276,7 +288,7 @@ const MatchupPage = () => {
                     (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
                 )}
                 {statsRow(
-                  "PR:WR",
+                  translations.matchupPagePRWRRow[lang],
                   "totalRecordRatio",
                   false,
                   average,
@@ -286,39 +298,75 @@ const MatchupPage = () => {
                     "%",
                 )}
                 <tr>
-                  <th>Tally</th>
+                  <th>{translations.matchupPageTallyRow[lang]}</th>
                   <th colSpan={cellSpan}>
-                    {matchupData[0].data !== undefined
-                      ? lapMode === "overall"
-                        ? matchupData[0].data.isLapStats.wins +
-                          matchupData[0].data.isntLapStats.wins
-                        : lapMode === "lap"
-                          ? matchupData[0].data.isLapStats.wins
-                          : matchupData[0].data.isntLapStats.wins
-                      : 0}{" "}
-                    win(s)
+                    {`${
+                      matchupData[0].data !== undefined
+                        ? lapMode === "overall"
+                          ? matchupData[0].data.isLapStats.wins +
+                            matchupData[0].data.isntLapStats.wins
+                          : lapMode === "lap"
+                            ? matchupData[0].data.isLapStats.wins
+                            : matchupData[0].data.isntLapStats.wins
+                        : 0
+                    } ${
+                      (matchupData[0].data !== undefined
+                        ? lapMode === "overall"
+                          ? matchupData[0].data.isLapStats.wins +
+                            matchupData[0].data.isntLapStats.wins
+                          : lapMode === "lap"
+                            ? matchupData[0].data.isLapStats.wins
+                            : matchupData[0].data.isntLapStats.wins
+                        : 0) === 1
+                        ? translations.matchupPageTallyRowWinsSingular[lang]
+                        : translations.matchupPageTallyRowWinsPlural[lang]
+                    }`}
                   </th>
                   <th className={diffClass(0)}>
-                    {matchupData[0].data !== undefined
-                      ? lapMode === "overall"
-                        ? matchupData[0].data.isLapStats.ties +
-                          matchupData[0].data.isntLapStats.ties
-                        : lapMode === "lap"
-                          ? matchupData[0].data.isLapStats.ties
-                          : matchupData[0].data.isntLapStats.ties
-                      : 0}{" "}
-                    draw(s)
+                    {`${
+                      matchupData[0].data !== undefined
+                        ? lapMode === "overall"
+                          ? matchupData[0].data.isLapStats.ties +
+                            matchupData[0].data.isntLapStats.ties
+                          : lapMode === "lap"
+                            ? matchupData[0].data.isLapStats.ties
+                            : matchupData[0].data.isntLapStats.ties
+                        : 0
+                    }  ${
+                      (matchupData[0].data !== undefined
+                        ? lapMode === "overall"
+                          ? matchupData[0].data.isLapStats.ties +
+                            matchupData[0].data.isntLapStats.ties
+                          : lapMode === "lap"
+                            ? matchupData[0].data.isLapStats.ties
+                            : matchupData[0].data.isntLapStats.ties
+                        : 0) === 1
+                        ? translations.matchupPageTallyRowDrawsSingular[lang]
+                        : translations.matchupPageTallyRowDrawsPlural[lang]
+                    }`}
                   </th>
                   <th colSpan={cellSpan}>
-                    {matchupData[0].data !== undefined
-                      ? lapMode === "overall"
-                        ? matchupData[0].data.isLapStats.losses +
-                          matchupData[0].data.isntLapStats.losses
-                        : lapMode === "lap"
-                          ? matchupData[0].data.isLapStats.losses
-                          : matchupData[0].data.isntLapStats.losses
-                      : 0}{" "}
-                    win(s)
+                    {`${
+                      matchupData[0].data !== undefined
+                        ? lapMode === "overall"
+                          ? matchupData[0].data.isLapStats.losses +
+                            matchupData[0].data.isntLapStats.losses
+                          : lapMode === "lap"
+                            ? matchupData[0].data.isLapStats.losses
+                            : matchupData[0].data.isntLapStats.losses
+                        : 0
+                    } ${
+                      (matchupData[0].data !== undefined
+                        ? lapMode === "overall"
+                          ? matchupData[0].data.isLapStats.losses +
+                            matchupData[0].data.isntLapStats.losses
+                          : lapMode === "lap"
+                            ? matchupData[0].data.isLapStats.losses
+                            : matchupData[0].data.isntLapStats.losses
+                        : 0) === 1
+                        ? translations.matchupPageTallyRowWinsSingular[lang]
+                        : translations.matchupPageTallyRowWinsPlural[lang]
+                    }`}
                   </th>
                 </tr>
               </tfoot>
