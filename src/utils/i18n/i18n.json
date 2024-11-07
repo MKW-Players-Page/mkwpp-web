@@ -1,4 +1,76 @@
 {
+  "constantCupMUSHROOM": {
+    "it": "Trofeo Fungo",
+    "en": "Mushroom Cup",
+    "fr": "Coupe Champignon",
+    "de": "Pilz-Cup",
+    "jp": "キノコカップ",
+    "pt": "Taça Cogumelo",
+    "es": "Copa Champiñón"
+  },
+  "constantCupFLOWER": {
+    "it": "Trofeo Fiore",
+    "en": "Flower Cup",
+    "fr": "Coupe Fleur",
+    "de": "Blumen-Cup",
+    "jp": "フラワーカップ",
+    "pt": "Taça Flor",
+    "es": "Copa Flor"
+  },
+  "constantCupSTAR": {
+    "it": "Trofeo Stella",
+    "en": "Star Cup",
+    "fr": "Coupe Étoile",
+    "de": "Stern-Cup",
+    "jp": "スターカップ",
+    "pt": "Taça Estrela",
+    "es": "Copa Estrella"
+  },
+  "constantCupSPECIAL": {
+    "it": "Trofeo Speciale",
+    "en": "Special Cup",
+    "fr": "Coupe Spéciale",
+    "de": "Spezial-Cup",
+    "jp": "スペシャルカップ",
+    "pt": "Taça Especial",
+    "es": "Copa Especial"
+  },
+  "constantCupSHELL": {
+    "it": "Trofeo Guscio",
+    "en": "Shell Cup",
+    "fr": "Coupe Carapace",
+    "de": "Panzer-Cup",
+    "jp": "こうらカップ",
+    "pt": "Taça Carapaça",
+    "es": "Copa Caparazón"
+  },
+  "constantCupBANANA": {
+    "it": "Trofeo Banana",
+    "en": "Banana Cup",
+    "fr": "Coupe Banane",
+    "de": "Bananen-Cup",
+    "jp": "バナナカップ",
+    "pt": "Taça Banana",
+    "es": "Copa Plátano"
+  },
+  "constantCupLEAF": {
+    "it": "Trofeo Foglia",
+    "en": "Leaf Cup",
+    "fr": "Coupe Feuille",
+    "de": "Blatt-Cup",
+    "jp": "このはカップ",
+    "pt": "Taça Folha",
+    "es": "Copa Hoja"
+  },
+  "constantCupLIGHTNING": {
+    "it": "Trofeo Fulmine",
+    "en": "Lightning Cup",
+    "fr": "Coupe Éclair",
+    "de": "Blitz-Cup",
+    "jp": "サンダーカップ",
+    "pt": "Taça Relâmpago",
+    "es": "Copa Trueno"
+  },
   "constantLapModeOverall": {
     "it": "Complessivo",
     "en": "Overall",

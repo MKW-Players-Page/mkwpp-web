@@ -26,7 +26,9 @@ const TrackListPage = () => {
           {metadata.cups?.map((cup) => (
             <div key={cup.id} className="module">
               <div className="module-content">
-                <b>{cup.name}</b>
+                <b>
+                  {translations[`constantCup${cup.code.toUpperCase()}` as TranslationKey][lang]}
+                </b>
                 <ul>
                   {cup.tracks.map((trackId) => (
                     <li key={trackId}>
