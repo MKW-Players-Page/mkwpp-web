@@ -168,7 +168,7 @@ const SECTIONS: NavbarSection[] = [
         external: true,
       },
       {
-        label: "Discord",
+        label: "navbarLabelDiscord",
         url: "//discord.gg/GTTFmVdfRN",
         external: true,
       },
