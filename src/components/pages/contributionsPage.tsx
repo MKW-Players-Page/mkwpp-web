@@ -79,7 +79,7 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageLanguageCompletionHeading[lang]}</h2>
-          <table>
+          <table style={{ marginBottom: "10px" } as React.CSSProperties}>
             <thead>
               <tr>
                 <th>{translations.contributionsPageLanguageCompletionLanguageCol[lang]}</th>
@@ -114,6 +114,17 @@ const ContributionsPage = () => {
               ))}
             </tbody>
           </table>
+          <p>{translations.contributionsPageLanguageCompletionThanksText[lang]}</p>
+          <ul style={{ listStyleType: "disc" } as React.CSSProperties}>
+            {[
+              { name: "Leila FalB Massanova", langs: [LanguageName.Italian, LanguageName.English] },
+              { name: "Nara Hiero", langs: [LanguageName.English] },
+            ].map((credit) => (
+              <li>
+                {credit.name} ({credit.langs.join(", ")})
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
