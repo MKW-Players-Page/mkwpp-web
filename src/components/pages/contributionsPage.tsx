@@ -122,6 +122,7 @@ const ContributionsPage = () => {
                 langs: [LanguageName.Italian, LanguageName.English],
               },
               { player: <PlayerMention id={1165} />, langs: [LanguageName.English] },
+              { player: <PlayerMention id={145} />, langs: [LanguageName.English] },
             ].map((credit) => (
               <li>
                 {credit.player} ({credit.langs.join(", ")})

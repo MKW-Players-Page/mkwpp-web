@@ -64,7 +64,6 @@ export const handleBars = (
           out.push(partX);
           out.push(value);
         }
-        console.log(out);
         return out.slice(0, out.length - 1);
       })
       .flat();
