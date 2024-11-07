@@ -167,6 +167,11 @@ const SECTIONS: NavbarSection[] = [
         url: "//www.mariokart64.com/yabb",
         external: true,
       },
+      {
+        label: "Discord",
+        url: "//discord.gg/GTTFmVdfRN",
+        external: true,
+      },
     ],
   },
 ];
