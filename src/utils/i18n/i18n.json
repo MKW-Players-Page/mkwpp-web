@@ -10384,5 +10384,50 @@
     "jp": "",
     "pt": "",
     "es": ""
+  },
+  "contributionsPageFeatureRoadmapHeading": {
+    "it": "Tabella di marcia delle feature",
+    "en": "Feature Roadmap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageOngoingDevelopmentHeading": {
+    "it": "Sviluppo in corso",
+    "en": "Ongoing Feature Development",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageDevelopedCreditsHeading": {
+    "it": "Feature completate",
+    "en": "Developed Features",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageSpecialCreditsHeading": {
+    "it": "Crediti Speciali",
+    "en": "Special Credits",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageSpecialCreditsPenevParagraph": {
+    "it": "Ringraziamo {{Penev}} per aver creato il vecchio Sito, permettendo alla community di crescere.",
+    "en": "Special Thanks to {{Penev}} for creating the old Site, letting the community flourish.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   }
 }

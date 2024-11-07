@@ -188,139 +188,121 @@ const RulesPage = () => {
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameMG[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMGNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesMGNoSCGapJumpLinkText",
-                      <Lnk url="//youtu.be/8-0Xetey5xY?t=43">
-                        {translations.rulesPageTrackCategoriesMGNoSCGapJumpLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMGNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesMGNoSCGapJumpLinkText",
+                    <Lnk url="//youtu.be/8-0Xetey5xY?t=43">
+                      {translations.rulesPageTrackCategoriesMGNoSCGapJumpLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMGSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesMGSCWallRide1LinkText",
-                      <Lnk url="//youtu.be/MtM9svSJG_A?t=21">
-                        {translations.rulesPageTrackCategoriesMGSCWallRide1LinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesMGSCWallRide2LinkText",
-                      <Lnk url="//youtu.be/MtM9svSJG_A?t=44">
-                        {translations.rulesPageTrackCategoriesMGSCWallRide2LinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMGSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesMGSCWallRide1LinkText",
+                    <Lnk url="//youtu.be/MtM9svSJG_A?t=21">
+                      {translations.rulesPageTrackCategoriesMGSCWallRide1LinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesMGSCWallRide2LinkText",
+                    <Lnk url="//youtu.be/MtM9svSJG_A?t=44">
+                      {translations.rulesPageTrackCategoriesMGSCWallRide2LinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMGUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesMGUnresWallRideLinkText",
-                      <Lnk url="//youtu.be/y5V_s3dMJ4k">
-                        {translations.rulesPageTrackCategoriesMGUnresWallRideLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMGUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesMGUnresWallRideLinkText",
+                    <Lnk url="//youtu.be/y5V_s3dMJ4k">
+                      {translations.rulesPageTrackCategoriesMGUnresWallRideLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameTF[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesTFNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesTFNoSCLakeCutLinkText",
-                      <Lnk url="//youtu.be/mqQa_1Cq1bw?t=38">
-                        {translations.rulesPageTrackCategoriesTFNoSCLakeCutLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesTFNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesTFNoSCLakeCutLinkText",
+                    <Lnk url="//youtu.be/mqQa_1Cq1bw?t=38">
+                      {translations.rulesPageTrackCategoriesTFNoSCLakeCutLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesTFSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesTFSCBoxClipLinkText",
-                      <Lnk url="//youtu.be/IapJ1CS0Eas?t=22">
-                        {translations.rulesPageTrackCategoriesTFSCBoxClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesTFSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesTFSCBoxClipLinkText",
+                    <Lnk url="//youtu.be/IapJ1CS0Eas?t=22">
+                      {translations.rulesPageTrackCategoriesTFSCBoxClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameMC[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMCNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesMCNoSCKingAlexRampLinkText",
-                      <Lnk url="//youtu.be/kG8PvG8K1ZA?t=22">
-                        {translations.rulesPageTrackCategoriesMCNoSCKingAlexRampLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMCNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesMCNoSCKingAlexRampLinkText",
+                    <Lnk url="//youtu.be/kG8PvG8K1ZA?t=22">
+                      {translations.rulesPageTrackCategoriesMCNoSCKingAlexRampLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMCUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesMCUnresWallclipLinkText",
-                      <Lnk url="//youtu.be/CoOLNaRK5dc">
-                        {translations.rulesPageTrackCategoriesMCUnresWallclipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMCUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesMCUnresWallclipLinkText",
+                    <Lnk url="//youtu.be/CoOLNaRK5dc">
+                      {translations.rulesPageTrackCategoriesMCUnresWallclipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameCM[lang]}>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesCMSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesCMSC1LinkText",
-                      <Lnk url="//youtu.be/I_DTmlAWWdA">
-                        {translations.rulesPageTrackCategoriesCMSC1LinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesCMSC2LinkText",
-                      <Lnk url="//youtu.be/xcheyzld7-s?t=7">
-                        {translations.rulesPageTrackCategoriesCMSC2LinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesCMSC3LinkText",
-                      <Lnk url="//youtu.be/Jf-HC1Z_1FE?t=17">
-                        {translations.rulesPageTrackCategoriesCMSC3LinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesCMSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesCMSC1LinkText",
+                    <Lnk url="//youtu.be/I_DTmlAWWdA">
+                      {translations.rulesPageTrackCategoriesCMSC1LinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesCMSC2LinkText",
+                    <Lnk url="//youtu.be/xcheyzld7-s?t=7">
+                      {translations.rulesPageTrackCategoriesCMSC2LinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesCMSC3LinkText",
+                    <Lnk url="//youtu.be/Jf-HC1Z_1FE?t=17">
+                      {translations.rulesPageTrackCategoriesCMSC3LinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesCMUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesCMUnresParkingLotLinkText",
-                      <Lnk url="//youtu.be/HwPwQ7Q">
-                        {translations.rulesPageTrackCategoriesCMUnresParkingLotLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesCMUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesCMUnresParkingLotLinkText",
+                    <Lnk url="//youtu.be/HwPwQ7Q">
+                      {translations.rulesPageTrackCategoriesCMUnresParkingLotLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameDKSC[lang]}>
@@ -330,52 +312,46 @@ const RulesPage = () => {
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameWGM[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesWGMNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText",
-                      <Lnk url="//youtu.be/NbhzA2rtZ2A?t=20">
-                        {translations.rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesWGMNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText",
+                    <Lnk url="//youtu.be/NbhzA2rtZ2A?t=20">
+                      {translations.rulesPageTrackCategoriesWGMNoSCMickeyMouseLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesWGMSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesWGMSCTurnskipLinkText",
-                      <Lnk url="//youtu.be/WetnmZeZTEg?t=39">
-                        {translations.rulesPageTrackCategoriesWGMSCTurnskipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesWGMSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesWGMSCTurnskipLinkText",
+                    <Lnk url="//youtu.be/WetnmZeZTEg?t=39">
+                      {translations.rulesPageTrackCategoriesWGMSCTurnskipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesWGMUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesWGMUnresPipebounceLinkText",
-                      <Lnk url="//youtu.be/VVFXP639DRY?t=18">
-                        {translations.rulesPageTrackCategoriesWGMUnresPipebounceLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesWGMUnresRespawnLinkText",
-                      <Lnk url="//youtu.be/RlGsAQ-FE1Q?t=9">
-                        {translations.rulesPageTrackCategoriesWGMUnresRespawnLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesWGMUnresShroomlessLinkText",
-                      <Lnk url="//youtu.be/XhyLw2lW2kE?t=29">
-                        {translations.rulesPageTrackCategoriesWGMUnresShroomlessLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesWGMUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesWGMUnresPipebounceLinkText",
+                    <Lnk url="//youtu.be/VVFXP639DRY?t=18">
+                      {translations.rulesPageTrackCategoriesWGMUnresPipebounceLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesWGMUnresRespawnLinkText",
+                    <Lnk url="//youtu.be/RlGsAQ-FE1Q?t=9">
+                      {translations.rulesPageTrackCategoriesWGMUnresRespawnLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesWGMUnresShroomlessLinkText",
+                    <Lnk url="//youtu.be/XhyLw2lW2kE?t=29">
+                      {translations.rulesPageTrackCategoriesWGMUnresShroomlessLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameDC[lang]}>
@@ -387,90 +363,78 @@ const RulesPage = () => {
               <></>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesKCUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesKCUnresLinkText",
-                      <Lnk url="//youtu.be/Elb5K7woV20?t=63">
-                        {translations.rulesPageTrackCategoriesKCUnresLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesKCUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesKCUnresLinkText",
+                    <Lnk url="//youtu.be/Elb5K7woV20?t=63">
+                      {translations.rulesPageTrackCategoriesKCUnresLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameMT[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMTNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesMTNoSCTurnskipLinkText",
-                      <Lnk url="//youtu.be/igcHE0-OV0g?t=33">
-                        {translations.rulesPageTrackCategoriesMTNoSCTurnskipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMTNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesMTNoSCTurnskipLinkText",
+                    <Lnk url="//youtu.be/igcHE0-OV0g?t=33">
+                      {translations.rulesPageTrackCategoriesMTNoSCTurnskipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesMTUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesMTUnresLinkText",
-                      <Lnk url="//youtu.be/1e3WoYHDw2Y?t=14">
-                        {translations.rulesPageTrackCategoriesMTUnresLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesMTUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesMTUnresLinkText",
+                    <Lnk url="//youtu.be/1e3WoYHDw2Y?t=14">
+                      {translations.rulesPageTrackCategoriesMTUnresLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameGV[lang]}>
               <p>{translations.rulesPageTrackCategoriesGVNoSC[lang]}</p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesGVSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesGVSCRockhopLinkText",
-                      <Lnk url="//youtu.be/J55Fo2ZMz9M?t=33">
-                        {translations.rulesPageTrackCategoriesGVSCRockhopLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesGVSCRockhopRespawnLinkText",
-                      <Lnk url="//youtu.be/xeIoXyUsXzw?t=106">
-                        {translations.rulesPageTrackCategoriesGVSCRockhopRespawnLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesGVSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesGVSCRockhopLinkText",
+                    <Lnk url="//youtu.be/J55Fo2ZMz9M?t=33">
+                      {translations.rulesPageTrackCategoriesGVSCRockhopLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesGVSCRockhopRespawnLinkText",
+                    <Lnk url="//youtu.be/xeIoXyUsXzw?t=106">
+                      {translations.rulesPageTrackCategoriesGVSCRockhopRespawnLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesGVUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesGVUnresLinkText",
-                      <Lnk url="//youtu.be/bB0oUzdCHTA?t=12">
-                        {translations.rulesPageTrackCategoriesGVUnresLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesGVUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesGVUnresLinkText",
+                    <Lnk url="//youtu.be/bB0oUzdCHTA?t=12">
+                      {translations.rulesPageTrackCategoriesGVUnresLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameDDR[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesDDRNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesDDRNoSCUltraLinkText",
-                      <Lnk url="//youtu.be/nVcVbd4n3yM?t=84">
-                        {translations.rulesPageTrackCategoriesDDRNoSCUltraLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesDDRNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesDDRNoSCUltraLinkText",
+                    <Lnk url="//youtu.be/nVcVbd4n3yM?t=84">
+                      {translations.rulesPageTrackCategoriesDDRNoSCUltraLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
               <></>
@@ -483,78 +447,70 @@ const RulesPage = () => {
             <TrackCategory trackName={translations.constantTrackNameBC[lang]}>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesBCSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesBCSCSpiralSkipLinkText",
-                      <Lnk url="//youtu.be/Htt2CRmktvg?t=32">
-                        {translations.rulesPageTrackCategoriesBCSCSpiralSkipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesBCSCRampCutLinkText",
-                      <Lnk url="//youtu.be/Htt2CRmktvg?t=37">
-                        {translations.rulesPageTrackCategoriesBCSCRampCutLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesBCSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesBCSCSpiralSkipLinkText",
+                    <Lnk url="//youtu.be/Htt2CRmktvg?t=32">
+                      {translations.rulesPageTrackCategoriesBCSCSpiralSkipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesBCSCRampCutLinkText",
+                    <Lnk url="//youtu.be/Htt2CRmktvg?t=37">
+                      {translations.rulesPageTrackCategoriesBCSCRampCutLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRR[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRRNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRRNoSCMoonjumpLinkText",
-                      <Lnk url="//youtu.be/fM7uBUAI_tw?t=18">
-                        {translations.rulesPageTrackCategoriesRRNoSCMoonjumpLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesRRNoSCSnakeCutLinkText",
-                      <Lnk url="//youtu.be/fM7uBUAI_tw?t=39">
-                        {translations.rulesPageTrackCategoriesRRNoSCSnakeCutLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesRRNoSCPathswitchLinkText",
-                      <Lnk url="//youtu.be/fM7uBUAI_tw?t=55">
-                        {translations.rulesPageTrackCategoriesRRNoSCPathswitchLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRRNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRRNoSCMoonjumpLinkText",
+                    <Lnk url="//youtu.be/fM7uBUAI_tw?t=18">
+                      {translations.rulesPageTrackCategoriesRRNoSCMoonjumpLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesRRNoSCSnakeCutLinkText",
+                    <Lnk url="//youtu.be/fM7uBUAI_tw?t=39">
+                      {translations.rulesPageTrackCategoriesRRNoSCSnakeCutLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesRRNoSCPathswitchLinkText",
+                    <Lnk url="//youtu.be/fM7uBUAI_tw?t=55">
+                      {translations.rulesPageTrackCategoriesRRNoSCPathswitchLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRRUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRRUnresWallclipsLinkText",
-                      <Lnk url="//youtu.be/WoVvyOtqquU?t=22">
-                        {translations.rulesPageTrackCategoriesRRUnresWallclipsLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRRUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRRUnresWallclipsLinkText",
+                    <Lnk url="//youtu.be/WoVvyOtqquU?t=22">
+                      {translations.rulesPageTrackCategoriesRRUnresWallclipsLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRPB[lang]}>
               <></>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRPBUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRPBUnresWallclipsLinkText",
-                      <Lnk url="//youtu.be/Ew-HUEUGRQI?t=37">
-                        {translations.rulesPageTrackCategoriesRPBUnresWallclipsLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRPBUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRPBUnresWallclipsLinkText",
+                    <Lnk url="//youtu.be/Ew-HUEUGRQI?t=37">
+                      {translations.rulesPageTrackCategoriesRPBUnresWallclipsLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRYF[lang]}>
@@ -566,16 +522,14 @@ const RulesPage = () => {
               <></>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRGV2Unres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRGV2UnresWallclipLinkText",
-                      <Lnk url="//youtu.be/Ew-T7OVqaNUbzI?t=7">
-                        {translations.rulesPageTrackCategoriesRGV2UnresWallclipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRGV2Unres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRGV2UnresWallclipLinkText",
+                    <Lnk url="//youtu.be/Ew-T7OVqaNUbzI?t=7">
+                      {translations.rulesPageTrackCategoriesRGV2UnresWallclipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRMR[lang]}>
@@ -585,28 +539,24 @@ const RulesPage = () => {
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRSL[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRSLSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRSLSCWallclipLinkText",
-                      <Lnk url="//youtu.be/KstIRAm_0KE?t=15">
-                        {translations.rulesPageTrackCategoriesRSLSCWallclipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRSLSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRSLSCWallclipLinkText",
+                    <Lnk url="//youtu.be/KstIRAm_0KE?t=15">
+                      {translations.rulesPageTrackCategoriesRSLSCWallclipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRSLUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRSLUnresPoleclipLinkText",
-                      <Lnk url="//youtu.be/itty-pdMLq4?t=13">
-                        {translations.rulesPageTrackCategoriesRSLUnresPoleclipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRSLUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRSLUnresPoleclipLinkText",
+                    <Lnk url="//youtu.be/itty-pdMLq4?t=13">
+                      {translations.rulesPageTrackCategoriesRSLUnresPoleclipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
@@ -614,22 +564,20 @@ const RulesPage = () => {
               <p>{translations.rulesPageTrackCategoriesRSGBNoSC[lang]}</p>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRSGBUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRSGBUnresBombClipLinkText",
-                      <Lnk url="//youtu.be/L4OcK4u5JNg?t=6">
-                        {translations.rulesPageTrackCategoriesRSGBUnresBombClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesRSGBUnresFloorClipLinkText",
-                      <Lnk url="//youtu.be/BoM9CeOjNlg?t=104">
-                        {translations.rulesPageTrackCategoriesRSGBUnresFloorClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRSGBUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRSGBUnresBombClipLinkText",
+                    <Lnk url="//youtu.be/L4OcK4u5JNg?t=6">
+                      {translations.rulesPageTrackCategoriesRSGBUnresBombClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesRSGBUnresFloorClipLinkText",
+                    <Lnk url="//youtu.be/BoM9CeOjNlg?t=104">
+                      {translations.rulesPageTrackCategoriesRSGBUnresFloorClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRDS[lang]}>
@@ -639,152 +587,132 @@ const RulesPage = () => {
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRWS[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRWSNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRWSNoSCTurn2LinkText",
-                      <Lnk url="//youtu.be/K0gQpxxAGZ0?t=6">
-                        {translations.rulesPageTrackCategoriesRWSNoSCTurn2LinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRWSNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRWSNoSCTurn2LinkText",
+                    <Lnk url="//youtu.be/K0gQpxxAGZ0?t=6">
+                      {translations.rulesPageTrackCategoriesRWSNoSCTurn2LinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRWSUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRWSUnresGlitchTextLink",
-                      <Lnk url="//youtu.be/2rDSx5pgQ9A?t=10">
-                        {translations.rulesPageTrackCategoriesRWSUnresGlitchTextLink[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRWSUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRWSUnresGlitchTextLink",
+                    <Lnk url="//youtu.be/2rDSx5pgQ9A?t=10">
+                      {translations.rulesPageTrackCategoriesRWSUnresGlitchTextLink[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRDH[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDHNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDHNoSCWallTouchLinkText",
-                      <Lnk url="//youtu.be/W2DCAEFjAFE?t=67">
-                        {translations.rulesPageTrackCategoriesRDHNoSCWallTouchLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDHNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDHNoSCWallTouchLinkText",
+                    <Lnk url="//youtu.be/W2DCAEFjAFE?t=67">
+                      {translations.rulesPageTrackCategoriesRDHNoSCWallTouchLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDHSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDHSCLakeCutLinkText",
-                      <Lnk url="//youtu.be/v5Qj0DnqVo0?t=12">
-                        {translations.rulesPageTrackCategoriesRDHSCLakeCutLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDHSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDHSCLakeCutLinkText",
+                    <Lnk url="//youtu.be/v5Qj0DnqVo0?t=12">
+                      {translations.rulesPageTrackCategoriesRDHSCLakeCutLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDHUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDHUnresODBLinkText",
-                      <Lnk url="//youtu.be/Cu00LwuXKNg?t=14">
-                        {translations.rulesPageTrackCategoriesRDHUnresODBLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDHUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDHUnresODBLinkText",
+                    <Lnk url="//youtu.be/Cu00LwuXKNg?t=14">
+                      {translations.rulesPageTrackCategoriesRDHUnresODBLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRBC3[lang]}>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRBC3SC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRBC3SCUltraLinkText",
-                      <Lnk url="//youtu.be/vSbSADDEzEs?t=70">
-                        {translations.rulesPageTrackCategoriesRBC3SCUltraLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesRBC3SCWallclipsLinkText",
-                      <Lnk url="//youtu.be/jmmhhIqewQg?t=14">
-                        {translations.rulesPageTrackCategoriesRBC3SCWallclipsLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRBC3SC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRBC3SCUltraLinkText",
+                    <Lnk url="//youtu.be/vSbSADDEzEs?t=70">
+                      {translations.rulesPageTrackCategoriesRBC3SCUltraLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesRBC3SCWallclipsLinkText",
+                    <Lnk url="//youtu.be/jmmhhIqewQg?t=14">
+                      {translations.rulesPageTrackCategoriesRBC3SCWallclipsLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRDKJP[lang]}>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDKJPSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText",
-                      <Lnk url="//youtu.be/jmmhhIqewQg?t=14">
-                        {translations.rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDKJPSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText",
+                    <Lnk url="//youtu.be/jmmhhIqewQg?t=14">
+                      {translations.rulesPageTrackCategoriesRDKJPSCSpiralSkipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDKJPUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText",
-                      <Lnk url="//youtu.be/bkinW1UZK6M?t=28">
-                        {translations.rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                    [
-                      "rulesPageTrackCategoriesRDKJPUnresSignClipLinkText",
-                      <Lnk url="//youtu.be/_lbQOL3wYxI?t=17">
-                        {translations.rulesPageTrackCategoriesRDKJPUnresSignClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDKJPUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText",
+                    <Lnk url="//youtu.be/bkinW1UZK6M?t=28">
+                      {translations.rulesPageTrackCategoriesRDKJPUnresTreeClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                  [
+                    "rulesPageTrackCategoriesRDKJPUnresSignClipLinkText",
+                    <Lnk url="//youtu.be/_lbQOL3wYxI?t=17">
+                      {translations.rulesPageTrackCategoriesRDKJPUnresSignClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRMC[lang]}>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRMCSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRMCSCWallclipLinkText",
-                      <Lnk url="//youtu.be/QwWEFaiOquI?t=29">
-                        {translations.rulesPageTrackCategoriesRMCSCWallclipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRMCSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRMCSCWallclipLinkText",
+                    <Lnk url="//youtu.be/QwWEFaiOquI?t=29">
+                      {translations.rulesPageTrackCategoriesRMCSCWallclipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRMC3[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRMC3NoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText",
-                      <Lnk url="//youtu.be/o7kMZcDDGZI?t=18">
-                        {translations.rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRMC3NoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText",
+                    <Lnk url="//youtu.be/o7kMZcDDGZI?t=18">
+                      {translations.rulesPageTrackCategoriesRMC3NoSCTurnWallClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
               <></>
@@ -792,82 +720,70 @@ const RulesPage = () => {
             <TrackCategory trackName={translations.constantTrackNameRPG[lang]}>
               <></>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRPGSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRPGSCTreeClipLinkText",
-                      <Lnk url="//youtu.be/F2fFVrUU2oE?t=39">
-                        {translations.rulesPageTrackCategoriesRPGSCTreeClipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRPGSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRPGSCTreeClipLinkText",
+                    <Lnk url="//youtu.be/F2fFVrUU2oE?t=39">
+                      {translations.rulesPageTrackCategoriesRPGSCTreeClipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRDKM[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDKMNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDKMNoSCGapLinkText",
-                      <Lnk url="//youtu.be/jk5NIcHWQ-Y?t=85">
-                        {translations.rulesPageTrackCategoriesRDKMNoSCGapLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDKMNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDKMNoSCGapLinkText",
+                    <Lnk url="//youtu.be/jk5NIcHWQ-Y?t=85">
+                      {translations.rulesPageTrackCategoriesRDKMNoSCGapLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRDKMSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRDKMSCWallBypassLinkText",
-                      <Lnk url="//youtu.be/s3uqTaxr_4A?t=43">
-                        {translations.rulesPageTrackCategoriesRDKMSCWallBypassLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRDKMSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRDKMSCWallBypassLinkText",
+                    <Lnk url="//youtu.be/s3uqTaxr_4A?t=43">
+                      {translations.rulesPageTrackCategoriesRDKMSCWallBypassLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <></>
             </TrackCategory>
             <TrackCategory trackName={translations.constantTrackNameRBC[lang]}>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRBCNoSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRBCNoSCRailCutLinkText",
-                      <Lnk url="//youtu.be/twZes-RI6Sc?t=107">
-                        {translations.rulesPageTrackCategoriesRBCNoSCRailCutLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRBCNoSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRBCNoSCRailCutLinkText",
+                    <Lnk url="//youtu.be/twZes-RI6Sc?t=107">
+                      {translations.rulesPageTrackCategoriesRBCNoSCRailCutLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRBCSC[lang], [
-                    [
-                      "rulesPageTrackCategoriesRBCSCSpiralSkipLinkText",
-                      <Lnk url="//youtu.be/3PYp8-IrY_0?t=41">
-                        {translations.rulesPageTrackCategoriesRBCSCSpiralSkipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRBCSC[lang], [
+                  [
+                    "rulesPageTrackCategoriesRBCSCSpiralSkipLinkText",
+                    <Lnk url="//youtu.be/3PYp8-IrY_0?t=41">
+                      {translations.rulesPageTrackCategoriesRBCSCSpiralSkipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
               <p>
-                {parse(
-                  handleBars(translations.rulesPageTrackCategoriesRBCUnres[lang], [
-                    [
-                      "rulesPageTrackCategoriesRBCUnresPoleclipLinkText",
-                      <Lnk url="//youtu.be/ylcEVLHzwJA?t=17">
-                        {translations.rulesPageTrackCategoriesRBCUnresPoleclipLinkText[lang]}
-                      </Lnk>,
-                    ],
-                  ]),
-                )}
+                {handleBars(translations.rulesPageTrackCategoriesRBCUnres[lang], [
+                  [
+                    "rulesPageTrackCategoriesRBCUnresPoleclipLinkText",
+                    <Lnk url="//youtu.be/ylcEVLHzwJA?t=17">
+                      {translations.rulesPageTrackCategoriesRBCUnresPoleclipLinkText[lang]}
+                    </Lnk>,
+                  ],
+                ])}
               </p>
             </TrackCategory>
           </ul>

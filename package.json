@@ -26,7 +26,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/ --max-warnings=0 && npx prettier . --check",
     "format": "npx prettier . --write",
-    "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml"
+    "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml",
+    "serve": "eslint ./src/ --max-warnings=0 && npx prettier . --check --write && react-scripts build && serve -s build"
   },
   "prettier": {
     "tabWidth": 2,

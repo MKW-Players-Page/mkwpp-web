@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
-import { I18nContext, Language, LanguageName } from "../../utils/i18n/i18n";
+import { handleBars, I18nContext, Language, LanguageName } from "../../utils/i18n/i18n";
+import PlayerMention from "../widgets/PlayerMention";
 
 interface Question {
   type: 0;
@@ -46,7 +47,6 @@ const ContributionsPage = () => {
   };
 
   const [questionIndex, setQuestionIndex] = useState(1);
-
   return (
     <>
       <h1>{translations.contributionsPageHeading[lang]}</h1>
@@ -117,14 +117,39 @@ const ContributionsPage = () => {
           <p>{translations.contributionsPageLanguageCompletionThanksText[lang]}</p>
           <ul style={{ listStyleType: "disc" } as React.CSSProperties}>
             {[
-              { name: "Leila FalB Massanova", langs: [LanguageName.Italian, LanguageName.English] },
-              { name: "Nara Hiero", langs: [LanguageName.English] },
+              { player: <PlayerMention id={918} />, langs: [LanguageName.Italian, LanguageName.English] },
+              { player: <PlayerMention id={1165} />, langs: [LanguageName.English] },
             ].map((credit) => (
               <li>
-                {credit.name} ({credit.langs.join(", ")})
+                {credit.player} ({credit.langs.join(", ")})
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+      <div className="module">
+        <div className="module-content">
+          <h2>{translations.contributionsPageFeatureRoadmapHeading[lang]}</h2>
+        </div>
+      </div>
+      <div className="module">
+        <div className="module-content">
+          <h2>{translations.contributionsPageOngoingDevelopmentHeading[lang]}</h2>
+        </div>
+      </div>
+      <div className="module">
+        <div className="module-content">
+          <h2>{translations.contributionsPageDevelopedCreditsHeading[lang]}</h2>
+        </div>
+      </div>
+      <div className="module">
+        <div className="module-content">
+          <h2>{translations.contributionsPageSpecialCreditsHeading[lang]}</h2>
+          <p>
+            {handleBars(translations.contributionsPageSpecialCreditsPenevParagraph[lang], [
+              ["Penev", <PlayerMention id={58} />],
+            ])}
+          </p>
         </div>
       </div>
     </>

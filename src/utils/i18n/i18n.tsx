@@ -1,5 +1,4 @@
 import Dropdown, { DropdownData } from "../../components/widgets/Dropdown";
-import ReactDOMServer from "react-dom/server";
 import { createContext, useContext } from "react";
 /* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
@@ -10,8 +9,8 @@ export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
 
 export enum Language {
-  Italian = "it",
   English = "en",
+  Italian = "it",
   French = "fr",
   German = "de",
   Japanese = "jp",
@@ -20,8 +19,8 @@ export enum Language {
 }
 
 export enum LanguageName {
-  Italian = "Italiano",
   English = "English",
+  Italian = "Italiano",
   French = "Français",
   German = "Deutsch",
   Japanese = "日本語",
@@ -52,14 +51,26 @@ export const I18nContext = createContext<I18nContextType>({
 
 export const handleBars = (
   stringWithHandleBars: string,
-  handleBarKeyReplPairs: (string | JSX.Element)[][],
+  handleBarKeyReplPairs: [string, string | JSX.Element][],
 ) => {
-  let out = stringWithHandleBars;
-  for (let [key, replace] of handleBarKeyReplPairs) {
-    out = out.replaceAll(`{{${key as string}}}`, ReactDOMServer.renderToString(replace));
+  let intermediateArray: (string | JSX.Element)[] = [stringWithHandleBars];
+  for (let [key, value] of handleBarKeyReplPairs) {
+    intermediateArray = intermediateArray
+      .map((part) => {
+        if (typeof part !== "string") return part;
+        let out = [];
+        const parts = part.split(`{{${key}}}`);
+        for (let partX of parts) {
+          out.push(partX);
+          out.push(value);
+        }
+        console.log(out);
+        return out.slice(0, out.length - 1);
+      })
+      .flat();
   }
 
-  return out;
+  return <>{intermediateArray}</>;
 };
 
 export const LanguageDropdown = () => {
