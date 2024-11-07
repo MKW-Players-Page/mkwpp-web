@@ -9916,5 +9916,95 @@
     "jp": "",
     "pt": "",
     "es": ""
+  },
+  "userJoinPageFormLabel": {
+    "it": "Registrati",
+    "en": "Join",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageFormLabelSubmitButton": {
+    "it": "Registrati",
+    "en": "Join",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageEmailLabel": {
+    "it": "E-mail",
+    "en": "Email",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageUsernameLabel": {
+    "it": "Nome Utente",
+    "en": "Username",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPagePasswordLabel": {
+    "it": "Password",
+    "en": "Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageConfirmPasswordLabel": {
+    "it": "Conferma Password",
+    "en": "Confirm Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userLoginPageFormLabel": {
+    "it": "Entra",
+    "en": "Log in",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userLoginPageFormLabelSubmitButton": {
+    "it": "Entra",
+    "en": "Log in",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userLoginPageUsernameLabel": {
+    "it": "Nome Utente",
+    "en": "Username",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userLoginPagePasswordLabel": {
+    "it": "Password",
+    "en": "Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   }
 }
