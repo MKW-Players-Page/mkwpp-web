@@ -10222,5 +10222,50 @@
     "jp": "",
     "pt": "",
     "es": ""
+  },
+  "blogListPageHeading": {
+    "it": "Archivio Notizie",
+    "en": "News Archive",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "blogListPageTitleCol": {
+    "it": "Titolo",
+    "en": "Title",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "blogListPageDateCol": {
+    "it": "Data",
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "blogListPageAuthorCol": {
+    "it": "Autore",
+    "en": "Author",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "blogPostPageNonexistant": {
+    "it": "Il post archiviato che hai richiesto sembra non esistere...",
+    "en": "The archive you requested does not appear to exist...",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   }
 }
