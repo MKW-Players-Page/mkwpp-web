@@ -14,7 +14,7 @@ const PlayerMention = ({ id }: PlayerMentionProps) => {
   const metadata = useContext(MetadataContext);
   const { isLoading, data: player } = useApi(
     () => api.timetrialsPlayersRetrieve({ id }),
-    [id, metadata],
+    [id],
   );
 
   if (metadata.isLoading || isLoading) return <>Loading..</>;
