@@ -7649,6 +7649,15 @@
     "pt": "",
     "es": ""
   },
+  "navbarLabelContribute": {
+    "it": "Come Contribuire",
+    "en": "How To Contribute",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "navbarTitleHistorical": {
     "it": "Storico",
     "en": "Historical",
@@ -7769,6 +7778,15 @@
   "navbarLabelDiscord": {
     "it": "Discord",
     "en": "Discord",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "navbarLabelGithub": {
+    "it": "Github",
+    "en": "Github",
     "fr": "",
     "de": "",
     "jp": "",
@@ -10262,6 +10280,96 @@
   "blogPostPageNonexistant": {
     "it": "Il post archiviato che hai richiesto sembra non esistere...",
     "en": "The archive you requested does not appear to exist...",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageHeading": {
+    "it": "Come Contribuire",
+    "en": "How to Contribute",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPagePositiveResponse": {
+    "it": "Si",
+    "en": "Yes",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageNegativeResponse": {
+    "it": "No",
+    "en": "No",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageQuestionsAndAnswers1": {
+    "it": "Sei un developer?",
+    "en": "Are you a developer?",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageQuestionsAndAnswers2": {
+    "it": "Per favore, aiutaci contribuendo al frontend o al backend del progetto su Github. Puoi trovare il link nella sidebar.",
+    "en": "Please, help us by contributing to the project's frontend or backend on Github. You can find the link on the sidebar.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageQuestionsAndAnswers3": {
+    "it": "Parli una lingua diversa dall'Inglese?",
+    "en": "Do you speak a language besides English?",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageQuestionsAndAnswers4": {
+    "it": "Se la tua lingua non è stata tradotta al 100% (vedi uno dei quadranti qua sotto) puoi contribuire su Github facendo una Pull Request.",
+    "en": "If your language does not have 100% completion (see one of the boxes below) you can contribute on Github by making a Pull Request.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageLanguageCompletionHeading": {
+    "it": "Percentuale di Completamento Traduzioni",
+    "en": "Translation Completion Percentage",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageLanguageCompletionLanguageCol": {
+    "it": "Lingua",
+    "en": "Language",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageLanguageCompletionPercentageCol": {
+    "it": "Percentuale",
+    "en": "Percentage",
     "fr": "",
     "de": "",
     "jp": "",

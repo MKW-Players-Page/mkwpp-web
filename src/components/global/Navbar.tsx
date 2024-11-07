@@ -103,6 +103,10 @@ const SECTIONS: NavbarSection[] = [
         label: "navbarLabelMatchups",
         url: resolvePage(Pages.MatchupHome),
       },
+      {
+        label: "navbarLabelContribute",
+        url: resolvePage(Pages.Contribute),
+      },
     ],
   },
   {
@@ -170,6 +174,11 @@ const SECTIONS: NavbarSection[] = [
       {
         label: "navbarLabelDiscord",
         url: "//discord.gg/GTTFmVdfRN",
+        external: true,
+      },
+      {
+        label: "navbarLabelGithub",
+        url: "//github.com/MKW-Players-Page",
         external: true,
       },
     ],

@@ -19,6 +19,7 @@ import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
 import { buildQueryParamString } from "../../utils/SearchParams";
 import CountryRankingsPage from "./CountryRankingsPage";
+import ContributionsPage from "./contributionsPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -44,6 +45,10 @@ export const Pages: PageMap = {
   Matchup: {
     path: "/matchup/:id1/:id2",
     element: <MatchupPage />,
+  },
+  Contribute: {
+    path: "/contribute",
+    element: <ContributionsPage />,
   },
   PlayerList: {
     path: "/players",

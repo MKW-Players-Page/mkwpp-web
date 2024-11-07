@@ -19,6 +19,16 @@ export enum Language {
   Spanish = "es",
 }
 
+export enum LanguageName {
+  Italian = "Italiano",
+  English = "English",
+  French = "Français",
+  German = "Deutsch",
+  Japanese = "日本語",
+  Portuguese = "Português",
+  Spanish = "Español",
+}
+
 /** Get selected language from localStorage. */
 export const getLang = (): Language => {
   return (window.localStorage.getItem("langCode") ??
@@ -66,13 +76,33 @@ export const LanguageDropdown = () => {
             {
               id: 0,
               children: [
-                [Language.English, "English", <Flag flag={"gb" as keyof typeof Flags} />],
-                [Language.Italian, "Italiano", <Flag flag={"it" as keyof typeof Flags} />],
-                [Language.French, "Français", <Flag flag={"fr" as keyof typeof Flags} />],
-                [Language.German, "Deutsch", <Flag flag={"de" as keyof typeof Flags} />],
-                [Language.Japanese, "日本語", <Flag flag={"jp" as keyof typeof Flags} />],
-                [Language.Portuguese, "Português", <Flag flag={"pt" as keyof typeof Flags} />],
-                [Language.Spanish, "Español", <Flag flag={"es" as keyof typeof Flags} />],
+                [
+                  Language.English,
+                  LanguageName.English,
+                  <Flag flag={"gb" as keyof typeof Flags} />,
+                ],
+                [
+                  Language.Italian,
+                  LanguageName.Italian,
+                  <Flag flag={"it" as keyof typeof Flags} />,
+                ],
+                [Language.French, LanguageName.French, <Flag flag={"fr" as keyof typeof Flags} />],
+                [Language.German, LanguageName.German, <Flag flag={"de" as keyof typeof Flags} />],
+                [
+                  Language.Japanese,
+                  LanguageName.Japanese,
+                  <Flag flag={"jp" as keyof typeof Flags} />,
+                ],
+                [
+                  Language.Portuguese,
+                  LanguageName.Portuguese,
+                  <Flag flag={"pt" as keyof typeof Flags} />,
+                ],
+                [
+                  Language.Spanish,
+                  LanguageName.Spanish,
+                  <Flag flag={"es" as keyof typeof Flags} />,
+                ],
               ].map(([value, text, rightIcon]) => {
                 return {
                   type: "DropdownItemData",
