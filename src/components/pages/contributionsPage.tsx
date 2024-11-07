@@ -117,7 +117,10 @@ const ContributionsPage = () => {
           <p>{translations.contributionsPageLanguageCompletionThanksText[lang]}</p>
           <ul style={{ listStyleType: "disc" } as React.CSSProperties}>
             {[
-              { player: <PlayerMention id={918} />, langs: [LanguageName.Italian, LanguageName.English] },
+              {
+                player: <PlayerMention id={918} />,
+                langs: [LanguageName.Italian, LanguageName.English],
+              },
               { player: <PlayerMention id={1165} />, langs: [LanguageName.English] },
             ].map((credit) => (
               <li>
@@ -149,6 +152,11 @@ const ContributionsPage = () => {
             {handleBars(translations.contributionsPageSpecialCreditsPenevParagraph[lang], [
               ["Penev", <PlayerMention id={58} />],
             ])}
+          </p>
+          <p>
+            {translations.contributionsPageSpecialCreditsUpdatersParagraph[lang]}{" "}
+            <PlayerMention id={1167} />, <PlayerMention id={145} />, <PlayerMention id={630} />,{" "}
+            <PlayerMention id={144} />, <PlayerMention id={1588} />, <PlayerMention id={1372} />
           </p>
         </div>
       </div>

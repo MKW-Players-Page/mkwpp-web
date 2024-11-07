@@ -17,7 +17,7 @@ const PlayerMention = ({ id }: PlayerMentionProps) => {
     [id, metadata],
   );
 
-  if (metadata.isLoading || isLoading) return <>err</>;
+  if (metadata.isLoading || isLoading) return <>Loading..</>;
 
   return (
     <Link to={resolvePage(Pages.PlayerProfile, { id })}>
