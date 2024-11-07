@@ -10394,6 +10394,42 @@
     "pt": "",
     "es": ""
   },
+  "contributionsPageFeatureRoadmapTimelineFilterHeading": {
+    "it": "Filtro a Linea Temporale",
+    "en": "Timeline Filter",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRoadmapTimelineFilterParagraph": {
+    "it": "Un tentativo di replicare il filtro omonimo trovato sulle classifiche di {{TMX}}.",
+    "en": "An attempt at replicating the Timeline Filter found on leaderboard pages on {{TMX}}.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRoadmapFurtherSubregionsHeading": {
+    "it": "Più Sottoregioni",
+    "en": "More Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRoadmapFurtherSubregionsParagraph": {
+    "it": "Dovremmo aggiungere regioni alle varie nazioni sul Sito, come gli Stati degli USA, o i cantoni Svizzeri.",
+    "en": "We should add regions to the various countries on the Site, such as US States, or Swiss Cantons.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "contributionsPageOngoingDevelopmentHeading": {
     "it": "Sviluppo in corso",
     "en": "Ongoing Feature Development",
@@ -10406,6 +10442,15 @@
   "contributionsPageDevelopedCreditsHeading": {
     "it": "Feature completate",
     "en": "Developed Features",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeautreSuggestedBy": {
+    "it": "Consigliato da:",
+    "en": "Suggested by:",
     "fr": "",
     "de": "",
     "jp": "",

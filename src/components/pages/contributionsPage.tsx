@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { handleBars, I18nContext, Language, LanguageName } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -134,6 +135,28 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageFeatureRoadmapHeading[lang]}</h2>
+          <FeatureElement
+            title={translations.contributionsPageFeatureRoadmapTimelineFilterHeading[lang]}
+            description={handleBars(
+              translations.contributionsPageFeatureRoadmapTimelineFilterParagraph[lang],
+              [
+                [
+                  "TMX",
+                  <Link target="_blank" to="//tmuf.exchange/trackreplayshow/37085">
+                    TMX
+                  </Link>,
+                ],
+              ],
+            )}
+            suggestedBy={[918]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureRoadmapFurtherSubregionsHeading[lang]}
+            description={
+              <>{translations.contributionsPageFeatureRoadmapFurtherSubregionsParagraph[lang]}</>
+            }
+            suggestedBy={[1165, 918]}
+          />
         </div>
       </div>
       <div className="module">
@@ -162,6 +185,40 @@ const ContributionsPage = () => {
         </div>
       </div>
     </>
+  );
+};
+
+interface FeatureProps {
+  title?: string;
+  description?: JSX.Element;
+  images?: JSX.Element;
+  suggestedBy?: number[];
+}
+
+const FeatureElement = ({ title, description, images, suggestedBy }: FeatureProps) => {
+  const { translations, lang } = useContext(I18nContext);
+  return (
+    <div>
+      <h3>{title}</h3>
+      <div>{description}</div>
+      {images}
+      {suggestedBy ? (
+        <div
+          style={
+            { marginTop: "10px", marginBottom: "10px", fontSize: ".75em" } as React.CSSProperties
+          }
+        >
+          <div>{translations.contributionsPageFeautreSuggestedBy[lang]}</div>
+          {suggestedBy.map((r) => (
+            <div>
+              <PlayerMention id={r} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 };
 
