@@ -6,6 +6,7 @@ import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
 import { loginUser, UserContext } from "../../../utils/User";
 import Form, { Field } from "../../widgets/Form";
+import { I18nContext } from "../../../utils/i18n/i18n";
 
 interface UserLoginState {
   username: string;
@@ -18,6 +19,7 @@ const UserLoginPage = () => {
   const navigate = useNavigate();
 
   const { user, setUser } = useContext(UserContext);
+  const { translations, lang } = useContext(I18nContext);
 
   const initialState = { username: "", password: "", errors: {}, submitting: false };
   const [state, setState] = useState<UserLoginState>(initialState);
@@ -46,9 +48,19 @@ const UserLoginPage = () => {
     <>
       {/* Redirect users to home page if they are already logged in. */}
       {user && <Navigate to={resolvePage(Pages.Home)} />}
-      <Form state={state} setState={setState} title="Log In" submitLabel="Log In" submit={submit}>
-        <Field type="text" field="username" label="Username" />
-        <Field type="password" field="password" label="Password" />
+      <Form
+        state={state}
+        setState={setState}
+        title={translations.userLoginPageFormLabel[lang]}
+        submitLabel={translations.userLoginPageFormLabelSubmitButton[lang]}
+        submit={submit}
+      >
+        <Field type="text" field="username" label={translations.userLoginPageUsernameLabel[lang]} />
+        <Field
+          type="password"
+          field="password"
+          label={translations.userLoginPagePasswordLabel[lang]}
+        />
       </Form>
     </>
   );
