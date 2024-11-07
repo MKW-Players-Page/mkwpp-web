@@ -9971,6 +9971,42 @@
     "pt": "",
     "es": ""
   },
+  "userJoinPageSuccessHeading": {
+    "it": "Account Creato",
+    "en": "Account Created",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageParagraph1": {
+    "it": "Il tuo account è stato creato con successo! Una email di verifica è stata mandata all'indirizzo inserito.",
+    "en": "Your account has been successfully created! A verification email has been sent to the address you provided.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageParagraph2": {
+    "it": "Il link d'attivazione del tuo account scadrà tra 48 ore. Assicurati di seguirlo prima della scadenza, altrimenti dovrai ricreare l'account!",
+    "en": "The activation link for your account will expire in 48 hours. Make sure to follow it before then, as you will have to recreate your account otherwise!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userJoinPageParagraph3": {
+    "it": "Grazie per esserti registrato alla Players' Page!",
+    "en": "Thank you for joining the Players' Page!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "userLoginPageFormLabel": {
     "it": "Entra",
     "en": "Log in",

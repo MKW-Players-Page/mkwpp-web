@@ -95,20 +95,15 @@ const UserJoinPage = () => {
 };
 
 export const UserJoinSuccessPage = () => {
+  const { translations, lang } = useContext(I18nContext);
   return (
     <>
-      <h1>Account Created</h1>
+      <h1>{translations.userJoinPageSuccessHeading[lang]}</h1>
       <div className="module">
         <div className="module-content">
-          <p>
-            Your account has been successfully created! A verification email has been sent to the
-            address you provided.
-          </p>
-          <p>
-            The activation link for your account will expire in 48 hours. Make sure to follow it
-            before then, as you will have to recreate your account otherwise!
-          </p>
-          <p>Thank you for joining the Players' Page!</p>
+          <p>{translations.userJoinPageParagraph1[lang]}</p>
+          <p>{translations.userJoinPageParagraph2[lang]}</p>
+          <p>{translations.userJoinPageParagraph3[lang]}</p>
         </div>
       </div>
     </>
