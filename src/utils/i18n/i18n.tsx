@@ -7,6 +7,7 @@ import i18nJson from "./i18n.json";
 import Flag, { Flags } from "../../components/widgets/Flags";
 
 export type TranslationKey = keyof typeof i18nJson;
+export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
 
 export enum Language {
   Italian = "it",
@@ -30,7 +31,7 @@ export const getLang = (): Language => {
 export interface I18nContextType {
   lang: Language;
   setLang: (lang: Language, cb: React.Dispatch<React.SetStateAction<Language>>) => void;
-  translations: Record<TranslationKey, Record<Language, string>>;
+  translations: TranslationJson;
 }
 
 export const I18nContext = createContext<I18nContextType>({

@@ -206,7 +206,7 @@ const PlayerProfilePage = () => {
                           return {
                             type: "DropdownItemData",
                             element: {
-                              text: region.name,
+                              text: translations[`constantRegion${region.code}` as TranslationKey][lang],
                               value: region,
                               rightIcon: (
                                 <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
@@ -230,7 +230,7 @@ const PlayerProfilePage = () => {
                 <tbody>
                   <tr>
                     <td>{translations.playerProfilePageLocation[lang]}</td>
-                    <td>{getRegionNameFull(metadata, player?.region ?? 0)}</td>
+                    <td>{getRegionNameFull(metadata, translations, lang, player?.region ?? 0)}</td>
                   </tr>
                   <tr>
                     <td>{translations.playerProfilePageAlias[lang]}</td>
