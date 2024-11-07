@@ -27,8 +27,8 @@ const Header = () => {
               <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
                 {user.username}
               </Link>
-              <Link to={resolvePage(Pages.Submission)}>{translations.headerLogOut[lang]}</Link>
-              <button onClick={onLogout}>{translations.headerLogOut[lang]}</button>
+              <Link to={resolvePage(Pages.Submission)}>{translations.headerSubmit[lang]}</Link>
+              <Link onClick={onLogout} to="">{translations.headerLogOut[lang]}</Link>
             </>
           ) : (
             <>
