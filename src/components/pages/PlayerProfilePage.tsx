@@ -206,7 +206,9 @@ const PlayerProfilePage = () => {
                           return {
                             type: "DropdownItemData",
                             element: {
-                              text: translations[`constantRegion${region.code}` as TranslationKey][lang],
+                              text: translations[`constantRegion${region.code}` as TranslationKey][
+                                lang
+                              ],
                               value: region,
                               rightIcon: (
                                 <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />

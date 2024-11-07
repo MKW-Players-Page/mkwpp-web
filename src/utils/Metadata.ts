@@ -61,7 +61,12 @@ export const getRegionById = (metadata: Metadata, regionId: number) => {
  * @param regionId The id of the region
  * @returns The full name of the region, or `undefined` if no region with the given id exists.
  */
-export const getRegionNameFull = (metadata: Metadata, translations: TranslationJson, lang: Language, regionId: number) => {
+export const getRegionNameFull = (
+  metadata: Metadata,
+  translations: TranslationJson,
+  lang: Language,
+  regionId: number,
+) => {
   const region = getRegionById(metadata, regionId);
   if (!region) {
     return undefined;
