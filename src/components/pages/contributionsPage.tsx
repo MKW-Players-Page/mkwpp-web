@@ -178,14 +178,6 @@ const ContributionsPage = () => {
         <div className="module-content">
           <h2>{translations.contributionsPageOngoingDevelopmentHeading[lang]}</h2>
           <FeatureElement
-            title={translations.contributionsPageFeatureContributionsPageHeading[lang]}
-            description={
-              <>{translations.contributionsPageFeatureContributionsPageParagraph[lang]}</>
-            }
-            suggestedBy={[918]}
-            workedOnBy={[918]}
-          />
-          <FeatureElement
             title={translations.contributionsPageFeatureAwardsHeading[lang]}
             description={<>{translations.contributionsPageFeatureAwardsParagraph[lang]}</>}
             workedOnBy={[1165]}
@@ -210,6 +202,14 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageDevelopedCreditsHeading[lang]}</h2>
+          <FeatureElement
+            title={translations.contributionsPageFeatureContributionsPageHeading[lang]}
+            description={
+              <>{translations.contributionsPageFeatureContributionsPageParagraph[lang]}</>
+            }
+            suggestedBy={[918]}
+            workedOnBy={[918]}
+          />
           <FeatureElement
             title={translations.contributionsPageFeatureLocalizationHeading[lang]}
             description={<>{translations.contributionsPageFeatureLocalizationParagraph[lang]}</>}
