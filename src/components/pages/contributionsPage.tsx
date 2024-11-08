@@ -229,20 +229,20 @@ const ContributionsPage = () => {
             suggestedBy={[144]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRegionSelectionHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRegionSelectionParagraph[lang]}</>}
-            suggestedBy={[918]}
-            workedOnBy={[918]}
-          />
-          <FeatureElement
             title={translations.contributionsPageFeatureTallyPointsHeading[lang]}
             description={<>{translations.contributionsPageFeatureTallyPointsParagraph[lang]}</>}
             suggestedBy={[1165, 630, 144]}
             workedOnBy={[1165, 918, 1167]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureTallyPointsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureTallyPointsParagraph[lang]}</>}
+            title={translations.contributionsPageFeatureRegionSelectionHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRegionSelectionParagraph[lang]}</>}
+            suggestedBy={[918]}
+            workedOnBy={[918]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureSubmissionHeading[lang]}
+            description={<>{translations.contributionsPageFeatureSubmissionParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
@@ -253,6 +253,11 @@ const ContributionsPage = () => {
           <FeatureElement
             title={translations.contributionsPageFeaturePlayersHeading[lang]}
             description={<>{translations.contributionsPageFeaturePlayersParagraph[lang]}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureLoginHeading[lang]}
+            description={<>{translations.contributionsPageFeatureLoginParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement

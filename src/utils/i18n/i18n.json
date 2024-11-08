@@ -10772,6 +10772,42 @@
     "pt": "",
     "es": ""
   },
+  "contributionsPageFeatureLoginHeading": {
+    "it": "Sistema di account",
+    "en": "Account system",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureLoginParagraph": {
+    "it": "Un sistema che permette agli user di registrarsi ed entrare, permettendo così interattività permanente.",
+    "en": "A system that allows for users to register and log in, allowing for interactivity that is permanent.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureSubmissionHeading": {
+    "it": "Sistema di caricamento tempi",
+    "en": "Submission system",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureSubmissionParagraph": {
+    "it": "Un sistema che permette agli user registrati di caricare tempi a proprio nome.",
+    "en": "A system that allows for registered users to submit times directly.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "contributionsPageOngoingDevelopmentHeading": {
     "it": "Sviluppo in corso",
     "en": "Ongoing Feature Development",
