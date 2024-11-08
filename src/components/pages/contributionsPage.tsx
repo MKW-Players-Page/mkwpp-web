@@ -158,8 +158,8 @@ const ContributionsPage = () => {
             suggestedBy={[1165, 918]}
           />
           <FeatureElement
-            title={"Port Rivalries"}
-            description={<>{"Port Rivalries from the Old Site"}</>}
+            title={translations.contributionsPageFeatureRivalriesHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
           />
         </div>
       </div>
@@ -175,13 +175,13 @@ const ContributionsPage = () => {
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={"Port Awards"}
-            description={<>{"Port Awards from the Old Site"}</>}
+            title={translations.contributionsPageFeatureAwardsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureAwardsParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={"Port Past Champions"}
-            description={<>{"Port Past Champions from the Old Site"}</>}
+            title={translations.contributionsPageFeaturePastChampsHeading[lang]}
+            description={<>{translations.contributionsPageFeaturePastChampsParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
         </div>
@@ -190,85 +190,83 @@ const ContributionsPage = () => {
         <div className="module-content">
           <h2>{translations.contributionsPageDevelopedCreditsHeading[lang]}</h2>
           <FeatureElement
-            title={"Localization"}
-            description={<>{"Allow for pages to have multiple languages"}</>}
+            title={translations.contributionsPageFeatureLocalizationHeading[lang]}
+            description={<>{translations.contributionsPageFeatureLocalizationParagraph[lang]}</>}
             workedOnBy={[1165, 918]}
             suggestedBy={[1165, 918]}
           />
           <FeatureElement
-            title={"Filters on Player Profile Charts"}
-            description={
-              <>{"Sort the chart on Player Profiles by clicking on the table headings"}</>
-            }
+            title={translations.contributionsPageFeatureProfileFiltersHeading[lang]}
+            description={<>{translations.contributionsPageFeatureProfileFiltersParagraph[lang]}</>}
             workedOnBy={[918]}
             suggestedBy={[918, 144]}
           />
           <FeatureElement
-            title={"Port Country AF"}
-            description={<>{"Port Country AF from the Old Site"}</>}
+            title={translations.contributionsPageFeatureCountryAFHeading[lang]}
+            description={<>{translations.contributionsPageFeatureCountryAFParagraph[lang]}</>}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={"Port Matchups"}
-            description={<>{"Port Matchups from the Old Site"}</>}
+            title={translations.contributionsPageFeatureMatchupsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureMatchupsParagraph[lang]}</>}
             workedOnBy={[1165, 918]}
           />
           <FeatureElement
-            title={"Custom dropdowns"}
-            description={<>{"Create Custom Dropdowns"}</>}
+            title={translations.contributionsPageFeatureCustomDropdownsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureCustomDropdownsParagraph[lang]}</>}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={"Rules Page"}
-            description={<>{"Port Rules from old Site and update them."}</>}
+            title={translations.contributionsPageFeatureRulesPageHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRulesPageParagraph[lang]}</>}
             workedOnBy={[918, 145]}
           />
           <FeatureElement
-            title={"Visually indicate Category"}
-            description={<>{"Change the hue of the site based on the page's category"}</>}
+            title={translations.contributionsPageFeatureCategoryHueHeading[lang]}
+            description={<>{translations.contributionsPageFeatureCategoryHueParagraph[lang]}</>}
             workedOnBy={[918, 1165]}
             suggestedBy={[144]}
           />
           <FeatureElement
-            title={"Region Selection"}
-            description={<>{"Create a custom Region Selection for the Top 10s page"}</>}
+            title={translations.contributionsPageFeatureRegionSelectionHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRegionSelectionParagraph[lang]}</>}
             suggestedBy={[918]}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={"Tally Points Rankings"}
-            description={<>{"Mimick Tally Points from MKL"}</>}
+            title={translations.contributionsPageFeatureTallyPointsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureTallyPointsParagraph[lang]}</>}
             suggestedBy={[1165, 630, 144]}
             workedOnBy={[1165, 918, 1167]}
           />
           <FeatureElement
-            title={"Port Standards"}
-            description={<>{"Port Standards from the Old Site"}</>}
+            title={translations.contributionsPageFeatureTallyPointsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureTallyPointsParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={"Top 10s"}
-            description={<>{"Mimick Top 10s from MKL"}</>}
+            title={translations.contributionsPageFeatureTopsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureTopsParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={"Port Players"}
-            description={<>{"Port Players from the Old Site"}</>}
+            title={translations.contributionsPageFeaturePlayersHeading[lang]}
+            description={<>{translations.contributionsPageFeaturePlayersParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={"Port Rankings"}
-            description={<>{"Port Rankings from the Old Site, AF, ARR, PRWR, Total Time"}</>}
+            title={translations.contributionsPageFeatureRankingsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRankingsParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={"Port Charts"}
-            description={<>{"Port Charts from the Old Site"}</>}
+            title={translations.contributionsPageFeatureChartsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureChartsParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={"New Site!"}
-            description={<>{"Begin work on a new site"}</>}
+            title={translations.contributionsPageFeatureSiteHeading[lang]}
+            description={<>{translations.contributionsPageFeatureSiteParagraph[lang]}</>}
             workedOnBy={[1165]}
           />
         </div>
@@ -321,7 +319,7 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
       >
         {workedOnBy ? (
           <div>
-            <div>{translations.contributionsPageFeautreWorkedOnBy[lang]}</div>
+            <div>{translations.contributionsPageFeatureWorkedOnBy[lang]}</div>
             {workedOnBy.map((r) => (
               <div>
                 <PlayerMention id={r} />
@@ -333,7 +331,7 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
         )}
         {suggestedBy ? (
           <div>
-            <div>{translations.contributionsPageFeautreSuggestedBy[lang]}</div>
+            <div>{translations.contributionsPageFeatureSuggestedBy[lang]}</div>
             {suggestedBy.map((r) => (
               <div>
                 <PlayerMention id={r} />

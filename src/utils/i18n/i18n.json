@@ -10448,6 +10448,330 @@
     "pt": "",
     "es": ""
   },
+  "contributionsPageFeatureRivalriesHeading": {
+    "it": "Porting delle Rivalries",
+    "en": "Port Rivalries",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRivalriesParagraph": {
+    "it": "Porting delle Rivalries dal vecchio Sito.",
+    "en": "Port Rivalries from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureAwardsHeading": {
+    "it": "Porting degli Awards",
+    "en": "Port Awards",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureAwardsParagraph": {
+    "it": "Porting degli Awards dal vecchio Sito.",
+    "en": "Port Awards from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeaturePastChampsHeading": {
+    "it": "Porting dei Past Champions",
+    "en": "Port Past Champions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeaturePastChampsParagraph": {
+    "it": "Porting dei Past Champions dal vecchio Sito.",
+    "en": "Port Past Champions from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureLocalizationHeading": {
+    "it": "Localizzazione",
+    "en": "Localization",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureLocalizationParagraph": {
+    "it": "Permette al sito di avere più lingue.",
+    "en": "Allow for pages to have multiple languages.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureProfileFiltersHeading": {
+    "it": "Filtro sulla Chart dei Profili.",
+    "en": "Filters on Player Profile Charts.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureProfileFiltersParagraph": {
+    "it": "Filtri per riordinare la chart dei Profili dei Player cliccando sugli heading delle table.",
+    "en": "Sort the chart on Player Profiles by clicking on the table headings.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureCountryAFHeading": {
+    "it": "Porting del Country AF",
+    "en": "Port Country AF",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureCountryAFParagraph": {
+    "it": "Porting del Country AF dal vecchio Sito.",
+    "en": "Port Country AF from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureMatchupsHeading": {
+    "it": "Porting dei Matchups",
+    "en": "Port Matchups",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureMatchupsParagraph": {
+    "it": "Porting dei Matchups dal vecchio Sito.",
+    "en": "Port Matchups from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureCustomDropdownsHeading": {
+    "it": "Dropdown Personalizzato",
+    "en": "Custom Dropdowns",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureCustomDropdownsParagraph": {
+    "it": "Creazione d'un Dropdown personalizzato da usare sull'intero sito, rimpiazzando l'elemento <select> in HTML.",
+    "en": "Create Custom Dropdowns for use all over the site, replacing HTML <select> elements.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRulesPageHeading": {
+    "it": "Pagina delle Regole",
+    "en": "Rules Page",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRulesPageParagraph": {
+    "it": "Porting delle Regole dal vecchio Sito.",
+    "en": "Port Rules from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureCategoryHueHeading": {
+    "it": "Indicatore visuale della Categoria",
+    "en": "Visually indicate Category",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureCategoryHueParagraph": {
+    "it": "Cambiamento della tinta del sito in base alla Categoria selezionata nella pagina.",
+    "en": "Change the hue of the site based on the page's category.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRegionSelectionHeading": {
+    "it": "Selezione Regioni",
+    "en": "Region Selection",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRegionSelectionParagraph": {
+    "it": "Creazione d'un selettore personalizzato per la pagina delle Top 10",
+    "en": "Create a custom Region Selection for the Top 10s page.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureTallyPointsHeading": {
+    "it": "Conteggio Punti",
+    "en": "Tally Points Rankings",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureTallyPointsParagraph": {
+    "it": "Ricreazione del Conteggio Punti di MKL.",
+    "en": "Mimick Tally Points from MKL.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureStandardsHeading": {
+    "it": "Porting degli Standards",
+    "en": "Port Standards",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureStandardsParagraph": {
+    "it": "Porting degli Standard dal vecchio Sito",
+    "en": "Port Standards from the old Site",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeaturePlayersHeading": {
+    "it": "Porting dei Player",
+    "en": "Port Players",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeaturePlayersParagraph": {
+    "it": "Porting dei Player dal vecchio Sito. Sia la Lista Player che i Profili.",
+    "en": "Port Players from the Old Site. Both the Player List and the Player Profiles.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRankingsHeading": {
+    "it": "Porting dei Rankings",
+    "en": "Port Rankings",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRankingsParagraph": {
+    "it": "Porting dei Rankings dal vecchio Sito: AF, ARR, PRWR, Tempo Totale.",
+    "en": "Port Rankings from the Old Site: AF, ARR, PRWR, Total Time.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureTopsHeading": {
+    "it": "Top 10",
+    "en": "Top 10s",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureTopsParagraph": {
+    "it": "Ricreazione delle Top 10 di MKL.",
+    "en": "Mimick Top 10s from MKL.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureChartsHeading": {
+    "it": "Porting delle Chart",
+    "en": "Port Charts",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureChartsParagraph": {
+    "it": "Porting delle Chart dal vecchio Sito.",
+    "en": "Port Charts from the Old Site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureSiteHeading": {
+    "it": "Nuovo Sito!",
+    "en": "New Site!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureSiteParagraph": {
+    "it": "Inizio dei lavori sul nuovo sito.",
+    "en": "Begin work on a new site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "contributionsPageOngoingDevelopmentHeading": {
     "it": "Sviluppo in corso",
     "en": "Ongoing Feature Development",
@@ -10466,7 +10790,7 @@
     "pt": "",
     "es": ""
   },
-  "contributionsPageFeautreWorkedOnBy": {
+  "contributionsPageFeatureWorkedOnBy": {
     "it": "Contribuenti:",
     "en": "Worked on by:",
     "fr": "",
@@ -10475,7 +10799,7 @@
     "pt": "",
     "es": ""
   },
-  "contributionsPageFeautreSuggestedBy": {
+  "contributionsPageFeatureSuggestedBy": {
     "it": "Consigliato da:",
     "en": "Suggested by:",
     "fr": "",
