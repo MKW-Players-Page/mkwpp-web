@@ -10808,6 +10808,60 @@
     "pt": "",
     "es": ""
   },
+  "contributionsPageFeatureUserSettingsHeading": {
+    "it": "Impostazioni Utente",
+    "en": "User Settings",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureUserSettingsParagraph": {
+    "it": "Impostazioni per aggiornare la biografia, l'alias e la password.",
+    "en": "Settings like a way to update your bio, alias and password.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureSvgFlagsHeading": {
+    "it": "Bandiere Nazionali",
+    "en": "Country Flags",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureSvgFlagsParagraph": {
+    "it": "Stiamo cercando simboli e bandiere che possano simboleggiare le nazioni (e regioni) che non ne hanno già.",
+    "en": "We are looking for symbols and flags that could possibly symbolize the countries (and regions) that don't have them already.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRustBackendHeading": {
+    "it": "Backend in Rust",
+    "en": "Rust Backend",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureRustBackendParagraph": {
+    "it": "Riscriveremo il Backend (che è al momento in Python+Django) in Rust, permettendo così per una performance del sito maggiore.",
+    "en": "We'll be rewriting the Backend (that is currently in Python+Django) in Rust, allowing for much faster site performance.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "contributionsPageOngoingDevelopmentHeading": {
     "it": "Sviluppo in corso",
     "en": "Ongoing Feature Development",

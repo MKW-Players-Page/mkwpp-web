@@ -162,6 +162,16 @@ const ContributionsPage = () => {
             title={translations.contributionsPageFeatureRivalriesHeading[lang]}
             description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
           />
+          <FeatureElement
+            title={translations.contributionsPageFeatureUserSettingsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureUserSettingsParagraph[lang]}</>}
+            suggestedBy={[1165]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureRustBackendHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRustBackendParagraph[lang]}</>}
+            suggestedBy={[918]}
+          />
         </div>
       </div>
       <div className="module">
@@ -183,7 +193,17 @@ const ContributionsPage = () => {
           <FeatureElement
             title={translations.contributionsPageFeaturePastChampsHeading[lang]}
             description={<>{translations.contributionsPageFeaturePastChampsParagraph[lang]}</>}
+            workedOnBy={[1165, 1167]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureSubmissionHeading[lang]}
+            description={<>{translations.contributionsPageFeatureSubmissionParagraph[lang]}</>}
             workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureSvgFlagsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureSvgFlagsParagraph[lang]}</>}
+            workedOnBy={[1165, 918, 144]}
           />
         </div>
       </div>
@@ -239,11 +259,6 @@ const ContributionsPage = () => {
             description={<>{translations.contributionsPageFeatureRegionSelectionParagraph[lang]}</>}
             suggestedBy={[918]}
             workedOnBy={[918]}
-          />
-          <FeatureElement
-            title={translations.contributionsPageFeatureSubmissionHeading[lang]}
-            description={<>{translations.contributionsPageFeatureSubmissionParagraph[lang]}</>}
-            workedOnBy={[1165]}
           />
           <FeatureElement
             title={translations.contributionsPageFeatureTopsHeading[lang]}
