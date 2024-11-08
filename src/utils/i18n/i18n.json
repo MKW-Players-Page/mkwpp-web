@@ -10394,7 +10394,7 @@
     "pt": "",
     "es": ""
   },
-  "contributionsPageFeatureRoadmapTimelineFilterHeading": {
+  "contributionsPageFeatureTimelineFilterHeading": {
     "it": "Filtro a Linea Temporale",
     "en": "Timeline Filter",
     "fr": "",
@@ -10403,7 +10403,7 @@
     "pt": "",
     "es": ""
   },
-  "contributionsPageFeatureRoadmapTimelineFilterParagraph": {
+  "contributionsPageFeatureTimelineFilterParagraph": {
     "it": "Un tentativo di replicare il filtro omonimo trovato sulle classifiche di {{TMX}}.",
     "en": "An attempt at replicating the Timeline Filter found on leaderboard pages on {{TMX}}.",
     "fr": "",
@@ -10412,7 +10412,7 @@
     "pt": "",
     "es": ""
   },
-  "contributionsPageFeatureRoadmapFurtherSubregionsHeading": {
+  "contributionsPageFeatureFurtherSubregionsHeading": {
     "it": "Più Sottoregioni",
     "en": "More Subregions",
     "fr": "",
@@ -10421,9 +10421,27 @@
     "pt": "",
     "es": ""
   },
-  "contributionsPageFeatureRoadmapFurtherSubregionsParagraph": {
+  "contributionsPageFeatureFurtherSubregionsParagraph": {
     "it": "Dovremmo aggiungere regioni alle varie nazioni sul Sito, come gli Stati degli USA, o i cantoni Svizzeri.",
     "en": "We should add regions to the various countries on the Site, such as US States, or Swiss Cantons.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureContributionsPageHeading": {
+    "it": "La Pagina delle Contribuzioni.",
+    "en": "The Contributions Page.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureContributionsPageParagraph": {
+    "it": "Una pagina fatta per aiutarti ad aiutarci comunicando cosa vogliamo aggiungere e come ci puoi aiutare a farlo.",
+    "en": "A page meant to help you help us by communicating what we want to add and how you can help doing so.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -10442,6 +10460,15 @@
   "contributionsPageDevelopedCreditsHeading": {
     "it": "Feature completate",
     "en": "Developed Features",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeautreWorkedOnBy": {
+    "it": "Contribuenti:",
+    "en": "Worked on by:",
     "fr": "",
     "de": "",
     "jp": "",

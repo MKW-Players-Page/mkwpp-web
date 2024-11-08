@@ -4,7 +4,7 @@ import api from "../../api";
 import { useApi } from "../../hooks";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
-import { FlagIcon } from "./Icon";
+import Flag, { Flags } from "./Flags";
 
 export interface PlayerMentionProps {
   id: number;
@@ -18,7 +18,15 @@ const PlayerMention = ({ id }: PlayerMentionProps) => {
 
   return (
     <Link to={resolvePage(Pages.PlayerProfile, { id })}>
-      <FlagIcon region={getRegionById(metadata, player?.region ?? 1)} />
+      {player?.region !== undefined && player?.region !== null ? (
+        <span className="flag-icon" style={{ width: "24px" } as React.CSSProperties}>
+          <Flag
+            flag={getRegionById(metadata, player?.region)?.code.toLowerCase() as keyof typeof Flags}
+          />
+        </span>
+      ) : (
+        <></>
+      )}
       {player?.alias ?? player?.name}
     </Link>
   );

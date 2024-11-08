@@ -136,9 +136,9 @@ const ContributionsPage = () => {
         <div className="module-content">
           <h2>{translations.contributionsPageFeatureRoadmapHeading[lang]}</h2>
           <FeatureElement
-            title={translations.contributionsPageFeatureRoadmapTimelineFilterHeading[lang]}
+            title={translations.contributionsPageFeatureTimelineFilterHeading[lang]}
             description={handleBars(
-              translations.contributionsPageFeatureRoadmapTimelineFilterParagraph[lang],
+              translations.contributionsPageFeatureTimelineFilterParagraph[lang],
               [
                 [
                   "TMX",
@@ -151,22 +151,126 @@ const ContributionsPage = () => {
             suggestedBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRoadmapFurtherSubregionsHeading[lang]}
+            title={translations.contributionsPageFeatureFurtherSubregionsHeading[lang]}
             description={
-              <>{translations.contributionsPageFeatureRoadmapFurtherSubregionsParagraph[lang]}</>
+              <>{translations.contributionsPageFeatureFurtherSubregionsParagraph[lang]}</>
             }
             suggestedBy={[1165, 918]}
+          />
+          <FeatureElement
+            title={"Port Rivalries"}
+            description={<>{"Port Rivalries from the Old Site"}</>}
           />
         </div>
       </div>
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageOngoingDevelopmentHeading[lang]}</h2>
+          <FeatureElement
+            title={translations.contributionsPageFeatureContributionsPageHeading[lang]}
+            description={
+              <>{translations.contributionsPageFeatureContributionsPageParagraph[lang]}</>
+            }
+            suggestedBy={[918]}
+            workedOnBy={[918]}
+          />
+          <FeatureElement
+            title={"Port Awards"}
+            description={<>{"Port Awards from the Old Site"}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={"Port Past Champions"}
+            description={<>{"Port Past Champions from the Old Site"}</>}
+            workedOnBy={[1165]}
+          />
         </div>
       </div>
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageDevelopedCreditsHeading[lang]}</h2>
+          <FeatureElement
+            title={"Localization"}
+            description={<>{"Allow for pages to have multiple languages"}</>}
+            workedOnBy={[1165, 918]}
+            suggestedBy={[1165, 918]}
+          />
+          <FeatureElement
+            title={"Filters on Player Profile Charts"}
+            description={
+              <>{"Sort the chart on Player Profiles by clicking on the table headings"}</>
+            }
+            workedOnBy={[918]}
+            suggestedBy={[918, 144]}
+          />
+          <FeatureElement
+            title={"Port Country AF"}
+            description={<>{"Port Country AF from the Old Site"}</>}
+            workedOnBy={[918]}
+          />
+          <FeatureElement
+            title={"Port Matchups"}
+            description={<>{"Port Matchups from the Old Site"}</>}
+            workedOnBy={[1165, 918]}
+          />
+          <FeatureElement
+            title={"Custom dropdowns"}
+            description={<>{"Create Custom Dropdowns"}</>}
+            workedOnBy={[918]}
+          />
+          <FeatureElement
+            title={"Rules Page"}
+            description={<>{"Port Rules from old Site and update them."}</>}
+            workedOnBy={[918, 145]}
+          />
+          <FeatureElement
+            title={"Visually indicate Category"}
+            description={<>{"Change the hue of the site based on the page's category"}</>}
+            workedOnBy={[918, 1165]}
+            suggestedBy={[144]}
+          />
+          <FeatureElement
+            title={"Region Selection"}
+            description={<>{"Create a custom Region Selection for the Top 10s page"}</>}
+            suggestedBy={[918]}
+            workedOnBy={[918]}
+          />
+          <FeatureElement
+            title={"Tally Points Rankings"}
+            description={<>{"Mimick Tally Points from MKL"}</>}
+            suggestedBy={[1165, 630, 144]}
+            workedOnBy={[1165, 918, 1167]}
+          />
+          <FeatureElement
+            title={"Port Standards"}
+            description={<>{"Port Standards from the Old Site"}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={"Top 10s"}
+            description={<>{"Mimick Top 10s from MKL"}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={"Port Players"}
+            description={<>{"Port Players from the Old Site"}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={"Port Rankings"}
+            description={<>{"Port Rankings from the Old Site, AF, ARR, PRWR, Total Time"}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={"Port Charts"}
+            description={<>{"Port Charts from the Old Site"}</>}
+            workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={"New Site!"}
+            description={<>{"Begin work on a new site"}</>}
+            workedOnBy={[1165]}
+          />
         </div>
       </div>
       <div className="module">
@@ -192,32 +296,54 @@ interface FeatureProps {
   title?: string;
   description?: JSX.Element;
   images?: JSX.Element;
+  workedOnBy?: number[];
   suggestedBy?: number[];
 }
 
-const FeatureElement = ({ title, description, images, suggestedBy }: FeatureProps) => {
+const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }: FeatureProps) => {
   const { translations, lang } = useContext(I18nContext);
   return (
     <div>
+      <hr style={{ width: "100%" } as React.CSSProperties} />
       <h3>{title}</h3>
       <div>{description}</div>
       {images}
-      {suggestedBy ? (
-        <div
-          style={
-            { marginTop: "10px", marginBottom: "10px", fontSize: ".75em" } as React.CSSProperties
-          }
-        >
-          <div>{translations.contributionsPageFeautreSuggestedBy[lang]}</div>
-          {suggestedBy.map((r) => (
-            <div>
-              <PlayerMention id={r} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <></>
-      )}
+      <div
+        style={
+          {
+            marginTop: "10px",
+            marginBottom: "10px",
+            fontSize: ".75em",
+            display: "flex",
+            gap: "10px",
+          } as React.CSSProperties
+        }
+      >
+        {workedOnBy ? (
+          <div>
+            <div>{translations.contributionsPageFeautreWorkedOnBy[lang]}</div>
+            {workedOnBy.map((r) => (
+              <div>
+                <PlayerMention id={r} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
+        {suggestedBy ? (
+          <div>
+            <div>{translations.contributionsPageFeautreSuggestedBy[lang]}</div>
+            {suggestedBy.map((r) => (
+              <div>
+                <PlayerMention id={r} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };
