@@ -303,7 +303,13 @@ const ContributionsPage = () => {
           <p>
             {translations.contributionsPageSpecialCreditsUpdatersParagraph[lang]}{" "}
             <PlayerMention id={1167} />, <PlayerMention id={145} />, <PlayerMention id={630} />,{" "}
-            <PlayerMention id={144} />, <PlayerMention id={1588} />, <PlayerMention id={1372} />
+            <PlayerMention id={144} />, <PlayerMention id={1588} />, <PlayerMention id={1372} />,{" "}
+            <PlayerMention id={308} />
+          </p>
+          <p>
+            {translations.contributionsPageSpecialCreditsFormerUpdatersParagraph[lang]}{" "}
+            <PlayerMention id={1626} />, <PlayerMention id={1539} />, <PlayerMention id={1538} />,{" "}
+            <PlayerMention id={644} />, <PlayerMention id={383} />, <PlayerMention id={718} />
           </p>
         </div>
       </div>
