@@ -10349,6 +10349,24 @@
     "pt": "",
     "es": ""
   },
+  "contributionsPageQuestionsAndAnswers5": {
+    "it": "Conosci la vessillologia?",
+    "en": "Do you know anything about Vexillology?",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageQuestionsAndAnswers6": {
+    "it": "Se conosci bandiere o simboli che sono mancanti (o hanno maggiore accuratezza) per le varie regioni geografiche, contattaci!",
+    "en": "If you're aware of flags or symbols that are missing (or that have higher accuracy) for the various geographical regions, contact us!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "contributionsPageLanguageCompletionHeading": {
     "it": "Percentuale di Completamento Traduzioni",
     "en": "Translation Completion Percentage",
@@ -10820,6 +10838,24 @@
   "contributionsPageFeatureUserSettingsParagraph": {
     "it": "Impostazioni per aggiornare la biografia, l'alias e la password.",
     "en": "Settings like a way to update your bio, alias and password.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureChadsoftAPIInterfaceHeading": {
+    "it": "Interfaccia all'API Chadsoft",
+    "en": "Chadsoft API Interface",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "contributionsPageFeatureChadsoftAPIInterfaceParagraph": {
+    "it": "Un modo per connettere gli ID Chadsfot all'account, assieme a delle impostazioni per decidere come i tempi vengano caricati.",
+    "en": "A way to link Chadsoft IDs with Account, alongside settings to decide how times get pulled.",
     "fr": "",
     "de": "",
     "jp": "",

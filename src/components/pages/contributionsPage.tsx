@@ -39,11 +39,23 @@ const ContributionsPage = () => {
       posAns: translations.contributionsPagePositiveResponse[lang],
       negAns: translations.contributionsPageNegativeResponse[lang],
       posFollowup: 4,
-      negFollowup: 1,
+      negFollowup: 5,
     },
     4: {
       type: 1,
       text: translations.contributionsPageQuestionsAndAnswers4[lang],
+    },
+    5: {
+      type: 0,
+      text: translations.contributionsPageQuestionsAndAnswers5[lang],
+      posAns: translations.contributionsPagePositiveResponse[lang],
+      negAns: translations.contributionsPageNegativeResponse[lang],
+      posFollowup: 6,
+      negFollowup: 1,
+    },
+    6: {
+      type: 1,
+      text: translations.contributionsPageQuestionsAndAnswers6[lang],
     },
   };
 
@@ -171,6 +183,13 @@ const ContributionsPage = () => {
             title={translations.contributionsPageFeatureRustBackendHeading[lang]}
             description={<>{translations.contributionsPageFeatureRustBackendParagraph[lang]}</>}
             suggestedBy={[918]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureChadsoftAPIInterfaceHeading[lang]}
+            description={
+              <>{translations.contributionsPageFeatureChadsoftAPIInterfaceParagraph[lang]}</>
+            }
+            suggestedBy={[918, 1165, 630, 237]}
           />
         </div>
       </div>
