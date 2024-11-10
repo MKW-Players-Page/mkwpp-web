@@ -477,7 +477,7 @@ const PlayerProfilePage = () => {
                           >
                             {
                               translations[
-                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                                `constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                               ][lang]
                             }
                           </Link>
@@ -499,7 +499,7 @@ const PlayerProfilePage = () => {
                           >
                             {
                               translations[
-                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                                `constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                               ][lang]
                             }
                           </Link>
