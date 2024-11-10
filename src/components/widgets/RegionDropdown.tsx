@@ -60,7 +60,12 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
       });
 
     children
-      .sort((a, b) => (a.name > b.name ? 1 : -1))
+      .sort((a, b) =>
+        translations[`constantRegion${a.code}` as TranslationKey][lang] >
+        translations[`constantRegion${b.code}` as TranslationKey][lang]
+          ? 1
+          : -1,
+      )
       .forEach((region) => {
         outChildren.push({
           type: "DropdownItemData",
