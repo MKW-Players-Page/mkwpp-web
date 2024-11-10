@@ -17,7 +17,7 @@ interface PlayerForFilter extends PlayerBasic {
 }
 
 const PlayerListPage = () => {
-  let { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
+  const { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
   players?.forEach(
     (r) => ((r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD")),
   );
@@ -27,7 +27,7 @@ const PlayerListPage = () => {
 
   const { user } = useContext(UserContext);
 
-  let [playerFilter, setPlayerFilter] = useState("");
+  const [playerFilter, setPlayerFilter] = useState("");
 
   return (
     <>
@@ -58,7 +58,11 @@ const PlayerListPage = () => {
           id="searchBtn"
           className="module"
           onClick={(e) => {
-            setPlayerFilter((document.getElementById("filterText") as HTMLInputElement).value);
+            setPlayerFilter(
+              (document.getElementById("filterText") as HTMLInputElement).value
+                .toLowerCase()
+                .normalize("NFKD"),
+            );
           }}
         >
           {translations.playerListPageSearchBtn[lang]}
@@ -75,9 +79,8 @@ const PlayerListPage = () => {
             </thead>
             <tbody className="table-hover-rows">
               {players?.map((player) =>
-                (player as PlayerForFilter).simplifiedName.includes(
-                  playerFilter.toLowerCase().normalize("NFKD"),
-                ) ? (
+                playerFilter === "" ||
+                (player as PlayerForFilter).simplifiedName.includes(playerFilter) ? (
                   <tr
                     key={player.id}
                     className={user && player.id === user.player ? "highlighted" : ""}
