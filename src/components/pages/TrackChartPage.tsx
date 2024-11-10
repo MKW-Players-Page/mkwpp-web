@@ -139,7 +139,7 @@ const TrackChartPage = () => {
         <div className="module-row">
           <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
           <LapModeSelect value={lapMode} onChange={setLapMode} />
-          <RegionSelectionDropdown ranked={false} value={region} setValue={setRegion} />
+          <RegionSelectionDropdown onePlayerMin={true} twoPlayerMin={true} ranked={false} value={region} setValue={setRegion} />
         </div>
         <div className="module">
           <Deferred isWaiting={metadata.isLoading || isLoading}>

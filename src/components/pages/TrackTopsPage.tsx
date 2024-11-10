@@ -62,7 +62,7 @@ const TrackTopsPage = () => {
       lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
       region: region.id,
     })) || [],
-    [category, cup, lapMode, region],
+    [category, cup, lapMode, region, metadata],
   );
 
   const siteHue = getCategorySiteHue(category);

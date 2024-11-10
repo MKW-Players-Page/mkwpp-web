@@ -31,7 +31,9 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
       style={
         {
           display:
-            playerFilter === "" || (player as PlayerForFilter).simplifiedName.includes(playerFilter) || (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
+            playerFilter === "" ||
+            (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
+            (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
               ? ""
               : "none",
         } as React.CSSProperties
@@ -41,7 +43,9 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
     >
       <td>
         <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />
-        <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>{player.alias ?? player.name}</Link>
+        <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
+          {player.alias ?? player.name}
+        </Link>
       </td>
       <td>
         {getRegionNameFull(metadata, translations, lang, player.region ?? 0) ??
@@ -53,13 +57,16 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
 
 const PlayerListPage = () => {
   const { isLoading, data: players } = useApi(() =>
-    api.timetrialsPlayersList().then(
-      (arr) =>
-        (arr.map((r) => {
+    api.timetrialsPlayersList().then((arr) =>
+      (
+        arr.map((r) => {
           (r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD");
-          (r as PlayerForFilter).simplifiedAlias = (r.alias ?? r.name).toLowerCase().normalize("NFKD");
+          (r as PlayerForFilter).simplifiedAlias = (r.alias ?? r.name)
+            .toLowerCase()
+            .normalize("NFKD");
           return r;
-        }) as PlayerForFilter[]).sort((a,b)=>a.simplifiedAlias > b.simplifiedAlias ? 1:-1),
+        }) as PlayerForFilter[]
+      ).sort((a, b) => (a.simplifiedAlias > b.simplifiedAlias ? 1 : -1)),
     ),
   );
   const { translations, lang } = useContext(I18nContext);

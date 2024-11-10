@@ -15,11 +15,13 @@ import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
+  onePlayerMin: boolean;
+  twoPlayerMin: boolean;
   value: Region;
   setValue: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDropdownProps) => {
+const RegionSelectionDropdown = ({ ranked, twoPlayerMin, onePlayerMin, value, setValue }: RegionSelectionDropdownProps) => {
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
@@ -67,6 +69,9 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
           : -1,
       )
       .forEach((region) => {
+          if ((twoPlayerMin) && region.playerCount < 2) {return;} else
+          if ((onePlayerMin) && region.playerCount < 1) {return;}
+          
         outChildren.push({
           type: "DropdownItemData",
           element: {
@@ -81,7 +86,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
             type: "DropdownItemSetSetterData",
             element: {
               text: translations[`constantRegionSubregions${region.code}` as TranslationKey][lang],
-              rightIcon: <span style={{paddingRight: "7px"} as React.CSSProperties}>»</span>,
+              rightIcon: <span style={{ paddingRight: "7px" } as React.CSSProperties}>»</span>,
               toItemSetId: region.id,
             } as DropdownItemSetSetterData,
           });
