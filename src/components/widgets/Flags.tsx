@@ -20,6 +20,7 @@ import { ReactComponent as FlagBA } from "../../assets/flags/ba.svg";
 import { ReactComponent as FlagBB } from "../../assets/flags/bb.svg";
 import { ReactComponent as FlagBD } from "../../assets/flags/bd.svg";
 import { ReactComponent as FlagBE } from "../../assets/flags/be.svg";
+import { ReactComponent as FlagBENELUX } from "../../assets/flags/benelux.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagBF } from "../../assets/flags/bf.svg";
 import { ReactComponent as FlagBG } from "../../assets/flags/bg.svg";
 import { ReactComponent as FlagBH } from "../../assets/flags/bh.svg";
@@ -58,6 +59,7 @@ import { ReactComponent as FlagCX } from "../../assets/flags/cx.svg";
 import { ReactComponent as FlagCY } from "../../assets/flags/cy.svg";
 import { ReactComponent as FlagCZ } from "../../assets/flags/cz.svg";
 import { ReactComponent as FlagDE } from "../../assets/flags/de.svg";
+import { ReactComponent as FlagDEAT } from "../../assets/flags/deat.svg";
 import { ReactComponent as FlagDG } from "../../assets/flags/dg.svg";
 import { ReactComponent as FlagDJ } from "../../assets/flags/dj.svg";
 import { ReactComponent as FlagDK } from "../../assets/flags/dk.svg";
@@ -72,7 +74,7 @@ import { ReactComponent as FlagEH } from "../../assets/flags/eh.svg";
 import { ReactComponent as FlagER } from "../../assets/flags/er.svg";
 import { ReactComponent as FlagES } from "../../assets/flags/es.svg";
 import { ReactComponent as FlagET } from "../../assets/flags/et.svg";
-import { ReactComponent as FlagEU } from "../../assets/flags/eu.svg";
+import { ReactComponent as FlagEUR } from "../../assets/flags/eu.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagFI } from "../../assets/flags/fi.svg";
 import { ReactComponent as FlagFJ } from "../../assets/flags/fj.svg";
 import { ReactComponent as FlagFK } from "../../assets/flags/fk.svg";
@@ -178,6 +180,7 @@ import { ReactComponent as FlagNP } from "../../assets/flags/np.svg";
 import { ReactComponent as FlagNR } from "../../assets/flags/nr.svg";
 import { ReactComponent as FlagNU } from "../../assets/flags/nu.svg";
 import { ReactComponent as FlagNZ } from "../../assets/flags/nz.svg";
+import { ReactComponent as FlagOCE } from "../../assets/flags/pc.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagOM } from "../../assets/flags/om.svg";
 import { ReactComponent as FlagPA } from "../../assets/flags/pa.svg";
 import { ReactComponent as FlagPC } from "../../assets/flags/pc.svg";
@@ -252,6 +255,7 @@ import { ReactComponent as FlagVI } from "../../assets/flags/vi.svg";
 import { ReactComponent as FlagVN } from "../../assets/flags/vn.svg";
 import { ReactComponent as FlagVU } from "../../assets/flags/vu.svg";
 import { ReactComponent as FlagWF } from "../../assets/flags/wf.svg";
+import { ReactComponent as FlagWORLD } from "../../assets/flags/un.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagWS } from "../../assets/flags/ws.svg";
 import { ReactComponent as FlagXK } from "../../assets/flags/xk.svg";
 import { ReactComponent as FlagXX } from "../../assets/flags/xx.svg";
@@ -281,6 +285,7 @@ export const Flags = {
   ba: FlagBA,
   bb: FlagBB,
   bd: FlagBD,
+  benelux: FlagBENELUX,
   be: FlagBE,
   bf: FlagBF,
   bg: FlagBG,
@@ -320,6 +325,7 @@ export const Flags = {
   cy: FlagCY,
   cz: FlagCZ,
   de: FlagDE,
+  deat: FlagDEAT,
   dg: FlagDG,
   dj: FlagDJ,
   dk: FlagDK,
@@ -334,7 +340,7 @@ export const Flags = {
   er: FlagER,
   es: FlagES,
   et: FlagET,
-  eur: FlagEU, // TEMPORARY!
+  eur: FlagEUR,
   fi: FlagFI,
   fj: FlagFJ,
   fk: FlagFK,
@@ -440,6 +446,7 @@ export const Flags = {
   nr: FlagNR,
   nu: FlagNU,
   nz: FlagNZ,
+  oce: FlagOCE,
   om: FlagOM,
   pa: FlagPA,
   pc: FlagPC,
@@ -514,6 +521,7 @@ export const Flags = {
   vn: FlagVN,
   vu: FlagVU,
   wf: FlagWF,
+  world: FlagWORLD,
   ws: FlagWS,
   xk: FlagXK,
   xx: FlagXX,
