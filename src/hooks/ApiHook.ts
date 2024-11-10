@@ -5,20 +5,25 @@ export interface ApiState<T> {
   isLoading: boolean;
   data?: T;
   error?: ResponseError;
+  timestamp: Date;
 }
 
-export const useApi = <T>(apiCallback: () => Promise<T>, dependencies: DependencyList = []) => {
-  const initialState = { isLoading: true };
+export const useApi = <T>(
+  apiCallback: () => Promise<T>,
+  dependencies: DependencyList = [],
+  timestamp: Date = new Date(),
+) => {
+  const initialState = { isLoading: true, timestamp };
   const [state, setState] = useState<ApiState<T>>(initialState);
 
   useEffect(() => {
-    setState((prev) => ({ ...prev, isLoading: true }));
+    
     apiCallback()
       .then((data: T) => {
-        setState({ isLoading: false, data });
+        setState({ isLoading: false, data, timestamp });
       })
       .catch((error: ResponseError) => {
-        setState({ isLoading: false, error });
+        setState({ isLoading: false, error, timestamp });
       });
     // React complains about apiCallback missing from dependency array, but it isn't needed.
     // In fact, it causes the effect hook to be triggered in an endless loop. We don't want that.
@@ -33,9 +38,11 @@ export const useApiArray = <T, R>(
   callCount: number,
   paramArray: R[],
   dependencies: DependencyList = [],
+  timestamp: Date = new Date(),
 ) => {
   const initialState = Array.from({ length: callCount }, (_, __) => ({
     isLoading: true,
+    timestamp,
   }));
   const [state, setState] = useState<Array<ApiState<T>>>(initialState);
 
@@ -55,14 +62,14 @@ export const useApiArray = <T, R>(
         .then((data: T) => {
           setState((prev) => [
             ...prev.slice(0, i),
-            { isLoading: false, data },
+            { isLoading: false, data, timestamp },
             ...prev.slice(i + 1),
           ]);
         })
         .catch((error: ResponseError) => {
           setState((prev) => [
             ...prev.slice(0, i),
-            { isLoading: false, error },
+            { isLoading: false, error, timestamp },
             ...prev.slice(i + 1),
           ]);
         });
