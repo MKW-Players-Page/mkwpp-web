@@ -3554,6 +3554,546 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionIT23": {
+    "it": "Valle d'Aosta",
+    "en": "Aosta Valley",
+    "fr": "",
+    "de": "Aostatal",
+    "jp": "",
+    "pt": "",
+    "es": "Valle de Aosta"
+  },
+  "constantRegionRecordIT23": {
+    "it": "Record Valdostani",
+    "en": "Aosta Valley Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT23": {
+    "it": "Sottoregioni Valdostane",
+    "en": "Aosta Valley Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT21": {
+    "it": "Piemonte",
+    "en": "Piedmont",
+    "fr": "",
+    "de": "Piemont",
+    "jp": "",
+    "pt": "",
+    "es": "Piamonte"
+  },
+  "constantRegionRecordIT21": {
+    "it": "Record Piemontesi",
+    "en": "Piedmontese Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT21": {
+    "it": "Sottoregioni Piemontesi",
+    "en": "Piedmontese Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT25": {
+    "it": "Lombardia",
+    "en": "Lombardy",
+    "fr": "",
+    "de": "Lombardei",
+    "jp": "",
+    "pt": "",
+    "es": "Lombardía"
+  },
+  "constantRegionRecordIT25": {
+    "it": "Record Lombardi",
+    "en": "Lombard Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT25": {
+    "it": "Sottoregioni Lombarde",
+    "en": "Lombard Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT32": {
+    "it": "Trentino-Alto Adige",
+    "en": "Trentino-Südtirol",
+    "fr": "",
+    "de": "Trentino-Südtirol",
+    "jp": "",
+    "pt": "",
+    "es": "Trentino-Alto Adigio"
+  },
+  "constantRegionRecordIT32": {
+    "it": "Record Trentino-AltoAtesini",
+    "en": "Trentino-South Tyrolean Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT32": {
+    "it": "Sottoregioni Trentine-AltoAtesine",
+    "en": "Trentino-South Tyrolean Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT34": {
+    "it": "Veneto",
+    "en": "Veneto",
+    "fr": "",
+    "de": "Venetien",
+    "jp": "",
+    "pt": "",
+    "es": "Véneto"
+  },
+  "constantRegionRecordIT34": {
+    "it": "Record Veneti",
+    "en": "Venetian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT34": {
+    "it": "Sottoregioni Venete",
+    "en": "Venetian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT36": {
+    "it": "Friuli-Venezia Giulia",
+    "en": "Friuli-Venezia Giulia",
+    "fr": "",
+    "de": "Friaul-Julisch Venetien",
+    "jp": "",
+    "pt": "",
+    "es": "Friuli-Venecia Julia"
+  },
+  "constantRegionRecordIT36": {
+    "it": "Record Friulani-Giuliani",
+    "en": "Friuli-Venezia Giulian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT36": {
+    "it": "Sottoregioni Friulane-Giuliane",
+    "en": "Friuli-Venezia Giulian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT42": {
+    "it": "Liguria",
+    "en": "Liguria",
+    "fr": "",
+    "de": "Ligurien",
+    "jp": "",
+    "pt": "",
+    "es": "Liguria"
+  },
+  "constantRegionRecordIT42": {
+    "it": "Record Liguri",
+    "en": "Ligurian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT42": {
+    "it": "Sottoregioni Liguri",
+    "en": "Ligurian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT45": {
+    "it": "Emilia-Romagna",
+    "en": "Emilia-Romagna",
+    "fr": "",
+    "de": "Emilia-Romagna",
+    "jp": "",
+    "pt": "",
+    "es": "Emilia-Romaña"
+  },
+  "constantRegionRecordIT45": {
+    "it": "Record Emiliano-Romagnoli",
+    "en": "Emilia-Romagnan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT45": {
+    "it": "Sottoregioni Emiliano-Romagnole",
+    "en": "Emilia-Romagnan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT52": {
+    "it": "Toscana",
+    "en": "Tuscany",
+    "fr": "",
+    "de": "Toskana",
+    "jp": "",
+    "pt": "",
+    "es": "Toscana"
+  },
+  "constantRegionRecordIT52": {
+    "it": "Record Toscani",
+    "en": "Tuscan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT52": {
+    "it": "Sottoregioni Toscane",
+    "en": "Tuscan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT55": {
+    "it": "Umbria",
+    "en": "Umbria",
+    "fr": "",
+    "de": "Umbrien",
+    "jp": "",
+    "pt": "",
+    "es": "Umbria"
+  },
+  "constantRegionRecordIT55": {
+    "it": "Record Umbri",
+    "en": "Umbrian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT55": {
+    "it": "Sottoregioni Umbre",
+    "en": "Umbrian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT57": {
+    "it": "Marche",
+    "en": "Marche",
+    "fr": "",
+    "de": "Marken",
+    "jp": "",
+    "pt": "",
+    "es": "Marcas"
+  },
+  "constantRegionRecordIT57": {
+    "it": "Record Marchigiani",
+    "en": "Marche Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT57": {
+    "it": "Sottoregioni Marchigiane",
+    "en": "Marche Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT62": {
+    "it": "Lazio",
+    "en": "Lazio",
+    "fr": "",
+    "de": "Latium",
+    "jp": "",
+    "pt": "",
+    "es": "Lacio"
+  },
+  "constantRegionRecordIT62": {
+    "it": "Record Laziali",
+    "en": "Lazian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT62": {
+    "it": "Sottoregioni Laziali",
+    "en": "Lazian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT65": {
+    "it": "Abruzzo",
+    "en": "Abruzzo",
+    "fr": "",
+    "de": "Abruzzen",
+    "jp": "",
+    "pt": "",
+    "es": "Abruzos"
+  },
+  "constantRegionRecordIT65": {
+    "it": "Record Abruzzesi",
+    "en": "Abruzzo Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT65": {
+    "it": "Sottoregioni Abruzzesi",
+    "en": "Abruzzo Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT67": {
+    "it": "Molise",
+    "en": "Molise",
+    "fr": "",
+    "de": "Molise",
+    "jp": "",
+    "pt": "",
+    "es": "Molise"
+  },
+  "constantRegionRecordIT67": {
+    "it": "Record Molisani",
+    "en": "Molisan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT67": {
+    "it": "Sottoregioni Molisane",
+    "en": "Molisan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT72": {
+    "it": "Campania",
+    "en": "Campania",
+    "fr": "",
+    "de": "Kampanien",
+    "jp": "",
+    "pt": "",
+    "es": "Campania"
+  },
+  "constantRegionRecordIT72": {
+    "it": "Record Campani",
+    "en": "Campanian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT72": {
+    "it": "Sottoregioni Campane",
+    "en": "Campanian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT75": {
+    "it": "Puglia",
+    "en": "Apulia",
+    "fr": "",
+    "de": "Apulien",
+    "jp": "",
+    "pt": "",
+    "es": "Apulia"
+  },
+  "constantRegionRecordIT75": {
+    "it": "Record Pugliesi",
+    "en": "Apulian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT75": {
+    "it": "Sottoregioni Pugliesi",
+    "en": "Apulian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT77": {
+    "it": "Basilicata",
+    "en": "Basilicata",
+    "fr": "",
+    "de": "Basilikata",
+    "jp": "",
+    "pt": "",
+    "es": "Basilicata"
+  },
+  "constantRegionRecordIT77": {
+    "it": "Record Lucani",
+    "en": "Lucanian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT77": {
+    "it": "Sottoregioni Lucane",
+    "en": "Lucanian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT78": {
+    "it": "Calabria",
+    "en": "Calabria",
+    "fr": "",
+    "de": "Kalabrien",
+    "jp": "",
+    "pt": "",
+    "es": "Calabria"
+  },
+  "constantRegionRecordIT78": {
+    "it": "Record Calabresi",
+    "en": "Calabrian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT78": {
+    "it": "Sottoregioni Calabresi",
+    "en": "Calabrian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT82": {
+    "it": "Sicilia",
+    "en": "Sicily",
+    "fr": "",
+    "de": "Sizilien",
+    "jp": "",
+    "pt": "",
+    "es": "Sicilia"
+  },
+  "constantRegionRecordIT82": {
+    "it": "Record Siciliani",
+    "en": "Sicilian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT82": {
+    "it": "Sottoregioni Siciliane",
+    "en": "Sicilian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionIT88": {
+    "it": "Sardegna",
+    "en": "Sardinia",
+    "fr": "",
+    "de": "Sardinien",
+    "jp": "",
+    "pt": "",
+    "es": "Cerdeña"
+  },
+  "constantRegionRecordIT88": {
+    "it": "Record Sardi",
+    "en": "Sardinian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT88": {
+    "it": "Sottoregioni Sarde",
+    "en": "Sardinian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionCI": {
     "it": "Costa d'Avorio",
     "en": "Côte d'Ivoire",

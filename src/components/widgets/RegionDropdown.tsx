@@ -56,7 +56,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
     if (parent !== undefined)
       outChildren.push({
         type: "DropdownItemSetSetterData",
-        element: { text: "<< Back", toItemSetId: parent.parent ?? 0 } as DropdownItemSetSetterData,
+        element: { text: "« Back", toItemSetId: parent.parent ?? 0 } as DropdownItemSetSetterData,
       });
 
     children
@@ -81,6 +81,7 @@ const RegionSelectionDropdown = ({ ranked, value, setValue }: RegionSelectionDro
             type: "DropdownItemSetSetterData",
             element: {
               text: translations[`constantRegionSubregions${region.code}` as TranslationKey][lang],
+              rightIcon: <span style={{paddingRight: "7px"} as React.CSSProperties}>»</span>,
               toItemSetId: region.id,
             } as DropdownItemSetSetterData,
           });

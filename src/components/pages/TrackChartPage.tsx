@@ -81,7 +81,7 @@ const TrackChartPage = () => {
     <>
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
-      <Link to={resolvePage(Pages.TrackList)}>{"< Track List"}</Link>
+      <Link to={resolvePage(Pages.TrackList)}>{"« Track List"}</Link>
       <div
         style={{ justifyContent: "space-between" } as React.CSSProperties}
         className="module-row"
@@ -98,7 +98,7 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {"< " +
+              {"« " +
                 translations[
                   `constantTrackName${prevTrack?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                 ][lang]}
@@ -128,7 +128,7 @@ const TrackChartPage = () => {
             >
               {translations[
                 `constantTrackName${nextTrack?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-              ][lang] + " >"}
+              ][lang] + " »"}
             </Link>
           ) : (
             <></>
