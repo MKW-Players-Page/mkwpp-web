@@ -40,7 +40,13 @@ const TrackRecordsPage = () => {
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
-          <RegionSelectionDropdown onePlayerMin={false} twoPlayerMin={true}  ranked={false} value={region} setValue={setRegion} />
+          <RegionSelectionDropdown
+            onePlayerMin={false}
+            twoPlayerMin={true}
+            ranked={false}
+            value={region}
+            setValue={setRegion}
+          />
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading || metadata.isLoading}>

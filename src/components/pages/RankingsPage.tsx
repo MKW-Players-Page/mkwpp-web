@@ -123,7 +123,13 @@ const RankingsPage = ({ metric }: RankingsProps) => {
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
           <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
-          <RegionSelectionDropdown onePlayerMin={false} twoPlayerMin={false}  ranked={true} value={region} setValue={setRegion} />
+          <RegionSelectionDropdown
+            onePlayerMin={false}
+            twoPlayerMin={false}
+            ranked={true}
+            value={region}
+            setValue={setRegion}
+          />
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading}>

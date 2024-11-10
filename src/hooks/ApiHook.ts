@@ -17,7 +17,6 @@ export const useApi = <T>(
   const [state, setState] = useState<ApiState<T>>(initialState);
 
   useEffect(() => {
-    
     apiCallback()
       .then((data: T) => {
         setState({ isLoading: false, data, timestamp });

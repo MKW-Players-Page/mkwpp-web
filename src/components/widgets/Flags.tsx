@@ -118,6 +118,26 @@ import { ReactComponent as FlagIQ } from "../../assets/flags/iq.svg";
 import { ReactComponent as FlagIR } from "../../assets/flags/ir.svg";
 import { ReactComponent as FlagIS } from "../../assets/flags/is.svg";
 import { ReactComponent as FlagIT } from "../../assets/flags/it.svg";
+import { ReactComponent as FlagIT21 } from "../../assets/flags/it21.svg";
+import { ReactComponent as FlagIT23 } from "../../assets/flags/it23.svg";
+import { ReactComponent as FlagIT25 } from "../../assets/flags/it25.svg";
+import { ReactComponent as FlagIT32 } from "../../assets/flags/it32.svg";
+import { ReactComponent as FlagIT34 } from "../../assets/flags/it34.svg";
+import { ReactComponent as FlagIT36 } from "../../assets/flags/it36.svg";
+import { ReactComponent as FlagIT42 } from "../../assets/flags/it42.svg";
+import { ReactComponent as FlagIT45 } from "../../assets/flags/it45.svg";
+import { ReactComponent as FlagIT52 } from "../../assets/flags/it52.svg";
+import { ReactComponent as FlagIT55 } from "../../assets/flags/it55.svg";
+import { ReactComponent as FlagIT57 } from "../../assets/flags/it57.svg";
+import { ReactComponent as FlagIT62 } from "../../assets/flags/it62.svg";
+import { ReactComponent as FlagIT65 } from "../../assets/flags/it65.svg";
+import { ReactComponent as FlagIT67 } from "../../assets/flags/it67.svg";
+import { ReactComponent as FlagIT72 } from "../../assets/flags/it72.svg";
+import { ReactComponent as FlagIT75 } from "../../assets/flags/it75.svg";
+import { ReactComponent as FlagIT77 } from "../../assets/flags/it77.svg";
+import { ReactComponent as FlagIT78 } from "../../assets/flags/it78.svg";
+import { ReactComponent as FlagIT82 } from "../../assets/flags/it82.svg";
+import { ReactComponent as FlagIT88 } from "../../assets/flags/it88.svg";
 import { ReactComponent as FlagJE } from "../../assets/flags/je.svg";
 import { ReactComponent as FlagJM } from "../../assets/flags/jm.svg";
 import { ReactComponent as FlagJO } from "../../assets/flags/jo.svg";
@@ -384,6 +404,26 @@ export const Flags = {
   ir: FlagIR,
   is: FlagIS,
   it: FlagIT,
+  it21: FlagIT21,
+  it23: FlagIT23,
+  it25: FlagIT25,
+  it32: FlagIT32,
+  it34: FlagIT34,
+  it36: FlagIT36,
+  it42: FlagIT42,
+  it45: FlagIT45,
+  it52: FlagIT52,
+  it55: FlagIT55,
+  it57: FlagIT57,
+  it62: FlagIT62,
+  it65: FlagIT65,
+  it67: FlagIT67,
+  it72: FlagIT72,
+  it75: FlagIT75,
+  it77: FlagIT77,
+  it78: FlagIT78,
+  it82: FlagIT82,
+  it88: FlagIT88,
   je: FlagJE,
   jm: FlagJM,
   jo: FlagJO,
