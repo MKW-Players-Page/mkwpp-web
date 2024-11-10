@@ -36,7 +36,7 @@ export interface FlagIconProps {
 export const FlagIcon = ({ region }: FlagIconProps) => {
   return (
     <span className="flag-icon">
-      {region && <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />}
+      <Flag flag={(region === undefined ? "xx" : region.code.toLowerCase()) as keyof typeof Flags} />
     </span>
   );
 };

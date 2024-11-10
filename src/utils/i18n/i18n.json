@@ -440,6 +440,15 @@
     "pt": "",
     "es": "N64 Castillo de Bowser"
   },
+  "constantRegionXX": {
+    "it": "Sconosciuta",
+    "en": "Unknown",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionWORLD": {
     "it": "Mondo",
     "en": "World",

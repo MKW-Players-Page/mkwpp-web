@@ -69,7 +69,7 @@ export const getRegionNameFull = (
 ) => {
   const region = getRegionById(metadata, regionId);
   if (!region) {
-    return undefined;
+    return translations.constantRegionXX[lang];
   }
 
   if (region.parent && region.type === RegionTypeEnum.Subnational) {
