@@ -7353,8 +7353,8 @@
     "es": ""
   },
   "constantRegionESPT": {
-    "it": "Spagna e Portogallo",
-    "en": "Spain & Portugal",
+    "it": "Iberia",
+    "en": "Iberia",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7362,8 +7362,8 @@
     "es": ""
   },
   "constantRegionRecordESPT": {
-    "it": "Record Spagnoli e Portoghesi",
-    "en": "Spanish & Portuguese Records",
+    "it": "Record Iberici",
+    "en": "Iberian Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7371,8 +7371,8 @@
     "es": ""
   },
   "constantRegionSubregionsESPT": {
-    "it": "Sottoregioni Spagnole e Portoghesi",
-    "en": "Spanish & Portuguese Subregions",
+    "it": "Sottoregioni Iberiche",
+    "en": "Iberian Subregions",
     "fr": "",
     "de": "",
     "jp": "",
