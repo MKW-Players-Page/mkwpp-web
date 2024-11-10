@@ -99,16 +99,20 @@ const TrackChartPage = () => {
               )}
             >
               {"< " +
-                translations[`constantTrackName${prevTrack?.abbr.toUpperCase()}` as TranslationKey][
-                  lang
-                ]}
+                translations[
+                  `constantTrackName${prevTrack?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
+                ][lang]}
             </Link>
           ) : (
             <></>
           )}
         </div>
         <h1>
-          {translations[`constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey][lang]}
+          {
+            translations[`constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey][
+              lang
+            ]
+          }
         </h1>
         <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
           {nextTrack !== undefined ? (
@@ -122,9 +126,9 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {translations[`constantTrackName${nextTrack?.abbr.toUpperCase()}` as TranslationKey][
-                lang
-              ] + " >"}
+              {translations[
+                `constantTrackName${nextTrack?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
+              ][lang] + " >"}
             </Link>
           ) : (
             <></>
@@ -184,7 +188,7 @@ const TrackChartPage = () => {
                     >
                       <td>{score.rank}</td>
                       <td>
-                        <FlagIcon region={getRegionById(metadata, score.player.region || 0)} />
+                        <FlagIcon region={getRegionById(metadata, score.player.region ?? 0)} />
                         <Link
                           to={resolvePage(Pages.PlayerProfile, {
                             id: score.player.id,
