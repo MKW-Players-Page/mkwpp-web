@@ -5,4 +5,5 @@ export const WorldRegion: Region = {
   type: "world",
   code: "WORLD",
   name: "World",
+  playerCount: 2,
 };

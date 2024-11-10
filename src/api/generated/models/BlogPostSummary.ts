@@ -46,10 +46,10 @@ export interface BlogPostSummary {
     title: string;
     /**
      * 
-     * @type {Date}
+     * @type {number}
      * @memberof BlogPostSummary
      */
-    publishedAt: Date;
+    publishedAt: number;
 }
 
 /**
@@ -76,7 +76,7 @@ export function BlogPostSummaryFromJSONTyped(json: any, ignoreDiscriminator: boo
         'id': json['id'],
         'author': UserFromJSON(json['author']),
         'title': json['title'],
-        'publishedAt': (new Date(json['published_at'])),
+        'publishedAt': json['published_at'],
     };
 }
 
@@ -88,7 +88,7 @@ export function BlogPostSummaryToJSON(value?: Omit<BlogPostSummary, 'id'> | null
         
         'author': UserToJSON(value['author']),
         'title': value['title'],
-        'published_at': ((value['publishedAt']).toISOString()),
+        'published_at': value['publishedAt'],
     };
 }
 

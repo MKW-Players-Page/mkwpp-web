@@ -62,6 +62,12 @@ export interface Region {
      * @memberof Region
      */
     isRanked?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof Region
+     */
+    readonly playerCount: number;
 }
 
 
@@ -74,6 +80,7 @@ export function instanceOfRegion(value: object): value is Region {
     if (!('type' in value) || value['type'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
     if (!('code' in value) || value['code'] === undefined) return false;
+    if (!('playerCount' in value) || value['playerCount'] === undefined) return false;
     return true;
 }
 
@@ -93,10 +100,11 @@ export function RegionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Re
         'code': json['code'],
         'parent': json['parent'] == null ? undefined : json['parent'],
         'isRanked': json['is_ranked'] == null ? undefined : json['is_ranked'],
+        'playerCount': json['player_count'],
     };
 }
 
-export function RegionToJSON(value?: Omit<Region, 'id'> | null): any {
+export function RegionToJSON(value?: Omit<Region, 'id'|'player_count'> | null): any {
     if (value == null) {
         return value;
     }

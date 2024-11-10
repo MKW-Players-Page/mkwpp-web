@@ -52,10 +52,10 @@ export interface BlogPost {
     content: string;
     /**
      * 
-     * @type {Date}
+     * @type {number}
      * @memberof BlogPost
      */
-    publishedAt: Date;
+    publishedAt: number;
 }
 
 /**
@@ -84,7 +84,7 @@ export function BlogPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'author': UserFromJSON(json['author']),
         'title': json['title'],
         'content': json['content'],
-        'publishedAt': (new Date(json['published_at'])),
+        'publishedAt': json['published_at'],
     };
 }
 
@@ -97,7 +97,7 @@ export function BlogPostToJSON(value?: Omit<BlogPost, 'id'> | null): any {
         'author': UserToJSON(value['author']),
         'title': value['title'],
         'content': value['content'],
-        'published_at': ((value['publishedAt']).toISOString()),
+        'published_at': value['publishedAt'],
     };
 }
 

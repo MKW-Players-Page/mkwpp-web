@@ -46,10 +46,10 @@ export interface SiteChampion {
     category: CategoryEnum;
     /**
      * 
-     * @type {Date}
+     * @type {number}
      * @memberof SiteChampion
      */
-    dateInstated?: Date;
+    dateInstated: number;
     /**
      * 
      * @type {Player}
@@ -66,6 +66,7 @@ export interface SiteChampion {
 export function instanceOfSiteChampion(value: object): value is SiteChampion {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('category' in value) || value['category'] === undefined) return false;
+    if (!('dateInstated' in value) || value['dateInstated'] === undefined) return false;
     if (!('player' in value) || value['player'] === undefined) return false;
     return true;
 }
@@ -82,7 +83,7 @@ export function SiteChampionFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': json['id'],
         'category': CategoryEnumFromJSON(json['category']),
-        'dateInstated': json['date_instated'] == null ? undefined : (new Date(json['date_instated'])),
+        'dateInstated': json['date_instated'],
         'player': PlayerFromJSON(json['player']),
     };
 }
@@ -94,7 +95,7 @@ export function SiteChampionToJSON(value?: Omit<SiteChampion, 'id'> | null): any
     return {
         
         'category': CategoryEnumToJSON(value['category']),
-        'date_instated': value['dateInstated'] == null ? undefined : ((value['dateInstated']).toISOString()),
+        'date_instated': value['dateInstated'],
         'player': PlayerToJSON(value['player']),
     };
 }

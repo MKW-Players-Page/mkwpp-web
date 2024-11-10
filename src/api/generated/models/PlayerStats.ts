@@ -81,17 +81,35 @@ export interface PlayerStats {
      */
     totalRank: number;
     /**
+     * 
+     * @type {string}
+     * @memberof PlayerStats
+     */
+    readonly averageRank: string;
+    /**
      * Sum of the standard of all lowest scores
      * @type {number}
      * @memberof PlayerStats
      */
     totalStandard: number;
     /**
+     * 
+     * @type {string}
+     * @memberof PlayerStats
+     */
+    readonly averageStandard: string;
+    /**
      * Sum of lowest score to record ratios
      * @type {number}
      * @memberof PlayerStats
      */
     totalRecordRatio: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlayerStats
+     */
+    readonly averageRecordRatio: string;
     /**
      * Number of records
      * @type {number}
@@ -119,8 +137,11 @@ export function instanceOfPlayerStats(value: object): value is PlayerStats {
     if (!('scoreCount' in value) || value['scoreCount'] === undefined) return false;
     if (!('totalScore' in value) || value['totalScore'] === undefined) return false;
     if (!('totalRank' in value) || value['totalRank'] === undefined) return false;
+    if (!('averageRank' in value) || value['averageRank'] === undefined) return false;
     if (!('totalStandard' in value) || value['totalStandard'] === undefined) return false;
+    if (!('averageStandard' in value) || value['averageStandard'] === undefined) return false;
     if (!('totalRecordRatio' in value) || value['totalRecordRatio'] === undefined) return false;
+    if (!('averageRecordRatio' in value) || value['averageRecordRatio'] === undefined) return false;
     if (!('totalRecords' in value) || value['totalRecords'] === undefined) return false;
     if (!('leaderboardPoints' in value) || value['leaderboardPoints'] === undefined) return false;
     return true;
@@ -144,14 +165,17 @@ export function PlayerStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'scoreCount': json['score_count'],
         'totalScore': json['total_score'],
         'totalRank': json['total_rank'],
+        'averageRank': json['average_rank'],
         'totalStandard': json['total_standard'],
+        'averageStandard': json['average_standard'],
         'totalRecordRatio': json['total_record_ratio'],
+        'averageRecordRatio': json['average_record_ratio'],
         'totalRecords': json['total_records'],
         'leaderboardPoints': json['leaderboard_points'],
     };
 }
 
-export function PlayerStatsToJSON(value?: PlayerStats | null): any {
+export function PlayerStatsToJSON(value?: Omit<PlayerStats, 'average_rank'|'average_standard'|'average_record_ratio'> | null): any {
     if (value == null) {
         return value;
     }
