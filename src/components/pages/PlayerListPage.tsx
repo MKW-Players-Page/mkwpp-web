@@ -16,16 +16,48 @@ interface PlayerForFilter extends PlayerBasic {
   simplifiedName: string;
 }
 
-const PlayerListPage = () => {
-  const { isLoading, data: players } = useApi(() => api.timetrialsPlayersList());
-  players?.forEach(
-    (r) => ((r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD")),
-  );
-
+interface PlayerListRowProp {
+  player: PlayerForFilter;
+  playerFilter: string;
+}
+const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
   const metadata = useContext(MetadataContext);
   const { translations, lang } = useContext(I18nContext);
-
   const { user } = useContext(UserContext);
+
+  return (
+    <tr
+      style={
+        {
+          display:
+            playerFilter === "" || (player as PlayerForFilter).simplifiedName.includes(playerFilter)
+              ? ""
+              : "none",
+        } as React.CSSProperties
+      }
+      key={player.id}
+      className={user && player.id === user.player ? "highlighted" : ""}
+    >
+      <td>
+        <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />
+        <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>{player.name}</Link>
+      </td>
+      <td>{getRegionNameFull(metadata, translations, lang, player.region ?? 0)}</td>
+    </tr>
+  );
+};
+
+const PlayerListPage = () => {
+  const { isLoading, data: players } = useApi(() =>
+    api.timetrialsPlayersList().then(
+      (arr) =>
+        arr.map((r) => {
+          (r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD");
+          return r;
+        }) as PlayerForFilter[],
+    ),
+  );
+  const { translations, lang } = useContext(I18nContext);
 
   const [playerFilter, setPlayerFilter] = useState("");
 
@@ -78,25 +110,9 @@ const PlayerListPage = () => {
               </tr>
             </thead>
             <tbody className="table-hover-rows">
-              {players?.map((player) =>
-                playerFilter === "" ||
-                (player as PlayerForFilter).simplifiedName.includes(playerFilter) ? (
-                  <tr
-                    key={player.id}
-                    className={user && player.id === user.player ? "highlighted" : ""}
-                  >
-                    <td>
-                      <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />
-                      <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
-                        {player.name}
-                      </Link>
-                    </td>
-                    <td>{getRegionNameFull(metadata, translations, lang, player.region ?? 0)}</td>
-                  </tr>
-                ) : (
-                  <></>
-                ),
-              )}
+              {players?.map((player) => (
+                <PlayerListRow player={player} playerFilter={playerFilter} />
+              ))}
             </tbody>
           </table>
         </Deferred>
