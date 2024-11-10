@@ -42,7 +42,10 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
         <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />
         <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>{player.name}</Link>
       </td>
-      <td>{getRegionNameFull(metadata, translations, lang, player.region ?? 0) ?? translations.constantRegionXX[lang]}</td>
+      <td>
+        {getRegionNameFull(metadata, translations, lang, player.region ?? 0) ??
+          translations.constantRegionXX[lang]}
+      </td>
     </tr>
   );
 };
