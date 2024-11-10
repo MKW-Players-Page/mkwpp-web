@@ -73,6 +73,7 @@ import { ReactComponent as FlagEG } from "../../assets/flags/eg.svg";
 import { ReactComponent as FlagEH } from "../../assets/flags/eh.svg";
 import { ReactComponent as FlagER } from "../../assets/flags/er.svg";
 import { ReactComponent as FlagES } from "../../assets/flags/es.svg";
+import { ReactComponent as FlagESPT } from "../../assets/flags/espt.svg";
 import { ReactComponent as FlagET } from "../../assets/flags/et.svg";
 import { ReactComponent as FlagEUR } from "../../assets/flags/eu.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagFI } from "../../assets/flags/fi.svg";
@@ -359,6 +360,7 @@ export const Flags = {
   eh: FlagEH,
   er: FlagER,
   es: FlagES,
+  espt: FlagESPT,
   et: FlagET,
   eur: FlagEUR,
   fi: FlagFI,
