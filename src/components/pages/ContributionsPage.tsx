@@ -164,13 +164,6 @@ const ContributionsPage = () => {
             suggestedBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureFurtherSubregionsHeading[lang]}
-            description={
-              <>{translations.contributionsPageFeatureFurtherSubregionsParagraph[lang]}</>
-            }
-            suggestedBy={[1165, 918]}
-          />
-          <FeatureElement
             title={translations.contributionsPageFeatureRivalriesHeading[lang]}
             description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
           />
@@ -200,6 +193,13 @@ const ContributionsPage = () => {
             title={translations.contributionsPageFeatureAwardsHeading[lang]}
             description={<>{translations.contributionsPageFeatureAwardsParagraph[lang]}</>}
             workedOnBy={[1165]}
+          />
+          <FeatureElement
+            title={translations.contributionsPageFeatureFurtherSubregionsHeading[lang]}
+            description={
+              <>{translations.contributionsPageFeatureFurtherSubregionsParagraph[lang]}</>
+            }
+            suggestedBy={[1165, 918]}
           />
           <FeatureElement
             title={translations.contributionsPageFeaturePastChampsHeading[lang]}

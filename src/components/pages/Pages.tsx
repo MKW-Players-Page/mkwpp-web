@@ -19,7 +19,7 @@ import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
 import { buildQueryParamString } from "../../utils/SearchParams";
 import CountryRankingsPage from "./CountryRankingsPage";
-import ContributionsPage from "./contributionsPage";
+import ContributionsPage from "./ContributionsPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
