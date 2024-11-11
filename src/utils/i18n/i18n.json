@@ -522,8 +522,8 @@
     "es": ""
   },
   "constantRegionSubregionsAME": {
-    "it": "Sottregioni Americane",
-    "en": "American Subregions",
+    "it": "Stati Americani",
+    "en": "American States",
     "fr": "",
     "de": "",
     "jp": "",
@@ -1143,8 +1143,8 @@
     "es": ""
   },
   "constantRegionSubregionsBE": {
-    "it": "Sottoregioni Belghe",
-    "en": "Belgian Subregions",
+    "it": "Regioni Belghe",
+    "en": "Belgian Regions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2655,8 +2655,8 @@
     "es": ""
   },
   "constantRegionSubregionsFR": {
-    "it": "Sottoregioni Francesi",
-    "en": "French Subregions",
+    "it": "Regioni Francesi",
+    "en": "French Regions",
     "fr": "",
     "de": "",
     "jp": "",
@@ -2871,8 +2871,8 @@
     "es": ""
   },
   "constantRegionSubregionsDE": {
-    "it": "Sottoregioni Tedesche",
-    "en": "German Subregions",
+    "it": "Stati Tedeschi",
+    "en": "German States",
     "fr": "",
     "de": "",
     "jp": "",
@@ -3492,8 +3492,8 @@
     "es": ""
   },
   "constantRegionSubregionsIE": {
-    "it": "Sottoregioni Irlandesi",
-    "en": "Irish Subregions",
+    "it": "Contee Irlandesi",
+    "en": "Irish Counties",
     "fr": "",
     "de": "",
     "jp": "",
@@ -5220,8 +5220,8 @@
     "es": ""
   },
   "constantRegionSubregionsNL": {
-    "it": "Sottoregioni Olandesi",
-    "en": "Dutch Subregions",
+    "it": "Province Olandesi",
+    "en": "Dutch Provinces",
     "fr": "",
     "de": "",
     "jp": "",
@@ -5949,8 +5949,8 @@
     "es": ""
   },
   "constantRegionSubregionsPT": {
-    "it": "Sottoregioni Portoghesi",
-    "en": "Portuguese Subregions",
+    "it": "Distretti Portoghesi",
+    "en": "Portuguese Districts",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6759,8 +6759,8 @@
     "es": ""
   },
   "constantRegionSubregionsES": {
-    "it": "Sottoregioni Spagnole",
-    "en": "Spanish Subregions",
+    "it": "Comunità Autonome Spagnole",
+    "en": "Spanish Autonomous Communities",
     "fr": "",
     "de": "",
     "jp": "",
@@ -6975,8 +6975,8 @@
     "es": ""
   },
   "constantRegionSubregionsCH": {
-    "it": "Sottoregioni Svizzere",
-    "en": "Swiss Subregions",
+    "it": "Cantoni Svizzeri",
+    "en": "Swiss Cantons",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7461,8 +7461,8 @@
     "es": ""
   },
   "constantRegionSubregionsGB": {
-    "it": "Sottoregioni Britanniche",
-    "en": "British Subregions",
+    "it": "Nazioni Britanniche",
+    "en": "British Countries",
     "fr": "",
     "de": "",
     "jp": "",
