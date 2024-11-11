@@ -75,8 +75,8 @@ const PastChampsPage = () => {
                       </td>
                       <td>
                         {durationPerc < 10
-                          ? "0" + durationPerc.toFixed(10)
-                          : durationPerc.toFixed(10)}
+                          ? "0" + durationPerc.toFixed(5)
+                          : durationPerc.toFixed(5)}
                         %
                       </td>
                     </tr>
