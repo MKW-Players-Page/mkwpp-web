@@ -468,8 +468,8 @@
     "es": ""
   },
   "constantRegionSubregionsWORLD": {
-    "it": "Sottoregioni del Mondo",
-    "en": "World Subregions",
+    "it": "Continenti",
+    "en": "Continents",
     "fr": "",
     "de": "",
     "jp": "",
@@ -495,8 +495,8 @@
     "es": ""
   },
   "constantRegionSubregionsAFR": {
-    "it": "Sottoregioni Africane",
-    "en": "African Subregions",
+    "it": "Nazioni Africane",
+    "en": "African Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -522,8 +522,8 @@
     "es": ""
   },
   "constantRegionSubregionsAME": {
-    "it": "Stati Americani",
-    "en": "American States",
+    "it": "Nazioni Americane",
+    "en": "American Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -549,8 +549,8 @@
     "es": ""
   },
   "constantRegionSubregionsANT": {
-    "it": "Sottoregioni Antartiche",
-    "en": "Antarctic Subregions",
+    "it": "Nazioni Antartiche",
+    "en": "Antarctic Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -576,8 +576,8 @@
     "es": ""
   },
   "constantRegionSubregionsASI": {
-    "it": "Sottoregioni Asiatiche",
-    "en": "Asian Subregions",
+    "it": "Nazioni Asiatiche",
+    "en": "Asian Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -603,8 +603,8 @@
     "es": ""
   },
   "constantRegionSubregionsEUR": {
-    "it": "Sottoregioni Europee",
-    "en": "European Subregions",
+    "it": "Nazioni Europee",
+    "en": "European Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -630,8 +630,8 @@
     "es": ""
   },
   "constantRegionSubregionsOCE": {
-    "it": "Sottoregioni Oceaniche",
-    "en": "Oceanic Subregions",
+    "it": "Nazioni Oceaniche",
+    "en": "Oceanic Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7596,8 +7596,8 @@
     "es": ""
   },
   "constantRegionSubregionsUS": {
-    "it": "Sottoregioni Stat'unitensi",
-    "en": "American Subregions",
+    "it": "Stati Stat'unitensi",
+    "en": "American States",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7866,8 +7866,8 @@
     "es": ""
   },
   "constantRegionSubregionsLATAM": {
-    "it": "Sottoregioni Latino Americane",
-    "en": "Latin American Subregions",
+    "it": "Nazioni Latino Americane",
+    "en": "Latin American Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7920,8 +7920,8 @@
     "es": ""
   },
   "constantRegionSubregionsESPT": {
-    "it": "Sottoregioni Iberiche",
-    "en": "Iberian Subregions",
+    "it": "Nazioni Iberiche",
+    "en": "Iberian Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -7974,8 +7974,8 @@
     "es": ""
   },
   "constantRegionSubregionsBENELUX": {
-    "it": "Sottoregioni del Benelux",
-    "en": "Benelux Subregions",
+    "it": "Nazioni del Benelux",
+    "en": "Benelux Countries",
     "fr": "",
     "de": "",
     "jp": "",
@@ -8001,8 +8001,8 @@
     "es": ""
   },
   "constantRegionSubregionsNORDIC": {
-    "it": "Sottoregioni Nordiche",
-    "en": "Nordic Subregions",
+    "it": "Nazioni Nordiche",
+    "en": "Nordic Countries",
     "fr": "",
     "de": "",
     "jp": "",
