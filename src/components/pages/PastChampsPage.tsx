@@ -49,6 +49,7 @@ const PastChampsPage = () => {
                     ? arr[idx + 1].dateInstated - champ.dateInstated
                     : Math.floor(+new Date() / 1000) - champ.dateInstated;
                   const durationDays = duration / 86400;
+                  const durationPerc = (duration / totalDuration) * 100;
                   return (
                     <tr>
                       <td>
@@ -72,7 +73,12 @@ const PastChampsPage = () => {
                           ? translations.pastChampsPageLessThan1Day[lang]
                           : `${Math.floor(durationDays)} ${Math.floor(durationDays) === 1 ? translations.pastChampsPageDaySingular[lang] : translations.pastChampsPageDayPlural[lang]}`}
                       </td>
-                      <td>{((duration / totalDuration) * 100).toFixed(10)}%</td>
+                      <td>
+                        {durationPerc < 10
+                          ? "0" + durationPerc.toFixed(10)
+                          : durationPerc.toFixed(10)}
+                        %
+                      </td>
                     </tr>
                   );
                 })}
