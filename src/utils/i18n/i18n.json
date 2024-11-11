@@ -8198,6 +8198,15 @@
     "pt": "",
     "es": ""
   },
+  "navbarLabelChampions": {
+    "it": "I Campioni",
+    "en": "The Champions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "navbarLabelContribute": {
     "it": "Come Contribuire",
     "en": "How To Contribute",
@@ -11513,6 +11522,96 @@
   "contributionsPageSpecialCreditsFormerUpdatersParagraph": {
     "it": "Ringraziamo tutti i membri dello staff che hanno aiutato a mantenere il Sito in passato:",
     "en": "Special Thanks to former staff members who helped maintain the Site in the past:",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageHeading": {
+    "it": "I Campioni",
+    "en": "The Champions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPagePlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageStartDateCol": {
+    "it": "Inizio",
+    "en": "Start Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageEndDateCol": {
+    "it": "Fine",
+    "en": "End Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageDurationCol": {
+    "it": "Durata",
+    "en": "Duration",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPagePercentCol": {
+    "it": "%",
+    "en": "%",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageOngoing": {
+    "it": "Continua",
+    "en": "Ongoing",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageLessThan1Day": {
+    "it": "<1 giornata",
+    "en": "<1 day",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageDaySingular": {
+    "it": "giorno",
+    "en": "day",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "pastChampsPageDayPlural": {
+    "it": "giorni",
+    "en": "days",
     "fr": "",
     "de": "",
     "jp": "",

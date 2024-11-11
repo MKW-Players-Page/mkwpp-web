@@ -104,6 +104,10 @@ const SECTIONS: NavbarSection[] = [
         url: resolvePage(Pages.MatchupHome),
       },
       {
+        label: "navbarLabelChampions",
+        url: resolvePage(Pages.PastChamps),
+      },
+      {
         label: "navbarLabelContribute",
         url: resolvePage(Pages.Contribute),
       },
