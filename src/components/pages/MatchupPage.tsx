@@ -204,6 +204,7 @@ const MatchupPage = () => {
                   <th />
                   <th colSpan={cellSpan}>
                     <FlagIcon
+                      showRegFlagRegardless={true}
                       region={getRegionById(metadata, matchupData[0].data?.playerData.region ?? 0)}
                     />
                     {matchupData[0].data?.playerData.alias ?? matchupData[0].data?.playerData.name}
@@ -211,6 +212,7 @@ const MatchupPage = () => {
                   <th />
                   <th colSpan={cellSpan}>
                     <FlagIcon
+                      showRegFlagRegardless={true}
                       region={getRegionById(metadata, matchupData[1].data?.playerData.region ?? 0)}
                     />
                     {matchupData[1].data?.playerData.alias ?? matchupData[1].data?.playerData.name}

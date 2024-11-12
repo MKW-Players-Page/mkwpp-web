@@ -7,6 +7,10 @@ import { ReactComponent as CommentIcon } from "../../assets/icons/comment.svg";
 import { ReactComponent as GhostIcon } from "../../assets/icons/ghost.svg";
 import { ReactComponent as VideoIcon } from "../../assets/icons/video.svg";
 import { ReactComponent as DropdownCaret } from "../../assets/icons/dropdowncaret.svg";
+import { useContext } from "react";
+import { SettingsContext } from "../../utils/Settings";
+import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { WorldRegion } from "../../utils/Defaults";
 
 export const Icons = {
   Comment: CommentIcon,
@@ -31,14 +35,36 @@ const Icon = ({ icon }: IconProps) => {
 
 export interface FlagIconProps {
   region?: Region;
+  showRegFlagRegardless?: boolean;
 }
 
-export const FlagIcon = ({ region }: FlagIconProps) => {
+export const FlagIcon = ({ region, showRegFlagRegardless }: FlagIconProps) => {
+  const { settings } = useContext(SettingsContext);
+  const metadata = useContext(MetadataContext);
+
+  const getFirstValidRegion = (region: Region): Region => {
+    if (
+      region.parent === undefined ||
+      region.parent === null ||
+      region.type === "country" ||
+      region.type === "country_group" ||
+      region.type === "continent" ||
+      region.type === "world"
+    )
+      return region;
+    return getFirstValidRegion(getRegionById(metadata, region.parent) ?? WorldRegion);
+  };
+
+  const computeRegionCode =
+    region === undefined
+      ? "xx"
+      : settings.showRegFlags || showRegFlagRegardless
+        ? region.code.toLowerCase()
+        : getFirstValidRegion(region).code.toLowerCase();
+
   return (
     <span className="flag-icon">
-      <Flag
-        flag={(region === undefined ? "xx" : region.code.toLowerCase()) as keyof typeof Flags}
-      />
+      <Flag flag={computeRegionCode as keyof typeof Flags} />
     </span>
   );
 };

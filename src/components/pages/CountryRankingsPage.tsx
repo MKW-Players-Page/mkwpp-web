@@ -184,7 +184,7 @@ const CountryRankingsPage = () => {
                       >
                         <td>{stats.rank}</td>
                         <td>
-                          <FlagIcon region={stats.region} />
+                          <FlagIcon showRegFlagRegardless={true} region={stats.region} />
                           <span>{stats.region.name}</span>
                         </td>
                         <td>{calculatedValueStr}</td>

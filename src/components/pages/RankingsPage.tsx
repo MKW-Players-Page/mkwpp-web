@@ -183,7 +183,14 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                     >
                       <td>{stats.rank}</td>
                       <td>
-                        <FlagIcon region={getRegionById(metadata, stats.player.region ?? 0)} />
+                        <FlagIcon
+                          showRegFlagRegardless={
+                            region.type === "country" ||
+                            region.type === "subnational" ||
+                            region.type === "subnational_group"
+                          }
+                          region={getRegionById(metadata, stats.player.region ?? 0)}
+                        />
                         <Link
                           to={resolvePage(Pages.PlayerProfile, {
                             id: stats.player.id,

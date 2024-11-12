@@ -9,6 +9,12 @@ import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";
 import { getLang, I18nContext, Language } from "../utils/i18n/i18n";
 import i18nJson from "../utils/i18n/i18n.json";
+import {
+  browserSettingsLoadParse,
+  Settings,
+  SettingsContext,
+  SettingsDataKey,
+} from "../utils/Settings";
 
 interface AppUserState {
   isLoading: boolean;
@@ -21,10 +27,16 @@ const App = () => {
   const initialUserState = { isLoading: true };
   const [user, setUserState] = useState<AppUserState>(initialUserState);
   const [langCode, setLangCodeState] = useState(getLang());
+  const [settings, setSettingsState] = useState(browserSettingsLoadParse());
 
   const setLang = (langCode: Language): void => {
     setLangCodeState(langCode);
     window.localStorage.setItem("langCode", langCode);
+  };
+
+  const setSettings = (newSettings: Settings): void => {
+    setSettingsState(newSettings);
+    window.localStorage.setItem(SettingsDataKey, JSON.stringify(newSettings));
   };
 
   const setUser = (user?: User) => {
@@ -39,13 +51,15 @@ const App = () => {
     <>
       <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
         <I18nContext.Provider value={{ lang: langCode, setLang, translations: i18nJson }}>
-          <Header />
-          <Navbar />
-          <div className="content">
-            <MetadataContext.Provider value={metadata}>
-              <Outlet />
-            </MetadataContext.Provider>
-          </div>
+          <SettingsContext.Provider value={{ settings, setSettings }}>
+            <Header />
+            <Navbar />
+            <div className="content">
+              <MetadataContext.Provider value={metadata}>
+                <Outlet />
+              </MetadataContext.Provider>
+            </div>
+          </SettingsContext.Provider>
         </I18nContext.Provider>
       </UserContext.Provider>
     </>

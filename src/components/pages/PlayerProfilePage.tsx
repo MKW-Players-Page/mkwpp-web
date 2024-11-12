@@ -182,7 +182,14 @@ const PlayerProfilePage = () => {
       {/* Redirect to player list if id is invalid or does not exist. */}
       {playerError && <Navigate to={resolvePage(Pages.PlayerList)} />}
       <h1>
-        <FlagIcon region={getRegionById(metadata, player?.region ?? 0)} />
+        <FlagIcon
+          showRegFlagRegardless={
+            region.type === "country" ||
+            region.type === "subnational" ||
+            region.type === "subnational_group"
+          }
+          region={getRegionById(metadata, player?.region ?? 0)}
+        />
         {player?.name ?? <>&nbsp;</>}
       </h1>
       <OverwriteColor hue={siteHue}>

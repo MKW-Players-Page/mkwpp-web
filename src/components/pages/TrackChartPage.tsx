@@ -194,7 +194,14 @@ const TrackChartPage = () => {
                     >
                       <td>{score.rank}</td>
                       <td>
-                        <FlagIcon region={getRegionById(metadata, score.player.region ?? 0)} />
+                        <FlagIcon
+                          showRegFlagRegardless={
+                            region.type === "country" ||
+                            region.type === "subnational" ||
+                            region.type === "subnational_group"
+                          }
+                          region={getRegionById(metadata, score.player.region ?? 0)}
+                        />
                         <Link
                           to={resolvePage(Pages.PlayerProfile, {
                             id: score.player.id,

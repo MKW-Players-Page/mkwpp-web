@@ -39,7 +39,7 @@ export const getLang = (): Language => {
 
 export interface I18nContextType {
   lang: Language;
-  setLang: (lang: Language, cb: React.Dispatch<React.SetStateAction<Language>>) => void;
+  setLang: (lang: Language) => void;
   translations: TranslationJson;
 }
 

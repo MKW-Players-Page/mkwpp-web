@@ -167,6 +167,11 @@ const TrackTopsPage = () => {
                                   <td>{score.rank}</td>
                                   <td>
                                     <FlagIcon
+                                      showRegFlagRegardless={
+                                        region.type === "country" ||
+                                        region.type === "subnational" ||
+                                        region.type === "subnational_group"
+                                      }
                                       region={getRegionById(metadata, score.player.region ?? 0)}
                                     />
                                     <Link

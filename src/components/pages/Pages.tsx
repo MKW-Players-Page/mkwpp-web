@@ -21,6 +21,7 @@ import { buildQueryParamString } from "../../utils/SearchParams";
 import CountryRankingsPage from "./CountryRankingsPage";
 import ContributionsPage from "./ContributionsPage";
 import PastChampsPage from "./PastChampsPage";
+import OptionsPage from "./OptionsPage";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -102,6 +103,10 @@ export const Pages: PageMap = {
   PastChamps: {
     path: "/champs",
     element: <PastChampsPage />,
+  },
+  Options: {
+    path: "/options",
+    element: <OptionsPage />,
   },
   TrackTopsHome: {
     path: "/tops",
