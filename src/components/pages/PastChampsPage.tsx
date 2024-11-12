@@ -33,7 +33,7 @@ const PastChampsPage = () => {
       <OverwriteColor hue={siteHue}>
         <CategorySelect value={category} onChange={setCategory} />
         <Deferred isWaiting={isLoading}>
-          <div className="module">
+          <div className="module table-hover-rows">
             <table>
               <thead>
                 <th>{translations.pastChampsPagePlayerCol[lang]}</th>
