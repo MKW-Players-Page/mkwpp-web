@@ -168,11 +168,6 @@ const ContributionsPage = () => {
             description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureUserSettingsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureUserSettingsParagraph[lang]}</>}
-            suggestedBy={[1165]}
-          />
-          <FeatureElement
             title={translations.contributionsPageFeatureRustBackendHeading[lang]}
             description={<>{translations.contributionsPageFeatureRustBackendParagraph[lang]}</>}
             suggestedBy={[918]}
@@ -195,10 +190,17 @@ const ContributionsPage = () => {
             workedOnBy={[1165]}
           />
           <FeatureElement
+            title={translations.contributionsPageFeatureUserSettingsHeading[lang]}
+            description={<>{translations.contributionsPageFeatureUserSettingsParagraph[lang]}</>}
+            workedOnBy={[918]}
+            suggestedBy={[1165]}
+          />
+          <FeatureElement
             title={translations.contributionsPageFeatureFurtherSubregionsHeading[lang]}
             description={
               <>{translations.contributionsPageFeatureFurtherSubregionsParagraph[lang]}</>
             }
+            workedOnBy={[1165, 918]}
             suggestedBy={[1165, 918]}
           />
           <FeatureElement
