@@ -373,10 +373,7 @@ const TextInputDropdown = ({
               (dropdown.current as any).nextElementSibling.children[0].focus();
               (textarea.current as any).value = text;
             } else {
-              (textarea.current as any).value = (textarea.current as any).value.replaceAll(
-                /\n/g,
-                "",
-              );
+              (textarea.current as any).blur();
             }
           }
         }}
