@@ -6,7 +6,7 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { I18nContext } from "../../utils/i18n/i18n";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { useCategoryParam } from "../../utils/SearchParams";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { CategorySelect, FlagIcon } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { Pages, resolvePage } from "./Pages";

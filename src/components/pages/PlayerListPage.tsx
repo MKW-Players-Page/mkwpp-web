@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { FlagIcon } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";

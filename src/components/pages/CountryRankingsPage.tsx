@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks";

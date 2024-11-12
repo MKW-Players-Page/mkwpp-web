@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { CategoryEnum, PlayerStats } from "../../api";
 import { useApi } from "../../hooks";
 import { formatTime, formatTimeDiff } from "../../utils/Formatters";

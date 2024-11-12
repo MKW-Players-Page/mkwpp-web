@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import {
   CategoryField,
   Icon,

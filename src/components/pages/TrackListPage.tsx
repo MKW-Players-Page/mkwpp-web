@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { MetadataContext } from "../../utils/Metadata";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 

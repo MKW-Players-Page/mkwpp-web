@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import api, { CategoryEnum } from "../../api";

@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { getCategoryNameTranslationKey, getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";

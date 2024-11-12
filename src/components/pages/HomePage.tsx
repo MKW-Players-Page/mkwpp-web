@@ -1,4 +1,4 @@
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { coreApi } from "../../api";
 import { useApi } from "../../hooks";
 import { BlogPostModule } from "../widgets";

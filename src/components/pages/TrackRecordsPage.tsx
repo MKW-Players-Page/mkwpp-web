@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { CategorySelect, FlagIcon, Icon, Tooltip } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import api from "../../api";

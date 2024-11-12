@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
-import Deferred from "../../global/Deferred";
+import Deferred from "../../widgets/Deferred";
 import { Pages, resolvePage } from "../Pages";
 
 interface UserActivationState {

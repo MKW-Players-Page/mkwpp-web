@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import Deferred from "../../global/Deferred";
+import Deferred from "../../widgets/Deferred";
 import { BlogPostModule } from "../../widgets";
 import { coreApi } from "../../../api";
 import { useApi } from "../../../hooks";

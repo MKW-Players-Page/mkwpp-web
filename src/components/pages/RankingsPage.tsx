@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
-import Deferred from "../global/Deferred";
+import Deferred from "../widgets/Deferred";
 import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
 import api from "../../api";
 import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
