@@ -18,10 +18,10 @@ const OptionsPage = () => {
             <p>{translations.optionsPageBrowserOptRegFlagsParagraph[lang]}</p>
             <input
               type="checkbox"
-              onClick={() =>
+              onChange={() =>
                 setSettings(setSettingKV(settings, "showRegFlags", !settings.showRegFlags))
               }
-              checked={settings.showRegFlags}
+              defaultChecked={settings.showRegFlags}
             />
           </div>
         </div>
