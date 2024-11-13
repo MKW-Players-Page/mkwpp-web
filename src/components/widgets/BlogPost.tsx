@@ -13,7 +13,7 @@ const BlogPostModule = ({ post }: BlogPostModuleProps) => {
       <div className="module-header">
         <b>{post.title}</b>
         <br />
-        {post.publishedAt.toLocaleString(lang)} - {post.author.username}
+        {new Date(post.publishedAt * 1000).toLocaleString(lang)} - {post.author.username}
       </div>
       <div className="module-content" dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
