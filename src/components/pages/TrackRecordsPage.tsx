@@ -14,6 +14,7 @@ import { UserContext } from "../../utils/User";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -22,6 +23,7 @@ const TrackRecordsPage = () => {
   const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
+  const { settings } = useContext(SettingsContext);
   const { translations, lang } = useContext(I18nContext);
 
   const { user } = useContext(UserContext);
@@ -31,7 +33,7 @@ const TrackRecordsPage = () => {
     [category, region],
   );
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>

@@ -18,6 +18,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 import { WorldRegion } from "../../utils/Defaults";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -45,6 +46,7 @@ const TrackTopsPage = () => {
   const { lapMode, setLapMode } = useLapModeParam(searchParams);
 
   const metadata = useContext(MetadataContext);
+  const { settings } = useContext(SettingsContext);
   const { translations, lang } = useContext(I18nContext);
 
   const region =
@@ -65,7 +67,7 @@ const TrackTopsPage = () => {
     [category, cup, lapMode, region, metadata],
   );
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>

@@ -11654,6 +11654,15 @@
     "pt": "",
     "es": ""
   },
+  "optionsPageBrowserOptHueShiftHeading": {
+    "it": "Cambia Colori Sito",
+    "en": "Change Site Hues",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "optionsPageBrowserOptRegFlagsParagraph": {
     "it": "Mostra o meno le bandiere specifiche alle sottoregioni sulle chart",
     "en": "Whether to show or not subregion-specific flags on Charts",
@@ -11684,6 +11693,15 @@
   "optionsPageSaveBtnText": {
     "it": "Salva",
     "en": "Save",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageResetBtnText": {
+    "it": "Reset",
+    "en": "Reset",
     "fr": "",
     "de": "",
     "jp": "",

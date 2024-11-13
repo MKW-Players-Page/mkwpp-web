@@ -27,6 +27,7 @@ import {
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -116,6 +117,7 @@ const PlayerProfilePage = () => {
 
   const metadata = useContext(MetadataContext);
   const { translations, lang } = useContext(I18nContext);
+  const { settings } = useContext(SettingsContext);
 
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
@@ -161,7 +163,7 @@ const PlayerProfilePage = () => {
       return score as ScoreDoubled;
     });
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   const getAllRegions = (arr: Region[], startId: number): Region[] => {
     let region = getRegionById(metadata, startId);

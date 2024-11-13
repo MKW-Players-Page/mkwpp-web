@@ -20,6 +20,7 @@ import {
   useRowHighlightParam,
 } from "../../utils/SearchParams";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -91,6 +92,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
+  const { settings } = useContext(SettingsContext);
 
   const { isLoading, data: rankings } = useApi(
     () =>
@@ -113,7 +115,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     }
   }, [highlightElement, isLoading]);
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>

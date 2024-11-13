@@ -20,6 +20,7 @@ import {
   MatchupScore,
 } from "../../utils/MatchupDataCrunch";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -93,6 +94,7 @@ const MatchupPage = () => {
 
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
+  const { settings } = useContext(SettingsContext);
 
   const hasCourse = lapMode !== LapModeEnum.Lap;
   const hasLap = lapMode !== LapModeEnum.Course;
@@ -183,7 +185,7 @@ const MatchupPage = () => {
     );
   };
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>

@@ -24,6 +24,7 @@ import {
   TimetrialsRegionsRankingsListTypeEnum,
 } from "../../api/generated";
 import { handleBars, I18nContext } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -32,6 +33,7 @@ const CountryRankingsPage = () => {
   const { top, setTopNumber } = useTopParam(searchParams, ["hl"]);
   const { regionType, setRegionType } = useRegionTypeRestrictedParam(searchParams, ["hl"]);
 
+  const { settings } = useContext(SettingsContext);
   const { translations, lang } = useContext(I18nContext);
 
   const highlight = useRowHighlightParam(searchParams).highlight;
@@ -56,7 +58,7 @@ const CountryRankingsPage = () => {
     }
   }, [highlightElement, isLoading]);
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   let text = "err";
   switch (top) {
