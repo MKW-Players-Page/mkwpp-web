@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <>
       <Deferred isWaiting={isLoading}>
-        {posts?.map((post) => <BlogPostModule post={post} />)}
+        {posts?.slice(0,4)?.map((post) => <BlogPostModule post={post} />)}
       </Deferred>
     </>
   );
