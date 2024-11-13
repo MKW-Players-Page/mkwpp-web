@@ -9549,8 +9549,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHUnres": {
-    "it": "Nonostante non sia stato fatto RTA, è permesso {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
-    "en": "Although it's not yet been pulled off RTA, it is allowed to do {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
+    "it": "È permesso {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
+    "en": "It is allowed to do {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
     "fr": "",
     "de": "",
     "jp": "",
