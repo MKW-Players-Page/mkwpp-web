@@ -11671,5 +11671,23 @@
     "jp": "",
     "pt": "",
     "es": ""
+  },
+  "optionsPageAccountOptBioHeading": {
+    "it": "Aggiorna Biografia",
+    "en": "Update Bio",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSaveBtnText": {
+    "it": "Salva",
+    "en": "Save",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
   }
 }
