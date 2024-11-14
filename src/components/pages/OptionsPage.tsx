@@ -25,6 +25,7 @@ const OptionsPage = () => {
   );
 
   const bioTextArea = useRef(null);
+  const aliasTextArea = useRef(null);
 
   return (
     <>
@@ -67,33 +68,64 @@ const OptionsPage = () => {
           <div className="module-content">{translations.optionsPageLogInWarning[lang]}</div>
         </div>
       ) : (
-        <div className="module">
-          <div className="module-content">
-            <Deferred isWaiting={playerLoading}>
-              <h2>{translations.optionsPageAccountOptBioHeading[lang]}</h2>
-              <textarea
-                ref={bioTextArea}
-                style={{ color: "#fff" } as React.CSSProperties}
-                maxLength={1024}
-                defaultValue={player?.bio ?? ""}
-                className="module"
-              ></textarea>
-              <button
-                onClick={() => {
-                  // eslint-disable-next-line
-                  const newBio = (bioTextArea.current as any).value;
-                  // post request here, add api
-                }}
-                disabled={
-                  bioTextArea.current === null ||
-                  (bioTextArea.current as any).value === (player?.bio ?? "")
-                }
-              >
-                {translations.optionsPageSaveBtnText[lang]}
-              </button>
-            </Deferred>
+        <>
+          <div className="module">
+            <div className="module-content">
+              <Deferred isWaiting={playerLoading}>
+                <h2>{translations.optionsPageAccountOptAliasHeading[lang]}</h2>
+                <textarea
+                  ref={aliasTextArea}
+                  style={{ color: "#fff" } as React.CSSProperties}
+                  maxLength={64}
+                  defaultValue={player?.alias ?? ""}
+                  className="module"
+                />
+                <button
+                  onClick={async () => {
+                    if (
+                      aliasTextArea.current === null ||
+                      (aliasTextArea.current as any).value === (player?.alias ?? "")
+                    )
+                      return;
+                    await api.timetrialsProfileUpdate({
+                      playerUpdate: { alias: (aliasTextArea.current as any).value },
+                    });
+                  }}
+                >
+                  {translations.optionsPageSaveBtnText[lang]}
+                </button>
+              </Deferred>
+            </div>
           </div>
-        </div>
+          <div className="module">
+            <div className="module-content">
+              <Deferred isWaiting={playerLoading}>
+                <h2>{translations.optionsPageAccountOptBioHeading[lang]}</h2>
+                <textarea
+                  ref={bioTextArea}
+                  style={{ color: "#fff" } as React.CSSProperties}
+                  maxLength={1024}
+                  defaultValue={player?.bio ?? ""}
+                  className="module"
+                />
+                <button
+                  onClick={async () => {
+                    if (
+                      bioTextArea.current === null ||
+                      (bioTextArea.current as any).value === (player?.bio ?? "")
+                    )
+                      return;
+                    await api.timetrialsProfileUpdate({
+                      playerUpdate: { bio: (bioTextArea.current as any).value },
+                    });
+                  }}
+                >
+                  {translations.optionsPageSaveBtnText[lang]}
+                </button>
+              </Deferred>
+            </div>
+          </div>
+        </>
       )}
     </>
   );
