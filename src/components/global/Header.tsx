@@ -5,8 +5,14 @@ import "./Header.css";
 import { Pages, resolvePage } from "../pages";
 import { logoutUser, UserContext } from "../../utils/User";
 import { I18nContext } from "../../utils/i18n/i18n";
+import Icon from "../widgets/Icon";
 
-const Header = () => {
+export interface HeaderProps {
+  setNavbarHidden: React.Dispatch<React.SetStateAction<boolean>>;
+  navbarHidden: boolean;
+}
+
+const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
   const { isLoading, user, setUser } = useContext(UserContext);
   const { translations, lang } = useContext(I18nContext);
 
@@ -16,9 +22,19 @@ const Header = () => {
 
   return (
     <header className="header">
-      <Link to={resolvePage(Pages.Home)}>
-        <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
-      </Link>
+      <div>
+        <span
+          className="hamburger"
+          onClick={() => {
+            setNavbarHidden(!navbarHidden);
+          }}
+        >
+          <Icon icon="Hamburger" />
+        </span>
+        <Link to={resolvePage(Pages.Home)}>
+          <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
+        </Link>
+      </div>
       {!isLoading && (
         <div className="account-actions">
           {user ? (

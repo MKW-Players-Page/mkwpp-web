@@ -18,6 +18,7 @@ interface AppUserState {
 const App = () => {
   const metadata = useMetadata();
 
+  const [navbarHidden, setNavbarHidden] = useState(false);
   const initialUserState = { isLoading: true };
   const [user, setUserState] = useState<AppUserState>(initialUserState);
   const [langCode, setLangCodeState] = useState(getLang());
@@ -39,9 +40,9 @@ const App = () => {
     <>
       <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
         <I18nContext.Provider value={{ lang: langCode, setLang, translations: i18nJson }}>
-          <Header />
-          <Navbar />
-          <div className="content">
+          <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
+          <Navbar navbarHidden={navbarHidden} />
+          <div className={`content${navbarHidden ? " navbarHidden" : ""}`}>
             <MetadataContext.Provider value={metadata}>
               <Outlet />
             </MetadataContext.Provider>
