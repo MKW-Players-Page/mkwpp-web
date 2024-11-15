@@ -7,12 +7,13 @@
   border-right: 1px solid var(--navbar-border-color);
   box-shadow: 0 3px 12px 0 #000;
   padding-top: var(--header-height);
-  transition: transform 1s;
+  margin-left: 0;
+  transition: margin-left 1s;
 }
 
 .navbar.hidden {
-  transform: translateX(-100%);
-  transition: transform 1s;
+  margin-left: calc(-1 * var(--navbar-width));
+  transition: margin-left 1s;
 }
 
 .navbar-content {
