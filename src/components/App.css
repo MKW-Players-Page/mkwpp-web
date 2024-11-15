@@ -1,14 +1,12 @@
 .content {
   padding-top: calc(var(--header-height) + 20px);
-  padding-left: calc(var(--navbar-width) + 20px);
+  margin-left: calc(var(--navbar-width) + 20px);
   padding-bottom: 20px;
   padding-right: 20px;
-  transition: padding-left 1s;
 }
 
 .content.navbarHidden {
-  padding-left: calc(20px);
-  transition: padding-left 1s;
+  margin-left: calc(20px);
 }
 
 .module {

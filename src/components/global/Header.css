@@ -38,6 +38,7 @@
 .hamburger {
   padding-right: 30px;
   padding-left: 10px;
+  cursor: pointer;
 }
 
 .hamburger:hover * {
