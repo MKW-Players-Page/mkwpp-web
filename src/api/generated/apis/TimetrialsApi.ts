@@ -15,11 +15,12 @@
 
 import * as runtime from '../runtime';
 import type {
+  PatchedPlayerUpdate,
   Player,
   PlayerAward,
   PlayerBasic,
-  PlayerMatchup,
   PlayerStats,
+  PlayerUpdate,
   Region,
   RegionStats,
   Score,
@@ -31,16 +32,18 @@ import type {
   TrackCup,
 } from '../models/index';
 import {
+    PatchedPlayerUpdateFromJSON,
+    PatchedPlayerUpdateToJSON,
     PlayerFromJSON,
     PlayerToJSON,
     PlayerAwardFromJSON,
     PlayerAwardToJSON,
     PlayerBasicFromJSON,
     PlayerBasicToJSON,
-    PlayerMatchupFromJSON,
-    PlayerMatchupToJSON,
     PlayerStatsFromJSON,
     PlayerStatsToJSON,
+    PlayerUpdateFromJSON,
+    PlayerUpdateToJSON,
     RegionFromJSON,
     RegionToJSON,
     RegionStatsFromJSON,
@@ -69,13 +72,6 @@ export interface TimetrialsChampionsListRequest {
     category: TimetrialsChampionsListCategoryEnum;
 }
 
-export interface TimetrialsMatchupsRetrieveRequest {
-    category: TimetrialsMatchupsRetrieveCategoryEnum;
-    lapMode: TimetrialsMatchupsRetrieveLapModeEnum;
-    pk1: number;
-    pk2: number;
-}
-
 export interface TimetrialsPlayersRetrieveRequest {
     id: number;
 }
@@ -92,6 +88,14 @@ export interface TimetrialsPlayersStatsRetrieveRequest {
     id: number;
     lapMode: TimetrialsPlayersStatsRetrieveLapModeEnum;
     region: number;
+}
+
+export interface TimetrialsProfilePartialUpdateRequest {
+    patchedPlayerUpdate?: PatchedPlayerUpdate;
+}
+
+export interface TimetrialsProfileUpdateRequest {
+    playerUpdate?: PlayerUpdate;
 }
 
 export interface TimetrialsRankingsListRequest {
@@ -232,66 +236,6 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsCupsList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TrackCup>> {
         const response = await this.timetrialsCupsListRaw(initOverrides);
-        return await response.value();
-    }
-
-    /**
-     */
-    async timetrialsMatchupsRetrieveRaw(requestParameters: TimetrialsMatchupsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PlayerMatchup>> {
-        if (requestParameters['category'] == null) {
-            throw new runtime.RequiredError(
-                'category',
-                'Required parameter "category" was null or undefined when calling timetrialsMatchupsRetrieve().'
-            );
-        }
-
-        if (requestParameters['lapMode'] == null) {
-            throw new runtime.RequiredError(
-                'lapMode',
-                'Required parameter "lapMode" was null or undefined when calling timetrialsMatchupsRetrieve().'
-            );
-        }
-
-        if (requestParameters['pk1'] == null) {
-            throw new runtime.RequiredError(
-                'pk1',
-                'Required parameter "pk1" was null or undefined when calling timetrialsMatchupsRetrieve().'
-            );
-        }
-
-        if (requestParameters['pk2'] == null) {
-            throw new runtime.RequiredError(
-                'pk2',
-                'Required parameter "pk2" was null or undefined when calling timetrialsMatchupsRetrieve().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['category'] != null) {
-            queryParameters['category'] = requestParameters['category'];
-        }
-
-        if (requestParameters['lapMode'] != null) {
-            queryParameters['lap_mode'] = requestParameters['lapMode'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/timetrials/matchups/{pk1}/{pk2}/`.replace(`{${"pk1"}}`, encodeURIComponent(String(requestParameters['pk1']))).replace(`{${"pk2"}}`, encodeURIComponent(String(requestParameters['pk2']))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerMatchupFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async timetrialsMatchupsRetrieve(requestParameters: TimetrialsMatchupsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PlayerMatchup> {
-        const response = await this.timetrialsMatchupsRetrieveRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -461,6 +405,68 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsPlayersStatsRetrieve(requestParameters: TimetrialsPlayersStatsRetrieveRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PlayerStats> {
         const response = await this.timetrialsPlayersStatsRetrieveRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsProfilePartialUpdateRaw(requestParameters: TimetrialsProfilePartialUpdateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PlayerUpdate>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/profile/`,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedPlayerUpdateToJSON(requestParameters['patchedPlayerUpdate']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerUpdateFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async timetrialsProfilePartialUpdate(requestParameters: TimetrialsProfilePartialUpdateRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PlayerUpdate> {
+        const response = await this.timetrialsProfilePartialUpdateRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsProfileUpdateRaw(requestParameters: TimetrialsProfileUpdateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PlayerUpdate>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/profile/`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PlayerUpdateToJSON(requestParameters['playerUpdate']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerUpdateFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async timetrialsProfileUpdate(requestParameters: TimetrialsProfileUpdateRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PlayerUpdate> {
+        const response = await this.timetrialsProfileUpdateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -920,24 +926,6 @@ export const TimetrialsChampionsListCategoryEnum = {
     Unrestricted: 'unres'
 } as const;
 export type TimetrialsChampionsListCategoryEnum = typeof TimetrialsChampionsListCategoryEnum[keyof typeof TimetrialsChampionsListCategoryEnum];
-/**
- * @export
- */
-export const TimetrialsMatchupsRetrieveCategoryEnum = {
-    NonShortcut: 'nonsc',
-    Shortcut: 'sc',
-    Unrestricted: 'unres'
-} as const;
-export type TimetrialsMatchupsRetrieveCategoryEnum = typeof TimetrialsMatchupsRetrieveCategoryEnum[keyof typeof TimetrialsMatchupsRetrieveCategoryEnum];
-/**
- * @export
- */
-export const TimetrialsMatchupsRetrieveLapModeEnum = {
-    Course: 'course',
-    Lap: 'lap',
-    Overall: 'overall'
-} as const;
-export type TimetrialsMatchupsRetrieveLapModeEnum = typeof TimetrialsMatchupsRetrieveLapModeEnum[keyof typeof TimetrialsMatchupsRetrieveLapModeEnum];
 /**
  * @export
  */

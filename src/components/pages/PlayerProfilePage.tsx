@@ -27,6 +27,7 @@ import {
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -116,6 +117,7 @@ const PlayerProfilePage = () => {
 
   const metadata = useContext(MetadataContext);
   const { translations, lang } = useContext(I18nContext);
+  const { settings } = useContext(SettingsContext);
 
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
@@ -161,7 +163,7 @@ const PlayerProfilePage = () => {
       return score as ScoreDoubled;
     });
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   const getAllRegions = (arr: Region[], startId: number): Region[] => {
     let region = getRegionById(metadata, startId);
@@ -182,7 +184,14 @@ const PlayerProfilePage = () => {
       {/* Redirect to player list if id is invalid or does not exist. */}
       {playerError && <Navigate to={resolvePage(Pages.PlayerList)} />}
       <h1>
-        <FlagIcon region={getRegionById(metadata, player?.region ?? 0)} />
+        <FlagIcon
+          showRegFlagRegardless={
+            region.type === "country" ||
+            region.type === "subnational" ||
+            region.type === "subnational_group"
+          }
+          region={getRegionById(metadata, player?.region ?? 0)}
+        />
         {player?.name ?? <>&nbsp;</>}
       </h1>
       <OverwriteColor hue={siteHue}>

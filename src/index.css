@@ -30,6 +30,7 @@
   --input-background-color-disabled: hsl(var(--site-hue), 21%, 35%);
   --input-background-color-disabled-hover: hsl(var(--site-hue), 19%, 40%);
   --input-border-color: hsl(var(--site-hue), 21%, 32%);
+  --input-selected: hsl(var(--site-hue), 100%, 57%);
   /* Other */
   --tooltip-background-color: rgba(0, 0, 0, 0.9);
 }
@@ -138,4 +139,14 @@ select:disabled {
 input:disabled:hover,
 select:disabled:hover {
   background-color: var(--input-background-color-disabled-hover);
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  align-self: center;
+  border: var(--input-border-color) 1px solid;
+}
+input[type="checkbox"]:checked {
+  background-color: var(--input-selected);
 }

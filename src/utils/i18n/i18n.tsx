@@ -30,16 +30,20 @@ export enum LanguageName {
 
 /** Get selected language from localStorage. */
 export const getLang = (): Language => {
-  return (window.localStorage.getItem("langCode") ??
-    ((Object.values(Language) as string[]).includes(navigator.language)
-      ? navigator.language
-      : null) ??
-    Language.English) as Language;
+  return (
+    (Object.values(Language) as string[]).includes(
+      window.localStorage.getItem("langCode") ?? "DEFINITELYNOTALANGCODE",
+    )
+      ? window.localStorage.getItem("langCode")
+      : (((Object.values(Language) as string[]).includes(navigator.language)
+          ? navigator.language
+          : null) ?? Language.English)
+  ) as Language;
 };
 
 export interface I18nContextType {
   lang: Language;
-  setLang: (lang: Language, cb: React.Dispatch<React.SetStateAction<Language>>) => void;
+  setLang: (lang: Language) => void;
   translations: TranslationJson;
 }
 
