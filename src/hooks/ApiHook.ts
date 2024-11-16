@@ -23,14 +23,15 @@ export const useApi = <T>(
 
   useEffect(() => {
     setState((prev) => ({ ...prev, isLoading: true }));
-    if (!waitFor.map(({ variable, defaultValue }) => variable !== defaultValue).includes(false))
-      apiCallback()
-        .then((data: T) => {
-          setState({ isLoading: false, data });
-        })
-        .catch((error: ResponseError) => {
-          setState({ isLoading: false, error });
-        });
+    for (const { variable, defaultValue } of waitFor) if (variable === defaultValue) return;
+
+    apiCallback()
+      .then((data: T) => {
+        setState({ isLoading: false, data });
+      })
+      .catch((error: ResponseError) => {
+        setState({ isLoading: false, error });
+      });
     // React complains about apiCallback missing from dependency array, but it isn't needed.
     // In fact, it causes the effect hook to be triggered in an endless loop. We don't want that.
     // eslint-disable-next-line
