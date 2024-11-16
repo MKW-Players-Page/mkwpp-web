@@ -7,19 +7,30 @@ export interface ApiState<T> {
   error?: ResponseError;
 }
 
-export const useApi = <T>(apiCallback: () => Promise<T>, dependencies: DependencyList = []) => {
+/** Allows for stalling requests if a variable is an undesired value */
+export interface WaitDependencyList {
+  variable: any;
+  defaultValue: any;
+}
+
+export const useApi = <T>(
+  apiCallback: () => Promise<T>,
+  dependencies: DependencyList = [],
+  waitFor: WaitDependencyList[] = [],
+) => {
   const initialState = { isLoading: true };
   const [state, setState] = useState<ApiState<T>>(initialState);
 
   useEffect(() => {
     setState((prev) => ({ ...prev, isLoading: true }));
-    apiCallback()
-      .then((data: T) => {
-        setState({ isLoading: false, data });
-      })
-      .catch((error: ResponseError) => {
-        setState({ isLoading: false, error });
-      });
+    if (!waitFor.map(({ variable, defaultValue }) => variable !== defaultValue).includes(false))
+      apiCallback()
+        .then((data: T) => {
+          setState({ isLoading: false, data });
+        })
+        .catch((error: ResponseError) => {
+          setState({ isLoading: false, error });
+        });
     // React complains about apiCallback missing from dependency array, but it isn't needed.
     // In fact, it causes the effect hook to be triggered in an endless loop. We don't want that.
     // eslint-disable-next-line
