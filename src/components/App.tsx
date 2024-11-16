@@ -53,8 +53,8 @@ const App = () => {
       <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
         <I18nContext.Provider value={{ lang: langCode, setLang, translations: i18nJson }}>
           <SettingsContext.Provider value={{ settings, setSettings }}>
-              <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
-                        <Navbar navbarHidden={navbarHidden} />
+            <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
+            <Navbar navbarHidden={navbarHidden} />
             <div className={`content${navbarHidden ? " navbarHidden" : ""}`}>
               <MetadataContext.Provider value={metadata}>
                 <Outlet />
