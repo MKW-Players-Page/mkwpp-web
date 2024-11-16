@@ -8009,6 +8009,15 @@
     "pt": "",
     "es": ""
   },
+  "headerOptions": {
+    "it": "Impostazioni",
+    "en": "Options",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "headerSubmit": {
     "it": "Carica",
     "en": "Submit",
@@ -9540,8 +9549,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesRDHUnres": {
-    "it": "Nonostante non sia stato fatto RTA, è permesso {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
-    "en": "Although it's not yet been pulled off RTA, it is allowed to do {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
+    "it": "È permesso {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
+    "en": "It is allowed to do {{rulesPageTrackCategoriesRDHUnresODBLinkText}}.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -11612,6 +11621,96 @@
   "pastChampsPageDayPlural": {
     "it": "giorni",
     "en": "days",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageLogInWarning": {
+    "it": "Entra per vedere",
+    "en": "Log in to view",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageBrowserHeading": {
+    "it": "Impostazioni Browser",
+    "en": "Browser Settings",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageBrowserOptRegFlagsHeading": {
+    "it": "Mostra Bandiere Regionali",
+    "en": "Show Regional Flags",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageBrowserOptHueShiftHeading": {
+    "it": "Cambia Colori Sito",
+    "en": "Change Site Hues",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageBrowserOptRegFlagsParagraph": {
+    "it": "Mostra o meno le bandiere specifiche alle sottoregioni sulle chart",
+    "en": "Whether to show or not subregion-specific flags on Charts",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountHeading": {
+    "it": "Impostazioni Account",
+    "en": "Account Settings",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptBioHeading": {
+    "it": "Aggiorna Biografia",
+    "en": "Update Bio",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptAliasHeading": {
+    "it": "Aggiorna Alias",
+    "en": "Update Alias",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSaveBtnText": {
+    "it": "Salva",
+    "en": "Save",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageResetBtnText": {
+    "it": "Reset",
+    "en": "Reset",
     "fr": "",
     "de": "",
     "jp": "",

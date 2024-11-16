@@ -22,6 +22,7 @@ import {
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -36,6 +37,7 @@ const TrackChartPage = () => {
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const metadata = useContext(MetadataContext);
+  const { settings } = useContext(SettingsContext);
   const { translations, lang } = useContext(I18nContext);
 
   let track,
@@ -75,7 +77,7 @@ const TrackChartPage = () => {
     }
   }, [highlightElement, isLoading, metadata.isLoading]);
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>
@@ -194,7 +196,14 @@ const TrackChartPage = () => {
                     >
                       <td>{score.rank}</td>
                       <td>
-                        <FlagIcon region={getRegionById(metadata, score.player.region ?? 0)} />
+                        <FlagIcon
+                          showRegFlagRegardless={
+                            region.type === "country" ||
+                            region.type === "subnational" ||
+                            region.type === "subnational_group"
+                          }
+                          region={getRegionById(metadata, score.player.region ?? 0)}
+                        />
                         <Link
                           to={resolvePage(Pages.PlayerProfile, {
                             id: score.player.id,

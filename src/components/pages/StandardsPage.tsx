@@ -13,6 +13,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../widgets/Dropdown";
 import { useCategoryParam, useStandardLevelIdParam } from "../../utils/SearchParams";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 const StandardsPage = () => {
   const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ const StandardsPage = () => {
 
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
+  const { settings } = useContext(SettingsContext);
 
   useEffect(() => {
     if (levelId === 0 && !metadata.isLoading) {
@@ -45,7 +47,7 @@ const StandardsPage = () => {
       }
     });
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>

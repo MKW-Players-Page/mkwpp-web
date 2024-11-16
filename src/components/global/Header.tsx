@@ -43,6 +43,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
               <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
                 {user.username}
               </Link>
+              <Link to={resolvePage(Pages.Options)}>{translations.headerOptions[lang]}</Link>
               <Link to={resolvePage(Pages.Submission)}>{translations.headerSubmit[lang]}</Link>
               <Link onClick={onLogout} to="">
                 {translations.headerLogOut[lang]}
@@ -50,6 +51,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
             </>
           ) : (
             <>
+              <Link to={resolvePage(Pages.Options)}>{translations.headerOptions[lang]}</Link>
               <Link to={resolvePage(Pages.UserLogin)}>{translations.headerLogIn[lang]}</Link>
               <Link to={resolvePage(Pages.UserJoin)}>{translations.headerJoin[lang]}</Link>
             </>

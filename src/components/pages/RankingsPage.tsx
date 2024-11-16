@@ -20,6 +20,7 @@ import {
   useRowHighlightParam,
 } from "../../utils/SearchParams";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { SettingsContext } from "../../utils/Settings";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -91,6 +92,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
+  const { settings } = useContext(SettingsContext);
 
   const { isLoading, data: rankings } = useApi(
     () =>
@@ -113,7 +115,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     }
   }, [highlightElement, isLoading]);
 
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
 
   return (
     <>
@@ -183,7 +185,14 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                     >
                       <td>{stats.rank}</td>
                       <td>
-                        <FlagIcon region={getRegionById(metadata, stats.player.region ?? 0)} />
+                        <FlagIcon
+                          showRegFlagRegardless={
+                            region.type === "country" ||
+                            region.type === "subnational" ||
+                            region.type === "subnational_group"
+                          }
+                          region={getRegionById(metadata, stats.player.region ?? 0)}
+                        />
                         <Link
                           to={resolvePage(Pages.PlayerProfile, {
                             id: stats.player.id,

@@ -1,17 +1,18 @@
 import { CategoryEnum } from "../api";
 import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
 import { TranslationKey } from "./i18n/i18n";
+import { Settings } from "./Settings";
 
-export const getCategorySiteHue = (category: CategoryEnum) => {
+export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) => {
   switch (category) {
     case "nonsc":
-      return 0;
+      return settings.categoryHueColorNonSC;
     case "sc":
-      return 100;
+      return settings.categoryHueColorSC;
     case "unres":
-      return 216;
+      return settings.categoryHueColorUnres;
     default:
-      return 216;
+      return settings.categoryHueColorUnres;
   }
 };
 

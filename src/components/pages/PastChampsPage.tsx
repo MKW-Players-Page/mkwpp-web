@@ -10,13 +10,15 @@ import Deferred from "../widgets/Deferred";
 import { CategorySelect, FlagIcon } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { Pages, resolvePage } from "./Pages";
+import { SettingsContext } from "../../utils/Settings";
 
 const PastChampsPage = () => {
   const { translations, lang } = useContext(I18nContext);
+  const { settings } = useContext(SettingsContext);
   const metadata = useContext(MetadataContext);
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
-  const siteHue = getCategorySiteHue(category);
+  const siteHue = getCategorySiteHue(category, settings);
   const { isLoading, data: champs } = useApi(
     () =>
       api.timetrialsChampionsList({
