@@ -70,13 +70,17 @@ export const useApiArray = <T, R>(
   callCount: number,
   paramArray: R[],
   dependencies: DependencyList = [],
+  requestType = "",
+  waitFor: WaitDependencyList[] = [],
 ) => {
   const initialState = Array.from({ length: callCount }, (_, __) => ({
     isLoading: true,
   }));
   const [state, setState] = useState<Array<ApiState<T>>>(initialState);
+  const setPromises = useState<Array<[Promise<any>, number, string]>>([])[1];
 
   useEffect(() => {
+    for (const { variable, defaultValue } of waitFor) if (variable === defaultValue) return;
     for (let i = 0; i < callCount; ++i) {
       if (i >= paramArray.length) {
         return;
@@ -88,21 +92,42 @@ export const useApiArray = <T, R>(
         ...prev.slice(i + 1),
       ]);
 
-      apiCallback(paramArray[i])
-        .then((data: T) => {
-          setState((prev) => [
-            ...prev.slice(0, i),
-            { isLoading: false, data },
-            ...prev.slice(i + 1),
-          ]);
-        })
-        .catch((error: ResponseError) => {
-          setState((prev) => [
-            ...prev.slice(0, i),
-            { isLoading: false, error },
-            ...prev.slice(i + 1),
-          ]);
-        });
+      const promiseDate = +new Date();
+      setPromises((prev) => [
+        ...prev,
+        [
+          apiCallback(paramArray[i])
+            .finally(async () => {
+              // Wait for any previous request of the same kind
+              const previousRequest = prev.reverse().find((r) => r[2] === requestType);
+              if (previousRequest !== undefined) await previousRequest[0];
+
+              // Remove this one
+              setPromises((prev) =>
+                prev.filter((promiseWithDate) => promiseWithDate[1] !== promiseDate),
+              );
+            })
+            // Set data or error accordingly
+            .then(
+              (data: T) => {
+                setState((prev) => [
+                  ...prev.slice(0, i),
+                  { isLoading: false, data },
+                  ...prev.slice(i + 1),
+                ]);
+              },
+              (error: ResponseError) => {
+                setState((prev) => [
+                  ...prev.slice(0, i),
+                  { isLoading: false, error },
+                  ...prev.slice(i + 1),
+                ]);
+              },
+            ),
+          promiseDate,
+          requestType,
+        ],
+      ]);
     }
     // eslint-disable-next-line
   }, dependencies);
