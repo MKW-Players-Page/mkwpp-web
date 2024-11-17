@@ -1,0 +1,19 @@
+.expandable-module-heading {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+  padding: 4px 16px;
+  font-size: 0.925rem;
+  background-color: var(--module-background-color-alt);
+}
+
+.expandable-module-body {
+  overflow: clip;
+  max-height: 0;
+  transition: max-height 1s linear;
+}
+.expandable-module-body.expanded {
+  max-height: var(--expandable-module-max-height);
+  transition: max-height 1s linear;
+}
