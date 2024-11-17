@@ -1665,7 +1665,7 @@
     "es": ""
   },
   "constantRegionCAAB": {
-    "it": "",
+    "it": "Alberta",
     "en": "Alberta",
     "fr": "",
     "de": "",
@@ -1674,7 +1674,7 @@
     "es": ""
   },
   "constantRegionRecordCAAB": {
-    "it": "",
+    "it": "Record Albertani",
     "en": "Albertan Records",
     "fr": "",
     "de": "",
@@ -1683,7 +1683,7 @@
     "es": ""
   },
   "constantRegionSubregionsCAAB": {
-    "it": "",
+    "it": "Sottoregioni Albertane",
     "en": "Albertan Subregions",
     "fr": "",
     "de": "",
@@ -1692,7 +1692,7 @@
     "es": ""
   },
   "constantRegionCABC": {
-    "it": "",
+    "it": "Columbia Britannica",
     "en": "British Columbia",
     "fr": "",
     "de": "",
@@ -1701,7 +1701,7 @@
     "es": ""
   },
   "constantRegionRecordCABC": {
-    "it": "",
+    "it": "Record della Columbia Britannica",
     "en": "British Columbian Records",
     "fr": "",
     "de": "",
@@ -1710,7 +1710,7 @@
     "es": ""
   },
   "constantRegionSubregionsCABC": {
-    "it": "",
+    "it": "Sottoregioni della Columbia Britannica",
     "en": "British Columbian Subregions",
     "fr": "",
     "de": "",
@@ -1719,7 +1719,7 @@
     "es": ""
   },
   "constantRegionCAMB": {
-    "it": "",
+    "it": "Manitoba",
     "en": "Manitoba",
     "fr": "",
     "de": "",
@@ -1728,7 +1728,7 @@
     "es": ""
   },
   "constantRegionRecordCAMB": {
-    "it": "",
+    "it": "Record Manitobani",
     "en": "Manitoban Records",
     "fr": "",
     "de": "",
@@ -1737,7 +1737,7 @@
     "es": ""
   },
   "constantRegionSubregionsCAMB": {
-    "it": "",
+    "it": "Sottoregioni Manitobane",
     "en": "Manitoban Subregions",
     "fr": "",
     "de": "",
@@ -1746,7 +1746,7 @@
     "es": ""
   },
   "constantRegionCANB": {
-    "it": "",
+    "it": "Nuovo Brunswick",
     "en": "New Brunswick",
     "fr": "",
     "de": "",
@@ -1755,7 +1755,7 @@
     "es": ""
   },
   "constantRegionRecordCANB": {
-    "it": "",
+    "it": "Record del Nuovo Brunswick",
     "en": "New Brunswicker Records",
     "fr": "",
     "de": "",
@@ -1764,7 +1764,7 @@
     "es": ""
   },
   "constantRegionSubregionsCANB": {
-    "it": "",
+    "it": "Sottoregioni del Nuovo Brunswick",
     "en": "New Brunswicker Subregions",
     "fr": "",
     "de": "",
@@ -1773,7 +1773,7 @@
     "es": ""
   },
   "constantRegionCANL": {
-    "it": "",
+    "it": "Terranova e Labrador",
     "en": "Newfoundland and Labrador",
     "fr": "",
     "de": "",
@@ -1782,7 +1782,7 @@
     "es": ""
   },
   "constantRegionRecordCANL": {
-    "it": "",
+    "it": "Record della Terranova e del Labrador",
     "en": "Newfoundlander and Labradorian Records",
     "fr": "",
     "de": "",
@@ -1791,7 +1791,7 @@
     "es": ""
   },
   "constantRegionSubregionsCANL": {
-    "it": "",
+    "it": "Sottoregioni della Terranova e del Labrador",
     "en": "Newfoundlander and Labradorian Subregions",
     "fr": "",
     "de": "",
@@ -1800,7 +1800,7 @@
     "es": ""
   },
   "constantRegionCANT": {
-    "it": "",
+    "it": "Territori del Nord-Ovest",
     "en": "Northwest Territories",
     "fr": "",
     "de": "",
@@ -1809,7 +1809,7 @@
     "es": ""
   },
   "constantRegionRecordCANT": {
-    "it": "",
+    "it": "Record dei Territori del Nord-Ovest",
     "en": "Northwest Territorian Records",
     "fr": "",
     "de": "",
@@ -1818,7 +1818,7 @@
     "es": ""
   },
   "constantRegionSubregionsCANT": {
-    "it": "",
+    "it": "Sottoregioni dei Territori del Nord-Ovest",
     "en": "Northwest Territorian Subregions",
     "fr": "",
     "de": "",
@@ -1827,7 +1827,7 @@
     "es": ""
   },
   "constantRegionCANS": {
-    "it": "",
+    "it": "Nuova Scozia",
     "en": "Nova Scotia",
     "fr": "",
     "de": "",
@@ -1836,7 +1836,7 @@
     "es": ""
   },
   "constantRegionRecordCANS": {
-    "it": "",
+    "it": "Record della Nuova Scozia",
     "en": "Nova Scotian Records",
     "fr": "",
     "de": "",
@@ -1845,7 +1845,7 @@
     "es": ""
   },
   "constantRegionSubregionsCANS": {
-    "it": "",
+    "it": "Sottoregioni della Nuova Scozia",
     "en": "Nova Scotian Subregions",
     "fr": "",
     "de": "",
@@ -1854,7 +1854,7 @@
     "es": ""
   },
   "constantRegionCANU": {
-    "it": "",
+    "it": "Nunavut",
     "en": "Nunavut",
     "fr": "",
     "de": "",
@@ -1863,7 +1863,7 @@
     "es": ""
   },
   "constantRegionRecordCANU": {
-    "it": "",
+    "it": "Record del Nunavut",
     "en": "Nunavummiuq Records",
     "fr": "",
     "de": "",
@@ -1872,7 +1872,7 @@
     "es": ""
   },
   "constantRegionSubregionsCANU": {
-    "it": "",
+    "it": "Sottoregioni del Nunavut",
     "en": "Nunavummiuq Subregions",
     "fr": "",
     "de": "",
@@ -1881,7 +1881,7 @@
     "es": ""
   },
   "constantRegionCAON": {
-    "it": "",
+    "it": "Ontario",
     "en": "Ontario",
     "fr": "",
     "de": "",
@@ -1890,7 +1890,7 @@
     "es": ""
   },
   "constantRegionRecordCAON": {
-    "it": "",
+    "it": "Record dell'Ontario",
     "en": "Ontarian Records",
     "fr": "",
     "de": "",
@@ -1899,7 +1899,7 @@
     "es": ""
   },
   "constantRegionSubregionsCAON": {
-    "it": "",
+    "it": "Sottoregioni dell'Ontario",
     "en": "Ontarian Subregions",
     "fr": "",
     "de": "",
@@ -1908,7 +1908,7 @@
     "es": ""
   },
   "constantRegionCAPE": {
-    "it": "",
+    "it": "Isola del Principe Edoardo",
     "en": "Prince Edward Island",
     "fr": "",
     "de": "",
@@ -1917,7 +1917,7 @@
     "es": ""
   },
   "constantRegionRecordCAPE": {
-    "it": "",
+    "it": "Record dell'Isola del Principe Edoardo",
     "en": "Prince Edward Islander Records",
     "fr": "",
     "de": "",
@@ -1926,7 +1926,7 @@
     "es": ""
   },
   "constantRegionSubregionsCAPE": {
-    "it": "",
+    "it": "Sottoregioni dell'Isola del Principe Edoardo",
     "en": "Prince Edward Islander Subregions",
     "fr": "",
     "de": "",
@@ -1935,7 +1935,7 @@
     "es": ""
   },
   "constantRegionCAQC": {
-    "it": "",
+    "it": "Québec",
     "en": "Quebec",
     "fr": "",
     "de": "",
@@ -1944,7 +1944,7 @@
     "es": ""
   },
   "constantRegionRecordCAQC": {
-    "it": "",
+    "it": "Record Quebecchesi",
     "en": "Quebecer Records",
     "fr": "",
     "de": "",
@@ -1953,7 +1953,7 @@
     "es": ""
   },
   "constantRegionSubregionsCAQC": {
-    "it": "",
+    "it": "Sottoregioni Quebecchesi",
     "en": "Quebecer Subregions",
     "fr": "",
     "de": "",
@@ -1962,7 +1962,7 @@
     "es": ""
   },
   "constantRegionCASK": {
-    "it": "",
+    "it": "Saskatchewan",
     "en": "Saskatchewan",
     "fr": "",
     "de": "",
@@ -1971,7 +1971,7 @@
     "es": ""
   },
   "constantRegionRecordCASK": {
-    "it": "",
+    "it": "Record del Saskatchewan",
     "en": "Saskatchewanian Records",
     "fr": "",
     "de": "",
@@ -1980,7 +1980,7 @@
     "es": ""
   },
   "constantRegionSubregionsCASK": {
-    "it": "",
+    "it": "Sottoregioni del Saskatchewan",
     "en": "Saskatchewanian Subregions",
     "fr": "",
     "de": "",
@@ -1989,7 +1989,7 @@
     "es": ""
   },
   "constantRegionCAYT": {
-    "it": "",
+    "it": "Yukon",
     "en": "Yukon",
     "fr": "",
     "de": "",
@@ -1998,7 +1998,7 @@
     "es": ""
   },
   "constantRegionRecordCAYT": {
-    "it": "",
+    "it": "Record dello Yukon",
     "en": "Yukoner Records",
     "fr": "",
     "de": "",
@@ -2007,7 +2007,7 @@
     "es": ""
   },
   "constantRegionSubregionsCAYT": {
-    "it": "",
+    "it": "Sottoregioni dello Yukon",
     "en": "Yukoner Subregions",
     "fr": "",
     "de": "",
