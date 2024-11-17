@@ -56,18 +56,21 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
 };
 
 const PlayerListPage = () => {
-  const { isLoading, data: players } = useApi(() =>
-    api.timetrialsPlayersList().then((arr) =>
-      (
-        arr.map((r) => {
-          (r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD");
-          (r as PlayerForFilter).simplifiedAlias = (r.alias ?? r.name)
-            .toLowerCase()
-            .normalize("NFKD");
-          return r;
-        }) as PlayerForFilter[]
-      ).sort((a, b) => (a.simplifiedAlias > b.simplifiedAlias ? 1 : -1)),
-    ),
+  const { isLoading, data: players } = useApi(
+    () =>
+      api.timetrialsPlayersList().then((arr) =>
+        (
+          arr.map((r) => {
+            (r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD");
+            (r as PlayerForFilter).simplifiedAlias = (r.alias ?? r.name)
+              .toLowerCase()
+              .normalize("NFKD");
+            return r;
+          }) as PlayerForFilter[]
+        ).sort((a, b) => (a.simplifiedAlias > b.simplifiedAlias ? 1 : -1)),
+      ),
+    [],
+    "playerList",
   );
   const { translations, lang } = useContext(I18nContext);
 

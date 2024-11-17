@@ -65,6 +65,7 @@ const TrackChartPage = () => {
         region: region.id,
       }),
     [category, lapMode, region, id, metadata],
+    "trackCharts",
     [{ variable: metadata.regions.length, defaultValue: 1 }],
   );
 

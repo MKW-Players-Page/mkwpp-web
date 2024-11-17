@@ -102,8 +102,8 @@ const MatchupPage = () => {
   const cellSpan = lapMode === LapModeEnum.Overall ? 2 : 1;
 
   const matchupData = [
-    useApi(() => getPlayerData(id1, category, lapMode), [id1, category, lapMode]),
-    useApi(() => getPlayerData(id2, category, lapMode), [id2, category, lapMode]),
+    useApi(() => getPlayerData(id1, category, lapMode), [id1, category, lapMode], "playerData0"),
+    useApi(() => getPlayerData(id2, category, lapMode), [id2, category, lapMode], "playerData1"),
   ];
 
   const isLoading = matchupData[0].isLoading || matchupData[1].isLoading;

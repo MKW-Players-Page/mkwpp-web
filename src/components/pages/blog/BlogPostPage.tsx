@@ -12,7 +12,11 @@ const BlogPostPage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
-  const { isLoading, data: post } = useApi(() => coreApi.coreBlogRetrieve({ id }), [id]);
+  const { isLoading, data: post } = useApi(
+    () => coreApi.coreBlogRetrieve({ id }),
+    [id],
+    "blogPosts",
+  );
   const { translations, lang } = useContext(I18nContext);
 
   return (

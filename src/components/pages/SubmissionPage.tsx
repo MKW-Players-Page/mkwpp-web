@@ -239,7 +239,11 @@ const SubmissionsTab = () => {
   const metadata = useContext(MetadataContext);
   const { translations, lang } = useContext(I18nContext);
 
-  const { isLoading, data: submissions } = useApi(() => api.timetrialsSubmissionsList());
+  const { isLoading, data: submissions } = useApi(
+    () => api.timetrialsSubmissionsList(),
+    [],
+    "trackSubmissions",
+  );
 
   return (
     <div className="module-content">

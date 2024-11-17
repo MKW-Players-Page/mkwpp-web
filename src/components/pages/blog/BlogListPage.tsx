@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { I18nContext } from "../../../utils/i18n/i18n";
 
 const BlogListPage = () => {
-  const { isLoading, data: posts } = useApi(() => coreApi.coreBlogList());
+  const { isLoading, data: posts } = useApi(() => coreApi.coreBlogList(), [], "blogPosts");
   const { translations, lang } = useContext(I18nContext);
 
   return (

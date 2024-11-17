@@ -16,22 +16,47 @@ export interface WaitDependencyList {
 export const useApi = <T>(
   apiCallback: () => Promise<T>,
   dependencies: DependencyList = [],
+  requestType = "",
   waitFor: WaitDependencyList[] = [],
 ) => {
   const initialState = { isLoading: true };
   const [state, setState] = useState<ApiState<T>>(initialState);
+  const setPromises = useState<Array<[Promise<any>, number, string]>>([])[1];
+  // const [promises, setPromises] = useState<Array<[Promise<any>, number, string]>>([]);
 
   useEffect(() => {
-    setState((prev) => ({ ...prev, isLoading: true }));
+    setState({ isLoading: true });
     for (const { variable, defaultValue } of waitFor) if (variable === defaultValue) return;
 
-    apiCallback()
-      .then((data: T) => {
-        setState({ isLoading: false, data });
-      })
-      .catch((error: ResponseError) => {
-        setState({ isLoading: false, error });
-      });
+    const promiseDate = +new Date();
+    setPromises((prev) => [
+      ...prev,
+      [
+        apiCallback()
+          .finally(async () => {
+            // Wait for any previous request of the same kind
+            const previousRequest = prev.reverse().find((r) => r[2] === requestType);
+            if (previousRequest !== undefined) await previousRequest[0];
+
+            // Remove this one
+            setPromises((prev) =>
+              prev.filter((promiseWithDate) => promiseWithDate[1] !== promiseDate),
+            );
+          })
+          // Set data or error accordingly
+          .then(
+            async (data: T) => {
+              setState({ isLoading: false, data });
+            },
+            async (error: ResponseError) => {
+              setState({ isLoading: false, error });
+            },
+          ),
+        promiseDate,
+        requestType,
+      ],
+    ]);
+
     // React complains about apiCallback missing from dependency array, but it isn't needed.
     // In fact, it causes the effect hook to be triggered in an endless loop. We don't want that.
     // eslint-disable-next-line

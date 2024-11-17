@@ -31,6 +31,7 @@ const TrackRecordsPage = () => {
   const { isLoading, data: scores } = useApi(
     () => api.timetrialsRecordsList({ category, region: region.id }),
     [category, region, metadata],
+    "trackRecords",
     [{ variable: metadata.regions.length, defaultValue: 1 }],
   );
 

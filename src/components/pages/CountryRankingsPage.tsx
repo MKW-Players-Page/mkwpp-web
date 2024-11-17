@@ -46,6 +46,7 @@ const CountryRankingsPage = () => {
         type: regionType,
       }),
     [category, lapMode, top, regionType],
+    "countryRankingsTops",
   );
 
   const highlightElement = useRef(null);
