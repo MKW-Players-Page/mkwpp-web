@@ -8711,6 +8711,33 @@
     "pt": "",
     "es": ""
   },
+  "discordEmbedParagraph": {
+    "it": "Unisciti alla community su discord!",
+    "en": "Join the community on discord!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "discordEmbedOnlineUsers": {
+    "it": "Utenti Online: {{number}}",
+    "en": "Online Users: {{number}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "discordEmbedLinktext": {
+    "it": "Unisciti!",
+    "en": "Join!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "rulesPageHeading": {
     "it": "Regole Prove a Tempo Mario Kart Wii",
     "en": "Mario Kart Wii Time Trials Rules",
