@@ -1664,6 +1664,357 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionCAAB": {
+    "it": "",
+    "en": "Alberta",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCAAB": {
+    "it": "",
+    "en": "Albertan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCAAB": {
+    "it": "",
+    "en": "Albertan Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCABC": {
+    "it": "",
+    "en": "British Columbia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCABC": {
+    "it": "",
+    "en": "British Columbian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCABC": {
+    "it": "",
+    "en": "British Columbian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCAMB": {
+    "it": "",
+    "en": "Manitoba",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCAMB": {
+    "it": "",
+    "en": "Manitoban Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCAMB": {
+    "it": "",
+    "en": "Manitoban Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCANB": {
+    "it": "",
+    "en": "New Brunswick",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCANB": {
+    "it": "",
+    "en": "New Brunswicker Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCANB": {
+    "it": "",
+    "en": "New Brunswicker Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCANL": {
+    "it": "",
+    "en": "Newfoundland and Labrador",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCANL": {
+    "it": "",
+    "en": "Newfoundlander and Labradorian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCANL": {
+    "it": "",
+    "en": "Newfoundlander and Labradorian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCANT": {
+    "it": "",
+    "en": "Northwest Territories",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCANT": {
+    "it": "",
+    "en": "Northwest Territorian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCANT": {
+    "it": "",
+    "en": "Northwest Territorian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCANS": {
+    "it": "",
+    "en": "Nova Scotia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCANS": {
+    "it": "",
+    "en": "Nova Scotian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCANS": {
+    "it": "",
+    "en": "Nova Scotian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCANU": {
+    "it": "",
+    "en": "Nunavut",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCANU": {
+    "it": "",
+    "en": "Nunavummiuq Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCANU": {
+    "it": "",
+    "en": "Nunavummiuq Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCAON": {
+    "it": "",
+    "en": "Ontario",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCAON": {
+    "it": "",
+    "en": "Ontarian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCAON": {
+    "it": "",
+    "en": "Ontarian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCAPE": {
+    "it": "",
+    "en": "Prince Edward Island",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCAPE": {
+    "it": "",
+    "en": "Prince Edward Islander Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCAPE": {
+    "it": "",
+    "en": "Prince Edward Islander Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCAQC": {
+    "it": "",
+    "en": "Quebec",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCAQC": {
+    "it": "",
+    "en": "Quebecer Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCAQC": {
+    "it": "",
+    "en": "Quebecer Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCASK": {
+    "it": "",
+    "en": "Saskatchewan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCASK": {
+    "it": "",
+    "en": "Saskatchewanian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCASK": {
+    "it": "",
+    "en": "Saskatchewanian Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCAYT": {
+    "it": "",
+    "en": "Yukon",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCAYT": {
+    "it": "",
+    "en": "Yukoner Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCAYT": {
+    "it": "",
+    "en": "Yukoner Subregions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionCV": {
     "it": "Capo Verde",
     "en": "Cabo Verde",
