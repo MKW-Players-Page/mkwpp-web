@@ -8,8 +8,8 @@ import { I18nContext } from "../../utils/i18n/i18n";
 import { useContext } from "react";
 
 const HomePage = () => {
-    const { translations, lang } = useContext(I18nContext);
-    
+  const { translations, lang } = useContext(I18nContext);
+
   const { isLoading: blogpostsLoading, data: posts } = useApi(
     () => coreApi.coreBlogLatestList(),
     [],
