@@ -7,6 +7,7 @@ import { ReactComponent as CommentIcon } from "../../assets/icons/comment.svg";
 import { ReactComponent as GhostIcon } from "../../assets/icons/ghost.svg";
 import { ReactComponent as VideoIcon } from "../../assets/icons/video.svg";
 import { ReactComponent as DropdownCaret } from "../../assets/icons/dropdowncaret.svg";
+import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.svg";
 import { useContext } from "react";
 import { SettingsContext } from "../../utils/Settings";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
@@ -17,6 +18,7 @@ export const Icons = {
   Ghost: GhostIcon,
   Video: VideoIcon,
   Caret: DropdownCaret,
+  Hamburger: HamburgerIcon,
 };
 
 export interface IconProps {

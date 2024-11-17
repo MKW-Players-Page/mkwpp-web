@@ -189,11 +189,15 @@ const SECTIONS: NavbarSection[] = [
   },
 ];
 
-const Navbar = () => {
+export interface NavbarProps {
+  navbarHidden: boolean;
+}
+
+const Navbar = ({ navbarHidden }: NavbarProps) => {
   const { translations, lang } = useContext(I18nContext);
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar${navbarHidden ? " hidden" : ""}`}>
       <div className="navbar-content">
         <LanguageDropdown />
         {SECTIONS.map((section) => (

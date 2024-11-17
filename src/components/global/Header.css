@@ -34,3 +34,13 @@
 .account-actions button:hover {
   color: var(--alt-text-color);
 }
+
+.hamburger {
+  padding-right: 30px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.hamburger:hover * {
+  color: var(--alt-text-color);
+}
