@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { MetadataContext, useMetadata } from "../utils/Metadata";
@@ -24,7 +24,7 @@ interface AppUserState {
 const App = () => {
   const metadata = useMetadata();
 
-  const [navbarHidden, setNavbarHidden] = useState(false);
+  const [navbarHidden, setNavbarHidden] = useState(window.innerWidth < window.innerHeight);
   const initialUserState = { isLoading: true };
   const [user, setUserState] = useState<AppUserState>(initialUserState);
   const [langCode, setLangCodeState] = useState(getLang());
@@ -44,6 +44,30 @@ const App = () => {
     setUserState({ isLoading: false, user });
   };
 
+  useLayoutEffect(() => {
+    let isLandscape = window.innerWidth >= window.innerHeight;
+    const updateSize = () => {
+      if (window.innerWidth < window.innerHeight) {
+        // If it's turned to portrait
+        if (isLandscape) {
+          // And was landscape
+          isLandscape = false;
+          setNavbarHidden(true);
+        }
+      } else {
+        // If it's turned to landscape
+        if (!isLandscape) {
+          // And was portrait
+          isLandscape = true;
+        }
+      }
+    };
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     fetchCurrentUser(setUser);
   }, []);
@@ -55,7 +79,11 @@ const App = () => {
           <SettingsContext.Provider value={{ settings, setSettings }}>
             <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
             <Navbar navbarHidden={navbarHidden} />
-            <div className={`content${navbarHidden ? " navbarHidden" : ""}`}>
+            <div
+              onClick={() => setNavbarHidden(true)}
+              className={`darkener${navbarHidden ? "" : " navbarShown"}`}
+            ></div>
+            <div className={`content${navbarHidden ? "" : " navbarShown"}`}>
               <MetadataContext.Provider value={metadata}>
                 <Outlet />
               </MetadataContext.Provider>
