@@ -19,10 +19,10 @@ export interface Metadata {
  * @returns A stateful object containing the fetched metadata if the loading flag is cleared.
  */
 export const useMetadata = (): Metadata => {
-  const regions = useApi(() => api.timetrialsRegionsList());
-  const standards = useApi(() => api.timetrialsStandardsList());
-  const cups = useApi(() => api.timetrialsCupsList());
-  const tracks = useApi(() => api.timetrialsTracksList());
+  const regions = useApi(() => api.timetrialsRegionsList(), [], "regions");
+  const standards = useApi(() => api.timetrialsStandardsList(), [], "standards");
+  const cups = useApi(() => api.timetrialsCupsList(), [], "cups");
+  const tracks = useApi(() => api.timetrialsTracksList(), [], "tracks");
 
   return {
     isLoading: regions.isLoading || standards.isLoading || cups.isLoading || tracks.isLoading,

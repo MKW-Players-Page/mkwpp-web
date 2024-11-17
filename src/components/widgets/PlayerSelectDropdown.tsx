@@ -10,7 +10,7 @@ export interface PlayerSelectDropdownProps {
 }
 
 const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
-  const { data: players } = useApi(() => api.timetrialsPlayersList());
+  const { data: players } = useApi(() => api.timetrialsPlayersList(), [], "playerData");
   const { translations, lang } = useContext(I18nContext);
   const defaultValue: DropdownItemSetDataChild = {
     type: "DropdownItemData",

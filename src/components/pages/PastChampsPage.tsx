@@ -25,6 +25,7 @@ const PastChampsPage = () => {
         category,
       }),
     [category],
+    "pastChamps",
   );
 
   const totalDuration = +new Date() / 1000 - 1208390400;

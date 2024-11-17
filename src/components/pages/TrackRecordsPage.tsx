@@ -30,7 +30,9 @@ const TrackRecordsPage = () => {
 
   const { isLoading, data: scores } = useApi(
     () => api.timetrialsRecordsList({ category, region: region.id }),
-    [category, region],
+    [category, region, metadata],
+    "trackRecords",
+    [{ variable: metadata.regions.length, defaultValue: 1 }],
   );
 
   const siteHue = getCategorySiteHue(category, settings);

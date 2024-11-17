@@ -4,7 +4,7 @@ import { useApi } from "../../hooks";
 import { BlogPostModule } from "../widgets";
 
 const HomePage = () => {
-  const { isLoading, data: posts } = useApi(() => coreApi.coreBlogLatestList());
+  const { isLoading, data: posts } = useApi(() => coreApi.coreBlogLatestList(), [], "blogPosts");
 
   return (
     <>

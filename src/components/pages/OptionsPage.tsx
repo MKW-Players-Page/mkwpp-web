@@ -22,6 +22,7 @@ const OptionsPage = () => {
   const { isLoading: playerLoading, data: player } = useApi(
     () => api.timetrialsPlayersRetrieve({ id: user?.player ?? 1 }),
     [user],
+    "loadedUser",
   );
 
   const bioTextArea = useRef(null);

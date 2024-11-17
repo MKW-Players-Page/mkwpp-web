@@ -103,6 +103,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
         metric: metric.metric,
       }),
     [category, lapMode, region],
+    "playerRankings",
   );
 
   const highlightElement = useRef(null);

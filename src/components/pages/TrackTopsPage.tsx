@@ -65,6 +65,7 @@ const TrackTopsPage = () => {
       region: region.id,
     })) || [],
     [category, cup, lapMode, region, metadata],
+    "trackTop10s",
   );
 
   const siteHue = getCategorySiteHue(category, settings);
