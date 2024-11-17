@@ -8711,6 +8711,24 @@
     "pt": "",
     "es": ""
   },
+  "homePageWelcomeHeading": {
+    "it": "Benvenuto!",
+    "en": "Welcome!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph": {
+    "it": "Benvenuto alla Players' Page di Mario Kart Wii!",
+    "en": "Welcome to the Mario Kart Wii Players' Page!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "discordEmbedParagraph": {
     "it": "Unisciti alla community su discord!",
     "en": "Join the community on discord!",
