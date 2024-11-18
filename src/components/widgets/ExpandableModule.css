@@ -9,11 +9,14 @@
 }
 
 .expandable-module-body {
-  overflow: clip;
-  max-height: 0;
-  transition: max-height 1s linear;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-in;
+}
+.expandable-module-body > div {
+  overflow: hidden;
 }
 .expandable-module-body.expanded {
-  max-height: var(--expandable-module-max-height);
-  transition: max-height 1s linear;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.5s ease-in;
 }

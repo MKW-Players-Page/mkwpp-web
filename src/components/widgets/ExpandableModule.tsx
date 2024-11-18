@@ -5,34 +5,20 @@ import { useState } from "react";
 export interface ExpandableModuleProps {
   heading: string;
   defaultExpanded?: boolean;
-  moduleHeight: number;
   children: JSX.Element;
 }
 
-const ExpandableModule = ({
-  children,
-  defaultExpanded,
-  moduleHeight,
-  heading,
-}: ExpandableModuleProps) => {
+const ExpandableModule = ({ children, defaultExpanded, heading }: ExpandableModuleProps) => {
   const [expanded, setExpanded] = useState(!!defaultExpanded);
 
   return (
     <div className="module expandable-module">
-      <div
-        onClick={() => {
-          setExpanded(!expanded);
-        }}
-        className="expandable-module-heading"
-      >
+      <div onClick={() => setExpanded(!expanded)} className="expandable-module-heading">
         <span>{heading}</span>
         <Icon icon="Caret" />
       </div>
-      <div
-        style={{ "--expandable-module-max-height": `${moduleHeight}px` } as React.CSSProperties}
-        className={`expandable-module-body${expanded ? " expanded" : ""}`}
-      >
-        {children}
+      <div className={`expandable-module-body${expanded ? " expanded" : ""}`}>
+        <div>{children}</div>
       </div>
     </div>
   );

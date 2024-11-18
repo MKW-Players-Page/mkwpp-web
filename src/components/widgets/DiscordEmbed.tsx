@@ -41,15 +41,15 @@ const DiscordEmbed = () => {
 
   return (
     <div className="module discord">
-      <table>
-        <thead>
-          <tr>
-            <th colSpan={2}>
-              <span>{translations.discordEmbedParagraph[lang]}</span>
-            </th>
-          </tr>
-        </thead>
-        <Deferred isWaiting={isLoading}>
+      <Deferred isWaiting={isLoading}>
+        <table>
+          <thead>
+            <tr>
+              <th colSpan={2}>
+                <span>{translations.discordEmbedParagraph[lang]}</span>
+              </th>
+            </tr>
+          </thead>
           <tbody>
             {onlineMembers
               ?.map((user) => ({ user, sort: Math.random() }))
@@ -66,24 +66,24 @@ const DiscordEmbed = () => {
                 </tr>
               ))}
           </tbody>
-        </Deferred>
-        <tfoot>
-          <tr>
-            <th>
-              <span>
-                {handleBars(translations.discordEmbedOnlineUsers[lang], [
-                  ["number", (data?.presence_count ?? 0).toString()],
-                ])}
-              </span>
-            </th>
-            <th>
-              <Link className="submit-style" target="_blank" to="//discord.gg/GTTFmVdfRN">
-                {translations.discordEmbedLinktext[lang]}
-              </Link>
-            </th>
-          </tr>
-        </tfoot>
-      </table>
+          <tfoot>
+            <tr>
+              <th>
+                <span>
+                  {handleBars(translations.discordEmbedOnlineUsers[lang], [
+                    ["number", (data?.presence_count ?? 0).toString()],
+                  ])}
+                </span>
+              </th>
+              <th>
+                <Link className="submit-style" target="_blank" to="//discord.gg/GTTFmVdfRN">
+                  {translations.discordEmbedLinktext[lang]}
+                </Link>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+      </Deferred>
     </div>
   );
 };

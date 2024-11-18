@@ -18,7 +18,7 @@ const HomePage = () => {
 
   return (
     <div className="homePageGrid">
-      <ExpandableModule moduleHeight={150} heading={translations.homePageWelcomeHeading[lang]}>
+      <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>
         <div className="module-content">{translations.homePageWelcomeParagraph[lang]}</div>
       </ExpandableModule>
       <DiscordEmbed />
