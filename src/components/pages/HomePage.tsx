@@ -25,14 +25,11 @@ const HomePage = () => {
       </div>
       <div style={{ flex: 1 }}>
         <DiscordEmbed />
-        <ExpandableModule heading={"recent records"}>
-          <div className="module-content">test</div>
+        <ExpandableModule heading={translations.homePageRecentRecordsHeading[lang]}>
+          <div className="module-content"></div>
         </ExpandableModule>
-        <ExpandableModule heading={"recent times"}>
-          <div className="module-content">test</div>
-        </ExpandableModule>
-        <ExpandableModule heading={"test"}>
-          <div className="module-content">test</div>
+        <ExpandableModule heading={translations.homePageRecentTimesHeading[lang]}>
+          <div className="module-content"></div>
         </ExpandableModule>
       </div>
       <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>

@@ -8729,6 +8729,24 @@
     "pt": "",
     "es": ""
   },
+  "homePageRecentRecordsHeading": {
+    "it": "Record Recenti",
+    "en": "Recent Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageRecentTimesHeading": {
+    "it": "Tempi Recenti",
+    "en": "Recent Times",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "discordEmbedParagraph": {
     "it": "Unisciti alla community su discord!",
     "en": "Join the community on discord!",
