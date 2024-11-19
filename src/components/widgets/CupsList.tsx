@@ -22,7 +22,11 @@ const CupsList = () => {
           }
         >
           {metadata.cups?.map((cup) => (
-            <div key={cup.id} className="module" style={{ margin: 0 }}>
+            <div
+              key={cup.id}
+              className="module"
+              style={{ margin: 0, overflow: "hidden" } as React.CSSProperties}
+            >
               <div className="module-content">
                 <b>
                   {translations[`constantCup${cup.code.toUpperCase()}` as TranslationKey][lang]}
