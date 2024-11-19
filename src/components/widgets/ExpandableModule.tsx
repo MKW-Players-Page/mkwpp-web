@@ -5,14 +5,15 @@ import { useState } from "react";
 export interface ExpandableModuleProps {
   heading: string;
   defaultExpanded?: boolean;
+  style?: React.CSSProperties;
   children: JSX.Element;
 }
 
-const ExpandableModule = ({ children, defaultExpanded, heading }: ExpandableModuleProps) => {
+const ExpandableModule = ({ children, defaultExpanded, heading, style }: ExpandableModuleProps) => {
   const [expanded, setExpanded] = useState(!!defaultExpanded);
 
   return (
-    <div className="module expandable-module">
+    <div className="module expandable-module" style={style}>
       <div onClick={() => setExpanded(!expanded)} className="expandable-module-heading">
         <span>{heading}</span>
         <Icon icon="Caret" />

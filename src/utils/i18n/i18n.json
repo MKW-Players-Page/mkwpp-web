@@ -8739,8 +8739,8 @@
     "es": ""
   },
   "discordEmbedOnlineUsers": {
-    "it": "Utenti Online: {{number}}",
-    "en": "Online Users: {{number}}",
+    "it": "Utenti{{nbsp}}Online: {{number}}",
+    "en": "Online{{nbsp}}Users: {{number}}",
     "fr": "",
     "de": "",
     "jp": "",

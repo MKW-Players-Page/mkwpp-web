@@ -18,13 +18,26 @@ const HomePage = () => {
 
   return (
     <div className="homePageGrid">
-      <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>
+      <ExpandableModule style={{ order: 1 }} heading={translations.homePageWelcomeHeading[lang]}>
         <div className="module-content">{translations.homePageWelcomeParagraph[lang]}</div>
       </ExpandableModule>
-      <DiscordEmbed />
-      <Deferred isWaiting={blogpostsLoading}>
-        {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
-      </Deferred>
+      <div style={{ order: 3, flex: 1 }}>
+        <DiscordEmbed />
+        <ExpandableModule heading={"recent records"}>
+          <div className="module-content">test</div>
+        </ExpandableModule>
+        <ExpandableModule heading={"recent times"}>
+          <div className="module-content">test</div>
+        </ExpandableModule>
+        <ExpandableModule heading={"test"}>
+          <div className="module-content">test</div>
+        </ExpandableModule>
+      </div>
+      <div style={{ order: 2, flex: 3 }}>
+        <Deferred isWaiting={blogpostsLoading}>
+          {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
+        </Deferred>
+      </div>
     </div>
   );
 };

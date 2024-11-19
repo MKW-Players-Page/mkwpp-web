@@ -22,7 +22,11 @@ interface DiscordWidgetResponse {
   presence_count: number;
 }
 
-const DiscordEmbed = () => {
+export interface DiscordEmbedProps {
+  style?: React.CSSProperties;
+}
+
+const DiscordEmbed = ({ style }: DiscordEmbedProps) => {
   const UsersToShow = 10;
   const { translations, lang } = useContext(I18nContext);
 
@@ -40,7 +44,7 @@ const DiscordEmbed = () => {
   );
 
   return (
-    <div className="module discord">
+    <div className="module discord" style={style}>
       <Deferred isWaiting={isLoading}>
         <table>
           <thead>
@@ -71,6 +75,7 @@ const DiscordEmbed = () => {
               <th>
                 <span>
                   {handleBars(translations.discordEmbedOnlineUsers[lang], [
+                    ["nbsp", <>&nbsp;</>],
                     ["number", (data?.presence_count ?? 0).toString()],
                   ])}
                 </span>
