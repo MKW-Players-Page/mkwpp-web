@@ -6,6 +6,7 @@ import DiscordEmbed from "../widgets/DiscordEmbed";
 import ExpandableModule from "../widgets/ExpandableModule";
 import { I18nContext } from "../../utils/i18n/i18n";
 import { useContext } from "react";
+import CupsList from "../widgets/CupsList";
 
 const HomePage = () => {
   const { translations, lang } = useContext(I18nContext);
@@ -32,6 +33,11 @@ const HomePage = () => {
           <div className="module-content"></div>
         </ExpandableModule>
       </div>
+      <ExpandableModule heading={translations.homePageRecentTrackListPart[lang]}>
+        <div className="module-content">
+          <CupsList />
+        </div>
+      </ExpandableModule>
       <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>
         <div className="module-content">{translations.homePageWelcomeParagraph[lang]}</div>
       </ExpandableModule>

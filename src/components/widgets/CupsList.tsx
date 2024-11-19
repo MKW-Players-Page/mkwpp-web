@@ -15,14 +15,14 @@ const CupsList = () => {
           style={
             {
               display: "grid",
-              gap: "0 16px",
+              gap: "16px",
               gridTemplateColumns:
                 "repeat(auto-fit, minmax(min(100%, max(250px, 100%/5)), 1fr))" /* Don't ask me how or why this works */,
             } as React.CSSProperties
           }
         >
           {metadata.cups?.map((cup) => (
-            <div key={cup.id} className="module">
+            <div key={cup.id} className="module" style={{ margin: 0 }}>
               <div className="module-content">
                 <b>
                   {translations[`constantCup${cup.code.toUpperCase()}` as TranslationKey][lang]}
