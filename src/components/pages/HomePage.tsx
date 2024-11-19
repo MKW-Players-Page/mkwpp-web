@@ -18,10 +18,12 @@ const HomePage = () => {
 
   return (
     <div className="homePageGrid">
-      <ExpandableModule style={{ order: 1 }} heading={translations.homePageWelcomeHeading[lang]}>
-        <div className="module-content">{translations.homePageWelcomeParagraph[lang]}</div>
-      </ExpandableModule>
-      <div style={{ order: 3, flex: 1 }}>
+      <div style={{ flex: 3, minWidth: "250px" }}>
+        <Deferred isWaiting={blogpostsLoading}>
+          {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
+        </Deferred>
+      </div>
+      <div style={{ flex: 1 }}>
         <DiscordEmbed />
         <ExpandableModule heading={"recent records"}>
           <div className="module-content">test</div>
@@ -33,11 +35,9 @@ const HomePage = () => {
           <div className="module-content">test</div>
         </ExpandableModule>
       </div>
-      <div style={{ order: 2, flex: 3 }}>
-        <Deferred isWaiting={blogpostsLoading}>
-          {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
-        </Deferred>
-      </div>
+      <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>
+        <div className="module-content">{translations.homePageWelcomeParagraph[lang]}</div>
+      </ExpandableModule>
     </div>
   );
 };
