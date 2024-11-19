@@ -27,6 +27,7 @@ export const TrackTopsHomePage = () => {
     <Deferred isWaiting={metadata.isLoading}>
       {metadata.regions && metadata.cups && (
         <Navigate
+          replace={true}
           to={resolvePage(Pages.TrackTops, {
             region: metadata.regions[0].code.toLowerCase(),
             cup: metadata.cups[0].id,
@@ -152,7 +153,7 @@ const TrackTopsPage = () => {
                       <h1>
                         {
                           translations[
-                            `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                            `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                           ][lang]
                         }
                       </h1>

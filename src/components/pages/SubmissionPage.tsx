@@ -254,7 +254,7 @@ const SubmissionsTab = () => {
               <p className="nobr">
                 {
                   translations[
-                    `constantTrackName${getTrackById(metadata, submission.track)?.abbr.toUpperCase()}` as TranslationKey
+                    `constantTrackName${getTrackById(metadata, submission.track)?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                   ][lang]
                 }
                 ,&nbsp;

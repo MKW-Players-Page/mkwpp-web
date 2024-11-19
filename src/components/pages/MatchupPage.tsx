@@ -245,7 +245,7 @@ const MatchupPage = () => {
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
                               {
                                 translations[
-                                  `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                                  `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                                 ][lang]
                               }
                             </Link>

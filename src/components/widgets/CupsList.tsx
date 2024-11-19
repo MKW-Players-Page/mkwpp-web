@@ -4,6 +4,7 @@ import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
+import "./CupsList.css";
 
 const CupsList = () => {
   const { translations, lang } = useContext(I18nContext);
@@ -11,23 +12,17 @@ const CupsList = () => {
   return (
     <>
       <Deferred isWaiting={metadata.isLoading}>
-        <div
-          style={
-            {
-              display: "grid",
-              gap: "16px",
-              gridTemplateColumns:
-                "repeat(auto-fit, minmax(min(100%, max(250px, 100%/5)), 1fr))" /* Don't ask me how or why this works */,
-            } as React.CSSProperties
-          }
-        >
+        <div className="cups-list">
           {metadata.cups?.map((cup) => (
-            <div
-              key={cup.id}
-              className="module"
-              style={{ margin: 0, overflow: "hidden" } as React.CSSProperties}
-            >
-              <div className="module-content">
+            <div key={cup.id} className="module">
+              <div
+                className="module-content cups-list-cup"
+                style={
+                  {
+                    "--cup-image": `url(/mkw/cups/${cup.id}.png)`,
+                  } as React.CSSProperties
+                }
+              >
                 <b>
                   {translations[`constantCup${cup.code.toUpperCase()}` as TranslationKey][lang]}
                 </b>
@@ -37,9 +32,11 @@ const CupsList = () => {
                       <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
                         {
                           translations[
-                            `constantTrackName${metadata.tracks
-                              ?.find((track) => track.id === trackId)
-                              ?.abbr.toUpperCase()}` as TranslationKey
+                            `constantTrackName${
+                              metadata.tracks
+                                ?.find((track) => track.id === trackId)
+                                ?.abbr.toUpperCase() ?? "LC"
+                            }` as TranslationKey
                           ][lang]
                         }
                       </Link>

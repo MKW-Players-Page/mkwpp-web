@@ -104,7 +104,7 @@ const StandardsPage = () => {
                           >
                             {
                               translations[
-                                `constantTrackName${track?.abbr.toUpperCase()}` as TranslationKey
+                                `constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                               ][lang]
                             }
                           </Link>
