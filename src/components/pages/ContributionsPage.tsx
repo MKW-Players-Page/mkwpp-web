@@ -72,7 +72,7 @@ const ContributionsPage = () => {
                 onClick={() => {
                   setQuestionIndex((QuestionsAndAnswers[questionIndex] as Question).posFollowup);
                 }}
-                style={{ marginRight: "10px" } as React.CSSProperties}
+                style={{ marginRight: "10px" }}
               >
                 {(QuestionsAndAnswers[questionIndex] as Question).posAns}
               </button>
@@ -92,7 +92,7 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageLanguageCompletionHeading[lang]}</h2>
-          <table style={{ marginBottom: "10px" } as React.CSSProperties}>
+          <table style={{ marginBottom: "10px" }}>
             <thead>
               <tr>
                 <th>{translations.contributionsPageLanguageCompletionLanguageCol[lang]}</th>
@@ -128,7 +128,7 @@ const ContributionsPage = () => {
             </tbody>
           </table>
           <p>{translations.contributionsPageLanguageCompletionThanksText[lang]}</p>
-          <ul style={{ listStyleType: "disc" } as React.CSSProperties}>
+          <ul style={{ listStyleType: "disc" }}>
             {[
               {
                 player: <PlayerMention id={918} />,
@@ -351,20 +351,18 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
   const { translations, lang } = useContext(I18nContext);
   return (
     <div>
-      <hr style={{ width: "100%" } as React.CSSProperties} />
+      <hr style={{ width: "100%" }} />
       <h3>{title}</h3>
       <div>{description}</div>
       {images}
       <div
-        style={
-          {
-            marginTop: "10px",
-            marginBottom: "10px",
-            fontSize: ".75em",
-            display: "flex",
-            gap: "10px",
-          } as React.CSSProperties
-        }
+        style={{
+          marginTop: "10px",
+          marginBottom: "10px",
+          fontSize: ".75em",
+          display: "flex",
+          gap: "10px",
+        }}
       >
         {workedOnBy ? (
           <div>

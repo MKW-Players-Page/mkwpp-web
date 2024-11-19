@@ -86,31 +86,25 @@ const TrackTopsPage = () => {
           </div>
           <div
             className="module-row"
-            style={
-              {
-                justifyContent: "center",
-              } as React.CSSProperties
-            }
+            style={{
+              justifyContent: "center",
+            }}
           >
             {metadata.cups?.map((c) => (
               <div
                 key={c.id}
                 className="module"
-                style={
-                  {
-                    borderRadius: "50%",
-                    aspectRatio: "1/1",
-                    width: "auto",
-                    backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
-                  } as React.CSSProperties
-                }
+                style={{
+                  borderRadius: "50%",
+                  aspectRatio: "1/1",
+                  width: "auto",
+                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
+                }}
               >
                 <div
-                  style={
-                    {
-                      textAlign: "center",
-                    } as React.CSSProperties
-                  }
+                  style={{
+                    textAlign: "center",
+                  }}
                   className="module-content"
                 >
                   <Link
@@ -120,12 +114,10 @@ const TrackTopsPage = () => {
                     })}
                   >
                     <img
-                      style={
-                        {
-                          aspectRatio: "1/1",
-                          height: "60px",
-                        } as React.CSSProperties
-                      }
+                      style={{
+                        aspectRatio: "1/1",
+                        height: "60px",
+                      }}
                       src={`/mkw/cups/${c.id}.png`}
                       alt="Cup Icon"
                     />
@@ -136,12 +128,10 @@ const TrackTopsPage = () => {
           </div>
           <div
             className="module-row "
-            style={
-              {
-                display: "grid",
-                gridTemplateColumns: "repeat(4,1fr)",
-              } as React.CSSProperties
-            }
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4,1fr)",
+            }}
           >
             {cup &&
               metadata.tracks

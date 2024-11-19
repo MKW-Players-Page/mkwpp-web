@@ -19,7 +19,7 @@ const PlayerMention = ({ id }: PlayerMentionProps) => {
   return (
     <Link to={resolvePage(Pages.PlayerProfile, { id })}>
       {player?.region !== undefined && player?.region !== null ? (
-        <span className="flag-icon" style={{ width: "24px" } as React.CSSProperties}>
+        <span className="flag-icon" style={{ width: "24px" }}>
           <Flag
             flag={getRegionById(metadata, player?.region)?.code.toLowerCase() as keyof typeof Flags}
           />

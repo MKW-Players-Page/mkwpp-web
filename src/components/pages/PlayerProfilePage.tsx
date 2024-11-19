@@ -101,7 +101,7 @@ const ThSort = ({ children, states, sortType, setSortType }: ThSortProps) => {
   const setTo = stateIndex < 0 ? 1 : states.length === stateIndex + 1 ? 0 : stateIndex + 1;
   return (
     <th
-      style={{ cursor: "pointer" } as React.CSSProperties}
+      style={{ cursor: "pointer" }}
       onClick={() => {
         setSortType(states[setTo]);
       }}
@@ -402,7 +402,7 @@ const PlayerProfilePage = () => {
               <thead>
                 <tr>
                   <th
-                    style={{ cursor: "pointer" } as React.CSSProperties}
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setSortType("trackAsc");
                     }}

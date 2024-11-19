@@ -32,12 +32,10 @@ const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
   return (
     <div className="module-row">
       <span
-        style={
-          {
-            textDecorationColor: id === 0 ? "red" : "white",
-            textDecorationLine: id === 0 ? "underline" : "none",
-          } as React.CSSProperties
-        }
+        style={{
+          textDecorationColor: id === 0 ? "red" : "white",
+          textDecorationLine: id === 0 ? "underline" : "none",
+        }}
       >
         {translations.matchupPagePlayerText[lang]}&nbsp;{nth}
       </span>

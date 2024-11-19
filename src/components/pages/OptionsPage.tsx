@@ -16,7 +16,7 @@ const OptionsPage = () => {
     display: "flex",
     gap: "20px",
     alignItems: "center",
-  } as React.CSSProperties;
+  };
 
   // it doesn't matter what player is loaded if you aren't logged in.
   const { isLoading: playerLoading, data: player } = useApi(
@@ -76,7 +76,7 @@ const OptionsPage = () => {
                 <h2>{translations.optionsPageAccountOptAliasHeading[lang]}</h2>
                 <textarea
                   ref={aliasTextArea}
-                  style={{ color: "#fff" } as React.CSSProperties}
+                  style={{ color: "#fff" }}
                   maxLength={64}
                   defaultValue={player?.alias ?? ""}
                   className="module"
@@ -104,7 +104,7 @@ const OptionsPage = () => {
                 <h2>{translations.optionsPageAccountOptBioHeading[lang]}</h2>
                 <textarea
                   ref={bioTextArea}
-                  style={{ color: "#fff" } as React.CSSProperties}
+                  style={{ color: "#fff" }}
                   maxLength={1024}
                   defaultValue={player?.bio ?? ""}
                   className="module"

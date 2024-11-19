@@ -28,16 +28,14 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
 
   return (
     <tr
-      style={
-        {
-          display:
-            playerFilter === "" ||
-            (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
-            (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
-              ? ""
-              : "none",
-        } as React.CSSProperties
-      }
+      style={{
+        display:
+          playerFilter === "" ||
+          (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
+          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
+            ? ""
+            : "none",
+      }}
       key={player.id}
       className={user && player.id === user.player ? "highlighted" : ""}
     >
@@ -80,13 +78,11 @@ const PlayerListPage = () => {
     <>
       <h1>{translations.playerListPageHeading[lang]}</h1>
       <div
-        style={
-          {
-            display: "grid",
-            gridTemplateColumns: "4fr 1fr",
-            gridGap: "5px",
-          } as React.CSSProperties
-        }
+        style={{
+          display: "grid",
+          gridTemplateColumns: "4fr 1fr",
+          gridGap: "5px",
+        }}
       >
         <input
           id="filterText"
@@ -97,11 +93,9 @@ const PlayerListPage = () => {
           }}
         />
         <button
-          style={
-            {
-              borderRadius: 0,
-            } as React.CSSProperties
-          }
+          style={{
+            borderRadius: 0,
+          }}
           id="searchBtn"
           className="module"
           onClick={(e) => {

@@ -86,11 +86,8 @@ const TrackChartPage = () => {
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <Link to={resolvePage(Pages.TrackList)}>{"« Track List"}</Link>
-      <div
-        style={{ justifyContent: "space-between" } as React.CSSProperties}
-        className="module-row"
-      >
-        <div style={{ width: "200px" } as React.CSSProperties}>
+      <div style={{ justifyContent: "space-between" }} className="module-row">
+        <div style={{ width: "200px" }}>
           {prevTrack !== undefined ? (
             <Link
               to={resolvePage(
@@ -118,7 +115,7 @@ const TrackChartPage = () => {
             ]
           }
         </h1>
-        <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
+        <div style={{ width: "200px", textAlign: "right" }}>
           {nextTrack !== undefined ? (
             <Link
               to={resolvePage(

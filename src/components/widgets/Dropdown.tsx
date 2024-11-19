@@ -378,16 +378,14 @@ const TextInputDropdown = ({
           }
         }}
         rows={1}
-        style={
-          {
-            resize: "none",
-            height: "100%",
-            background: "transparent",
-            border: 0,
-            color: "#fff",
-            whiteSpace: "pre-line",
-          } as React.CSSProperties
-        }
+        style={{
+          resize: "none",
+          height: "100%",
+          background: "transparent",
+          border: 0,
+          color: "#fff",
+          whiteSpace: "pre-line",
+        }}
       />
       {disabled ? <></> : <Icon icon="Caret" />}
     </div>

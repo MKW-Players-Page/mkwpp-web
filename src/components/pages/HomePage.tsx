@@ -19,12 +19,12 @@ const HomePage = () => {
 
   return (
     <div className="homePageGrid">
-      <div style={{ flex: 3, minWidth: "250px" } as React.CSSProperties}>
+      <div style={{ flex: 3, minWidth: "250px" }}>
         <Deferred isWaiting={blogpostsLoading}>
           {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
         </Deferred>
       </div>
-      <div style={{ flex: 1 } as React.CSSProperties}>
+      <div style={{ flex: 1 }}>
         <DiscordEmbed />
         <ExpandableModule heading={translations.homePageRecentRecordsHeading[lang]}>
           <div className="module-content"></div>
