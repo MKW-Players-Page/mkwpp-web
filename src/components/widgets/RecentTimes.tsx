@@ -54,7 +54,11 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
             {recentTimes?.map((data) => (
               <tr>
                 <td>
-                  <PlayerMention id={data.player.id} />
+                  <PlayerMention
+                    precalcPlayer={data.player}
+                    precalcRegionId={data.player.region ?? undefined}
+                    xxFlag={true}
+                  />
                 </td>
                 <td>
                   <Link

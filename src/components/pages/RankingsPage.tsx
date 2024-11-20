@@ -1,14 +1,12 @@
 import { useContext, useEffect, useRef } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { CategorySelect, LapModeSelect } from "../widgets";
 import api from "../../api";
 import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
@@ -21,6 +19,7 @@ import {
 } from "../../utils/SearchParams";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -90,7 +89,6 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const { translations, lang } = useContext(I18nContext);
-  const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
   const { settings } = useContext(SettingsContext);
 
@@ -186,21 +184,16 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                     >
                       <td>{stats.rank}</td>
                       <td>
-                        <FlagIcon
+                        <PlayerMention
+                          precalcPlayer={stats.player}
+                          precalcRegionId={stats.player.region ?? undefined}
+                          xxFlag={true}
                           showRegFlagRegardless={
                             region.type === "country" ||
                             region.type === "subnational" ||
                             region.type === "subnational_group"
                           }
-                          region={getRegionById(metadata, stats.player.region ?? 0)}
                         />
-                        <Link
-                          to={resolvePage(Pages.PlayerProfile, {
-                            id: stats.player.id,
-                          })}
-                        >
-                          {stats.player.alias ?? stats.player.name}
-                        </Link>
                       </td>
                       <td>{metric.getValueString(stats)}</td>
                     </tr>

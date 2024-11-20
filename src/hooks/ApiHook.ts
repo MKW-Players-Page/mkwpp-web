@@ -18,6 +18,7 @@ export const useApi = <T>(
   dependencies: DependencyList = [],
   requestType = "",
   waitFor: WaitDependencyList[] = [],
+  requestTypeWait: boolean = true,
 ) => {
   const initialState = { isLoading: true };
   const [state, setState] = useState<ApiState<T>>(initialState);
@@ -35,8 +36,11 @@ export const useApi = <T>(
         apiCallback()
           .finally(async () => {
             // Wait for any previous request of the same kind
-            const previousRequest = prev.reverse().find((r) => r[2] === requestType);
-            if (previousRequest !== undefined) await previousRequest[0];
+            if (requestTypeWait) {
+              const previousRequest = prev.reverse().find((r) => r[2] === requestType);
+              if (previousRequest !== undefined) await previousRequest[0];
+              console.log(requestType);
+            }
 
             // Remove this one
             setPromises((prev) =>

@@ -3,13 +3,13 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { CategorySelect, LapModeSelect } from "../widgets";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import api, { CategoryEnum } from "../../api";
 import { TimetrialsTracksTopsListLapModeEnum } from "../../api/generated";
 import { useApiArray } from "../../hooks/ApiHook";
 import { formatTime } from "../../utils/Formatters";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
@@ -19,6 +19,7 @@ import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 import { WorldRegion } from "../../utils/Defaults";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -160,21 +161,16 @@ const TrackTopsPage = () => {
                                 >
                                   <td>{score.rank}</td>
                                   <td>
-                                    <FlagIcon
+                                    <PlayerMention
+                                      precalcPlayer={score.player}
+                                      precalcRegionId={score.player.region ?? undefined}
+                                      xxFlag={true}
                                       showRegFlagRegardless={
                                         region.type === "country" ||
                                         region.type === "subnational" ||
                                         region.type === "subnational_group"
                                       }
-                                      region={getRegionById(metadata, score.player.region ?? 0)}
                                     />
-                                    <Link
-                                      to={resolvePage(Pages.PlayerProfile, {
-                                        id: score.player.id,
-                                      })}
-                                    >
-                                      {score.player.alias ?? score.player.name}
-                                    </Link>
                                   </td>
                                   <td>{formatTime(score.value)}</td>
                                 </tr>

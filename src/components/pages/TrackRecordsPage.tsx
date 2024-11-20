@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, Icon, Tooltip } from "../widgets";
+import { CategorySelect, Icon, Tooltip } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import api from "../../api";
 import { useApi } from "../../hooks";
@@ -11,10 +11,11 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
-import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -92,19 +93,16 @@ const TrackRecordsPage = () => {
                         )}
                         <td>
                           {score ? (
-                            <>
-                              <FlagIcon
-                                showRegFlagRegardless={
-                                  region.type === "country" ||
-                                  region.type === "subnational" ||
-                                  region.type === "subnational_group"
-                                }
-                                region={getRegionById(metadata, score.player.region || 0)}
-                              />
-                              <Link to={resolvePage(Pages.PlayerProfile, { id: score?.player.id })}>
-                                {score.player.alias ?? score.player.name}
-                              </Link>
-                            </>
+                            <PlayerMention
+                              precalcPlayer={score.player}
+                              precalcRegionId={score.player.region ?? undefined}
+                              xxFlag={true}
+                              showRegFlagRegardless={
+                                region.type === "country" ||
+                                region.type === "subnational" ||
+                                region.type === "subnational_group"
+                              }
+                            />
                           ) : (
                             "-"
                           )}

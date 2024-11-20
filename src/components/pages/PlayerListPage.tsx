@@ -1,16 +1,14 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 
-import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { FlagIcon } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
-import { getRegionById, getRegionNameFull, MetadataContext } from "../../utils/Metadata";
+import { getRegionNameFull, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { PlayerBasic } from "../../api";
 import { useState } from "react";
 import { I18nContext } from "../../utils/i18n/i18n";
+import PlayerMention from "../widgets/PlayerMention";
 
 interface PlayerForFilter extends PlayerBasic {
   simplifiedName: string;
@@ -40,10 +38,11 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
       className={user && player.id === user.player ? "highlighted" : ""}
     >
       <td>
-        <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />
-        <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
-          {player.alias ?? player.name}
-        </Link>
+        <PlayerMention
+          precalcPlayer={player}
+          precalcRegionId={player.region ?? undefined}
+          xxFlag={true}
+        />
       </td>
       <td>
         {getRegionNameFull(metadata, translations, lang, player.region ?? 0) ??
