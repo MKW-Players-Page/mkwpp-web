@@ -15,7 +15,23 @@
 }
 
 .cups-list-cup {
-  background-image: var(--cup-image);
-  background-repeat: no-repeat;
-  background-position: calc(100% + 32px) 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.cups-list-cup-image-div {
+  opacity: 0.5;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 70%;
+  height: 165px;
+  width: 165px;
+  border: 2px var(--module-border-color) dotted;
+  border-radius: 50%;
+}
+
+.cups-list-cup-image {
+  height: 100%;
+  aspect-ratio: 1/1;
 }
