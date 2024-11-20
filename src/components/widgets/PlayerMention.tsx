@@ -4,13 +4,14 @@ import api from "../../api";
 import { useApi } from "../../hooks";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
-import Flag, { Flags } from "./Flags";
+import { FlagIcon } from "./Icon";
 
 export interface PlayerMentionProps {
   id: number;
+  showRegFlagRegardless?: boolean;
 }
 
-const PlayerMention = ({ id }: PlayerMentionProps) => {
+const PlayerMention = ({ id, showRegFlagRegardless }: PlayerMentionProps) => {
   const metadata = useContext(MetadataContext);
   const { isLoading, data: player } = useApi(() => api.timetrialsPlayersRetrieve({ id }), [id]);
 
@@ -19,11 +20,10 @@ const PlayerMention = ({ id }: PlayerMentionProps) => {
   return (
     <Link to={resolvePage(Pages.PlayerProfile, { id })}>
       {player?.region !== undefined && player?.region !== null ? (
-        <span className="flag-icon" style={{ width: "24px" }}>
-          <Flag
-            flag={getRegionById(metadata, player?.region)?.code.toLowerCase() as keyof typeof Flags}
-          />
-        </span>
+        <FlagIcon
+          region={getRegionById(metadata, player?.region)}
+          showRegFlagRegardless={showRegFlagRegardless}
+        />
       ) : (
         <></>
       )}
