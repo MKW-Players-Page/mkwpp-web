@@ -118,6 +118,10 @@ export interface TimetrialsRegionsRankingsListRequest {
     type: TimetrialsRegionsRankingsListTypeEnum;
 }
 
+export interface TimetrialsScoresLatestListRequest {
+    limit: number;
+}
+
 export interface TimetrialsStandardsListRequest {
     isLegacy?: boolean;
 }
@@ -670,6 +674,41 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsRegionsRankingsList(requestParameters: TimetrialsRegionsRankingsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RegionStats>> {
         const response = await this.timetrialsRegionsRankingsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsScoresLatestListRaw(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+        if (requestParameters['limit'] == null) {
+            throw new runtime.RequiredError(
+                'limit',
+                'Required parameter "limit" was null or undefined when calling timetrialsScoresLatestList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/scores/latest/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreSubmissionFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsScoresLatestList(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+        const response = await this.timetrialsScoresLatestListRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

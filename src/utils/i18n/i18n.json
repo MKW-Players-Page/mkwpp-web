@@ -8729,24 +8729,6 @@
     "pt": "",
     "es": ""
   },
-  "homePageRecentRecordsHeading": {
-    "it": "Record Recenti",
-    "en": "Recent Records",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "homePageRecentTimesHeading": {
-    "it": "Tempi Recenti",
-    "en": "Recent Times",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
   "homePageRecentTrackListPart": {
     "it": "Vedi le classifiche",
     "en": "See the charts",
@@ -10757,6 +10739,96 @@
   "trackListPageHeading": {
     "it": "Piste",
     "en": "Courses",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentRecordsHeading": {
+    "it": "Record Recenti",
+    "en": "Recent Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentRecordsPlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentRecordsTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentRecordsTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentRecordsDateCol": {
+    "it": "Data",
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentTimesHeading": {
+    "it": "Tempi Recenti",
+    "en": "Recent Times",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentTimesPlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentTimesTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentTimesTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackListPageRecentTimesDateCol": {
+    "it": "Data",
+    "en": "Date",
     "fr": "",
     "de": "",
     "jp": "",
