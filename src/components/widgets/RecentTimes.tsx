@@ -24,7 +24,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
   const metadata = useContext(MetadataContext);
 
   const adjustedRecords = !!records;
-  
+
   /* TODO: Add Records API once it's ready */
   const { isLoading: recentTimesLoading, data: recentTimes } = useApi(
     adjustedRecords
