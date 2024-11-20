@@ -100,6 +100,7 @@ const TrackTopsPage = () => {
                   aspectRatio: "1/1",
                   width: "auto",
                   backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
+                  userSelect: "none",
                 }}
               >
                 <div

@@ -160,7 +160,7 @@ const ContributionsPage = () => {
                 ],
               ],
             )}
-            images={<img src="/misc/TMXSlider.png" alt="Slider" />}
+            images={<img style={{ userSelect: "none" }} src="/misc/TMXSlider.png" alt="Slider" />}
             suggestedBy={[918]}
           />
           <FeatureElement
