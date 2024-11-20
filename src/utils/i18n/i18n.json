@@ -10745,7 +10745,7 @@
     "pt": "",
     "es": ""
   },
-  "trackListPageRecentRecordsHeading": {
+  "recentTimesRecentRecordsHeading": {
     "it": "Record Recenti",
     "en": "Recent Records",
     "fr": "",
@@ -10754,43 +10754,7 @@
     "pt": "",
     "es": ""
   },
-  "trackListPageRecentRecordsPlayerCol": {
-    "it": "Player",
-    "en": "Player",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "trackListPageRecentRecordsTrackCol": {
-    "it": "Pista",
-    "en": "Track",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "trackListPageRecentRecordsTimeCol": {
-    "it": "Tempo",
-    "en": "Time",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "trackListPageRecentRecordsDateCol": {
-    "it": "Data",
-    "en": "Date",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "trackListPageRecentTimesHeading": {
+  "recentTimesRecentTimesHeading": {
     "it": "Tempi Recenti",
     "en": "Recent Times",
     "fr": "",
@@ -10799,7 +10763,7 @@
     "pt": "",
     "es": ""
   },
-  "trackListPageRecentTimesPlayerCol": {
+  "recentTimesRecentTimesPlayerCol": {
     "it": "Player",
     "en": "Player",
     "fr": "",
@@ -10808,7 +10772,7 @@
     "pt": "",
     "es": ""
   },
-  "trackListPageRecentTimesTrackCol": {
+  "recentTimesRecentTimesTrackCol": {
     "it": "Pista",
     "en": "Track",
     "fr": "",
@@ -10817,7 +10781,7 @@
     "pt": "",
     "es": ""
   },
-  "trackListPageRecentTimesTimeCol": {
+  "recentTimesRecentTimesTimeCol": {
     "it": "Tempo",
     "en": "Time",
     "fr": "",
@@ -10826,7 +10790,7 @@
     "pt": "",
     "es": ""
   },
-  "trackListPageRecentTimesDateCol": {
+  "recentTimesRecentTimesDateCol": {
     "it": "Data",
     "en": "Date",
     "fr": "",

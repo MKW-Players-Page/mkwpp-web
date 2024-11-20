@@ -1,12 +1,17 @@
 .cups-list {
   display: grid;
+  margin-bottom: 16px;
   gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, max(280px, 100%/5)), 1fr)) /* Don't ask me how or why this works */;
 }
 
-.cups-list > .module {
+.module .cups-list {
   margin: 0;
+}
+
+.cups-list > .module {
   overflow: hidden;
+  margin: 0;
 }
 
 .cups-list-cup {

@@ -1,0 +1,9 @@
+.recentTimesTable td:not(:first-child),
+.recentTimesTable th:not(:first-child) {
+  text-align: center;
+}
+
+.recentTimesTable td,
+.recentTimesTable th {
+  white-space: nowrap;
+}
