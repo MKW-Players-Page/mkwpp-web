@@ -6,9 +6,9 @@ import Deferred from "../widgets/Deferred";
 import { CategoryEnum, PlayerStats } from "../../api";
 import { useApi } from "../../hooks";
 import { formatTime, formatTimeDiff } from "../../utils/Formatters";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
-import { CategorySelect, FlagIcon } from "../widgets";
+import { CategorySelect } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import LapModeSelect, { LapModeEnum } from "../widgets/LapModeSelect";
@@ -21,6 +21,7 @@ import {
 } from "../../utils/MatchupDataCrunch";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -203,19 +204,11 @@ const MatchupPage = () => {
                 <tr>
                   <th />
                   <th colSpan={cellSpan}>
-                    <FlagIcon
-                      showRegFlagRegardless={true}
-                      region={getRegionById(metadata, matchupData[0].data?.playerData.region ?? 0)}
-                    />
-                    {matchupData[0].data?.playerData.alias ?? matchupData[0].data?.playerData.name}
+                    <PlayerMention precalcPlayer={matchupData[0].data?.playerData} />
                   </th>
                   <th />
                   <th colSpan={cellSpan}>
-                    <FlagIcon
-                      showRegFlagRegardless={true}
-                      region={getRegionById(metadata, matchupData[1].data?.playerData.region ?? 0)}
-                    />
-                    {matchupData[1].data?.playerData.alias ?? matchupData[1].data?.playerData.name}
+                    <PlayerMention precalcPlayer={matchupData[1].data?.playerData} />
                   </th>
                 </tr>
                 <tr>
