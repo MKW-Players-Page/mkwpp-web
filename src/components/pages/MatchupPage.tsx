@@ -27,8 +27,16 @@ interface PlayerSelectFieldProp {
   nth: number;
   setId: React.Dispatch<React.SetStateAction<number>>;
   id: number;
+  showDelete: boolean;
+  deleteOnClick: () => void;
 }
-const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
+const PlayerSelectField = ({
+  nth,
+  setId,
+  id,
+  showDelete,
+  deleteOnClick,
+}: PlayerSelectFieldProp) => {
   const { translations, lang } = useContext(I18nContext);
   return (
     <div className="module-row">
@@ -41,6 +49,13 @@ const PlayerSelectField = ({ nth, setId, id }: PlayerSelectFieldProp) => {
         {translations.matchupPagePlayerText[lang]}&nbsp;{nth}
       </span>
       <PlayerSelectDropdown setId={setId} id={id} />
+      {showDelete ? (
+        <button onClick={deleteOnClick} className="module" style={{ flexShrink: 10 }}>
+          X
+        </button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
@@ -63,8 +78,27 @@ export const MatchupHomePage = () => {
       <h1>{translations.matchupPageHeading[lang]}</h1>
       <div className="module">
         <div className="module-content">
-          <PlayerSelectField nth={1} id={idStates[0][0]} setId={idStates[0][1]} />
-          <PlayerSelectField nth={2} id={idStates[1][0]} setId={idStates[1][1]} />
+          {idStates.map(([idState, setIdState], idx, arr) => {
+            if (idState === 0 && idx !== 0 && arr[idx - 1][0] === 0) return <></>;
+            return (
+              <PlayerSelectField
+                showDelete={arr.reduce((x, r) => (r[0] !== 0 ? x + 1 : x), 0) > 1}
+                nth={idx + 1}
+                id={idState}
+                setId={setIdState}
+                deleteOnClick={() => {
+                  for (let i = idx; i < idStates.length; i++) {
+                    if (idStates[i][0] === 0) return;
+                    if (i === idStates.length - 1) {
+                      idStates[i][1](0);
+                      return;
+                    }
+                    idStates[i][1](idStates[i + 1][0]);
+                  }
+                }}
+              />
+            );
+          })}
           <Link
             className="submit-style"
             to={
