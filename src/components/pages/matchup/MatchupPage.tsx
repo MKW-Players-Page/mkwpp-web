@@ -1,133 +1,35 @@
-import { useContext, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
-
-import { Pages, resolvePage } from "./Pages";
-import Deferred from "../widgets/Deferred";
-import { CategoryEnum, PlayerStats } from "../../api";
-import { useApi } from "../../hooks";
-import { formatTime, formatTimeDiff } from "../../utils/Formatters";
-import { MetadataContext } from "../../utils/Metadata";
-import { integerOr } from "../../utils/Numbers";
-import { CategorySelect } from "../widgets";
-import OverwriteColor from "../widgets/OverwriteColor";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
-import LapModeSelect, { LapModeEnum } from "../widgets/LapModeSelect";
-import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
+import { useContext } from "react";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
+import { I18nContext, TranslationKey } from "../../../utils/i18n/i18n";
+import { SettingsContext } from "../../../utils/Settings";
+import { PlayerStats } from "../../../api";
+import { useApi } from "../../../hooks";
+import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
+import { MetadataContext } from "../../../utils/Metadata";
+import { integerOr } from "../../../utils/Numbers";
+import { CategorySelect } from "../../widgets";
+import OverwriteColor from "../../widgets/OverwriteColor";
+import { getCategorySiteHue } from "../../../utils/EnumUtils";
+import LapModeSelect, { LapModeEnum } from "../../widgets/LapModeSelect";
+import PlayerMention from "../../widgets/PlayerMention";
 import {
   compareTwoPlayers,
   getPlayerData,
   MatchupData,
   MatchupScore,
-} from "../../utils/MatchupDataCrunch";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
-import { SettingsContext } from "../../utils/Settings";
-import PlayerMention from "../widgets/PlayerMention";
+} from "../../../utils/MatchupDataCrunch";
+import { Pages, resolvePage } from "../Pages";
+import Deferred from "../../widgets/Deferred";
+import { useCategoryParam, useLapModeParam } from "../../../utils/SearchParams";
 
-interface PlayerSelectFieldProp {
-  nth: number;
-  setId: React.Dispatch<React.SetStateAction<number>>;
-  id: number;
-  showDelete: boolean;
-  deleteOnClick: () => void;
-}
-const PlayerSelectField = ({
-  nth,
-  setId,
-  id,
-  showDelete,
-  deleteOnClick,
-}: PlayerSelectFieldProp) => {
-  const { translations, lang } = useContext(I18nContext);
-  return (
-    <div className="module-row">
-      <span
-        style={{
-          textDecorationColor: id === 0 ? "red" : "white",
-          textDecorationLine: id === 0 ? "underline" : "none",
-        }}
-      >
-        {translations.matchupPagePlayerText[lang]}&nbsp;{nth}
-      </span>
-      <PlayerSelectDropdown setId={setId} id={id} />
-      {showDelete ? (
-        <button onClick={deleteOnClick} className="module" style={{ flexShrink: 10 }}>
-          X
-        </button>
-      ) : (
-        <></>
-      )}
-    </div>
-  );
-};
-
-export const MatchupHomePage = () => {
-  const idStates = [
-    useState(0),
-    useState(0),
-    useState(0),
-    useState(0),
-    useState(0),
-    useState(0),
-    useState(0),
-    useState(0),
-  ];
-  const { translations, lang } = useContext(I18nContext);
-
-  return (
-    <>
-      <h1>{translations.matchupPageHeading[lang]}</h1>
-      <div className="module">
-        <div className="module-content">
-          {idStates.map(([idState, setIdState], idx, arr) => {
-            if (idState === 0 && idx !== 0 && arr[idx - 1][0] === 0) return <></>;
-            return (
-              <PlayerSelectField
-                showDelete={arr.reduce((x, r) => (r[0] !== 0 ? x + 1 : x), 0) > 1}
-                nth={idx + 1}
-                id={idState}
-                setId={setIdState}
-                deleteOnClick={
-                  idState === 0
-                    ? () => {}
-                    : () => {
-                        for (let i = idx; i < idStates.length; i++) {
-                          if (idStates[i][0] === 0) return;
-                          if (i === idStates.length - 1) {
-                            idStates[i][1](0);
-                            return;
-                          }
-                          idStates[i][1](idStates[i + 1][0]);
-                        }
-                      }
-                }
-              />
-            );
-          })}
-          <Link
-            className="submit-style"
-            to={
-              idStates[0][0] === 0 || idStates[1][0] === 0
-                ? ""
-                : resolvePage(Pages.Matchup, { id1: idStates[0][0], id2: idStates[1][0] })
-            }
-          >
-            {translations.matchupPageCompareButtonText[lang]}
-          </Link>
-        </div>
-      </div>
-    </>
-  );
-};
-
-/*  The code of this function is a little clunky, but it can easily be refactored.
-    Mostly waiting on whether this should be used for Rivalries too. */
 const MatchupPage = () => {
   const { id1: id1Str, id2: id2Str } = useParams();
   const id1 = Math.max(integerOr(id1Str, 0), 0);
   const id2 = Math.max(integerOr(id2Str, 0), 0);
 
-  const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
-  const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
+  const searchParams = useSearchParams();
+  const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
 
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);

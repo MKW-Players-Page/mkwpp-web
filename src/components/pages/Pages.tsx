@@ -1,7 +1,8 @@
 import { RouteObject, generatePath } from "react-router-dom";
 
 import HomePage from "./HomePage";
-import MatchupPage, { MatchupHomePage } from "./MatchupPage";
+import MatchupHomePage from "./matchup/MatchupSearch";
+import MatchupPage from "./matchup/MatchupPage";
 import PlayerListPage from "./PlayerListPage";
 import PlayerProfilePage from "./PlayerProfilePage";
 import RankingsPage, { RankingsMetrics } from "./RankingsPage";
@@ -45,7 +46,7 @@ export const Pages: PageMap = {
     element: <MatchupHomePage />,
   },
   Matchup: {
-    path: "/matchup/:id1/:id2",
+    path: "/matchup/compare",
     element: <MatchupPage />,
   },
   Contribute: {
