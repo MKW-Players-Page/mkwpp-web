@@ -25,10 +25,9 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
 
   const adjustedRecords = !!records;
 
-  /* TODO: Add Records API once it's ready */
   const { isLoading: recentTimesLoading, data: recentTimes } = useApi(
     adjustedRecords
-      ? () => api.timetrialsScoresLatestList({ limit })
+      ? () => api.timetrialsRecordsLatestList({ limit })
       : () => api.timetrialsScoresLatestList({ limit }),
     [],
     adjustedRecords ? "recentRecords" : "recentTimes",
