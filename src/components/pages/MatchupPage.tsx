@@ -86,16 +86,20 @@ export const MatchupHomePage = () => {
                 nth={idx + 1}
                 id={idState}
                 setId={setIdState}
-                deleteOnClick={() => {
-                  for (let i = idx; i < idStates.length; i++) {
-                    if (idStates[i][0] === 0) return;
-                    if (i === idStates.length - 1) {
-                      idStates[i][1](0);
-                      return;
-                    }
-                    idStates[i][1](idStates[i + 1][0]);
-                  }
-                }}
+                deleteOnClick={
+                  idState === 0
+                    ? () => {}
+                    : () => {
+                        for (let i = idx; i < idStates.length; i++) {
+                          if (idStates[i][0] === 0) return;
+                          if (i === idStates.length - 1) {
+                            idStates[i][1](0);
+                            return;
+                          }
+                          idStates[i][1](idStates[i + 1][0]);
+                        }
+                      }
+                }
               />
             );
           })}
