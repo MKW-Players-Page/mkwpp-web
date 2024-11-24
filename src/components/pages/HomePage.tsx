@@ -36,7 +36,15 @@ const HomePage = () => {
         </div>
       </ExpandableModule>
       <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>
-        <div className="module-content">{translations.homePageWelcomeParagraph[lang]}</div>
+        <div className="module-content">
+          <h2>{translations.homePageWelcomeParagraphHeading[lang]}</h2>
+          <p>{translations.homePageWelcomeParagraph1[lang]}</p>
+          <p>{translations.homePageWelcomeParagraph2[lang]}</p>
+          <p>{translations.homePageWelcomeParagraph3[lang]}</p>
+          <p>{translations.homePageWelcomeParagraph4[lang]}</p>
+          <p>{translations.homePageWelcomeParagraph5[lang]}</p>
+          <p>{translations.homePageWelcomeParagraph6[lang]}</p>
+        </div>
       </ExpandableModule>
     </div>
   );

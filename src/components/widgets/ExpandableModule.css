@@ -14,7 +14,9 @@
   transition: grid-template-rows 0.5s ease-in;
 }
 .expandable-module-body > div {
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 .expandable-module-body.expanded {
   grid-template-rows: 1fr;
