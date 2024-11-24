@@ -26,6 +26,14 @@
   }
 }
 
+.homePageGrid {
+  display: flex;
+  gap: 0 16px;
+  justify-content: center;
+  align-content: stretch;
+  flex-wrap: wrap-reverse;
+}
+
 .module {
   width: 100%;
   background-color: var(--module-background-color);

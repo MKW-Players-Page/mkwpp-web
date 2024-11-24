@@ -8711,6 +8711,114 @@
     "pt": "",
     "es": ""
   },
+  "homePageWelcomeHeading": {
+    "it": "Benvenuto!",
+    "en": "Welcome!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraphHeading": {
+    "it": "Benvenuto alla Players' Page di Mario Kart Wii!",
+    "en": "Welcome to the Mario Kart Wii Player's Page!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph1": {
+    "it": "Se stai cercando la migliore esperienza competitiva, sei nel posto giusto.",
+    "en": "If you're looking for the best competitive time-trialing experience, then look no further than our site.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph2": {
+    "it": "Questo database fondato dalla community ha tutto ciò che ti può servire in termini di classifiche, top 10, scontri e rivalità, storico campioni e più!",
+    "en": "This community-founded database has everything you need in terms of leaderboards, top 10s, head-to-head matchups and rivalries, champion history, and more!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph3": {
+    "it": "Registrati sul nostro sito per caricare i tuoi tempi, e costruisci il tuo timesheet!",
+    "en": "Register on our site to begin submitting your times, and build yourself your own timesheet!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph4": {
+    "it": "Da Glitch a No-Glitch, dai 3lap ai Flap, scopri i vari set di categorie sul quale giocare!",
+    "en": "From Glitch to No-Glitch, from 3lap to Flap, discover our diverse set of categories to play on!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph5": {
+    "it": "Scopri i nostri vari sistemi di ranking, di nota le classifiche AF, e competi con player di tutte le età!",
+    "en": "Discover our various ranking systems, most notably the AF charts, and compete with players from all ages!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageWelcomeParagraph6": {
+    "it": "Sarai capace di diventare il migliore? C'è solo un modo per scoprirlo!",
+    "en": "Will you be able to climb to the top? There's only one way to find out!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "homePageRecentTrackListPart": {
+    "it": "Vedi le classifiche",
+    "en": "See the charts",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "discordEmbedParagraph": {
+    "it": "Unisciti alla community su discord!",
+    "en": "Join the community on discord!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "discordEmbedOnlineUsers": {
+    "it": "Utenti{{nbsp}}Online: {{number}}",
+    "en": "Online{{nbsp}}Users: {{number}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "discordEmbedLinktext": {
+    "it": "Unisciti!",
+    "en": "Join!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "rulesPageHeading": {
     "it": "Regole Prove a Tempo Mario Kart Wii",
     "en": "Mario Kart Wii Time Trials Rules",
@@ -10685,6 +10793,60 @@
   "trackListPageHeading": {
     "it": "Piste",
     "en": "Courses",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentRecordsHeading": {
+    "it": "Record Recenti",
+    "en": "Recent Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesHeading": {
+    "it": "Tempi Recenti",
+    "en": "Recent Times",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesPlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesDateCol": {
+    "it": "Data",
+    "en": "Date",
     "fr": "",
     "de": "",
     "jp": "",

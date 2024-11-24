@@ -1,21 +1,19 @@
 import { useContext } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { I18nContext } from "../../utils/i18n/i18n";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import { useCategoryParam } from "../../utils/SearchParams";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon } from "../widgets";
+import { CategorySelect } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
-import { Pages, resolvePage } from "./Pages";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 const PastChampsPage = () => {
   const { translations, lang } = useContext(I18nContext);
   const { settings } = useContext(SettingsContext);
-  const metadata = useContext(MetadataContext);
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const siteHue = getCategorySiteHue(category, settings);
@@ -56,14 +54,11 @@ const PastChampsPage = () => {
                   return (
                     <tr>
                       <td>
-                        <FlagIcon region={getRegionById(metadata, champ.player.region ?? 0)} />
-                        <Link
-                          to={resolvePage(Pages.PlayerProfile, {
-                            id: champ.player.id,
-                          })}
-                        >
-                          {champ.player.alias ?? champ.player.name}
-                        </Link>
+                        <PlayerMention
+                          precalcPlayer={champ.player}
+                          precalcRegionId={champ.player.region ?? undefined}
+                          xxFlag={true}
+                        />
                       </td>
                       <td>{new Date(champ.dateInstated * 1000).toLocaleDateString(lang)}</td>
                       <td>

@@ -1,5 +1,5 @@
 import { CategoryEnum } from "../api";
-import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
+import { TimetrialsRegionsRankingsListTopEnum, Track } from "../api/generated";
 import { TranslationKey } from "./i18n/i18n";
 import { Settings } from "./Settings";
 
@@ -84,4 +84,9 @@ export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) =>
  */
 export const eligibleCategories = (category: CategoryEnum) => {
   return Object.values(CategoryEnum).slice(0, Object.values(CategoryEnum).indexOf(category) + 1);
+};
+
+export const getTrackById = (tracks: Track[] | undefined, id: number) => {
+  if (tracks === undefined) return undefined;
+  return tracks.find((r) => r.id === id);
 };

@@ -105,6 +105,10 @@ export interface TimetrialsRankingsListRequest {
     region: number;
 }
 
+export interface TimetrialsRecordsLatestListRequest {
+    limit: number;
+}
+
 export interface TimetrialsRecordsListRequest {
     category: TimetrialsRecordsListCategoryEnum;
     lapMode?: TimetrialsRecordsListLapModeEnum;
@@ -116,6 +120,10 @@ export interface TimetrialsRegionsRankingsListRequest {
     lapMode: TimetrialsRegionsRankingsListLapModeEnum;
     top: TimetrialsRegionsRankingsListTopEnum;
     type: TimetrialsRegionsRankingsListTypeEnum;
+}
+
+export interface TimetrialsScoresLatestListRequest {
+    limit: number;
 }
 
 export interface TimetrialsStandardsListRequest {
@@ -540,6 +548,41 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
+    async timetrialsRecordsLatestListRaw(requestParameters: TimetrialsRecordsLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+        if (requestParameters['limit'] == null) {
+            throw new runtime.RequiredError(
+                'limit',
+                'Required parameter "limit" was null or undefined when calling timetrialsRecordsLatestList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/records/latest/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreSubmissionFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsRecordsLatestList(requestParameters: TimetrialsRecordsLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+        const response = await this.timetrialsRecordsLatestListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
     async timetrialsRecordsListRaw(requestParameters: TimetrialsRecordsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreWithPlayer>>> {
         if (requestParameters['category'] == null) {
             throw new runtime.RequiredError(
@@ -670,6 +713,41 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsRegionsRankingsList(requestParameters: TimetrialsRegionsRankingsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RegionStats>> {
         const response = await this.timetrialsRegionsRankingsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsScoresLatestListRaw(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+        if (requestParameters['limit'] == null) {
+            throw new runtime.RequiredError(
+                'limit',
+                'Required parameter "limit" was null or undefined when calling timetrialsScoresLatestList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/scores/latest/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreSubmissionFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsScoresLatestList(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+        const response = await this.timetrialsScoresLatestListRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

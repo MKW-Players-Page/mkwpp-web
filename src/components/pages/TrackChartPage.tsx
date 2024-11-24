@@ -3,12 +3,12 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
+import { CategorySelect, Icon, LapModeSelect, Tooltip } from "../widgets";
 import api from "../../api";
 import { CategoryEnum, TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/Formatters";
-import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
@@ -23,6 +23,7 @@ import {
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -86,11 +87,8 @@ const TrackChartPage = () => {
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
       <Link to={resolvePage(Pages.TrackList)}>{"« Track List"}</Link>
-      <div
-        style={{ justifyContent: "space-between" } as React.CSSProperties}
-        className="module-row"
-      >
-        <div style={{ width: "200px" } as React.CSSProperties}>
+      <div style={{ justifyContent: "space-between" }} className="module-row">
+        <div style={{ width: "200px" }}>
           {prevTrack !== undefined ? (
             <Link
               to={resolvePage(
@@ -118,7 +116,7 @@ const TrackChartPage = () => {
             ]
           }
         </h1>
-        <div style={{ width: "200px", textAlign: "right" } as React.CSSProperties}>
+        <div style={{ width: "200px", textAlign: "right" }}>
           {nextTrack !== undefined ? (
             <Link
               to={resolvePage(
@@ -198,21 +196,16 @@ const TrackChartPage = () => {
                     >
                       <td>{score.rank}</td>
                       <td>
-                        <FlagIcon
+                        <PlayerMention
+                          precalcPlayer={score.player}
+                          precalcRegionId={score.player.region ?? undefined}
+                          xxFlag={true}
                           showRegFlagRegardless={
                             region.type === "country" ||
                             region.type === "subnational" ||
                             region.type === "subnational_group"
                           }
-                          region={getRegionById(metadata, score.player.region ?? 0)}
                         />
-                        <Link
-                          to={resolvePage(Pages.PlayerProfile, {
-                            id: score.player.id,
-                          })}
-                        >
-                          {score.player.alias ?? score.player.name}
-                        </Link>
                       </td>
                       <td className={score.category !== category ? "fallthrough" : ""}>
                         {formatTime(score.value)}

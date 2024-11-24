@@ -1,0 +1,24 @@
+.expandable-module-heading {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+  padding: 4px 16px;
+  font-size: 0.925rem;
+  background-color: var(--module-background-color-alt);
+}
+
+.expandable-module-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-in;
+}
+.expandable-module-body > div {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+.expandable-module-body.expanded {
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.5s ease-in;
+}

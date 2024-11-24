@@ -43,7 +43,7 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
                     type: "DropdownItemData",
                     element: {
                       text: translations[
-                        `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                        `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                       ][lang],
                       value: track.id,
                     },

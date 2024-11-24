@@ -26,7 +26,7 @@ const ColorSlider = ({ paragraphText, valueKey }: ColorSliderProps) => {
         justifyContent: "space-between",
       }}
     >
-      <p style={{ width: "120px", whiteSpace: "nowrap" } as React.CSSProperties}>{paragraphText}</p>
+      <p style={{ width: "120px", whiteSpace: "nowrap" }}>{paragraphText}</p>
       <input
         className="rainbow-slider"
         type="range"

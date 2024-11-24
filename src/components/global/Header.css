@@ -15,6 +15,7 @@
 .logo {
   width: auto;
   height: 100%;
+  user-select: none;
 }
 
 .account-actions {

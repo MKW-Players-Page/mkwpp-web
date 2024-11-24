@@ -70,7 +70,7 @@ const RulesPage = () => {
         <div className="module-content">
           <p>{translations.rulesPageShortDesc[lang]}</p>
           <p>{translations.rulesPageTableOfContentsHeading[lang]}</p>
-          <ul style={{ listStyle: "square" } as React.CSSProperties}>
+          <ul style={{ listStyle: "square" }}>
             <ScrollListItem scrollToId="basic">
               {translations.rulesPageScrollListItemBasic[lang]}
             </ScrollListItem>
@@ -110,10 +110,10 @@ const RulesPage = () => {
           <ol>
             <li>
               <p>{parse(translations.rulesPageCategoryRulesParagraph2[lang])}</p>
-              <ol style={{ listStyleType: "lower-alpha" } as React.CSSProperties}>
+              <ol style={{ listStyleType: "lower-alpha" }}>
                 <li>
                   <p>{translations.rulesPageCategoryRulesParagraph3[lang]}</p>
-                  <ol style={{ listStyleType: "lower-roman" } as React.CSSProperties}>
+                  <ol style={{ listStyleType: "lower-roman" }}>
                     <li>{translations.rulesPageCategoryRulesParagraph4[lang]}</li>
                     <li>
                       <p>{translations.rulesPageCategoryRulesParagraph5[lang]}</p>
@@ -154,7 +154,7 @@ const RulesPage = () => {
                 </li>
                 <li>
                   <p>{translations.rulesPageCategoryRulesParagraph24[lang]}</p>
-                  <ol style={{ listStyleType: "lower-roman" } as React.CSSProperties}>
+                  <ol style={{ listStyleType: "lower-roman" }}>
                     <li>{translations.rulesPageCategoryRulesParagraph25[lang]}</li>
                     <li>{translations.rulesPageCategoryRulesParagraph26[lang]}</li>
                     <li>{translations.rulesPageCategoryRulesParagraph27[lang]}</li>

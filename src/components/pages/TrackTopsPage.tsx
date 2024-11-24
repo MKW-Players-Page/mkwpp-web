@@ -3,13 +3,13 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { CategorySelect, LapModeSelect } from "../widgets";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import api, { CategoryEnum } from "../../api";
 import { TimetrialsTracksTopsListLapModeEnum } from "../../api/generated";
 import { useApiArray } from "../../hooks/ApiHook";
 import { formatTime } from "../../utils/Formatters";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import ComplexRegionSelection from "../widgets/RegionSelection";
@@ -19,6 +19,7 @@ import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 import { WorldRegion } from "../../utils/Defaults";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import PlayerMention from "../widgets/PlayerMention";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -27,6 +28,7 @@ export const TrackTopsHomePage = () => {
     <Deferred isWaiting={metadata.isLoading}>
       {metadata.regions && metadata.cups && (
         <Navigate
+          replace={true}
           to={resolvePage(Pages.TrackTops, {
             region: metadata.regions[0].code.toLowerCase(),
             cup: metadata.cups[0].id,
@@ -85,31 +87,26 @@ const TrackTopsPage = () => {
           </div>
           <div
             className="module-row"
-            style={
-              {
-                justifyContent: "center",
-              } as React.CSSProperties
-            }
+            style={{
+              justifyContent: "center",
+            }}
           >
             {metadata.cups?.map((c) => (
               <div
                 key={c.id}
                 className="module"
-                style={
-                  {
-                    borderRadius: "50%",
-                    aspectRatio: "1/1",
-                    width: "auto",
-                    backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
-                  } as React.CSSProperties
-                }
+                style={{
+                  borderRadius: "50%",
+                  aspectRatio: "1/1",
+                  width: "auto",
+                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
+                  userSelect: "none",
+                }}
               >
                 <div
-                  style={
-                    {
-                      textAlign: "center",
-                    } as React.CSSProperties
-                  }
+                  style={{
+                    textAlign: "center",
+                  }}
                   className="module-content"
                 >
                   <Link
@@ -119,12 +116,10 @@ const TrackTopsPage = () => {
                     })}
                   >
                     <img
-                      style={
-                        {
-                          aspectRatio: "1/1",
-                          height: "60px",
-                        } as React.CSSProperties
-                      }
+                      style={{
+                        aspectRatio: "1/1",
+                        height: "60px",
+                      }}
                       src={`/mkw/cups/${c.id}.png`}
                       alt="Cup Icon"
                     />
@@ -135,12 +130,10 @@ const TrackTopsPage = () => {
           </div>
           <div
             className="module-row "
-            style={
-              {
-                display: "grid",
-                gridTemplateColumns: "repeat(4,1fr)",
-              } as React.CSSProperties
-            }
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4,1fr)",
+            }}
           >
             {cup &&
               metadata.tracks
@@ -152,7 +145,7 @@ const TrackTopsPage = () => {
                       <h1>
                         {
                           translations[
-                            `constantTrackName${track.abbr.toUpperCase()}` as TranslationKey
+                            `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
                           ][lang]
                         }
                       </h1>
@@ -169,21 +162,16 @@ const TrackTopsPage = () => {
                                 >
                                   <td>{score.rank}</td>
                                   <td>
-                                    <FlagIcon
+                                    <PlayerMention
+                                      precalcPlayer={score.player}
+                                      precalcRegionId={score.player.region ?? undefined}
+                                      xxFlag={true}
                                       showRegFlagRegardless={
                                         region.type === "country" ||
                                         region.type === "subnational" ||
                                         region.type === "subnational_group"
                                       }
-                                      region={getRegionById(metadata, score.player.region ?? 0)}
                                     />
-                                    <Link
-                                      to={resolvePage(Pages.PlayerProfile, {
-                                        id: score.player.id,
-                                      })}
-                                    >
-                                      {score.player.alias ?? score.player.name}
-                                    </Link>
                                   </td>
                                   <td>{formatTime(score.value)}</td>
                                 </tr>

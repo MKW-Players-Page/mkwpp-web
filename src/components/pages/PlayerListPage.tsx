@@ -1,16 +1,14 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 
-import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { FlagIcon } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
-import { getRegionById, getRegionNameFull, MetadataContext } from "../../utils/Metadata";
+import { getRegionNameFull, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { PlayerBasic } from "../../api";
 import { useState } from "react";
 import { I18nContext } from "../../utils/i18n/i18n";
+import PlayerMention from "../widgets/PlayerMention";
 
 interface PlayerForFilter extends PlayerBasic {
   simplifiedName: string;
@@ -28,24 +26,23 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
 
   return (
     <tr
-      style={
-        {
-          display:
-            playerFilter === "" ||
-            (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
-            (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
-              ? ""
-              : "none",
-        } as React.CSSProperties
-      }
+      style={{
+        display:
+          playerFilter === "" ||
+          (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
+          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
+            ? ""
+            : "none",
+      }}
       key={player.id}
       className={user && player.id === user.player ? "highlighted" : ""}
     >
       <td>
-        <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />
-        <Link to={resolvePage(Pages.PlayerProfile, { id: player.id })}>
-          {player.alias ?? player.name}
-        </Link>
+        <PlayerMention
+          precalcPlayer={player}
+          precalcRegionId={player.region ?? undefined}
+          xxFlag={true}
+        />
       </td>
       <td>
         {getRegionNameFull(metadata, translations, lang, player.region ?? 0) ??
@@ -80,13 +77,11 @@ const PlayerListPage = () => {
     <>
       <h1>{translations.playerListPageHeading[lang]}</h1>
       <div
-        style={
-          {
-            display: "grid",
-            gridTemplateColumns: "4fr 1fr",
-            gridGap: "5px",
-          } as React.CSSProperties
-        }
+        style={{
+          display: "grid",
+          gridTemplateColumns: "4fr 1fr",
+          gridGap: "5px",
+        }}
       >
         <input
           id="filterText"
@@ -97,11 +92,9 @@ const PlayerListPage = () => {
           }}
         />
         <button
-          style={
-            {
-              borderRadius: 0,
-            } as React.CSSProperties
-          }
+          style={{
+            borderRadius: 0,
+          }}
           id="searchBtn"
           className="module"
           onClick={(e) => {

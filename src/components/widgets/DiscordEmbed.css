@@ -1,0 +1,11 @@
+.discord tbody img {
+  border-radius: 50%;
+  width: 20px;
+  aspect-ratio: 1/1;
+  margin-right: 15px;
+  user-select: none;
+}
+
+.discord th {
+  text-align: center;
+}

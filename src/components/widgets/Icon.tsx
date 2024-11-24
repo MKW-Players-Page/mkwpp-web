@@ -36,11 +36,12 @@ const Icon = ({ icon }: IconProps) => {
 };
 
 export interface FlagIconProps {
-  region?: Region;
+  region?: Region | keyof typeof Flags;
+  width?: number;
   showRegFlagRegardless?: boolean;
 }
 
-export const FlagIcon = ({ region, showRegFlagRegardless }: FlagIconProps) => {
+export const FlagIcon = ({ region, showRegFlagRegardless, width }: FlagIconProps) => {
   const { settings } = useContext(SettingsContext);
   const metadata = useContext(MetadataContext);
 
@@ -60,12 +61,14 @@ export const FlagIcon = ({ region, showRegFlagRegardless }: FlagIconProps) => {
   const computeRegionCode =
     region === undefined
       ? "xx"
-      : settings.showRegFlags || showRegFlagRegardless
-        ? region.code.toLowerCase()
-        : getFirstValidRegion(region).code.toLowerCase();
+      : typeof region === "string"
+        ? region
+        : settings.showRegFlags || showRegFlagRegardless
+          ? region.code.toLowerCase()
+          : getFirstValidRegion(region).code.toLowerCase();
 
   return (
-    <span className="flag-icon">
+    <span className="flag-icon" style={{ width: `${width ?? 24}px` }}>
       <Flag flag={computeRegionCode as keyof typeof Flags} />
     </span>
   );

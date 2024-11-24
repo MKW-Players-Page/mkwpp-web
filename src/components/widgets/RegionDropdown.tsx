@@ -95,7 +95,7 @@ const RegionSelectionDropdown = ({
             type: "DropdownItemSetSetterData",
             element: {
               text: translations[`constantRegionSubregions${region.code}` as TranslationKey][lang],
-              rightIcon: <span style={{ paddingRight: "7px" } as React.CSSProperties}>»</span>,
+              rightIcon: <span style={{ paddingRight: "7px" }}>»</span>,
               toItemSetId: region.id,
             } as DropdownItemSetSetterData,
           });
