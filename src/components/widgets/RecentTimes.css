@@ -1,6 +1,6 @@
 .recentTimesTable td:not(:first-child),
 .recentTimesTable th:not(:first-child) {
-  padding: 0;
+  padding: 4px;
 }
 
 .recentTimesTable td,
