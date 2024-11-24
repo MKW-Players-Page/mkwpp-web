@@ -17,11 +17,17 @@ export interface MatchupData {
   };
 }
 
-export const getPlayerData = async (
-  id: number,
-  category: CategoryEnum,
-  lapMode: LapModeEnum,
-): Promise<MatchupData> => {
+export interface getPlayerDataParams {
+  id: number;
+  category: CategoryEnum;
+  lapMode: LapModeEnum;
+}
+
+export const getPlayerData = async ({
+  id,
+  category,
+  lapMode,
+}: getPlayerDataParams): Promise<MatchupData> => {
   return {
     playerData: await api.timetrialsPlayersRetrieve({ id }),
     scoreData: await api.timetrialsPlayersScoresList({ id: id, category, region: 1 }),

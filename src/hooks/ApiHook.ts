@@ -39,7 +39,6 @@ export const useApi = <T>(
             if (requestTypeWait) {
               const previousRequest = prev.reverse().find((r) => r[2] === requestType);
               if (previousRequest !== undefined) await previousRequest[0];
-              console.log(requestType);
             }
 
             // Remove this one
@@ -76,6 +75,7 @@ export const useApiArray = <T, R>(
   dependencies: DependencyList = [],
   requestType = "",
   waitFor: WaitDependencyList[] = [],
+  requestTypeWait: boolean = true,
 ) => {
   const initialState = Array.from({ length: callCount }, (_, __) => ({
     isLoading: true,
@@ -102,9 +102,11 @@ export const useApiArray = <T, R>(
         [
           apiCallback(paramArray[i])
             .finally(async () => {
-              // Wait for any previous request of the same kind
-              const previousRequest = prev.reverse().find((r) => r[2] === requestType);
-              if (previousRequest !== undefined) await previousRequest[0];
+              if (requestTypeWait) {
+                // Wait for any previous request of the same kind
+                const previousRequest = prev.reverse().find((r) => r[2] === requestType);
+                if (previousRequest !== undefined) await previousRequest[0];
+              }
 
               // Remove this one
               setPromises((prev) =>

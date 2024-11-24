@@ -29,12 +29,14 @@ const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
           {
             id: 0,
             children: [
-              ...((players?.map((player) => {
-                return {
-                  type: "DropdownItemData",
-                  element: { text: player.alias ?? player.name, value: player.id },
-                };
-              }) as DropdownItemSetDataChild[]) ?? []),
+              ...((players
+                ?.sort((a, b) => ((a.alias ?? a.name) < (b.alias ?? b.name) ? -1 : 1))
+                .map((player) => {
+                  return {
+                    type: "DropdownItemData",
+                    element: { text: player.alias ?? player.name, value: player.id },
+                  };
+                }) as DropdownItemSetDataChild[]) ?? []),
               defaultValue,
             ],
           },

@@ -1,313 +1,299 @@
-import { useContext } from "react";
-import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
-import { I18nContext, TranslationKey } from "../../../utils/i18n/i18n";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { I18nContext } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
-import { PlayerStats } from "../../../api";
-import { useApi } from "../../../hooks";
-import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import { MetadataContext } from "../../../utils/Metadata";
-import { integerOr } from "../../../utils/Numbers";
 import { CategorySelect } from "../../widgets";
 import OverwriteColor from "../../widgets/OverwriteColor";
-import { getCategorySiteHue } from "../../../utils/EnumUtils";
+import { getCategorySiteHue, getTrackById } from "../../../utils/EnumUtils";
 import LapModeSelect, { LapModeEnum } from "../../widgets/LapModeSelect";
 import PlayerMention from "../../widgets/PlayerMention";
-import {
-  compareTwoPlayers,
-  getPlayerData,
-  MatchupData,
-  MatchupScore,
-} from "../../../utils/MatchupDataCrunch";
+import { getPlayerData, getPlayerDataParams } from "../../../utils/MatchupDataCrunch";
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
-import { useCategoryParam, useLapModeParam } from "../../../utils/SearchParams";
+import { useCategoryParam, useIdsParam, useLapModeParam } from "../../../utils/SearchParams";
+import { useApiArray } from "../../../hooks/ApiHook";
+import { CategoryEnum } from "../../../api";
+import { formatTime } from "../../../utils/Formatters";
+import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../../widgets/Dropdown";
 
 const MatchupPage = () => {
-  const { id1: id1Str, id2: id2Str } = useParams();
-  const id1 = Math.max(integerOr(id1Str, 0), 0);
-  const id2 = Math.max(integerOr(id2Str, 0), 0);
-
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
+  const [differenceMode, setDifferenceMode] = useState(false);
+  const ids = useIdsParam(searchParams).ids;
 
   const { translations, lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
 
-  const hasCourse = lapMode !== LapModeEnum.Lap;
-  const hasLap = lapMode !== LapModeEnum.Course;
-  const lapModes = [...(hasCourse ? [false] : []), ...(hasLap ? [true] : [])];
-  const cellSpan = lapMode === LapModeEnum.Overall ? 2 : 1;
-
-  const matchupData = [
-    useApi(() => getPlayerData(id1, category, lapMode), [id1, category, lapMode], "playerData0"),
-    useApi(() => getPlayerData(id2, category, lapMode), [id2, category, lapMode], "playerData1"),
-  ];
-
-  const isLoading = matchupData[0].isLoading || matchupData[1].isLoading;
-
-  const newData = compareTwoPlayers(
-    metadata.tracks ?? [],
-    matchupData[0].data,
-    matchupData[1].data,
+  const matchupData = useApiArray(
+    (params: getPlayerDataParams) => getPlayerData(params),
+    ids.length,
+    ids.map((id) => {
+      return {
+        id,
+        category,
+        lapMode,
+      };
+    }),
+    [category, lapMode],
+    "playerData",
+    [],
+    false,
   );
-  if (!isLoading) {
-    matchupData[0].data = (newData as MatchupData[])[0];
-    matchupData[1].data = (newData as MatchupData[])[1];
-  }
-  const scoreClasses = (score?: MatchupScore) => {
-    if (!score) {
-      return "";
-    }
-    return (
-      (score.category !== category ? "fallthrough " : "") +
-      (score.difference === null || score.difference <= 0 ? "winner" : "loser")
-    );
-  };
 
-  const diff = (p1Score?: MatchupScore) => {
-    if (p1Score) {
-      return p1Score.difference !== null ? formatTimeDiff(p1Score.difference) : "-";
-    } else {
-      return "-";
-    }
-  };
-
-  const diffClass = (diff?: number | null) => {
-    if (diff === null || diff === undefined) {
-      return "";
-    }
-    return diff === 0 ? "diff-eq" : diff > 0 ? "diff-gt" : "diff-lt";
-  };
-
-  const total = (stats: PlayerStats, metric: keyof PlayerStats) => {
-    if (stats === undefined || typeof stats[metric] !== "number") return 0;
-    return stats[metric] as number;
-  };
-
-  const average = (stats: PlayerStats, metric: keyof PlayerStats) => {
-    if (
-      stats !== undefined &&
-      stats !== null &&
-      typeof stats[metric] === "number" &&
-      stats.scoreCount > 0
-    ) {
-      return (stats[metric] as number) / stats.scoreCount;
-    } else {
-      return 0;
-    }
-  };
-
-  const statsRow = (
-    label: string,
-    metric: keyof PlayerStats,
-    ascending: boolean,
-    calcFunc: (stats: PlayerStats, metric: keyof PlayerStats) => number,
-    displayFunc: (value: number, isDiff: boolean) => string,
-  ) => {
-    if (!matchupData) {
-      return <></>;
-    }
-
-    const p1Value = calcFunc(matchupData[0].data?.statsData as PlayerStats, metric);
-    const p2Value = calcFunc(matchupData[1].data?.statsData as PlayerStats, metric);
-    const diff = p1Value - p2Value;
-
-    return (
-      <tr>
-        <th>{label}</th>
-        <th colSpan={cellSpan}>{displayFunc(p1Value, false)}</th>
-        <th className={diffClass(ascending ? diff : -diff)}>{displayFunc(diff, true)}</th>
-        <th colSpan={cellSpan}>{displayFunc(p2Value, false)}</th>
-      </tr>
-    );
-  };
-
+  const matchupDataIsLoading = matchupData.map((r) => r.isLoading).includes(true);
   const siteHue = getCategorySiteHue(category, settings);
+
+  const tableModule = useRef<HTMLDivElement | null>(null);
+  const [layoutTypeBig, setLayoutTypeBig] = useState(true);
+  const [layoutSwitchWidth, setLayoutSwitchWidth] = useState(0);
+  useLayoutEffect(() => {
+    if (tableModule.current === null) return;
+    const element = tableModule.current;
+    const updateSize = () => {
+      const scrollDiff = element.scrollWidth - element.clientWidth;
+      console.log(element);
+      if (layoutTypeBig && scrollDiff > 0) {
+        setLayoutTypeBig(false);
+        setLayoutSwitchWidth(element.clientWidth);
+      } else if (
+        !layoutTypeBig &&
+        scrollDiff === 0 &&
+        element.clientWidth > layoutSwitchWidth + 50
+      ) {
+        setLayoutTypeBig(true);
+        setLayoutSwitchWidth(0);
+      }
+    };
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, [
+    tableModule,
+    matchupDataIsLoading,
+    setLayoutTypeBig,
+    setLayoutSwitchWidth,
+    layoutSwitchWidth,
+    layoutTypeBig,
+  ]);
 
   return (
     <>
-      {/** Redirect if any id is invalid or API fetch failed */}
-      {(id1 === 0 || id2 === 0) && <Navigate to={resolvePage(Pages.MatchupHome)} />}
+      {/* Redirect if any id is invalid or API fetch failed */}
+      {ids.length < 2 && <Navigate to={resolvePage(Pages.MatchupHome)} />}
       <Link to={resolvePage(Pages.MatchupHome)}>&lt; Back</Link>
       <h1>{translations.matchupPageHeading[lang]}</h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
-        </div>
-        <div className="module">
-          <Deferred isWaiting={metadata.isLoading || isLoading}>
-            <table>
+          <div className="module-row">
+              <CategorySelect value={category} onChange={setCategory} />
+              <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+            </div>
+            <div className="module-row">
+                <Dropdown data={{
+                  type: "Normal",
+                  value: differenceMode,
+                  valueSetter: setDifferenceMode,
+                  defaultItemSet: 0,
+                  data: [
+                    {
+                      id: 0,
+                      children: [{
+                            type: "DropdownItemData",
+                            element: {
+                            text: translations.matchupPageDiffColToFirst[lang],
+                            value: false,
+                          },
+                        } as DropdownItemSetDataChild,{
+                              type: "DropdownItemData",
+                              element: {
+                              text: translations.matchupPageDiffColToNext[lang],
+                              value: true,
+                            },
+                          } as DropdownItemSetDataChild,]
+                      ,
+                    },
+                  ],
+                } as DropdownData} />
+              </div>
+        <Deferred isWaiting={metadata.isLoading || matchupDataIsLoading}>
+          <div className="module" ref={tableModule} style={{ overflowX: "scroll" }}>
+            <table style={{ whiteSpace: "nowrap" }}>
               <thead>
                 <tr>
-                  <th />
-                  <th colSpan={cellSpan}>
-                    <PlayerMention precalcPlayer={matchupData[0].data?.playerData} />
-                  </th>
-                  <th />
-                  <th colSpan={cellSpan}>
-                    <PlayerMention precalcPlayer={matchupData[1].data?.playerData} />
-                  </th>
+                  <>
+                    <th />
+                    {matchupData.map((playerData, idx, arr) => (
+                      <>
+                        {layoutTypeBig ? (
+                          <th colSpan={2}>
+                            <PlayerMention precalcPlayer={playerData.data?.playerData} />
+                          </th>
+                        ) : (
+                          <th>
+                            <PlayerMention precalcPlayer={playerData.data?.playerData} />
+                          </th>
+                        )}
+                        {arr.length === 2 && idx === 1 ? <></> : <th />}
+                      </>
+                    ))}
+                  </>
                 </tr>
                 <tr>
                   <th>{translations.matchupPageTrackCol[lang]}</th>
-                  {hasCourse && <th>{translations.matchupPageCourseCol[lang]}</th>}
-                  {hasLap && <th>{translations.matchupPageLapCol[lang]}</th>}
-                  <th>{translations.matchupPageDiffCol[lang]}</th>
-                  {hasCourse && <th>{translations.matchupPageCourseCol[lang]}</th>}
-                  {hasLap && <th>{translations.matchupPageLapCol[lang]}</th>}
+                  {matchupData.map((playerData, idx, arr) => (
+                    <>
+                      {layoutTypeBig ? (
+                        <>
+                          <th>{translations.matchupPageCourseCol[lang]}</th>
+                          <th>{translations.matchupPageLapCol[lang]}</th>
+                          {arr.length === 2 && idx === 1 ? (
+                            <></>
+                          ) : (
+                            <th>{translations.matchupPageDiffCol[lang]}</th>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <th>{translations.matchupPageTimeCol[lang]}</th>
+                          {arr.length === 2 && idx === 1 ? (
+                            <></>
+                          ) : (
+                            <th>{translations.matchupPageDiffCol[lang]}</th>
+                          )}
+                        </>
+                      )}
+                    </>
+                  ))}
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
-                {metadata.tracks?.map((track) =>
-                  lapModes.map((isLap) => {
-                    const p1Score = matchupData[0].data?.scoreData.find(
-                      (score) => score.track === track.id && score.isLap === isLap,
-                    ) as MatchupScore | undefined;
-                    const p2Score = matchupData[1].data?.scoreData.find(
-                      (score) => score.track === track.id && score.isLap === isLap,
-                    ) as MatchupScore | undefined;
-                    return (
-                      <tr key={`${isLap ? "l" : "c"}${track.id}`}>
-                        {(!isLap || lapMode === LapModeEnum.Lap) && (
-                          <td rowSpan={cellSpan}>
-                            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {
-                                translations[
-                                  `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                                ][lang]
-                              }
+                {(
+                  Array.from(
+                    new Set(
+                      matchupData
+                        .map((data) =>
+                          data.data?.scoreData.map(
+                            (scoreData) =>
+                              (scoreData.track << 1) ^ ((scoreData.isLap ?? false) ? 0 : 1),
+                          ),
+                        )
+                        .flat(),
+                    ),
+                  ) as number[]
+                )
+                  .sort((a, b) => a - b)
+                  .map((id) => {
+                    const trackId = id >> 1;
+                    const isFlap = id % 2 === 1;
+
+                    if (layoutTypeBig && !isFlap) {
+                      return (
+                        <tr>
+                          <td rowSpan={2}>
+                            <Link
+                              to={resolvePage(
+                                Pages.TrackChart,
+                                { id: trackId },
+                                {
+                                  cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                  lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+                                },
+                              )}
+                            >
+                              {getTrackById(metadata.tracks, trackId)?.name}
                             </Link>
                           </td>
-                        )}
-                        {isLap && lapMode === LapModeEnum.Overall && <td />}
-                        <td className={scoreClasses(p1Score)}>
-                          {p1Score ? formatTime(p1Score.value) : "-"}
+                          {matchupData.map((data, idx, arr) => {
+                            const score = data.data?.scoreData.find(
+                              (score) => score.isLap === false && score.track === trackId,
+                            );
+                            if (score === undefined)
+                              return (
+                                <>
+                                  <td colSpan={2}>-</td>
+                                  {arr.length === 2 && idx === 1 ? <></> : <td>-</td>}
+                                </>
+                              );
+                            return (
+                              <>
+                                <td colSpan={2}>{formatTime(score.value)}</td>
+                                {arr.length === 2 && idx === 1 ? <></> : <td>-</td>}
+                              </>
+                            );
+                          })}
+                        </tr>
+                      );
+                    } else if (layoutTypeBig && isFlap) {
+                      return (
+                        <tr>
+                          {matchupData.map((data, idx, arr) => {
+                            const score = data.data?.scoreData.find(
+                              (score) => score.isLap === true && score.track === trackId,
+                            );
+                            if (score === undefined)
+                              return (
+                                <>
+                                  <td />
+                                  <td>-</td>
+                                  {arr.length === 2 && idx === 1 ? <></> : <td>-</td>}
+                                </>
+                              );
+                            return (
+                              <>
+                                <td />
+                                <td>{formatTime(score.value)}</td>
+                                {arr.length === 2 && idx === 1 ? <></> : <td>-</td>}
+                              </>
+                            );
+                          })}
+                        </tr>
+                      );
+                    }
+                    return (
+                      <tr>
+                        <td>
+                          <Link
+                            to={resolvePage(
+                              Pages.TrackChart,
+                              { id: trackId },
+                              {
+                                cat: category !== CategoryEnum.NonShortcut ? category : null,
+                                lap: isFlap ? LapModeEnum.Lap : null,
+                              },
+                            )}
+                          >
+                            {`${getTrackById(metadata.tracks, trackId)?.name} - ${isFlap ? translations.constantLapModeLap[lang] : translations.constantLapModeCourse[lang]}`}
+                          </Link>
                         </td>
-                        {!isLap && lapMode === LapModeEnum.Overall && <td />}
-                        <td className={diffClass(p1Score?.difference)}>{diff(p1Score)}</td>
-                        {isLap && lapMode === LapModeEnum.Overall && <td />}
-                        <td className={scoreClasses(p2Score)}>
-                          {p2Score ? formatTime(p2Score.value) : "-"}
-                        </td>
-                        {!isLap && lapMode === LapModeEnum.Overall && <td />}
+                        {matchupData.map((data, idx, arr) => {
+                          const score = data.data?.scoreData.find(
+                            (score) => score.isLap === isFlap && score.track === trackId,
+                          );
+                          if (score === undefined)
+                            return (
+                              <>
+                                <td>-</td>
+                                {arr.length === 2 && idx === 1 ? <></> : <td>-</td>}
+                              </>
+                            );
+                          return (
+                            <>
+                              <td>{formatTime(score.value)}</td>
+                              {arr.length === 2 && idx === 1 ? <></> : <td>-</td>}
+                            </>
+                          );
+                        })}
                       </tr>
                     );
-                  }),
-                )}
+                  })}
               </tbody>
-              <tfoot>
-                {statsRow(
-                  translations.matchupPageTotalRow[lang],
-                  "totalScore",
-                  true,
-                  total,
-                  (value, isDiff) => (isDiff ? formatTimeDiff(value) : formatTime(value)),
-                )}
-                {statsRow(
-                  translations.matchupPageAFRow[lang],
-                  "totalRank",
-                  true,
-                  average,
-                  (value, isDiff) =>
-                    (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
-                )}
-                {statsRow(
-                  translations.matchupPageARRRow[lang],
-                  "totalStandard",
-                  true,
-                  average,
-                  (value, isDiff) =>
-                    (isDiff ? (value < 0 ? "-" : "+") : "") + Math.abs(value).toFixed(4),
-                )}
-                {statsRow(
-                  translations.matchupPagePRWRRow[lang],
-                  "totalRecordRatio",
-                  false,
-                  average,
-                  (value, isDiff) =>
-                    (isDiff ? (value < 0 ? "-" : "+") : "") +
-                    (Math.abs(value) * 100).toFixed(4) +
-                    "%",
-                )}
-                <tr>
-                  <th>{translations.matchupPageTallyRow[lang]}</th>
-                  <th colSpan={cellSpan}>
-                    {`${
-                      matchupData[0].data !== undefined
-                        ? lapMode === "overall"
-                          ? matchupData[0].data.isLapStats.wins +
-                            matchupData[0].data.isntLapStats.wins
-                          : lapMode === "lap"
-                            ? matchupData[0].data.isLapStats.wins
-                            : matchupData[0].data.isntLapStats.wins
-                        : 0
-                    } ${
-                      (matchupData[0].data !== undefined
-                        ? lapMode === "overall"
-                          ? matchupData[0].data.isLapStats.wins +
-                            matchupData[0].data.isntLapStats.wins
-                          : lapMode === "lap"
-                            ? matchupData[0].data.isLapStats.wins
-                            : matchupData[0].data.isntLapStats.wins
-                        : 0) === 1
-                        ? translations.matchupPageTallyRowWinsSingular[lang]
-                        : translations.matchupPageTallyRowWinsPlural[lang]
-                    }`}
-                  </th>
-                  <th className={diffClass(0)}>
-                    {`${
-                      matchupData[0].data !== undefined
-                        ? lapMode === "overall"
-                          ? matchupData[0].data.isLapStats.ties +
-                            matchupData[0].data.isntLapStats.ties
-                          : lapMode === "lap"
-                            ? matchupData[0].data.isLapStats.ties
-                            : matchupData[0].data.isntLapStats.ties
-                        : 0
-                    }  ${
-                      (matchupData[0].data !== undefined
-                        ? lapMode === "overall"
-                          ? matchupData[0].data.isLapStats.ties +
-                            matchupData[0].data.isntLapStats.ties
-                          : lapMode === "lap"
-                            ? matchupData[0].data.isLapStats.ties
-                            : matchupData[0].data.isntLapStats.ties
-                        : 0) === 1
-                        ? translations.matchupPageTallyRowDrawsSingular[lang]
-                        : translations.matchupPageTallyRowDrawsPlural[lang]
-                    }`}
-                  </th>
-                  <th colSpan={cellSpan}>
-                    {`${
-                      matchupData[0].data !== undefined
-                        ? lapMode === "overall"
-                          ? matchupData[0].data.isLapStats.losses +
-                            matchupData[0].data.isntLapStats.losses
-                          : lapMode === "lap"
-                            ? matchupData[0].data.isLapStats.losses
-                            : matchupData[0].data.isntLapStats.losses
-                        : 0
-                    } ${
-                      (matchupData[0].data !== undefined
-                        ? lapMode === "overall"
-                          ? matchupData[0].data.isLapStats.losses +
-                            matchupData[0].data.isntLapStats.losses
-                          : lapMode === "lap"
-                            ? matchupData[0].data.isLapStats.losses
-                            : matchupData[0].data.isntLapStats.losses
-                        : 0) === 1
-                        ? translations.matchupPageTallyRowWinsSingular[lang]
-                        : translations.matchupPageTallyRowWinsPlural[lang]
-                    }`}
-                  </th>
-                </tr>
-              </tfoot>
+              <tfoot></tfoot>
             </table>
-          </Deferred>
-        </div>
+          </div>
+        </Deferred>
       </OverwriteColor>
     </>
   );

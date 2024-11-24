@@ -344,6 +344,10 @@ const TextInputDropdown = ({
       {leftIcon ?? rightIcon ?? <></>}
       <textarea
         ref={textarea}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         onFocus={() => {
           if (autodeleteText) (textarea.current as any).value = "";
           setDropdownListShown(true);

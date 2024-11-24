@@ -10619,6 +10619,24 @@
     "pt": "",
     "es": ""
   },
+  "matchupPageDiffColToNext": {
+    "it": "Differenza col Prossimo",
+    "en": "Difference With Next",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageDiffColToFirst": {
+    "it": "Differenza col Primo",
+    "en": "Difference With First",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "matchupPageTrackCol": {
     "it": "Pista",
     "en": "Track",
@@ -10640,6 +10658,15 @@
   "matchupPageLapCol": {
     "it": "Giro",
     "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "matchupPageTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
     "fr": "",
     "de": "",
     "jp": "",

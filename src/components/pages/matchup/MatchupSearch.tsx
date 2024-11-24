@@ -24,8 +24,8 @@ const PlayerSelectField = ({
     <div className="module-row">
       <span
         style={{
-          textDecorationColor: id === 0 ? "red" : "white",
-          textDecorationLine: id === 0 ? "underline" : "none",
+          textDecorationColor: id === 0 && nth < 3 ? "red" : "white",
+          textDecorationLine: id === 0 && nth < 3 ? "underline" : "none",
         }}
       >
         {translations.matchupPagePlayerText[lang]}&nbsp;{nth}
@@ -54,11 +54,6 @@ export const MatchupHomePage = () => {
     useState(0),
   ];
   const { translations, lang } = useContext(I18nContext);
-  const redirectParams: Record<string, number> = {};
-  for (let i = 0; i < idStates.length; i++) {
-    if (idStates[i][0] === 0) break;
-    redirectParams[`id${i}`] = idStates[i][0];
-  }
 
   return (
     <>
@@ -95,7 +90,11 @@ export const MatchupHomePage = () => {
             to={
               idStates[0][0] === 0 || idStates[1][0] === 0
                 ? ""
-                : resolvePage(Pages.Matchup, {}, redirectParams)
+                : resolvePage(
+                    Pages.Matchup,
+                    {},
+                    { ids: idStates.map((idState) => idState[0]).filter((r) => r !== 0) },
+                  )
             }
           >
             {translations.matchupPageCompareButtonText[lang]}
