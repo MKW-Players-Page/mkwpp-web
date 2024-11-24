@@ -87,37 +87,43 @@ const MatchupPage = () => {
       <Link to={resolvePage(Pages.MatchupHome)}>&lt; Back</Link>
       <h1>{translations.matchupPageHeading[lang]}</h1>
       <OverwriteColor hue={siteHue}>
-          <div className="module-row">
-              <CategorySelect value={category} onChange={setCategory} />
-              <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
-            </div>
-            <div className="module-row">
-                <Dropdown data={{
-                  type: "Normal",
-                  value: differenceMode,
-                  valueSetter: setDifferenceMode,
-                  defaultItemSet: 0,
-                  data: [
-                    {
-                      id: 0,
-                      children: [{
-                            type: "DropdownItemData",
-                            element: {
-                            text: translations.matchupPageDiffColToFirst[lang],
-                            value: false,
-                          },
-                        } as DropdownItemSetDataChild,{
-                              type: "DropdownItemData",
-                              element: {
-                              text: translations.matchupPageDiffColToNext[lang],
-                              value: true,
-                            },
-                          } as DropdownItemSetDataChild,]
-                      ,
-                    },
-                  ],
-                } as DropdownData} />
-              </div>
+        <div className="module-row">
+          <CategorySelect value={category} onChange={setCategory} />
+          <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+        </div>
+        <div className="module-row">
+          <Dropdown
+            data={
+              {
+                type: "Normal",
+                value: differenceMode,
+                valueSetter: setDifferenceMode,
+                defaultItemSet: 0,
+                data: [
+                  {
+                    id: 0,
+                    children: [
+                      {
+                        type: "DropdownItemData",
+                        element: {
+                          text: translations.matchupPageDiffColToFirst[lang],
+                          value: false,
+                        },
+                      } as DropdownItemSetDataChild,
+                      {
+                        type: "DropdownItemData",
+                        element: {
+                          text: translations.matchupPageDiffColToNext[lang],
+                          value: true,
+                        },
+                      } as DropdownItemSetDataChild,
+                    ],
+                  },
+                ],
+              } as DropdownData
+            }
+          />
+        </div>
         <Deferred isWaiting={metadata.isLoading || matchupDataIsLoading}>
           <div className="module" ref={tableModule} style={{ overflowX: "scroll" }}>
             <table style={{ whiteSpace: "nowrap" }}>
