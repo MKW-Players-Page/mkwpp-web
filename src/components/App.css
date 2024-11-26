@@ -131,8 +131,17 @@
   white-space: nowrap;
 }
 
+td.force-bg {
+  background-color: var(--module-background-color);
+}
+
+th.force-bg {
+  background-color: var(--module-background-color-alt);
+}
+
 .table-hover-rows tr:hover td:not([rowspan="2"]),
 .table-hover-rows tr:has(td[rowspan="2"]:hover) + tr,
-.table-hover-rows td[rowspan="2"]:hover {
+.table-hover-rows td[rowspan="2"]:hover,
+td.force-bg:hover {
   background-color: var(--header-background-color);
 }
