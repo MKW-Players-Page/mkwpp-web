@@ -66,7 +66,11 @@ const MatchupPageTableRowTrackTD = ({
 
   if (layoutTypeBig && !isLap) {
     return (
-      <td rowSpan={2} className="force-bg" style={{ position: "sticky", left: 0, paddingRight: "5px" }}>
+      <td
+        rowSpan={2}
+        className="force-bg"
+        style={{ position: "sticky", left: 0, paddingRight: "5px" }}
+      >
         <Link
           to={resolvePage(
             Pages.TrackChart,
