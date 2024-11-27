@@ -105,7 +105,9 @@ const MatchupPageTableRowTrackTD = ({
 
 interface MatchupPageTableRowProps {
   layoutTypeBig: boolean;
+  lastId: number;
   id: number;
+  nextId: number;
   matchupData: ApiState<MatchupData>[];
   category: CategoryEnum;
   lapMode: LapModeEnum;
@@ -114,7 +116,9 @@ interface MatchupPageTableRowProps {
 
 const MatchupPageTableRow = ({
   layoutTypeBig,
+  lastId,
   id,
+  nextId,
   matchupData,
   category,
   lapMode,
@@ -122,8 +126,11 @@ const MatchupPageTableRow = ({
 }: MatchupPageTableRowProps) => {
   const metadata = useContext(MetadataContext);
 
-  const trackId = id >> 1;
+  const trackId = id >>> 1;
   const isFlap = id % 2 === 1;
+
+  if ((lapMode === LapModeEnum.Course && isFlap) || (lapMode === LapModeEnum.Lap && !isFlap))
+    return <></>;
 
   const orderedScores = matchupData
     .map((data) =>
@@ -139,7 +146,9 @@ const MatchupPageTableRow = ({
   return (
     <tr>
       <MatchupPageTableRowTrackTD
-        layoutTypeBig={layoutTypeBig}
+        layoutTypeBig={
+          layoutTypeBig && ((nextId === id + 1 && !isFlap) || (lastId === id - 1 && isFlap))
+        }
         isLap={isFlap}
         trackName={getTrackById(metadata.tracks, trackId)?.name ?? "Err"}
         trackId={trackId}
@@ -328,7 +337,7 @@ const MatchupPage = () => {
         lapMode,
       };
     }),
-    [category, lapMode],
+    [category],
     "playerData",
     [],
     false,
@@ -369,6 +378,23 @@ const MatchupPage = () => {
     layoutSwitchWidth,
     layoutTypeBig,
   ]);
+
+  const allTrackIds = (
+    Array.from(
+      new Set(
+        matchupData
+          .map((data) =>
+            data.data?.scoreData.map(
+              (scoreData) => (scoreData.track << 1) ^ ((scoreData.isLap ?? false) ? 1 : 0),
+            ),
+          )
+          .flat(),
+      ),
+    ) as number[]
+  ).sort((a, b) => a - b);
+  const notOnlyOneLapMode =
+    allTrackIds.map((r) => r % 2 === 1).includes(true) &&
+    allTrackIds.map((r) => r % 2 === 1).includes(false);
 
   return (
     <>
@@ -430,15 +456,15 @@ const MatchupPage = () => {
                     />
                     {matchupData.map((playerData, idx, arr) => (
                       <>
-                        {layoutTypeBig ? (
-                          <th colSpan={2}>
-                            <PlayerMention precalcPlayer={playerData.data?.playerData} />
-                          </th>
-                        ) : (
-                          <th>
-                            <PlayerMention precalcPlayer={playerData.data?.playerData} />
-                          </th>
-                        )}
+                        <th
+                          colSpan={
+                            layoutTypeBig && lapMode === LapModeEnum.Overall && notOnlyOneLapMode
+                              ? 2
+                              : 1
+                          }
+                        >
+                          <PlayerMention precalcPlayer={playerData.data?.playerData} />
+                        </th>
                         {arr.length === 2 && idx === 1 ? <></> : <th />}
                       </>
                     ))}
@@ -453,7 +479,7 @@ const MatchupPage = () => {
                   </th>
                   {matchupData.map((playerData, idx, arr) => (
                     <>
-                      {layoutTypeBig ? (
+                      {layoutTypeBig && lapMode === LapModeEnum.Overall && notOnlyOneLapMode ? (
                         <>
                           <th>{translations.matchupPageCourseCol[lang]}</th>
                           <th>{translations.matchupPageLapCol[lang]}</th>
@@ -478,31 +504,20 @@ const MatchupPage = () => {
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
-                {(
-                  Array.from(
-                    new Set(
-                      matchupData
-                        .map((data) =>
-                          data.data?.scoreData.map(
-                            (scoreData) =>
-                              (scoreData.track << 1) ^ ((scoreData.isLap ?? false) ? 0 : 1),
-                          ),
-                        )
-                        .flat(),
-                    ),
-                  ) as number[]
-                )
-                  .sort((a, b) => a - b)
-                  .map((id) => (
-                    <MatchupPageTableRow
-                      layoutTypeBig={layoutTypeBig}
-                      id={id}
-                      matchupData={matchupData}
-                      category={category}
-                      lapMode={lapMode}
-                      differenceMode={differenceMode}
-                    />
-                  ))}
+                {allTrackIds.map((id, idx, arr) => (
+                  <MatchupPageTableRow
+                    layoutTypeBig={
+                      layoutTypeBig && lapMode === LapModeEnum.Overall && notOnlyOneLapMode
+                    }
+                    lastId={arr[idx - 1]}
+                    id={id}
+                    nextId={arr[idx + 1]}
+                    matchupData={matchupData}
+                    category={category}
+                    lapMode={lapMode}
+                    differenceMode={differenceMode}
+                  />
+                ))}
               </tbody>
               <tfoot>
                 <MatchupPageTableFooterRow
@@ -510,7 +525,7 @@ const MatchupPage = () => {
                   rankingTypeKey="totalScore"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig}
+                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
                   displayFunc={formatTime}
                   displayFuncDiff={formatTimeDiff}
                 />
@@ -519,7 +534,7 @@ const MatchupPage = () => {
                   rankingTypeKey="totalRank"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig}
+                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
                   displayFunc={(x) => (x / 64).toFixed(4)}
                   displayFuncDiff={(x) => {
                     const r = (x / 64).toFixed(4);
@@ -531,7 +546,7 @@ const MatchupPage = () => {
                   rankingTypeKey="totalStandard"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig}
+                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
                   displayFunc={(x) => (x / 64).toFixed(4)}
                   displayFuncDiff={(x) => {
                     const r = (x / 64).toFixed(4);
@@ -543,7 +558,7 @@ const MatchupPage = () => {
                   rankingTypeKey="totalRecordRatio"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig}
+                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
                   displayFunc={(x) => ((x / 64) * 100).toFixed(4) + "%"}
                   displayFuncDiff={(x) => ((x / 64) * 100).toFixed(4) + "%"}
                 />
@@ -593,7 +608,7 @@ const MatchupPage = () => {
                         return (
                           <>
                             <th
-                              colSpan={layoutTypeBig ? 2 : 1}
+                              colSpan={layoutTypeBig && lapMode === LapModeEnum.Overall ? 2 : 1}
                               style={{
                                 textDecoration: scoreIndex === 0 ? "underline" : "",
                               }}
@@ -604,7 +619,7 @@ const MatchupPage = () => {
                               <></>
                             ) : (
                               <th
-                                colSpan={layoutTypeBig ? 2 : 1}
+                                colSpan={layoutTypeBig && lapMode === LapModeEnum.Overall ? 2 : 1}
                                 style={{
                                   color:
                                     arr.length === 2
