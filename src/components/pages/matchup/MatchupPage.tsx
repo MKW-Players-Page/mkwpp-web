@@ -340,7 +340,7 @@ const MatchupPage = () => {
         lapMode,
       };
     }),
-    [category],
+    [category, lapMode],
     "playerData",
     [],
     false,
