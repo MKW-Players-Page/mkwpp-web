@@ -66,7 +66,7 @@ const MatchupPageTableRowTrackTD = ({
 
   if (layoutTypeBig && !isLap) {
     return (
-      <td rowSpan={2}>
+      <td rowSpan={2} className="force-bg" style={{ position: "sticky", left: 0, paddingRight: "5px" }}>
         <Link
           to={resolvePage(
             Pages.TrackChart,
@@ -286,7 +286,6 @@ const MatchupPageTableFooterRow = ({
               <></>
             ) : (
               <th
-                colSpan={layoutTypeBig ? 2 : 1}
                 style={{
                   color:
                     arr.length === 2
@@ -377,6 +376,7 @@ const MatchupPage = () => {
     setLayoutSwitchWidth,
     layoutSwitchWidth,
     layoutTypeBig,
+    ids,
   ]);
 
   const allTrackIds = (
@@ -619,7 +619,6 @@ const MatchupPage = () => {
                               <></>
                             ) : (
                               <th
-                                colSpan={layoutTypeBig && lapMode === LapModeEnum.Overall ? 2 : 1}
                                 style={{
                                   color:
                                     arr.length === 2
