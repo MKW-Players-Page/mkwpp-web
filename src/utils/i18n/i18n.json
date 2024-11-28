@@ -10799,24 +10799,6 @@
     "pt": "",
     "es": ""
   },
-  "matchupPageTallyRowDrawsSingular": {
-    "it": "Pareggio",
-    "en": "Draw",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "matchupPageTallyRowDrawsPlural": {
-    "it": "Pareggi",
-    "en": "Draws",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
   "trackListPageHeading": {
     "it": "Piste",
     "en": "Courses",
