@@ -2,9 +2,7 @@ import { useContext } from "react";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext } from "../../utils/i18n/i18n";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
 import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";
-import { FlagIcon } from "./Icon";
 
 export interface PlayerSelectDropdownProps {
   setId: React.Dispatch<React.SetStateAction<number>>;
@@ -14,7 +12,6 @@ export interface PlayerSelectDropdownProps {
 const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
   const { data: players } = useApi(() => api.timetrialsPlayersList(), [], "playerData");
   const { translations, lang } = useContext(I18nContext);
-  const metadata = useContext(MetadataContext);
   const defaultValue: DropdownItemSetDataChild = {
     type: "DropdownItemData",
     hidden: true,
@@ -40,7 +37,6 @@ const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
                     element: {
                       text: player.alias ?? player.name,
                       value: player.id,
-                      rightIcon: <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />,
                     },
                   };
                 }) as DropdownItemSetDataChild[]) ?? []),
