@@ -22,7 +22,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
 
   return (
     <header className="header">
-      <div>
+      <div className="logo-div">
         <span
           className="hamburger"
           onClick={() => {
