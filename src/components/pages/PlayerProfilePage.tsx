@@ -28,6 +28,7 @@ import {
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import { RankingsMetrics } from "./RankingsPage";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -274,15 +275,18 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? (
+                      {stats ? (
                         <Link
                           to={resolvePage(
                             Pages.RankingsAverageFinish,
                             {},
-                            { ...rankingsRedirectParams, hl: stats.totalRank / stats.scoreCount },
+                            {
+                              ...rankingsRedirectParams,
+                              hl: RankingsMetrics.AverageFinish.getHighlightValue(stats),
+                            },
                           )}
                         >
-                          {stats.totalRank / stats.scoreCount}
+                          {RankingsMetrics.AverageFinish.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"
@@ -298,18 +302,18 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? (
+                      {stats ? (
                         <Link
                           to={resolvePage(
                             Pages.RankingsAverageStandard,
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: stats.totalStandard / stats.scoreCount,
+                              hl: RankingsMetrics.AverageStandard.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {stats.totalStandard / stats.scoreCount}
+                          {RankingsMetrics.AverageStandard.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"
@@ -329,18 +333,18 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? (
+                      {stats ? (
                         <Link
                           to={resolvePage(
                             Pages.RankingsAverageRecordRatio,
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4),
+                              hl: RankingsMetrics.AverageRecordRatio.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"}
+                          {RankingsMetrics.AverageRecordRatio.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"
@@ -361,11 +365,11 @@ const PlayerProfilePage = () => {
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: stats.totalScore,
+                              hl: RankingsMetrics.TotalTime.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {formatTime(stats.totalScore)}
+                          {RankingsMetrics.TotalTime.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"

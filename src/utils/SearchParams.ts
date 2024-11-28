@@ -53,6 +53,20 @@ export const useRowHighlightParam = (searchParams: SearchParams) => {
   };
 };
 
+export const useIdsParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
+  const ids = (searchParams[0].get("ids") ?? "")
+    .replaceAll("%2C", ",")
+    .split(",")
+    .map((x) => parseInt(x))
+    .filter((x) => x > 0);
+  return {
+    ids,
+    setIds: (ids: number[]) => {
+      searchParams[1]((prev) => paramReplace(prev, "ids", ids.toString(), overwriteParams));
+    },
+  };
+};
+
 export const useLapModeParam = (
   searchParams: SearchParams,
   restrictedSet: boolean = true,

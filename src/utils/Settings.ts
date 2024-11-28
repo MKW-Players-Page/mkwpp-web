@@ -3,6 +3,7 @@ import { createContext } from "react";
 export interface Settings {
   version: number;
   showRegFlags: boolean;
+  lockTableCells: boolean;
   categoryHueColorNonSC: number;
   categoryHueColorSC: number;
   categoryHueColorUnres: number;
@@ -15,6 +16,8 @@ export const browserSettingDefault = (key: keyof Settings) => {
     case "version":
       return 1;
     case "showRegFlags":
+      return false;
+    case "lockTableCells":
       return false;
     case "categoryHueColorNonSC":
       return 0;
@@ -39,6 +42,7 @@ export const browserSettingsLoadParse = (): Settings => {
     return {
       version: browserSettingDefault("version"),
       showRegFlags: browserSettingDefault("showRegFlags"),
+      lockTableCells: browserSettingDefault("lockTableCells"),
       categoryHueColorNonSC: browserSettingDefault("categoryHueColorNonSC"),
       categoryHueColorSC: browserSettingDefault("categoryHueColorSC"),
       categoryHueColorUnres: browserSettingDefault("categoryHueColorUnres"),
@@ -48,6 +52,7 @@ export const browserSettingsLoadParse = (): Settings => {
   const SettingsKeys = [
     "version",
     "showRegFlags",
+    "lockTableCells",
     "categoryHueColorNonSC",
     "categoryHueColorSC",
     "categoryHueColorUnres",

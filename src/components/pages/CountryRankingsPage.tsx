@@ -25,6 +25,7 @@ import {
 } from "../../api/generated";
 import { handleBars, I18nContext } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -162,14 +163,17 @@ const CountryRankingsPage = () => {
               </thead>
               <tbody className="table-hover-rows">
                 {data?.map((stats, idx, arr) => {
-                  const calculatedValueStr = (stats.totalRank / stats.scoreCount).toFixed(4);
+                  const calculatedValueStr = (
+                    stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32)
+                  ).toFixed(4);
                   const calculatedValue = parseFloat(calculatedValueStr);
                   return (
                     <>
                       {highlight &&
                       calculatedValue > highlight &&
                       (arr[idx - 1] === undefined ||
-                        arr[idx - 1].totalRank / arr[idx - 1].scoreCount < highlight) ? (
+                        arr[idx - 1].totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32) <
+                          highlight) ? (
                         <>
                           <tr ref={highlightElement} key={highlight} className="highlighted">
                             <td />

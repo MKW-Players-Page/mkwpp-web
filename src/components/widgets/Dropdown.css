@@ -8,6 +8,10 @@
   height: 27px;
 }
 
+.dropdown > textarea {
+  flex-grow: 5;
+}
+
 .dropdown-list {
   z-index: 100;
   position: absolute;
