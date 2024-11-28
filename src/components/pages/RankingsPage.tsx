@@ -40,24 +40,28 @@ export const RankingsMetrics: RankingsMetricMap = {
     descriptionKey: "rankingsPageAverageFinishDescription",
     metric: "total_rank",
     metricOrder: +1,
-    getHighlightValue: (stats) => +(stats.totalRank / 64).toFixed(4),
-    getValueString: (stats) => String(stats.totalRank / 64),
+    getHighlightValue: (stats) =>
+      +(stats.totalRank / (stats.isLap === undefined ? 64 : 32)).toFixed(4),
+    getValueString: (stats) => String(stats.totalRank / (stats.isLap === undefined ? 64 : 32)),
   },
   AverageStandard: {
     titleKey: "rankingsPageAverageStandardTitle",
     descriptionKey: "rankingsPageAverageStandardDescription",
     metric: "total_standard",
     metricOrder: +1,
-    getHighlightValue: (stats) => +(stats.totalStandard / 64).toFixed(4),
-    getValueString: (stats) => String(stats.totalStandard / 64),
+    getHighlightValue: (stats) =>
+      +(stats.totalStandard / (stats.isLap === undefined ? 64 : 32)).toFixed(4),
+    getValueString: (stats) => String(stats.totalStandard / (stats.isLap === undefined ? 64 : 32)),
   },
   AverageRecordRatio: {
     titleKey: "rankingsPageAverageRecordRatioTitle",
     descriptionKey: "rankingsPageAverageRecordRatioDescription",
     metric: "total_record_ratio",
     metricOrder: -1,
-    getHighlightValue: (stats) => +((stats.totalRecordRatio / 64) * 100).toFixed(4),
-    getValueString: (stats) => ((stats.totalRecordRatio / 64) * 100).toFixed(4) + "%",
+    getHighlightValue: (stats) =>
+      +((stats.totalRecordRatio / (stats.isLap === undefined ? 64 : 32)) * 100).toFixed(4),
+    getValueString: (stats) =>
+      ((stats.totalRecordRatio / (stats.isLap === undefined ? 64 : 32)) * 100).toFixed(4) + "%",
   },
   TotalTime: {
     titleKey: "rankingsPageTotalTimeTitle",

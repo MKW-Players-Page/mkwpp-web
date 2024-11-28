@@ -526,6 +526,8 @@ const MatchupPage = () => {
     [matchupData, lapMode],
   );
 
+  const scoreCountForFooter = lapMode === LapModeEnum.Overall ? 64 : 32;
+
   return (
     <>
       {/* Redirect if any id is invalid or API fetch failed */}
@@ -695,9 +697,9 @@ const MatchupPage = () => {
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={(x) => (x / 64).toFixed(4)}
+                  displayFunc={(x) => (x / scoreCountForFooter).toFixed(4)}
                   displayFuncDiff={(x) => {
-                    const r = (x / 64).toFixed(4);
+                    const r = (x / scoreCountForFooter).toFixed(4);
                     return x > 0 ? `+` + r : r;
                   }}
                   backwards={false}
@@ -709,9 +711,9 @@ const MatchupPage = () => {
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={(x) => (x / 64).toFixed(4)}
+                  displayFunc={(x) => (x / scoreCountForFooter).toFixed(4)}
                   displayFuncDiff={(x) => {
-                    const r = (x / 64).toFixed(4);
+                    const r = (x / scoreCountForFooter).toFixed(4);
                     return x > 0 ? `+` + r : r;
                   }}
                   backwards={false}
@@ -723,9 +725,9 @@ const MatchupPage = () => {
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={(x) => ((x / 64) * 100).toFixed(4) + "%"}
+                  displayFunc={(x) => ((x / scoreCountForFooter) * 100).toFixed(4) + "%"}
                   displayFuncDiff={(x) => {
-                    const r = ((x / 64) * 100).toFixed(4) + "%";
+                    const r = ((x / scoreCountForFooter) * 100).toFixed(4) + "%";
                     return x > 0 ? `+` + r : r;
                   }}
                   backwards={true}

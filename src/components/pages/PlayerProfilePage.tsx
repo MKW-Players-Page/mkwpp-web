@@ -274,15 +274,18 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? (
+                      {stats ? (
                         <Link
                           to={resolvePage(
                             Pages.RankingsAverageFinish,
                             {},
-                            { ...rankingsRedirectParams, hl: stats.totalRank / stats.scoreCount },
+                            {
+                              ...rankingsRedirectParams,
+                              hl: stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32),
+                            },
                           )}
                         >
-                          {stats.totalRank / stats.scoreCount}
+                          {stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32)}
                         </Link>
                       ) : (
                         "-"
@@ -298,18 +301,18 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? (
+                      {stats ? (
                         <Link
                           to={resolvePage(
                             Pages.RankingsAverageStandard,
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: stats.totalStandard / stats.scoreCount,
+                              hl: stats.totalStandard / (lapMode === LapModeEnum.Overall ? 64 : 32),
                             },
                           )}
                         >
-                          {stats.totalStandard / stats.scoreCount}
+                          {stats.totalStandard / (lapMode === LapModeEnum.Overall ? 64 : 32)}
                         </Link>
                       ) : (
                         "-"
@@ -329,18 +332,25 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats && stats.scoreCount > 0 ? (
+                      {stats ? (
                         <Link
                           to={resolvePage(
                             Pages.RankingsAverageRecordRatio,
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: ((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4),
+                              hl: (
+                                (stats.totalRecordRatio /
+                                  (lapMode === LapModeEnum.Overall ? 64 : 32)) *
+                                100
+                              ).toFixed(4),
                             },
                           )}
                         >
-                          {((stats.totalRecordRatio / stats.scoreCount) * 100).toFixed(4) + "%"}
+                          {(
+                            (stats.totalRecordRatio / (lapMode === LapModeEnum.Overall ? 64 : 32)) *
+                            100
+                          ).toFixed(4) + "%"}
                         </Link>
                       ) : (
                         "-"
