@@ -32,8 +32,12 @@ const PlayerSelectField = ({
       </span>
       <PlayerSelectDropdown setId={setId} id={id} />
       {showDelete ? (
-        <button onClick={deleteOnClick} className="module" style={{ flexShrink: 10 }}>
-          X
+        <button
+          onClick={deleteOnClick}
+          className="module"
+          style={{ flexShrink: 10, alignSelf: "stretch", fontSize: ".7em" }}
+        >
+          ✖
         </button>
       ) : (
         <></>
