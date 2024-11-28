@@ -28,6 +28,7 @@ import {
 import { LapModeEnum } from "../widgets/LapModeSelect";
 import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import { RankingsMetrics } from "./RankingsPage";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -281,11 +282,11 @@ const PlayerProfilePage = () => {
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32),
+                              hl: RankingsMetrics.AverageFinish.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32)}
+                          {RankingsMetrics.AverageFinish.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"
@@ -308,11 +309,11 @@ const PlayerProfilePage = () => {
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: stats.totalStandard / (lapMode === LapModeEnum.Overall ? 64 : 32),
+                              hl: RankingsMetrics.AverageStandard.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {stats.totalStandard / (lapMode === LapModeEnum.Overall ? 64 : 32)}
+                          {RankingsMetrics.AverageStandard.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"
@@ -339,18 +340,11 @@ const PlayerProfilePage = () => {
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: (
-                                (stats.totalRecordRatio /
-                                  (lapMode === LapModeEnum.Overall ? 64 : 32)) *
-                                100
-                              ).toFixed(4),
+                              hl: RankingsMetrics.AverageRecordRatio.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {(
-                            (stats.totalRecordRatio / (lapMode === LapModeEnum.Overall ? 64 : 32)) *
-                            100
-                          ).toFixed(4) + "%"}
+                          {RankingsMetrics.AverageRecordRatio.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"
@@ -371,11 +365,11 @@ const PlayerProfilePage = () => {
                             {},
                             {
                               ...rankingsRedirectParams,
-                              hl: stats.totalScore,
+                              hl: RankingsMetrics.TotalTime.getHighlightValue(stats),
                             },
                           )}
                         >
-                          {formatTime(stats.totalScore)}
+                          {RankingsMetrics.TotalTime.getValueString(stats)}
                         </Link>
                       ) : (
                         "-"

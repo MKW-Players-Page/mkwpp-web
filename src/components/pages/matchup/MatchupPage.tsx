@@ -15,6 +15,8 @@ import { ApiState, useApiArray } from "../../../hooks/ApiHook";
 import api, { CategoryEnum, Score, PlayerStats, Player } from "../../../api";
 import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../../widgets/Dropdown";
+import { TimetrialsRankingsListMetricEnum } from "../../../api/generated";
+import { RankingsMetrics } from "../RankingsPage";
 
 interface MatchupData {
   playerData: Player;
@@ -328,7 +330,19 @@ const MatchupPageTableRow = ({
               }}
               colSpan={layoutTypeBig && !isFlap ? 2 : 1}
             >
-              {formatTime(score.value)}
+              <Link
+                to={resolvePage(
+                  Pages.TrackChart,
+                  { id: trackId },
+                  {
+                    cat: score.category !== CategoryEnum.NonShortcut ? category : null,
+                    lap: score.isLap ? LapModeEnum.Lap : null,
+                    hl: score.value,
+                  },
+                )}
+              >
+                {formatTime(score.value)}
+              </Link>
             </td>
             {isTwoPlayers && idx === 1 ? (
               <></>
@@ -363,32 +377,86 @@ const MatchupPageTableRow = ({
 };
 
 interface MatchupPageTableFooterRowProps {
-  backwards: boolean;
   layoutTypeBig: boolean;
   isTwoPlayers: boolean;
-  rankingType: string;
-  rankingTypeKey: string;
+  enumKey: TimetrialsRankingsListMetricEnum;
   matchupData: ApiState<MatchupData>[];
   differenceMode: boolean;
-  displayFunc: (x: number) => string;
   displayFuncDiff: (x: number) => string;
+  redirectParams: {
+    cat: null | CategoryEnum;
+    lap: null | LapModeEnum;
+  };
 }
 
 const MatchupPageTableFooterRow = ({
-  rankingType,
-  rankingTypeKey,
+  enumKey,
   matchupData,
   differenceMode,
-  displayFunc,
   displayFuncDiff,
   layoutTypeBig,
-  backwards,
   isTwoPlayers,
+  redirectParams,
 }: MatchupPageTableFooterRowProps) => {
   const { settings } = useContext(SettingsContext);
+  const { translations, lang } = useContext(I18nContext);
+
+  const MetricEnumToData = {
+    leaderboard_points: {
+      backwards: RankingsMetrics.TallyPoints.metricOrder < 0,
+      name: "leaderboardPoints",
+      heading: "",
+      page: Pages.RankingsTallyPoints,
+      highlightDisplayFunc: RankingsMetrics.TallyPoints.getHighlightValue,
+      displayFunc: RankingsMetrics.TallyPoints.getValueString,
+    },
+    total_rank: {
+      backwards: RankingsMetrics.AverageFinish.metricOrder < 0,
+      highlightDisplayFunc: RankingsMetrics.AverageFinish.getHighlightValue,
+      displayFunc: RankingsMetrics.AverageFinish.getValueString,
+      name: "totalRank",
+      heading: translations.matchupPageAFRow[lang],
+      page: Pages.RankingsAverageFinish,
+    },
+    total_record_ratio: {
+      backwards: RankingsMetrics.AverageRecordRatio.metricOrder < 0,
+      highlightDisplayFunc: RankingsMetrics.AverageRecordRatio.getHighlightValue,
+      displayFunc: RankingsMetrics.AverageRecordRatio.getValueString,
+      name: "totalRecordRatio",
+      heading: translations.matchupPagePRWRRow[lang],
+      page: Pages.RankingsAverageRecordRatio,
+    },
+    total_records: {
+      name: "totalRecords",
+      heading: "",
+      page: Pages.RankingsAverageFinish,
+      highlightDisplayFunc: () => "",
+      displayFunc: () => "",
+      backwards: false,
+    },
+    total_score: {
+      backwards: RankingsMetrics.TotalTime.metricOrder < 0,
+      name: "totalScore",
+      highlightDisplayFunc: RankingsMetrics.TotalTime.getHighlightValue,
+      displayFunc: RankingsMetrics.TotalTime.getValueString,
+      heading: translations.matchupPageTotalRow[lang],
+      page: Pages.RankingsTotalTime,
+    },
+    total_standard: {
+      backwards: RankingsMetrics.AverageStandard.metricOrder < 0,
+      highlightDisplayFunc: RankingsMetrics.AverageStandard.getHighlightValue,
+      displayFunc: RankingsMetrics.AverageStandard.getValueString,
+      name: "totalStandard",
+      heading: translations.matchupPageARRRow[lang],
+      page: Pages.RankingsAverageStandard,
+    },
+  };
+
+  const rankingTypeKey = MetricEnumToData[enumKey].name as keyof PlayerStats;
+
   const orderedScores = matchupData
-    .map((data) => data.data?.statsData[rankingTypeKey as keyof PlayerStats] as number)
-    .sort((a, b) => (backwards ? b - a : a - b));
+    .map((data) => data.data?.statsData[rankingTypeKey] as number)
+    .sort((a, b) => (MetricEnumToData[enumKey].backwards ? b - a : a - b));
 
   if (matchupData[0].data?.statsData === undefined) return <></>;
 
@@ -400,10 +468,10 @@ const MatchupPageTableFooterRow = ({
         className="force-bg"
         style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
       >
-        {rankingType}
+        {MetricEnumToData[enumKey].heading}
       </th>
       {matchupData.map((data, idx, arr) => {
-        const score = data.data?.statsData[rankingTypeKey as keyof PlayerStats] as number;
+        const score = data.data?.statsData[rankingTypeKey] as number;
 
         const rgbValue =
           100 +
@@ -413,13 +481,25 @@ const MatchupPageTableFooterRow = ({
         const scoreIndex = orderedScores.findIndex((r) => r === score);
         return (
           <>
-            <th
-              colSpan={layoutTypeBig ? 2 : 1}
-              style={{
-                textDecoration: scoreIndex === 0 ? "underline" : "",
-              }}
-            >
-              {displayFunc(score)}
+            <th colSpan={layoutTypeBig ? 2 : 1}>
+              <Link
+                style={{
+                  textDecoration: scoreIndex === 0 ? "underline" : "",
+                  textDecorationColor: "currentcolor",
+                }}
+                to={resolvePage(
+                  MetricEnumToData[enumKey].page,
+                  {},
+                  {
+                    ...redirectParams,
+                    hl: MetricEnumToData[enumKey].highlightDisplayFunc(
+                      data.data?.statsData as PlayerStats,
+                    ),
+                  },
+                )}
+              >
+                {MetricEnumToData[enumKey].displayFunc(data.data?.statsData as PlayerStats)}
+              </Link>
             </th>
             {isTwoPlayers && idx === 1 ? (
               <></>
@@ -527,6 +607,10 @@ const MatchupPage = () => {
   );
 
   const scoreCountForFooter = lapMode === LapModeEnum.Overall ? 64 : 32;
+  const rankingsRedirectParams = {
+    cat: category !== CategoryEnum.NonShortcut ? category : null,
+    lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
+  };
 
   return (
     <>
@@ -680,57 +764,49 @@ const MatchupPage = () => {
               </tbody>
               <tfoot>
                 <MatchupPageTableFooterRow
+                  redirectParams={rankingsRedirectParams}
                   isTwoPlayers={isTwoPlayers}
-                  rankingType={translations.matchupPageTotalRow[lang]}
-                  rankingTypeKey="totalScore"
+                  enumKey="total_score"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={formatTime}
                   displayFuncDiff={formatTimeDiff}
-                  backwards={false}
                 />
                 <MatchupPageTableFooterRow
+                  redirectParams={rankingsRedirectParams}
                   isTwoPlayers={isTwoPlayers}
-                  rankingType={translations.matchupPageAFRow[lang]}
-                  rankingTypeKey="totalRank"
+                  enumKey="total_rank"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={(x) => (x / scoreCountForFooter).toFixed(4)}
                   displayFuncDiff={(x) => {
                     const r = (x / scoreCountForFooter).toFixed(4);
                     return x > 0 ? `+` + r : r;
                   }}
-                  backwards={false}
                 />
                 <MatchupPageTableFooterRow
+                  redirectParams={rankingsRedirectParams}
                   isTwoPlayers={isTwoPlayers}
-                  rankingType={translations.matchupPageARRRow[lang]}
-                  rankingTypeKey="totalStandard"
+                  enumKey="total_standard"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={(x) => (x / scoreCountForFooter).toFixed(4)}
                   displayFuncDiff={(x) => {
                     const r = (x / scoreCountForFooter).toFixed(4);
                     return x > 0 ? `+` + r : r;
                   }}
-                  backwards={false}
                 />
                 <MatchupPageTableFooterRow
+                  redirectParams={rankingsRedirectParams}
                   isTwoPlayers={isTwoPlayers}
-                  rankingType={translations.matchupPagePRWRRow[lang]}
-                  rankingTypeKey="totalRecordRatio"
+                  enumKey="total_record_ratio"
                   matchupData={matchupData}
                   differenceMode={differenceMode}
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFunc={(x) => ((x / scoreCountForFooter) * 100).toFixed(4) + "%"}
                   displayFuncDiff={(x) => {
                     const r = ((x / scoreCountForFooter) * 100).toFixed(4) + "%";
                     return x > 0 ? `+` + r : r;
                   }}
-                  backwards={true}
                 />
                 <tr>
                   <th
