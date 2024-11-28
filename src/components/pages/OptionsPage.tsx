@@ -1,4 +1,5 @@
 import { useContext, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext } from "../../utils/i18n/i18n";
@@ -27,9 +28,19 @@ const OptionsPage = () => {
 
   const bioTextArea = useRef(null);
   const aliasTextArea = useRef(null);
+  const navigate = useNavigate();
 
   return (
     <>
+      <Link
+        to=""
+        onClick={(e) => {
+          e.preventDefault();
+          navigate(-1);
+        }}
+      >
+        « Back
+      </Link>
       <h1>{translations.optionsPageBrowserHeading[lang]}</h1>
       <div className="module">
         <div className="module-content">
