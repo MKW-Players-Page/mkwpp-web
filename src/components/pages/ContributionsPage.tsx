@@ -164,10 +164,6 @@ const ContributionsPage = () => {
             suggestedBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRivalriesHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
-          />
-          <FeatureElement
             title={translations.contributionsPageFeatureRustBackendHeading[lang]}
             description={<>{translations.contributionsPageFeatureRustBackendParagraph[lang]}</>}
             suggestedBy={[918]}
@@ -184,6 +180,11 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translations.contributionsPageOngoingDevelopmentHeading[lang]}</h2>
+          <FeatureElement
+            title={translations.contributionsPageFeatureRivalriesHeading[lang]}
+            description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
+            workedOnBy={[918]}
+          />
           <FeatureElement
             title={translations.contributionsPageFeatureAwardsHeading[lang]}
             description={<>{translations.contributionsPageFeatureAwardsParagraph[lang]}</>}
