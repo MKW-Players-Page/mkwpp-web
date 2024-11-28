@@ -10862,6 +10862,60 @@
     "pt": "",
     "es": ""
   },
+  "recentTimesRecentRecordsHeading": {
+    "it": "Record Recenti",
+    "en": "Recent Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesHeading": {
+    "it": "Tempi Recenti",
+    "en": "Recent Times",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesPlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesDateCol": {
+    "it": "Data",
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "playerProfilePageLocation": {
     "it": "Locazione",
     "en": "Location",

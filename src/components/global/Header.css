@@ -12,6 +12,11 @@
   box-shadow: 0 3px 12px 0 #000;
 }
 
+.logo-div {
+  max-width: 20vw;
+  min-width: 210px;
+}
+
 .logo {
   width: auto;
   height: 100%;
