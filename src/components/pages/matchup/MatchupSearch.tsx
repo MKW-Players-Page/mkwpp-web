@@ -24,6 +24,7 @@ const PlayerSelectField = ({
     <div className="module-row">
       <span
         style={{
+          marginBottom: "16px",
           textDecorationColor: id === 0 && nth < 3 ? "red" : "white",
           textDecorationLine: id === 0 && nth < 3 ? "underline" : "none",
         }}
