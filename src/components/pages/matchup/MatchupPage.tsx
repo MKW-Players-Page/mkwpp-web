@@ -200,13 +200,14 @@ const MatchupPageTableRowTrackTD = ({
   lapMode,
 }: MatchupPageTableRowTrackTDProps) => {
   const { translations, lang } = useContext(I18nContext);
+  const { settings } = useContext(SettingsContext);
 
   if (layoutTypeBig && !isLap) {
     return (
       <td
         rowSpan={2}
         className="force-bg"
-        style={{ position: "sticky", left: 0, paddingRight: "5px" }}
+        style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
       >
         <Link
           to={resolvePage(
@@ -224,7 +225,10 @@ const MatchupPageTableRowTrackTD = ({
     );
   } else if (!layoutTypeBig) {
     return (
-      <td className="force-bg" style={{ position: "sticky", left: 0, paddingRight: "5px" }}>
+      <td
+        className="force-bg"
+        style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
+      >
         <Link
           to={resolvePage(
             Pages.TrackChart,
@@ -379,6 +383,7 @@ const MatchupPageTableFooterRow = ({
   layoutTypeBig,
   isTwoPlayers,
 }: MatchupPageTableFooterRowProps) => {
+  const { settings } = useContext(SettingsContext);
   const orderedScores = matchupData
     .map((data) => data.data?.statsData[rankingTypeKey as keyof PlayerStats] as number)
     .sort((a, b) => a - b);
@@ -389,7 +394,10 @@ const MatchupPageTableFooterRow = ({
 
   return (
     <tr>
-      <th className="force-bg" style={{ position: "sticky", left: 0, paddingRight: "5px" }}>
+      <th
+        className="force-bg"
+        style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
+      >
         {rankingType}
       </th>
       {matchupData.map((data, idx, arr) => {
@@ -516,8 +524,6 @@ const MatchupPage = () => {
     [matchupData, lapMode],
   );
 
-  console.log(elaboratedMatchupData);
-
   return (
     <>
       {/* Redirect if any id is invalid or API fetch failed */}
@@ -576,7 +582,11 @@ const MatchupPage = () => {
                   <>
                     <th
                       className="force-bg"
-                      style={{ position: "sticky", left: 0, paddingRight: "5px" }}
+                      style={
+                        settings.lockTableCells
+                          ? { position: "sticky", left: 0, paddingRight: "5px" }
+                          : {}
+                      }
                     />
                     {matchupData.map((playerData, idx, arr) => (
                       <>
@@ -599,7 +609,11 @@ const MatchupPage = () => {
                 <tr>
                   <th
                     className="force-bg"
-                    style={{ position: "sticky", left: 0, paddingRight: "5px" }}
+                    style={
+                      settings.lockTableCells
+                        ? { position: "sticky", left: 0, paddingRight: "5px" }
+                        : {}
+                    }
                   >
                     {translations.matchupPageTrackCol[lang]}
                   </th>
@@ -713,7 +727,11 @@ const MatchupPage = () => {
                 <tr>
                   <th
                     className="force-bg"
-                    style={{ position: "sticky", left: 0, paddingRight: "5px" }}
+                    style={
+                      settings.lockTableCells
+                        ? { position: "sticky", left: 0, paddingRight: "5px" }
+                        : {}
+                    }
                   >
                     {translations.matchupPageTallyRow[lang]}
                   </th>

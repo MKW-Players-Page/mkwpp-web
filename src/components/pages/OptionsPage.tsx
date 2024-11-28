@@ -48,6 +48,21 @@ const OptionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
+          <h2>{translations.optionsPageBrowserOptLockTableCellHeading[lang]}</h2>
+          <div style={horizDivStyle}>
+            <p>{translations.optionsPageBrowserOptLockTableCellParagraph[lang]}</p>
+            <input
+              type="checkbox"
+              onChange={() =>
+                setSettings(setSettingKV(settings, "lockTableCells", !settings.lockTableCells))
+              }
+              defaultChecked={settings.lockTableCells}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="module">
+        <div className="module-content">
           <h2>{translations.optionsPageBrowserOptHueShiftHeading[lang]}</h2>
           <ColorSlider
             paragraphText={translations.constantCategoryNameNoSCLong[lang]}
