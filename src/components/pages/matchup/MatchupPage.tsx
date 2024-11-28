@@ -363,6 +363,7 @@ const MatchupPageTableRow = ({
 };
 
 interface MatchupPageTableFooterRowProps {
+  backwards: boolean;
   layoutTypeBig: boolean;
   isTwoPlayers: boolean;
   rankingType: string;
@@ -381,12 +382,13 @@ const MatchupPageTableFooterRow = ({
   displayFunc,
   displayFuncDiff,
   layoutTypeBig,
+  backwards,
   isTwoPlayers,
 }: MatchupPageTableFooterRowProps) => {
   const { settings } = useContext(SettingsContext);
   const orderedScores = matchupData
     .map((data) => data.data?.statsData[rankingTypeKey as keyof PlayerStats] as number)
-    .sort((a, b) => a - b);
+    .sort((a, b) => (backwards ? b - a : a - b));
 
   if (matchupData[0].data?.statsData === undefined) return <></>;
 
@@ -684,6 +686,7 @@ const MatchupPage = () => {
                   layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
                   displayFunc={formatTime}
                   displayFuncDiff={formatTimeDiff}
+                  backwards={false}
                 />
                 <MatchupPageTableFooterRow
                   isTwoPlayers={isTwoPlayers}
@@ -697,6 +700,7 @@ const MatchupPage = () => {
                     const r = (x / 64).toFixed(4);
                     return x > 0 ? `+` + r : r;
                   }}
+                  backwards={false}
                 />
                 <MatchupPageTableFooterRow
                   isTwoPlayers={isTwoPlayers}
@@ -710,6 +714,7 @@ const MatchupPage = () => {
                     const r = (x / 64).toFixed(4);
                     return x > 0 ? `+` + r : r;
                   }}
+                  backwards={false}
                 />
                 <MatchupPageTableFooterRow
                   isTwoPlayers={isTwoPlayers}
@@ -723,6 +728,7 @@ const MatchupPage = () => {
                     const r = ((x / 64) * 100).toFixed(4) + "%";
                     return x > 0 ? `+` + r : r;
                   }}
+                  backwards={true}
                 />
                 <tr>
                   <th
