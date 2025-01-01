@@ -2,10 +2,9 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks";
-import { getCategoryNameTranslationKey, getTrackById } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
-import { I18nContext } from "../../utils/i18n/i18n";
-import { MetadataContext } from "../../utils/Metadata";
+import { I18nContext, translate, translateCategoryName } from "../../utils/i18n/i18n";
+import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import ExpandableModule from "./ExpandableModule";
@@ -20,7 +19,7 @@ interface RecentTimesProps {
 }
 
 const RecentTimes = ({ records, limit }: RecentTimesProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
 
   const adjustedRecords = !!records;
@@ -37,17 +36,17 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
     <ExpandableModule
       heading={
         adjustedRecords
-          ? translations.recentTimesRecentRecordsHeading[lang]
-          : translations.recentTimesRecentTimesHeading[lang]
+          ? translate("recentTimesRecentRecordsHeading", lang)
+          : translate("recentTimesRecentTimesHeading", lang)
       }
     >
       <Deferred isWaiting={recentTimesLoading || metadata.isLoading}>
         <table className="recentTimesTable">
           <thead>
-            <th>{translations.recentTimesRecentTimesPlayerCol[lang]}</th>
-            <th>{translations.recentTimesRecentTimesTrackCol[lang]}</th>
-            <th>{translations.recentTimesRecentTimesTimeCol[lang]}</th>
-            <th>{translations.recentTimesRecentTimesDateCol[lang]}</th>
+            <th>{translate("recentTimesRecentTimesPlayerCol", lang)}</th>
+            <th>{translate("recentTimesRecentTimesTrackCol", lang)}</th>
+            <th>{translate("recentTimesRecentTimesTimeCol", lang)}</th>
+            <th>{translate("recentTimesRecentTimesDateCol", lang)}</th>
           </thead>
           <tbody>
             {recentTimes?.map((data) => (
@@ -71,10 +70,10 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                     )}
                   >
                     {getTrackById(metadata.tracks, data.track)?.abbr}&nbsp;
-                    {translations[getCategoryNameTranslationKey(data.category)][lang]}&nbsp;
+                    {translateCategoryName(data.category, lang) + "&nbsp;"}
                     {data.isLap
-                      ? translations.constantLapModeLap[lang]
-                      : translations.constantLapModeCourse[lang]}
+                      ? translate("constantLapModeLap", lang)
+                      : translate("constantLapModeCourse", lang)}
                   </Link>
                 </td>
                 <td>

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
-import { I18nContext } from "../../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
-import { MetadataContext } from "../../../utils/Metadata";
+import { getTrackById, MetadataContext } from "../../../utils/Metadata";
 import { CategorySelect } from "../../widgets";
 import OverwriteColor from "../../widgets/OverwriteColor";
-import { getCategorySiteHue, getTrackById } from "../../../utils/EnumUtils";
+import { getCategorySiteHue } from "../../../utils/EnumUtils";
 import LapModeSelect, { LapModeEnum } from "../../widgets/LapModeSelect";
 import PlayerMention from "../../widgets/PlayerMention";
 import { Pages, resolvePage } from "../Pages";
@@ -201,7 +201,7 @@ const MatchupPageTableRowTrackTD = ({
   category,
   lapMode,
 }: MatchupPageTableRowTrackTDProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { settings } = useContext(SettingsContext);
 
   if (layoutTypeBig && !isLap) {
@@ -241,7 +241,7 @@ const MatchupPageTableRowTrackTD = ({
             },
           )}
         >
-          {`${trackName} - ${isLap ? translations.constantLapModeLap[lang] : translations.constantLapModeCourse[lang]}`}
+          {`${trackName} - ${isLap ? translate("constantLapModeLap", lang) : translate("constantLapModeCourse", lang)}`}
         </Link>
       </td>
     );
@@ -399,7 +399,7 @@ const MatchupPageTableFooterRow = ({
   redirectParams,
 }: MatchupPageTableFooterRowProps) => {
   const { settings } = useContext(SettingsContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const MetricEnumToData = {
     leaderboard_points: {
@@ -415,7 +415,7 @@ const MatchupPageTableFooterRow = ({
       highlightDisplayFunc: RankingsMetrics.AverageFinish.getHighlightValue,
       displayFunc: RankingsMetrics.AverageFinish.getValueString,
       name: "totalRank",
-      heading: translations.matchupPageAFRow[lang],
+      heading: translate("matchupPageAFRow", lang),
       page: Pages.RankingsAverageFinish,
     },
     total_record_ratio: {
@@ -423,7 +423,7 @@ const MatchupPageTableFooterRow = ({
       highlightDisplayFunc: RankingsMetrics.AverageRecordRatio.getHighlightValue,
       displayFunc: RankingsMetrics.AverageRecordRatio.getValueString,
       name: "totalRecordRatio",
-      heading: translations.matchupPagePRWRRow[lang],
+      heading: translate("matchupPagePRWRRow", lang),
       page: Pages.RankingsAverageRecordRatio,
     },
     total_records: {
@@ -439,7 +439,7 @@ const MatchupPageTableFooterRow = ({
       name: "totalScore",
       highlightDisplayFunc: RankingsMetrics.TotalTime.getHighlightValue,
       displayFunc: RankingsMetrics.TotalTime.getValueString,
-      heading: translations.matchupPageTotalRow[lang],
+      heading: translate("matchupPageTotalRow", lang),
       page: Pages.RankingsTotalTime,
     },
     total_standard: {
@@ -447,7 +447,7 @@ const MatchupPageTableFooterRow = ({
       highlightDisplayFunc: RankingsMetrics.AverageStandard.getHighlightValue,
       displayFunc: RankingsMetrics.AverageStandard.getValueString,
       name: "totalStandard",
-      heading: translations.matchupPageARRRow[lang],
+      heading: translate("matchupPageARRRow", lang),
       page: Pages.RankingsAverageStandard,
     },
   };
@@ -540,7 +540,7 @@ const MatchupPage = () => {
   const [differenceMode, setDifferenceMode] = useState(false);
   const ids = useIdsParam(searchParams).ids;
 
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
 
@@ -572,7 +572,6 @@ const MatchupPage = () => {
     const element = tableModule.current;
     const updateSize = () => {
       const scrollDiff = element.scrollWidth - element.clientWidth;
-      console.log(element);
       if (layoutTypeBig && scrollDiff > 0) {
         setLayoutTypeBig(false);
         setLayoutSwitchWidth(element.clientWidth);
@@ -617,7 +616,7 @@ const MatchupPage = () => {
       {/* Redirect if any id is invalid or API fetch failed */}
       {ids.length < 2 && <Navigate to={resolvePage(Pages.MatchupHome)} />}
       <Link to={resolvePage(Pages.MatchupHome)}>« Back</Link>
-      <h1>{translations.matchupPageHeading[lang]}</h1>
+      <h1>{translate("matchupPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
@@ -641,14 +640,14 @@ const MatchupPage = () => {
                         {
                           type: "DropdownItemData",
                           element: {
-                            text: translations.matchupPageDiffColToFirst[lang],
+                            text: translate("matchupPageDiffColToFirst", lang),
                             value: false,
                           },
                         } as DropdownItemSetDataChild,
                         {
                           type: "DropdownItemData",
                           element: {
-                            text: translations.matchupPageDiffColToNext[lang],
+                            text: translate("matchupPageDiffColToNext", lang),
                             value: true,
                           },
                         } as DropdownItemSetDataChild,
@@ -703,7 +702,7 @@ const MatchupPage = () => {
                         : {}
                     }
                   >
-                    {translations.matchupPageTrackCol[lang]}
+                    {translate("matchupPageTrackCol", lang)}
                   </th>
                   {matchupData.map((playerData, idx, arr) => (
                     <>
@@ -711,21 +710,21 @@ const MatchupPage = () => {
                       lapMode === LapModeEnum.Overall &&
                       !elaboratedMatchupData.onlyOneLapType ? (
                         <>
-                          <th>{translations.matchupPageCourseCol[lang]}</th>
-                          <th>{translations.matchupPageLapCol[lang]}</th>
+                          <th>{translate("matchupPageCourseCol", lang)}</th>
+                          <th>{translate("matchupPageLapCol", lang)}</th>
                           {isTwoPlayers && idx === 1 ? (
                             <></>
                           ) : (
-                            <th>{translations.matchupPageDiffCol[lang]}</th>
+                            <th>{translate("matchupPageDiffCol", lang)}</th>
                           )}
                         </>
                       ) : (
                         <>
-                          <th>{translations.matchupPageTimeCol[lang]}</th>
+                          <th>{translate("matchupPageTimeCol", lang)}</th>
                           {isTwoPlayers && idx === 1 ? (
                             <></>
                           ) : (
-                            <th>{translations.matchupPageDiffCol[lang]}</th>
+                            <th>{translate("matchupPageDiffCol", lang)}</th>
                           )}
                         </>
                       )}
@@ -817,7 +816,7 @@ const MatchupPage = () => {
                         : {}
                     }
                   >
-                    {translations.matchupPageTallyRow[lang]}
+                    {translate("matchupPageTallyRow", lang)}
                   </th>
                   <>
                     {elaboratedMatchupData.tallyWins.map((score, idx, arr) => {
@@ -840,7 +839,7 @@ const MatchupPage = () => {
                             }}
                           >
                             {score}
-                            {` ${score === 1 ? translations.matchupPageTallyRowWinsSingular[lang] : translations.matchupPageTallyRowWinsPlural[lang]}`}
+                            {` ${score === 1 ? translate("matchupPageTallyRowWinsSingular", lang) : translate("matchupPageTallyRowWinsPlural", lang)}`}
                           </th>
                           {isTwoPlayers && idx === 1 ? (
                             <></>

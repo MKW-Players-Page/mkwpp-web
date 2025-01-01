@@ -1,9 +1,8 @@
 import { createContext } from "react";
 
-import api, { Region, Track, TrackCup, RegionTypeEnum, StandardLevel } from "../api";
+import api, { Region, Track, TrackCup, StandardLevel } from "../api";
 import { useApi } from "../hooks";
 import { WorldRegion } from "./Defaults";
-import { Language, TranslationJson, TranslationKey } from "./i18n/i18n";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
 export interface Metadata {
@@ -51,37 +50,6 @@ export const getRegionById = (metadata: Metadata, regionId: number) => {
   return metadata.regions.find((region: Region) => region.id === regionId);
 };
 
-/** The full name of a region is constructed as follows:
- *
- * 1. If the region type is `Subnational`, return the name of the region followed by the name of
- *    its parent separated by a comma.
- * 2. Otherwise, simply return the region name.
- *
- * @param metadata The Metadata object returned from `useContext(MetadataContext)`
- * @param regionId The id of the region
- * @returns The full name of the region, or `undefined` if no region with the given id exists.
- */
-export const getRegionNameFull = (
-  metadata: Metadata,
-  translations: TranslationJson,
-  lang: Language,
-  regionId: number,
-) => {
-  const region = getRegionById(metadata, regionId);
-  if (!region) {
-    return translations.constantRegionXX[lang];
-  }
-
-  if (region.parent && region.type === RegionTypeEnum.Subnational) {
-    const parent = getRegionById(metadata, region.parent);
-    if (parent) {
-      return `${translations[`constantRegion${region.code}` as TranslationKey][lang]}, ${translations[`constantRegion${parent.code}` as TranslationKey][lang]}`;
-    }
-  }
-
-  return translations[`constantRegion${region.code}` as TranslationKey][lang];
-};
-
 /** The standard level of the standard with the given id.
  *
  * @param metadata The Metadata object returned from `useContext(MetadataContext)`
@@ -105,14 +73,14 @@ export const getStandardLevel = (metadata: Metadata, standardId: number) => {
 };
 
 /**
- * @param metadata The Metadata object returned from `useContext(MetadataContext)`
+ * @param tracks The Metadata field `metadata.tracks`
  * @param trackId The id of the track
  * @returns A Track object, or `undefined` if no track with the given id exists.
  */
-export const getTrackById = (metadata: Metadata, trackId: number) => {
-  if (!metadata.tracks) {
+export const getTrackById = (tracks: Track[] | undefined, trackId: number) => {
+  if (!tracks) {
     return undefined;
   }
 
-  return metadata.tracks?.find((track) => track.id === trackId);
+  return tracks?.find((track) => track.id === trackId);
 };

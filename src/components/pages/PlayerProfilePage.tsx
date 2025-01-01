@@ -7,12 +7,7 @@ import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widge
 import api, { CategoryEnum, Region, Score } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
-import {
-  getRegionById,
-  getRegionNameFull,
-  getStandardLevel,
-  MetadataContext,
-} from "../../utils/Metadata";
+import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
@@ -26,7 +21,13 @@ import {
   useRegionParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import {
+  I18nContext,
+  translate,
+  translateRegionName,
+  translateRegionNameFull,
+  translateTrack,
+} from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { RankingsMetrics } from "./RankingsPage";
 
@@ -117,7 +118,7 @@ const PlayerProfilePage = () => {
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const metadata = useContext(MetadataContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { settings } = useContext(SettingsContext);
 
   const searchParams = useSearchParams();
@@ -218,9 +219,7 @@ const PlayerProfilePage = () => {
                           return {
                             type: "DropdownItemData",
                             element: {
-                              text: translations[`constantRegion${region.code}` as TranslationKey][
-                                lang
-                              ],
+                              text: translateRegionName(region, lang),
                               value: region,
                               rightIcon: (
                                 <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
@@ -243,19 +242,19 @@ const PlayerProfilePage = () => {
               <table>
                 <tbody>
                   <tr>
-                    <td>{translations.playerProfilePageLocation[lang]}</td>
-                    <td>{getRegionNameFull(metadata, translations, lang, player?.region ?? 0)}</td>
+                    <td>{translate("playerProfilePageLocation", lang)}</td>
+                    <td>{translateRegionNameFull(metadata, lang, player?.region)}</td>
                   </tr>
                   <tr>
-                    <td>{translations.playerProfilePageAlias[lang]}</td>
+                    <td>{translate("playerProfilePageAlias", lang)}</td>
                     <td>{player?.alias}</td>
                   </tr>
                   <tr>
-                    <td>{translations.playerProfilePageDateJoined[lang]}</td>
+                    <td>{translate("playerProfilePageDateJoined", lang)}</td>
                     <td>{player?.joinedDate && formatDate(player.joinedDate)}</td>
                   </tr>
                   <tr>
-                    <td>{translations.playerProfilePageLastActivity[lang]}</td>
+                    <td>{translate("playerProfilePageLastActivity", lang)}</td>
                     <td>{player?.lastActivity && formatDate(player.lastActivity)}</td>
                   </tr>
                 </tbody>
@@ -271,7 +270,7 @@ const PlayerProfilePage = () => {
                       <Link
                         to={resolvePage(Pages.RankingsAverageFinish, {}, rankingsRedirectParams)}
                       >
-                        {translations.playerProfilePageAverageFinishTitle[lang]}
+                        {translate("playerProfilePageAverageFinishTitle", lang)}
                       </Link>
                     </td>
                     <td>
@@ -298,7 +297,7 @@ const PlayerProfilePage = () => {
                       <Link
                         to={resolvePage(Pages.RankingsAverageStandard, {}, rankingsRedirectParams)}
                       >
-                        {translations.playerProfilePageAverageStandardTitle[lang]}
+                        {translate("playerProfilePageAverageStandardTitle", lang)}
                       </Link>
                     </td>
                     <td>
@@ -329,7 +328,7 @@ const PlayerProfilePage = () => {
                           rankingsRedirectParams,
                         )}
                       >
-                        {translations.playerProfilePageAverageRecordRatioTitle[lang]}
+                        {translate("playerProfilePageAverageRecordRatioTitle", lang)}
                       </Link>
                     </td>
                     <td>
@@ -354,7 +353,7 @@ const PlayerProfilePage = () => {
                   <tr>
                     <td>
                       <Link to={resolvePage(Pages.RankingsTotalTime, {}, rankingsRedirectParams)}>
-                        {translations.playerProfilePageTotalTimeTitle[lang]}
+                        {translate("playerProfilePageTotalTimeTitle", lang)}
                       </Link>
                     </td>
                     <td>
@@ -393,7 +392,7 @@ const PlayerProfilePage = () => {
                       </>
                     ))
                   ) : (
-                    <i>{translations.playerProfilePageDefaultBio[lang]}</i>
+                    <i>{translate("playerProfilePageDefaultBio", lang)}</i>
                   )}
                 </p>
               </div>
@@ -411,7 +410,7 @@ const PlayerProfilePage = () => {
                       setSortType("trackAsc");
                     }}
                   >
-                    {translations.playerProfilePageTrackColumn[lang]}
+                    {translate("playerProfilePageTrackColumn", lang)}
                   </th>
                   {lapMode === LapModeEnum.Overall ? (
                     <>
@@ -420,14 +419,14 @@ const PlayerProfilePage = () => {
                         sortType={sortType}
                         setSortType={setSortType}
                       >
-                        {translations.playerProfilePageCourseTimeColumn[lang]}
+                        {translate("playerProfilePageCourseTimeColumn", lang)}
                       </ThSort>
                       <ThSort
                         states={["trackAsc", "timeAsc", "timeDesc"]}
                         sortType={sortType}
                         setSortType={setSortType}
                       >
-                        {translations.playerProfilePageLapTimeColumn[lang]}
+                        {translate("playerProfilePageLapTimeColumn", lang)}
                       </ThSort>
                     </>
                   ) : (
@@ -436,7 +435,7 @@ const PlayerProfilePage = () => {
                       sortType={sortType}
                       setSortType={setSortType}
                     >
-                      {translations.playerProfilePageTimeColumn[lang]}
+                      {translate("playerProfilePageTimeColumn", lang)}
                     </ThSort>
                   )}
                   <ThSort
@@ -444,28 +443,28 @@ const PlayerProfilePage = () => {
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    {translations.playerProfilePageRankColumn[lang]}
+                    {translate("playerProfilePageRankColumn", lang)}
                   </ThSort>
                   <ThSort
                     states={["trackAsc", "stdAsc", "stdDesc"]}
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    {translations.playerProfilePageStandardColumn[lang]}
+                    {translate("playerProfilePageStandardColumn", lang)}
                   </ThSort>
                   <ThSort
                     states={["trackAsc", "prwrDesc", "prwrAsc"]}
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    {translations.playerProfilePagePRWRColumn[lang]}
+                    {translate("playerProfilePagePRWRColumn", lang)}
                   </ThSort>
                   <ThSort
                     states={["trackAsc", "dateAsc", "dateDesc"]}
                     sortType={sortType}
                     setSortType={setSortType}
                   >
-                    {translations.playerProfilePageDateColumn[lang]}
+                    {translate("playerProfilePageDateColumn", lang)}
                   </ThSort>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
@@ -490,11 +489,7 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {
-                              translations[
-                                `constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                              ][lang]
-                            }
+                            {translateTrack(track, lang)}
                           </Link>
                         </td>
                       ) : score.repeat ? (
@@ -512,11 +507,7 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {
-                              translations[
-                                `constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                              ][lang]
-                            }
+                            {translateTrack(track, lang)}
                           </Link>
                         </td>
                       )}

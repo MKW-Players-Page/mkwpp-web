@@ -4,6 +4,9 @@ import { createContext, useContext } from "react";
 import i18nJson from "./i18n.json";
 
 import Flag, { Flags } from "../../components/widgets/Flags";
+import { CategoryEnum, Region, RegionTypeEnum, Track } from "../../api";
+import { getRegionById, Metadata } from "../Metadata";
+import { browserSettingsLoadParse } from "../Settings";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -129,4 +132,73 @@ export const LanguageDropdown = () => {
       }
     />
   );
+};
+
+export const translate = (key: TranslationKey, lang: Language): string => {
+  if (false || browserSettingsLoadParse().debugTranslation) return key; // DEBUG
+  if (!Object.keys(i18nJson).includes(key)) return `key '${key}' doesn't exist!`;
+  return i18nJson[key][lang];
+};
+
+export const translateTrack = (track: Track | undefined | null, lang: Language): string => {
+  if (track === undefined || track === null) return "Track Not Loaded";
+  return translate(`constantTrackName${track.abbr.toUpperCase()}` as TranslationKey, lang);
+};
+
+/** The full name of a region is constructed as follows:
+ *
+ * 1. If the region type is `Subnational`, return the name of the region followed by the name of
+ *    its parent separated by a comma.
+ * 2. Otherwise, simply return the region name.
+ *
+ * @param metadata The Metadata object returned from `useContext(MetadataContext)`
+ * @param regionId The id of the region
+ * @returns The full name of the region, or `undefined` if no region with the given id exists.
+ */
+export const translateRegionNameFull = (
+  metadata: Metadata,
+  lang: Language,
+  regionCompute: number | Region | undefined | null,
+) => {
+  let region: typeof regionCompute = undefined;
+  if (typeof regionCompute === "number") {
+    region = getRegionById(metadata, regionCompute);
+  } else {
+    region = regionCompute;
+  }
+  if (region === undefined || region === null) return translate("constantRegionXX", lang);
+
+  if ((region as Region).parent && (region as Region).type === RegionTypeEnum.Subnational) {
+    const parent = getRegionById(metadata, (region as Region).parent as number);
+    if (parent) {
+      return `${translateRegionName(parent, lang)}, ${translateRegionName(region, lang)}`;
+    }
+  }
+
+  return translateRegionName(region, lang);
+};
+
+export const translateRegionName = (
+  region: undefined | null | Region,
+  lang: Language,
+  type?: "Region" | "Subregions" | "Record" | undefined | null,
+) => {
+  if (!region) {
+    return translate(`constantRegionXX`, lang);
+  }
+  return translate(
+    `constantRegion${type === "Record" || type === "Subregions" ? type : ""}${region.code}` as TranslationKey,
+    lang,
+  );
+};
+
+export const translateCategoryName = (category: CategoryEnum, lang: Language): string => {
+  switch (category) {
+    case "nonsc":
+      return translate("constantCategoryNameNoSCShort", lang);
+    case "sc":
+      return translate("constantCategoryNameSCShort", lang);
+    case "unres":
+      return translate("constantCategoryNameUnresLong", lang);
+  }
 };

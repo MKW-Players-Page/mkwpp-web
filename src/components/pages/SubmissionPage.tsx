@@ -20,8 +20,12 @@ import { UserContext } from "../../utils/User";
 import { Navigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
-import { getCategoryNameTranslationKey } from "../../utils/EnumUtils";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import {
+  I18nContext,
+  translate,
+  translateCategoryName,
+  translateTrack,
+} from "../../utils/i18n/i18n";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -60,7 +64,7 @@ const SubmitTab = () => {
   const [state, setState] = useState<SubmitTabState>(initialState);
 
   const { user } = useContext(UserContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const metadata = useContext(MetadataContext);
 
@@ -70,7 +74,7 @@ const SubmitTab = () => {
     }
   }, [metadata, state]);
 
-  const track = getTrackById(metadata, +state.track);
+  const track = getTrackById(metadata.tracks, +state.track);
   const categories = track ? track.categories : [];
 
   useEffect(() => {
@@ -88,7 +92,7 @@ const SubmitTab = () => {
       setState((prev) => ({
         ...prev,
         errors: {
-          non_field_errors: [translations.submissionPageSubmitTabNoPlayerProfileLinkErr[lang]],
+          non_field_errors: [translate("submissionPageSubmitTabNoPlayerProfileLinkErr", lang)],
         },
       }));
       return;
@@ -100,7 +104,7 @@ const SubmitTab = () => {
         ...prev,
         errors: {
           ...prev.errors,
-          value: [translations.submissionPageSubmitTabInvalidTimeErr[lang]],
+          value: [translate("submissionPageSubmitTabInvalidTimeErr", lang)],
         },
       }));
       errored = true;
@@ -112,7 +116,7 @@ const SubmitTab = () => {
         ...prev,
         errors: {
           ...prev.errors,
-          date: [translations.submissionPageSubmitTabInvalidDateErr[lang]],
+          date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
         },
       }));
       errored = true;
@@ -149,7 +153,7 @@ const SubmitTab = () => {
           .catch(() => {
             setState((prev) => ({
               ...prev,
-              errors: { non_field_errors: [translations.submissionPageSubmitTabGenericErr[lang]] },
+              errors: { non_field_errors: [translate("submissionPageSubmitTabGenericErr", lang)] },
             }));
           });
         done();
@@ -165,27 +169,27 @@ const SubmitTab = () => {
           <Form
             state={state}
             setState={setState}
-            submitLabel={translations.submissionPageSubmitTabSubmitSubmitLabel[lang]}
+            submitLabel={translate("submissionPageSubmitTabSubmitSubmitLabel", lang)}
             submit={submit}
           >
             <TrackSelect
               metadata={metadata}
               field="track"
-              label={translations.submissionPageSubmitTabTrackLabel[lang]}
+              label={translate("submissionPageSubmitTabTrackLabel", lang)}
             />
             <CategoryField
               options={categories}
               field="category"
-              label={translations.submissionPageSubmitTabCategoryLabel[lang]}
+              label={translate("submissionPageSubmitTabCategoryLabel", lang)}
             />
             <LapModeField
               field="lapMode"
-              label={translations.submissionPageSubmitTabModeLabel[lang]}
+              label={translate("submissionPageSubmitTabModeLabel", lang)}
             />
             <Field
               type="text"
               field="value"
-              label={translations.submissionPageSubmitTabTimeLabel[lang]}
+              label={translate("submissionPageSubmitTabTimeLabel", lang)}
               placeholder={`1'23"456`}
             />
             <Field
@@ -193,31 +197,31 @@ const SubmitTab = () => {
               field="date"
               min="2009-04-01"
               max={`${todayDate.getFullYear().toString().padStart(4, "0")}-${(todayDate.getMonth() + 1).toString().padStart(2, "0")}-${todayDate.getDate().toString().padStart(2, "0")}`}
-              label={translations.submissionPageSubmitTabDateLabel[lang]}
+              label={translate("submissionPageSubmitTabDateLabel", lang)}
             />
             <Field
               type="text"
               field="ghostLink"
-              label={translations.submissionPageSubmitTabGhostLabel[lang]}
+              label={translate("submissionPageSubmitTabGhostLabel", lang)}
             />
             <Field
               type="text"
               field="videoLink"
-              label={translations.submissionPageSubmitTabVideoLabel[lang]}
+              label={translate("submissionPageSubmitTabVideoLabel", lang)}
             />
             <Field
               type="text"
               field="comment"
-              label={translations.submissionPageSubmitTabCommentLabel[lang]}
+              label={translate("submissionPageSubmitTabCommentLabel", lang)}
             />
           </Form>
         )}
         {state.state === SubmitStateEnum.Success && (
           <>
-            <p>{translations.submissionPageSubmitTabSuccessStateParagraph[lang]}</p>
+            <p>{translate("submissionPageSubmitTabSuccessStateParagraph", lang)}</p>
             <br />
             <button onClick={() => setState(initialState)}>
-              {translations.submissionPageSubmitTabSuccessStateButton[lang]}
+              {translate("submissionPageSubmitTabSuccessStateButton", lang)}
             </button>
           </>
         )}
@@ -227,17 +231,17 @@ const SubmitTab = () => {
 };
 
 const BulkSubmitTab = () => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   return (
     <div className="module-content">
-      {translations.submissionPageBulkSubmitTabUnderConstruction[lang]}
+      {translate("submissionPageBulkSubmitTabUnderConstruction", lang)}
     </div>
   );
 };
 
 const SubmissionsTab = () => {
   const metadata = useContext(MetadataContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const { isLoading, data: submissions } = useApi(
     () => api.timetrialsSubmissionsList(),
@@ -252,16 +256,12 @@ const SubmissionsTab = () => {
           {submissions?.map((submission) => (
             <div key={submission.id} className="card">
               <p className="nobr">
-                {
-                  translations[
-                    `constantTrackName${getTrackById(metadata, submission.track)?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                  ][lang]
-                }
+                {translateTrack(getTrackById(metadata.tracks, submission.track), lang)}
                 ,&nbsp;
-                {translations[getCategoryNameTranslationKey(submission.category)][lang]},&nbsp;
+                {translateCategoryName(submission.category, lang)},&nbsp;
                 {submission.isLap
-                  ? translations.constantLapModeLap[lang]
-                  : translations.constantLapModeCourse[lang]}
+                  ? translate("constantLapModeLap", lang)
+                  : translate("constantLapModeCourse", lang)}
               </p>
               <p>{formatTime(submission.value)}</p>
               <p>
@@ -291,21 +291,21 @@ const SubmissionsTab = () => {
 
 const SubmissionPage = () => {
   const { isLoading, user } = useContext(UserContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   return (
     <>
       <Deferred isWaiting={isLoading}>
         {!user && <Navigate to={resolvePage(Pages.UserLogin)} />}
-        <h1>{translations.submissionPageTabbedModuleHeading[lang]}</h1>
+        <h1>{translate("submissionPageTabbedModuleHeading", lang)}</h1>
         <TabbedModule>
-          <Tab title={translations.submissionPageSubmitTabTitle[lang]} element={<SubmitTab />} />
+          <Tab title={translate("submissionPageSubmitTabTitle", lang)} element={<SubmitTab />} />
           <Tab
-            title={translations.submissionPageBulkSubmitTabTitle[lang]}
+            title={translate("submissionPageBulkSubmitTabTitle", lang)}
             element={<BulkSubmitTab />}
           />
           <Tab
-            title={translations.submissionPageSubmissionsTabTitle[lang]}
+            title={translate("submissionPageSubmissionsTabTitle", lang)}
             element={<SubmissionsTab />}
           />
         </TabbedModule>

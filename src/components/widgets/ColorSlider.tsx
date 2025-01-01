@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../utils/i18n/i18n";
 import {
   browserSettingDefault,
   setSettingKV,
@@ -14,7 +14,7 @@ export interface ColorSliderProps {
 }
 
 const ColorSlider = ({ paragraphText, valueKey }: ColorSliderProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { settings, setSettings } = useContext(SettingsContext);
   return (
     <div
@@ -41,7 +41,7 @@ const ColorSlider = ({ paragraphText, valueKey }: ColorSliderProps) => {
           (e.target as any).previousSibling.value = browserSettingDefault(valueKey);
         }}
       >
-        {translations.optionsPageResetBtnText[lang]}
+        {translate("optionsPageResetBtnText", lang)}
       </button>
     </div>
   );

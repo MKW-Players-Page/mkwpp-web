@@ -7955,6 +7955,1383 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionUSAL": {
+    "it": "Alabama",
+    "en": "Alabama",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSAL": {
+    "it": "Record Alabamensi",
+    "en": "Alabamian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSAL": {
+    "it": "Contee Alabamense",
+    "en": "Alabamian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSAK": {
+    "it": "Alaska",
+    "en": "Alaska",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSAK": {
+    "it": "Record Alaskani",
+    "en": "Alaskan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSAK": {
+    "it": "Contee Alaskane",
+    "en": "Alaskan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSAZ": {
+    "it": "Arizona",
+    "en": "Arizona",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSAZ": {
+    "it": "Record Arizoniani",
+    "en": "Arizonan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSAZ": {
+    "it": "Contee Arizoniane",
+    "en": "Arizonan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSAR": {
+    "it": "Arkansas",
+    "en": "Arkansas",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSAR": {
+    "it": "Record Arkansani",
+    "en": "Arkansan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSAR": {
+    "it": "Contee Arkansane",
+    "en": "Arkansan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSCA": {
+    "it": "California",
+    "en": "California",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSCA": {
+    "it": "Record Californiani",
+    "en": "Californian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSCA": {
+    "it": "Contee Californiane",
+    "en": "Californian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSCO": {
+    "it": "Colorado",
+    "en": "Colorado",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSCO": {
+    "it": "Record del Colorado",
+    "en": "Coloradan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSCO": {
+    "it": "Contee del Colorado",
+    "en": "Coloradan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSCT": {
+    "it": "Connecticut",
+    "en": "Connecticut",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSCT": {
+    "it": "Record del Connecticut",
+    "en": "Connecticuter Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSCT": {
+    "it": "Contee del Connecticut",
+    "en": "Connecticuter Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSDE": {
+    "it": "Delaware",
+    "en": "Delaware",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSDE": {
+    "it": "Record del Delaware",
+    "en": "Delawarean Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSDE": {
+    "it": "Contee del Delaware",
+    "en": "Delawarean Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSFL": {
+    "it": "Florida",
+    "en": "Florida",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSFL": {
+    "it": "Record Floridiani",
+    "en": "Floridian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSFL": {
+    "it": "Contee Floridiane",
+    "en": "Floridian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSGA": {
+    "it": "Georgia",
+    "en": "Georgia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSGA": {
+    "it": "Record Georgiani",
+    "en": "Georgian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSGA": {
+    "it": "Contee Georgiane",
+    "en": "Georgian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSHI": {
+    "it": "Hawaii",
+    "en": "Hawaii",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSHI": {
+    "it": "Record Hawaiiani",
+    "en": "Hawai'ian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSHI": {
+    "it": "Contee Hawaiiane",
+    "en": "Hawai'ian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSID": {
+    "it": "Idaho",
+    "en": "Idaho",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSID": {
+    "it": "Record dell'Idaho",
+    "en": "Idahoan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSID": {
+    "it": "Contee dell'Idaho",
+    "en": "Idahoan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSIL": {
+    "it": "Illinois",
+    "en": "Illinois",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSIL": {
+    "it": "Record dell'Illinois",
+    "en": "Illinoisan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSIL": {
+    "it": "Contee dell'Illinois",
+    "en": "Illinoisan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSIN": {
+    "it": "Indiana",
+    "en": "Indiana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSIN": {
+    "it": "Record dell'Indiana",
+    "en": "Hoosier Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSIN": {
+    "it": "Contee dell'Indiana",
+    "en": "Hoosier Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSIA": {
+    "it": "Iowa",
+    "en": "Iowa",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSIA": {
+    "it": "Record dell'Iowa",
+    "en": "Iowan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSIA": {
+    "it": "Contee dell'Iowa",
+    "en": "Iowan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSKS": {
+    "it": "Kansas",
+    "en": "Kansas",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSKS": {
+    "it": "Record del Kansas",
+    "en": "Kansan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSKS": {
+    "it": "Contee del Kansas",
+    "en": "Kansan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSKY": {
+    "it": "Kentucky",
+    "en": "Kentucky",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSKY": {
+    "it": "Record del Kentucky",
+    "en": "Kentuckian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSKY": {
+    "it": "Contee del Kentucky",
+    "en": "Kentuckian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSLA": {
+    "it": "Louisiana",
+    "en": "Louisiana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSLA": {
+    "it": "Record della Louisiana",
+    "en": "Louisian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSLA": {
+    "it": "Contee della Louisiana",
+    "en": "Louisian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSME": {
+    "it": "Maine",
+    "en": "Maine",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSME": {
+    "it": "Record del Maine",
+    "en": "Mainer Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSME": {
+    "it": "Contee del Maine",
+    "en": "Mainer Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMD": {
+    "it": "Maryland",
+    "en": "Maryland",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMD": {
+    "it": "Record del Maryland",
+    "en": "Marylander Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMD": {
+    "it": "Contee del Maryland",
+    "en": "Marylander Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMA": {
+    "it": "Massachusetts",
+    "en": "Massachusetts",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMA": {
+    "it": "Record del Massachusetts",
+    "en": "Massachusettsan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMA": {
+    "it": "Contee del Massachusetts",
+    "en": "Massachusettsan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMI": {
+    "it": "Michigan",
+    "en": "Michigan",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMI": {
+    "it": "Record del Michigan",
+    "en": "Michiganian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMI": {
+    "it": "Contee del Michigan",
+    "en": "Michiganian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMN": {
+    "it": "Minnesota",
+    "en": "Minnesota",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMN": {
+    "it": "Record Minnesotani",
+    "en": "Minnesotan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMN": {
+    "it": "Contee Minnesotane",
+    "en": "Minnesotan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMS": {
+    "it": "Mississippi",
+    "en": "Mississippi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMS": {
+    "it": "Record del Mississippi",
+    "en": "Mississippian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMS": {
+    "it": "Contee del Mississippi",
+    "en": "Mississippian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMO": {
+    "it": "Missouri",
+    "en": "Missouri",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMO": {
+    "it": "Record del Missouri",
+    "en": "Missourian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMO": {
+    "it": "Contee del Missouri",
+    "en": "Missourian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSMT": {
+    "it": "Montana",
+    "en": "Montana",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSMT": {
+    "it": "Record del Montana",
+    "en": "Montanan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSMT": {
+    "it": "Contee del Montana",
+    "en": "Montanan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNE": {
+    "it": "Nebraska",
+    "en": "Nebraska",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNE": {
+    "it": "Record del Nebraska",
+    "en": "Nebraskan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNE": {
+    "it": "Contee del Nebraska",
+    "en": "Nebraskan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNV": {
+    "it": "Nevada",
+    "en": "Nevada",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNV": {
+    "it": "Record del Nevada",
+    "en": "Nevadan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNV": {
+    "it": "Contee del Nevada",
+    "en": "Nevadan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNH": {
+    "it": "New Hampshire",
+    "en": "New Hampshire",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNH": {
+    "it": "Record del New Hampshire",
+    "en": "New Hampshirite Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNH": {
+    "it": "Contee del New Hampshire",
+    "en": "New Hampshirite Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNJ": {
+    "it": "New Jersey",
+    "en": "New Jersey",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNJ": {
+    "it": "Record del New Jersey",
+    "en": "New Jerseyan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNJ": {
+    "it": "Contee del New Jersey",
+    "en": "New Jerseyan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNM": {
+    "it": "Nuovo Messico",
+    "en": "New Mexico",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNM": {
+    "it": "Record Messicani",
+    "en": "New Mexican Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNM": {
+    "it": "Contee Messicane",
+    "en": "New Mexican Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNY": {
+    "it": "New York",
+    "en": "New York",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNY": {
+    "it": "Record di New York",
+    "en": "New Yorker Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNY": {
+    "it": "Contee di New York",
+    "en": "New Yorker Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSNC": {
+    "it": "Carolina del Nord",
+    "en": "North Carolina",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSNC": {
+    "it": "Record della Carolina del Nord",
+    "en": "North Carolinian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSNC": {
+    "it": "Contee della Carolina del Nord",
+    "en": "North Carolinian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSND": {
+    "it": "Dakota del Nord",
+    "en": "North Dakota",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSND": {
+    "it": "Record del Dakota del Nord",
+    "en": "North Dakotan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSND": {
+    "it": "Contee del Dakota del Nord",
+    "en": "North Dakotan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSOH": {
+    "it": "Ohio",
+    "en": "Ohio",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSOH": {
+    "it": "Record dell'Ohio",
+    "en": "Ohioan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSOH": {
+    "it": "Contee dell'Ohio",
+    "en": "Ohioan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSOK": {
+    "it": "Oklahoma",
+    "en": "Oklahoma",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSOK": {
+    "it": "Record dell'Oklahoma",
+    "en": "Oklahoman Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSOK": {
+    "it": "Contee dell'Oklahoma",
+    "en": "Oklahoman Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSOR": {
+    "it": "Oregon",
+    "en": "Oregon",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSOR": {
+    "it": "Record dell'Oregon",
+    "en": "Oregonian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSOR": {
+    "it": "Contee dell'Oregon",
+    "en": "Oregonian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSPA": {
+    "it": "Pennsylvania",
+    "en": "Pennsylvania",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSPA": {
+    "it": "Record della Pennsylvania",
+    "en": "Pennsylvanian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSPA": {
+    "it": "Contee della Pennsylvania",
+    "en": "Pennsylvanian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSRI": {
+    "it": "Rhode Island",
+    "en": "Rhode Island",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSRI": {
+    "it": "Record di Rhode Island",
+    "en": "Rhode Islander Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSRI": {
+    "it": "Contee di Rhode Island",
+    "en": "Rhode Islander Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSSC": {
+    "it": "Carolina del Sud",
+    "en": "South Carolina",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSSC": {
+    "it": "Record della Carolina del Sud",
+    "en": "South Carolinian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSSC": {
+    "it": "Contee della Carolina del Sud",
+    "en": "South Carolinian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSSD": {
+    "it": "Dakota del Sud",
+    "en": "South Dakota",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSSD": {
+    "it": "Record del Dakota del Sud",
+    "en": "South Dakotan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSSD": {
+    "it": "Contee del Dakota del Sud",
+    "en": "South Dakotan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSTN": {
+    "it": "Tennessee",
+    "en": "Tennessee",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSTN": {
+    "it": "Record del Tennessee",
+    "en": "Tennessean Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSTN": {
+    "it": "Contee del Tennessee",
+    "en": "Tennessean Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSTX": {
+    "it": "Texas",
+    "en": "Texas",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSTX": {
+    "it": "Record Texani",
+    "en": "Texan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSTX": {
+    "it": "Contee Texane",
+    "en": "Texan Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSUT": {
+    "it": "Utah",
+    "en": "Utah",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSUT": {
+    "it": "Record dello Utah",
+    "en": "Utahn Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSUT": {
+    "it": "Contee dello Utah",
+    "en": "Utahn Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSVT": {
+    "it": "Vermont",
+    "en": "Vermont",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSVT": {
+    "it": "Record del Vermont",
+    "en": "Vermonter Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSVT": {
+    "it": "Contee del Vermont",
+    "en": "Vermonter Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSVA": {
+    "it": "Virginia",
+    "en": "Virginia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSVA": {
+    "it": "Record della Virginia",
+    "en": "Virginian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSVA": {
+    "it": "Contee della Virginia",
+    "en": "Virginian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSWA": {
+    "it": "Washington",
+    "en": "Washington",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSWA": {
+    "it": "Record Washingtoniani",
+    "en": "Washingtonian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSWA": {
+    "it": "Contee Washingtoniane",
+    "en": "Washingtonian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSWV": {
+    "it": "Virginia Occidentale",
+    "en": "West Virginia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSWV": {
+    "it": "Record della Virginia Occidentale",
+    "en": "West Virginian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSWV": {
+    "it": "Contee della Virginia Occidentale",
+    "en": "West Virginian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSWI": {
+    "it": "Wisconsin",
+    "en": "Wisconsin",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSWI": {
+    "it": "Record del Wisconsin",
+    "en": "Wisconsinite Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSWI": {
+    "it": "Contee del Wisconsin",
+    "en": "Wisconsinite Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSWY": {
+    "it": "Wyoming",
+    "en": "Wyoming",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSWY": {
+    "it": "Record del Wyoming",
+    "en": "Wyomingite Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSWY": {
+    "it": "Contee del Wyoming",
+    "en": "Wyomingite Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionUSDC": {
+    "it": "Distretto di Columbia",
+    "en": "District of Columbia",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordUSDC": {
+    "it": "Record Washingtoniani",
+    "en": "Washingtonian Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsUSDC": {
+    "it": "Contee Washingtoniane",
+    "en": "Washingtonian Counties",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionVI": {
     "it": "Isole Vergini Statunitensi",
     "en": "US Virgin Islands",
@@ -10394,6 +11771,51 @@
     "pt": "",
     "es": ""
   },
+  "trackChartPageRankCol": {
+    "it": "Pos.",
+    "en": "Rank",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackChartPagePlayerCol": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackChartPageTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackChartPageStandardCol": {
+    "it": "Standard",
+    "en": "Standard",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackChartPageDateCol": {
+    "it": "Date",
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "countryRankingsPageHeading": {
     "it": "AF Nazioni",
     "en": "Country Rankings",
@@ -10802,60 +12224,6 @@
   "trackListPageHeading": {
     "it": "Piste",
     "en": "Courses",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "recentTimesRecentRecordsHeading": {
-    "it": "Record Recenti",
-    "en": "Recent Records",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "recentTimesRecentTimesHeading": {
-    "it": "Tempi Recenti",
-    "en": "Recent Times",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "recentTimesRecentTimesPlayerCol": {
-    "it": "Player",
-    "en": "Player",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "recentTimesRecentTimesTrackCol": {
-    "it": "Pista",
-    "en": "Track",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "recentTimesRecentTimesTimeCol": {
-    "it": "Tempo",
-    "en": "Time",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "recentTimesRecentTimesDateCol": {
-    "it": "Data",
-    "en": "Date",
     "fr": "",
     "de": "",
     "jp": "",

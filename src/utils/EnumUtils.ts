@@ -1,6 +1,5 @@
 import { CategoryEnum } from "../api";
-import { TimetrialsRegionsRankingsListTopEnum, Track } from "../api/generated";
-import { TranslationKey } from "./i18n/i18n";
+import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
 import { Settings } from "./Settings";
 
 export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) => {
@@ -13,17 +12,6 @@ export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) =
       return settings.categoryHueColorUnres;
     default:
       return settings.categoryHueColorUnres;
-  }
-};
-
-export const getCategoryNameTranslationKey = (category: CategoryEnum): TranslationKey => {
-  switch (category) {
-    case "nonsc":
-      return "constantCategoryNameNoSCShort";
-    case "sc":
-      return "constantCategoryNameSCShort";
-    case "unres":
-      return "constantCategoryNameUnresLong";
   }
 };
 
@@ -84,9 +72,4 @@ export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) =>
  */
 export const eligibleCategories = (category: CategoryEnum) => {
   return Object.values(CategoryEnum).slice(0, Object.values(CategoryEnum).indexOf(category) + 1);
-};
-
-export const getTrackById = (tracks: Track[] | undefined, id: number) => {
-  if (tracks === undefined) return undefined;
-  return tracks.find((r) => r.id === id);
 };

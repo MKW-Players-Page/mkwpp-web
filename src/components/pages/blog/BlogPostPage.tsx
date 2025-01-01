@@ -6,7 +6,7 @@ import { coreApi } from "../../../api";
 import { useApi } from "../../../hooks";
 import { integerOr } from "../../../utils/Numbers";
 import { useContext } from "react";
-import { I18nContext } from "../../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../../utils/i18n/i18n";
 
 const BlogPostPage = () => {
   const { id: idStr } = useParams();
@@ -17,7 +17,7 @@ const BlogPostPage = () => {
     [id],
     "blogPosts",
   );
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   return (
     <>
@@ -26,7 +26,7 @@ const BlogPostPage = () => {
           <BlogPostModule post={post} />
         ) : (
           <div className="module">
-            <div className="module-content">{translations.blogPostPageNonexistant[lang]}</div>
+            <div className="module-content">{translate("blogPostPageNonexistant", lang)}</div>
           </div>
         )}
       </Deferred>

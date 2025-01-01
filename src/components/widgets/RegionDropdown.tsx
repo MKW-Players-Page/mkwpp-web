@@ -11,7 +11,7 @@ import Dropdown, {
   DropdownItemSetDataChild,
   DropdownItemSetSetterData,
 } from "./Dropdown";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -28,7 +28,7 @@ const RegionSelectionDropdown = ({
   value,
   setValue,
 }: RegionSelectionDropdownProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
   const regions = metadata.regions.length === 1 ? [value] : metadata.regions;
@@ -68,12 +68,7 @@ const RegionSelectionDropdown = ({
       });
 
     children
-      .sort((a, b) =>
-        translations[`constantRegion${a.code}` as TranslationKey][lang] >
-        translations[`constantRegion${b.code}` as TranslationKey][lang]
-          ? 1
-          : -1,
-      )
+      .sort((a, b) => (translateRegionName(a, lang) > translateRegionName(b, lang) ? 1 : -1))
       .forEach((region) => {
         if (twoPlayerMin && region.playerCount < 2) {
           return;
@@ -84,7 +79,7 @@ const RegionSelectionDropdown = ({
         outChildren.push({
           type: "DropdownItemData",
           element: {
-            text: translations[`constantRegion${region.code}` as TranslationKey][lang],
+            text: translateRegionName(region, lang),
             rightIcon: <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />,
             value: region,
           } as DropdownItemData,
@@ -94,7 +89,7 @@ const RegionSelectionDropdown = ({
           outChildren.push({
             type: "DropdownItemSetSetterData",
             element: {
-              text: translations[`constantRegionSubregions${region.code}` as TranslationKey][lang],
+              text: translateRegionName(region, lang, "Subregions"),
               rightIcon: <span style={{ paddingRight: "7px" }}>»</span>,
               toItemSetId: region.id,
             } as DropdownItemSetSetterData,

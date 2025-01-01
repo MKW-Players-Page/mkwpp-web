@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import api from "../../api";
 import { useApi } from "../../hooks";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../utils/i18n/i18n";
 import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";
 
 export interface PlayerSelectDropdownProps {
@@ -11,12 +11,12 @@ export interface PlayerSelectDropdownProps {
 
 const PlayerSelectDropdown = ({ id, setId }: PlayerSelectDropdownProps) => {
   const { data: players } = useApi(() => api.timetrialsPlayersList(), [], "playerData");
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const defaultValue: DropdownItemSetDataChild = {
     type: "DropdownItemData",
     hidden: true,
     autodeleteText: true,
-    element: { text: translations.matchupPageDefaultValue[lang], value: 0 },
+    element: { text: translate("matchupPageDefaultValue", lang), value: 0 },
   };
   return (
     <Dropdown

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import "./Navbar.css";
 import { Pages, resolvePage } from "../pages";
-import { I18nContext, LanguageDropdown, TranslationKey } from "../../utils/i18n/i18n";
+import { I18nContext, LanguageDropdown, translate, TranslationKey } from "../../utils/i18n/i18n";
 import { useContext } from "react";
 
 /** Properties of a link element in the navbar */
@@ -194,7 +194,7 @@ export interface NavbarProps {
 }
 
 const Navbar = ({ navbarHidden }: NavbarProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   return (
     <nav className={`navbar${navbarHidden ? " hidden" : ""}`}>
@@ -202,16 +202,16 @@ const Navbar = ({ navbarHidden }: NavbarProps) => {
         <LanguageDropdown />
         {SECTIONS.map((section) => (
           <section key={section.title ?? "Default"}>
-            {section.title && <h5>{translations[section.title][lang]}</h5>}
+            {section.title && <h5>{translate(section.title, lang)}</h5>}
             <ul>
               {section.items.map((item) => (
                 <li key={item.label}>
                   {item.external ? (
                     <a href={item.url} rel="noopener noreferrer">
-                      {translations[item.label][lang]}
+                      {translate(item.label, lang)}
                     </a>
                   ) : (
-                    <Link to={item.url}>{translations[item.label][lang]}</Link>
+                    <Link to={item.url}>{translate(item.label, lang)}</Link>
                   )}
                 </li>
               ))}

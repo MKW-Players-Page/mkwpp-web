@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
-import { MetadataContext } from "../../utils/Metadata";
+import { I18nContext, translate, translateTrack, TranslationKey } from "../../utils/i18n/i18n";
+import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import "./CupsList.css";
@@ -12,25 +12,18 @@ interface CupTracksProps {
 }
 
 const CupTracks = ({ cup }: CupTracksProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
 
   return (
     <div key={cup.id} className="module">
       <div className="module-content cups-list-cup">
-        <b>{translations[`constantCup${cup.code.toUpperCase()}` as TranslationKey][lang]}</b>
+        <b>{translate(`constantCup${cup.code.toUpperCase()}` as TranslationKey, lang)}</b>
         <ul>
           {cup.tracks.map((trackId) => (
             <li key={trackId}>
               <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
-                {
-                  translations[
-                    `constantTrackName${
-                      metadata.tracks?.find((track) => track.id === trackId)?.abbr.toUpperCase() ??
-                      "LC"
-                    }` as TranslationKey
-                  ][lang]
-                }
+                {translateTrack(getTrackById(metadata.tracks, trackId), lang)}
               </Link>
             </li>
           ))}

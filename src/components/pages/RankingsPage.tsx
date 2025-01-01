@@ -17,7 +17,7 @@ import {
   useRegionParam,
   useRowHighlightParam,
 } from "../../utils/SearchParams";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { I18nContext, translate, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -92,7 +92,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const { region, setRegion } = useRegionParam(searchParams);
   const highlight = useRowHighlightParam(searchParams).highlight;
 
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { user } = useContext(UserContext);
   const { settings } = useContext(SettingsContext);
 
@@ -122,8 +122,8 @@ const RankingsPage = ({ metric }: RankingsProps) => {
 
   return (
     <>
-      <h1>{translations[metric.titleKey][lang]}</h1>
-      <p>{translations[metric.descriptionKey][lang]}</p>
+      <h1>{translate(metric.titleKey, lang)}</h1>
+      <p>{translate(metric.descriptionKey, lang)}</p>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
@@ -141,9 +141,9 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             <table>
               <thead>
                 <tr>
-                  <th>{translations.rankingsPageRankCol[lang]}</th>
-                  <th>{translations.rankingsPagePlayerCol[lang]}</th>
-                  <th>{translations[metric.titleKey][lang]}</th>
+                  <th>{translate("rankingsPageRankCol", lang)}</th>
+                  <th>{translate("rankingsPagePlayerCol", lang)}</th>
+                  <th>{translate(metric.titleKey, lang)}</th>
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
@@ -161,7 +161,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                       <>
                         <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
-                          <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
+                          <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
                           <td>
                             {metric.metric === "total_record_ratio"
                               ? highlight.toFixed(4) + "%"

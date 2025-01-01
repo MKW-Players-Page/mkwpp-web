@@ -13,7 +13,7 @@ import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
 import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateRegionName, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -25,7 +25,7 @@ const TrackRecordsPage = () => {
 
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const { user } = useContext(UserContext);
 
@@ -40,8 +40,7 @@ const TrackRecordsPage = () => {
 
   return (
     <>
-      {/* This heading will eventually have an i18n key for literally every region indexed */}
-      <h1>{translations[`constantRegionRecord${region.code}` as TranslationKey][lang]}</h1>
+      <h1>{translateRegionName(region, lang, "Record")}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
           <CategorySelect value={category} onChange={setCategory} />
@@ -58,12 +57,12 @@ const TrackRecordsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>{translations.trackRecordsPageTrackCol[lang]}</th>
-                  <th>{translations.trackRecordsPagePlayerCol[lang]}</th>
-                  <th>{translations.trackRecordsPageCourseCol[lang]}</th>
-                  <th>{translations.trackRecordsPageLapCol[lang]}</th>
-                  <th>{translations.trackRecordsPageStandardCol[lang]}</th>
-                  <th>{translations.trackRecordsPageDateCol[lang]}</th>
+                  <th>{translate("trackRecordsPageTrackCol", lang)}</th>
+                  <th>{translate("trackRecordsPagePlayerCol", lang)}</th>
+                  <th>{translate("trackRecordsPageCourseCol", lang)}</th>
+                  <th>{translate("trackRecordsPageLapCol", lang)}</th>
+                  <th>{translate("trackRecordsPageStandardCol", lang)}</th>
+                  <th>{translate("trackRecordsPageDateCol", lang)}</th>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
@@ -83,11 +82,7 @@ const TrackRecordsPage = () => {
                         {!isLap && (
                           <td rowSpan={2}>
                             <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {
-                                translations[
-                                  `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                                ][lang]
-                              }
+                              {translateTrack(track, lang)}
                             </Link>
                           </td>
                         )}

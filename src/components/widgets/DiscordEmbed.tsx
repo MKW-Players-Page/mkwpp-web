@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useApi } from "../../hooks";
-import { handleBars, I18nContext } from "../../utils/i18n/i18n";
+import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import Deferred from "./Deferred";
 import "./DiscordEmbed.css";
 
@@ -28,7 +28,7 @@ export interface DiscordEmbedProps {
 
 const DiscordEmbed = ({ style }: DiscordEmbedProps) => {
   const UsersToShow = 10;
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const { isLoading, data } = useApi(
     () =>
@@ -50,7 +50,7 @@ const DiscordEmbed = ({ style }: DiscordEmbedProps) => {
           <thead>
             <tr>
               <th colSpan={2}>
-                <span>{translations.discordEmbedParagraph[lang]}</span>
+                <span>{translate("discordEmbedParagraph", lang)}</span>
               </th>
             </tr>
           </thead>
@@ -74,7 +74,7 @@ const DiscordEmbed = ({ style }: DiscordEmbedProps) => {
             <tr>
               <th>
                 <span>
-                  {handleBars(translations.discordEmbedOnlineUsers[lang], [
+                  {handleBars(translate("discordEmbedOnlineUsers", lang), [
                     ["nbsp", <>&nbsp;</>],
                     ["number", (data?.presence_count ?? 0).toString()],
                   ])}
@@ -82,7 +82,7 @@ const DiscordEmbed = ({ style }: DiscordEmbedProps) => {
               </th>
               <th>
                 <Link className="submit-style" target="_blank" to="//discord.gg/GTTFmVdfRN">
-                  {translations.discordEmbedLinktext[lang]}
+                  {translate("discordEmbedLinktext", lang)}
                 </Link>
               </th>
             </tr>

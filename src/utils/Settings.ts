@@ -7,6 +7,7 @@ export interface Settings {
   categoryHueColorNonSC: number;
   categoryHueColorSC: number;
   categoryHueColorUnres: number;
+  debugTranslation: boolean;
 }
 
 export const SettingsDataKey = "browserSettings";
@@ -25,6 +26,8 @@ export const browserSettingDefault = (key: keyof Settings) => {
       return 100;
     case "categoryHueColorUnres":
       return 216;
+    case "debugTranslation":
+      return false;
     default:
       return undefined;
   }
@@ -46,6 +49,7 @@ export const browserSettingsLoadParse = (): Settings => {
       categoryHueColorNonSC: browserSettingDefault("categoryHueColorNonSC"),
       categoryHueColorSC: browserSettingDefault("categoryHueColorSC"),
       categoryHueColorUnres: browserSettingDefault("categoryHueColorUnres"),
+      debugTranslation: browserSettingDefault("debugTranslation"),
     } as Settings;
 
   const objectBrowserSettings: Record<string, any> = JSON.parse(possibleBrowserSettings);
@@ -56,6 +60,7 @@ export const browserSettingsLoadParse = (): Settings => {
     "categoryHueColorNonSC",
     "categoryHueColorSC",
     "categoryHueColorUnres",
+    "debugTranslation",
   ];
   for (const key in objectBrowserSettings)
     if (!SettingsKeys.includes(key)) delete objectBrowserSettings[key];

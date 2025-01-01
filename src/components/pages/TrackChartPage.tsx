@@ -21,7 +21,7 @@ import {
   useRowHighlightParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum } from "../widgets/LapModeSelect";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -39,7 +39,7 @@ const TrackChartPage = () => {
 
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   let track,
     prevTrack,
@@ -100,22 +100,13 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {"« " +
-                translations[
-                  `constantTrackName${prevTrack?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                ][lang]}
+              {"« " + translateTrack(prevTrack, lang)}
             </Link>
           ) : (
             <></>
           )}
         </div>
-        <h1>
-          {
-            translations[`constantTrackName${track?.abbr.toUpperCase() ?? "LC"}` as TranslationKey][
-              lang
-            ]
-          }
-        </h1>
+        <h1>{translateTrack(track, lang)}</h1>
         <div style={{ width: "200px", textAlign: "right" }}>
           {nextTrack !== undefined ? (
             <Link
@@ -128,9 +119,7 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {translations[
-                `constantTrackName${nextTrack?.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-              ][lang] + " »"}
+              {translateTrack(nextTrack, lang) + " »"}
             </Link>
           ) : (
             <></>
@@ -154,11 +143,11 @@ const TrackChartPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Rank</th>
-                  <th>Player</th>
-                  <th>Time</th>
-                  <th>Standard</th>
-                  <th>Date</th>
+                  <th>{translate("trackChartPageRankCol", lang)}</th>
+                  <th>{translate("trackChartPagePlayerCol", lang)}</th>
+                  <th>{translate("trackChartPageTimeCol", lang)}</th>
+                  <th>{translate("trackChartPageStandardCol", lang)}</th>
+                  <th>{translate("trackChartPageDateCol", lang)}</th>
                   <th className="icon-cell" />
                   <th className="icon-cell" />
                   <th className="icon-cell" />
@@ -173,7 +162,7 @@ const TrackChartPage = () => {
                       <>
                         <tr ref={highlightElement} key={highlight} className="highlighted">
                           <td />
-                          <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
+                          <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
                           <td>{formatTime(highlight)}</td>
                           <td />
                           <td />
