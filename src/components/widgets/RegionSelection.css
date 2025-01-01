@@ -27,7 +27,8 @@
   background-color: var(--navbar-background-color-hover);
 }
 
-.region-selection-button svg {
+.region-selection-button svg,
+.region-selection-button img {
   height: 100%;
 }
 

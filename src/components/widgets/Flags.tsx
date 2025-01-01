@@ -20,7 +20,7 @@ import { ReactComponent as FlagBA } from "../../assets/flags/ba.svg";
 import { ReactComponent as FlagBB } from "../../assets/flags/bb.svg";
 import { ReactComponent as FlagBD } from "../../assets/flags/bd.svg";
 import { ReactComponent as FlagBE } from "../../assets/flags/be.svg";
-import { ReactComponent as FlagBENELUX } from "../../assets/flags/benelux.svg"; // TODO: TEMPORARY
+import { ReactComponent as FlagBENELUX } from "../../assets/flags/benelux.svg";
 import { ReactComponent as FlagBF } from "../../assets/flags/bf.svg";
 import { ReactComponent as FlagBG } from "../../assets/flags/bg.svg";
 import { ReactComponent as FlagBH } from "../../assets/flags/bh.svg";
@@ -75,7 +75,7 @@ import { ReactComponent as FlagER } from "../../assets/flags/er.svg";
 import { ReactComponent as FlagES } from "../../assets/flags/es.svg";
 import { ReactComponent as FlagESPT } from "../../assets/flags/espt.svg";
 import { ReactComponent as FlagET } from "../../assets/flags/et.svg";
-import { ReactComponent as FlagEUR } from "../../assets/flags/eu.svg"; // TODO: TEMPORARY
+import { ReactComponent as FlagEUR } from "../../assets/flags/eu.svg"; // TODO: RENAMED!
 import { ReactComponent as FlagFI } from "../../assets/flags/fi.svg";
 import { ReactComponent as FlagFJ } from "../../assets/flags/fj.svg";
 import { ReactComponent as FlagFK } from "../../assets/flags/fk.svg";
@@ -201,10 +201,9 @@ import { ReactComponent as FlagNP } from "../../assets/flags/np.svg";
 import { ReactComponent as FlagNR } from "../../assets/flags/nr.svg";
 import { ReactComponent as FlagNU } from "../../assets/flags/nu.svg";
 import { ReactComponent as FlagNZ } from "../../assets/flags/nz.svg";
-import { ReactComponent as FlagOCE } from "../../assets/flags/pc.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagOM } from "../../assets/flags/om.svg";
 import { ReactComponent as FlagPA } from "../../assets/flags/pa.svg";
-import { ReactComponent as FlagPC } from "../../assets/flags/pc.svg";
+import { ReactComponent as FlagOCE } from "../../assets/flags/pc.svg"; // TODO: RENAMED!
 import { ReactComponent as FlagPE } from "../../assets/flags/pe.svg";
 import { ReactComponent as FlagPF } from "../../assets/flags/pf.svg";
 import { ReactComponent as FlagPG } from "../../assets/flags/pg.svg";
@@ -264,8 +263,59 @@ import { ReactComponent as FlagTZ } from "../../assets/flags/tz.svg";
 import { ReactComponent as FlagUA } from "../../assets/flags/ua.svg";
 import { ReactComponent as FlagUG } from "../../assets/flags/ug.svg";
 import { ReactComponent as FlagUM } from "../../assets/flags/um.svg";
-import { ReactComponent as FlagUN } from "../../assets/flags/un.svg";
+import { ReactComponent as FlagWORLD } from "../../assets/flags/un.svg"; // TODO: RENAMED!
 import { ReactComponent as FlagUS } from "../../assets/flags/us.svg";
+import { ReactComponent as FlagUSAK } from "../../assets/flags/usak.svg";
+import { ReactComponent as FlagUSAL } from "../../assets/flags/usal.svg";
+import { ReactComponent as FlagUSAR } from "../../assets/flags/usar.svg";
+import { ReactComponent as FlagUSAZ } from "../../assets/flags/usaz.svg";
+import { ReactComponent as FlagUSCA } from "../../assets/flags/usca.svg";
+import { ReactComponent as FlagUSCO } from "../../assets/flags/usco.svg";
+import { ReactComponent as FlagUSCT } from "../../assets/flags/usct.svg";
+import { ReactComponent as FlagUSDC } from "../../assets/flags/usdc.svg";
+import { ReactComponent as FlagUSDE } from "../../assets/flags/usde.svg";
+import { ReactComponent as FlagUSFL } from "../../assets/flags/usfl.svg";
+import { ReactComponent as FlagUSGA } from "../../assets/flags/usga.svg";
+import { ReactComponent as FlagUSHI } from "../../assets/flags/ushi.svg";
+import { ReactComponent as FlagUSIA } from "../../assets/flags/usia.svg";
+import { ReactComponent as FlagUSID } from "../../assets/flags/usid.svg";
+import { ReactComponent as FlagUSIL } from "../../assets/flags/usil.svg";
+import { ReactComponent as FlagUSIN } from "../../assets/flags/usin.svg";
+import { ReactComponent as FlagUSKS } from "../../assets/flags/usks.svg";
+import { ReactComponent as FlagUSKY } from "../../assets/flags/usky.svg";
+import { ReactComponent as FlagUSLA } from "../../assets/flags/usla.svg";
+import { ReactComponent as FlagUSMA } from "../../assets/flags/usma.svg";
+import { ReactComponent as FlagUSMD } from "../../assets/flags/usmd.svg";
+import { ReactComponent as FlagUSME } from "../../assets/flags/usme.svg";
+import { ReactComponent as FlagUSMI } from "../../assets/flags/usmi.svg";
+import { ReactComponent as FlagUSMN } from "../../assets/flags/usmn.svg";
+import { ReactComponent as FlagUSMO } from "../../assets/flags/usmo.svg";
+import { ReactComponent as FlagUSMS } from "../../assets/flags/usms.svg";
+import { ReactComponent as FlagUSMT } from "../../assets/flags/usmt.svg";
+import { ReactComponent as FlagUSNC } from "../../assets/flags/usnc.svg";
+import { ReactComponent as FlagUSND } from "../../assets/flags/usnd.svg";
+import { ReactComponent as FlagUSNE } from "../../assets/flags/usne.svg";
+import { ReactComponent as FlagUSNH } from "../../assets/flags/usnh.svg";
+import { ReactComponent as FlagUSNJ } from "../../assets/flags/usnj.svg";
+import { ReactComponent as FlagUSNM } from "../../assets/flags/usnm.svg";
+import { ReactComponent as FlagUSNV } from "../../assets/flags/usnv.svg";
+import { ReactComponent as FlagUSNY } from "../../assets/flags/usny.svg";
+import { ReactComponent as FlagUSOH } from "../../assets/flags/usoh.svg";
+import { ReactComponent as FlagUSOK } from "../../assets/flags/usok.svg";
+import { ReactComponent as FlagUSOR } from "../../assets/flags/usor.svg";
+import { ReactComponent as FlagUSPA } from "../../assets/flags/uspa.svg";
+import { ReactComponent as FlagUSRI } from "../../assets/flags/usri.svg";
+import { ReactComponent as FlagUSSC } from "../../assets/flags/ussc.svg";
+import { ReactComponent as FlagUSSD } from "../../assets/flags/ussd.svg";
+import { ReactComponent as FlagUSTN } from "../../assets/flags/ustn.svg";
+import { ReactComponent as FlagUSTX } from "../../assets/flags/ustx.svg";
+import { ReactComponent as FlagUSUT } from "../../assets/flags/usut.svg";
+import { ReactComponent as FlagUSVA } from "../../assets/flags/usva.svg";
+import { ReactComponent as FlagUSVT } from "../../assets/flags/usvt.svg";
+import { ReactComponent as FlagUSWA } from "../../assets/flags/uswa.svg";
+import { ReactComponent as FlagUSWI } from "../../assets/flags/uswi.svg";
+import { ReactComponent as FlagUSWV } from "../../assets/flags/uswv.svg";
+import { ReactComponent as FlagUSWY } from "../../assets/flags/uswy.svg";
 import { ReactComponent as FlagUY } from "../../assets/flags/uy.svg";
 import { ReactComponent as FlagUZ } from "../../assets/flags/uz.svg";
 import { ReactComponent as FlagVA } from "../../assets/flags/va.svg";
@@ -276,7 +326,6 @@ import { ReactComponent as FlagVI } from "../../assets/flags/vi.svg";
 import { ReactComponent as FlagVN } from "../../assets/flags/vn.svg";
 import { ReactComponent as FlagVU } from "../../assets/flags/vu.svg";
 import { ReactComponent as FlagWF } from "../../assets/flags/wf.svg";
-import { ReactComponent as FlagWORLD } from "../../assets/flags/un.svg"; // TODO: TEMPORARY
 import { ReactComponent as FlagWS } from "../../assets/flags/ws.svg";
 import { ReactComponent as FlagXK } from "../../assets/flags/xk.svg";
 import { ReactComponent as FlagXX } from "../../assets/flags/xx.svg";
@@ -306,8 +355,8 @@ export const Flags = {
   ba: FlagBA,
   bb: FlagBB,
   bd: FlagBD,
-  benelux: FlagBENELUX,
   be: FlagBE,
+  benelux: FlagBENELUX,
   bf: FlagBF,
   bg: FlagBG,
   bh: FlagBH,
@@ -488,10 +537,9 @@ export const Flags = {
   nr: FlagNR,
   nu: FlagNU,
   nz: FlagNZ,
-  oce: FlagOCE,
   om: FlagOM,
   pa: FlagPA,
-  pc: FlagPC,
+  oce: FlagOCE,
   pe: FlagPE,
   pf: FlagPF,
   pg: FlagPG,
@@ -551,8 +599,59 @@ export const Flags = {
   ua: FlagUA,
   ug: FlagUG,
   um: FlagUM,
-  un: FlagUN,
+  world: FlagWORLD,
   us: FlagUS,
+  usak: FlagUSAK,
+  usal: FlagUSAL,
+  usar: FlagUSAR,
+  usaz: FlagUSAZ,
+  usca: FlagUSCA,
+  usco: FlagUSCO,
+  usct: FlagUSCT,
+  usdc: FlagUSDC,
+  usde: FlagUSDE,
+  usfl: FlagUSFL,
+  usga: FlagUSGA,
+  ushi: FlagUSHI,
+  usia: FlagUSIA,
+  usid: FlagUSID,
+  usil: FlagUSIL,
+  usin: FlagUSIN,
+  usks: FlagUSKS,
+  usky: FlagUSKY,
+  usla: FlagUSLA,
+  usma: FlagUSMA,
+  usmd: FlagUSMD,
+  usme: FlagUSME,
+  usmi: FlagUSMI,
+  usmn: FlagUSMN,
+  usmo: FlagUSMO,
+  usms: FlagUSMS,
+  usmt: FlagUSMT,
+  usnc: FlagUSNC,
+  usnd: FlagUSND,
+  usne: FlagUSNE,
+  usnh: FlagUSNH,
+  usnj: FlagUSNJ,
+  usnm: FlagUSNM,
+  usnv: FlagUSNV,
+  usny: FlagUSNY,
+  usoh: FlagUSOH,
+  usok: FlagUSOK,
+  usor: FlagUSOR,
+  uspa: FlagUSPA,
+  usri: FlagUSRI,
+  ussc: FlagUSSC,
+  ussd: FlagUSSD,
+  ustn: FlagUSTN,
+  ustx: FlagUSTX,
+  usut: FlagUSUT,
+  usva: FlagUSVA,
+  usvt: FlagUSVT,
+  uswa: FlagUSWA,
+  uswi: FlagUSWI,
+  uswv: FlagUSWV,
+  uswy: FlagUSWY,
   uy: FlagUY,
   uz: FlagUZ,
   va: FlagVA,
@@ -563,7 +662,6 @@ export const Flags = {
   vn: FlagVN,
   vu: FlagVU,
   wf: FlagWF,
-  world: FlagWORLD,
   ws: FlagWS,
   xk: FlagXK,
   xx: FlagXX,
@@ -576,12 +674,31 @@ export const Flags = {
 
 export interface FlagProps {
   flag: keyof typeof Flags;
+  useSvg?: boolean;
 }
 
-const Flag = ({ flag }: FlagProps) => {
+const Flag = ({ flag, useSvg }: FlagProps) => {
+  if (!useSvg) return <img src={`/mkw/flags/${codeToFlag(flag)}.svg`} alt={`${flag}.svg`} />;
   const FlagSVG = Flags[flag];
   if (FlagSVG === undefined) return <></>;
   return <FlagSVG />;
+};
+
+/**
+ * @param flag flag code that comes from the code field in region data
+ * @returns the code used for the svg file instead
+ */
+const codeToFlag = (flag: string): string => {
+  switch (flag) {
+    case "eur":
+      return "eu";
+    case "oce":
+      return "pc";
+    case "world":
+      return "un";
+    default:
+      return flag;
+  }
 };
 
 export default Flag;
