@@ -23,6 +23,7 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
   const { user } = useContext(UserContext);
+  const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
 
   return (
     <tr
@@ -30,7 +31,8 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
         display:
           playerFilter === "" ||
           (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
-          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
+          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter) ||
+          regionNameFull.toLowerCase().normalize("NFKD").includes(playerFilter)
             ? ""
             : "none",
       }}
@@ -44,7 +46,7 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
           xxFlag={true}
         />
       </td>
-      <td>{translateRegionNameFull(metadata, lang, player.region)}</td>
+      <td>{regionNameFull}</td>
     </tr>
   );
 };
