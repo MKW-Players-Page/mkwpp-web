@@ -5,13 +5,14 @@ import "./Tooltip.css";
 export interface TooltipProps {
   children?: ReactNode;
   text: string;
+  left?: boolean;
 }
 
-const Tooltip = ({ children, text }: TooltipProps) => {
+const Tooltip = ({ children, text, left }: TooltipProps) => {
   return (
     <div className="tooltip">
       {children}
-      <span className="tooltip-text">{text}</span>
+      <span className={`tooltip-text${left ? ` left` : ""}`}>{text}</span>
     </div>
   );
 };

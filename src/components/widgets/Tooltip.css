@@ -32,6 +32,12 @@
     transparent;
 }
 
+.tooltip-text.left,
+.tooltip-text.left::after {
+  left: 0;
+  right: unset;
+}
+
 .tooltip:hover .tooltip-text {
   visibility: visible;
 }
