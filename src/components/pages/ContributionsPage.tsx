@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { handleBars, I18nContext, Language, LanguageName } from "../../utils/i18n/i18n";
+import { handleBars, I18nContext, Language, LanguageName, translate } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 
 interface Question {
@@ -18,51 +18,51 @@ interface Answer {
 }
 
 const ContributionsPage = () => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang, translations } = useContext(I18nContext);
 
   const QuestionsAndAnswers: Record<number, Question | Answer> = {
     1: {
       type: 0,
-      text: translations.contributionsPageQuestionsAndAnswers1[lang],
-      posAns: translations.contributionsPagePositiveResponse[lang],
-      negAns: translations.contributionsPageNegativeResponse[lang],
+      text: translate("contributionsPageQuestionsAndAnswers1", lang),
+      posAns: translate("contributionsPagePositiveResponse", lang),
+      negAns: translate("contributionsPageNegativeResponse", lang),
       posFollowup: 2,
       negFollowup: 3,
     },
     2: {
       type: 1,
-      text: translations.contributionsPageQuestionsAndAnswers2[lang],
+      text: translate("contributionsPageQuestionsAndAnswers2", lang),
     },
     3: {
       type: 0,
-      text: translations.contributionsPageQuestionsAndAnswers3[lang],
-      posAns: translations.contributionsPagePositiveResponse[lang],
-      negAns: translations.contributionsPageNegativeResponse[lang],
+      text: translate("contributionsPageQuestionsAndAnswers3", lang),
+      posAns: translate("contributionsPagePositiveResponse", lang),
+      negAns: translate("contributionsPageNegativeResponse", lang),
       posFollowup: 4,
       negFollowup: 5,
     },
     4: {
       type: 1,
-      text: translations.contributionsPageQuestionsAndAnswers4[lang],
+      text: translate("contributionsPageQuestionsAndAnswers4", lang),
     },
     5: {
       type: 0,
-      text: translations.contributionsPageQuestionsAndAnswers5[lang],
-      posAns: translations.contributionsPagePositiveResponse[lang],
-      negAns: translations.contributionsPageNegativeResponse[lang],
+      text: translate("contributionsPageQuestionsAndAnswers5", lang),
+      posAns: translate("contributionsPagePositiveResponse", lang),
+      negAns: translate("contributionsPageNegativeResponse", lang),
       posFollowup: 6,
       negFollowup: 1,
     },
     6: {
       type: 1,
-      text: translations.contributionsPageQuestionsAndAnswers6[lang],
+      text: translate("contributionsPageQuestionsAndAnswers6", lang),
     },
   };
 
   const [questionIndex, setQuestionIndex] = useState(1);
   return (
     <>
-      <h1>{translations.contributionsPageHeading[lang]}</h1>
+      <h1>{translate("contributionsPageHeading", lang)}</h1>
       <div className="module">
         <div className="module-content">
           {QuestionsAndAnswers[questionIndex].type === 0 ? (
@@ -91,12 +91,12 @@ const ContributionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.contributionsPageLanguageCompletionHeading[lang]}</h2>
+          <h2>{translate("contributionsPageLanguageCompletionHeading", lang)}</h2>
           <table style={{ marginBottom: "10px" }}>
             <thead>
               <tr>
-                <th>{translations.contributionsPageLanguageCompletionLanguageCol[lang]}</th>
-                <th>{translations.contributionsPageLanguageCompletionPercentageCol[lang]}</th>
+                <th>{translate("contributionsPageLanguageCompletionLanguageCol", lang)}</th>
+                <th>{translate("contributionsPageLanguageCompletionPercentageCol", lang)}</th>
               </tr>
             </thead>
             <tbody>
@@ -127,7 +127,7 @@ const ContributionsPage = () => {
               ))}
             </tbody>
           </table>
-          <p>{translations.contributionsPageLanguageCompletionThanksText[lang]}</p>
+          <p>{translate("contributionsPageLanguageCompletionThanksText", lang)}</p>
           <ul style={{ listStyleType: "disc" }}>
             {[
               {
@@ -146,11 +146,11 @@ const ContributionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.contributionsPageFeatureRoadmapHeading[lang]}</h2>
+          <h2>{translate("contributionsPageFeatureRoadmapHeading", lang)}</h2>
           <FeatureElement
-            title={translations.contributionsPageFeatureTimelineFilterHeading[lang]}
+            title={translate("contributionsPageFeatureTimelineFilterHeading", lang)}
             description={handleBars(
-              translations.contributionsPageFeatureTimelineFilterParagraph[lang],
+              translate("contributionsPageFeatureTimelineFilterParagraph", lang),
               [
                 [
                   "TMX",
@@ -164,14 +164,14 @@ const ContributionsPage = () => {
             suggestedBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRustBackendHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRustBackendParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureRustBackendHeading", lang)}
+            description={<>{translate("contributionsPageFeatureRustBackendParagraph", lang)}</>}
             suggestedBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureChadsoftAPIInterfaceHeading[lang]}
+            title={translate("contributionsPageFeatureChadsoftAPIInterfaceHeading", lang)}
             description={
-              <>{translations.contributionsPageFeatureChadsoftAPIInterfaceParagraph[lang]}</>
+              <>{translate("contributionsPageFeatureChadsoftAPIInterfaceParagraph", lang)}</>
             }
             suggestedBy={[918, 1165, 630, 237]}
           />
@@ -179,157 +179,157 @@ const ContributionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.contributionsPageOngoingDevelopmentHeading[lang]}</h2>
+          <h2>{translate("contributionsPageOngoingDevelopmentHeading", lang)}</h2>
           <FeatureElement
-            title={translations.contributionsPageFeatureRivalriesHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRivalriesParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureRivalriesHeading", lang)}
+            description={<>{translate("contributionsPageFeatureRivalriesParagraph", lang)}</>}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureAwardsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureAwardsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureAwardsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureAwardsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureUserSettingsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureUserSettingsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureUserSettingsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureUserSettingsParagraph", lang)}</>}
             workedOnBy={[918]}
             suggestedBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureFurtherSubregionsHeading[lang]}
+            title={translate("contributionsPageFeatureFurtherSubregionsHeading", lang)}
             description={
-              <>{translations.contributionsPageFeatureFurtherSubregionsParagraph[lang]}</>
+              <>{translate("contributionsPageFeatureFurtherSubregionsParagraph", lang)}</>
             }
             workedOnBy={[1165, 918]}
             suggestedBy={[1165, 918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeaturePastChampsHeading[lang]}
-            description={<>{translations.contributionsPageFeaturePastChampsParagraph[lang]}</>}
+            title={translate("contributionsPageFeaturePastChampsHeading", lang)}
+            description={<>{translate("contributionsPageFeaturePastChampsParagraph", lang)}</>}
             workedOnBy={[1165, 1167]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureSubmissionHeading[lang]}
-            description={<>{translations.contributionsPageFeatureSubmissionParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureSubmissionHeading", lang)}
+            description={<>{translate("contributionsPageFeatureSubmissionParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureSvgFlagsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureSvgFlagsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureSvgFlagsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureSvgFlagsParagraph", lang)}</>}
             workedOnBy={[1165, 918, 144]}
           />
         </div>
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.contributionsPageDevelopedCreditsHeading[lang]}</h2>
+          <h2>{translate("contributionsPageDevelopedCreditsHeading", lang)}</h2>
           <FeatureElement
-            title={translations.contributionsPageFeatureContributionsPageHeading[lang]}
+            title={translate("contributionsPageFeatureContributionsPageHeading", lang)}
             description={
-              <>{translations.contributionsPageFeatureContributionsPageParagraph[lang]}</>
+              <>{translate("contributionsPageFeatureContributionsPageParagraph", lang)}</>
             }
             suggestedBy={[918]}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureLocalizationHeading[lang]}
-            description={<>{translations.contributionsPageFeatureLocalizationParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureLocalizationHeading", lang)}
+            description={<>{translate("contributionsPageFeatureLocalizationParagraph", lang)}</>}
             workedOnBy={[1165, 918]}
             suggestedBy={[1165, 918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureProfileFiltersHeading[lang]}
-            description={<>{translations.contributionsPageFeatureProfileFiltersParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureProfileFiltersHeading", lang)}
+            description={<>{translate("contributionsPageFeatureProfileFiltersParagraph", lang)}</>}
             workedOnBy={[918]}
             suggestedBy={[918, 144]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureCountryAFHeading[lang]}
-            description={<>{translations.contributionsPageFeatureCountryAFParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureCountryAFHeading", lang)}
+            description={<>{translate("contributionsPageFeatureCountryAFParagraph", lang)}</>}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureMatchupsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureMatchupsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureMatchupsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureMatchupsParagraph", lang)}</>}
             workedOnBy={[1165, 918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureCustomDropdownsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureCustomDropdownsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureCustomDropdownsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureCustomDropdownsParagraph", lang)}</>}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRulesPageHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRulesPageParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureRulesPageHeading", lang)}
+            description={<>{translate("contributionsPageFeatureRulesPageParagraph", lang)}</>}
             workedOnBy={[918, 145]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureCategoryHueHeading[lang]}
-            description={<>{translations.contributionsPageFeatureCategoryHueParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureCategoryHueHeading", lang)}
+            description={<>{translate("contributionsPageFeatureCategoryHueParagraph", lang)}</>}
             workedOnBy={[918, 1165]}
             suggestedBy={[144]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureTallyPointsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureTallyPointsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureTallyPointsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureTallyPointsParagraph", lang)}</>}
             suggestedBy={[1165, 630, 144]}
             workedOnBy={[1165, 918, 1167]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRegionSelectionHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRegionSelectionParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureRegionSelectionHeading", lang)}
+            description={<>{translate("contributionsPageFeatureRegionSelectionParagraph", lang)}</>}
             suggestedBy={[918]}
             workedOnBy={[918]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureTopsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureTopsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureTopsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureTopsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeaturePlayersHeading[lang]}
-            description={<>{translations.contributionsPageFeaturePlayersParagraph[lang]}</>}
+            title={translate("contributionsPageFeaturePlayersHeading", lang)}
+            description={<>{translate("contributionsPageFeaturePlayersParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureLoginHeading[lang]}
-            description={<>{translations.contributionsPageFeatureLoginParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureLoginHeading", lang)}
+            description={<>{translate("contributionsPageFeatureLoginParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureRankingsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureRankingsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureRankingsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureRankingsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureChartsHeading[lang]}
-            description={<>{translations.contributionsPageFeatureChartsParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureChartsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureChartsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
           <FeatureElement
-            title={translations.contributionsPageFeatureSiteHeading[lang]}
-            description={<>{translations.contributionsPageFeatureSiteParagraph[lang]}</>}
+            title={translate("contributionsPageFeatureSiteHeading", lang)}
+            description={<>{translate("contributionsPageFeatureSiteParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
         </div>
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.contributionsPageSpecialCreditsHeading[lang]}</h2>
+          <h2>{translate("contributionsPageSpecialCreditsHeading", lang)}</h2>
           <p>
-            {handleBars(translations.contributionsPageSpecialCreditsPenevParagraph[lang], [
+            {handleBars(translate("contributionsPageSpecialCreditsPenevParagraph", lang), [
               ["Penev", <PlayerMention id={58} />],
             ])}
           </p>
           <p>
-            {translations.contributionsPageSpecialCreditsUpdatersParagraph[lang]}{" "}
+            {translate("contributionsPageSpecialCreditsUpdatersParagraph", lang)}{" "}
             <PlayerMention id={1167} />, <PlayerMention id={145} />, <PlayerMention id={630} />,{" "}
             <PlayerMention id={144} />, <PlayerMention id={1588} />, <PlayerMention id={1372} />,{" "}
             <PlayerMention id={308} />
           </p>
           <p>
-            {translations.contributionsPageSpecialCreditsFormerUpdatersParagraph[lang]}{" "}
+            {translate("contributionsPageSpecialCreditsFormerUpdatersParagraph", lang)}{" "}
             <PlayerMention id={1626} />, <PlayerMention id={1539} />, <PlayerMention id={1538} />,{" "}
             <PlayerMention id={644} />, <PlayerMention id={383} />, <PlayerMention id={718} />,{" "}
             <PlayerMention id={1598} />
@@ -349,7 +349,7 @@ interface FeatureProps {
 }
 
 const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }: FeatureProps) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   return (
     <div>
       <hr style={{ width: "100%" }} />
@@ -367,7 +367,7 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
       >
         {workedOnBy ? (
           <div>
-            <div>{translations.contributionsPageFeatureWorkedOnBy[lang]}</div>
+            <div>{translate("contributionsPageFeatureWorkedOnBy", lang)}</div>
             {workedOnBy.map((r) => (
               <div>
                 <PlayerMention id={r} />
@@ -379,7 +379,7 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
         )}
         {suggestedBy ? (
           <div>
-            <div>{translations.contributionsPageFeatureSuggestedBy[lang]}</div>
+            <div>{translate("contributionsPageFeatureSuggestedBy", lang)}</div>
             {suggestedBy.map((r) => (
               <div>
                 <PlayerMention id={r} />

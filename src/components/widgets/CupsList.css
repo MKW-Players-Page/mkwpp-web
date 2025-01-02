@@ -2,7 +2,9 @@
   display: grid;
   margin-bottom: 16px;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(280px, 100%/5)), 1fr)) /* Don't ask me how or why this works */;
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(100%, max(280px, 100%/5)), 1fr))
+    /* Don't ask me how or why this works */;
 }
 
 .module .cups-list {

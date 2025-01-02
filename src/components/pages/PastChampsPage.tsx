@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { useCategoryParam } from "../../utils/SearchParams";
 import Deferred from "../widgets/Deferred";
 import { CategorySelect } from "../widgets";
@@ -12,7 +12,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 
 const PastChampsPage = () => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { settings } = useContext(SettingsContext);
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
@@ -30,18 +30,18 @@ const PastChampsPage = () => {
 
   return (
     <>
-      <h1>{translations.pastChampsPageHeading[lang]}</h1>
+      <h1>{translate("pastChampsPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
         <CategorySelect value={category} onChange={setCategory} />
         <Deferred isWaiting={isLoading}>
           <div className="module table-hover-rows">
             <table>
               <thead>
-                <th>{translations.pastChampsPagePlayerCol[lang]}</th>
-                <th>{translations.pastChampsPageStartDateCol[lang]}</th>
-                <th>{translations.pastChampsPageEndDateCol[lang]}</th>
-                <th>{translations.pastChampsPageDurationCol[lang]}</th>
-                <th>{translations.pastChampsPagePercentCol[lang]}</th>
+                <th>{translate("pastChampsPagePlayerCol", lang)}</th>
+                <th>{translate("pastChampsPageStartDateCol", lang)}</th>
+                <th>{translate("pastChampsPageEndDateCol", lang)}</th>
+                <th>{translate("pastChampsPageDurationCol", lang)}</th>
+                <th>{translate("pastChampsPagePercentCol", lang)}</th>
               </thead>
               <tbody>
                 {champs?.map((champ, idx, arr) => {
@@ -64,12 +64,12 @@ const PastChampsPage = () => {
                       <td>
                         {nextExists
                           ? new Date(arr[idx + 1].dateInstated * 1000).toLocaleDateString(lang)
-                          : translations.pastChampsPageOngoing[lang]}
+                          : translate("pastChampsPageOngoing", lang)}
                       </td>
                       <td>
                         {durationDays < 1
-                          ? translations.pastChampsPageLessThan1Day[lang]
-                          : `${Math.floor(durationDays)} ${Math.floor(durationDays) === 1 ? translations.pastChampsPageDaySingular[lang] : translations.pastChampsPageDayPlural[lang]}`}
+                          ? translate("pastChampsPageLessThan1Day", lang)
+                          : `${Math.floor(durationDays)} ${Math.floor(durationDays) === 1 ? translate("pastChampsPageDaySingular", lang) : translate("pastChampsPageDayPlural", lang)}`}
                       </td>
                       <td>
                         {durationPerc < 10

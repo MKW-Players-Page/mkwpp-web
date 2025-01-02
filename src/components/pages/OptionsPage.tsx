@@ -1,8 +1,8 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../api";
 import { useApi } from "../../hooks";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { setSettingKV, SettingsContext } from "../../utils/Settings";
 import { UserContext } from "../../utils/User";
 import ColorSlider from "../widgets/ColorSlider";
@@ -10,7 +10,7 @@ import Deferred from "../widgets/Deferred";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { settings, setSettings } = useContext(SettingsContext);
 
   const horizDivStyle = {
@@ -30,6 +30,18 @@ const OptionsPage = () => {
   const aliasTextArea = useRef(null);
   const navigate = useNavigate();
 
+  const [debugActive, setDebugActive] = useState(0);
+  useEffect(() => {
+    const eventListener = (e: KeyboardEvent) => {
+      const debugText = "nobuo";
+      if (e.key === debugText[debugActive]) {
+        setDebugActive(debugActive + 1);
+      }
+    };
+    document.addEventListener("keydown", eventListener);
+    return () => document.removeEventListener("keydown", eventListener);
+  });
+
   return (
     <>
       <Link
@@ -41,12 +53,44 @@ const OptionsPage = () => {
       >
         « Back
       </Link>
-      <h1>{translations.optionsPageBrowserHeading[lang]}</h1>
+      {debugActive === 5 ? (
+        <>
+          <h1>
+            Debug{" "}
+            <span style={{ color: "grey", fontSize: ".7rem" }}>
+              To activate this, type 'nobuo' ;) --FalB
+            </span>
+          </h1>
+          <div className="module">
+            <div className="module-content">
+              <h2>Translation Keys</h2>
+              <div style={horizDivStyle}>
+                <p>
+                  Click on this to show key text instead of translations for strings on the site
+                  (refresh for it to take effect)
+                </p>
+                <input
+                  type="checkbox"
+                  onChange={() =>
+                    setSettings(
+                      setSettingKV(settings, "debugTranslation", !settings.debugTranslation),
+                    )
+                  }
+                  defaultChecked={settings.debugTranslation}
+                />
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+      <h1>{translate("optionsPageBrowserHeading", lang)}</h1>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.optionsPageBrowserOptRegFlagsHeading[lang]}</h2>
+          <h2>{translate("optionsPageBrowserOptRegFlagsHeading", lang)}</h2>
           <div style={horizDivStyle}>
-            <p>{translations.optionsPageBrowserOptRegFlagsParagraph[lang]}</p>
+            <p>{translate("optionsPageBrowserOptRegFlagsParagraph", lang)}</p>
             <input
               type="checkbox"
               onChange={() =>
@@ -59,9 +103,9 @@ const OptionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.optionsPageBrowserOptLockTableCellHeading[lang]}</h2>
+          <h2>{translate("optionsPageBrowserOptLockTableCellHeading", lang)}</h2>
           <div style={horizDivStyle}>
-            <p>{translations.optionsPageBrowserOptLockTableCellParagraph[lang]}</p>
+            <p>{translate("optionsPageBrowserOptLockTableCellParagraph", lang)}</p>
             <input
               type="checkbox"
               onChange={() =>
@@ -74,32 +118,32 @@ const OptionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
-          <h2>{translations.optionsPageBrowserOptHueShiftHeading[lang]}</h2>
+          <h2>{translate("optionsPageBrowserOptHueShiftHeading", lang)}</h2>
           <ColorSlider
-            paragraphText={translations.constantCategoryNameNoSCLong[lang]}
+            paragraphText={translate("constantCategoryNameNoSCLong", lang)}
             valueKey="categoryHueColorNonSC"
           />
           <ColorSlider
-            paragraphText={translations.constantCategoryNameSCLong[lang]}
+            paragraphText={translate("constantCategoryNameSCLong", lang)}
             valueKey="categoryHueColorSC"
           />
           <ColorSlider
-            paragraphText={translations.constantCategoryNameUnresLong[lang]}
+            paragraphText={translate("constantCategoryNameUnresLong", lang)}
             valueKey="categoryHueColorUnres"
           />
         </div>
       </div>
-      <h1>{translations.optionsPageAccountHeading[lang]}</h1>
+      <h1>{translate("optionsPageAccountHeading", lang)}</h1>
       {user === undefined ? (
         <div className="module">
-          <div className="module-content">{translations.optionsPageLogInWarning[lang]}</div>
+          <div className="module-content">{translate("optionsPageLogInWarning", lang)}</div>
         </div>
       ) : (
         <>
           <div className="module">
             <div className="module-content">
               <Deferred isWaiting={playerLoading}>
-                <h2>{translations.optionsPageAccountOptAliasHeading[lang]}</h2>
+                <h2>{translate("optionsPageAccountOptAliasHeading", lang)}</h2>
                 <textarea
                   ref={aliasTextArea}
                   style={{ color: "#fff" }}
@@ -119,7 +163,7 @@ const OptionsPage = () => {
                     });
                   }}
                 >
-                  {translations.optionsPageSaveBtnText[lang]}
+                  {translate("optionsPageSaveBtnText", lang)}
                 </button>
               </Deferred>
             </div>
@@ -127,7 +171,7 @@ const OptionsPage = () => {
           <div className="module">
             <div className="module-content">
               <Deferred isWaiting={playerLoading}>
-                <h2>{translations.optionsPageAccountOptBioHeading[lang]}</h2>
+                <h2>{translate("optionsPageAccountOptBioHeading", lang)}</h2>
                 <textarea
                   ref={bioTextArea}
                   style={{ color: "#fff" }}
@@ -147,7 +191,7 @@ const OptionsPage = () => {
                     });
                   }}
                 >
-                  {translations.optionsPageSaveBtnText[lang]}
+                  {translate("optionsPageSaveBtnText", lang)}
                 </button>
               </Deferred>
             </div>

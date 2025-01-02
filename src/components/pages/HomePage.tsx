@@ -4,13 +4,13 @@ import { useApi } from "../../hooks";
 import { BlogPostModule } from "../widgets";
 import DiscordEmbed from "../widgets/DiscordEmbed";
 import ExpandableModule from "../widgets/ExpandableModule";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { useContext } from "react";
 import CupsList from "../widgets/CupsList";
 import RecentTimes from "../widgets/RecentTimes";
 
 const HomePage = () => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const { isLoading: blogPostsLoading, data: posts } = useApi(
     () => coreApi.coreBlogLatestList(),
@@ -30,20 +30,20 @@ const HomePage = () => {
         <RecentTimes records={true} limit={30} />
         <RecentTimes records={false} limit={30} />
       </div>
-      <ExpandableModule heading={translations.homePageRecentTrackListPart[lang]}>
+      <ExpandableModule heading={translate("homePageRecentTrackListPart", lang)}>
         <div className="module-content">
           <CupsList />
         </div>
       </ExpandableModule>
-      <ExpandableModule heading={translations.homePageWelcomeHeading[lang]}>
+      <ExpandableModule heading={translate("homePageWelcomeHeading", lang)}>
         <div className="module-content">
-          <h2>{translations.homePageWelcomeParagraphHeading[lang]}</h2>
-          <p>{translations.homePageWelcomeParagraph1[lang]}</p>
-          <p>{translations.homePageWelcomeParagraph2[lang]}</p>
-          <p>{translations.homePageWelcomeParagraph3[lang]}</p>
-          <p>{translations.homePageWelcomeParagraph4[lang]}</p>
-          <p>{translations.homePageWelcomeParagraph5[lang]}</p>
-          <p>{translations.homePageWelcomeParagraph6[lang]}</p>
+          <h2>{translate("homePageWelcomeParagraphHeading", lang)}</h2>
+          <p>{translate("homePageWelcomeParagraph1", lang)}</p>
+          <p>{translate("homePageWelcomeParagraph2", lang)}</p>
+          <p>{translate("homePageWelcomeParagraph3", lang)}</p>
+          <p>{translate("homePageWelcomeParagraph4", lang)}</p>
+          <p>{translate("homePageWelcomeParagraph5", lang)}</p>
+          <p>{translate("homePageWelcomeParagraph6", lang)}</p>
         </div>
       </ExpandableModule>
     </div>

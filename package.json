@@ -16,6 +16,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
+    "svgo": "^3.3.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -27,6 +28,7 @@
     "lint": "eslint ./src/ --max-warnings=0 && npx prettier . --check",
     "format": "npx prettier . --write",
     "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml",
+    "gen-flag-svg": "node ./codegen-scripts/regen-flag-imports.js",
     "serve": "eslint ./src/ --max-warnings=0 && npx prettier . --check --write && react-scripts build && serve -s build"
   },
   "prettier": {

@@ -6,7 +6,7 @@ import Form, { Field } from "../../widgets/Form";
 import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
 import { UserContext } from "../../../utils/User";
-import { I18nContext } from "../../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../../utils/i18n/i18n";
 
 interface UserJoinState {
   email: string;
@@ -31,7 +31,7 @@ const UserJoinPage = () => {
   const [state, setState] = useState<UserJoinState>(initialState);
 
   const { user } = useContext(UserContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const submit = (done: () => void) => {
     setState((prev) => ({ ...prev, errors: {} }));
@@ -73,21 +73,21 @@ const UserJoinPage = () => {
       <Form
         state={state}
         setState={setState}
-        title={translations.userJoinPageFormLabel[lang]}
-        submitLabel={translations.userJoinPageFormLabelSubmitButton[lang]}
+        title={translate("userJoinPageFormLabel", lang)}
+        submitLabel={translate("userJoinPageFormLabelSubmitButton", lang)}
         submit={submit}
       >
-        <Field type="email" field="email" label={translations.userJoinPageEmailLabel[lang]} />
-        <Field type="text" field="username" label={translations.userJoinPageUsernameLabel[lang]} />
+        <Field type="email" field="email" label={translate("userJoinPageEmailLabel", lang)} />
+        <Field type="text" field="username" label={translate("userJoinPageUsernameLabel", lang)} />
         <Field
           type="password"
           field="password"
-          label={translations.userJoinPagePasswordLabel[lang]}
+          label={translate("userJoinPagePasswordLabel", lang)}
         />
         <Field
           type="password"
           field="password2"
-          label={translations.userJoinPageConfirmPasswordLabel[lang]}
+          label={translate("userJoinPageConfirmPasswordLabel", lang)}
         />
       </Form>
     </>
@@ -95,15 +95,15 @@ const UserJoinPage = () => {
 };
 
 export const UserJoinSuccessPage = () => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   return (
     <>
-      <h1>{translations.userJoinPageSuccessHeading[lang]}</h1>
+      <h1>{translate("userJoinPageSuccessHeading", lang)}</h1>
       <div className="module">
         <div className="module-content">
-          <p>{translations.userJoinPageParagraph1[lang]}</p>
-          <p>{translations.userJoinPageParagraph2[lang]}</p>
-          <p>{translations.userJoinPageParagraph3[lang]}</p>
+          <p>{translate("userJoinPageParagraph1", lang)}</p>
+          <p>{translate("userJoinPageParagraph2", lang)}</p>
+          <p>{translate("userJoinPageParagraph3", lang)}</p>
         </div>
       </div>
     </>

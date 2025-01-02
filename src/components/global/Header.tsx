@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { Pages, resolvePage } from "../pages";
 import { logoutUser, UserContext } from "../../utils/User";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../utils/i18n/i18n";
 import Icon from "../widgets/Icon";
 
 export interface HeaderProps {
@@ -14,7 +14,7 @@ export interface HeaderProps {
 
 const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
   const { isLoading, user, setUser } = useContext(UserContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const onLogout = () => {
     logoutUser(setUser);
@@ -43,17 +43,17 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
               <Link to={resolvePage(Pages.PlayerProfile, { id: user.player })}>
                 {user.username}
               </Link>
-              <Link to={resolvePage(Pages.Options)}>{translations.headerOptions[lang]}</Link>
-              <Link to={resolvePage(Pages.Submission)}>{translations.headerSubmit[lang]}</Link>
+              <Link to={resolvePage(Pages.Options)}>{translate("headerOptions", lang)}</Link>
+              <Link to={resolvePage(Pages.Submission)}>{translate("headerSubmit", lang)}</Link>
               <Link onClick={onLogout} to="">
-                {translations.headerLogOut[lang]}
+                {translate("headerLogOut", lang)}
               </Link>
             </>
           ) : (
             <>
-              <Link to={resolvePage(Pages.Options)}>{translations.headerOptions[lang]}</Link>
-              <Link to={resolvePage(Pages.UserLogin)}>{translations.headerLogIn[lang]}</Link>
-              <Link to={resolvePage(Pages.UserJoin)}>{translations.headerJoin[lang]}</Link>
+              <Link to={resolvePage(Pages.Options)}>{translate("headerOptions", lang)}</Link>
+              <Link to={resolvePage(Pages.UserLogin)}>{translate("headerLogIn", lang)}</Link>
+              <Link to={resolvePage(Pages.UserJoin)}>{translate("headerJoin", lang)}</Link>
             </>
           )}
         </div>

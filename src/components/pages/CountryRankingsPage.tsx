@@ -23,7 +23,7 @@ import {
   TimetrialsRegionsRankingsListTopEnum,
   TimetrialsRegionsRankingsListTypeEnum,
 } from "../../api/generated";
-import { handleBars, I18nContext } from "../../utils/i18n/i18n";
+import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { LapModeEnum } from "../widgets/LapModeSelect";
 
@@ -35,7 +35,7 @@ const CountryRankingsPage = () => {
   const { regionType, setRegionType } = useRegionTypeRestrictedParam(searchParams, ["hl"]);
 
   const { settings } = useContext(SettingsContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const highlight = useRowHighlightParam(searchParams).highlight;
   const { isLoading, data } = useApi(
@@ -65,27 +65,27 @@ const CountryRankingsPage = () => {
   let text = "err";
   switch (top) {
     case TimetrialsRegionsRankingsListTopEnum.Records:
-      text = translations.countryRankingsPageExplanationRecords[lang];
+      text = translate("countryRankingsPageExplanationRecords", lang);
       break;
     case TimetrialsRegionsRankingsListTopEnum.Top3:
-      text = translations.countryRankingsPageExplanationTop3[lang];
+      text = translate("countryRankingsPageExplanationTop3", lang);
       break;
     case TimetrialsRegionsRankingsListTopEnum.Top5:
-      text = translations.countryRankingsPageExplanationTop5[lang];
+      text = translate("countryRankingsPageExplanationTop5", lang);
       break;
     case TimetrialsRegionsRankingsListTopEnum.Top10:
-      text = translations.countryRankingsPageExplanationTop10[lang];
+      text = translate("countryRankingsPageExplanationTop10", lang);
       break;
     case TimetrialsRegionsRankingsListTopEnum.All:
-      text = translations.countryRankingsPageExplanationAll[lang];
+      text = translate("countryRankingsPageExplanationAll", lang);
       break;
   }
 
   return (
     <>
-      <h1>{translations.countryRankingsPageHeading[lang]}</h1>
+      <h1>{translate("countryRankingsPageHeading", lang)}</h1>
       <p>
-        {handleBars(translations.countryRankingsPageExplanation[lang], [
+        {handleBars(translate("countryRankingsPageExplanation", lang), [
           ["countryRankingsTopType", text],
         ])}
       </p>
@@ -129,15 +129,15 @@ const CountryRankingsPage = () => {
                     children: [
                       [
                         TimetrialsRegionsRankingsListTypeEnum.Country,
-                        translations.countryRankingsPageDropdownCountries[lang],
+                        translate("countryRankingsPageDropdownCountries", lang),
                       ],
                       [
                         TimetrialsRegionsRankingsListTypeEnum.Continent,
-                        translations.countryRankingsPageDropdownContinents[lang],
+                        translate("countryRankingsPageDropdownContinents", lang),
                       ],
                       [
                         TimetrialsRegionsRankingsListTypeEnum.Subnational,
-                        translations.countryRankingsPageDropdownSubregions[lang],
+                        translate("countryRankingsPageDropdownSubregions", lang),
                       ],
                     ].map(([value, text]) => {
                       return {
@@ -156,9 +156,9 @@ const CountryRankingsPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>{translations.countryRankingsPageRank[lang]}</th>
-                  <th>{translations.countryRankingsPageCountry[lang]}</th>
-                  <th>{translations.countryRankingsPageAverageFinish[lang]}</th>
+                  <th>{translate("countryRankingsPageRank", lang)}</th>
+                  <th>{translate("countryRankingsPageCountry", lang)}</th>
+                  <th>{translate("countryRankingsPageAverageFinish", lang)}</th>
                 </tr>
               </thead>
               <tbody className="table-hover-rows">
@@ -177,7 +177,7 @@ const CountryRankingsPage = () => {
                         <>
                           <tr ref={highlightElement} key={highlight} className="highlighted">
                             <td />
-                            <td>{translations.genericRankingsYourHighlightedValue[lang]}</td>
+                            <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
                             <td>{highlight}</td>
                           </tr>
                         </>

@@ -17,7 +17,7 @@ import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
 import { WorldRegion } from "../../utils/Defaults";
-import { I18nContext, TranslationKey } from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -49,7 +49,7 @@ const TrackTopsPage = () => {
 
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const region =
     metadata.regions.find((r) => r.code.toLowerCase() === regionCode && r.isRanked) ?? WorldRegion;
@@ -142,13 +142,7 @@ const TrackTopsPage = () => {
                   const trackCategory = getHighestValid(category, track?.categories ?? []);
                   return (
                     <div key={track.id}>
-                      <h1>
-                        {
-                          translations[
-                            `constantTrackName${track.abbr.toUpperCase() ?? "LC"}` as TranslationKey
-                          ][lang]
-                        }
-                      </h1>
+                      <h1>{translateTrack(track, lang)}</h1>
                       <div className="module">
                         <Deferred isWaiting={tops[index].isLoading}>
                           <table>
@@ -194,7 +188,7 @@ const TrackTopsPage = () => {
                                       },
                                     )}
                                   >
-                                    {translations.trackTopsPageViewFullLeaderboards[lang]}
+                                    {translate("trackTopsPageViewFullLeaderboards", lang)}
                                   </Link>
                                 </th>
                               </tr>

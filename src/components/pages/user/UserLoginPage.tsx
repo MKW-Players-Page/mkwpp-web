@@ -6,7 +6,7 @@ import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
 import { loginUser, UserContext } from "../../../utils/User";
 import Form, { Field } from "../../widgets/Form";
-import { I18nContext } from "../../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../../utils/i18n/i18n";
 
 interface UserLoginState {
   username: string;
@@ -19,7 +19,7 @@ const UserLoginPage = () => {
   const navigate = useNavigate();
 
   const { user, setUser } = useContext(UserContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const initialState = { username: "", password: "", errors: {}, submitting: false };
   const [state, setState] = useState<UserLoginState>(initialState);
@@ -51,15 +51,15 @@ const UserLoginPage = () => {
       <Form
         state={state}
         setState={setState}
-        title={translations.userLoginPageFormLabel[lang]}
-        submitLabel={translations.userLoginPageFormLabelSubmitButton[lang]}
+        title={translate("userLoginPageFormLabel", lang)}
+        submitLabel={translate("userLoginPageFormLabelSubmitButton", lang)}
         submit={submit}
       >
-        <Field type="text" field="username" label={translations.userLoginPageUsernameLabel[lang]} />
+        <Field type="text" field="username" label={translate("userLoginPageUsernameLabel", lang)} />
         <Field
           type="password"
           field="password"
-          label={translations.userLoginPagePasswordLabel[lang]}
+          label={translate("userLoginPagePasswordLabel", lang)}
         />
       </Form>
     </>

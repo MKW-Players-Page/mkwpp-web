@@ -3,11 +3,11 @@ import { useContext } from "react";
 import Deferred from "../widgets/Deferred";
 import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
-import { getRegionNameFull, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { PlayerBasic } from "../../api";
 import { useState } from "react";
-import { I18nContext } from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 
 interface PlayerForFilter extends PlayerBasic {
@@ -21,8 +21,9 @@ interface PlayerListRowProp {
 }
 const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
   const metadata = useContext(MetadataContext);
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   const { user } = useContext(UserContext);
+  const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
 
   return (
     <tr
@@ -30,7 +31,8 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
         display:
           playerFilter === "" ||
           (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
-          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter)
+          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter) ||
+          regionNameFull.toLowerCase().normalize("NFKD").includes(playerFilter)
             ? ""
             : "none",
       }}
@@ -44,10 +46,7 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
           xxFlag={true}
         />
       </td>
-      <td>
-        {getRegionNameFull(metadata, translations, lang, player.region ?? 0) ??
-          translations.constantRegionXX[lang]}
-      </td>
+      <td>{regionNameFull}</td>
     </tr>
   );
 };
@@ -69,13 +68,13 @@ const PlayerListPage = () => {
     [],
     "playerList",
   );
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   const [playerFilter, setPlayerFilter] = useState("");
 
   return (
     <>
-      <h1>{translations.playerListPageHeading[lang]}</h1>
+      <h1>{translate("playerListPageHeading", lang)}</h1>
       <div
         style={{
           display: "grid",
@@ -105,7 +104,7 @@ const PlayerListPage = () => {
             );
           }}
         >
-          {translations.playerListPageSearchBtn[lang]}
+          {translate("playerListPageSearchBtn", lang)}
         </button>
       </div>
       <div className="module">
@@ -113,8 +112,8 @@ const PlayerListPage = () => {
           <table>
             <thead>
               <tr>
-                <th>{translations.playerListPageNameCol[lang]}</th>
-                <th>{translations.playerListPageLocationCol[lang]}</th>
+                <th>{translate("playerListPageNameCol", lang)}</th>
+                <th>{translate("playerListPageLocationCol", lang)}</th>
               </tr>
             </thead>
             <tbody className="table-hover-rows">

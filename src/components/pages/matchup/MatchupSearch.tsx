@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "./../Pages";
 import PlayerSelectDropdown from "../../widgets/PlayerSelectDropdown";
-import { I18nContext } from "../../../utils/i18n/i18n";
+import { I18nContext, translate } from "../../../utils/i18n/i18n";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -19,7 +19,7 @@ const PlayerSelectField = ({
   showDelete,
   deleteOnClick,
 }: PlayerSelectFieldProp) => {
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
   return (
     <div className="module-row">
       <span
@@ -29,7 +29,7 @@ const PlayerSelectField = ({
           textDecorationLine: id === 0 && nth < 3 ? "underline" : "none",
         }}
       >
-        {translations.matchupPagePlayerText[lang]}&nbsp;{nth}
+        {translate("matchupPagePlayerText", lang)}&nbsp;{nth}
       </span>
       <PlayerSelectDropdown setId={setId} id={id} />
       {showDelete ? (
@@ -58,11 +58,11 @@ export const MatchupHomePage = () => {
     useState(0),
     useState(0),
   ];
-  const { translations, lang } = useContext(I18nContext);
+  const { lang } = useContext(I18nContext);
 
   return (
     <>
-      <h1>{translations.matchupPageHeading[lang]}</h1>
+      <h1>{translate("matchupPageHeading", lang)}</h1>
       <div className="module">
         <div className="module-content">
           {idStates.map(([idState, setIdState], idx, arr) => {
@@ -102,7 +102,7 @@ export const MatchupHomePage = () => {
                   )
             }
           >
-            {translations.matchupPageCompareButtonText[lang]}
+            {translate("matchupPageCompareButtonText", lang)}
           </Link>
         </div>
       </div>
