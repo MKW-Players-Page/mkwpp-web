@@ -70,7 +70,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                     )}
                   >
                     {getTrackById(metadata.tracks, data.track)?.abbr}&nbsp;
-                    {translateCategoryName(data.category, lang) + "&nbsp;"}
+                    {translateCategoryName(data.category, lang)}&nbsp;
                     {data.isLap
                       ? translate("constantLapModeLap", lang)
                       : translate("constantLapModeCourse", lang)}
