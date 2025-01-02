@@ -31,5 +31,5 @@ for (const flagFileName of flagFileNames) {
 if (!fs.existsSync("temp/")) fs.mkdirSync("temp");
 fs.writeFileSync(
   "temp/flag-imports.txt",
-  `${out1}\nexport const Flags = {\n${out2}}\n\n/**\n * @param flag flag code that comes from the code field in region data\n * @returns the code used for the svg file instead\n */\nconst codeToFlag = (flag: string): string => {\n  switch (flag) {\n${out3}    default:\n      return flag;\n  }\n};`,
+  `import "./Flags.css";\n\n${out1}\nexport const Flags = {\n${out2}};\n\n/**\n * @param flag flag code that comes from the code field in region data\n * @returns the code used for the svg file instead\n */\nconst codeToFlag = (flag: string): string => {\n  switch (flag) {\n${out3}    default:\n      return flag;\n  }\n};`,
 );

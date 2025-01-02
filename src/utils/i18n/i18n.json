@@ -7334,6 +7334,708 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionCHAG": {
+    "it": "Argovia",
+    "en": "Aargau",
+    "fr": "Argovie",
+    "de": "Aargau",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHAG": {
+    "it": "Record Argoviani",
+    "en": "Aargauan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHAG": {
+    "it": "Municipalità Argoviane",
+    "en": "Aargauan Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHAR": {
+    "it": "Appenzello Esterno",
+    "en": "Appenzell Outer-Rhodes",
+    "fr": "Appenzell Rhodes-Extérieures",
+    "de": "Appenzell Ausserrhoden",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHAR": {
+    "it": "Record Appenzellési (Esterno)",
+    "en": "Appenzell Outer-Rhodes Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHAR": {
+    "it": "Municipalità Appenzellési (Esterno)",
+    "en": "Appenzell Outer-Rhodes Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHAI": {
+    "it": "Appenzello Interno",
+    "en": "Appenzell Inner-Rhodes",
+    "fr": "Appenzell Rhodes-Intérieures",
+    "de": "Appenzell Innerrhoden",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHAI": {
+    "it": "Record Appenzellési (Interno)",
+    "en": "Appenzell Inner-Rhodes Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHAI": {
+    "it": "Municipalità Appenzellési (Interno)",
+    "en": "Appenzell Inner-Rhodes Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHBL": {
+    "it": "Basilea Campagna",
+    "en": "Basel-Country",
+    "fr": "Bâle-Campagne",
+    "de": "Basel-Landschaft",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHBL": {
+    "it": "Record Baṡileési (Campagna)",
+    "en": "Basel-Country Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHBL": {
+    "it": "Municipalità Baṡileési (Campagna)",
+    "en": "Basel-Country Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHBS": {
+    "it": "Basilea Città",
+    "en": "Basel-City",
+    "fr": "Bâle-Ville",
+    "de": "Basel-Stadt",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHBS": {
+    "it": "Record Baṡileési (Città)",
+    "en": "Basel-City Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHBS": {
+    "it": "Municipalità Baṡileési (Città)",
+    "en": "Basel-City Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHBE": {
+    "it": "Berna",
+    "en": "Bern",
+    "fr": "Berne",
+    "de": "Bern",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHBE": {
+    "it": "Record Bernesi",
+    "en": "Bernese Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHBE": {
+    "it": "Municipalità Bernesi",
+    "en": "Bernese Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHFR": {
+    "it": "Friburgo",
+    "en": "Fribourg",
+    "fr": "Fribourg",
+    "de": "Freiburg",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHFR": {
+    "it": "Record di Friburgo",
+    "en": "Fribourg Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHFR": {
+    "it": "Municipalità di Friburgo",
+    "en": "Fribourg Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHGE": {
+    "it": "Ginevra",
+    "en": "Geneva",
+    "fr": "Genève",
+    "de": "Genf",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHGE": {
+    "it": "Record Ginevrini",
+    "en": "Genevan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHGE": {
+    "it": "Municipalità Ginevrine",
+    "en": "Genevan Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHGL": {
+    "it": "Glarona",
+    "en": "Glarus",
+    "fr": "Glaris",
+    "de": "Glarus",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHGL": {
+    "it": "Record della Glarona",
+    "en": "Glarus Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHGL": {
+    "it": "Municipalità della Glarona",
+    "en": "Glarus Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHGR": {
+    "it": "Grigioni",
+    "en": "Grisons",
+    "fr": "Grisons",
+    "de": "Graubünden",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHGR": {
+    "it": "Record Grigioni",
+    "en": "Grisons Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHGR": {
+    "it": "Municipalità Grigione",
+    "en": "Grisons Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHJU": {
+    "it": "Giura",
+    "en": "Jura",
+    "fr": "Jura",
+    "de": "Jura",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHJU": {
+    "it": "Record Giuresi",
+    "en": "Jurassic Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHJU": {
+    "it": "Municipalità Giuresi",
+    "en": "Jurassic Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHLU": {
+    "it": "Lucerna",
+    "en": "Lucerne",
+    "fr": "Lucerne",
+    "de": "Luzern",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHLU": {
+    "it": "Record della Lucerna",
+    "en": "Lucerne Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHLU": {
+    "it": "Municipalità della Lucerna",
+    "en": "Lucerne Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHNE": {
+    "it": "Neuchâtel",
+    "en": "Neuchâtel",
+    "fr": "Neuchâtel",
+    "de": "Neuenburg",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHNE": {
+    "it": "Record Neocomiani",
+    "en": "Neuchâtel Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHNE": {
+    "it": "Municipalità Neocomiane",
+    "en": "Neuchâtel Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHNW": {
+    "it": "Nidvaldo",
+    "en": "Nidwalden",
+    "fr": "Nidwald",
+    "de": "Nidwalden",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHNW": {
+    "it": "Record del Nidvaldo",
+    "en": "Nidwalden Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHNW": {
+    "it": "Municipalità del Nidvaldo",
+    "en": "Nidwalden Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHOW": {
+    "it": "Obvaldo",
+    "en": "Obwalden",
+    "fr": "Obwald",
+    "de": "Obwalden",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHOW": {
+    "it": "Record dell'Obvaldo",
+    "en": "Obwalden Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHOW": {
+    "it": "Municipalità dell'Obvaldo",
+    "en": "Obwalden Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHSG": {
+    "it": "San Gallo",
+    "en": "St. Gallen",
+    "fr": "St Gall",
+    "de": "Sankt Gallen",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHSG": {
+    "it": "Record Sangallesi",
+    "en": "Gallish Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHSG": {
+    "it": "Municipalità Sangallesi",
+    "en": "Gallish Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHSH": {
+    "it": "Sciaffusa",
+    "en": "Schaffhausen",
+    "fr": "Schaffhouse",
+    "de": "Schaffhausen",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHSH": {
+    "it": "Record della Sciaffusa",
+    "en": "Schaffhausen Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHSH": {
+    "it": "Municipalità della Sciaffusa",
+    "en": "Schaffhausen Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHSZ": {
+    "it": "Svitto",
+    "en": "Schwyz",
+    "fr": "Schwytz",
+    "de": "Schwyz",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHSZ": {
+    "it": "Record dello Svitto",
+    "en": "Schwyz Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHSZ": {
+    "it": "Municipalità dello Svitto",
+    "en": "Schwyz Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHSO": {
+    "it": "Soletta",
+    "en": "Solothurn",
+    "fr": "Soleure",
+    "de": "Solothurn",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHSO": {
+    "it": "Record di Soletta",
+    "en": "Solothurn Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHSO": {
+    "it": "Municipalità di Soletta",
+    "en": "Solothurn Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHTG": {
+    "it": "Turgovia",
+    "en": "Thurgau",
+    "fr": "Thurgovie",
+    "de": "Thurgau",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHTG": {
+    "it": "Record Turgoviani",
+    "en": "Thurgauan Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHTG": {
+    "it": "Municipalità Turgoviani",
+    "en": "Thurgauan Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHTI": {
+    "it": "Ticino",
+    "en": "Ticino",
+    "fr": "Tessin",
+    "de": "Tessin",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHTI": {
+    "it": "Record Ticinesi",
+    "en": "Tessinese Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHTI": {
+    "it": "Municipalità Ticinesi",
+    "en": "Tessinese Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHUR": {
+    "it": "Uri",
+    "en": "Uri",
+    "fr": "Uri",
+    "de": "Uri",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHUR": {
+    "it": "Record dell'Uri",
+    "en": "Urner Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHUR": {
+    "it": "Municipalità dell'Uri",
+    "en": "Urner Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHVS": {
+    "it": "Vallese",
+    "en": "Valais",
+    "fr": "Valais",
+    "de": "Wallis",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHVS": {
+    "it": "Record Vallesi",
+    "en": "Valais Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHVS": {
+    "it": "Municipalità Vallesi",
+    "en": "Valais Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHVD": {
+    "it": "Vaud",
+    "en": "Vaud",
+    "fr": "Vaud",
+    "de": "Waadt",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHVD": {
+    "it": "Record del Vaud",
+    "en": "Vaud Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHVD": {
+    "it": "Municipalità del Vaud",
+    "en": "Vaud Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHZG": {
+    "it": "Zugo",
+    "en": "Zug",
+    "fr": "Zoug",
+    "de": "Zug",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHZG": {
+    "it": "Record dello Zugo",
+    "en": "Zug Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHZG": {
+    "it": "Municipalità dello Zugo",
+    "en": "Zug Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionCHZH": {
+    "it": "Zurigo",
+    "en": "Zurich",
+    "fr": "Zurich",
+    "de": "Zürich",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionRecordCHZH": {
+    "it": "Record Zurighesi",
+    "en": "Zurich Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsCHZH": {
+    "it": "Municipalità Zurighesi",
+    "en": "Zurich Municipalities",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionSY": {
     "it": "Siria",
     "en": "Syrian Arab Republic",
