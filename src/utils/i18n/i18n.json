@@ -13391,6 +13391,24 @@
     "pt": "",
     "es": ""
   },
+  "submissionPageSubmitTabSubmitterNoteLabel": {
+    "it": "Nota per gli Updater",
+    "en": "Submitter Note",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabSubmitterNoteTooltip": {
+    "it": "Questo testo sarà visibile solamente agli Updater.",
+    "en": "This text will be visible only to Updaters.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "submissionPageSubmitTabNoPlayerProfileLinkErr": {
     "it": "Nessun profilo player collegato.",
     "en": "No player profile linked.",

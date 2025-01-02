@@ -46,6 +46,7 @@ interface SubmitTabState {
   ghostLink: string;
   videoLink: string;
   comment: string;
+  submitterNote: string;
   errors: { [key: string]: string[] };
   submitting: boolean;
 }
@@ -61,6 +62,7 @@ const SubmitTab = () => {
     ghostLink: "",
     videoLink: "",
     comment: "",
+    submitterNote: "",
     errors: {},
     submitting: false,
   };
@@ -133,6 +135,7 @@ const SubmitTab = () => {
     api
       .timetrialsSubmissionsCreateCreate({
         scoreSubmission: {
+          playerId: user.player, // TODO: `Localized` updaters
           value: value as number,
           track: +state.track,
           category: state.category,
@@ -141,6 +144,7 @@ const SubmitTab = () => {
           ghostLink: state.ghostLink,
           videoLink: state.videoLink,
           comment: state.comment,
+          submitterNote: state.submitterNote,
         } as ScoreSubmission,
       })
       .then(() => {
@@ -217,6 +221,16 @@ const SubmitTab = () => {
               field="comment"
               label={translate("submissionPageSubmitTabCommentLabel", lang)}
             />
+            <Tooltip
+              text={translate("submissionPageSubmitTabSubmitterNoteTooltip", lang)}
+              left={true}
+            >
+              <Field
+                type="text"
+                field="submitterNote"
+                label={translate("submissionPageSubmitTabSubmitterNoteLabel", lang)}
+              />
+            </Tooltip>
           </Form>
         )}
         {state.state === SubmitStateEnum.Success && (
