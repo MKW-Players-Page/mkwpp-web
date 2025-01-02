@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 
-import Deferred from "../widgets/Deferred";
+import "./SubmissionPage.css";
+
+import Deferred from "../../widgets/Deferred";
 import {
   CategoryField,
   Icon,
@@ -9,23 +11,24 @@ import {
   TabbedModule,
   Tooltip,
   TrackSelect,
-} from "../widgets";
-import api, { CategoryEnum, ScoreSubmission } from "../../api";
-import { ResponseError } from "../../api/generated";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
-import { LapModeEnum } from "../widgets/LapModeSelect";
-import Form, { Field } from "../widgets/Form";
-import { formatTime, parseTime } from "../../utils/Formatters";
-import { UserContext } from "../../utils/User";
+} from "../../widgets";
+import api, { CategoryEnum, ScoreSubmission } from "../../../api";
+import { ResponseError } from "../../../api/generated";
+import { getTrackById, MetadataContext } from "../../../utils/Metadata";
+import { LapModeEnum } from "../../widgets/LapModeSelect";
+import Form, { Field } from "../../widgets/Form";
+import { formatTime, parseTime } from "../../../utils/Formatters";
+import { UserContext } from "../../../utils/User";
 import { Navigate } from "react-router-dom";
-import { Pages, resolvePage } from "./Pages";
-import { useApi } from "../../hooks";
+import { Pages, resolvePage } from "../Pages";
+import { useApi } from "../../../hooks";
 import {
   I18nContext,
   translate,
   translateCategoryName,
   translateTrack,
-} from "../../utils/i18n/i18n";
+} from "../../../utils/i18n/i18n";
+import OverwriteColor from "../../widgets/OverwriteColor";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -265,21 +268,45 @@ const SubmissionsTab = () => {
               </p>
               <p>{formatTime(submission.value)}</p>
               <p>
-                {submission.videoLink && (
-                  <a href={submission.videoLink} target="_blank" rel="noopener noreferrer">
-                    <Icon icon="Video" />
-                  </a>
-                )}
-                {submission.ghostLink && (
-                  <a href={submission.ghostLink} target="_blank" rel="noopener noreferrer">
-                    <Icon icon="Ghost" />
-                  </a>
-                )}
-                {submission.comment && (
-                  <Tooltip text={submission.comment}>
-                    <Icon icon="Comment" />
-                  </Tooltip>
-                )}
+                <div className="submission-card-flex-div">
+                  <div>
+                    {submission.videoLink && (
+                      <a href={submission.videoLink} target="_blank" rel="noopener noreferrer">
+                        <Icon icon="Video" />
+                      </a>
+                    )}
+                    {submission.ghostLink && (
+                      <a href={submission.ghostLink} target="_blank" rel="noopener noreferrer">
+                        <Icon icon="Ghost" />
+                      </a>
+                    )}
+                    {submission.comment && (
+                      <Tooltip left={true} text={submission.comment}>
+                        <Icon icon="Comment" />
+                      </Tooltip>
+                    )}
+                  </div>
+                  <div>
+                    {submission.status === "accepted" ? (
+                      <Icon icon="SubmissionAccepted" />
+                    ) : submission.status === "rejected" ? (
+                      <Tooltip text="">
+                        <Icon icon="SubmissionRejected" />
+                      </Tooltip>
+                    ) : submission.status === "pending" ? (
+                      <OverwriteColor hue={20} saturationShift={1000}>
+                        <Icon icon="SubmissionPending" />
+                      </OverwriteColor>
+                    ) : submission.status === "on_hold" ? (
+                      <Tooltip text="">
+                        <Icon icon="SubmissionPending" />
+                      </Tooltip>
+                    ) : (
+                      <></>
+                    )}
+                    <Icon icon="Edit" />
+                  </div>
+                </div>
               </p>
             </div>
           ))}

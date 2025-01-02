@@ -12,7 +12,7 @@ import TrackChartPage from "./TrackChartPage";
 import TrackListPage from "./TrackListPage";
 import TrackRecordsPage from "./TrackRecordsPage";
 import TrackTopsPage, { TrackTopsHomePage } from "./TrackTopsPage";
-import SubmissionPage from "./SubmissionPage";
+import SubmissionPage from "./submission/SubmissionPage";
 import BlogListPage from "./blog/BlogListPage";
 import BlogPostPage from "./blog/BlogPostPage";
 import UserActivationPage from "./user/UserActivationPage";
