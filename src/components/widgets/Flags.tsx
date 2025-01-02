@@ -44,6 +44,32 @@ import { ReactComponent as FlagCD } from "../../assets/flags/cd.svg";
 import { ReactComponent as FlagCF } from "../../assets/flags/cf.svg";
 import { ReactComponent as FlagCG } from "../../assets/flags/cg.svg";
 import { ReactComponent as FlagCH } from "../../assets/flags/ch.svg";
+import { ReactComponent as FlagCHAG } from "../../assets/flags/chag.svg";
+import { ReactComponent as FlagCHAI } from "../../assets/flags/chai.svg";
+import { ReactComponent as FlagCHAR } from "../../assets/flags/char.svg";
+import { ReactComponent as FlagCHBE } from "../../assets/flags/chbe.svg";
+import { ReactComponent as FlagCHBL } from "../../assets/flags/chbl.svg";
+import { ReactComponent as FlagCHBS } from "../../assets/flags/chbs.svg";
+import { ReactComponent as FlagCHFR } from "../../assets/flags/chfr.svg";
+import { ReactComponent as FlagCHGE } from "../../assets/flags/chge.svg";
+import { ReactComponent as FlagCHGL } from "../../assets/flags/chgl.svg";
+import { ReactComponent as FlagCHGR } from "../../assets/flags/chgr.svg";
+import { ReactComponent as FlagCHJU } from "../../assets/flags/chju.svg";
+import { ReactComponent as FlagCHLU } from "../../assets/flags/chlu.svg";
+import { ReactComponent as FlagCHNE } from "../../assets/flags/chne.svg";
+import { ReactComponent as FlagCHNW } from "../../assets/flags/chnw.svg";
+import { ReactComponent as FlagCHOW } from "../../assets/flags/chow.svg";
+import { ReactComponent as FlagCHSG } from "../../assets/flags/chsg.svg";
+import { ReactComponent as FlagCHSH } from "../../assets/flags/chsh.svg";
+import { ReactComponent as FlagCHSO } from "../../assets/flags/chso.svg";
+import { ReactComponent as FlagCHSZ } from "../../assets/flags/chsz.svg";
+import { ReactComponent as FlagCHTG } from "../../assets/flags/chtg.svg";
+import { ReactComponent as FlagCHTI } from "../../assets/flags/chti.svg";
+import { ReactComponent as FlagCHUR } from "../../assets/flags/chur.svg";
+import { ReactComponent as FlagCHVD } from "../../assets/flags/chvd.svg";
+import { ReactComponent as FlagCHVS } from "../../assets/flags/chvs.svg";
+import { ReactComponent as FlagCHZG } from "../../assets/flags/chzg.svg";
+import { ReactComponent as FlagCHZH } from "../../assets/flags/chzh.svg";
 import { ReactComponent as FlagCI } from "../../assets/flags/ci.svg";
 import { ReactComponent as FlagCK } from "../../assets/flags/ck.svg";
 import { ReactComponent as FlagCL } from "../../assets/flags/cl.svg";
@@ -380,6 +406,32 @@ export const Flags = {
   cf: FlagCF,
   cg: FlagCG,
   ch: FlagCH,
+  chag: FlagCHAG,
+  chai: FlagCHAI,
+  char: FlagCHAR,
+  chbe: FlagCHBE,
+  chbl: FlagCHBL,
+  chbs: FlagCHBS,
+  chfr: FlagCHFR,
+  chge: FlagCHGE,
+  chgl: FlagCHGL,
+  chgr: FlagCHGR,
+  chju: FlagCHJU,
+  chlu: FlagCHLU,
+  chne: FlagCHNE,
+  chnw: FlagCHNW,
+  chow: FlagCHOW,
+  chsg: FlagCHSG,
+  chsh: FlagCHSH,
+  chso: FlagCHSO,
+  chsz: FlagCHSZ,
+  chtg: FlagCHTG,
+  chti: FlagCHTI,
+  chur: FlagCHUR,
+  chvd: FlagCHVD,
+  chvs: FlagCHVS,
+  chzg: FlagCHZG,
+  chzh: FlagCHZH,
   ci: FlagCI,
   ck: FlagCK,
   cl: FlagCL,

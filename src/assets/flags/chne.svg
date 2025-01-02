@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <g transform="matrix(0.888889, 0, 0, 0.888889, 79.999969, -0.000034)">
+    <rect width="360" height="540" fill="#e8423f" style="" x="270"/>
+    <rect width="360" height="540" fill="#16a74e" x="-90"/>
+    <rect width="90" height="540" fill="#fff" x="225"/>
+    <path stroke="#fff" stroke-width="20" d="M 450,20 v 140 M 380,90 h 140"/>
+  </g>
+</svg>
