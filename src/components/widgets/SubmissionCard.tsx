@@ -11,7 +11,7 @@ import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import Icon from "./Icon";
 import ObscuredModule from "./ObscuredModule";
 import OverwriteColor from "./OverwriteColor";
-import SubmitForm from "./SubmitForm";
+import SubmissionForm from "./SubmissionForm";
 import Tooltip from "./Tooltip";
 
 import './SubmissionCard.css'
@@ -70,7 +70,7 @@ const SubmissionCard = ({ submission }: SubmissionCardProps) => {
                   <Icon icon="Edit" />
                 </span>
                 <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
-                  <SubmitForm />
+                  <SubmissionForm />
                 </ObscuredModule>
                 <OverwriteColor hue={20} saturationShift={1000}>
                   <Icon icon="SubmissionPending" />

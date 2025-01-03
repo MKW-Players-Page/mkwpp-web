@@ -45,7 +45,7 @@ export interface StarterData {
   starterSubmitterNote?: string;
 }
 
-const SubmitForm = ({
+const SubmissionForm = ({
   starterTrack,
   starterCategory,
   starterLapMode,
@@ -251,4 +251,4 @@ const SubmitForm = ({
   );
 };
 
-export default SubmitForm;
+export default SubmissionForm;

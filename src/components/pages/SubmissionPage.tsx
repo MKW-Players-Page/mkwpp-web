@@ -9,11 +9,11 @@ import { Navigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
-import SubmitForm from "../widgets/SubmitForm";
+import SubmissionForm from "../widgets/SubmissionForm";
 import SubmissionCard from "../widgets/SubmissionCard";
 
 const SubmitTab = () => {
-  return <SubmitForm />;
+  return <SubmissionForm />;
 };
 
 const BulkSubmitTab = () => {
