@@ -8,15 +8,13 @@
 }
 
 .radio-button:last-child {
-    border-right: 0;
+  border-right: 0;
 }
 
 .radio-button.active {
-    border: 0;
+  border: 0;
   background-color: var(--module-border-color);
 }
-
-
 
 .radio-button-row {
   padding: 0;
