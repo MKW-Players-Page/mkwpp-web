@@ -126,6 +126,10 @@ const SubmissionPage = () => {
             title={translate("submissionPageSubmissionsTabTitle", lang)}
             element={<SubmissionsTab />}
           />
+          <Tab
+            title={translate("submissionPageTimesheetTabTitle", lang)}
+            element={<SubmissionsTab />}
+          />
         </TabbedModule>
       </Deferred>
     </>
