@@ -3,7 +3,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, Icon, LapModeSelect, Tooltip } from "../widgets";
+import { Icon, Tooltip } from "../widgets";
 import api from "../../api";
 import { CategoryEnum, TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
@@ -20,10 +20,11 @@ import {
   useRegionParam,
   useRowHighlightParam,
 } from "../../utils/SearchParams";
-import { LapModeEnum } from "../widgets/LapModeSelect";
+import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
 import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -128,8 +129,8 @@ const TrackChartPage = () => {
       </div>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect options={track?.categories} value={category} onChange={setCategory} />
-          <LapModeSelect value={lapMode} onChange={setLapMode} />
+          <CategoryRadio options={track?.categories} value={category} onChange={setCategory} />
+          <LapModeRadio value={lapMode} onChange={setLapMode} />
           <RegionSelectionDropdown
             onePlayerMin={true}
             twoPlayerMin={true}

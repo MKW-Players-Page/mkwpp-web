@@ -3,8 +3,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, LapModeSelect } from "../widgets";
-import { LapModeEnum } from "../widgets/LapModeSelect";
+import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
 import api, { CategoryEnum } from "../../api";
 import { TimetrialsTracksTopsListLapModeEnum } from "../../api/generated";
 import { useApiArray } from "../../hooks/ApiHook";
@@ -20,6 +19,7 @@ import { WorldRegion } from "../../utils/Defaults";
 import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -82,8 +82,8 @@ const TrackTopsPage = () => {
         <OverwriteColor hue={siteHue}>
           <ComplexRegionSelection region={region} cupId={cupId} />
           <div className="module-row">
-            <CategorySelect value={category} onChange={setCategory} />
-            <LapModeSelect value={lapMode} onChange={setLapMode} />
+            <CategoryRadio value={category} onChange={setCategory} />
+            <LapModeRadio value={lapMode} onChange={setLapMode} />
           </div>
           <div
             className="module-row"

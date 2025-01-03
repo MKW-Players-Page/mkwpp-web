@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, LapModeSelect } from "../widgets";
 import api from "../../api";
 import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
@@ -20,6 +19,8 @@ import {
 import { I18nContext, translate, TranslationKey } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
+import { CategoryRadio } from "../widgets/CategorySelect";
+import { LapModeRadio } from "../widgets/LapModeSelect";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -126,8 +127,8 @@ const RankingsPage = ({ metric }: RankingsProps) => {
       <p>{translate(metric.descriptionKey, lang)}</p>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <CategoryRadio value={category} onChange={setCategory} />
+          <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           <RegionSelectionDropdown
             onePlayerMin={false}
             twoPlayerMin={false}

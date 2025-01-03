@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, Icon, Tooltip } from "../widgets";
+import { Icon, Tooltip } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import api from "../../api";
 import { useApi } from "../../hooks";
@@ -16,6 +16,7 @@ import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import { I18nContext, translate, translateRegionName, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -43,7 +44,7 @@ const TrackRecordsPage = () => {
       <h1>{translateRegionName(region, lang, "Record")}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
+          <CategoryRadio value={category} onChange={setCategory} />
           <RegionSelectionDropdown
             onePlayerMin={false}
             twoPlayerMin={true}

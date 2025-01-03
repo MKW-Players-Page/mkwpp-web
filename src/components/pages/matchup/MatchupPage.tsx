@@ -3,10 +3,9 @@ import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
 import { getTrackById, MetadataContext } from "../../../utils/Metadata";
-import { CategorySelect } from "../../widgets";
 import OverwriteColor from "../../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../../utils/EnumUtils";
-import LapModeSelect, { LapModeEnum } from "../../widgets/LapModeSelect";
+import { LapModeEnum, LapModeRadio } from "../../widgets/LapModeSelect";
 import PlayerMention from "../../widgets/PlayerMention";
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
@@ -17,6 +16,7 @@ import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../../widgets/Dropdown";
 import { TimetrialsRankingsListMetricEnum } from "../../../api/generated";
 import { RankingsMetrics } from "../RankingsPage";
+import { CategoryRadio } from "../../widgets/CategorySelect";
 
 interface MatchupData {
   playerData: Player;
@@ -619,8 +619,8 @@ const MatchupPage = () => {
       <h1>{translate("matchupPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <CategoryRadio value={category} onChange={setCategory} />
+          <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
         </div>
         {matchupData.length === 2 ? (
           <></>
