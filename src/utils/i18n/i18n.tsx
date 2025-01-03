@@ -7,6 +7,7 @@ import Flag, { Flags } from "../../components/widgets/Flags";
 import { CategoryEnum, Region, RegionTypeEnum, Track } from "../../api";
 import { getRegionById, Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
+import { LapModeEnum } from "../../components/widgets/LapModeSelect";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -194,11 +195,22 @@ export const translateRegionName = (
 
 export const translateCategoryName = (category: CategoryEnum, lang: Language): string => {
   switch (category) {
-    case "nonsc":
+    case CategoryEnum.NonShortcut:
       return translate("constantCategoryNameNoSCShort", lang);
-    case "sc":
+    case CategoryEnum.Shortcut:
       return translate("constantCategoryNameSCShort", lang);
-    case "unres":
+    case CategoryEnum.Unrestricted:
       return translate("constantCategoryNameUnresLong", lang);
+  }
+};
+
+export const translateLapModeName = (lapMode: LapModeEnum, lang: Language): string => {
+  switch (lapMode) {
+    case LapModeEnum.Course:
+      return translate("constantLapModeCourse", lang);
+    case LapModeEnum.Lap:
+      return translate("constantLapModeLap", lang);
+    case LapModeEnum.Overall:
+      return translate("constantLapModeOverall", lang);
   }
 };
