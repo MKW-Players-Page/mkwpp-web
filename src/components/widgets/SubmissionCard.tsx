@@ -14,6 +14,8 @@ import OverwriteColor from "./OverwriteColor";
 import SubmitForm from "./SubmitForm";
 import Tooltip from "./Tooltip";
 
+import './SubmissionCard.css'
+
 export interface SubmissionCardProps {
   submission: ScoreSubmission;
 }
@@ -33,7 +35,6 @@ const SubmissionCard = ({ submission }: SubmissionCardProps) => {
           : translate("constantLapModeCourse", lang)}
       </p>
       <p>{formatTime(submission.value)}</p>
-      <p>
         <div className="submission-card-flex-div">
           <div>
             {submission.videoLink && (
@@ -61,7 +62,11 @@ const SubmissionCard = ({ submission }: SubmissionCardProps) => {
               </Tooltip>
             ) : submission.status === "pending" ? (
               <>
-                <span>
+                <span
+                  onClick={() => {
+                    setVisibleObscured(true);
+                  }}
+                >
                   <Icon icon="Edit" />
                 </span>
                 <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
@@ -85,7 +90,6 @@ const SubmissionCard = ({ submission }: SubmissionCardProps) => {
             )}
           </div>
         </div>
-      </p>
     </div>
   );
 };

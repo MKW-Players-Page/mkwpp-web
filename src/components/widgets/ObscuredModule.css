@@ -1,0 +1,43 @@
+.obscured-module-dark-layer {
+  display: none;
+}
+
+.obscured-module-dark-layer.visible {
+  display: unset;
+  z-index: 150;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: clip;
+  cursor: pointer;
+}
+.obscured-module-close-button {
+  display: none;
+}
+
+@media only screen and (max-width: 400px) {
+  .obscured-module-close-button {
+    display: unset;
+    position: fixed;
+    z-index: 250;
+    text-align: center;
+    padding: 5px 25px;
+    top: 10px;
+    right: 10px;
+    width: auto;
+  }
+}
+
+.obscured-module-dark-layer.visible > .obscured-module {
+  cursor: auto;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vh;
+  overflow: scroll;
+}
