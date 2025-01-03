@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { I18nContext, translate } from "../../utils/i18n/i18n";
+import { I18nContext, translateLapModeName } from "../../utils/i18n/i18n";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 
 import { FormContext } from "./Form";
+import RadioButtons from "./RadioButtons";
 
 export enum LapModeEnum {
   Course = "course",
@@ -20,6 +21,27 @@ export interface LapModeSelectProps {
   /** Whether this element is disabled */
   disabled?: boolean;
 }
+
+export const LapModeRadio = ({ includeOverall, value, onChange, disabled }: LapModeSelectProps) => {
+  const { lang } = useContext(I18nContext);
+
+  const options = [
+    ...(includeOverall ? [LapModeEnum.Overall] : []),
+    LapModeEnum.Course,
+    LapModeEnum.Lap,
+  ];
+
+  return (
+    <RadioButtons
+      disabled={!!disabled}
+      data={options.map((r) => {
+        return { text: translateLapModeName(r, lang), value: r };
+      })}
+      state={value}
+      setState={onChange}
+    />
+  );
+};
 
 const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSelectProps) => {
   disabled = !!disabled;
@@ -47,12 +69,7 @@ const LapModeSelect = ({ includeOverall, value, onChange, disabled }: LapModeSel
                 return {
                   type: "DropdownItemData",
                   element: {
-                    text:
-                      option === LapModeEnum.Overall
-                        ? translate("constantLapModeOverall", lang)
-                        : option === LapModeEnum.Course
-                          ? translate("constantLapModeCourse", lang)
-                          : translate("constantLapModeLap", lang),
+                    text: translateLapModeName(option, lang),
                     value: option,
                   },
                 } as DropdownItemSetDataChild;
@@ -81,6 +98,24 @@ export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps
     <div className="field">
       <p>{label}</p>
       <LapModeSelect
+        includeOverall={includeOverall}
+        value={getValue(field) as LapModeEnum}
+        onChange={(lapMode) => {
+          setValue(field, lapMode);
+        }}
+        disabled={disabled}
+      />
+    </div>
+  );
+};
+
+export const LapModeRadioField = ({ includeOverall, field, label }: LapModeFieldProps) => {
+  const { getValue, setValue, disabled } = useContext(FormContext);
+
+  return (
+    <div className="field">
+      <p>{label}</p>
+      <LapModeRadio
         includeOverall={includeOverall}
         value={getValue(field) as LapModeEnum}
         onChange={(lapMode) => {

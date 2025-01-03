@@ -5,6 +5,7 @@ import { CategoryEnum } from "../../api";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 import { getCategoryNumerical } from "../../utils/EnumUtils";
 import { I18nContext, translateCategoryName } from "../../utils/i18n/i18n";
+import RadioButtons from "./RadioButtons";
 
 export interface CategorySelectProps {
   /** Categories to include in select element. Default to all categories if not defined. */
@@ -16,6 +17,26 @@ export interface CategorySelectProps {
   /** Whether this element is disabled */
   disabled?: boolean;
 }
+
+export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySelectProps) => {
+  const { lang } = useContext(I18nContext);
+
+  if (!options) {
+    options = Object.values(CategoryEnum);
+  }
+  options.sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b));
+
+  return (
+    <RadioButtons
+      disabled={!!disabled}
+      data={options.map((r) => {
+        return { text: translateCategoryName(r, lang), value: r };
+      })}
+      state={value}
+      setState={onChange}
+    />
+  );
+};
 
 const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectProps) => {
   disabled = !!disabled;
@@ -71,6 +92,24 @@ export const CategoryField = ({ options, field, label }: CategoryFieldProps) => 
     <div className="field">
       <p>{label}</p>
       <CategorySelect
+        options={options}
+        value={getValue(field) as CategoryEnum}
+        onChange={(category) => {
+          setValue(field, category);
+        }}
+        disabled={disabled}
+      />
+    </div>
+  );
+};
+
+export const CategoryRadioField = ({ options, field, label }: CategoryFieldProps) => {
+  const { getValue, setValue, disabled } = useContext(FormContext);
+
+  return (
+    <div className="field">
+      <p>{label}</p>
+      <CategoryRadio
         options={options}
         value={getValue(field) as CategoryEnum}
         onChange={(category) => {
