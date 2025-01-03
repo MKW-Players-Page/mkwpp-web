@@ -5,10 +5,10 @@ import { parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
-import { CategoryField } from "./CategorySelect";
+import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { LapModeEnum, LapModeField } from "./LapModeSelect";
+import { LapModeEnum, LapModeRadioField } from "./LapModeSelect";
 import Tooltip from "./Tooltip";
 import TrackSelect from "./TrackSelect";
 
@@ -188,12 +188,12 @@ const SubmitForm = ({
               field="track"
               label={translate("submissionPageSubmitTabTrackLabel", lang)}
             />
-            <CategoryField
+            <CategoryRadioField
               options={categories}
               field="category"
               label={translate("submissionPageSubmitTabCategoryLabel", lang)}
             />
-            <LapModeField
+            <LapModeRadioField
               field="lapMode"
               label={translate("submissionPageSubmitTabModeLabel", lang)}
             />
