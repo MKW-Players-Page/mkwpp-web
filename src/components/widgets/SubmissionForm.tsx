@@ -9,6 +9,8 @@ import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
 import { LapModeEnum, LapModeRadioField } from "./LapModeSelect";
+import OverwriteColor from "./OverwriteColor";
+import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
 import Tooltip from "./Tooltip";
 import TrackSelect from "./TrackSelect";
 
@@ -20,7 +22,8 @@ enum SubmitStateEnum {
 interface SubmitTabState {
   state: SubmitStateEnum;
   /** Active track id */
-  track: string;
+  player: number;
+  track: number;
   category: CategoryEnum;
   lapMode: LapModeEnum;
   value: string;
@@ -34,7 +37,8 @@ interface SubmitTabState {
 }
 
 export interface StarterData {
-  starterTrack?: string;
+  starterPlayer?: number;
+  starterTrack?: number;
   starterCategory?: CategoryEnum;
   starterLapMode?: LapModeEnum;
   starterValue?: string;
@@ -43,9 +47,13 @@ export interface StarterData {
   starterVideoLink?: string;
   starterComment?: string;
   starterSubmitterNote?: string;
+  deleteId?: number;
+  editMode?: boolean;
+  doneFunc?: any;
 }
 
 const SubmissionForm = ({
+  starterPlayer,
   starterTrack,
   starterCategory,
   starterLapMode,
@@ -55,10 +63,16 @@ const SubmissionForm = ({
   starterVideoLink,
   starterComment,
   starterSubmitterNote,
+  deleteId,
+  editMode,
+  doneFunc,
 }: StarterData) => {
+  const { user } = useContext(UserContext);
+
   const initialState = {
     state: SubmitStateEnum.Form,
-    track: starterTrack ?? "",
+    player: starterPlayer ?? user?.player ?? 1, // TODO: `Localized` updaters
+    track: starterTrack ?? 1,
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
     value: starterValue ?? "",
@@ -71,22 +85,17 @@ const SubmissionForm = ({
     submitting: false,
   };
   const [state, setState] = useState<SubmitTabState>(initialState);
+  if (doneFunc === undefined || doneFunc === null) doneFunc = () => setState(initialState);
 
-  const { user } = useContext(UserContext);
   const { lang } = useContext(I18nContext);
 
   const metadata = useContext(MetadataContext);
-
-  useEffect(() => {
-    if (state.track === "" && metadata.tracks) {
-      setState((prev) => ({ ...prev, track: metadata.tracks?.at(0)?.id.toString() || "" }));
-    }
-  }, [metadata, state]);
 
   const track = getTrackById(metadata.tracks, +state.track);
   const categories = track ? track.categories : [];
 
   useEffect(() => {
+    console.log(state);
     if (track && !track.categories.includes(state.category)) {
       setState((prev) => ({ ...prev, category: CategoryEnum.NonShortcut }));
     }
@@ -136,45 +145,65 @@ const SubmissionForm = ({
       return;
     }
 
-    api
-      .timetrialsSubmissionsCreateCreate({
-        scoreSubmission: {
-          playerId: user.player, // TODO: `Localized` updaters
-          value: value as number,
-          track: +state.track,
-          category: state.category,
-          isLap: state.lapMode === LapModeEnum.Lap,
-          date: new Date(date),
-          ghostLink: state.ghostLink,
-          videoLink: state.videoLink,
-          comment: state.comment,
-          submitterNote: state.submitterNote,
-        } as ScoreSubmission,
-      })
-      .then(() => {
-        setState({ ...initialState, state: SubmitStateEnum.Success });
-        done();
-      })
-      .catch((error: ResponseError) => {
-        error.response
-          .json()
-          .then((json) => {
-            setState((prev) => ({ ...prev, errors: { ...json } }));
-          })
-          .catch(() => {
-            setState((prev) => ({
-              ...prev,
-              errors: { non_field_errors: [translate("submissionPageSubmitTabGenericErr", lang)] },
-            }));
-          });
-        done();
+    if (deleteId !== undefined) {
+      api.timetrialsSubmissionsDeleteDestroy({
+        id: deleteId,
       });
+    }
+
+    if (editMode) {
+    } else {
+      api
+        .timetrialsSubmissionsCreateCreate({
+          scoreSubmission: {
+            playerId: state.player,
+            value: value as number,
+            track: +state.track,
+            category: state.category,
+            isLap: state.lapMode === LapModeEnum.Lap,
+            date: new Date(date),
+            ghostLink: state.ghostLink,
+            videoLink: state.videoLink,
+            comment: state.comment,
+            submitterNote: state.submitterNote,
+          } as ScoreSubmission,
+        })
+        .then(() => {
+          setState({ ...initialState, state: SubmitStateEnum.Success });
+          done();
+        })
+        .catch((error: ResponseError) => {
+          error.response
+            .json()
+            .then((json) => {
+              setState((prev) => ({ ...prev, errors: { ...json } }));
+            })
+            .catch(() => {
+              setState((prev) => ({
+                ...prev,
+                errors: {
+                  non_field_errors: [translate("submissionPageSubmitTabGenericErr", lang)],
+                },
+              }));
+            });
+          done();
+        });
+    }
   };
 
   const todayDate = new Date();
 
   return (
     <div className="module-content">
+      <OverwriteColor hue={50}>
+        <div style={{ padding: "5px" }} className="module">
+          ⚠️{" "}
+          {deleteId === undefined
+            ? translate("submissionPageSubmitTabWarning1", lang)
+            : translate("submissionPageSubmitTabWarning2", lang)}{" "}
+          ⚠️
+        </div>
+      </OverwriteColor>
       <Deferred isWaiting={metadata.isLoading}>
         {state.state === SubmitStateEnum.Form && (
           <Form
@@ -183,6 +212,12 @@ const SubmissionForm = ({
             submitLabel={translate("submissionPageSubmitTabSubmitSubmitLabel", lang)}
             submit={submit}
           >
+            <PlayerSelectDropdownField
+              disabled={true}
+              restrictSet={[user?.player ?? 1]}
+              label={translate("submissionPageSubmitTabPlayerLabel", lang)}
+              field="player"
+            />
             <TrackSelect
               metadata={metadata}
               field="track"
@@ -241,7 +276,7 @@ const SubmissionForm = ({
           <>
             <p>{translate("submissionPageSubmitTabSuccessStateParagraph", lang)}</p>
             <br />
-            <button onClick={() => setState(initialState)}>
+            <button onClick={doneFunc}>
               {translate("submissionPageSubmitTabSuccessStateButton", lang)}
             </button>
           </>

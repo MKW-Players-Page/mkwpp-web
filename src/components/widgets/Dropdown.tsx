@@ -343,6 +343,7 @@ const TextInputDropdown = ({
     >
       {leftIcon ?? rightIcon ?? <></>}
       <textarea
+        disabled={disabled}
         ref={textarea}
         autoComplete="off"
         autoCorrect="off"

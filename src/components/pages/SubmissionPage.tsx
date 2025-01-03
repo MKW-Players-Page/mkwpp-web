@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import Deferred from "../widgets/Deferred";
 import { Tab, TabbedModule } from "../widgets";
@@ -16,29 +16,23 @@ const SubmitTab = () => {
   return <SubmissionForm />;
 };
 
-const BulkSubmitTab = () => {
-  const { lang } = useContext(I18nContext);
-  return (
-    <div className="module-content">
-      {translate("submissionPageBulkSubmitTabUnderConstruction", lang)}
-    </div>
-  );
-};
-
 const SubmissionsTab = () => {
   const metadata = useContext(MetadataContext);
+  const [reload, setReload] = useState(Math.random());
 
   const { isLoading, data: submissions } = useApi(
     () => api.timetrialsSubmissionsList(),
-    [],
+    [reload],
     "trackSubmissions",
   );
 
   return (
     <div className="module-content">
       <Deferred isWaiting={isLoading || metadata.isLoading}>
-        <div className="card-container">
-          {submissions?.map((submission) => <SubmissionCard submission={submission} />)}
+        <div key={reload} className="card-container">
+          {submissions?.map((submission) => (
+            <SubmissionCard setReload={setReload} submission={submission} />
+          ))}
         </div>
       </Deferred>
     </div>
@@ -56,10 +50,6 @@ const SubmissionPage = () => {
         <h1>{translate("submissionPageTabbedModuleHeading", lang)}</h1>
         <TabbedModule>
           <Tab title={translate("submissionPageSubmitTabTitle", lang)} element={<SubmitTab />} />
-          <Tab
-            title={translate("submissionPageBulkSubmitTabTitle", lang)}
-            element={<BulkSubmitTab />}
-          />
           <Tab
             title={translate("submissionPageSubmissionsTabTitle", lang)}
             element={<SubmissionsTab />}

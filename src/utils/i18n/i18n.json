@@ -13292,15 +13292,6 @@
     "pt": "",
     "es": ""
   },
-  "submissionPageBulkSubmitTabTitle": {
-    "it": "Carica Molteplici",
-    "en": "Bulk Submit",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
   "submissionPageSubmissionsTabTitle": {
     "it": "In attesa",
     "en": "My Submissions",
@@ -13322,6 +13313,15 @@
   "submissionPageSubmitTabSubmitSubmitLabel": {
     "it": "Carica",
     "en": "Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabPlayerLabel": {
+    "it": "Player",
+    "en": "Player",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13464,17 +13464,80 @@
     "es": ""
   },
   "submissionPageSubmitTabSuccessStateButton": {
-    "it": "Carica un altro tempo",
-    "en": "Submit Another Time",
+    "it": "Indietro",
+    "en": "Back",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "submissionPageBulkSubmitTabUnderConstruction": {
-    "it": "In costruzione...",
-    "en": "Under construction...",
+  "submissionPageSubmitTabWarning1": {
+    "it": "Se hai un tempo in attesa per questa stessa run e intendi correggerlo, puoi modificarlo in 'In Attesa'. Se intendi invece solamente aggiungere un video o un link ad un ghost, puoi fare ciò in 'I miei Tempi'",
+    "en": "If you have a pending submission for this same time and mean to correct it, you can edit it in 'My Submissions'. If you mean to only add a video or ghost link, you can do so in 'My Timesheet'",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabWarning2": {
+    "it": "Se hai migliorato il tuo tempo e non hai fatto un errore, dovresti invece caricare un nuovo tempo in 'Carica'.",
+    "en": "If you improved your time and did not make a typo, you should instead submit it as a new time in 'Submit'.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipReviewedBy": {
+    "it": "Controllato da: {{name}}",
+    "en": "Reviewed By: {{name}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipReviewedAt": {
+    "it": "Controllato alle: {{time}}",
+    "en": "Reviewed At: {{time}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipNotReviewed": {
+    "it": "Non controllato.",
+    "en": "Not reviewed.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipSubmittedBy": {
+    "it": "Caricato da: {{name}}",
+    "en": "Submitted By: {{name}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipSubmittedFor": {
+    "it": "Caricato per: {{name}}",
+    "en": "Submitted For: {{name}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipSubmittedAt": {
+    "it": "Caricato alle: {{time}}",
+    "en": "Submitted At: {{time}}",
     "fr": "",
     "de": "",
     "jp": "",

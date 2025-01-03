@@ -4,7 +4,7 @@ import "./Tooltip.css";
 
 export interface TooltipProps {
   children?: ReactNode;
-  text: string;
+  text: string | JSX.Element;
   left?: boolean;
 }
 
