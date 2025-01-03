@@ -6,7 +6,6 @@ import Deferred from "../widgets/Deferred";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
-import { CategorySelect } from "../widgets";
 import { Standard, StandardLevel } from "../../api";
 import { getCategoryNumerical } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
@@ -19,6 +18,7 @@ import {
   translateTrack,
 } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 const StandardsPage = () => {
   const searchParams = useSearchParams();
@@ -80,7 +80,7 @@ const StandardsPage = () => {
               } as DropdownData
             }
           />
-          <CategorySelect value={category} onChange={setCategory} />
+          <CategoryRadio value={category} onChange={setCategory} />
         </div>
         <div className="module">
           <Deferred isWaiting={metadata.isLoading}>

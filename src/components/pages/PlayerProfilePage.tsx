@@ -3,7 +3,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, Icon, LapModeSelect, Tooltip } from "../widgets";
+import { FlagIcon, Icon, Tooltip } from "../widgets";
 import api, { CategoryEnum, Region, Score } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
@@ -20,7 +20,7 @@ import {
   useLapModeParam,
   useRegionParam,
 } from "../../utils/SearchParams";
-import { LapModeEnum } from "../widgets/LapModeSelect";
+import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
 import {
   I18nContext,
   translate,
@@ -30,6 +30,7 @@ import {
 } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { RankingsMetrics } from "./RankingsPage";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
@@ -200,8 +201,8 @@ const PlayerProfilePage = () => {
       </h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <CategoryRadio value={category} onChange={setCategory} />
+          <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           {player?.region !== undefined && player?.region !== null && player?.region !== 1 ? (
             <Dropdown
               data={

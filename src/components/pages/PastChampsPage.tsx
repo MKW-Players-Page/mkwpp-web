@@ -6,10 +6,10 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { useCategoryParam } from "../../utils/SearchParams";
 import Deferred from "../widgets/Deferred";
-import { CategorySelect } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 const PastChampsPage = () => {
   const { lang } = useContext(I18nContext);
@@ -32,7 +32,7 @@ const PastChampsPage = () => {
     <>
       <h1>{translate("pastChampsPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
-        <CategorySelect value={category} onChange={setCategory} />
+        <CategoryRadio value={category} onChange={setCategory} />
         <Deferred isWaiting={isLoading}>
           <div className="module table-hover-rows">
             <table>

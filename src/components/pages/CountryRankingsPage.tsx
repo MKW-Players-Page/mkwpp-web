@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../widgets/Deferred";
-import { CategorySelect, FlagIcon, LapModeSelect } from "../widgets";
+import { FlagIcon } from "../widgets";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import {
@@ -25,7 +25,8 @@ import {
 } from "../../api/generated";
 import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
-import { LapModeEnum } from "../widgets/LapModeSelect";
+import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { CategoryRadio } from "../widgets/CategorySelect";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -91,8 +92,8 @@ const CountryRankingsPage = () => {
       </p>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">
-          <CategorySelect value={category} onChange={setCategory} />
-          <LapModeSelect includeOverall value={lapMode} onChange={setLapMode} />
+          <CategoryRadio value={category} onChange={setCategory} />
+          <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           <Dropdown
             data={
               {
