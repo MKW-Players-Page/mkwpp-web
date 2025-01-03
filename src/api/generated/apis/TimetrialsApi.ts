@@ -15,12 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
+  EditScoreSubmission,
   PatchedPlayerUpdate,
   Player,
   PlayerAward,
   PlayerBasic,
   PlayerStats,
   PlayerUpdate,
+  RecentScore,
   Region,
   RegionStats,
   Score,
@@ -32,6 +34,8 @@ import type {
   TrackCup,
 } from '../models/index';
 import {
+    EditScoreSubmissionFromJSON,
+    EditScoreSubmissionToJSON,
     PatchedPlayerUpdateFromJSON,
     PatchedPlayerUpdateToJSON,
     PlayerFromJSON,
@@ -44,6 +48,8 @@ import {
     PlayerStatsToJSON,
     PlayerUpdateFromJSON,
     PlayerUpdateToJSON,
+    RecentScoreFromJSON,
+    RecentScoreToJSON,
     RegionFromJSON,
     RegionToJSON,
     RegionStatsFromJSON,
@@ -70,6 +76,11 @@ export interface TimetrialsAwardsListRequest {
 
 export interface TimetrialsChampionsListRequest {
     category: TimetrialsChampionsListCategoryEnum;
+}
+
+export interface TimetrialsPlayersListRequest {
+    limit?: number;
+    offset?: number;
 }
 
 export interface TimetrialsPlayersRetrieveRequest {
@@ -103,6 +114,8 @@ export interface TimetrialsRankingsListRequest {
     lapMode: TimetrialsRankingsListLapModeEnum;
     metric: TimetrialsRankingsListMetricEnum;
     region: number;
+    limit?: number;
+    offset?: number;
 }
 
 export interface TimetrialsRecordsLatestListRequest {
@@ -131,13 +144,35 @@ export interface TimetrialsStandardsListRequest {
 }
 
 export interface TimetrialsSubmissionsCreateCreateRequest {
-    scoreSubmission: Omit<ScoreSubmission, 'id'|'player'|'status'|'time_submitted'|'time_reviewed'|'reviewed_by'>;
+    scoreSubmission: Omit<ScoreSubmission, 'id'|'player'|'status'|'submitted_by'|'submitted_at'|'reviewed_by'|'reviewed_at'|'reviewer_note'>;
+}
+
+export interface TimetrialsSubmissionsDeleteDestroyRequest {
+    id: number;
+}
+
+export interface TimetrialsSubmissionsEditsCreateCreateRequest {
+    editScoreSubmission: Omit<EditScoreSubmission, 'id'|'score'|'video_link_edited'|'ghost_link_edited'|'comment_edited'|'status'|'submitted_by'|'submitted_at'|'reviewed_by'|'reviewed_at'|'reviewer_note'>;
+}
+
+export interface TimetrialsSubmissionsEditsDeleteDestroyRequest {
+    id: number;
+}
+
+export interface TimetrialsSubmissionsEditsListRequest {
+    status?: TimetrialsSubmissionsEditsListStatusEnum;
+}
+
+export interface TimetrialsSubmissionsListRequest {
+    status?: TimetrialsSubmissionsListStatusEnum;
 }
 
 export interface TimetrialsTracksScoresListRequest {
     category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
     lapMode: TimetrialsTracksScoresListLapModeEnum;
+    limit?: number;
+    offset?: number;
     region?: number;
 }
 
@@ -249,8 +284,16 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsPlayersListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerBasic>>> {
+    async timetrialsPlayersListRaw(requestParameters: TimetrialsPlayersListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerBasic>>> {
         const queryParameters: any = {};
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -266,8 +309,8 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsPlayersList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerBasic>> {
-        const response = await this.timetrialsPlayersListRaw(initOverrides);
+    async timetrialsPlayersList(requestParameters: TimetrialsPlayersListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerBasic>> {
+        const response = await this.timetrialsPlayersListRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -519,8 +562,16 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
 
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
         if (requestParameters['metric'] != null) {
             queryParameters['metric'] = requestParameters['metric'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
         }
 
         if (requestParameters['region'] != null) {
@@ -548,7 +599,7 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsRecordsLatestListRaw(requestParameters: TimetrialsRecordsLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+    async timetrialsRecordsLatestListRaw(requestParameters: TimetrialsRecordsLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RecentScore>>> {
         if (requestParameters['limit'] == null) {
             throw new runtime.RequiredError(
                 'limit',
@@ -571,12 +622,12 @@ export class TimetrialsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreSubmissionFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RecentScoreFromJSON));
     }
 
     /**
      */
-    async timetrialsRecordsLatestList(requestParameters: TimetrialsRecordsLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+    async timetrialsRecordsLatestList(requestParameters: TimetrialsRecordsLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RecentScore>> {
         const response = await this.timetrialsRecordsLatestListRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -718,7 +769,7 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsScoresLatestListRaw(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+    async timetrialsScoresLatestListRaw(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RecentScore>>> {
         if (requestParameters['limit'] == null) {
             throw new runtime.RequiredError(
                 'limit',
@@ -741,12 +792,12 @@ export class TimetrialsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(ScoreSubmissionFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RecentScoreFromJSON));
     }
 
     /**
      */
-    async timetrialsScoresLatestList(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+    async timetrialsScoresLatestList(requestParameters: TimetrialsScoresLatestListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RecentScore>> {
         const response = await this.timetrialsScoresLatestListRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -819,8 +870,150 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsSubmissionsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+    async timetrialsSubmissionsDeleteDestroyRaw(requestParameters: TimetrialsSubmissionsDeleteDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling timetrialsSubmissionsDeleteDestroy().'
+            );
+        }
+
         const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/delete/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsDeleteDestroy(requestParameters: TimetrialsSubmissionsDeleteDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.timetrialsSubmissionsDeleteDestroyRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsEditsCreateCreateRaw(requestParameters: TimetrialsSubmissionsEditsCreateCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EditScoreSubmission>> {
+        if (requestParameters['editScoreSubmission'] == null) {
+            throw new runtime.RequiredError(
+                'editScoreSubmission',
+                'Required parameter "editScoreSubmission" was null or undefined when calling timetrialsSubmissionsEditsCreateCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/edits/create/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: EditScoreSubmissionToJSON(requestParameters['editScoreSubmission']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => EditScoreSubmissionFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsEditsCreateCreate(requestParameters: TimetrialsSubmissionsEditsCreateCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EditScoreSubmission> {
+        const response = await this.timetrialsSubmissionsEditsCreateCreateRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsEditsDeleteDestroyRaw(requestParameters: TimetrialsSubmissionsEditsDeleteDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling timetrialsSubmissionsEditsDeleteDestroy().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/edits/delete/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsEditsDeleteDestroy(requestParameters: TimetrialsSubmissionsEditsDeleteDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.timetrialsSubmissionsEditsDeleteDestroyRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsEditsListRaw(requestParameters: TimetrialsSubmissionsEditsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<EditScoreSubmission>>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['status'] != null) {
+            queryParameters['status'] = requestParameters['status'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/edits/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EditScoreSubmissionFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsEditsList(requestParameters: TimetrialsSubmissionsEditsListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<EditScoreSubmission>> {
+        const response = await this.timetrialsSubmissionsEditsListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsListRaw(requestParameters: TimetrialsSubmissionsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ScoreSubmission>>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['status'] != null) {
+            queryParameters['status'] = requestParameters['status'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -840,8 +1033,8 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsSubmissionsList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
-        const response = await this.timetrialsSubmissionsListRaw(initOverrides);
+    async timetrialsSubmissionsList(requestParameters: TimetrialsSubmissionsListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
+        const response = await this.timetrialsSubmissionsListRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -901,6 +1094,14 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['lapMode'] != null) {
             queryParameters['lap_mode'] = requestParameters['lapMode'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
         }
 
         if (requestParameters['region'] != null) {
@@ -1124,6 +1325,26 @@ export const TimetrialsRegionsRankingsListTypeEnum = {
     Subnational: 'subnational'
 } as const;
 export type TimetrialsRegionsRankingsListTypeEnum = typeof TimetrialsRegionsRankingsListTypeEnum[keyof typeof TimetrialsRegionsRankingsListTypeEnum];
+/**
+ * @export
+ */
+export const TimetrialsSubmissionsEditsListStatusEnum = {
+    Accepted: 'accepted',
+    OnHold: 'on_hold',
+    Pending: 'pending',
+    Rejected: 'rejected'
+} as const;
+export type TimetrialsSubmissionsEditsListStatusEnum = typeof TimetrialsSubmissionsEditsListStatusEnum[keyof typeof TimetrialsSubmissionsEditsListStatusEnum];
+/**
+ * @export
+ */
+export const TimetrialsSubmissionsListStatusEnum = {
+    Accepted: 'accepted',
+    OnHold: 'on_hold',
+    Pending: 'pending',
+    Rejected: 'rejected'
+} as const;
+export type TimetrialsSubmissionsListStatusEnum = typeof TimetrialsSubmissionsListStatusEnum[keyof typeof TimetrialsSubmissionsListStatusEnum];
 /**
  * @export
  */

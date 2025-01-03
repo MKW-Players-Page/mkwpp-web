@@ -6,6 +6,7 @@ models/Auth.ts
 models/BlogPost.ts
 models/BlogPostSummary.ts
 models/CategoryEnum.ts
+models/EditScoreSubmission.ts
 models/PatchedPlayerUpdate.ts
 models/Player.ts
 models/PlayerAward.ts
@@ -13,10 +14,12 @@ models/PlayerAwardTypeEnum.ts
 models/PlayerBasic.ts
 models/PlayerStats.ts
 models/PlayerUpdate.ts
+models/RecentScore.ts
 models/Region.ts
 models/RegionStats.ts
 models/RegionTypeEnum.ts
 models/Score.ts
+models/ScoreBasic.ts
 models/ScoreSubmission.ts
 models/ScoreWithPlayer.ts
 models/SiteChampion.ts
@@ -27,6 +30,7 @@ models/TopScoreCountEnum.ts
 models/Track.ts
 models/TrackCup.ts
 models/User.ts
+models/UserWithPlayer.ts
 models/VerificationToken.ts
 models/index.ts
 runtime.ts

@@ -13,24 +13,18 @@
  */
 
 import { mapValues } from '../runtime';
-import type { PlayerBasic } from './PlayerBasic';
-import {
-    PlayerBasicFromJSON,
-    PlayerBasicFromJSONTyped,
-    PlayerBasicToJSON,
-} from './PlayerBasic';
 import type { StatusEnum } from './StatusEnum';
 import {
     StatusEnumFromJSON,
     StatusEnumFromJSONTyped,
     StatusEnumToJSON,
 } from './StatusEnum';
-import type { CategoryEnum } from './CategoryEnum';
+import type { ScoreBasic } from './ScoreBasic';
 import {
-    CategoryEnumFromJSON,
-    CategoryEnumFromJSONTyped,
-    CategoryEnumToJSON,
-} from './CategoryEnum';
+    ScoreBasicFromJSON,
+    ScoreBasicFromJSONTyped,
+    ScoreBasicToJSON,
+} from './ScoreBasic';
 import type { UserWithPlayer } from './UserWithPlayer';
 import {
     UserWithPlayerFromJSON,
@@ -41,115 +35,103 @@ import {
 /**
  * 
  * @export
- * @interface ScoreSubmission
+ * @interface EditScoreSubmission
  */
-export interface ScoreSubmission {
+export interface EditScoreSubmission {
     /**
      * 
      * @type {number}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly id: number;
     /**
-     * Finish time in milliseconds (e.g. 69999 for 1:09.999).
-     * @type {number}
-     * @memberof ScoreSubmission
-     */
-    value: number;
-    /**
      * 
-     * @type {PlayerBasic}
-     * @memberof ScoreSubmission
+     * @type {ScoreBasic}
+     * @memberof EditScoreSubmission
      */
-    readonly player: PlayerBasic;
+    readonly score: ScoreBasic;
     /**
      * 
      * @type {number}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
-    playerId: number;
+    scoreId: number;
     /**
      * 
-     * @type {number}
-     * @memberof ScoreSubmission
-     */
-    track: number;
-    /**
-     * 
-     * @type {CategoryEnum}
-     * @memberof ScoreSubmission
-     */
-    category: CategoryEnum;
-    /**
-     * Off for 3lap, on for flap.
      * @type {boolean}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
-    isLap?: boolean;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ScoreSubmission
-     */
-    date?: Date;
+    readonly videoLinkEdited: boolean;
     /**
      * 
      * @type {string}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     videoLink?: string | null;
     /**
      * 
+     * @type {boolean}
+     * @memberof EditScoreSubmission
+     */
+    readonly ghostLinkEdited: boolean;
+    /**
+     * 
      * @type {string}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     ghostLink?: string | null;
     /**
      * 
+     * @type {boolean}
+     * @memberof EditScoreSubmission
+     */
+    readonly commentEdited: boolean;
+    /**
+     * 
      * @type {string}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     comment?: string | null;
     /**
      * 
      * @type {StatusEnum}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly status: StatusEnum;
     /**
      * 
      * @type {UserWithPlayer}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly submittedBy: UserWithPlayer;
     /**
      * 
      * @type {Date}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly submittedAt: Date;
     /**
      * 
      * @type {string}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     submitterNote?: string | null;
     /**
      * 
      * @type {UserWithPlayer}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly reviewedBy: UserWithPlayer;
     /**
      * 
      * @type {Date}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly reviewedAt: Date | null;
     /**
      * 
      * @type {string}
-     * @memberof ScoreSubmission
+     * @memberof EditScoreSubmission
      */
     readonly reviewerNote: string | null;
 }
@@ -157,15 +139,15 @@ export interface ScoreSubmission {
 
 
 /**
- * Check if a given object implements the ScoreSubmission interface.
+ * Check if a given object implements the EditScoreSubmission interface.
  */
-export function instanceOfScoreSubmission(value: object): value is ScoreSubmission {
+export function instanceOfEditScoreSubmission(value: object): value is EditScoreSubmission {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('value' in value) || value['value'] === undefined) return false;
-    if (!('player' in value) || value['player'] === undefined) return false;
-    if (!('playerId' in value) || value['playerId'] === undefined) return false;
-    if (!('track' in value) || value['track'] === undefined) return false;
-    if (!('category' in value) || value['category'] === undefined) return false;
+    if (!('score' in value) || value['score'] === undefined) return false;
+    if (!('scoreId' in value) || value['scoreId'] === undefined) return false;
+    if (!('videoLinkEdited' in value) || value['videoLinkEdited'] === undefined) return false;
+    if (!('ghostLinkEdited' in value) || value['ghostLinkEdited'] === undefined) return false;
+    if (!('commentEdited' in value) || value['commentEdited'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
     if (!('submittedBy' in value) || value['submittedBy'] === undefined) return false;
     if (!('submittedAt' in value) || value['submittedAt'] === undefined) return false;
@@ -175,26 +157,24 @@ export function instanceOfScoreSubmission(value: object): value is ScoreSubmissi
     return true;
 }
 
-export function ScoreSubmissionFromJSON(json: any): ScoreSubmission {
-    return ScoreSubmissionFromJSONTyped(json, false);
+export function EditScoreSubmissionFromJSON(json: any): EditScoreSubmission {
+    return EditScoreSubmissionFromJSONTyped(json, false);
 }
 
-export function ScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boolean): ScoreSubmission {
+export function EditScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boolean): EditScoreSubmission {
     if (json == null) {
         return json;
     }
     return {
         
         'id': json['id'],
-        'value': json['value'],
-        'player': PlayerBasicFromJSON(json['player']),
-        'playerId': json['player_id'],
-        'track': json['track'],
-        'category': CategoryEnumFromJSON(json['category']),
-        'isLap': json['is_lap'] == null ? undefined : json['is_lap'],
-        'date': json['date'] == null ? undefined : (new Date(json['date'])),
+        'score': ScoreBasicFromJSON(json['score']),
+        'scoreId': json['score_id'],
+        'videoLinkEdited': json['video_link_edited'],
         'videoLink': json['video_link'] == null ? undefined : json['video_link'],
+        'ghostLinkEdited': json['ghost_link_edited'],
         'ghostLink': json['ghost_link'] == null ? undefined : json['ghost_link'],
+        'commentEdited': json['comment_edited'],
         'comment': json['comment'] == null ? undefined : json['comment'],
         'status': StatusEnumFromJSON(json['status']),
         'submittedBy': UserWithPlayerFromJSON(json['submitted_by']),
@@ -206,18 +186,13 @@ export function ScoreSubmissionFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ScoreSubmissionToJSON(value?: Omit<ScoreSubmission, 'id'|'player'|'status'|'submitted_by'|'submitted_at'|'reviewed_by'|'reviewed_at'|'reviewer_note'> | null): any {
+export function EditScoreSubmissionToJSON(value?: Omit<EditScoreSubmission, 'id'|'score'|'video_link_edited'|'ghost_link_edited'|'comment_edited'|'status'|'submitted_by'|'submitted_at'|'reviewed_by'|'reviewed_at'|'reviewer_note'> | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'value': value['value'],
-        'player_id': value['playerId'],
-        'track': value['track'],
-        'category': CategoryEnumToJSON(value['category']),
-        'is_lap': value['isLap'],
-        'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
+        'score_id': value['scoreId'],
         'video_link': value['videoLink'],
         'ghost_link': value['ghostLink'],
         'comment': value['comment'],

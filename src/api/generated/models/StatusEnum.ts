@@ -17,12 +17,14 @@
  * * `pending` - pending
  * * `accepted` - accepted
  * * `rejected` - rejected
+ * * `on_hold` - on_hold
  * @export
  */
 export const StatusEnum = {
     Pending: 'pending',
     Accepted: 'accepted',
-    Rejected: 'rejected'
+    Rejected: 'rejected',
+    OnHold: 'on_hold'
 } as const;
 export type StatusEnum = typeof StatusEnum[keyof typeof StatusEnum];
 
