@@ -108,6 +108,7 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
                 ? `${score.date.getFullYear().toString().padStart(4, "0")}-${(score.date.getMonth() + 1).toString().padStart(2, "0")}-${score.date.getDate().toString().padStart(2, "0")}`
                 : undefined
             }
+            deleteId={patchUpData?.id}
             starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink ?? undefined}
             starterVideoLink={patchUpData?.videoLink ?? score.videoLink ?? undefined}
             starterComment={patchUpData?.comment ?? score.comment ?? undefined}
@@ -340,11 +341,7 @@ const TimesheetTab = () => {
                       <TimesheetTabEditBtn
                         setReload={setReload}
                         score={score}
-                        patchUpData={
-                          submission?.status === "pending" || submission?.status === "on_hold"
-                            ? submission
-                            : undefined
-                        }
+                        patchUpData={submission?.status === "pending" ? submission : undefined}
                       />
                     </td>
                   </tr>

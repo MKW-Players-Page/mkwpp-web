@@ -100,6 +100,21 @@ const SubmissionForm = ({
     }
   }, [state, track]);
 
+  const deleteFunction =
+    deleteId !== undefined
+      ? editModeScore !== undefined
+        ? async (id: number) => {
+            return api.timetrialsSubmissionsEditsDeleteDestroy({
+              id: id,
+            });
+          }
+        : async (id: number) => {
+            return api.timetrialsSubmissionsDeleteDestroy({
+              id: id,
+            });
+          }
+      : async (x: any) => {};
+
   const submit = (done: () => void) => {
     setState((prev) => ({ ...prev, errors: {} }));
 
@@ -159,21 +174,6 @@ const SubmissionForm = ({
       done();
       return;
     }
-
-    const deleteFunction =
-      deleteId !== undefined
-        ? editModeScore !== undefined
-          ? async (id: number) => {
-              return api.timetrialsSubmissionsEditsDeleteDestroy({
-                id: id,
-              });
-            }
-          : async (id: number) => {
-              return api.timetrialsSubmissionsDeleteDestroy({
-                id: id,
-              });
-            }
-        : async (x: any) => {};
 
     const uploadFunction: () => Promise<any> =
       editModeScore !== undefined
@@ -261,16 +261,38 @@ const SubmissionForm = ({
             submitLabel={translate("submissionPageSubmitTabSubmitSubmitLabel", lang)}
             submit={submit}
           >
-            <PlayerSelectDropdownField
-              disabled={true || editModeScore !== undefined || deleteId !== undefined}
-              restrictSet={
-                editModeScore !== undefined || deleteId !== undefined
-                  ? [state.player]
-                  : [user?.player ?? 1]
-              }
-              label={translate("submissionPageSubmitTabPlayerLabel", lang)}
-              field="player"
-            />
+            <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <div style={{ flexGrow: 10 }}>
+                <PlayerSelectDropdownField
+                  disabled={true || editModeScore !== undefined || deleteId !== undefined}
+                  restrictSet={
+                    editModeScore !== undefined || deleteId !== undefined
+                      ? [state.player]
+                      : [user?.player ?? 1]
+                  }
+                  label={translate("submissionPageSubmitTabPlayerLabel", lang)}
+                  field="player"
+                />
+              </div>
+              {deleteId !== undefined && (
+                <div
+                  onClick={() => {
+                    deleteFunction(deleteId).then(() => doneFunc());
+                  }}
+                  style={{
+                    flexGrow: 1,
+                    width: "unset",
+                    height: "27px",
+                    marginLeft: "4px",
+                    textAlign: "center",
+                    cursor: "pointer",
+                  }}
+                  className="module"
+                >
+                  {translate("submissionPageSubmitTabDeleteBtn", lang)}
+                </div>
+              )}
+            </div>
             <TrackSelect
               metadata={metadata}
               disabled={editModeScore !== undefined}
