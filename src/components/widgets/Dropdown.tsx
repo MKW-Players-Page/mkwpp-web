@@ -76,6 +76,29 @@ export interface DropdownItemSetSetterData {
   toItemSetId: number;
 }
 
+const convolutedBoundingBoxCalc = (x: any) => {
+  const getScrollParent = (node: any): any => {
+    if (node == null) {
+      return { scrollLeft: 0, scrollTop: 0 };
+    }
+
+    if (
+      node.scrollHeight > node.clientHeight &&
+      ["scroll", "auto"].includes(window.getComputedStyle(node).overflowY)
+    ) {
+      return node;
+    } else {
+      return getScrollParent(node.parentNode);
+    }
+  };
+  const originBoundingRect = x.getBoundingClientRect();
+  return {
+    x: x.offsetLeft - getScrollParent(x).scrollLeft,
+    y: x.offsetTop - getScrollParent(x).scrollTop + originBoundingRect.height,
+    width: originBoundingRect.width,
+  };
+};
+
 const Dropdown = ({ data }: DropdownProp) => {
   let [dropdownListShown, setDropdownListShown] = useState(false);
   const [dropdownListPos, setDropdownListPos] = useState({ x: 0, y: 0, width: 0 });
@@ -247,11 +270,13 @@ const NormalDropdown = ({
     if (!dropdown.current) return;
     const resizeObserver = new ResizeObserver(() => {
       if (!dropdown.current) return;
-      let boundingBox = (dropdown.current as any).getBoundingClientRect();
-      setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+      setDropdownListPos(convolutedBoundingBoxCalc(dropdown.current as any));
     });
+
     resizeObserver.observe(dropdown.current);
-    return () => resizeObserver.disconnect();
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [setDropdownListPos]);
 
   return (
@@ -261,8 +286,8 @@ const NormalDropdown = ({
       tabIndex={-1}
       onFocus={() => {
         setDropdownListShown(true);
-        let boundingBox = (dropdown.current as any).getBoundingClientRect();
-        setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+        if (!dropdown.current) return;
+        setDropdownListPos(convolutedBoundingBoxCalc(dropdown.current as any));
       }}
       onBlur={(e) => {
         if (
@@ -326,8 +351,7 @@ const TextInputDropdown = ({
     setFilterString("");
     const resizeObserver = new ResizeObserver(() => {
       if (!dropdown.current) return;
-      let boundingBox = (dropdown.current as any).getBoundingClientRect();
-      setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+      setDropdownListPos(convolutedBoundingBoxCalc(dropdown.current as any));
     });
     resizeObserver.observe(dropdown.current);
     return () => resizeObserver.disconnect();
@@ -354,8 +378,7 @@ const TextInputDropdown = ({
         onFocus={() => {
           if (autodeleteText) (textarea.current as any).value = "";
           setDropdownListShown(true);
-          let boundingBox = (dropdown.current as any).getBoundingClientRect();
-          setDropdownListPos({ x: boundingBox.x, y: boundingBox.bottom, width: boundingBox.width });
+          setDropdownListPos(convolutedBoundingBoxCalc(dropdown.current as any));
           setFilterString("");
         }}
         onBlur={(e) => {

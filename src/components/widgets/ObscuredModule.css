@@ -33,7 +33,7 @@
 
 .obscured-module-dark-layer.visible > .obscured-module {
   cursor: auto;
-  position: relative;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
