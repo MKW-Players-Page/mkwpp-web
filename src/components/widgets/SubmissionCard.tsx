@@ -77,6 +77,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                 </span>
                 <OverwriteColor hue={216}>
                   <ObscuredModule
+                    setReload={setReload}
                     stateVisible={visibleObscured}
                     setStateVisible={setVisibleObscured}
                   >

@@ -80,6 +80,7 @@ interface TimesheetTabEditBtnProps {
 
 const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEditBtnProps) => {
   const [visibleObscured, setVisibleObscured] = useState(false);
+
   return (
     <>
       <span
@@ -91,7 +92,11 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
         <Icon icon="Edit" />
       </span>
       <OverwriteColor hue={216}>
-        <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
+        <ObscuredModule
+          setReload={setReload}
+          stateVisible={visibleObscured}
+          setStateVisible={setVisibleObscured}
+        >
           <SubmissionForm
             editModeScore={score}
             starterTrack={score.track}
