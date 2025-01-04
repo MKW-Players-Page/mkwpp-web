@@ -167,6 +167,14 @@ export interface TimetrialsSubmissionsListRequest {
     status?: TimetrialsSubmissionsListStatusEnum;
 }
 
+export interface TimetrialsSubmissionsSubmittersAddCreateRequest {
+    id: number;
+}
+
+export interface TimetrialsSubmissionsSubmittersRemoveDestroyRequest {
+    id: number;
+}
+
 export interface TimetrialsTracksScoresListRequest {
     category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
@@ -1036,6 +1044,130 @@ export class TimetrialsApi extends runtime.BaseAPI {
     async timetrialsSubmissionsList(requestParameters: TimetrialsSubmissionsListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ScoreSubmission>> {
         const response = await this.timetrialsSubmissionsListRaw(requestParameters, initOverrides);
         return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmitteesListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerBasic>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/submittees/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PlayerBasicFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmitteesList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerBasic>> {
+        const response = await this.timetrialsSubmissionsSubmitteesListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmittersAddCreateRaw(requestParameters: TimetrialsSubmissionsSubmittersAddCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling timetrialsSubmissionsSubmittersAddCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/submitters/add/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmittersAddCreate(requestParameters: TimetrialsSubmissionsSubmittersAddCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.timetrialsSubmissionsSubmittersAddCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmittersListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerBasic>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/submitters/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(PlayerBasicFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmittersList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<PlayerBasic>> {
+        const response = await this.timetrialsSubmissionsSubmittersListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmittersRemoveDestroyRaw(requestParameters: TimetrialsSubmissionsSubmittersRemoveDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling timetrialsSubmissionsSubmittersRemoveDestroy().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/timetrials/submissions/submitters/remove/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async timetrialsSubmissionsSubmittersRemoveDestroy(requestParameters: TimetrialsSubmissionsSubmittersRemoveDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.timetrialsSubmissionsSubmittersRemoveDestroyRaw(requestParameters, initOverrides);
     }
 
     /**
