@@ -108,10 +108,11 @@ export interface FieldProps {
   placeholder?: string;
   max?: string;
   min?: string;
+  disabled?: boolean;
 }
 
-export const Field = ({ type, field, label, placeholder, max, min }: FieldProps) => {
-  const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
+export const Field = ({ type, field, label, placeholder, max, min, disabled }: FieldProps) => {
+  const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(field, e.target.value);
@@ -123,7 +124,7 @@ export const Field = ({ type, field, label, placeholder, max, min }: FieldProps)
     <div className="field">
       <p>{label}</p>
       <input
-        disabled={disabled}
+        disabled={disabledByForm || disabled}
         type={type}
         value={getValue(field)}
         onChange={onChange}

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
-import { ResponseError } from "../../api/generated";
+import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
 import { parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
@@ -48,7 +48,7 @@ export interface StarterData {
   starterComment?: string;
   starterSubmitterNote?: string;
   deleteId?: number;
-  editMode?: boolean;
+  editModeScore?: Score;
   doneFunc?: any;
 }
 
@@ -64,7 +64,7 @@ const SubmissionForm = ({
   starterComment,
   starterSubmitterNote,
   deleteId,
-  editMode,
+  editModeScore,
   doneFunc,
 }: StarterData) => {
   const { user } = useContext(UserContext);
@@ -95,7 +95,6 @@ const SubmissionForm = ({
   const categories = track ? track.categories : [];
 
   useEffect(() => {
-    console.log(state);
     if (track && !track.categories.includes(state.category)) {
       setState((prev) => ({ ...prev, category: CategoryEnum.NonShortcut }));
     }
@@ -140,70 +139,120 @@ const SubmissionForm = ({
       errored = true;
     }
 
+    if (
+      editModeScore !== undefined &&
+      initialState.ghostLink === state.ghostLink &&
+      initialState.comment === state.comment &&
+      initialState.videoLink === state.videoLink
+    ) {
+      setState((prev) => ({
+        ...prev,
+        errors: {
+          ...prev.errors,
+          non_field_errors: [translate("submissionPageSubmitTabNoEditErr", lang)],
+        },
+      }));
+      errored = true;
+    }
+
     if (errored) {
       done();
       return;
     }
 
-    if (deleteId !== undefined) {
-      api.timetrialsSubmissionsDeleteDestroy({
-        id: deleteId,
-      });
-    }
+    const deleteFunction =
+      deleteId !== undefined
+        ? editModeScore !== undefined
+          ? async (id: number) => {
+              return api.timetrialsSubmissionsEditsDeleteDestroy({
+                id: id,
+              });
+            }
+          : async (id: number) => {
+              return api.timetrialsSubmissionsDeleteDestroy({
+                id: id,
+              });
+            }
+        : async (x: any) => {};
 
-    if (editMode) {
-    } else {
-      api
-        .timetrialsSubmissionsCreateCreate({
-          scoreSubmission: {
-            playerId: state.player,
-            value: value as number,
-            track: +state.track,
-            category: state.category,
-            isLap: state.lapMode === LapModeEnum.Lap,
-            date: new Date(date),
-            ghostLink: state.ghostLink,
-            videoLink: state.videoLink,
-            comment: state.comment,
-            submitterNote: state.submitterNote,
-          } as ScoreSubmission,
-        })
-        .then(() => {
-          setState({ ...initialState, state: SubmitStateEnum.Success });
-          done();
-        })
-        .catch((error: ResponseError) => {
-          error.response
-            .json()
-            .then((json) => {
-              setState((prev) => ({ ...prev, errors: { ...json } }));
-            })
-            .catch(() => {
-              setState((prev) => ({
-                ...prev,
-                errors: {
-                  non_field_errors: [translate("submissionPageSubmitTabGenericErr", lang)],
-                },
-              }));
+    const uploadFunction: () => Promise<any> =
+      editModeScore !== undefined
+        ? async () => {
+            let out = {
+              scoreId: editModeScore.id,
+              submitterNote: state.submitterNote,
+            };
+
+            if ((editModeScore.ghostLink ?? "") !== state.ghostLink)
+              (out as any).ghostLink = state.ghostLink;
+
+            if ((editModeScore.comment ?? "") !== state.comment)
+              (out as any).comment = state.comment;
+
+            if ((editModeScore.videoLink ?? "") !== state.videoLink)
+              (out as any).videoLink = state.videoLink;
+            // TODO: fix openapi
+            return api.timetrialsSubmissionsEditsCreateCreate({
+              editScoreSubmission: out as EditScoreSubmission,
             });
-          done();
-        });
-    }
+          }
+        : async () =>
+            api.timetrialsSubmissionsCreateCreate({
+              scoreSubmission: {
+                playerId: state.player,
+                value: value as number,
+                track: +state.track,
+                category: state.category,
+                isLap: state.lapMode === LapModeEnum.Lap,
+                date: new Date(date),
+                ghostLink: state.ghostLink,
+                videoLink: state.videoLink,
+                comment: state.comment,
+                submitterNote: state.submitterNote,
+              } as ScoreSubmission,
+            });
+
+    deleteFunction(deleteId as number)
+      .then(uploadFunction)
+      .then(() => {
+        setState({ ...initialState, state: SubmitStateEnum.Success });
+        done();
+      })
+      .catch((error: ResponseError) => {
+        error.response
+          .json()
+          .then((json) => {
+            setState((prev) => ({ ...prev, errors: { ...json } }));
+          })
+          .catch(() => {
+            setState((prev) => ({
+              ...prev,
+              errors: {
+                non_field_errors: [translate("submissionPageSubmitTabGenericErr", lang)],
+              },
+            }));
+          });
+        done();
+      });
   };
 
   const todayDate = new Date();
 
   return (
     <div className="module-content">
-      <OverwriteColor hue={50}>
-        <div style={{ padding: "5px" }} className="module">
-          ⚠️{" "}
-          {deleteId === undefined
-            ? translate("submissionPageSubmitTabWarning1", lang)
-            : translate("submissionPageSubmitTabWarning2", lang)}{" "}
-          ⚠️
-        </div>
-      </OverwriteColor>
+      {editModeScore !== undefined ? (
+        <></>
+      ) : (
+        <OverwriteColor hue={50}>
+          <div style={{ padding: "5px" }} className="module">
+            {"⚠️ "}
+            {deleteId === undefined
+              ? translate("submissionPageSubmitTabWarning1", lang)
+              : translate("submissionPageSubmitTabWarning2", lang)}
+            {" ⚠️"}
+          </div>
+        </OverwriteColor>
+      )}
       <Deferred isWaiting={metadata.isLoading}>
         {state.state === SubmitStateEnum.Form && (
           <Form
@@ -213,27 +262,35 @@ const SubmissionForm = ({
             submit={submit}
           >
             <PlayerSelectDropdownField
-              disabled={true}
-              restrictSet={[user?.player ?? 1]}
+              disabled={true || editModeScore !== undefined || deleteId !== undefined}
+              restrictSet={
+                editModeScore !== undefined || deleteId !== undefined
+                  ? [state.player]
+                  : [user?.player ?? 1]
+              }
               label={translate("submissionPageSubmitTabPlayerLabel", lang)}
               field="player"
             />
             <TrackSelect
               metadata={metadata}
+              disabled={editModeScore !== undefined}
               field="track"
               label={translate("submissionPageSubmitTabTrackLabel", lang)}
             />
             <CategoryRadioField
               options={categories}
+              disabled={editModeScore !== undefined}
               field="category"
               label={translate("submissionPageSubmitTabCategoryLabel", lang)}
             />
             <LapModeRadioField
+              disabled={editModeScore !== undefined}
               field="lapMode"
               label={translate("submissionPageSubmitTabModeLabel", lang)}
             />
             <Field
               type="text"
+              disabled={editModeScore !== undefined}
               field="value"
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
               placeholder={`1'23"456`}
@@ -241,6 +298,7 @@ const SubmissionForm = ({
             <Field
               type="date"
               field="date"
+              disabled={editModeScore !== undefined}
               min="2009-04-01"
               max={`${todayDate.getFullYear().toString().padStart(4, "0")}-${(todayDate.getMonth() + 1).toString().padStart(2, "0")}-${todayDate.getDate().toString().padStart(2, "0")}`}
               label={translate("submissionPageSubmitTabDateLabel", lang)}

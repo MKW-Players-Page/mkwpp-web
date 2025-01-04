@@ -256,6 +256,7 @@ const NormalDropdown = ({
 
   return (
     <div
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
       ref={dropdown}
       tabIndex={-1}
       onFocus={() => {
@@ -334,6 +335,7 @@ const TextInputDropdown = ({
 
   return (
     <div
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
       tabIndex={-1}
       onFocus={(e) => {
         if (e.target.children[0] !== undefined) (e.target.children[0] as any).focus();

@@ -75,28 +75,33 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                 >
                   <Icon icon="Edit" />
                 </span>
-                <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
-                  <SubmissionForm
-                    deleteId={submission.id}
-                    starterTrack={submission.track}
-                    starterCategory={submission.category}
-                    starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
-                    starterValue={formatTime(submission.value)}
-                    starterDate={
-                      submission.date
-                        ? `${submission.date.getFullYear().toString().padStart(4, "0")}-${(submission.date.getMonth() + 1).toString().padStart(2, "0")}-${submission.date.getDate().toString().padStart(2, "0")}`
-                        : undefined
-                    }
-                    starterGhostLink={submission.ghostLink ?? undefined}
-                    starterVideoLink={submission.videoLink ?? undefined}
-                    starterComment={submission.comment ?? undefined}
-                    starterSubmitterNote={submission.submitterNote ?? undefined}
-                    doneFunc={() => {
-                      setVisibleObscured(false);
-                      setReload(Math.random());
-                    }}
-                  />
-                </ObscuredModule>
+                <OverwriteColor hue={216}>
+                  <ObscuredModule
+                    stateVisible={visibleObscured}
+                    setStateVisible={setVisibleObscured}
+                  >
+                    <SubmissionForm
+                      deleteId={submission.id}
+                      starterTrack={submission.track}
+                      starterCategory={submission.category}
+                      starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
+                      starterValue={formatTime(submission.value)}
+                      starterDate={
+                        submission.date
+                          ? `${submission.date.getFullYear().toString().padStart(4, "0")}-${(submission.date.getMonth() + 1).toString().padStart(2, "0")}-${submission.date.getDate().toString().padStart(2, "0")}`
+                          : undefined
+                      }
+                      starterGhostLink={submission.ghostLink ?? undefined}
+                      starterVideoLink={submission.videoLink ?? undefined}
+                      starterComment={submission.comment ?? undefined}
+                      starterSubmitterNote={submission.submitterNote ?? undefined}
+                      doneFunc={() => {
+                        setVisibleObscured(false);
+                        setReload(Math.random());
+                      }}
+                    />
+                  </ObscuredModule>
+                </OverwriteColor>
               </>
             ) : (
               <></>

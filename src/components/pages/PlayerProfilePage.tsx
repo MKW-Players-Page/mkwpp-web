@@ -32,7 +32,7 @@ import { SettingsContext } from "../../utils/Settings";
 import { RankingsMetrics } from "./RankingsPage";
 import { CategoryRadio } from "../widgets/CategorySelect";
 
-interface ScoreDoubled extends Score {
+export interface ScoreDoubled extends Score {
   precedesRepeat: boolean;
   repeat: boolean;
 }
@@ -72,7 +72,7 @@ const Sorting: Record<string, any> = {
     (b.date ? b.date.valueOf() : -1000) - (a.date ? a.date.valueOf() : -1000),
 };
 
-const Filtering = {
+export const Filtering = {
   flapOnly: (a: Score) => a.isLap,
   courseOnly: (a: Score) => !a.isLap,
   overall: (a: Score) => true,
@@ -152,7 +152,7 @@ const PlayerProfilePage = () => {
     "playerProfileScores",
   );
 
-  let sortedScores = scores
+  const sortedScores = scores
     ?.filter(
       lapMode === LapModeEnum.Overall
         ? Filtering.overall
@@ -237,7 +237,7 @@ const PlayerProfilePage = () => {
             <></>
           )}
         </div>
-        <div className="module-row ">
+        <div className="module-row">
           <div className="module">
             <Deferred isWaiting={playerLoading}>
               <table>

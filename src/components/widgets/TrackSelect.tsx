@@ -12,10 +12,11 @@ export interface TrackSelectProps {
   field: string;
   /** Select label */
   label?: string;
+  disabled?: boolean;
 }
 
-const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
-  const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
+const TrackSelect = ({ metadata, field, label, disabled }: TrackSelectProps) => {
+  const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
   const { lang } = useContext(I18nContext);
 
   const onChange = (e: string) => {
@@ -33,7 +34,7 @@ const TrackSelect = ({ metadata, field, label }: TrackSelectProps) => {
             type: "Normal",
             value: getValue(field),
             valueSetter: onChange,
-            disabled: disabled,
+            disabled: disabledByForm || disabled,
             defaultItemSet: 0,
             data: [
               {

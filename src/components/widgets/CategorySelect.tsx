@@ -83,10 +83,11 @@ export interface CategoryFieldProps {
   field: string;
   /** Field label */
   label: string;
+  disabled?: boolean;
 }
 
-export const CategoryField = ({ options, field, label }: CategoryFieldProps) => {
-  const { getValue, setValue, disabled } = useContext(FormContext);
+export const CategoryField = ({ options, field, label, disabled }: CategoryFieldProps) => {
+  const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
@@ -97,14 +98,14 @@ export const CategoryField = ({ options, field, label }: CategoryFieldProps) => 
         onChange={(category) => {
           setValue(field, category);
         }}
-        disabled={disabled}
+        disabled={disabled || disabledByForm}
       />
     </div>
   );
 };
 
-export const CategoryRadioField = ({ options, field, label }: CategoryFieldProps) => {
-  const { getValue, setValue, disabled } = useContext(FormContext);
+export const CategoryRadioField = ({ options, field, label, disabled }: CategoryFieldProps) => {
+  const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
@@ -115,7 +116,7 @@ export const CategoryRadioField = ({ options, field, label }: CategoryFieldProps
         onChange={(category) => {
           setValue(field, category);
         }}
-        disabled={disabled}
+        disabled={disabledByForm || disabled}
       />
     </div>
   );
