@@ -10,3 +10,8 @@
   font-size: 0.75rem;
   color: red;
 }
+
+.form-buttons {
+  display: flex;
+  gap: 4px;
+}

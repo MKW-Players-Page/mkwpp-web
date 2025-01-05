@@ -13356,8 +13356,8 @@
     "es": ""
   },
   "submissionPageSubmitTabDeleteBtn": {
-    "it": "Elimina",
-    "en": "Delete",
+    "it": "Elimina Submission",
+    "en": "Delete Submission",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13574,6 +13574,33 @@
   "submissionPageMySubmissionsTabTooltipSubmittedAt": {
     "it": "Caricato alle: {{time}}",
     "en": "Submitted At: {{time}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabFilterAll": {
+    "it": "Tutte le tue submission",
+    "en": "All your Submissions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabFilterByYou": {
+    "it": "Caricato da te",
+    "en": "Submitted By You",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabFilterForYou": {
+    "it": "Caricato per te",
+    "en": "Submitted For You",
     "fr": "",
     "de": "",
     "jp": "",

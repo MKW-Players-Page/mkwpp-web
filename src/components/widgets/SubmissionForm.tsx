@@ -259,48 +259,38 @@ const SubmissionForm = ({
       <Deferred isWaiting={metadata.isLoading}>
         {state.state === SubmitStateEnum.Form && (
           <Form
+            extraButtons={
+              deleteId !== undefined && (
+                <div
+                  onClick={() => {
+                    deleteFunction(deleteId).then(() => doneFunc());
+                  }}
+                  className="submit-style"
+                >
+                  {translate("submissionPageSubmitTabDeleteBtn", lang)}
+                </div>
+              )
+            }
             state={state}
             setState={setState}
             submitLabel={translate("submissionPageSubmitTabSubmitSubmitLabel", lang)}
             submit={submit}
           >
-            <div style={{ display: "flex", alignItems: "flex-end" }}>
-              <div style={{ flexGrow: 10 }}>
-                <PlayerSelectDropdownField
-                  disabled={editModeScore !== undefined}
-                  restrictSet={
-                    editModeScore !== undefined
-                      ? [state.player]
-                      : [
-                          deleteId !== undefined ? state.player : (user?.player ?? 0),
-                          ...(submittees === undefined || submittees.length === 0
-                            ? []
-                            : submittees.map((r) => r.id as number)),
-                        ]
-                  }
-                  label={translate("submissionPageSubmitTabPlayerLabel", lang)}
-                  field="player"
-                />
-              </div>
-              {deleteId !== undefined && (
-                <div
-                  onClick={() => {
-                    deleteFunction(deleteId).then(() => doneFunc());
-                  }}
-                  style={{
-                    flexGrow: 1,
-                    width: "unset",
-                    height: "27px",
-                    marginLeft: "4px",
-                    textAlign: "center",
-                    cursor: "pointer",
-                  }}
-                  className="module"
-                >
-                  {translate("submissionPageSubmitTabDeleteBtn", lang)}
-                </div>
-              )}
-            </div>
+            <PlayerSelectDropdownField
+              disabled={editModeScore !== undefined}
+              restrictSet={
+                editModeScore !== undefined
+                  ? [state.player]
+                  : [
+                      deleteId !== undefined ? state.player : (user?.player ?? 0),
+                      ...(submittees === undefined || submittees.length === 0
+                        ? []
+                        : submittees.map((r) => r.id as number)),
+                    ]
+              }
+              label={translate("submissionPageSubmitTabPlayerLabel", lang)}
+              field="player"
+            />
             <TrackSelect
               metadata={metadata}
               disabled={editModeScore !== undefined}
