@@ -47,6 +47,7 @@ export interface FormState {
 
 export interface FormProps<T extends FormState> {
   children?: ReactNode;
+  extraButtons?: ReactNode;
   state: T;
   setState: Dispatch<SetStateAction<T>>;
   disabled?: boolean;
@@ -57,6 +58,7 @@ export interface FormProps<T extends FormState> {
 
 const Form = <T extends FormState>({
   children,
+  extraButtons,
   state,
   setState,
   disabled,
@@ -96,7 +98,10 @@ const Form = <T extends FormState>({
           {children}
         </FormContext.Provider>
       </div>
-      <input disabled={disabled} type="submit" value={submitLabel} />
+      <div className="form-buttons">
+        <input disabled={disabled} type="submit" value={submitLabel} />
+        {extraButtons}
+      </div>
     </form>
   );
 };
@@ -108,10 +113,11 @@ export interface FieldProps {
   placeholder?: string;
   max?: string;
   min?: string;
+  disabled?: boolean;
 }
 
-export const Field = ({ type, field, label, placeholder, max, min }: FieldProps) => {
-  const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
+export const Field = ({ type, field, label, placeholder, max, min, disabled }: FieldProps) => {
+  const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(field, e.target.value);
@@ -123,7 +129,7 @@ export const Field = ({ type, field, label, placeholder, max, min }: FieldProps)
     <div className="field">
       <p>{label}</p>
       <input
-        disabled={disabled}
+        disabled={disabledByForm || disabled}
         type={type}
         value={getValue(field)}
         onChange={onChange}

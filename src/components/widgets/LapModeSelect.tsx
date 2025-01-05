@@ -89,6 +89,7 @@ export interface LapModeFieldProps {
   field: string;
   /** Field label */
   label: string;
+  disabled?: boolean;
 }
 
 export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps) => {
@@ -109,8 +110,13 @@ export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps
   );
 };
 
-export const LapModeRadioField = ({ includeOverall, field, label }: LapModeFieldProps) => {
-  const { getValue, setValue, disabled } = useContext(FormContext);
+export const LapModeRadioField = ({
+  includeOverall,
+  field,
+  label,
+  disabled,
+}: LapModeFieldProps) => {
+  const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
@@ -121,7 +127,7 @@ export const LapModeRadioField = ({ includeOverall, field, label }: LapModeField
         onChange={(lapMode) => {
           setValue(field, lapMode);
         }}
-        disabled={disabled}
+        disabled={disabledByForm || disabled}
       />
     </div>
   );

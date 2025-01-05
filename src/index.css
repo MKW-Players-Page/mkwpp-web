@@ -5,32 +5,65 @@
 :root,
 .overwrite-color {
   --site-hue: 216;
+  --saturation-shift: 0;
+  --luminosity-shift: 0;
   /* General */
-  --background-color: hsl(var(--site-hue), 40%, 13%);
-  --text-color: hsl(var(--site-hue), 73%, 91%);
-  --alt-text-color: hsl(var(--site-hue), 25%, 65%);
+  --background-color: hsl(
+    from #141f2f var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --text-color: hsl(
+    from #d8f0f9 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --alt-text-color: hsl(
+    from #90b0bc var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
   /* Header */
   --header-height: 76px;
-  --header-background-color: hsl(var(--site-hue), 38%, 22%);
-  --header-border-color: hsl(var(--site-hue), 25%, 25%);
+  --header-background-color: hsl(
+    from #22354c var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --header-border-color: hsl(
+    from #304050 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
   /* Navbar */
   --navbar-width: 200px;
-  --navbar-background-color: hsl(var(--site-hue), 38%, 18%);
-  --navbar-background-color-hover: hsl(var(--site-hue), 40%, 26%);
-  --navbar-border-color: hsl(var(--site-hue), 29%, 22%);
-  --navbar-text-color: hsl(var(--site-hue), 33%, 81%);
+  --navbar-background-color: hsl(
+    from #1c2c3f var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --navbar-background-color-hover: hsl(
+    from #28405d var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --navbar-border-color: hsl(
+    from #283848 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --navbar-text-color: hsl(
+    from #c0d8df var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
   /* Modules */
   --module-background-color: var(--navbar-background-color);
   --module-background-color-alt: var(--navbar-background-color-hover);
-  --module-background-color-focus: hsl(var(--site-hue), 59%, 25%);
-  --module-border-color: hsl(var(--site-hue), 37%, 30%);
+  --module-background-color-focus: hsl(
+    from #1a3c65 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --module-border-color: hsl(
+    from #304868 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
   /* Inputs */
-  --input-background-color: hsl(var(--site-hue), 37%, 27%);
-  --input-background-color-hover: hsl(var(--site-hue), 34%, 32%);
-  --input-background-color-disabled: hsl(var(--site-hue), 21%, 35%);
-  --input-background-color-disabled-hover: hsl(var(--site-hue), 19%, 40%);
-  --input-border-color: hsl(var(--site-hue), 21%, 32%);
-  --input-selected: hsl(var(--site-hue), 100%, 57%);
+  --input-background-color: hsl(
+    from #2c405f var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --input-background-color-hover: hsl(
+    from #364c6d var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --input-background-color-disabled: hsl(
+    from #47566d var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --input-background-color-disabled-hover: hsl(
+    from #526179 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
+  --input-border-color: hsl(
+    from #405463 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
   /* Other */
   --tooltip-background-color: rgba(0, 0, 0, 0.9);
 }
@@ -147,6 +180,7 @@ input[type="checkbox"] {
   height: 20px;
   align-self: center;
   border: var(--input-border-color) 1px solid;
+  cursor: pointer;
 }
 input[type="checkbox"]:checked {
   background-color: var(--input-selected);

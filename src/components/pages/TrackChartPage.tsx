@@ -87,7 +87,9 @@ const TrackChartPage = () => {
     <>
       {/* Redirect to courses list if id is invalid or does not exist. */}
       {metadata.tracks && !track && <Navigate to={resolvePage(Pages.TrackList)} />}
-      <Link to={resolvePage(Pages.TrackList)}>{"« Track List"}</Link>
+      <Link to={resolvePage(Pages.TrackList)}>
+        {translate("trackChartPageTrackListButton", lang)}
+      </Link>
       <div style={{ justifyContent: "space-between" }} className="module-row">
         <div style={{ width: "200px" }}>
           {prevTrack !== undefined ? (

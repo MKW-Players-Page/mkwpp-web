@@ -11,7 +11,7 @@ import Dropdown, {
   DropdownItemSetDataChild,
   DropdownItemSetSetterData,
 } from "./Dropdown";
-import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -64,7 +64,10 @@ const RegionSelectionDropdown = ({
     if (parent !== undefined)
       outChildren.push({
         type: "DropdownItemSetSetterData",
-        element: { text: "« Back", toItemSetId: parent.parent ?? 0 } as DropdownItemSetSetterData,
+        element: {
+          text: translate("genericBackButton", lang),
+          toItemSetId: parent.parent ?? 0,
+        } as DropdownItemSetSetterData,
       });
 
     children

@@ -9,7 +9,7 @@
   z-index: 1000;
   min-width: 100px;
   width: max-content;
-  max-width: 200px;
+  max-width: 400px;
   text-align: center;
   margin-bottom: 6px;
   bottom: 100%;
@@ -30,6 +30,12 @@
   border-style: solid;
   border-color: var(--tooltip-background-color) var(--tooltip-background-color) transparent
     transparent;
+}
+
+.tooltip-text.left,
+.tooltip-text.left::after {
+  left: 0;
+  right: unset;
 }
 
 .tooltip:hover .tooltip-text {

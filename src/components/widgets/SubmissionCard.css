@@ -1,0 +1,13 @@
+.submission-card-flex-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.submission-card-flex-div > :first-child > * {
+  padding-right: 2px;
+}
+
+.submission-card-flex-div > :last-child > * {
+  padding-left: 2px;
+}

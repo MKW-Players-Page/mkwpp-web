@@ -615,7 +615,7 @@ const MatchupPage = () => {
     <>
       {/* Redirect if any id is invalid or API fetch failed */}
       {ids.length < 2 && <Navigate to={resolvePage(Pages.MatchupHome)} />}
-      <Link to={resolvePage(Pages.MatchupHome)}>« Back</Link>
+      <Link to={resolvePage(Pages.MatchupHome)}>{translate("genericBackButton", lang)}</Link>
       <h1>{translate("matchupPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
         <div className="module-row">

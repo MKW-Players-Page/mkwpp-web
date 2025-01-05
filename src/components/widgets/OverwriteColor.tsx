@@ -1,13 +1,24 @@
 export interface OverwriteColorProp {
   children: JSX.Element | JSX.Element[];
-  hue: number;
+  hue?: number;
+  saturationShift?: number;
+  luminosityShift?: number;
 }
 
-const OverwriteColor = ({ hue, children }: OverwriteColorProp) => {
+const OverwriteColor = ({
+  hue,
+  saturationShift,
+  luminosityShift,
+  children,
+}: OverwriteColorProp) => {
+  let outStyle: any = {};
+  if (hue !== undefined) outStyle["--site-hue"] = hue;
+  if (saturationShift !== undefined) outStyle["--saturation-shift"] = saturationShift;
+  if (luminosityShift !== undefined) outStyle["--luminosity-shift"] = luminosityShift;
   return (
-    <div className="overwrite-color" style={{ "--site-hue": hue } as React.CSSProperties}>
+    <span className="overwrite-color" style={outStyle}>
       {children}
-    </div>
+    </span>
   );
 };
 

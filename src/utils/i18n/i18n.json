@@ -12473,6 +12473,24 @@
     "pt": "",
     "es": ""
   },
+  "genericBackButton": {
+    "it": "« Indietro",
+    "en": "« Back",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackChartPageTrackListButton": {
+    "it": "« Piste",
+    "en": "« Track List",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "trackChartPageRankCol": {
     "it": "Pos.",
     "en": "Rank",
@@ -13292,18 +13310,18 @@
     "pt": "",
     "es": ""
   },
-  "submissionPageBulkSubmitTabTitle": {
-    "it": "Carica Molteplici",
-    "en": "Bulk Submit",
+  "submissionPageSubmissionsTabTitle": {
+    "it": "In attesa",
+    "en": "My Submissions",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "submissionPageSubmissionsTabTitle": {
-    "it": "In attesa",
-    "en": "My Submissions",
+  "submissionPageTimesheetTabTitle": {
+    "it": "I miei Tempi",
+    "en": "My Timesheet",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13319,9 +13337,27 @@
     "pt": "",
     "es": ""
   },
+  "submissionPageSubmitTabPlayerLabel": {
+    "it": "Player",
+    "en": "Player",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "submissionPageSubmitTabTrackLabel": {
     "it": "Pista",
     "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabDeleteBtn": {
+    "it": "Elimina Submission",
+    "en": "Delete Submission",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13391,6 +13427,24 @@
     "pt": "",
     "es": ""
   },
+  "submissionPageSubmitTabSubmitterNoteLabel": {
+    "it": "Nota per gli Updater",
+    "en": "Submitter Note",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabSubmitterNoteTooltip": {
+    "it": "Questo testo sarà visibile solamente agli Updater.",
+    "en": "This text will be visible only to Updaters.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "submissionPageSubmitTabNoPlayerProfileLinkErr": {
     "it": "Nessun profilo player collegato.",
     "en": "No player profile linked.",
@@ -13427,6 +13481,15 @@
     "pt": "",
     "es": ""
   },
+  "submissionPageSubmitTabNoEditErr": {
+    "it": "Non hai apportato modifiche.",
+    "en": "You didn't edit anything.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "submissionPageSubmitTabSuccessStateParagraph": {
     "it": "Il tuo tempo è stato caricato con successo! Si prega di attendere perché un moderatore lo esamini.",
     "en": "Your time has been submitted successfully! Please wait for a moderator to review it.",
@@ -13437,17 +13500,107 @@
     "es": ""
   },
   "submissionPageSubmitTabSuccessStateButton": {
-    "it": "Carica un altro tempo",
-    "en": "Submit Another Time",
+    "it": "Indietro",
+    "en": "Back",
     "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
     "es": ""
   },
-  "submissionPageBulkSubmitTabUnderConstruction": {
-    "it": "In costruzione...",
-    "en": "Under construction...",
+  "submissionPageSubmitTabWarning1": {
+    "it": "Se hai un tempo in attesa per questa stessa run e intendi correggerlo, puoi modificarlo in 'In Attesa'. Se intendi invece solamente aggiungere un video o un link ad un ghost, puoi fare ciò in 'I miei Tempi'",
+    "en": "If you have a pending submission for this same time and mean to correct it, you can edit it in 'My Submissions'. If you mean to only add a video or ghost link, you can do so in 'My Timesheet'",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabWarning2": {
+    "it": "Se hai migliorato il tuo tempo e non hai fatto un errore, dovresti invece caricare un nuovo tempo in 'Carica'.",
+    "en": "If you improved your time and did not make a typo, you should instead submit it as a new time in 'Submit'.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipReviewedBy": {
+    "it": "Controllato da: {{name}}",
+    "en": "Reviewed By: {{name}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipReviewedAt": {
+    "it": "Controllato alle: {{time}}",
+    "en": "Reviewed At: {{time}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipNotReviewed": {
+    "it": "Non controllato.",
+    "en": "Not reviewed.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipSubmittedBy": {
+    "it": "Caricato da: {{name}}",
+    "en": "Submitted By: {{name}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipSubmittedFor": {
+    "it": "Caricato per: {{name}}",
+    "en": "Submitted For: {{name}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabTooltipSubmittedAt": {
+    "it": "Caricato alle: {{time}}",
+    "en": "Submitted At: {{time}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabFilterAll": {
+    "it": "Tutte le tue submission",
+    "en": "All your Submissions",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabFilterByYou": {
+    "it": "Caricato da te",
+    "en": "Submitted By You",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageMySubmissionsTabFilterForYou": {
+    "it": "Caricato per te",
+    "en": "Submitted For You",
     "fr": "",
     "de": "",
     "jp": "",
@@ -14336,6 +14489,42 @@
     "pt": "",
     "es": ""
   },
+  "optionsPageSubmitterHeading": {
+    "it": "Player Trustati",
+    "en": "Player Submitters",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSubmitterParagraph": {
+    "it": "i 'Player Trustati' sono player a cui permetti di caricare tempi a tuo nome. I tuoi giocatori trustati: ",
+    "en": "'Player Submitters' are a number of players who you can allow to submit times for yourself. You have allowed already: ",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSubmitterListNoOne": {
+    "it": "Nessuno",
+    "en": "No One",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSubmitterListNoUserError": {
+    "it": "Nessun Utente associato col Profilo.",
+    "en": "No User associated with Profile.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "optionsPageAccountHeading": {
     "it": "Impostazioni Account",
     "en": "Account Settings",
@@ -14375,6 +14564,24 @@
   "optionsPageResetBtnText": {
     "it": "Reset",
     "en": "Reset",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAddBtnText": {
+    "it": "Aggiungi",
+    "en": "Add",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageRemoveBtnText": {
+    "it": "Salva",
+    "en": "Remove",
     "fr": "",
     "de": "",
     "jp": "",
