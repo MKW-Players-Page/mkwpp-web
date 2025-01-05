@@ -19,7 +19,7 @@ const HomePage = () => {
   );
 
   return (
-    <div className="homePageGrid">
+    <div className="home-page-grid">
       <div style={{ flex: 2, minWidth: "250px" }}>
         <Deferred isWaiting={blogPostsLoading}>
           {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
@@ -36,14 +36,16 @@ const HomePage = () => {
         </div>
       </ExpandableModule>
       <ExpandableModule heading={translate("homePageWelcomeHeading", lang)}>
-        <div className="module-content">
+        <div className="module-content home-page-welcome-module">
           <h2>{translate("homePageWelcomeParagraphHeading", lang)}</h2>
-          <p>{translate("homePageWelcomeParagraph1", lang)}</p>
-          <p>{translate("homePageWelcomeParagraph2", lang)}</p>
-          <p>{translate("homePageWelcomeParagraph3", lang)}</p>
-          <p>{translate("homePageWelcomeParagraph4", lang)}</p>
-          <p>{translate("homePageWelcomeParagraph5", lang)}</p>
-          <p>{translate("homePageWelcomeParagraph6", lang)}</p>
+          <p>
+            {translate("homePageWelcomeParagraph1", lang)}{" "}
+            {translate("homePageWelcomeParagraph2", lang)}{" "}
+            {translate("homePageWelcomeParagraph3", lang)}{" "}
+            {translate("homePageWelcomeParagraph4", lang)}{" "}
+            {translate("homePageWelcomeParagraph5", lang)}{" "}
+            {translate("homePageWelcomeParagraph6", lang)}
+          </p>
         </div>
       </ExpandableModule>
     </div>
