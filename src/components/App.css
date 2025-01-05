@@ -180,3 +180,10 @@ td.force-bg:hover {
     max-width: 1000px;
   }
 }
+
+@media only screen and (max-width: 550px) {
+  .player-list td:nth-child(2),
+  .player-list th:nth-child(2) {
+    display: none;
+  }
+}

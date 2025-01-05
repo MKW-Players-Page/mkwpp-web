@@ -125,6 +125,11 @@ th {
   font-size: 0.925rem;
 }
 
+.nbsp td,
+.nbsp th {
+  white-space: nowrap;
+}
+
 th {
   height: 36px;
 }
