@@ -12473,6 +12473,24 @@
     "pt": "",
     "es": ""
   },
+  "genericBackButton": {
+    "it": "« Indietro",
+    "en": "« Back",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackChartPageTrackListButton": {
+    "it": "« Piste",
+    "en": "« Track List",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "trackChartPageRankCol": {
     "it": "Pos.",
     "en": "Rank",
@@ -14444,6 +14462,42 @@
     "pt": "",
     "es": ""
   },
+  "optionsPageSubmitterHeading": {
+    "it": "Player Trustati",
+    "en": "Player Submitters",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSubmitterParagraph": {
+    "it": "i 'Player Trustati' sono player a cui permetti di caricare tempi a tuo nome. I tuoi giocatori trustati: ",
+    "en": "'Player Submitters' are a number of players who you can allow to submit times for yourself. You have allowed already: ",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSubmitterListNoOne": {
+    "it": "Nessuno",
+    "en": "No One",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageSubmitterListNoUserError": {
+    "it": "Nessun Utente associato col Profilo.",
+    "en": "No User associated with Profile.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "optionsPageAccountHeading": {
     "it": "Impostazioni Account",
     "en": "Account Settings",
@@ -14483,6 +14537,24 @@
   "optionsPageResetBtnText": {
     "it": "Reset",
     "en": "Reset",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAddBtnText": {
+    "it": "Aggiungi",
+    "en": "Add",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageRemoveBtnText": {
+    "it": "Salva",
+    "en": "Remove",
     "fr": "",
     "de": "",
     "jp": "",

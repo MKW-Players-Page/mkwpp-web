@@ -31,6 +31,7 @@ const PlayerSelectDropdown = ({
     autodeleteText: true,
     element: { text: translate("matchupPageDefaultValue", lang), value: 0 },
   };
+
   return (
     <Dropdown
       data={{
@@ -45,7 +46,11 @@ const PlayerSelectDropdown = ({
             children: [
               ...((players
                 ?.filter((player) =>
-                  restrictSet !== undefined ? restrictSet.includes(player.id) && !blacklist : true,
+                  restrictSet !== undefined
+                    ? blacklist
+                      ? !restrictSet.includes(player.id)
+                      : restrictSet.includes(player.id)
+                    : true,
                 )
                 .sort((a, b) => ((a.alias ?? a.name) < (b.alias ?? b.name) ? -1 : 1))
                 .map((player) => {

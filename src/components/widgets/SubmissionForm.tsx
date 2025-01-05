@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
 import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
+import { useApi } from "../../hooks";
 import { parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
@@ -71,7 +72,7 @@ const SubmissionForm = ({
 
   const initialState = {
     state: SubmitStateEnum.Form,
-    player: starterPlayer ?? user?.player ?? 1, // TODO: `Localized` updaters
+    player: starterPlayer ?? user?.player ?? 1,
     track: starterTrack ?? 1,
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
@@ -99,6 +100,8 @@ const SubmissionForm = ({
       setState((prev) => ({ ...prev, category: CategoryEnum.NonShortcut }));
     }
   }, [state, track]);
+
+  const { data: submittees } = useApi(() => api.timetrialsSubmissionsSubmitteesList());
 
   const deleteFunction =
     deleteId !== undefined
@@ -264,11 +267,16 @@ const SubmissionForm = ({
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <div style={{ flexGrow: 10 }}>
                 <PlayerSelectDropdownField
-                  disabled={true || editModeScore !== undefined || deleteId !== undefined}
+                  disabled={editModeScore !== undefined}
                   restrictSet={
-                    editModeScore !== undefined || deleteId !== undefined
+                    editModeScore !== undefined
                       ? [state.player]
-                      : [user?.player ?? 1]
+                      : [
+                          user?.player ?? 0,
+                          ...(submittees === undefined || submittees.length === 0
+                            ? []
+                            : submittees.map((r) => r.id as number)),
+                        ]
                   }
                   label={translate("submissionPageSubmitTabPlayerLabel", lang)}
                   field="player"

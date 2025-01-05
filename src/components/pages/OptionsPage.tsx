@@ -7,6 +7,8 @@ import { setSettingKV, SettingsContext } from "../../utils/Settings";
 import { UserContext } from "../../utils/User";
 import ColorSlider from "../widgets/ColorSlider";
 import Deferred from "../widgets/Deferred";
+import PlayerMention from "../widgets/PlayerMention";
+import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);
@@ -30,12 +32,26 @@ const OptionsPage = () => {
   const aliasTextArea = useRef(null);
   const navigate = useNavigate();
 
+  const [newSubmitterId, newSubmitterSetId] = useState(0);
+  const [newSubmitterIdFieldError, setNewSubmitterIdFieldError] = useState("");
+  const [resetSubmittersList, setResetSubmittersList] = useState(0);
+  const { isLoading: submittersLoading, data: submitters } = useApi(
+    () => api.timetrialsSubmissionsSubmittersList(),
+    [user, resetSubmittersList],
+    "loadedSubmitters",
+  );
+
   const [debugActive, setDebugActive] = useState(0);
   useEffect(() => {
     const eventListener = (e: KeyboardEvent) => {
       const debugText = "nobuo";
       if (e.key === debugText[debugActive]) {
         setDebugActive(debugActive + 1);
+        if (debugActive === 4) {
+          const audio = new Audio("/mkw/audio/nobuo.mp3");
+          audio.volume = 0.1;
+          audio.play();
+        }
       }
     };
     document.addEventListener("keydown", eventListener);
@@ -51,7 +67,7 @@ const OptionsPage = () => {
           navigate(-1);
         }}
       >
-        « Back
+        {translate("genericBackButton", lang)}
       </Link>
       {debugActive === 5 ? (
         <>
@@ -140,6 +156,72 @@ const OptionsPage = () => {
         </div>
       ) : (
         <>
+          <div className="module">
+            <div className="module-content">
+              <Deferred isWaiting={submittersLoading}>
+                <h2>{translate("optionsPageSubmitterHeading", lang)}</h2>
+                <p style={{ marginBottom: "10px" }}>
+                  {translate("optionsPageSubmitterParagraph", lang)}
+                  {submitters === undefined || submitters.length === 0
+                    ? translate("optionsPageSubmitterListNoOne", lang)
+                    : submitters.map((r) => <PlayerMention precalcPlayer={r} />)}
+                </p>
+                <p className="field-error">{newSubmitterIdFieldError}</p>
+                <PlayerSelectDropdown
+                  id={newSubmitterId}
+                  setId={newSubmitterSetId}
+                  blacklist
+                  restrictSet={[user.player]}
+                />
+                <button
+                  style={{ marginRight: "10px" }}
+                  onClick={async () => {
+                    if (
+                      newSubmitterId !== 0 &&
+                      !submitters?.map((r) => r.id).includes(newSubmitterId)
+                    )
+                      api
+                        .timetrialsSubmissionsSubmittersAddCreate({
+                          id: newSubmitterId,
+                        })
+                        .then(
+                          () => {
+                            setResetSubmittersList(Math.random());
+                          },
+                          () => {
+                            setNewSubmitterIdFieldError(
+                              translate("optionsPageSubmitterListNoUserError", lang),
+                            );
+                          },
+                        );
+                    newSubmitterSetId(0);
+                    setNewSubmitterIdFieldError("");
+                  }}
+                >
+                  {translate("optionsPageAddBtnText", lang)}
+                </button>
+                <button
+                  onClick={async () => {
+                    if (
+                      newSubmitterId !== 0 &&
+                      submitters?.map((r) => r.id).includes(newSubmitterId)
+                    )
+                      api
+                        .timetrialsSubmissionsSubmittersRemoveDestroy({
+                          id: newSubmitterId,
+                        })
+                        .then(() => {
+                          setResetSubmittersList(Math.random());
+                        });
+                    newSubmitterSetId(0);
+                    setNewSubmitterIdFieldError("");
+                  }}
+                >
+                  {translate("optionsPageRemoveBtnText", lang)}
+                </button>
+              </Deferred>
+            </div>
+          </div>
           <div className="module">
             <div className="module-content">
               <Deferred isWaiting={playerLoading}>

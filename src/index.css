@@ -180,6 +180,7 @@ input[type="checkbox"] {
   height: 20px;
   align-self: center;
   border: var(--input-border-color) 1px solid;
+  cursor: pointer;
 }
 input[type="checkbox"]:checked {
   background-color: var(--input-selected);
