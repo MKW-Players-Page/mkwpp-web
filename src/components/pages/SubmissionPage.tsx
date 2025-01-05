@@ -35,6 +35,7 @@ enum SubmissionFilter {
 const SubmissionsTab = () => {
   const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
+  const { lang } = useContext(I18nContext);
   const [reload, setReload] = useState(Math.random());
   const [filter, setFilter] = useState<SubmissionFilter>(SubmissionFilter.All);
 
@@ -50,18 +51,27 @@ const SubmissionsTab = () => {
         state={filter}
         setState={setFilter}
         data={[
-          { text: "Submitted By You", value: SubmissionFilter.ByYou },
-          { text: "Submitted For You", value: SubmissionFilter.ForYou },
-          { text: "All your Submissions", value: SubmissionFilter.All },
+          {
+            text: translate("submissionPageMySubmissionsTabFilterByYou", lang),
+            value: SubmissionFilter.ByYou,
+          },
+          {
+            text: translate("submissionPageMySubmissionsTabFilterForYou", lang),
+            value: SubmissionFilter.ForYou,
+          },
+          {
+            text: translate("submissionPageMySubmissionsTabFilterAll", lang),
+            value: SubmissionFilter.All,
+          },
         ]}
       />
       <Deferred isWaiting={isLoading || metadata.isLoading}>
         <div key={reload} className="card-container">
           {submissions
             ?.filter((submission) =>
-              SubmissionFilter.All
+              filter === SubmissionFilter.All
                 ? true
-                : SubmissionFilter.ByYou
+                : filter === SubmissionFilter.ByYou
                   ? submission.submittedBy.player.id === user?.player
                   : submission.player.id === user?.player,
             )
