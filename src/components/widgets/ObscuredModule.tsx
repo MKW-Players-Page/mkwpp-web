@@ -1,8 +1,9 @@
+import { ReactNode } from "react";
 import Deferred from "./Deferred";
 import "./ObscuredModule.css";
 
 export interface ObscuredModuleProps {
-  children: JSX.Element;
+  children: ReactNode;
   stateVisible: boolean;
   setStateVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setReload?: React.Dispatch<React.SetStateAction<number>>;
@@ -26,9 +27,7 @@ const ObscuredModule = ({
     >
       <div className="module obscured-module">
         <div className="obscured-module-body">
-          <Deferred isWaiting={!stateVisible}>
-            <div>{children}</div>
-          </Deferred>
+          <Deferred isWaiting={!stateVisible}>{children}</Deferred>
         </div>
       </div>
       <div className="module obscured-module-close-button">Close</div>
