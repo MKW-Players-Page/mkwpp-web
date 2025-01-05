@@ -19,7 +19,7 @@ const ObscuredModule = ({
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           setStateVisible(false);
-          if (setReload !== undefined) setReload(Math.random);
+          if (setReload !== undefined) setReload(Math.random());
         }
       }}
       className={`obscured-module-dark-layer${stateVisible ? " visible" : ""}`}
