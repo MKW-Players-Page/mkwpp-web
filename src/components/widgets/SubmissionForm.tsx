@@ -272,7 +272,7 @@ const SubmissionForm = ({
                     editModeScore !== undefined
                       ? [state.player]
                       : [
-                          user?.player ?? 0,
+                          deleteId !== undefined ? state.player : (user?.player ?? 0),
                           ...(submittees === undefined || submittees.length === 0
                             ? []
                             : submittees.map((r) => r.id as number)),

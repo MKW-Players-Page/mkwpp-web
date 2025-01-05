@@ -83,6 +83,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                   >
                     <SubmissionForm
                       deleteId={submission.id}
+                      starterPlayer={submission.player.id}
                       starterTrack={submission.track}
                       starterCategory={submission.category}
                       starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
