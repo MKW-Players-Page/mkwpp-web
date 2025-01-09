@@ -209,3 +209,15 @@ td.lock-table-cells {
     display: none;
   }
 }
+
+.home-page-welcome-module {
+  text-justify: inter-word;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+}
+
+.how-to-contribute-thanks {
+  text-justify: inter-word;
+  text-align: justify;
+}
