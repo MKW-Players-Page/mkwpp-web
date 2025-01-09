@@ -5,7 +5,68 @@ import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import "./CupsList.css";
-import { TrackCup } from "../../api";
+import { CategoryEnum, Region, TrackCup } from "../../api";
+import { LapModeEnum } from "./LapModeSelect";
+
+interface CupsListNoTracksProps {
+  currentRegion: Region;
+  /** Cup Id */
+  currentCup: number;
+  currentCategory: CategoryEnum;
+  currentLap: LapModeEnum;
+}
+
+export const CupsListNoTracks = ({
+  currentRegion,
+  currentCup,
+  currentCategory,
+  currentLap,
+}: CupsListNoTracksProps) => {
+  const metadata = useContext(MetadataContext);
+
+  return (
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <div className="cups-list-no-tracks">
+        {metadata.cups?.map((cup) => (
+          <CupNoTracks
+            key={`cup-no-tracks-${cup.id}`}
+            cup={cup}
+            selected={currentCup === cup.id}
+            href={resolvePage(
+              Pages.TrackTops,
+              {
+                region: currentRegion.code.toLowerCase(),
+                cup: cup.id,
+              },
+              {
+                cat: currentCategory !== CategoryEnum.NonShortcut ? currentCategory : null,
+                lap: currentLap === LapModeEnum.Lap ? currentLap : null,
+              },
+            )}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+interface CupNoTracksProps {
+  cup: TrackCup;
+  selected: boolean;
+  href: string;
+}
+
+const CupNoTracks = ({ cup, selected, href }: CupNoTracksProps) => {
+  return (
+    <div key={cup.id} className={`module cups-list-no-tracks-cup${selected ? " selected" : ""}`}>
+      <div className="module-content">
+        <Link to={href}>
+          <img src={`/mkw/cups/${cup.id}.png`} alt="Cup Icon" />
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 interface CupTracksProps {
   cup: TrackCup;

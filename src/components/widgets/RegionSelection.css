@@ -6,7 +6,7 @@
 
 .show-region-row {
   max-height: 100px;
-  overflow: hidden;
+  overflow: scroll hidden;
   transition: all 0.5s;
 }
 
@@ -30,6 +30,7 @@
 .region-selection-button svg,
 .region-selection-button img {
   height: 100%;
+  margin-left: 16px;
 }
 
 .region-selection-button,
@@ -42,8 +43,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  white-space: nowrap;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
 @media (prefers-reduced-motion: reduce) {

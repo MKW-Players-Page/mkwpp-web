@@ -2,16 +2,19 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "../pages";
-import { Region } from "../../api";
+import { CategoryEnum, Region } from "../../api";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
 import Flag, { Flags } from "./Flags";
 import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
+import { LapModeEnum } from "./LapModeSelect";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;
   cupId: number;
+  currentCategory: CategoryEnum;
+  currentLap: LapModeEnum;
 }
 
 export interface RegionSelectionRowProps {
@@ -19,15 +22,25 @@ export interface RegionSelectionRowProps {
   cupId: number;
   shown: boolean;
   selectedRegions: number[];
+  currentCategory: CategoryEnum;
+  currentLap: LapModeEnum;
 }
 
 export interface RegionModuleProps {
   region: Region;
   cupId: number;
   selectedRegions: number[];
+  currentCategory: CategoryEnum;
+  currentLap: LapModeEnum;
 }
 
-const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => {
+const RegionModule = ({
+  region,
+  cupId,
+  selectedRegions,
+  currentCategory,
+  currentLap,
+}: RegionModuleProps) => {
   let classes = "module region-selection-button";
   if (selectedRegions.includes(region.id)) classes += " selected-region";
   const { lang } = useContext(I18nContext);
@@ -35,10 +48,17 @@ const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => 
   return (
     <div className={classes}>
       <Link
-        to={resolvePage(Pages.TrackTops, {
-          region: region.code.toLowerCase(),
-          cup: cupId,
-        })}
+        to={resolvePage(
+          Pages.TrackTops,
+          {
+            region: region.code.toLowerCase(),
+            cup: cupId,
+          },
+          {
+            cat: currentCategory !== CategoryEnum.NonShortcut ? currentCategory : null,
+            lap: currentLap === LapModeEnum.Lap ? currentLap : null,
+          },
+        )}
       >
         <div className="module-content">
           {translateRegionName(region, lang)}
@@ -49,7 +69,14 @@ const RegionModule = ({ region, cupId, selectedRegions }: RegionModuleProps) => 
   );
 };
 
-const RegionSelection = ({ regions, cupId, shown, selectedRegions }: RegionSelectionRowProps) => {
+const RegionSelection = ({
+  regions,
+  cupId,
+  shown,
+  selectedRegions,
+  currentCategory,
+  currentLap,
+}: RegionSelectionRowProps) => {
   let classes = `module-row`;
   classes += shown ? ` show-region-row` : ` hide-region-row`;
 
@@ -61,13 +88,20 @@ const RegionSelection = ({ regions, cupId, shown, selectedRegions }: RegionSelec
           region={region}
           cupId={cupId}
           selectedRegions={selectedRegions}
+          currentCategory={currentCategory}
+          currentLap={currentLap}
         />
       ))}
     </div>
   );
 };
 
-const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) => {
+const ComplexRegionSelection = ({
+  region,
+  cupId,
+  currentCategory,
+  currentLap,
+}: ComplexRegionSelectionProps) => {
   const metadata = useContext(MetadataContext);
   if (metadata.isLoading) return <></>;
   const regions = metadata.regions;
@@ -104,18 +138,22 @@ const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) 
   const selectedRegions = region ? getRegionHierarchy(region).map((region) => region.id) : [];
 
   return (
-    <>
+    <div>
       <RegionSelection
         shown={true}
         cupId={cupId}
         regions={sortedRegions.world}
         selectedRegions={selectedRegions}
+        currentCategory={currentCategory}
+        currentLap={currentLap}
       />
       <RegionSelection
         shown={true}
         cupId={cupId}
         regions={sortedRegions.continent}
         selectedRegions={selectedRegions}
+        currentCategory={currentCategory}
+        currentLap={currentLap}
       />
       {Object.keys(sortedSubregions).map((sortedSubregionsKey) => (
         <RegionSelection
@@ -124,9 +162,11 @@ const ComplexRegionSelection = ({ region, cupId }: ComplexRegionSelectionProps) 
           cupId={cupId}
           regions={sortedSubregions[parseInt(sortedSubregionsKey)]}
           selectedRegions={selectedRegions}
+          currentCategory={currentCategory}
+          currentLap={currentLap}
         />
       ))}
-    </>
+    </div>
   );
 };
 

@@ -20,6 +20,7 @@ import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
+import { CupsListNoTracks } from "../widgets/CupsList";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -80,59 +81,27 @@ const TrackTopsPage = () => {
       )}
       <Deferred isWaiting={metadata.isLoading}>
         <OverwriteColor hue={siteHue}>
-          <ComplexRegionSelection region={region} cupId={cupId} />
+          <ComplexRegionSelection
+            region={region}
+            cupId={cupId}
+            currentLap={lapMode}
+            currentCategory={category}
+          />
           <div className="module-row wrap">
             <CategoryRadio value={category} onChange={setCategory} />
             <LapModeRadio value={lapMode} onChange={setLapMode} />
           </div>
-          <div
-            className="module-row"
-            style={{
-              justifyContent: "center",
-            }}
-          >
-            {metadata.cups?.map((c) => (
-              <div
-                key={c.id}
-                className="module"
-                style={{
-                  borderRadius: "50%",
-                  aspectRatio: "1/1",
-                  width: "auto",
-                  backgroundColor: c.id === cupId ? "var(--module-border-color)" : "",
-                  userSelect: "none",
-                }}
-              >
-                <div
-                  style={{
-                    textAlign: "center",
-                  }}
-                  className="module-content"
-                >
-                  <Link
-                    to={resolvePage(Pages.TrackTops, {
-                      region: region.code.toLowerCase(),
-                      cup: c.id,
-                    })}
-                  >
-                    <img
-                      style={{
-                        aspectRatio: "1/1",
-                        height: "60px",
-                      }}
-                      src={`/mkw/cups/${c.id}.png`}
-                      alt="Cup Icon"
-                    />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CupsListNoTracks
+            currentCup={cup?.id ?? 0}
+            currentRegion={region}
+            currentLap={lapMode}
+            currentCategory={category}
+          />
           <div
             className="module-row"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4,1fr)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, max(340px, 100%/5)), 1fr))",
             }}
           >
             {cup &&
