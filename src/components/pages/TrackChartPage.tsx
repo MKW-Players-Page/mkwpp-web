@@ -67,7 +67,7 @@ const TrackChartPage = () => {
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
         region: region.id,
       }),
-    [category, lapMode, region, id, metadata],
+    [category, lapMode, region, id, metadata.isLoading],
     "trackCharts",
     [{ variable: metadata.regions.length, defaultValue: 1 }],
   );

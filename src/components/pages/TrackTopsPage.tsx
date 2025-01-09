@@ -67,7 +67,7 @@ const TrackTopsPage = () => {
       lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
       region: region.id,
     })) || [],
-    [category, cup, lapMode, region, metadata],
+    [category, cup, lapMode, region, metadata.isLoading],
     "trackTop10s",
   );
 
