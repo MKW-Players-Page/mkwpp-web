@@ -618,14 +618,14 @@ const MatchupPage = () => {
       <Link to={resolvePage(Pages.MatchupHome)}>{translate("genericBackButton", lang)}</Link>
       <h1>{translate("matchupPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
         </div>
         {matchupData.length === 2 ? (
           <></>
         ) : (
-          <div className="module-row">
+          <div className="module-row wrap">
             <Dropdown
               data={
                 {

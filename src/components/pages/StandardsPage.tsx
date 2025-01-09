@@ -58,7 +58,7 @@ const StandardsPage = () => {
     <>
       <h1>{translate("standardsPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <Dropdown
             data={
               {

@@ -81,7 +81,7 @@ const TrackTopsPage = () => {
       <Deferred isWaiting={metadata.isLoading}>
         <OverwriteColor hue={siteHue}>
           <ComplexRegionSelection region={region} cupId={cupId} />
-          <div className="module-row">
+          <div className="module-row wrap">
             <CategoryRadio value={category} onChange={setCategory} />
             <LapModeRadio value={lapMode} onChange={setLapMode} />
           </div>
@@ -129,7 +129,7 @@ const TrackTopsPage = () => {
             ))}
           </div>
           <div
-            className="module-row "
+            className="module-row"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4,1fr)",

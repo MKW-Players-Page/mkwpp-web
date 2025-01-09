@@ -124,7 +124,7 @@ const TrackRecordsPage = () => {
     <>
       <h1>{translateRegionName(region, lang, "Record")}</h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <RegionSelectionDropdown
             onePlayerMin={false}

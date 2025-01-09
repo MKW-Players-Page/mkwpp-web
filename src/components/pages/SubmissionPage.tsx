@@ -177,7 +177,7 @@ const TimesheetTab = () => {
   return (
     <div key={reload} style={{ padding: "10px" }}>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio value={lapMode} onChange={setLapMode} includeOverall />
         </div>

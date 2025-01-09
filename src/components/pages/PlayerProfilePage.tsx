@@ -200,7 +200,7 @@ const PlayerProfilePage = () => {
         {player?.name ?? <>&nbsp;</>}
       </h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           {player?.region !== undefined && player?.region !== null && player?.region !== 1 ? (
@@ -237,7 +237,7 @@ const PlayerProfilePage = () => {
             <></>
           )}
         </div>
-        <div className="module-row">
+        <div className="module-row wrap">
           <div className="module">
             <Deferred isWaiting={playerLoading}>
               <table>

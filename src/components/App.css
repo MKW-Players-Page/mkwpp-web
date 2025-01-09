@@ -49,6 +49,17 @@
   gap: 16px;
 }
 
+.module-row.wrap {
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.module-row.wrap > .module {
+  margin: 0;
+  width: auto;
+  flex-grow: 1;
+}
+
 .card-container {
   display: flex;
   flex-direction: row;

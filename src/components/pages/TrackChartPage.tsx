@@ -135,7 +135,7 @@ const TrackChartPage = () => {
         </div>
       </div>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio options={track?.categories} value={category} onChange={setCategory} />
           <LapModeRadio value={lapMode} onChange={setLapMode} />
           <RegionSelectionDropdown
