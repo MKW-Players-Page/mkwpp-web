@@ -25,6 +25,7 @@ import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
+import { useInfiniteScroll } from "../../hooks/ScrollHook";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -80,6 +81,10 @@ const TrackChartPage = () => {
       });
     }
   }, [highlightElement, isLoading, metadata.isLoading]);
+
+  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(35, scores?.length ?? 0, [
+    isLoading,
+  ]);
 
   const siteHue = getCategorySiteHue(category, settings);
 
@@ -156,78 +161,81 @@ const TrackChartPage = () => {
                   <th className="icon-cell" />
                 </tr>
               </thead>
-              <tbody className="table-hover-rows">
-                {scores?.map((score, idx, arr) => (
-                  <>
-                    {highlight &&
-                    score.value > highlight &&
-                    (arr[idx - 1] === undefined || arr[idx - 1].value < highlight) ? (
-                      <>
-                        <tr ref={highlightElement} key={highlight} className="highlighted">
-                          <td />
-                          <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
-                          <td>{formatTime(highlight)}</td>
-                          <td />
-                          <td />
-                          <td />
-                          <td />
-                          <td />
-                        </tr>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <tr
-                      key={score.id}
-                      className={
-                        score.player.id === user?.player || score.value === highlight
-                          ? "highlighted"
-                          : ""
-                      }
-                      ref={score.value === highlight ? highlightElement : undefined}
-                    >
-                      <td>{score.rank}</td>
-                      <td>
-                        <PlayerMention
-                          precalcPlayer={score.player}
-                          precalcRegionId={score.player.region ?? undefined}
-                          xxFlag={true}
-                          showRegFlagRegardless={
-                            region.type === "country" ||
-                            region.type === "subnational" ||
-                            region.type === "subnational_group"
-                          }
-                        />
-                      </td>
-                      <td className={score.category !== category ? "fallthrough" : ""}>
-                        {formatTime(score.value)}
-                      </td>
-                      <td>{getStandardLevel(metadata, score.standard)?.name}</td>
-                      <td>{score.date && formatDate(score.date)}</td>
-                      <td className="icon-cell">
-                        {score?.videoLink && (
-                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                            <Icon icon="Video" />
-                          </a>
-                        )}
-                      </td>
-                      <td className="icon-cell">
-                        {score?.ghostLink && (
-                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                            <Icon icon="Ghost" />
-                          </a>
-                        )}
-                      </td>
-                      <td className="icon-cell">
-                        {score?.comment && (
-                          <Tooltip text={score.comment}>
-                            <Icon icon="Comment" />
-                          </Tooltip>
-                        )}
-                      </td>
-                    </tr>
-                  </>
-                ))}
+              <tbody ref={tbodyElement} className="table-hover-rows">
+                {scores?.map((score, idx, arr) => {
+                  if (idx < sliceStart || idx >= sliceEnd) return <></>;
+                  return (
+                    <>
+                      {highlight &&
+                      score.value > highlight &&
+                      (arr[idx - 1] === undefined || arr[idx - 1].value < highlight) ? (
+                        <>
+                          <tr ref={highlightElement} key={highlight} className="highlighted">
+                            <td />
+                            <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
+                            <td>{formatTime(highlight)}</td>
+                            <td />
+                            <td />
+                            <td />
+                            <td />
+                            <td />
+                          </tr>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <tr
+                        key={score.id}
+                        className={
+                          score.player.id === user?.player || score.value === highlight
+                            ? "highlighted"
+                            : ""
+                        }
+                        ref={score.value === highlight ? highlightElement : undefined}
+                      >
+                        <td>{score.rank}</td>
+                        <td>
+                          <PlayerMention
+                            precalcPlayer={score.player}
+                            precalcRegionId={score.player.region ?? undefined}
+                            xxFlag={true}
+                            showRegFlagRegardless={
+                              region.type === "country" ||
+                              region.type === "subnational" ||
+                              region.type === "subnational_group"
+                            }
+                          />
+                        </td>
+                        <td className={score.category !== category ? "fallthrough" : ""}>
+                          {formatTime(score.value)}
+                        </td>
+                        <td>{getStandardLevel(metadata, score.standard)?.name}</td>
+                        <td>{score.date && formatDate(score.date)}</td>
+                        <td className="icon-cell">
+                          {score?.videoLink && (
+                            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                              <Icon icon="Video" />
+                            </a>
+                          )}
+                        </td>
+                        <td className="icon-cell">
+                          {score?.ghostLink && (
+                            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                              <Icon icon="Ghost" />
+                            </a>
+                          )}
+                        </td>
+                        <td className="icon-cell">
+                          {score?.comment && (
+                            <Tooltip text={score.comment}>
+                              <Icon icon="Comment" />
+                            </Tooltip>
+                          )}
+                        </td>
+                      </tr>
+                    </>
+                  );
+                })}
               </tbody>
             </table>
           </Deferred>
