@@ -206,11 +206,7 @@ const MatchupPageTableRowTrackTD = ({
 
   if (layoutTypeBig && !isLap) {
     return (
-      <td
-        rowSpan={2}
-        className="force-bg"
-        style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
-      >
+      <td rowSpan={2} className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
         <Link
           to={resolvePage(
             Pages.TrackChart,
@@ -227,10 +223,7 @@ const MatchupPageTableRowTrackTD = ({
     );
   } else if (!layoutTypeBig) {
     return (
-      <td
-        className="force-bg"
-        style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
-      >
+      <td className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
         <Link
           to={resolvePage(
             Pages.TrackChart,
@@ -464,10 +457,7 @@ const MatchupPageTableFooterRow = ({
 
   return (
     <tr>
-      <th
-        className="force-bg"
-        style={settings.lockTableCells ? { position: "sticky", left: 0, paddingRight: "5px" } : {}}
-      >
+      <th className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
         {MetricEnumToData[enumKey].heading}
       </th>
       {matchupData.map((data, idx, arr) => {
@@ -662,18 +652,13 @@ const MatchupPage = () => {
         <Deferred
           isWaiting={metadata.isLoading || matchupDataIsLoading || elaboratedMatchupData.isLoading}
         >
-          <div className="module" ref={tableModule} style={{ overflowX: "scroll" }}>
-            <table style={{ whiteSpace: "nowrap" }}>
+          <div className="module" ref={tableModule}>
+            <table>
               <thead>
                 <tr>
                   <>
                     <th
-                      className="force-bg"
-                      style={
-                        settings.lockTableCells
-                          ? { position: "sticky", left: 0, paddingRight: "5px" }
-                          : {}
-                      }
+                      className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}
                     />
                     {matchupData.map((playerData, idx, arr) => (
                       <>
@@ -694,14 +679,7 @@ const MatchupPage = () => {
                   </>
                 </tr>
                 <tr>
-                  <th
-                    className="force-bg"
-                    style={
-                      settings.lockTableCells
-                        ? { position: "sticky", left: 0, paddingRight: "5px" }
-                        : {}
-                    }
-                  >
+                  <th className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
                     {translate("matchupPageTrackCol", lang)}
                   </th>
                   {matchupData.map((playerData, idx, arr) => (
@@ -808,14 +786,7 @@ const MatchupPage = () => {
                   }}
                 />
                 <tr>
-                  <th
-                    className="force-bg"
-                    style={
-                      settings.lockTableCells
-                        ? { position: "sticky", left: 0, paddingRight: "5px" }
-                        : {}
-                    }
-                  >
+                  <th className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
                     {translate("matchupPageTallyRow", lang)}
                   </th>
                   <>

@@ -34,6 +34,10 @@
   margin-bottom: 16px;
 }
 
+.module:has(table) {
+  overflow-x: scroll;
+}
+
 .module-header {
   background-color: var(--module-background-color-alt);
   padding: 8px;
@@ -149,6 +153,13 @@ th.force-bg {
 .table-hover-rows td[rowspan="2"]:hover,
 td.force-bg:hover {
   background-color: var(--header-background-color);
+}
+
+th.lock-table-cells,
+td.lock-table-cells {
+  position: sticky;
+  left: 0;
+  padding-right: 5px;
 }
 
 .home-page-grid {
