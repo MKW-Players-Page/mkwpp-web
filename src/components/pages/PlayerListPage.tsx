@@ -9,6 +9,7 @@ import { PlayerBasic } from "../../api";
 import { useState } from "react";
 import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
+import { useInfiniteScroll } from "../../hooks/ScrollHook";
 
 interface PlayerForFilter extends PlayerBasic {
   simplifiedName: string;
@@ -26,19 +27,7 @@ const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
   const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
 
   return (
-    <tr
-      style={{
-        display:
-          playerFilter === "" ||
-          (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
-          (player as PlayerForFilter).simplifiedAlias.includes(playerFilter) ||
-          regionNameFull.toLowerCase().normalize("NFKD").includes(playerFilter)
-            ? ""
-            : "none",
-      }}
-      key={player.id}
-      className={user && player.id === user.player ? "highlighted" : ""}
-    >
+    <tr className={user && player.id === user.player ? "highlighted" : ""}>
       <td>
         <PlayerMention
           precalcPlayer={player}
@@ -69,8 +58,13 @@ const PlayerListPage = () => {
     "playerList",
   );
   const { lang } = useContext(I18nContext);
+  const metadata = useContext(MetadataContext);
 
   const [playerFilter, setPlayerFilter] = useState("");
+
+  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(35, players?.length ?? 0, [
+    isLoading,
+  ]);
 
   return (
     <>
@@ -116,10 +110,24 @@ const PlayerListPage = () => {
                 <th>{translate("playerListPageLocationCol", lang)}</th>
               </tr>
             </thead>
-            <tbody className="table-hover-rows">
-              {players?.map((player) => (
-                <PlayerListRow player={player} playerFilter={playerFilter} />
-              ))}
+            <tbody ref={tbodyElement} className="table-hover-rows">
+              {players
+                ?.filter((player) => {
+                  const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
+
+                  return (
+                    playerFilter === "" ||
+                    (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
+                    (player as PlayerForFilter).simplifiedAlias.includes(playerFilter) ||
+                    regionNameFull.toLowerCase().normalize("NFKD").includes(playerFilter)
+                  );
+                })
+                .map((player, idx) => {
+                  if (idx < sliceStart || idx >= sliceEnd) return <></>;
+                  return (
+                    <PlayerListRow key={player.id} player={player} playerFilter={playerFilter} />
+                  );
+                })}
             </tbody>
           </table>
         </Deferred>
