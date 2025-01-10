@@ -21,6 +21,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import { LapModeRadio } from "../widgets/LapModeSelect";
+import { useInfiniteScroll } from "../../hooks/ScrollHook";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -119,6 +120,10 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     }
   }, [highlightElement, isLoading]);
 
+  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(35, rankings?.length ?? 0, [
+    isLoading,
+  ]);
+
   const siteHue = getCategorySiteHue(category, settings);
 
   return (
@@ -147,63 +152,68 @@ const RankingsPage = ({ metric }: RankingsProps) => {
                   <th>{translate(metric.titleKey, lang)}</th>
                 </tr>
               </thead>
-              <tbody className="table-hover-rows">
-                {rankings?.map((stats, idx, arr) => (
-                  <>
-                    {highlight &&
-                    ((metric.metricOrder < 0 &&
-                      metric.getHighlightValue(stats) < highlight &&
-                      (arr[idx - 1] === undefined ||
-                        metric.getHighlightValue(arr[idx - 1]) > highlight)) ||
-                      (metric.metricOrder > 0 &&
-                        metric.getHighlightValue(stats) > highlight &&
+              <tbody ref={tbodyElement} className="table-hover-rows">
+                {rankings?.map((stats, idx, arr) => {
+                  if (idx < sliceStart || idx >= sliceEnd) return <></>;
+                  return (
+                    <>
+                      {highlight &&
+                      ((metric.metricOrder < 0 &&
+                        metric.getHighlightValue(stats) < highlight &&
                         (arr[idx - 1] === undefined ||
-                          metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
-                      <>
-                        <tr ref={highlightElement} key={highlight} className="highlighted">
-                          <td />
-                          <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
-                          <td>
-                            {metric.metric === "total_record_ratio"
-                              ? highlight.toFixed(4) + "%"
-                              : metric.metric === "total_score"
-                                ? formatTime(highlight)
-                                : highlight}
-                          </td>
-                        </tr>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                    <tr
-                      key={stats.player.id}
-                      className={
-                        stats.player.id === user?.player ||
-                        metric.getHighlightValue(stats) === highlight
-                          ? "highlighted"
-                          : ""
-                      }
-                      ref={
-                        metric.getHighlightValue(stats) === highlight ? highlightElement : undefined
-                      }
-                    >
-                      <td>{stats.rank}</td>
-                      <td>
-                        <PlayerMention
-                          precalcPlayer={stats.player}
-                          precalcRegionId={stats.player.region ?? undefined}
-                          xxFlag={true}
-                          showRegFlagRegardless={
-                            region.type === "country" ||
-                            region.type === "subnational" ||
-                            region.type === "subnational_group"
-                          }
-                        />
-                      </td>
-                      <td>{metric.getValueString(stats)}</td>
-                    </tr>
-                  </>
-                ))}
+                          metric.getHighlightValue(arr[idx - 1]) > highlight)) ||
+                        (metric.metricOrder > 0 &&
+                          metric.getHighlightValue(stats) > highlight &&
+                          (arr[idx - 1] === undefined ||
+                            metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
+                        <>
+                          <tr ref={highlightElement} key={highlight} className="highlighted">
+                            <td />
+                            <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
+                            <td>
+                              {metric.metric === "total_record_ratio"
+                                ? highlight.toFixed(4) + "%"
+                                : metric.metric === "total_score"
+                                  ? formatTime(highlight)
+                                  : highlight}
+                            </td>
+                          </tr>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                      <tr
+                        key={stats.player.id}
+                        className={
+                          stats.player.id === user?.player ||
+                          metric.getHighlightValue(stats) === highlight
+                            ? "highlighted"
+                            : ""
+                        }
+                        ref={
+                          metric.getHighlightValue(stats) === highlight
+                            ? highlightElement
+                            : undefined
+                        }
+                      >
+                        <td>{stats.rank}</td>
+                        <td>
+                          <PlayerMention
+                            precalcPlayer={stats.player}
+                            precalcRegionId={stats.player.region ?? undefined}
+                            xxFlag={true}
+                            showRegFlagRegardless={
+                              region.type === "country" ||
+                              region.type === "subnational" ||
+                              region.type === "subnational_group"
+                            }
+                          />
+                        </td>
+                        <td>{metric.getValueString(stats)}</td>
+                      </tr>
+                    </>
+                  );
+                })}
               </tbody>
             </table>
           </Deferred>
