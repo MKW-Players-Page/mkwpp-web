@@ -8,8 +8,8 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
-import { formatDate, formatTime } from "../../utils/Formatters";
-import { useCategoryParam, useRegionParam } from "../../utils/SearchParams";
+import { formatDate, formatDateShort, formatTime } from "../../utils/Formatters";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
 import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
@@ -18,11 +18,13 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
+import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
 
   const { category, setCategory } = useCategoryParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams);
   const { region, setRegion } = useRegionParam(searchParams);
 
   const metadata = useContext(MetadataContext);
@@ -47,74 +49,126 @@ const TrackRecordsPage = () => {
   };
 
   metadata.tracks?.forEach((track) =>
-    [false, true].forEach((isLap) => {
+    [
+      { isLap: false, big: true },
+      { isLap: true, big: true },
+      { isLap: false, big: false },
+      { isLap: true, big: false },
+    ].forEach(({ isLap, big }) => {
+      const Indexes = {
+        TrackCellBigAndSmall: 0,
+        TrackCellXSmall: 1,
+        PlayerName: 2,
+        TimeCellSmall: 3,
+        CourseTimeCellBig: 4,
+        LapTimeCellBig: 5,
+        Standards: 6,
+        DateBig: 7,
+        DateSmall: 8,
+        VideoLink: 9,
+        GhostLink: 10,
+        Comment: 11,
+      };
       const out: ArrayTableCellData[] = [
         {
-          content: isLap ? null : (
-            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+          content: (
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: track.id },
+                { lap: isLap ? LapModeEnum.Lap : null },
+              )}
+            >
               {translateTrack(track, lang)}
             </Link>
           ),
-          expandCell: [isLap, false],
+          expandCell: [isLap && big, false],
+          className: "track-records-columns-xbig",
+        },
+        {
+          content: (
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: track.id },
+                { lap: isLap ? LapModeEnum.Lap : null },
+              )}
+            >
+              {track.abbr}
+            </Link>
+          ),
+          className: "track-records-columns-xsmall",
         },
         { content: "-" },
-        { content: isLap ? null : "-", className: "fallthrough" },
+        { content: "-", className: "track-records-columns-small fallthrough" },
+        { content: isLap ? null : "-", className: "track-records-columns-big fallthrough" },
         {
           content: isLap ? "-" : null,
           expandCell: [false, !isLap],
-          className: "fallthrough",
+          className: "track-records-columns-big fallthrough",
         },
         { content: "-" },
-        { content: "-" },
+        { content: "-", className: "track-records-columns-big" },
+        { content: "-", className: "track-records-columns-small" },
         { content: null },
         { content: null },
         { content: null },
       ];
+      tableData.classNames?.push({
+        rowIdx: (track.id - 1) * 4 + (isLap ? 1 : 0) + (big ? 0 : 2),
+        className: big
+          ? "track-records-columns-big"
+          : `track-records-columns-small ${isLap ? "flap" : "course"}`,
+      });
       const score = scores?.find((score) => score.track === track.id && score.isLap === isLap);
-      if (score === undefined) {
-        table.push(out);
-        return;
+      if (score !== undefined) {
+        if (score?.player.id === user?.player)
+          tableData.classNames?.push({
+            rowIdx: (track.id - 1) * 4 + (isLap ? 1 : 0) + (big ? 0 : 2),
+            className: "highlighted",
+          });
+        out[Indexes.PlayerName].content = (
+          <PlayerMention
+            precalcPlayer={score.player}
+            precalcRegionId={score.player.region ?? undefined}
+            xxFlag={true}
+            showRegFlagRegardless={
+              region.type === "country" ||
+              region.type === "subnational" ||
+              region.type === "subnational_group"
+            }
+          />
+        );
+        out[Indexes.TimeCellSmall].content = out[
+          isLap ? Indexes.LapTimeCellBig : Indexes.CourseTimeCellBig
+        ].content = formatTime(score.value);
+        out[Indexes.TimeCellSmall].className = "track-records-columns-small";
+        out[isLap ? Indexes.LapTimeCellBig : Indexes.CourseTimeCellBig].className =
+          "track-records-columns-big";
+        out[Indexes.Standards].content = getStandardLevel(metadata, score.standard)?.name;
+        if (score.date) {
+          out[Indexes.DateBig].content = formatDate(score.date);
+          out[Indexes.DateSmall].content = formatDateShort(score.date);
+        }
+        if (score.videoLink)
+          out[Indexes.VideoLink].content = (
+            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+              <Icon icon="Video" />
+            </a>
+          );
+        if (score.ghostLink)
+          out[Indexes.GhostLink].content = (
+            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+              <Icon icon="Ghost" />
+            </a>
+          );
+        if (score.comment)
+          out[Indexes.Comment].content = (
+            <Tooltip text={score.comment}>
+              <Icon icon="Comment" />
+            </Tooltip>
+          );
       }
-
-      if (score?.player.id === user?.player)
-        tableData.classNames?.push({
-          rowIdx: track.id * 2 + (isLap ? 1 : 0),
-          className: "highlighted",
-        });
-      out[1].content = (
-        <PlayerMention
-          precalcPlayer={score.player}
-          precalcRegionId={score.player.region ?? undefined}
-          xxFlag={true}
-          showRegFlagRegardless={
-            region.type === "country" ||
-            region.type === "subnational" ||
-            region.type === "subnational_group"
-          }
-        />
-      );
-      out[isLap ? 3 : 2].content = formatTime(score.value);
-      out[isLap ? 3 : 2].className = "";
-      out[4].content = getStandardLevel(metadata, score.standard)?.name;
-      if (score.date) out[5].content = formatDate(score.date);
-      if (score.videoLink)
-        out[6].content = (
-          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-            <Icon icon="Video" />
-          </a>
-        );
-      if (score.ghostLink)
-        out[7].content = (
-          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-            <Icon icon="Ghost" />
-          </a>
-        );
-      if (score.comment)
-        out[8].content = (
-          <Tooltip text={score.comment}>
-            <Icon icon="Comment" />
-          </Tooltip>
-        );
 
       table.push(out);
     }),
@@ -126,6 +180,11 @@ const TrackRecordsPage = () => {
       <OverwriteColor hue={siteHue}>
         <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
+          <LapModeRadio
+            value={lapMode}
+            onChange={setLapMode}
+            className="track-records-columns-small"
+          />
           <RegionSelectionDropdown
             onePlayerMin={false}
             twoPlayerMin={true}
@@ -134,17 +193,49 @@ const TrackRecordsPage = () => {
             setValue={setRegion}
           />
         </div>
-        <div className="module">
+        <div
+          className="module"
+          style={
+            {
+              "--hideCourse": lapMode !== LapModeEnum.Course ? "none" : "table-row",
+              "--hideFlap": lapMode !== LapModeEnum.Lap ? "none" : "table-row",
+            } as React.CSSProperties
+          }
+        >
           <Deferred isWaiting={isLoading || metadata.isLoading}>
             <ArrayTable
               headerRows={[
                 [
-                  { content: translate("trackRecordsPageTrackCol", lang) },
+                  {
+                    content: translate("trackRecordsPageTrackCol", lang),
+                    className: "track-records-columns-xbig",
+                  },
+                  {
+                    content: translate("trackRecordsPageTrackCol", lang),
+                    className: "track-records-columns-xsmall",
+                  },
                   { content: translate("trackRecordsPagePlayerCol", lang) },
-                  { content: translate("trackRecordsPageCourseCol", lang) },
-                  { content: translate("trackRecordsPageLapCol", lang) },
+                  {
+                    content: translate("trackRecordsPageTimeCol", lang),
+                    className: "track-records-columns-small",
+                  },
+                  {
+                    content: translate("trackRecordsPageCourseCol", lang),
+                    className: "track-records-columns-big",
+                  },
+                  {
+                    content: translate("trackRecordsPageLapCol", lang),
+                    className: "track-records-columns-big",
+                  },
                   { content: translate("trackRecordsPageStandardCol", lang) },
-                  { content: translate("trackRecordsPageDateCol", lang) },
+                  {
+                    content: translate("trackRecordsPageDateCol", lang),
+                    className: "track-records-columns-big",
+                  },
+                  {
+                    content: translate("trackRecordsPageDateCol", lang),
+                    className: "track-records-columns-small",
+                  },
                   { content: null },
                   { content: null },
                   { content: null },

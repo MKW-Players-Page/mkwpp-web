@@ -459,8 +459,8 @@
     "es": ""
   },
   "constantRegionRecordWORLD": {
-    "it": "Record Mondiale",
-    "en": "World Record",
+    "it": "Record Mondiali",
+    "en": "World Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -12584,6 +12584,15 @@
   "trackRecordsPageLapCol": {
     "it": "Giro",
     "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackRecordsPageTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
     "fr": "",
     "de": "",
     "jp": "",
