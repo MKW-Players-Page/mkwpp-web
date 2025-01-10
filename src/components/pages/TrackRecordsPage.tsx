@@ -17,6 +17,7 @@ import { I18nContext, translate, translateRegionName, translateTrack } from "../
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
+import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -39,6 +40,86 @@ const TrackRecordsPage = () => {
 
   const siteHue = getCategorySiteHue(category, settings);
 
+  const table: ArrayTableCellData[][] = [];
+  const tableData: ArrayTableData = {
+    iconCellColumns: [-1, -2, -3],
+    classNames: [],
+  };
+
+  metadata.tracks?.forEach((track) =>
+    [false, true].forEach((isLap) => {
+      const out: ArrayTableCellData[] = [
+        {
+          content: isLap ? null : (
+            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
+              {translateTrack(track, lang)}
+            </Link>
+          ),
+          expandCell: [isLap, false],
+        },
+        { content: "-" },
+        { content: isLap ? null : "-", className: "fallthrough" },
+        {
+          content: isLap ? "-" : null,
+          expandCell: [false, !isLap],
+          className: "fallthrough",
+        },
+        { content: "-" },
+        { content: "-" },
+        { content: null },
+        { content: null },
+        { content: null },
+      ];
+      const score = scores?.find((score) => score.track === track.id && score.isLap === isLap);
+      if (score === undefined) {
+        table.push(out);
+        return;
+      }
+
+      if (score?.player.id === user?.player)
+        tableData.classNames?.push({
+          rowIdx: track.id * 2 + (isLap ? 1 : 0),
+          className: "highlighted",
+        });
+      out[1].content = (
+        <PlayerMention
+          precalcPlayer={score.player}
+          precalcRegionId={score.player.region ?? undefined}
+          xxFlag={true}
+          showRegFlagRegardless={
+            region.type === "country" ||
+            region.type === "subnational" ||
+            region.type === "subnational_group"
+          }
+        />
+      );
+      out[isLap ? 3 : 2].content = formatTime(score.value);
+      out[isLap ? 3 : 2].className = "";
+      out[4].content = getStandardLevel(metadata, score.standard)?.name;
+      if (score.date) out[5].content = formatDate(score.date);
+      if (score.videoLink)
+        out[6].content = (
+          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+            <Icon icon="Video" />
+          </a>
+        );
+      if (score.ghostLink)
+        out[7].content = (
+          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+            <Icon icon="Ghost" />
+          </a>
+        );
+      if (score.comment)
+        out[8].content = (
+          <Tooltip text={score.comment}>
+            <Icon icon="Comment" />
+          </Tooltip>
+        );
+
+      table.push(out);
+    }),
+  );
+
   return (
     <>
       <h1>{translateRegionName(region, lang, "Record")}</h1>
@@ -55,88 +136,23 @@ const TrackRecordsPage = () => {
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading || metadata.isLoading}>
-            <table>
-              <thead>
-                <tr>
-                  <th>{translate("trackRecordsPageTrackCol", lang)}</th>
-                  <th>{translate("trackRecordsPagePlayerCol", lang)}</th>
-                  <th>{translate("trackRecordsPageCourseCol", lang)}</th>
-                  <th>{translate("trackRecordsPageLapCol", lang)}</th>
-                  <th>{translate("trackRecordsPageStandardCol", lang)}</th>
-                  <th>{translate("trackRecordsPageDateCol", lang)}</th>
-                  <th className="icon-cell" />
-                  <th className="icon-cell" />
-                  <th className="icon-cell" />
-                </tr>
-              </thead>
-              <tbody className="table-hover-rows">
-                {metadata.tracks?.map((track) =>
-                  [false, true].map((isLap) => {
-                    const score = scores?.find(
-                      (score) => score.track === track.id && score.isLap === isLap,
-                    );
-                    return (
-                      <tr
-                        key={`${isLap ? "l" : "c"}${track.id}`}
-                        className={user && score?.player.id === user.player ? "highlighted" : ""}
-                      >
-                        {!isLap && (
-                          <td rowSpan={2}>
-                            <Link to={resolvePage(Pages.TrackChart, { id: track.id })}>
-                              {translateTrack(track, lang)}
-                            </Link>
-                          </td>
-                        )}
-                        <td>
-                          {score ? (
-                            <PlayerMention
-                              precalcPlayer={score.player}
-                              precalcRegionId={score.player.region ?? undefined}
-                              xxFlag={true}
-                              showRegFlagRegardless={
-                                region.type === "country" ||
-                                region.type === "subnational" ||
-                                region.type === "subnational_group"
-                              }
-                            />
-                          ) : (
-                            "-"
-                          )}
-                        </td>
-                        {isLap && <td />}
-                        <td className={score?.category !== category ? "fallthrough" : ""}>
-                          {score ? formatTime(score.value) : "-"}
-                        </td>
-                        {!isLap && <td />}
-                        <td>{score ? getStandardLevel(metadata, score.standard)?.name : "-"}</td>
-                        <td>{score?.date ? formatDate(score.date) : "-"}</td>
-                        <td className="icon-cell">
-                          {score?.videoLink && (
-                            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Video" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.ghostLink && (
-                            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Ghost" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.comment && (
-                            <Tooltip text={score.comment}>
-                              <Icon icon="Comment" />
-                            </Tooltip>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  }),
-                )}
-              </tbody>
-            </table>
+            <ArrayTable
+              headerRows={[
+                [
+                  { content: translate("trackRecordsPageTrackCol", lang) },
+                  { content: translate("trackRecordsPagePlayerCol", lang) },
+                  { content: translate("trackRecordsPageCourseCol", lang) },
+                  { content: translate("trackRecordsPageLapCol", lang) },
+                  { content: translate("trackRecordsPageStandardCol", lang) },
+                  { content: translate("trackRecordsPageDateCol", lang) },
+                  { content: null },
+                  { content: null },
+                  { content: null },
+                ],
+              ]}
+              rows={table}
+              tableData={tableData}
+            />
           </Deferred>
         </div>
       </OverwriteColor>
