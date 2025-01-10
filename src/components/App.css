@@ -292,3 +292,9 @@ th.track-records-columns-small,
     display: none;
   }
 }
+
+@media (max-width: 400px) {
+  .matchup-search-s1 {
+    display: none;
+  }
+}
