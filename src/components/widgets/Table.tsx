@@ -126,19 +126,24 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps
 
 const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
   return cells.map((row, rowIdx) => {
+    let prevCellColSpan = 1;
     return row.map((cell, cellIdx) => {
       let colSpan = 1;
       let rowSpan = 1;
 
-      for (let checkingCellIdx = cellIdx + 1; true; checkingCellIdx++) {
-        if (
-          row[checkingCellIdx] !== undefined &&
-          row[checkingCellIdx].expandCell !== undefined &&
-          (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
-        ) {
-          colSpan++;
-        } else {
-          break;
+      if (prevCellColSpan > 1) {
+        colSpan = prevCellColSpan - 1;
+      } else {
+        for (let checkingCellIdx = cellIdx + 1; true; checkingCellIdx++) {
+          if (
+            row[checkingCellIdx] !== undefined &&
+            row[checkingCellIdx].expandCell !== undefined &&
+            (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
+          ) {
+            colSpan++;
+          } else {
+            break;
+          }
         }
       }
 
@@ -154,6 +159,7 @@ const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
         }
       }
 
+      prevCellColSpan = colSpan;
       return [rowSpan, colSpan];
     });
   });
