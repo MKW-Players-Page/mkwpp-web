@@ -55,7 +55,7 @@ const TabbedModule = ({ children }: TabbedModuleProps) => {
         {tabs.map((tab, index) => (
           <div
             key={index}
-            className={`tabbed-module-tab ${state.activeTabIndex === index ? "active" : ""}`}
+            className={`tabbed-module-tab nobr ${state.activeTabIndex === index ? "active" : ""}`}
             onClick={setActiveTab(index)}
           >
             {tab.props.title}

@@ -11,3 +11,7 @@
 .submission-card-flex-div > :last-child > * {
   padding-left: 2px;
 }
+
+.outer-card-div {
+  flex-grow: 1;
+}

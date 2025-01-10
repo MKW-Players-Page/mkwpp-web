@@ -3,6 +3,7 @@ export interface OverwriteColorProp {
   hue?: number;
   saturationShift?: number;
   luminosityShift?: number;
+  className?: string;
 }
 
 const OverwriteColor = ({
@@ -10,13 +11,14 @@ const OverwriteColor = ({
   saturationShift,
   luminosityShift,
   children,
+  className,
 }: OverwriteColorProp) => {
   let outStyle: any = {};
   if (hue !== undefined) outStyle["--site-hue"] = hue;
   if (saturationShift !== undefined) outStyle["--saturation-shift"] = saturationShift;
   if (luminosityShift !== undefined) outStyle["--luminosity-shift"] = luminosityShift;
   return (
-    <span className="overwrite-color" style={outStyle}>
+    <span className={`overwrite-color${className ? " " + className : ""}`} style={outStyle}>
       {children}
     </span>
   );

@@ -13626,8 +13626,8 @@
     "es": ""
   },
   "submissionPageMySubmissionsTabFilterAll": {
-    "it": "Tutte le tue submission",
-    "en": "All your Submissions",
+    "it": "Tutte",
+    "en": "All",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13635,8 +13635,8 @@
     "es": ""
   },
   "submissionPageMySubmissionsTabFilterByYou": {
-    "it": "Caricato da te",
-    "en": "Submitted By You",
+    "it": "Da te",
+    "en": "By You",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13644,8 +13644,8 @@
     "es": ""
   },
   "submissionPageMySubmissionsTabFilterForYou": {
-    "it": "Caricato per te",
-    "en": "Submitted For You",
+    "it": "Per te",
+    "en": "For You",
     "fr": "",
     "de": "",
     "jp": "",
