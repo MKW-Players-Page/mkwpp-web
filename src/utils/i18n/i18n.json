@@ -12689,6 +12689,15 @@
     "pt": "",
     "es": ""
   },
+  "standardsPageTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "countryRankingsPageExplanation": {
     "it": "{{countryRankingsTopType}} tempi per ogni nazione sono presi per ogni pista, e viene fatta una media, come la Media Posizioni.",
     "en": "{{countryRankingsTopType}} times for each country are taken for each track, then averaged, like Average Finish.",
