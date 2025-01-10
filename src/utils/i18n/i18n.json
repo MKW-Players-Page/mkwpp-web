@@ -13004,6 +13004,24 @@
     "pt": "",
     "es": ""
   },
+  "recentTimesRecentTimesCategoryCol": {
+    "it": "Categoria",
+    "en": "Category",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesLapModeCol": {
+    "it": "Giri",
+    "en": "Laps",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "recentTimesRecentTimesTimeCol": {
     "it": "Tempo",
     "en": "Time",
