@@ -37,7 +37,7 @@ const ArrayTableRow = ({
         ) : (
           <Cell
             className={`${
-              settings.lockTableCells && cell.lockedCell === true ? "lock-table-cells" : ""
+              settings.lockTableCells && cell.lockedCell === true ? "lock-table-cells force-bg" : ""
             }${cell.className ? " " + cell.className : ""}${
               iconCellColumns &&
               (iconCellColumns.includes(idx) || iconCellColumns.includes(idx - row.length))
@@ -69,9 +69,10 @@ export interface ArrayTableProps {
   /** 2D array, should always be square */
   footerRows?: ArrayTableCellData[][];
   tableData?: ArrayTableData;
+  className?: string;
 }
 
-const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps) => {
+const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: ArrayTableProps) => {
   const areas = {
     bodyCellArea: createCellAreaMap(rows),
     headerCellArea: createCellAreaMap(headerRows ? headerRows : []),
@@ -79,7 +80,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps
   };
 
   return (
-    <table>
+    <table className={className}>
       {headerRows ? (
         <thead>
           {headerRows.map((row, rowIdx) => (

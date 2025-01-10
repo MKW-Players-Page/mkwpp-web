@@ -84,6 +84,7 @@ const TrackRecordsPage = () => {
           ),
           expandCell: [isLap && big, false],
           className: "track-records-columns-xbig",
+          lockedCell: true,
         },
         {
           content: (
@@ -98,6 +99,7 @@ const TrackRecordsPage = () => {
             </Link>
           ),
           className: "track-records-columns-xsmall",
+          lockedCell: true,
         },
         { content: "-" },
         { content: "-", className: "track-records-columns-small fallthrough" },
@@ -209,10 +211,12 @@ const TrackRecordsPage = () => {
                   {
                     content: translate("trackRecordsPageTrackCol", lang),
                     className: "track-records-columns-xbig",
+                    lockedCell: true,
                   },
                   {
                     content: translate("trackRecordsPageTrackCol", lang),
                     className: "track-records-columns-xsmall",
+                    lockedCell: true,
                   },
                   { content: translate("trackRecordsPagePlayerCol", lang) },
                   {
