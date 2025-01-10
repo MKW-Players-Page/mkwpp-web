@@ -102,6 +102,10 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps
             iconCellColumns={tableData?.iconCellColumns}
             cellArea={areas.bodyCellArea}
             row={row}
+            className={tableData?.classNames
+              ?.filter((d) => d.rowIdx === rowIdx)
+              .map((d) => d.className)
+              .join(" ")}
           />
         ))}
       </tbody>
