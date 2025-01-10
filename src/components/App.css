@@ -298,3 +298,9 @@ th.track-records-columns-small,
     display: none;
   }
 }
+
+@media (max-width: 670px) {
+  .past-champs-s1 {
+    display: none;
+  }
+}
