@@ -11,3 +11,17 @@
     #ff0000 100%
   );
 }
+
+.color-slider {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .color-slider {
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+  }
+}
