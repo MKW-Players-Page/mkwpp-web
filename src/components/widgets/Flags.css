@@ -4,3 +4,8 @@
   aspect-ratio: 4/3;
   margin-right: 6px;
 }
+
+.flag-icon svg, .flag-icon img {
+    height:100%;
+    width: 100%;
+}

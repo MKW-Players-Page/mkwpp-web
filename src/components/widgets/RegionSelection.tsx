@@ -6,9 +6,9 @@ import { CategoryEnum, Region } from "../../api";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
-import Flag, { Flags } from "./Flags";
 import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
 import { LapModeEnum } from "./LapModeSelect";
+import { FlagIcon } from "./Icon";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;
@@ -62,7 +62,7 @@ const RegionModule = ({
       >
         <div className="module-content">
           {translateRegionName(region, lang)}
-          <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
+          <FlagIcon width={40} region={region} />
         </div>
       </Link>
     </div>

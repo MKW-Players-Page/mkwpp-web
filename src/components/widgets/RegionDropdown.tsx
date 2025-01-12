@@ -4,7 +4,6 @@ import { Region } from "../../api";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionDropdown.css";
-import Flag, { Flags } from "./Flags";
 import Dropdown, {
   DropdownData,
   DropdownItemData,
@@ -12,6 +11,7 @@ import Dropdown, {
   DropdownItemSetSetterData,
 } from "./Dropdown";
 import { I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
+import { FlagIcon } from "./Icon";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -83,7 +83,7 @@ const RegionSelectionDropdown = ({
           type: "DropdownItemData",
           element: {
             text: translateRegionName(region, lang),
-            rightIcon: <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />,
+            rightIcon: <FlagIcon region={region} />,
             value: region,
           } as DropdownItemData,
         });

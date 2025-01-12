@@ -12,7 +12,6 @@ import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import Flag, { Flags } from "../widgets/Flags";
 import {
   paramReplace,
   SearchParams,
@@ -222,9 +221,7 @@ const PlayerProfilePage = () => {
                             element: {
                               text: translateRegionName(region, lang),
                               value: region,
-                              rightIcon: (
-                                <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
-                              ),
+                              rightIcon: <FlagIcon region={region} />,
                             },
                           };
                         }),
