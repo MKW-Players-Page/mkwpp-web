@@ -36,7 +36,39 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
           <Icon icon="Hamburger" />
         </span>
         <Link to={resolvePage(Pages.Home)}>
-          <img className="logo" src="/mariokartwiilogo.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/00.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/01.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/02.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/03.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/04.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/05.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/06.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/07.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/08.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/09.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/10.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/11.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/12.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/13.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/14.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/15.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/16.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/17.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/18.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/19.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/20.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/21.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/22.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/23.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/24.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/25.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/26.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/27.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/28.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/29.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/30.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/31.png" alt="Mario Kart Wii" />
+          <img className="logo" src="/mkw/banner/32.png" alt="Mario Kart Wii" />
         </Link>
       </div>
       {!isLoading && (
