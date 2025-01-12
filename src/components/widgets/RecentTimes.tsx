@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
-import { I18nContext, translate, translateCategoryName } from "../../utils/i18n/i18n";
+import {
+  I18nContext,
+  translate,
+  translateCategoryName,
+  translateTrack,
+} from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
@@ -12,6 +17,8 @@ import { LapModeEnum } from "./LapModeSelect";
 import PlayerMention from "./PlayerMention";
 
 import "./RecentTimes.css";
+import ArrayTable from "./Table";
+import FormatDateDependable from "./VariedDate";
 
 interface RecentTimesProps {
   records?: boolean;
@@ -31,9 +38,9 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
     [],
     adjustedRecords ? "recentRecords" : "recentTimes",
   );
-
   return (
     <ExpandableModule
+      style={{ containerType: "inline-size" }}
       heading={
         adjustedRecords
           ? translate("recentTimesRecentRecordsHeading", lang)
@@ -41,61 +48,86 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
       }
     >
       <Deferred isWaiting={recentTimesLoading || metadata.isLoading}>
-        <table className="recentTimesTable">
-          <thead>
-            <th>{translate("recentTimesRecentTimesPlayerCol", lang)}</th>
-            <th>{translate("recentTimesRecentTimesTrackCol", lang)}</th>
-            <th>{translate("recentTimesRecentTimesTimeCol", lang)}</th>
-            <th>{translate("recentTimesRecentTimesDateCol", lang)}</th>
-          </thead>
-          <tbody>
-            {recentTimes?.map((data) => (
-              <tr>
-                <td>
-                  <PlayerMention
-                    precalcPlayer={data.player}
-                    precalcRegionId={data.player.region ?? undefined}
-                    xxFlag={true}
-                  />
-                </td>
-                <td>
-                  <Link
-                    to={resolvePage(
-                      Pages.TrackChart,
-                      { id: data.track },
-                      {
-                        cat: data.category !== CategoryEnum.NonShortcut ? data.category : null,
-                        lap: data.isLap ? LapModeEnum.Lap : null,
-                      },
-                    )}
-                  >
-                    {getTrackById(metadata.tracks, data.track)?.abbr}&nbsp;
-                    {translateCategoryName(data.category, lang)}&nbsp;
-                    {data.isLap
-                      ? translate("constantLapModeLap", lang)
-                      : translate("constantLapModeCourse", lang)}
-                  </Link>
-                </td>
-                <td>
-                  <Link
-                    to={resolvePage(
-                      Pages.TrackChart,
-                      { id: data.track },
-                      {
-                        cat: data.category !== CategoryEnum.NonShortcut ? data.category : null,
-                        lap: data.isLap ? LapModeEnum.Lap : null,
-                        hl: data.value,
-                      },
-                    )}
-                  >
-                    {formatTime(data.value)}
-                  </Link>
-                </td>
-                <td>{data.date?.toLocaleDateString(lang)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <ArrayTable
+          className="recent-times-table"
+          headerRows={[
+            [
+              {
+                content: translate("recentTimesRecentTimesTrackCol", lang),
+                lockedCell: true,
+              },
+              {
+                content: translate("recentTimesRecentTimesCategoryCol", lang),
+                className: "b2",
+              },
+              {
+                content: translate("recentTimesRecentTimesLapModeCol", lang),
+                className: "b1",
+              },
+              { content: translate("recentTimesRecentTimesPlayerCol", lang) },
+              { content: translate("recentTimesRecentTimesTimeCol", lang) },
+              { content: translate("recentTimesRecentTimesDateCol", lang) },
+            ],
+          ]}
+          rows={
+            recentTimes?.map((data) => {
+              const track = getTrackById(metadata.tracks, data.track);
+              return [
+                {
+                  content: (
+                    <Link
+                      to={resolvePage(
+                        Pages.TrackChart,
+                        { id: data.track },
+                        {
+                          cat: data.category !== CategoryEnum.NonShortcut ? data.category : null,
+                          lap: data.isLap ? LapModeEnum.Lap : null,
+                          hl: data.value,
+                        },
+                      )}
+                    >
+                      <span className="s3">{track?.abbr}</span>
+                      <span className="b3">{translateTrack(track, lang)}</span>
+                    </Link>
+                  ),
+                  lockedCell: true,
+                },
+                {
+                  content: translateCategoryName(data.category, lang),
+                  className: "b2",
+                },
+                {
+                  content: data.isLap
+                    ? translate("constantLapModeLap", lang)
+                    : translate("constantLapModeCourse", lang),
+                  className: "b1",
+                },
+                {
+                  content: (
+                    <PlayerMention
+                      precalcPlayer={data.player}
+                      precalcRegionId={data.player.region ?? undefined}
+                      xxFlag={true}
+                    />
+                  ),
+                },
+                {
+                  content: formatTime(data.value),
+                },
+                {
+                  content: (
+                    <FormatDateDependable
+                      date={data.date as Date}
+                      smallClass={"s1 b4"}
+                      bigClass={"b1"}
+                    />
+                  ),
+                  className: "",
+                },
+              ];
+            }) ?? [[]]
+          }
+        />
       </Deferred>
     </ExpandableModule>
   );

@@ -177,188 +177,201 @@ const TimesheetTab = () => {
   return (
     <div key={reload} style={{ padding: "10px" }}>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio value={lapMode} onChange={setLapMode} includeOverall />
         </div>
         <Deferred isWaiting={metadata.isLoading || scoresLoading || editsLoading}>
-          <table key={reload} className="module">
-            <thead>
-              <tr>
-                <th>{translate("playerProfilePageTrackColumn", lang)}</th>
-                {lapMode === LapModeEnum.Overall ? (
-                  <>
-                    <th>{translate("playerProfilePageCourseTimeColumn", lang)}</th>
-                    <th>{translate("playerProfilePageLapTimeColumn", lang)}</th>
-                  </>
-                ) : (
-                  <th>{translate("playerProfilePageTimeColumn", lang)}</th>
-                )}
-                <th>{translate("playerProfilePageRankColumn", lang)}</th>
-                <th>{translate("playerProfilePageDateColumn", lang)}</th>
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-                <th className="icon-cell" />
-              </tr>
-            </thead>
-            <tbody className="table-hover-rows">
-              {sortedScores?.map((score) => {
-                const track = metadata.tracks?.find((r) => r.id === score.track);
-                const submission = edits?.find((x) => x.score.id === score.id);
-                return (
-                  <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
-                    {score.precedesRepeat ? (
-                      <td rowSpan={2}>{translateTrack(track, lang)}</td>
-                    ) : score.repeat ? (
-                      <></>
-                    ) : (
-                      <td>{translateTrack(track, lang)}</td>
-                    )}
-                    {score.isLap && lapMode === LapModeEnum.Overall && <td />}
-                    <td className={score?.category !== category ? "fallthrough" : ""}>
-                      {formatTime(score.value)}
-                    </td>
-                    {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
-                    <td>{score.rank}</td>
-                    <td>{score.date ? formatDate(score.date) : "????-??-??"}</td>
-                    <td className="icon-cell">
-                      {score.videoLink && (
-                        <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                          <Icon icon="Video" />
-                        </a>
+          <div className="module">
+            <table key={reload}>
+              <thead>
+                <tr>
+                  <th>{translate("playerProfilePageTrackColumn", lang)}</th>
+                  {lapMode === LapModeEnum.Overall ? (
+                    <>
+                      <th>{translate("playerProfilePageCourseTimeColumn", lang)}</th>
+                      <th>{translate("playerProfilePageLapTimeColumn", lang)}</th>
+                    </>
+                  ) : (
+                    <th>{translate("playerProfilePageTimeColumn", lang)}</th>
+                  )}
+                  <th>{translate("playerProfilePageRankColumn", lang)}</th>
+                  <th>{translate("playerProfilePageDateColumn", lang)}</th>
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
+                  <th className="icon-cell" />
+                </tr>
+              </thead>
+              <tbody className="table-hover-rows">
+                {sortedScores?.map((score) => {
+                  const track = metadata.tracks?.find((r) => r.id === score.track);
+                  const submission = edits?.find((x) => x.score.id === score.id);
+                  return (
+                    <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
+                      {score.precedesRepeat ? (
+                        <td rowSpan={2}>
+                          <span className="submission-timesheet-columns-b1">
+                            {translateTrack(track, lang)}
+                          </span>
+                          <span className="submission-timesheet-columns-s1">{track?.abbr}</span>
+                        </td>
+                      ) : score.repeat ? (
+                        <></>
+                      ) : (
+                        <td>
+                          <span className="submission-timesheet-columns-b1">
+                            {translateTrack(track, lang)}
+                          </span>
+                          <span className="submission-timesheet-columns-s1">{track?.abbr}</span>
+                        </td>
                       )}
-                    </td>
-                    <td className="icon-cell">
-                      {score.ghostLink && (
-                        <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                          <Icon icon="Ghost" />
-                        </a>
-                      )}
-                    </td>
-                    <td className="icon-cell">
-                      {score.comment && (
-                        <Tooltip text={score.comment}>
-                          <Icon icon="Comment" />
-                        </Tooltip>
-                      )}
-                    </td>
-                    <td className="icon-cell">
-                      {submission && (
-                        <Tooltip
-                          text={
-                            <span style={{ whiteSpace: "nowrap" }}>
-                              {submission.submitterNote ? (
-                                <div style={{ marginBottom: "15px" }}>
-                                  {submission.submitterNote}
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                              <div>
-                                {handleBars(
-                                  translate(
-                                    "submissionPageMySubmissionsTabTooltipSubmittedAt",
-                                    lang,
-                                  ),
-                                  [["time", submission.submittedAt.toLocaleString(lang)]],
+                      {score.isLap && lapMode === LapModeEnum.Overall && <td />}
+                      <td className={score?.category !== category ? "fallthrough" : ""}>
+                        {formatTime(score.value)}
+                      </td>
+                      {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
+                      <td>{score.rank}</td>
+                      <td>{score.date ? formatDate(score.date) : "????-??-??"}</td>
+                      <td className="icon-cell">
+                        {score.videoLink && (
+                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Video" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score.ghostLink && (
+                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="Ghost" />
+                          </a>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {score.comment && (
+                          <Tooltip text={score.comment}>
+                            <Icon icon="Comment" />
+                          </Tooltip>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {submission && (
+                          <Tooltip
+                            text={
+                              <span style={{ whiteSpace: "nowrap" }}>
+                                {submission.submitterNote ? (
+                                  <div style={{ marginBottom: "15px" }}>
+                                    {submission.submitterNote}
+                                  </div>
+                                ) : (
+                                  <></>
                                 )}
-                              </div>
-                            </span>
-                          }
-                        >
-                          <Icon icon="Note" />
-                        </Tooltip>
-                      )}
-                    </td>
-                    <td className="icon-cell">
-                      {submission && (
-                        <Tooltip
-                          text={
-                            <span style={{ whiteSpace: "nowrap" }}>
-                              {submission.reviewerNote ? (
-                                <div style={{ marginBottom: "15px" }}>
-                                  {submission.reviewerNote}
+                                <div>
+                                  {handleBars(
+                                    translate(
+                                      "submissionPageMySubmissionsTabTooltipSubmittedAt",
+                                      lang,
+                                    ),
+                                    [["time", submission.submittedAt.toLocaleString(lang)]],
+                                  )}
                                 </div>
-                              ) : (
-                                <></>
-                              )}
-                              <div>
-                                {handleBars(
-                                  translate(
-                                    "submissionPageMySubmissionsTabTooltipReviewedBy",
-                                    lang,
-                                  ),
-                                  [
-                                    [
-                                      "name",
-                                      submission.reviewedBy ? (
-                                        <PlayerMention
-                                          precalcPlayer={submission.reviewedBy.player}
-                                        />
-                                      ) : (
-                                        translate(
-                                          "submissionPageMySubmissionsTabTooltipNotReviewed",
-                                          lang,
-                                        )
-                                      ),
-                                    ],
-                                  ],
+                              </span>
+                            }
+                          >
+                            <Icon icon="Note" />
+                          </Tooltip>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        {submission && (
+                          <Tooltip
+                            text={
+                              <span style={{ whiteSpace: "nowrap" }}>
+                                {submission.reviewerNote ? (
+                                  <div style={{ marginBottom: "15px" }}>
+                                    {submission.reviewerNote}
+                                  </div>
+                                ) : (
+                                  <></>
                                 )}
-                              </div>
-                              <div>
-                                {handleBars(
-                                  translate(
-                                    "submissionPageMySubmissionsTabTooltipReviewedAt",
-                                    lang,
-                                  ),
-                                  [
+                                <div>
+                                  {handleBars(
+                                    translate(
+                                      "submissionPageMySubmissionsTabTooltipReviewedBy",
+                                      lang,
+                                    ),
                                     [
-                                      "time",
-                                      submission.reviewedAt?.toLocaleString(lang) ??
-                                        translate(
-                                          "submissionPageMySubmissionsTabTooltipNotReviewed",
-                                          lang,
+                                      [
+                                        "name",
+                                        submission.reviewedBy ? (
+                                          <PlayerMention
+                                            precalcPlayer={submission.reviewedBy.player}
+                                          />
+                                        ) : (
+                                          translate(
+                                            "submissionPageMySubmissionsTabTooltipNotReviewed",
+                                            lang,
+                                          )
                                         ),
+                                      ],
                                     ],
-                                  ],
-                                )}
-                              </div>
-                            </span>
-                          }
-                        >
-                          {submission.status === "accepted" ? (
-                            <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
-                              <Icon icon="SubmissionAccepted" />
-                            </OverwriteColor>
-                          ) : submission.status === "rejected" ? (
-                            <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
-                              <Icon icon="SubmissionRejected" />
-                            </OverwriteColor>
-                          ) : submission.status === "pending" || submission.status === "on_hold" ? (
-                            <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
-                              <Icon icon="SubmissionPending" />
-                            </OverwriteColor>
-                          ) : (
-                            <></>
-                          )}
-                        </Tooltip>
-                      )}
-                    </td>
-                    <td className="icon-cell">
-                      <TimesheetTabEditBtn
-                        setReload={setReload}
-                        score={score}
-                        patchUpData={submission?.status === "pending" ? submission : undefined}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                                  )}
+                                </div>
+                                <div>
+                                  {handleBars(
+                                    translate(
+                                      "submissionPageMySubmissionsTabTooltipReviewedAt",
+                                      lang,
+                                    ),
+                                    [
+                                      [
+                                        "time",
+                                        submission.reviewedAt?.toLocaleString(lang) ??
+                                          translate(
+                                            "submissionPageMySubmissionsTabTooltipNotReviewed",
+                                            lang,
+                                          ),
+                                      ],
+                                    ],
+                                  )}
+                                </div>
+                              </span>
+                            }
+                          >
+                            {submission.status === "accepted" ? (
+                              <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
+                                <Icon icon="SubmissionAccepted" />
+                              </OverwriteColor>
+                            ) : submission.status === "rejected" ? (
+                              <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
+                                <Icon icon="SubmissionRejected" />
+                              </OverwriteColor>
+                            ) : submission.status === "pending" ||
+                              submission.status === "on_hold" ? (
+                              <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
+                                <Icon icon="SubmissionPending" />
+                              </OverwriteColor>
+                            ) : (
+                              <></>
+                            )}
+                          </Tooltip>
+                        )}
+                      </td>
+                      <td className="icon-cell">
+                        <TimesheetTabEditBtn
+                          setReload={setReload}
+                          score={score}
+                          patchUpData={submission?.status === "pending" ? submission : undefined}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </Deferred>
       </OverwriteColor>
     </div>

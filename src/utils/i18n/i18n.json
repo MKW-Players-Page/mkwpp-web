@@ -459,8 +459,8 @@
     "es": ""
   },
   "constantRegionRecordWORLD": {
-    "it": "Record Mondiale",
-    "en": "World Record",
+    "it": "Record Mondiali",
+    "en": "World Records",
     "fr": "",
     "de": "",
     "jp": "",
@@ -10484,6 +10484,15 @@
     "pt": "",
     "es": ""
   },
+  "headerActions": {
+    "it": "Account",
+    "en": "Account",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "navbarLabelHome": {
     "it": "Home",
     "en": "Home",
@@ -12581,6 +12590,15 @@
     "pt": "",
     "es": ""
   },
+  "trackRecordsPageTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "trackRecordsPageStandardCol": {
     "it": "Standard",
     "en": "Standard",
@@ -12609,8 +12627,8 @@
     "es": ""
   },
   "standardsPageHeading": {
-    "it": "Standard Storici",
-    "en": "Legacy Standards",
+    "it": "Gli Standard",
+    "en": "Standards",
     "fr": "",
     "de": "",
     "jp": "",
@@ -12665,6 +12683,15 @@
   "standardsPageLapCol": {
     "it": "Giro",
     "en": "Lap",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
     "fr": "",
     "de": "",
     "jp": "",
@@ -12980,6 +13007,24 @@
   "recentTimesRecentTimesTrackCol": {
     "it": "Pista",
     "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesCategoryCol": {
+    "it": "Categoria",
+    "en": "Category",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "recentTimesRecentTimesLapModeCol": {
+    "it": "Giri",
+    "en": "Laps",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13581,8 +13626,8 @@
     "es": ""
   },
   "submissionPageMySubmissionsTabFilterAll": {
-    "it": "Tutte le tue submission",
-    "en": "All your Submissions",
+    "it": "Tutte",
+    "en": "All",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13590,8 +13635,8 @@
     "es": ""
   },
   "submissionPageMySubmissionsTabFilterByYou": {
-    "it": "Caricato da te",
-    "en": "Submitted By You",
+    "it": "Da te",
+    "en": "By You",
     "fr": "",
     "de": "",
     "jp": "",
@@ -13599,8 +13644,8 @@
     "es": ""
   },
   "submissionPageMySubmissionsTabFilterForYou": {
-    "it": "Caricato per te",
-    "en": "Submitted For You",
+    "it": "Per te",
+    "en": "For You",
     "fr": "",
     "de": "",
     "jp": "",

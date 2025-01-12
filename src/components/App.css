@@ -1,8 +1,8 @@
 .content {
   padding-top: calc(var(--header-height) + 20px);
   margin-left: calc(20px);
-  padding-bottom: 20px;
-  padding-right: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
   overflow-x: clip;
 }
 
@@ -27,19 +27,15 @@
   }
 }
 
-.homePageGrid {
-  display: flex;
-  gap: 0 16px;
-  justify-content: center;
-  align-content: stretch;
-  flex-wrap: wrap-reverse;
-}
-
 .module {
   width: 100%;
   background-color: var(--module-background-color);
   border: 1px solid var(--module-border-color);
   margin-bottom: 16px;
+}
+
+.module:has(table) {
+  overflow-x: auto;
 }
 
 .module-header {
@@ -55,6 +51,17 @@
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+.module-row.wrap {
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.module-row.wrap > .module {
+  margin: 0;
+  width: auto;
+  flex-grow: 1;
 }
 
 .card-container {
@@ -144,6 +151,216 @@ th.force-bg {
 .table-hover-rows tr:hover td:not([rowspan="2"]),
 .table-hover-rows tr:has(td[rowspan="2"]:hover) + tr,
 .table-hover-rows td[rowspan="2"]:hover,
-td.force-bg:hover {
+td.force-bg:hover,
+.table-hover-rows tr:active td:not([rowspan="2"]),
+.table-hover-rows tr:has(td[rowspan="2"]:active) + tr,
+.table-hover-rows td[rowspan="2"]:active,
+td.force-bg:active {
   background-color: var(--header-background-color);
+}
+
+th.lock-table-cells,
+td.lock-table-cells {
+  position: sticky;
+  left: 0;
+  padding-right: 5px;
+}
+
+.home-page-grid {
+  display: flex;
+  gap: 0 16px;
+  justify-content: center;
+  align-content: stretch;
+  flex-wrap: wrap-reverse;
+}
+
+.home-page-welcome-module {
+  padding: 0;
+  text-justify: inter-word;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page-welcome-module > div {
+  text-justify: inter-word;
+  text-align: justify;
+  padding: 12px;
+}
+
+@media only screen and (max-width: 550px) {
+  .player-list td:nth-child(2),
+  .player-list th:nth-child(2) {
+    display: none;
+  }
+}
+
+.player-profile-columns-s1 {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .player-profile-columns-s1 {
+    display: table-cell;
+  }
+  .player-profile-columns-b1 {
+    display: none;
+  }
+}
+
+td.track-records-columns-s2,
+th.track-records-columns-s2,
+span.track-records-columns-s2,
+td.track-records-columns-s1,
+tr.track-records-columns-s1,
+th.track-records-columns-s1,
+span.track-records-columns-s1,
+.track-records-columns-s1.radio-button-row {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  td.track-records-columns-s1,
+  th.track-records-columns-s1 {
+    display: table-cell;
+  }
+  tr.track-records-columns-s1 {
+    display: table-row;
+  }
+  .track-records-columns-s1.flap {
+    display: var(--hideFlap);
+  }
+  .track-records-columns-s1.course {
+    display: var(--hideCourse);
+  }
+
+  .track-records-columns-s1.radio-button-row {
+    display: flex;
+  }
+  span.track-records-columns-s1 {
+    display: inline;
+  }
+
+  .track-records-columns-b1 {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  td.track-records-columns-s2,
+  th.track-records-columns-s2 {
+    display: table-cell;
+  }
+  span.track-records-columns-s2 {
+    display: inline;
+  }
+
+  .track-records-columns-b2 {
+    display: none;
+  }
+}
+
+.how-to-contribute-thanks {
+  text-justify: inter-word;
+  text-align: justify;
+}
+
+.standards-table-s1,
+.standards-table-s1.radio-button-row {
+  display: none;
+}
+
+@media (max-width: 770px) {
+  .standards-table-s1 {
+    display: table-cell;
+  }
+  .standards-table-b1 {
+    display: none;
+  }
+  .standards-table-s1.radio-button-row {
+    display: flex;
+  }
+}
+
+@media (max-width: 660px) {
+  .standards-table-b2 {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .matchup-search-s1 {
+    display: none;
+  }
+}
+
+@media (max-width: 670px) {
+  .past-champs-s1 {
+    display: none;
+  }
+}
+
+.track-chart-page-track-div {
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.track-chart-page-track-div-back {
+  flex-grow: 1;
+}
+
+.track-chart-page-track-div-current {
+  text-align: center;
+  flex-grow: 3;
+}
+
+.track-chart-page-track-div-next {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.track-chart-page-track-div .s1 {
+  display: none;
+}
+
+.track-chart-page-s1 {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .track-chart-page-track-div .b1 {
+    display: none;
+  }
+  .track-chart-page-track-div .s1 {
+    display: initial;
+  }
+
+  .track-chart-page-s1 {
+    display: inline;
+  }
+
+  .track-chart-page-b1 {
+    display: none;
+  }
+
+  .track-chart-page-track-div-current {
+    font-size: 0.9em;
+  }
+  .track-chart-page-track-div-back,
+  .track-chart-page-track-div-next {
+    min-width: 30px;
+  }
+}
+
+.submission-timesheet-columns-s1 {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .submission-timesheet-columns-s1 {
+    display: table-cell;
+  }
+  .submission-timesheet-columns-b1 {
+    display: none;
+  }
 }

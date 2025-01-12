@@ -16,7 +16,7 @@
 
 .expandable-module-body > div {
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
   scrollbar-width: none;
 }
 .expandable-module-body.expanded {

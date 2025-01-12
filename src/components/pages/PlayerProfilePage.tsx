@@ -12,7 +12,6 @@ import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import Flag, { Flags } from "../widgets/Flags";
 import {
   paramReplace,
   SearchParams,
@@ -200,7 +199,7 @@ const PlayerProfilePage = () => {
         {player?.name ?? <>&nbsp;</>}
       </h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           {player?.region !== undefined && player?.region !== null && player?.region !== 1 ? (
@@ -222,9 +221,7 @@ const PlayerProfilePage = () => {
                             element: {
                               text: translateRegionName(region, lang),
                               value: region,
-                              rightIcon: (
-                                <Flag flag={region.code.toLowerCase() as keyof typeof Flags} />
-                              ),
+                              rightIcon: <FlagIcon region={region} />,
                             },
                           };
                         }),
@@ -237,7 +234,7 @@ const PlayerProfilePage = () => {
             <></>
           )}
         </div>
-        <div className="module-row">
+        <div className="module-row wrap">
           <div className="module">
             <Deferred isWaiting={playerLoading}>
               <table>
@@ -383,7 +380,7 @@ const PlayerProfilePage = () => {
           <div className="module">
             <Deferred isWaiting={playerLoading}>
               {/* Temporary until better solution implemented, like a popup dialog. */}
-              <div className="module-content" style={{ overflowY: "scroll", maxHeight: 128 }}>
+              <div className="module-content" style={{ overflowY: "auto", maxHeight: 128 }}>
                 <p>
                   {player?.bio ? (
                     player.bio.split("\n").map((line: string) => (
@@ -490,7 +487,10 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {translateTrack(track, lang)}
+                            <span className="player-profile-columns-b1">
+                              {translateTrack(track, lang)}
+                            </span>
+                            <span className="player-profile-columns-s1">{track?.abbr}</span>
                           </Link>
                         </td>
                       ) : score.repeat ? (
@@ -508,7 +508,10 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {translateTrack(track, lang)}
+                            <span className="player-profile-columns-b1">
+                              {translateTrack(track, lang)}
+                            </span>
+                            <span className="player-profile-columns-s1">{track?.abbr}</span>
                           </Link>
                         </td>
                       )}

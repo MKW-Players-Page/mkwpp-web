@@ -131,7 +131,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
       <h1>{translate(metric.titleKey, lang)}</h1>
       <p>{translate(metric.descriptionKey, lang)}</p>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           <RegionSelectionDropdown

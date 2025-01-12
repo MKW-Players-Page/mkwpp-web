@@ -101,7 +101,7 @@ const PlayerListPage = () => {
           {translate("playerListPageSearchBtn", lang)}
         </button>
       </div>
-      <div className="module">
+      <div className="module player-list">
         <Deferred isWaiting={isLoading}>
           <table>
             <thead>

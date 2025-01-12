@@ -160,7 +160,13 @@ const ContributionsPage = () => {
                 ],
               ],
             )}
-            images={<img style={{ userSelect: "none" }} src="/misc/TMXSlider.png" alt="Slider" />}
+            images={
+              <img
+                style={{ userSelect: "none", aspectRatio: "499/62", width: "100%" }}
+                src="/misc/TMXSlider.png"
+                alt="Slider"
+              />
+            }
             suggestedBy={[918]}
           />
           <FeatureElement
@@ -315,7 +321,7 @@ const ContributionsPage = () => {
         </div>
       </div>
       <div className="module">
-        <div className="module-content">
+        <div className="module-content how-to-contribute-thanks">
           <h2>{translate("contributionsPageSpecialCreditsHeading", lang)}</h2>
           <p>
             {handleBars(translate("contributionsPageSpecialCreditsPenevParagraph", lang), [

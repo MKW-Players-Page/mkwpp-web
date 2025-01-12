@@ -19,6 +19,8 @@ import {
 } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { CategoryRadio } from "../widgets/CategorySelect";
+import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
+import { LapModeEnum } from "../widgets/LapModeSelect";
 
 const StandardsPage = () => {
   const searchParams = useSearchParams();
@@ -38,18 +40,48 @@ const StandardsPage = () => {
   const level =
     metadata.standards?.find((l) => l.id === levelId) ??
     ({ standards: [] } as unknown as StandardLevel);
-  let filteredStandards: Standard[] = [];
+
   let lastChecked = {} as Standard;
-  level?.standards
+  const filteredStandards: ArrayTableCellData[][] = level?.standards
     .filter((r) => getCategoryNumerical(r.category) <= getCategoryNumerical(category))
     .sort((a, b) => getCategoryNumerical(b.category) - getCategoryNumerical(a.category)) // Sort these in reverse order
     .sort((a, b) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0))
     .sort((a, b) => a.track - b.track)
-    .forEach((r) => {
+    .filter((r) => {
       if (lastChecked.track !== r.track || lastChecked.isLap !== r.isLap) {
-        filteredStandards.push(r);
         lastChecked = r;
+        return true;
       }
+      return false;
+    })
+    .map((standard) => {
+      const track = metadata.tracks?.find((track) => track.id === standard.track);
+      const value = formatTime(standard.value ?? 0);
+      return [
+        {
+          content: (
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: track?.id },
+                { lap: standard.isLap ? LapModeEnum.Lap : null },
+              )}
+            >
+              {translateTrack(track, lang)}
+            </Link>
+          ),
+          expandCell: [standard.isLap, false],
+        },
+        {
+          content: translateCategoryName(standard.category, lang),
+          className: "standards-table-b2",
+        },
+        { content: level.name },
+        { content: level.value },
+        { content: standard.isLap ? null : value, className: "standards-table-b1" },
+        { content: value, expandCell: [false, !standard.isLap], className: "standards-table-b1" },
+        { content: value, className: "standards-table-s1" },
+      ] as ArrayTableCellData[];
     });
 
   const siteHue = getCategorySiteHue(category, settings);
@@ -58,7 +90,7 @@ const StandardsPage = () => {
     <>
       <h1>{translate("standardsPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <Dropdown
             data={
               {
@@ -84,46 +116,32 @@ const StandardsPage = () => {
         </div>
         <div className="module">
           <Deferred isWaiting={metadata.isLoading}>
-            <table>
-              <thead>
-                <tr>
-                  <th>{translate("standardsPageTrackCol", lang)}</th>
-                  <th>{translate("standardsPageCategoryCol", lang)}</th>
-                  <th>{translate("standardsPageStandardCol", lang)}</th>
-                  <th>{translate("standardsPagePointsCol", lang)}</th>
-                  <th>{translate("standardsPageCourseCol", lang)}</th>
-                  <th>{translate("standardsPageLapCol", lang)}</th>
-                </tr>
-              </thead>
-              <tbody className="table-hover-rows">
-                {filteredStandards.map((standard) => {
-                  const track = metadata.tracks?.find((track) => track.id === standard.track);
-                  return (
-                    <tr key={standard.id}>
-                      {!standard.isLap ? (
-                        <td rowSpan={2}>
-                          <Link
-                            to={resolvePage(Pages.TrackChart, {
-                              id: track?.id ?? 0,
-                            })}
-                          >
-                            {translateTrack(track, lang)}
-                          </Link>
-                        </td>
-                      ) : (
-                        <></>
-                      )}
-                      <td>{translateCategoryName(standard.category, lang)}</td>
-                      <td>{level.name}</td>
-                      <td>{level.value}</td>
-                      {standard.isLap && <td />}
-                      <td>{standard.value ? formatTime(standard.value) : "*"}</td>
-                      {!standard.isLap && <td />}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <ArrayTable
+              headerRows={[
+                [
+                  { content: translate("standardsPageTrackCol", lang) },
+                  {
+                    content: translate("standardsPageCategoryCol", lang),
+                    className: "standards-table-b2",
+                  },
+                  { content: translate("standardsPageStandardCol", lang) },
+                  { content: translate("standardsPagePointsCol", lang) },
+                  {
+                    content: translate("standardsPageCourseCol", lang),
+                    className: "standards-table-b1",
+                  },
+                  {
+                    content: translate("standardsPageLapCol", lang),
+                    className: "standards-table-b1",
+                  },
+                  {
+                    content: translate("standardsPageTimeCol", lang),
+                    className: "standards-table-s1",
+                  },
+                ],
+              ]}
+              rows={filteredStandards}
+            />
           </Deferred>
         </div>
       </OverwriteColor>

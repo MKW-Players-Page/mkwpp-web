@@ -200,7 +200,7 @@ const Dropdown = ({ data }: DropdownProp) => {
         y={dropdownListPos.y}
         width={dropdownListPos.width}
       >
-        {data.data[selectedItemSetIndex].children.map((dropdownItem) => {
+        {data.data[selectedItemSetIndex].children.map((dropdownItem, idx) => {
           if (dropdownItem.hidden) return <></>;
           if (dropdownItem.type === "DropdownItemData")
             if (
@@ -209,6 +209,7 @@ const Dropdown = ({ data }: DropdownProp) => {
             )
               return (
                 <DropdownItem
+                  key={`dropdown-${dropdownItem.element.text}-${idx}`}
                   text={dropdownItem.element.text}
                   rightIcon={dropdownItem.element.rightIcon}
                   leftIcon={dropdownItem.element.leftIcon}

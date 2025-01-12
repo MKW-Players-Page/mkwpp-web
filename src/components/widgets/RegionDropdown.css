@@ -1,3 +1,7 @@
+.dropdown {
+  min-width: var(--navbar-width);
+}
+
 .dropdown-item svg {
   height: 100%;
 }

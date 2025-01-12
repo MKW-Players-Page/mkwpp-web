@@ -29,14 +29,15 @@ const PlayerSelectField = ({
           textDecorationLine: id === 0 && nth < 3 ? "underline" : "none",
         }}
       >
-        {translate("matchupPagePlayerText", lang)}&nbsp;{nth}
+        <span className="matchup-search-s1">{translate("matchupPagePlayerText", lang)}&nbsp;</span>
+        {nth}
       </span>
       <PlayerSelectDropdown setId={setId} id={id} />
       {showDelete ? (
         <button
           onClick={deleteOnClick}
           className="module"
-          style={{ flexShrink: 10, alignSelf: "stretch", fontSize: ".7em" }}
+          style={{ flexShrink: 10, alignSelf: "stretch", fontSize: ".7em", padding: "4px" }}
         >
           ✖
         </button>

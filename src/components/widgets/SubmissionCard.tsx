@@ -35,12 +35,11 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
   const siteHue = getCategorySiteHue(submission.category, settings);
 
   return (
-    <OverwriteColor hue={siteHue}>
+    <OverwriteColor hue={siteHue} className="outer-card-div">
       <div key={submission.id} className="card">
-        <p className="nobr">
-          {translateTrack(getTrackById(metadata.tracks, submission.track), lang)}
-          ,&nbsp;
-          {translateCategoryName(submission.category, lang)},&nbsp;
+        <p>{translateTrack(getTrackById(metadata.tracks, submission.track), lang)}</p>
+        <p>{translateCategoryName(submission.category, lang)}</p>
+        <p>
           {submission.isLap
             ? translate("constantLapModeLap", lang)
             : translate("constantLapModeCourse", lang)}

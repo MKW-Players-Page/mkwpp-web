@@ -10,6 +10,7 @@
   flex-direction: row;
   margin-bottom: -1px;
   z-index: 1;
+  overflow-y: auto;
 }
 
 .tabbed-module-tab {

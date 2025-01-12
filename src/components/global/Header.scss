@@ -1,0 +1,13 @@
+$base: 690px;
+$multiple: 40.5px;
+
+@for $n from 1 through 32 {
+  @media (min-width: $base + ($multiple * ($n - 1))) {
+    .logo:nth-child(0n + #{$n}) {
+      display: none;
+    }
+    .logo:nth-child(0n + #{1 + $n}) {
+      display: inline-block;
+    }
+  }
+}

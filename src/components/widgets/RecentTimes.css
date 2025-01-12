@@ -1,9 +1,39 @@
-.recentTimesTable td:not(:first-child),
-.recentTimesTable th:not(:first-child) {
-  padding: 4px;
+.recent-times-table .s1 {
+  display: none;
+}
+.recent-times-table .s3 {
+  display: none;
 }
 
-.recentTimesTable td,
-.recentTimesTable th {
-  white-space: nowrap;
+@container (max-width: 800px) {
+  .recent-times-table .s1 {
+    display: table-cell;
+  }
+  .recent-times-table span.s1 {
+    display: inline;
+  }
+  .recent-times-table .b1 {
+    display: none;
+  }
+}
+
+@container (max-width: 700px) {
+  .recent-times-table .b2 {
+    display: none;
+  }
+}
+
+@container (max-width: 600px) {
+  .recent-times-table .s3 {
+    display: table-cell;
+  }
+  .recent-times-table .b3 {
+    display: none;
+  }
+}
+
+@container (max-width: 460px) {
+  .recent-times-table .b4 {
+    display: none;
+  }
 }

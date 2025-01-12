@@ -3,11 +3,11 @@ import { createContext, useContext } from "react";
 /* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
 
-import Flag, { Flags } from "../../components/widgets/Flags";
 import { CategoryEnum, Region, RegionTypeEnum, Track } from "../../api";
 import { getRegionById, Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
 import { LapModeEnum } from "../../components/widgets/LapModeSelect";
+import { FlagIcon } from "../../components/widgets";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -94,33 +94,13 @@ export const LanguageDropdown = () => {
             {
               id: 0,
               children: [
-                [
-                  Language.English,
-                  LanguageName.English,
-                  <Flag flag={"gb" as keyof typeof Flags} />,
-                ],
-                [
-                  Language.Italian,
-                  LanguageName.Italian,
-                  <Flag flag={"it" as keyof typeof Flags} />,
-                ],
-                [Language.French, LanguageName.French, <Flag flag={"fr" as keyof typeof Flags} />],
-                [Language.German, LanguageName.German, <Flag flag={"de" as keyof typeof Flags} />],
-                [
-                  Language.Japanese,
-                  LanguageName.Japanese,
-                  <Flag flag={"jp" as keyof typeof Flags} />,
-                ],
-                [
-                  Language.Portuguese,
-                  LanguageName.Portuguese,
-                  <Flag flag={"pt" as keyof typeof Flags} />,
-                ],
-                [
-                  Language.Spanish,
-                  LanguageName.Spanish,
-                  <Flag flag={"es" as keyof typeof Flags} />,
-                ],
+                [Language.English, LanguageName.English, <FlagIcon region={"gb"} />],
+                [Language.Italian, LanguageName.Italian, <FlagIcon region={"it"} />],
+                [Language.French, LanguageName.French, <FlagIcon region={"fr"} />],
+                [Language.German, LanguageName.German, <FlagIcon region={"de"} />],
+                [Language.Japanese, LanguageName.Japanese, <FlagIcon region={"jp"} />],
+                [Language.Portuguese, LanguageName.Portuguese, <FlagIcon region={"pt"} />],
+                [Language.Spanish, LanguageName.Spanish, <FlagIcon region={"es"} />],
               ].map(([value, text, rightIcon]) => {
                 return {
                   type: "DropdownItemData",

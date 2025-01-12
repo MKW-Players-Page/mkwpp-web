@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
 
 export interface ArrayTableCellData {
@@ -37,7 +38,7 @@ const ArrayTableRow = ({
         ) : (
           <Cell
             className={`${
-              settings.lockTableCells && cell.lockedCell === true ? "lock-table-cells" : ""
+              settings.lockTableCells && cell.lockedCell === true ? "lock-table-cells force-bg" : ""
             }${cell.className ? " " + cell.className : ""}${
               iconCellColumns &&
               (iconCellColumns.includes(idx) || iconCellColumns.includes(idx - row.length))
@@ -59,6 +60,8 @@ export interface ArrayTableData {
   /** Negative values work like Array.at() */
   iconCellColumns?: number[];
   classNames?: { rowIdx: number; className: string }[];
+  rowKeys?: string[];
+  infiniteScrollData?: { padding: number; extraDependencies: any[] };
 }
 
 export interface ArrayTableProps {
@@ -69,21 +72,36 @@ export interface ArrayTableProps {
   /** 2D array, should always be square */
   footerRows?: ArrayTableCellData[][];
   tableData?: ArrayTableData;
+  className?: string;
 }
 
-const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps) => {
+const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: ArrayTableProps) => {
   const areas = {
     bodyCellArea: createCellAreaMap(rows),
     headerCellArea: createCellAreaMap(headerRows ? headerRows : []),
     footerCellArea: createCellAreaMap(footerRows ? footerRows : []),
   };
 
+  const mapFn = (row: ArrayTableCellData[], rowIdx: number): React.ReactNode => (
+    <ArrayTableRow
+      rowIdx={rowIdx}
+      iconCellColumns={tableData?.iconCellColumns}
+      cellArea={areas.bodyCellArea}
+      row={row}
+      className={tableData?.classNames
+        ?.filter((d) => d.rowIdx === rowIdx)
+        .map((d) => d.className)
+        .join(" ")}
+    />
+  );
+
   return (
-    <table>
+    <table className={className}>
       {headerRows ? (
         <thead>
           {headerRows.map((row, rowIdx) => (
             <ArrayTableRow
+              key={tableData?.rowKeys ? tableData.rowKeys[rowIdx] : undefined}
               rowIdx={rowIdx}
               iconCellColumns={tableData?.iconCellColumns}
               cellArea={areas.headerCellArea}
@@ -95,16 +113,17 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps
       ) : (
         <></>
       )}
-      <tbody className="table-hover-rows">
-        {rows.map((row, rowIdx) => (
-          <ArrayTableRow
-            rowIdx={rowIdx}
-            iconCellColumns={tableData?.iconCellColumns}
-            cellArea={areas.bodyCellArea}
-            row={row}
-          />
-        ))}
-      </tbody>
+      {tableData?.infiniteScrollData !== undefined ? (
+        <InfiniteScrollTBody
+          pad={tableData.infiniteScrollData.padding}
+          maxLen={rows.length}
+          extraDep={tableData.infiniteScrollData.extraDependencies}
+          mapFn={mapFn}
+          rows={rows}
+        />
+      ) : (
+        <tbody className="table-hover-rows">{rows.map(mapFn)}</tbody>
+      )}
       {footerRows ? (
         <tfoot>
           {footerRows.map((row, rowIdx) => (
@@ -124,21 +143,45 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows }: ArrayTableProps
   );
 };
 
+interface InfiniteScrollTBodyProps {
+  pad: number;
+  maxLen: number;
+  extraDep: any[];
+  mapFn: (row: ArrayTableCellData[], rowIdx: number) => React.ReactNode;
+  rows: ArrayTableCellData[][];
+}
+
+const InfiniteScrollTBody = ({ rows, pad, maxLen, extraDep, mapFn }: InfiniteScrollTBodyProps) => {
+  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(pad, maxLen, extraDep);
+  return (
+    <tbody ref={tbodyElement}>
+      {rows.map((row, rowIdx) => {
+        return rowIdx < sliceEnd && rowIdx >= sliceStart ? mapFn(row, rowIdx) : <></>;
+      })}
+    </tbody>
+  );
+};
+
 const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
   return cells.map((row, rowIdx) => {
+    let prevCellColSpan = 1;
     return row.map((cell, cellIdx) => {
       let colSpan = 1;
       let rowSpan = 1;
 
-      for (let checkingCellIdx = cellIdx + 1; true; checkingCellIdx++) {
-        if (
-          row[checkingCellIdx] !== undefined &&
-          row[checkingCellIdx].expandCell !== undefined &&
-          (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
-        ) {
-          colSpan++;
-        } else {
-          break;
+      if (prevCellColSpan > 1) {
+        colSpan = prevCellColSpan - 1;
+      } else {
+        for (let checkingCellIdx = cellIdx + 1; true; checkingCellIdx++) {
+          if (
+            row[checkingCellIdx] !== undefined &&
+            row[checkingCellIdx].expandCell !== undefined &&
+            (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
+          ) {
+            colSpan++;
+          } else {
+            break;
+          }
         }
       }
 
@@ -154,6 +197,7 @@ const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
         }
       }
 
+      prevCellColSpan = colSpan;
       return [rowSpan, colSpan];
     });
   });

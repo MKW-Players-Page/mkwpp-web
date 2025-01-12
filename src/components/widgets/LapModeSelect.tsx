@@ -20,9 +20,17 @@ export interface LapModeSelectProps {
   onChange: (lapMode: LapModeEnum) => void;
   /** Whether this element is disabled */
   disabled?: boolean;
+  /** Classes to add on top of the element */
+  className?: string;
 }
 
-export const LapModeRadio = ({ includeOverall, value, onChange, disabled }: LapModeSelectProps) => {
+export const LapModeRadio = ({
+  includeOverall,
+  value,
+  onChange,
+  disabled,
+  className,
+}: LapModeSelectProps) => {
   const { lang } = useContext(I18nContext);
 
   const options = [
@@ -39,6 +47,7 @@ export const LapModeRadio = ({ includeOverall, value, onChange, disabled }: LapM
       })}
       state={value}
       setState={onChange}
+      className={className}
     />
   );
 };
