@@ -31,6 +31,7 @@
 .region-selection-button img {
   height: 100%;
   margin-left: 16px;
+  aspect-ratio: 4/3;
 }
 
 .region-selection-button,
