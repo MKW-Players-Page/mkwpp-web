@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "../pages";
@@ -45,6 +45,20 @@ const RegionModule = ({
   if (selectedRegions.includes(region.id)) classes += " selected-region";
   const { lang } = useContext(I18nContext);
 
+  const div = useRef(null);
+  useLayoutEffect(() => {
+    if (!div.current) return;
+    const cb = () => {
+      if ((div.current as any).clientWidth < 210) {
+        (div.current as any).classList.add("flag-only");
+      } else {
+        (div.current as any).classList.remove("flag-only");
+      }
+    };
+    window.addEventListener("resize", cb);
+    return () => window.removeEventListener("resize", cb);
+  }, [div]);
+
   return (
     <div className={classes}>
       <Link
@@ -60,9 +74,11 @@ const RegionModule = ({
           },
         )}
       >
-        <div className="module-content">
-          {translateRegionName(region, lang)}
+        <div ref={div} className="module-content">
+          <span className="hide-for-flag">{translateRegionName(region, lang)}</span>
+          <span className="show-for-flag"></span>
           <FlagIcon width={40} region={region} />
+          <span className="show-for-flag"></span>
         </div>
       </Link>
     </div>

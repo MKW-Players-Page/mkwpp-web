@@ -27,8 +27,24 @@
   background-color: var(--navbar-background-color-hover);
 }
 
+.flag-only .hide-for-flag {
+  display: none;
+}
+
+.show-for-flag {
+  display: none;
+}
+
+.flag-only .show-for-flag {
+  display: inline;
+}
+
+.region-selection-button span:first-child {
+  margin: 0 5px 0 0;
+}
+
 .region-selection-button .flag-icon {
-  margin: 0 0 0 5px;
+  margin: 0;
 }
 
 .region-selection-button,
