@@ -9,6 +9,9 @@
   .recent-times-table .s1 {
     display: table-cell;
   }
+  .recent-times-table span.s1 {
+    display: inline;
+  }
   .recent-times-table .b1 {
     display: none;
   }

@@ -7,7 +7,7 @@ import { Icon, Tooltip } from "../widgets";
 import api from "../../api";
 import { CategoryEnum, TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
-import { formatDate, formatTime } from "../../utils/Formatters";
+import { formatTime } from "../../utils/Formatters";
 import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
@@ -25,7 +25,8 @@ import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
-import { useInfiniteScroll } from "../../hooks/ScrollHook";
+import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
+import FormatDateDependable from "../widgets/VariedDate";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -67,10 +68,108 @@ const TrackChartPage = () => {
         lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
         region: region.id,
       }),
+
     [category, lapMode, region, id, metadata.isLoading],
     "trackCharts",
     [{ variable: metadata.regions.length, defaultValue: 1 }],
   );
+
+  const tableArray: ArrayTableCellData[][] = [];
+  const tableData: ArrayTableData = {
+    iconCellColumns: [-1, -2, -3],
+    classNames: [],
+    infiniteScrollData: { padding: 45, extraDependencies: [isLoading] },
+    rowKeys: [],
+  };
+  let hasHighlightRow = false;
+
+  scores?.forEach((score, idx, arr) => {
+    console.log("passes!");
+    if (
+      highlight &&
+      score.value > highlight &&
+      (arr[idx - 1] === undefined || arr[idx - 1].value < highlight)
+    ) {
+      hasHighlightRow = true;
+      tableData.classNames?.push({
+        rowIdx: idx,
+        className: "highlighted",
+      });
+      tableData.rowKeys?.push("highlight");
+      tableArray.push([
+        { content: null },
+        { content: translate("genericRankingsYourHighlightedValue", lang) },
+        { content: formatTime(highlight) },
+        { content: null },
+        { content: null },
+        { content: null },
+        { content: null },
+        { content: null },
+      ]);
+    }
+
+    if (user?.player === score.player.id || score.value === highlight)
+      tableData.classNames?.push({
+        rowIdx: idx + (hasHighlightRow ? 0 : 1),
+        className: "highlighted",
+      });
+
+    tableData.rowKeys?.push(`${score.rank}-${score.value}`);
+    tableArray.push([
+      { content: score.rank },
+      {
+        content: (
+          <PlayerMention
+            precalcPlayer={score.player}
+            precalcRegionId={score.player.region ?? undefined}
+            xxFlag={true}
+            showRegFlagRegardless={
+              region.type === "country" ||
+              region.type === "subnational" ||
+              region.type === "subnational_group"
+            }
+          />
+        ),
+      },
+      {
+        content: formatTime(score.value),
+        className: score.category !== category ? "fallthrough" : undefined,
+      },
+      { content: getStandardLevel(metadata, score.standard)?.name },
+      {
+        content: score.date ? (
+          <FormatDateDependable
+            date={score.date}
+            smallClass={"track-chart-page-s1"}
+            bigClass={"track-chart-page-b1"}
+          />
+        ) : (
+          "-"
+        ),
+      },
+      {
+        content: score?.videoLink && (
+          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+            <Icon icon="Video" />
+          </a>
+        ),
+      },
+      {
+        content: score?.ghostLink && (
+          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+            <Icon icon="Ghost" />
+          </a>
+        ),
+      },
+      {
+        content: score?.comment && (
+          <Tooltip text={score.comment}>
+            <Icon icon="Comment" />
+          </Tooltip>
+        ),
+      },
+    ]);
+  });
 
   const highlightElement = useRef(null);
   useEffect(() => {
@@ -81,10 +180,6 @@ const TrackChartPage = () => {
       });
     }
   }, [highlightElement, isLoading, metadata.isLoading]);
-
-  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(35, scores?.length ?? 0, [
-    isLoading,
-  ]);
 
   const siteHue = getCategorySiteHue(category, settings);
 
@@ -150,96 +245,22 @@ const TrackChartPage = () => {
         </div>
         <div className="module">
           <Deferred isWaiting={metadata.isLoading || isLoading}>
-            <table>
-              <thead>
-                <tr>
-                  <th>{translate("trackChartPageRankCol", lang)}</th>
-                  <th>{translate("trackChartPagePlayerCol", lang)}</th>
-                  <th>{translate("trackChartPageTimeCol", lang)}</th>
-                  <th>{translate("trackChartPageStandardCol", lang)}</th>
-                  <th>{translate("trackChartPageDateCol", lang)}</th>
-                  <th className="icon-cell" />
-                  <th className="icon-cell" />
-                  <th className="icon-cell" />
-                </tr>
-              </thead>
-              <tbody ref={tbodyElement} className="table-hover-rows">
-                {scores?.map((score, idx, arr) => {
-                  if (idx < sliceStart || idx >= sliceEnd) return <></>;
-                  return (
-                    <>
-                      {highlight &&
-                      score.value > highlight &&
-                      (arr[idx - 1] === undefined || arr[idx - 1].value < highlight) ? (
-                        <>
-                          <tr ref={highlightElement} key={highlight} className="highlighted">
-                            <td />
-                            <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
-                            <td>{formatTime(highlight)}</td>
-                            <td />
-                            <td />
-                            <td />
-                            <td />
-                            <td />
-                          </tr>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <tr
-                        key={score.id}
-                        className={
-                          score.player.id === user?.player || score.value === highlight
-                            ? "highlighted"
-                            : ""
-                        }
-                        ref={score.value === highlight ? highlightElement : undefined}
-                      >
-                        <td>{score.rank}</td>
-                        <td>
-                          <PlayerMention
-                            precalcPlayer={score.player}
-                            precalcRegionId={score.player.region ?? undefined}
-                            xxFlag={true}
-                            showRegFlagRegardless={
-                              region.type === "country" ||
-                              region.type === "subnational" ||
-                              region.type === "subnational_group"
-                            }
-                          />
-                        </td>
-                        <td className={score.category !== category ? "fallthrough" : ""}>
-                          {formatTime(score.value)}
-                        </td>
-                        <td>{getStandardLevel(metadata, score.standard)?.name}</td>
-                        <td>{score.date && formatDate(score.date)}</td>
-                        <td className="icon-cell">
-                          {score?.videoLink && (
-                            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Video" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.ghostLink && (
-                            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                              <Icon icon="Ghost" />
-                            </a>
-                          )}
-                        </td>
-                        <td className="icon-cell">
-                          {score?.comment && (
-                            <Tooltip text={score.comment}>
-                              <Icon icon="Comment" />
-                            </Tooltip>
-                          )}
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
+            <ArrayTable
+              rows={tableArray}
+              headerRows={[
+                [
+                  { content: translate("trackChartPageRankCol", lang) },
+                  { content: translate("trackChartPagePlayerCol", lang) },
+                  { content: translate("trackChartPageTimeCol", lang) },
+                  { content: translate("trackChartPageStandardCol", lang) },
+                  { content: translate("trackChartPageDateCol", lang) },
+                  { content: null },
+                  { content: null },
+                  { content: null },
+                ],
+              ]}
+              tableData={tableData}
+            />
           </Deferred>
         </div>
       </OverwriteColor>

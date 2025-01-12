@@ -72,19 +72,3 @@ export const formatDate = (date: Date) => {
   const day = date.getUTCDate();
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 };
-
-/** Format a date in the form of
- *
- * `'YY-MM-DD`
- *
- * where `Y` stands for year, `M` stands for month, and `D` stands for day.
- *
- * @param date The date to format
- * @returns A human readable date string
- */
-export const formatDateShort = (date: Date) => {
-  const year = date.getUTCFullYear() - 2000;
-  const month = date.getUTCMonth() + 1;
-  const day = date.getUTCDate();
-  return `'${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-};

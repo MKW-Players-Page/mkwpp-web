@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks";
-import { formatDate, formatDateShort, formatTime } from "../../utils/Formatters";
+import { formatTime } from "../../utils/Formatters";
 import {
   I18nContext,
   translate,
@@ -18,6 +18,7 @@ import PlayerMention from "./PlayerMention";
 
 import "./RecentTimes.css";
 import ArrayTable from "./Table";
+import FormatDateDependable from "./VariedDate";
 
 interface RecentTimesProps {
   records?: boolean;
@@ -53,12 +54,6 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
             [
               {
                 content: translate("recentTimesRecentTimesTrackCol", lang),
-                className: "s3",
-                lockedCell: true,
-              },
-              {
-                content: translate("recentTimesRecentTimesTrackCol", lang),
-                className: "b3",
                 lockedCell: true,
               },
               {
@@ -71,8 +66,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
               },
               { content: translate("recentTimesRecentTimesPlayerCol", lang) },
               { content: translate("recentTimesRecentTimesTimeCol", lang) },
-              { content: translate("recentTimesRecentTimesDateCol", lang), className: "b1" },
-              { content: translate("recentTimesRecentTimesDateCol", lang), className: "s1 b4" },
+              { content: translate("recentTimesRecentTimesDateCol", lang) },
             ],
           ]}
           rows={
@@ -92,29 +86,10 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                         },
                       )}
                     >
-                      {track?.abbr}
+                      <span className="s3">{track?.abbr}</span>
+                      <span className="b3">{translateTrack(track, lang)}</span>
                     </Link>
                   ),
-                  className: "s3",
-                  lockedCell: true,
-                },
-                {
-                  content: (
-                    <Link
-                      to={resolvePage(
-                        Pages.TrackChart,
-                        { id: data.track },
-                        {
-                          cat: data.category !== CategoryEnum.NonShortcut ? data.category : null,
-                          lap: data.isLap ? LapModeEnum.Lap : null,
-                          hl: data.value,
-                        },
-                      )}
-                    >
-                      {translateTrack(track, lang)}
-                    </Link>
-                  ),
-                  className: "b3",
                   lockedCell: true,
                 },
                 {
@@ -140,12 +115,14 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                   content: formatTime(data.value),
                 },
                 {
-                  content: formatDate(data.date as Date),
-                  className: "b1",
-                },
-                {
-                  content: formatDateShort(data.date as Date),
-                  className: "s1 b4",
+                  content: (
+                    <FormatDateDependable
+                      date={data.date as Date}
+                      smallClass={"s1 b4"}
+                      bigClass={"b1"}
+                    />
+                  ),
+                  className: "",
                 },
               ];
             }) ?? [[]]

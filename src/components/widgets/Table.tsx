@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
 
 export interface ArrayTableCellData {
@@ -59,6 +60,8 @@ export interface ArrayTableData {
   /** Negative values work like Array.at() */
   iconCellColumns?: number[];
   classNames?: { rowIdx: number; className: string }[];
+  rowKeys?: string[];
+  infiniteScrollData?: { padding: number; extraDependencies: any[] };
 }
 
 export interface ArrayTableProps {
@@ -70,6 +73,7 @@ export interface ArrayTableProps {
   footerRows?: ArrayTableCellData[][];
   tableData?: ArrayTableData;
   className?: string;
+  infiniteScrollRef?: React.MutableRefObject<null>;
 }
 
 const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: ArrayTableProps) => {
@@ -79,12 +83,26 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     footerCellArea: createCellAreaMap(footerRows ? footerRows : []),
   };
 
+  const mapFn = (row: ArrayTableCellData[], rowIdx: number): React.ReactNode => (
+    <ArrayTableRow
+      rowIdx={rowIdx}
+      iconCellColumns={tableData?.iconCellColumns}
+      cellArea={areas.bodyCellArea}
+      row={row}
+      className={tableData?.classNames
+        ?.filter((d) => d.rowIdx === rowIdx)
+        .map((d) => d.className)
+        .join(" ")}
+    />
+  );
+
   return (
     <table className={className}>
       {headerRows ? (
         <thead>
           {headerRows.map((row, rowIdx) => (
             <ArrayTableRow
+              key={tableData?.rowKeys ? tableData.rowKeys[rowIdx] : undefined}
               rowIdx={rowIdx}
               iconCellColumns={tableData?.iconCellColumns}
               cellArea={areas.headerCellArea}
@@ -96,20 +114,17 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
       ) : (
         <></>
       )}
-      <tbody className="table-hover-rows">
-        {rows.map((row, rowIdx) => (
-          <ArrayTableRow
-            rowIdx={rowIdx}
-            iconCellColumns={tableData?.iconCellColumns}
-            cellArea={areas.bodyCellArea}
-            row={row}
-            className={tableData?.classNames
-              ?.filter((d) => d.rowIdx === rowIdx)
-              .map((d) => d.className)
-              .join(" ")}
-          />
-        ))}
-      </tbody>
+      {tableData?.infiniteScrollData !== undefined ? (
+        <InfiniteScrollTBody
+          pad={tableData.infiniteScrollData.padding}
+          maxLen={rows.length}
+          extraDep={tableData.infiniteScrollData.extraDependencies}
+          mapFn={mapFn}
+          rows={rows}
+        />
+      ) : (
+        <tbody className="table-hover-rows">{rows.map(mapFn)}</tbody>
+      )}
       {footerRows ? (
         <tfoot>
           {footerRows.map((row, rowIdx) => (
@@ -126,6 +141,25 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
         <></>
       )}
     </table>
+  );
+};
+
+interface InfiniteScrollTBodyProps {
+  pad: number;
+  maxLen: number;
+  extraDep: any[];
+  mapFn: (row: ArrayTableCellData[], rowIdx: number) => React.ReactNode;
+  rows: ArrayTableCellData[][];
+}
+
+const InfiniteScrollTBody = ({ rows, pad, maxLen, extraDep, mapFn }: InfiniteScrollTBodyProps) => {
+  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(pad, maxLen, extraDep);
+  return (
+    <tbody ref={tbodyElement}>
+      {rows.map((row, rowIdx) => {
+        return rowIdx < sliceEnd && rowIdx >= sliceStart ? mapFn(row, rowIdx) : <></>;
+      })}
+    </tbody>
   );
 };
 

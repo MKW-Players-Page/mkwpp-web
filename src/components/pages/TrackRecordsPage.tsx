@@ -8,7 +8,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
-import { formatDate, formatDateShort, formatTime } from "../../utils/Formatters";
+import { formatTime } from "../../utils/Formatters";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
 import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
@@ -19,6 +19,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import FormatDateDependable from "../widgets/VariedDate";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -56,18 +57,16 @@ const TrackRecordsPage = () => {
       { isLap: true, big: false },
     ].forEach(({ isLap, big }) => {
       const Indexes = {
-        TrackCellBigAndSmall: 0,
-        TrackCellXSmall: 1,
-        PlayerName: 2,
-        TimeCellSmall: 3,
-        CourseTimeCellBig: 4,
-        LapTimeCellBig: 5,
-        Standards: 6,
-        DateBig: 7,
-        DateSmall: 8,
-        VideoLink: 9,
-        GhostLink: 10,
-        Comment: 11,
+        TrackCell: 0,
+        PlayerName: 1,
+        TimeCellSmall: 2,
+        CourseTimeCellBig: 3,
+        LapTimeCellBig: 4,
+        Standards: 5,
+        Date: 6,
+        VideoLink: 7,
+        GhostLink: 8,
+        Comment: 9,
       };
       const out: ArrayTableCellData[] = [
         {
@@ -79,39 +78,24 @@ const TrackRecordsPage = () => {
                 { lap: isLap ? LapModeEnum.Lap : null },
               )}
             >
-              {translateTrack(track, lang)}
+              <span className="track-records-columns-b2">{translateTrack(track, lang)}</span>
+              <span className="track-records-columns-s2">{track.abbr}</span>
             </Link>
           ),
           expandCell: [isLap && big, false],
-          className: "track-records-columns-xbig",
-          lockedCell: true,
-        },
-        {
-          content: (
-            <Link
-              to={resolvePage(
-                Pages.TrackChart,
-                { id: track.id },
-                { lap: isLap ? LapModeEnum.Lap : null },
-              )}
-            >
-              {track.abbr}
-            </Link>
-          ),
-          className: "track-records-columns-xsmall",
+          className: "",
           lockedCell: true,
         },
         { content: "-" },
-        { content: "-", className: "track-records-columns-small fallthrough" },
-        { content: isLap ? null : "-", className: "track-records-columns-big fallthrough" },
+        { content: "-", className: "track-records-columns-s1 fallthrough" },
+        { content: isLap ? null : "-", className: "track-records-columns-b1 fallthrough" },
         {
           content: isLap ? "-" : null,
           expandCell: [false, !isLap],
-          className: "track-records-columns-big fallthrough",
+          className: "track-records-columns-b1 fallthrough",
         },
         { content: "-" },
-        { content: "-", className: "track-records-columns-big" },
-        { content: "-", className: "track-records-columns-small" },
+        { content: "-" },
         { content: null },
         { content: null },
         { content: null },
@@ -119,8 +103,8 @@ const TrackRecordsPage = () => {
       tableData.classNames?.push({
         rowIdx: (track.id - 1) * 4 + (isLap ? 1 : 0) + (big ? 0 : 2),
         className: big
-          ? "track-records-columns-big"
-          : `track-records-columns-small ${isLap ? "flap" : "course"}`,
+          ? "track-records-columns-b1"
+          : `track-records-columns-s1 ${isLap ? "flap" : "course"}`,
       });
       const score = scores?.find((score) => score.track === track.id && score.isLap === isLap);
       if (score !== undefined) {
@@ -144,13 +128,18 @@ const TrackRecordsPage = () => {
         out[Indexes.TimeCellSmall].content = out[
           isLap ? Indexes.LapTimeCellBig : Indexes.CourseTimeCellBig
         ].content = formatTime(score.value);
-        out[Indexes.TimeCellSmall].className = "track-records-columns-small";
+        out[Indexes.TimeCellSmall].className = "track-records-columns-s1";
         out[isLap ? Indexes.LapTimeCellBig : Indexes.CourseTimeCellBig].className =
-          "track-records-columns-big";
+          "track-records-columns-b1";
         out[Indexes.Standards].content = getStandardLevel(metadata, score.standard)?.name;
         if (score.date) {
-          out[Indexes.DateBig].content = formatDate(score.date);
-          out[Indexes.DateSmall].content = formatDateShort(score.date);
+          out[Indexes.Date].content = (
+            <FormatDateDependable
+              date={score.date}
+              smallClass={"track-records-columns-s1"}
+              bigClass={"track-records-columns-b1"}
+            />
+          );
         }
         if (score.videoLink)
           out[Indexes.VideoLink].content = (
@@ -185,7 +174,7 @@ const TrackRecordsPage = () => {
           <LapModeRadio
             value={lapMode}
             onChange={setLapMode}
-            className="track-records-columns-small"
+            className="track-records-columns-s1"
           />
           <RegionSelectionDropdown
             onePlayerMin={false}
@@ -210,36 +199,23 @@ const TrackRecordsPage = () => {
                 [
                   {
                     content: translate("trackRecordsPageTrackCol", lang),
-                    className: "track-records-columns-xbig",
-                    lockedCell: true,
-                  },
-                  {
-                    content: translate("trackRecordsPageTrackCol", lang),
-                    className: "track-records-columns-xsmall",
                     lockedCell: true,
                   },
                   { content: translate("trackRecordsPagePlayerCol", lang) },
                   {
                     content: translate("trackRecordsPageTimeCol", lang),
-                    className: "track-records-columns-small",
+                    className: "track-records-columns-s1",
                   },
                   {
                     content: translate("trackRecordsPageCourseCol", lang),
-                    className: "track-records-columns-big",
+                    className: "track-records-columns-b1",
                   },
                   {
                     content: translate("trackRecordsPageLapCol", lang),
-                    className: "track-records-columns-big",
+                    className: "track-records-columns-b1",
                   },
                   { content: translate("trackRecordsPageStandardCol", lang) },
-                  {
-                    content: translate("trackRecordsPageDateCol", lang),
-                    className: "track-records-columns-big",
-                  },
-                  {
-                    content: translate("trackRecordsPageDateCol", lang),
-                    className: "track-records-columns-small",
-                  },
+                  { content: translate("trackRecordsPageDateCol", lang) },
                   { content: null },
                   { content: null },
                   { content: null },
