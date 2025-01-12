@@ -304,3 +304,45 @@ th.track-records-columns-small,
     display: none;
   }
 }
+
+.track-chart-page-track-div {
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.track-chart-page-track-div-back {
+  min-width: 200px;
+  flex-grow: 1;
+}
+
+.track-chart-page-track-div-current {
+  text-align: center;
+  flex-grow: 3;
+}
+
+.track-chart-page-track-div-next {
+  min-width: 200px;
+  text-align: right;
+  flex-grow: 1;
+}
+
+.track-chart-page-track-div .s1 {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .track-chart-page-track-div .b1 {
+    display: none;
+  }
+  .track-chart-page-track-div .s1 {
+    display: initial;
+  }
+
+  .track-chart-page-track-div-current {
+    font-size: 0.9em;
+  }
+  .track-chart-page-track-div-back,
+  .track-chart-page-track-div-next {
+    min-width: 30px;
+  }
+}

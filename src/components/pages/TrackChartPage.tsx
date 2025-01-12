@@ -95,8 +95,8 @@ const TrackChartPage = () => {
       <Link to={resolvePage(Pages.TrackList)}>
         {translate("trackChartPageTrackListButton", lang)}
       </Link>
-      <div style={{ justifyContent: "space-between" }} className="module-row">
-        <div style={{ width: "200px" }}>
+      <div className="module-row nobr track-chart-page-track-div">
+        <div className="track-chart-page-track-div-back">
           {prevTrack !== undefined ? (
             <Link
               to={resolvePage(
@@ -108,14 +108,15 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {"« " + translateTrack(prevTrack, lang)}
+              <span className="b1">{"« " + translateTrack(prevTrack, lang)}</span>
+              <span className="s1">{"« " + prevTrack.abbr}</span>
             </Link>
           ) : (
             <></>
           )}
         </div>
-        <h1>{translateTrack(track, lang)}</h1>
-        <div style={{ width: "200px", textAlign: "right" }}>
+        <h1 className="track-chart-page-track-div-current">{translateTrack(track, lang)}</h1>
+        <div className="track-chart-page-track-div-next">
           {nextTrack !== undefined ? (
             <Link
               to={resolvePage(
@@ -127,7 +128,8 @@ const TrackChartPage = () => {
                 },
               )}
             >
-              {translateTrack(nextTrack, lang) + " »"}
+              <span className="b1">{translateTrack(nextTrack, lang) + " »"}</span>
+              <span className="s1">{nextTrack.abbr + " »"}</span>
             </Link>
           ) : (
             <></>
