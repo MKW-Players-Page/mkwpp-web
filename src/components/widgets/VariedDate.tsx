@@ -20,8 +20,8 @@ const FormatDateDependable = ({ date, smallClass, bigClass }: FormatDateDependab
   const dateStr = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
   return (
     <>
-      <span>{dateStr.substring(0, 2)}</span>
-      <span>'</span>
+      <span className={bigClass}>{dateStr.substring(0, 2)}</span>
+      <span className={smallClass}>'</span>
       {dateStr.substring(2)}
     </>
   );
