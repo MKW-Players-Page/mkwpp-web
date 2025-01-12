@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Header.css";
+import "./Header.scss";
 import { Pages, resolvePage } from "../pages";
 import { logoutUser, UserContext } from "../../utils/User";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
