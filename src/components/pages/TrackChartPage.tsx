@@ -84,7 +84,6 @@ const TrackChartPage = () => {
   let hasHighlightRow = false;
 
   scores?.forEach((score, idx, arr) => {
-    console.log("passes!");
     if (
       highlight &&
       score.value > highlight &&

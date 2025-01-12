@@ -2,7 +2,7 @@ $base: 700px;
 $multiple: 43px;
 
 @for $n from 1 through 32 {
-  @media (min-width: $base + (43px * ($n - 1))) {
+  @media (min-width: $base + ($multiple * ($n - 1))) {
     .logo:nth-child(0n + #{$n}) {
       display: none;
     }

@@ -212,11 +212,21 @@ const TimesheetTab = () => {
                   return (
                     <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
                       {score.precedesRepeat ? (
-                        <td rowSpan={2}>{translateTrack(track, lang)}</td>
+                        <td rowSpan={2}>
+                          <span className="submission-timesheet-columns-b1">
+                            {translateTrack(track, lang)}
+                          </span>
+                          <span className="submission-timesheet-columns-s1">{track?.abbr}</span>
+                        </td>
                       ) : score.repeat ? (
                         <></>
                       ) : (
-                        <td>{translateTrack(track, lang)}</td>
+                        <td>
+                          <span className="submission-timesheet-columns-b1">
+                            {translateTrack(track, lang)}
+                          </span>
+                          <span className="submission-timesheet-columns-s1">{track?.abbr}</span>
+                        </td>
                       )}
                       {score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td className={score?.category !== category ? "fallthrough" : ""}>

@@ -176,6 +176,10 @@ td.lock-table-cells {
 
 .home-page-welcome-module {
   padding: 0;
+  text-justify: inter-word;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-page-welcome-module > div {
@@ -187,6 +191,19 @@ td.lock-table-cells {
 @media only screen and (max-width: 550px) {
   .player-list td:nth-child(2),
   .player-list th:nth-child(2) {
+    display: none;
+  }
+}
+
+.player-profile-columns-s1 {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .player-profile-columns-s1 {
+    display: table-cell;
+  }
+  .player-profile-columns-b1 {
     display: none;
   }
 }
@@ -241,13 +258,6 @@ span.track-records-columns-s1,
   .track-records-columns-b2 {
     display: none;
   }
-}
-
-.home-page-welcome-module {
-  text-justify: inter-word;
-  text-align: justify;
-  display: flex;
-  flex-direction: column;
 }
 
 .how-to-contribute-thanks {
@@ -339,5 +349,18 @@ span.track-records-columns-s1,
   .track-chart-page-track-div-back,
   .track-chart-page-track-div-next {
     min-width: 30px;
+  }
+}
+
+.submission-timesheet-columns-s1 {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .submission-timesheet-columns-s1 {
+    display: table-cell;
+  }
+  .submission-timesheet-columns-b1 {
+    display: none;
   }
 }

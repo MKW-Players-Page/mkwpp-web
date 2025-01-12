@@ -490,7 +490,10 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {translateTrack(track, lang)}
+                            <span className="player-profile-columns-b1">
+                              {translateTrack(track, lang)}
+                            </span>
+                            <span className="player-profile-columns-s1">{track?.abbr}</span>
                           </Link>
                         </td>
                       ) : score.repeat ? (
@@ -508,7 +511,10 @@ const PlayerProfilePage = () => {
                               },
                             )}
                           >
-                            {translateTrack(track, lang)}
+                            <span className="player-profile-columns-b1">
+                              {translateTrack(track, lang)}
+                            </span>
+                            <span className="player-profile-columns-s1">{track?.abbr}</span>
                           </Link>
                         </td>
                       )}

@@ -73,7 +73,6 @@ export interface ArrayTableProps {
   footerRows?: ArrayTableCellData[][];
   tableData?: ArrayTableData;
   className?: string;
-  infiniteScrollRef?: React.MutableRefObject<null>;
 }
 
 const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: ArrayTableProps) => {
