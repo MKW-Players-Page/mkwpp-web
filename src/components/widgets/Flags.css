@@ -5,7 +5,8 @@
   margin-right: 6px;
 }
 
-.flag-icon svg, .flag-icon img {
-    height:100%;
-    width: 100%;
+.flag-icon svg,
+.flag-icon img {
+  height: 100%;
+  width: 100%;
 }

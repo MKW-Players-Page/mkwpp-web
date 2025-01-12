@@ -6,7 +6,7 @@
 
 .show-region-row {
   max-height: 100px;
-  overflow: scroll hidden;
+  overflow: auto hidden;
   transition: all 0.5s;
 }
 
@@ -27,11 +27,8 @@
   background-color: var(--navbar-background-color-hover);
 }
 
-.region-selection-button svg,
-.region-selection-button img {
-  height: 100%;
-  margin-left: 16px;
-  aspect-ratio: 4/3;
+.region-selection-button .flag-icon {
+  margin: 0 0 0 5px;
 }
 
 .region-selection-button,

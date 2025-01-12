@@ -380,7 +380,7 @@ const PlayerProfilePage = () => {
           <div className="module">
             <Deferred isWaiting={playerLoading}>
               {/* Temporary until better solution implemented, like a popup dialog. */}
-              <div className="module-content" style={{ overflowY: "scroll", maxHeight: 128 }}>
+              <div className="module-content" style={{ overflowY: "auto", maxHeight: 128 }}>
                 <p>
                   {player?.bio ? (
                     player.bio.split("\n").map((line: string) => (
