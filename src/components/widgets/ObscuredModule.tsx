@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import Deferred from "./Deferred";
 import "./ObscuredModule.css";
 
@@ -15,14 +15,16 @@ const ObscuredModule = ({
   setStateVisible,
   setReload,
 }: ObscuredModuleProps) => {
+  const closeFn: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (e.target === e.currentTarget) {
+      setStateVisible(false);
+      if (setReload !== undefined) setReload(Math.random());
+    }
+  };
+
   return (
     <div
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setStateVisible(false);
-          if (setReload !== undefined) setReload(Math.random());
-        }
-      }}
+      onClick={closeFn}
       className={`obscured-module-dark-layer${stateVisible ? " visible" : ""}`}
     >
       <div className="module obscured-module">
@@ -30,7 +32,9 @@ const ObscuredModule = ({
           <Deferred isWaiting={!stateVisible}>{children}</Deferred>
         </div>
       </div>
-      <div className="module obscured-module-close-button">Close</div>
+      <div onClick={closeFn} className="module obscured-module-close-button">
+        Close
+      </div>
     </div>
   );
 };
