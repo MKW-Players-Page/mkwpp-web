@@ -91,7 +91,7 @@ const CountryRankingsPage = () => {
         ])}
       </p>
       <OverwriteColor hue={siteHue}>
-        <div className="module-row">
+        <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           <Dropdown
