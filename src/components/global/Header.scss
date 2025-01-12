@@ -1,5 +1,5 @@
-$base: 700px;
-$multiple: 43px;
+$base: 690px;
+$multiple: 40.5px;
 
 @for $n from 1 through 32 {
   @media (min-width: $base + ($multiple * ($n - 1))) {

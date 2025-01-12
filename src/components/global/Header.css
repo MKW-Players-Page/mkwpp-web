@@ -19,6 +19,7 @@
   flex-flow: row nowrap;
   margin-right: 65px;
   height: var(--header-height);
+  flex-grow: 1;
 }
 
 .logo-div > a {
@@ -53,6 +54,9 @@
   .logo:nth-child(1) {
     display: inline-block;
   }
+  .logo-div {
+    margin-right: 10px;
+  }
 }
 
 .account-actions {
@@ -63,10 +67,12 @@
   max-width: 20vw;
   min-width: 350px;
   white-space: nowrap;
+  flex-grow: 1;
 }
 
 .account-actions a {
   padding: 10px;
+  flex-grow: 1;
 }
 
 .account-actions :not(.small-hide) {
