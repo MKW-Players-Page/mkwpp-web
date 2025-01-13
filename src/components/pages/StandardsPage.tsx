@@ -77,7 +77,6 @@ const StandardsPage = () => {
           className: "standards-table-b2",
         },
         { content: level.name },
-        { content: level.value },
         { content: standard.isLap ? null : value, className: "standards-table-b1" },
         { content: value, expandCell: [false, !standard.isLap], className: "standards-table-b1" },
         { content: value, className: "standards-table-s1" },
@@ -125,7 +124,6 @@ const StandardsPage = () => {
                     className: "standards-table-b2",
                   },
                   { content: translate("standardsPageStandardCol", lang) },
-                  { content: translate("standardsPagePointsCol", lang) },
                   {
                     content: translate("standardsPageCourseCol", lang),
                     className: "standards-table-b1",
@@ -141,6 +139,32 @@ const StandardsPage = () => {
                 ],
               ]}
               rows={filteredStandards}
+            />
+          </Deferred>
+        </div>
+        <div className="module">
+          <Deferred isWaiting={metadata.isLoading}>
+            <ArrayTable
+              headerRows={[
+                [
+                  { content: translate("standardsPageHelperChartTitle", lang) },
+                  { content: null, expandCell: [true, true] },
+                ],
+                [
+                  { content: translate("standardsPageStandardCol", lang) },
+                  { content: translate("standardsPagePointsCol", lang) },
+                ],
+              ]}
+              rows={
+                metadata.standards?.map((l) => {
+                  return [
+                    {
+                      content: l.name,
+                    },
+                    { content: l.value },
+                  ];
+                }) ?? []
+              }
             />
           </Deferred>
         </div>
