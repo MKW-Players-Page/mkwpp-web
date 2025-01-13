@@ -265,29 +265,6 @@ span.track-records-columns-s1,
   text-align: justify;
 }
 
-.standards-table-s1,
-.standards-table-s1.radio-button-row {
-  display: none;
-}
-
-@media (max-width: 770px) {
-  .standards-table-s1 {
-    display: table-cell;
-  }
-  .standards-table-b1 {
-    display: none;
-  }
-  .standards-table-s1.radio-button-row {
-    display: flex;
-  }
-}
-
-@media (max-width: 660px) {
-  .standards-table-b2 {
-    display: none;
-  }
-}
-
 @media (max-width: 400px) {
   .matchup-search-s1 {
     display: none;

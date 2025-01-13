@@ -1,0 +1,22 @@
+.table-s1,
+.table-s1.radio-button-row {
+  display: none;
+}
+
+@media (max-width: 670px) {
+  .table-s1 {
+    display: table-cell;
+  }
+  .table-b1 {
+    display: none;
+  }
+  .table-s1.radio-button-row {
+    display: flex;
+  }
+}
+
+@media (max-width: 570px) {
+  .table-b2 {
+    display: none;
+  }
+}

@@ -1,26 +1,28 @@
 import { useContext, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-import { Pages, resolvePage } from "./Pages";
-import Deferred from "../widgets/Deferred";
-import { getCategorySiteHue } from "../../utils/EnumUtils";
-import { formatTime } from "../../utils/Formatters";
-import { MetadataContext } from "../../utils/Metadata";
-import { Standard, StandardLevel } from "../../api";
-import { getCategoryNumerical } from "../../utils/EnumUtils";
-import OverwriteColor from "../widgets/OverwriteColor";
-import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../widgets/Dropdown";
-import { useCategoryParam, useStandardLevelIdParam } from "../../utils/SearchParams";
+import "./StandardsPage.css"
+
+import { Pages, resolvePage } from "../Pages";
+import Deferred from "../../widgets/Deferred";
+import { getCategorySiteHue } from "../../../utils/EnumUtils";
+import { formatTime } from "../../../utils/Formatters";
+import { MetadataContext } from "../../../utils/Metadata";
+import { Standard, StandardLevel } from "../../../api";
+import { getCategoryNumerical } from "../../../utils/EnumUtils";
+import OverwriteColor from "../../widgets/OverwriteColor";
+import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../../widgets/Dropdown";
+import { useCategoryParam, useStandardLevelIdParam } from "../../../utils/SearchParams";
 import {
   I18nContext,
   translate,
   translateCategoryName,
   translateTrack,
-} from "../../utils/i18n/i18n";
-import { SettingsContext } from "../../utils/Settings";
-import { CategoryRadio } from "../widgets/CategorySelect";
-import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
-import { LapModeEnum } from "../widgets/LapModeSelect";
+} from "../../../utils/i18n/i18n";
+import { SettingsContext } from "../../../utils/Settings";
+import { CategoryRadio } from "../../widgets/CategorySelect";
+import ArrayTable, { ArrayTableCellData } from "../../widgets/Table";
+import { LapModeEnum } from "../../widgets/LapModeSelect";
 
 const StandardsPage = () => {
   const searchParams = useSearchParams();
@@ -74,12 +76,12 @@ const StandardsPage = () => {
         },
         {
           content: translateCategoryName(standard.category, lang),
-          className: "standards-table-b2",
+          className: "table-b2",
         },
         { content: level.name },
-        { content: standard.isLap ? null : value, className: "standards-table-b1" },
-        { content: value, expandCell: [false, !standard.isLap], className: "standards-table-b1" },
-        { content: value, className: "standards-table-s1" },
+        { content: standard.isLap ? null : value, className: "table-b1" },
+        { content: value, expandCell: [false, !standard.isLap], className: "table-b1" },
+        { content: value, className: "table-s1" },
       ] as ArrayTableCellData[];
     });
 
@@ -121,20 +123,20 @@ const StandardsPage = () => {
                   { content: translate("standardsPageTrackCol", lang) },
                   {
                     content: translate("standardsPageCategoryCol", lang),
-                    className: "standards-table-b2",
+                    className: "table-b2",
                   },
                   { content: translate("standardsPageStandardCol", lang) },
                   {
                     content: translate("standardsPageCourseCol", lang),
-                    className: "standards-table-b1",
+                    className: "table-b1",
                   },
                   {
                     content: translate("standardsPageLapCol", lang),
-                    className: "standards-table-b1",
+                    className: "table-b1",
                   },
                   {
                     content: translate("standardsPageTimeCol", lang),
-                    className: "standards-table-s1",
+                    className: "table-s1",
                   },
                 ],
               ]}
