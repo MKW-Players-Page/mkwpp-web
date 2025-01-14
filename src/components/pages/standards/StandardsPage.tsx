@@ -5,7 +5,7 @@ import "./StandardsPage.css";
 
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
-import { getCategorySiteHue } from "../../../utils/EnumUtils";
+import { getCategoryNumerical, getCategorySiteHue } from "../../../utils/EnumUtils";
 import { formatTime } from "../../../utils/Formatters";
 import { MetadataContext } from "../../../utils/Metadata";
 import api, { Standard } from "../../../api";
@@ -172,7 +172,14 @@ const StandardsPage = () => {
 
   const filteredStandards: ArrayTableCellData[][] = level?.standards
     .filter(
-      (r) => r.name !== "Newbie" && r.category === category && (track === -5 || r.track === track),
+      (r, _, arr) =>
+        r.name !== "Newbie" &&
+        (r.category === category ||
+          arr
+            .filter((j) => j.category <= category && r.track === j.track && r.isLap === j.isLap)
+            .sort((a, b) => getCategoryNumerical(a.category) - getCategoryNumerical(b.category))
+            .at(-1)?.id === r.id) &&
+        (track === -5 || r.track === track),
     )
     .sort((a, b) => a.track - b.track || a.level - b.level || (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0))
     .map((standard, idx, arr) => {
@@ -206,7 +213,10 @@ const StandardsPage = () => {
             </Link>
           ),
           className: "table-track-col",
-          expandCell: [standard.isLap && arr[idx - 1].track === standard.track, false],
+          expandCell: [
+            arr[idx - 1] && standard.isLap && arr[idx - 1].track === standard.track,
+            false,
+          ],
         },
         {
           content: translateCategoryName(standard.category, lang),
