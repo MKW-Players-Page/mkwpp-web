@@ -155,6 +155,18 @@ const StandardsPage = () => {
     "playerProfileScores",
   );
 
+  const { isLoading: userStatsLoading, data: userStats } = useApi(
+    () =>
+      api.timetrialsPlayersStatsRetrieve({
+        id: user?.player ?? 1,
+        category,
+        lapMode,
+        region: 1,
+      }),
+    [user?.player, category, lapMode],
+    "playerProfileStats",
+  );
+
   const level: { standards: StandardWithName[] } = { standards: [] };
   metadata.standards
     ?.filter((l) =>
@@ -231,6 +243,8 @@ const StandardsPage = () => {
 
   const siteHue = getCategorySiteHue(category, settings);
 
+  const secondTableData: ArrayTableData = { classNames: [] };
+
   return (
     <>
       <h1>{translate("standardsPageHeading", lang)}</h1>
@@ -279,7 +293,7 @@ const StandardsPage = () => {
           </Deferred>
         </div>
         <div className="module">
-          <Deferred isWaiting={metadata.isLoading}>
+          <Deferred isWaiting={metadata.isLoading || userStatsLoading}>
             <ArrayTable
               headerRows={[
                 [
@@ -292,7 +306,13 @@ const StandardsPage = () => {
                 ],
               ]}
               rows={
-                metadata.standards?.map((l) => {
+                metadata.standards?.map((l, idx) => {
+                  if (
+                    user &&
+                    !userStatsLoading &&
+                    (userStats?.totalStandard ?? 36 * 64) / 64 < l.value
+                  )
+                    secondTableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
                   return [
                     {
                       content: l.name,
@@ -301,6 +321,7 @@ const StandardsPage = () => {
                   ];
                 }) ?? []
               }
+              tableData={secondTableData}
             />
           </Deferred>
         </div>
