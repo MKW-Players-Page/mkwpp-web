@@ -27,6 +27,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/ --max-warnings=0 && npx prettier . --check",
     "format": "npx prettier . --write",
+    "unlighthouse": "npx unlighthouse --site localhost:3000/mkw",
     "generate-api-client": "openapi-generator-cli generate -i http://localhost:8000/api/schema/ -g typescript-fetch -o ./src/api/generated/ -c openapi-config.yml",
     "gen-flag-svg": "node ./codegen-scripts/regen-flag-imports.js",
     "serve": "eslint ./src/ --max-warnings=0 && npx prettier . --check --write && react-scripts build && serve -s build"
@@ -59,6 +60,7 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "sass": "^1.83.1"
+    "sass": "^1.83.1",
+    "unlighthouse": "^0.15.0"
   }
 }
