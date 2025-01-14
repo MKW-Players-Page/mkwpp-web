@@ -17,6 +17,7 @@ import Dropdown, {
 } from "../../widgets/Dropdown";
 import {
   useCategoryParam,
+  useLapModeParam,
   useStandardLevelIdParam,
   useTrackParam,
 } from "../../../utils/SearchParams";
@@ -29,7 +30,7 @@ import {
 import { SettingsContext } from "../../../utils/Settings";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../../widgets/Table";
-import { LapModeEnum } from "../../widgets/LapModeSelect";
+import { LapModeEnum, LapModeRadio } from "../../widgets/LapModeSelect";
 import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import { TrackDropdown } from "../../widgets/TrackSelect";
@@ -143,6 +144,7 @@ const StandardsPage = () => {
   const { category, setCategory } = useCategoryParam(searchParams);
   const { track, setTrack } = useTrackParam(searchParams);
   const { levelId, setLevelId } = useStandardLevelIdParam(searchParams);
+  const { lapMode, setLapMode } = useLapModeParam(searchParams);
 
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
@@ -224,11 +226,28 @@ const StandardsPage = () => {
               {translateTrack(track, lang)}
             </Link>
           ),
-          className: "table-track-col",
+          className: "table-track-col table-b1",
           expandCell: [
             arr[idx - 1] && standard.isLap && arr[idx - 1].track === standard.track,
             false,
           ],
+        },
+        {
+          content: (
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: standard.track },
+                { lap: standard.isLap ? LapModeEnum.Lap : null },
+              )}
+            >
+              <>
+                <span className="table-b3">{translateTrack(track, lang)}</span>
+                <span className="table-s3">{track?.abbr}</span>
+              </>
+            </Link>
+          ),
+          className: "table-track-col table-s1",
         },
         {
           content: translateCategoryName(standard.category, lang),
@@ -253,9 +272,10 @@ const StandardsPage = () => {
           <StandardDropdown levelId={levelId} setLevelId={setLevelId} />
           <TrackDropdown value={track} onChange={setTrack} allTracks />
           <CategoryRadio value={category} onChange={setCategory} />
+          <LapModeRadio className="table-s1" value={lapMode} onChange={setLapMode} />
         </div>
         <div
-          className="module"
+          className={`module standards-table ${lapMode.toLowerCase()}`}
           style={
             { "--track-selected": track === -5 ? "table-cell" : "none" } as React.CSSProperties
           }
@@ -266,7 +286,11 @@ const StandardsPage = () => {
                 [
                   {
                     content: translate("standardsPageTrackCol", lang),
-                    className: "table-track-col",
+                    className: "table-track-col table-b1",
+                  },
+                  {
+                    content: translate("standardsPageTrackCol", lang),
+                    className: "table-track-col table-s1",
                   },
                   {
                     content: translate("standardsPageCategoryCol", lang),
