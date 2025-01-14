@@ -13067,6 +13067,87 @@
     "pt": "",
     "es": ""
   },
+  "standardsPageStandardDropdownAll": {
+    "it": "Tutti",
+    "en": "All",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllMyth": {
+    "it": "Tutti i Myth",
+    "en": "All Myth",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllLegend": {
+    "it": "Tutti i Legend",
+    "en": "All Legend",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllKing": {
+    "it": "Tutti i King",
+    "en": "All King",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllHero": {
+    "it": "Tutti gli Hero",
+    "en": "All Hero",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllExpert": {
+    "it": "Tutti gli Expert",
+    "en": "All Expert",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllIntermediate": {
+    "it": "Tutti gli Intermediate",
+    "en": "All Intermediate",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllApprentice": {
+    "it": "Tutti gli Apprentice",
+    "en": "All Apprentice",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "standardsPageStandardDropdownAllBeginner": {
+    "it": "Tutti i Beginner",
+    "en": "All Beginner",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "standardsPageTrackCol": {
     "it": "Pista",
     "en": "Track",
@@ -14087,6 +14168,15 @@
   "submissionPageMySubmissionsTabFilterForYou": {
     "it": "Per te",
     "en": "For You",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "trackDropdownAllTracks": {
+    "it": "Tutte le Piste",
+    "en": "All Tracks",
     "fr": "",
     "de": "",
     "jp": "",

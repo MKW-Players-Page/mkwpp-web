@@ -40,6 +40,17 @@ export const useCategoryParam = (searchParams: SearchParams, overwriteParams: st
   };
 };
 
+export const useTrackParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
+  const track = parseInt(searchParams[0].get("trk") ?? "-5");
+  return {
+    track,
+    setTrack: (trackId: number) => {
+      const trk = trackId === -5 ? undefined : trackId.toString();
+      searchParams[1]((prev) => paramReplace(prev, "trk", trk, overwriteParams));
+    },
+  };
+};
+
 export const useRowHighlightParam = (searchParams: SearchParams) => {
   const highlight =
     searchParams[0].get("hl") !== null
@@ -151,11 +162,8 @@ export const useRegionParam = (searchParams: SearchParams) => {
 };
 
 export const useStandardLevelIdParam = (searchParams: SearchParams) => {
-  const metadata = useContext(MetadataContext);
-
   let levelId = parseInt(searchParams[0].get("std") ?? "1");
-  const lastLevelId = metadata.standards?.map((std) => std.id).sort((a, b) => b - a)[0] ?? 1;
-  if (lastLevelId < levelId) levelId = lastLevelId;
+  if (levelId > 43) levelId = 1;
   return {
     levelId,
     setLevelId: (levelId: number) => {

@@ -20,3 +20,7 @@
     display: none;
   }
 }
+
+.table-track-col {
+  display: var(--track-selected);
+}
