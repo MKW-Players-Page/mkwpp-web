@@ -23,4 +23,3 @@ jobs:
         with:
           token: ${{ secrets.YOUR_PAT }}
           commit_message: Automatic Linting Process
-          branch: ${{ github.head_ref }}
