@@ -13752,8 +13752,8 @@
     "es": ""
   },
   "contributionsPageQuestionsAndAnswers4": {
-    "it": "Se la tua lingua non è stata tradotta al 100% (vedi uno dei quadranti qua sotto) puoi contribuire su Github facendo una Pull Request.",
-    "en": "If your language does not have 100% completion (see one of the boxes below) you can contribute on Github by making a Pull Request.",
+    "it": "Se la tua lingua non è stata tradotta al 100% (vedi uno dei quadranti qua sotto) puoi contribuire su Github facendo una Pull Request; Se non hai inteso, guarda questo video: {{video}}",
+    "en": "If your language does not have 100% completion (see one of the boxes below) you can contribute on Github by making a Pull Request; If you didn't understand, watch this video: {{video}}",
     "fr": "",
     "de": "",
     "jp": "",
