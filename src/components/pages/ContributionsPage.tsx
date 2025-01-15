@@ -5,16 +5,16 @@ import PlayerMention from "../widgets/PlayerMention";
 
 interface Question {
   type: 0;
-  text: string;
-  posAns: string;
-  negAns: string;
+  text: React.ReactNode;
+  posAns: React.ReactNode;
+  negAns: React.ReactNode;
   posFollowup: number;
   negFollowup: number;
 }
 
 interface Answer {
   type: 1;
-  text: string;
+  text: React.ReactNode;
 }
 
 const ContributionsPage = () => {
@@ -43,7 +43,14 @@ const ContributionsPage = () => {
     },
     4: {
       type: 1,
-      text: translate("contributionsPageQuestionsAndAnswers4", lang),
+      text: handleBars(translate("contributionsPageQuestionsAndAnswers4", lang), [
+        [
+          "video",
+          <Link target="_blank" to="//youtu.be/PoItVI4r3QY">
+            https://youtu.be/PoItVI4r3QY
+          </Link>,
+        ],
+      ]),
     },
     5: {
       type: 0,
