@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../widgets/Deferred";
@@ -27,6 +27,7 @@ import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
 import { CategoryRadio } from "../widgets/CategorySelect";
+import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -51,16 +52,65 @@ const CountryRankingsPage = () => {
     "countryRankingsTops",
   );
 
-  const highlightElement = useRef(null);
-  useEffect(() => {
-    if (highlightElement !== null) {
-      (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
-        inline: "center",
-        block: "center",
+  const tableArray: ArrayTableCellData[][] = [];
+  const tableData: ArrayTableData = {
+    classNames: [],
+    rowKeys: [],
+  };
+  let hasHighlightRow = false;
+
+  data?.forEach((stats, idx, arr) => {
+    const calculatedValueStr = (
+      stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32)
+    ).toFixed(4);
+    const calculatedValue = parseFloat(calculatedValueStr);
+
+    if (
+      highlight &&
+      calculatedValue > highlight &&
+      (arr[idx - 1] === undefined ||
+        arr[idx - 1].totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32) < highlight)
+    ) {
+      hasHighlightRow = true;
+      tableData.highlightedRow = idx;
+      tableData.classNames?.push({
+        rowIdx: idx,
+        className: "highlighted",
+      });
+      tableData.rowKeys?.push("highlight");
+      tableArray.push([
+        { content: null },
+        { content: translate("genericRankingsYourHighlightedValue", lang) },
+        {
+          content: highlight,
+        },
+      ]);
+    }
+
+    if (calculatedValue === highlight) {
+      tableData.highlightedRow = idx;
+      tableData.classNames?.push({
+        rowIdx: idx + (hasHighlightRow ? 1 : 0),
+        className: "highlighted",
       });
     }
-  }, [highlightElement, isLoading]);
 
+    tableData.rowKeys?.push(`${stats.region.code}`);
+    tableArray.push([
+      { content: stats.rank },
+      {
+        content: (
+          <>
+            <FlagIcon showRegFlagRegardless={true} region={stats.region} />
+            <span>{stats.region.name}</span>
+          </>
+        ),
+      },
+      {
+        content: calculatedValueStr,
+      },
+    ]);
+  });
   const siteHue = getCategorySiteHue(category, settings);
 
   let text = "err";
@@ -154,54 +204,17 @@ const CountryRankingsPage = () => {
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading}>
-            <table>
-              <thead>
-                <tr>
-                  <th>{translate("countryRankingsPageRank", lang)}</th>
-                  <th>{translate("countryRankingsPageCountry", lang)}</th>
-                  <th>{translate("countryRankingsPageAverageFinish", lang)}</th>
-                </tr>
-              </thead>
-              <tbody className="table-hover-rows">
-                {data?.map((stats, idx, arr) => {
-                  const calculatedValueStr = (
-                    stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32)
-                  ).toFixed(4);
-                  const calculatedValue = parseFloat(calculatedValueStr);
-                  return (
-                    <>
-                      {highlight &&
-                      calculatedValue > highlight &&
-                      (arr[idx - 1] === undefined ||
-                        arr[idx - 1].totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32) <
-                          highlight) ? (
-                        <>
-                          <tr ref={highlightElement} key={highlight} className="highlighted">
-                            <td />
-                            <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
-                            <td>{highlight}</td>
-                          </tr>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <tr
-                        key={stats.region.code}
-                        className={calculatedValue === highlight ? "highlighted" : ""}
-                        ref={calculatedValue === highlight ? highlightElement : undefined}
-                      >
-                        <td>{stats.rank}</td>
-                        <td>
-                          <FlagIcon showRegFlagRegardless={true} region={stats.region} />
-                          <span>{stats.region.name}</span>
-                        </td>
-                        <td>{calculatedValueStr}</td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
+            <ArrayTable
+              rows={tableArray}
+              headerRows={[
+                [
+                  { content: translate("countryRankingsPageRank", lang) },
+                  { content: translate("countryRankingsPageCountry", lang) },
+                  { content: translate("countryRankingsPageAverageFinish", lang) },
+                ],
+              ]}
+              tableData={tableData}
+            />
           </Deferred>
         </div>
       </OverwriteColor>
