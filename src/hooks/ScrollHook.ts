@@ -4,9 +4,10 @@ export const useInfiniteScroll = (
   paddingLength: number,
   maxLength: number,
   dependencies: any[],
+  preElement: number = 0,
 ): [number, number, React.MutableRefObject<null>] => {
-  const [firstElementNum, setFirstElementNum] = useState(0);
-  const [lastElementNum, setLastElementNum] = useState(0);
+  const [firstElementNum, setFirstElementNum] = useState(preElement);
+  const [lastElementNum, setLastElementNum] = useState(preElement);
   const sliceStart = Math.max(0, firstElementNum - paddingLength);
   const sliceEnd = Math.min(maxLength, lastElementNum + paddingLength);
   const tbodyElement = useRef(null);

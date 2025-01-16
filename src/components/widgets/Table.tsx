@@ -1,6 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
+
+type RowIdx = number;
+type ColIdx = number;
+
+export interface ThSortData {
+  sortKey: string;
+  asc?: boolean;
+  desc?: boolean;
+}
 
 export interface ArrayTableCellData {
   lockedCell?: boolean;
@@ -8,15 +17,17 @@ export interface ArrayTableCellData {
   content: React.ReactNode;
   /** Lets cells above and to the left expand into it. Up and then Left respectively */
   expandCell?: [boolean, boolean];
+  thSort?: ThSortData;
 }
 
 interface ArrayTableRowProps {
   row: ArrayTableCellData[];
-  rowIdx: number;
-  iconCellColumns?: number[];
+  rowIdx: RowIdx;
+  iconCellColumns?: ColIdx[];
   th?: boolean;
   cellArea: number[][][];
   className?: string;
+  reference?: React.MutableRefObject<HTMLTableRowElement | null>;
 }
 
 const ArrayTableRow = ({
@@ -26,12 +37,13 @@ const ArrayTableRow = ({
   cellArea,
   iconCellColumns,
   className,
+  reference: ref,
 }: ArrayTableRowProps) => {
   const { settings } = useContext(SettingsContext);
   const Cell: keyof JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
 
   return (
-    <tr className={className}>
+    <tr ref={ref} className={className}>
       {row.map((cell, idx, arr) =>
         cell.expandCell && cell.expandCell.includes(true) ? (
           <></>
@@ -56,12 +68,20 @@ const ArrayTableRow = ({
   );
 };
 
+export interface RowSortData {
+  rowIdx: RowIdx;
+  sortKey: string;
+  sortValue: any;
+}
+
 export interface ArrayTableData {
   /** Negative values work like Array.at() */
   iconCellColumns?: number[];
-  classNames?: { rowIdx: number; className: string }[];
+  classNames?: { rowIdx: RowIdx; className: string }[];
   rowKeys?: string[];
   infiniteScrollData?: { padding: number; extraDependencies: any[] };
+  highlightedRow?: RowIdx;
+  rowSortData?: RowSortData;
 }
 
 export interface ArrayTableProps {
@@ -82,8 +102,25 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     footerCellArea: createCellAreaMap(footerRows ? footerRows : []),
   };
 
-  const mapFn = (row: ArrayTableCellData[], rowIdx: number): React.ReactNode => (
+  const highlightRow = useRef<HTMLTableRowElement | null>(null);
+  useEffect(() => {
+    if (highlightRow.current !== null) {
+      highlightRow.current.scrollIntoView({
+        block: "center",
+        inline: "center",
+        behavior: "auto",
+      });
+      highlightRow.current = null;
+    }
+  }, [highlightRow]);
+
+  const mapFn = (row: ArrayTableCellData[], rowIdx: RowIdx): React.ReactNode => (
     <ArrayTableRow
+      reference={
+        tableData?.highlightedRow !== undefined && rowIdx === tableData.highlightedRow
+          ? highlightRow
+          : undefined
+      }
       rowIdx={rowIdx}
       iconCellColumns={tableData?.iconCellColumns}
       cellArea={areas.bodyCellArea}
@@ -120,6 +157,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
           extraDep={tableData.infiniteScrollData.extraDependencies}
           mapFn={mapFn}
           rows={rows}
+          preElement={tableData.highlightedRow ?? 0}
         />
       ) : (
         <tbody className="table-hover-rows">{rows.map(mapFn)}</tbody>
@@ -149,10 +187,18 @@ interface InfiniteScrollTBodyProps {
   extraDep: any[];
   mapFn: (row: ArrayTableCellData[], rowIdx: number) => React.ReactNode;
   rows: ArrayTableCellData[][];
+  preElement?: RowIdx;
 }
 
-const InfiniteScrollTBody = ({ rows, pad, maxLen, extraDep, mapFn }: InfiniteScrollTBodyProps) => {
-  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(pad, maxLen, extraDep);
+const InfiniteScrollTBody = ({
+  rows,
+  pad,
+  maxLen,
+  extraDep,
+  mapFn,
+  preElement,
+}: InfiniteScrollTBodyProps) => {
+  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(pad, maxLen, extraDep, preElement);
   return (
     <tbody ref={tbodyElement}>
       {rows.map((row, rowIdx) => {

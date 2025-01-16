@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
@@ -90,6 +90,7 @@ const TrackChartPage = () => {
       (arr[idx - 1] === undefined || arr[idx - 1].value < highlight)
     ) {
       hasHighlightRow = true;
+      tableData.highlightedRow = idx;
       tableData.classNames?.push({
         rowIdx: idx,
         className: "highlighted",
@@ -107,11 +108,13 @@ const TrackChartPage = () => {
       ]);
     }
 
-    if (user?.player === score.player.id || score.value === highlight)
+    if (user?.player === score.player.id || score.value === highlight) {
+      if (highlight !== null && score.value === highlight) tableData.highlightedRow = idx;
       tableData.classNames?.push({
-        rowIdx: idx + (hasHighlightRow ? 0 : 1),
+        rowIdx: idx + (hasHighlightRow ? 1 : 0),
         className: "highlighted",
       });
+    }
 
     tableData.rowKeys?.push(`${score.rank}-${score.value}`);
     tableArray.push([
@@ -169,16 +172,6 @@ const TrackChartPage = () => {
       },
     ]);
   });
-
-  const highlightElement = useRef(null);
-  useEffect(() => {
-    if (highlightElement !== null) {
-      (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
-        inline: "center",
-        block: "center",
-      });
-    }
-  }, [highlightElement, isLoading, metadata.isLoading]);
 
   const siteHue = getCategorySiteHue(category, settings);
 
@@ -242,7 +235,7 @@ const TrackChartPage = () => {
             setValue={setRegion}
           />
         </div>
-        <div className="module">
+        <div className="module table-hover-rows">
           <Deferred isWaiting={metadata.isLoading || isLoading}>
             <ArrayTable
               rows={tableArray}
