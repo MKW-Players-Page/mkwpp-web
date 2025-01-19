@@ -4,7 +4,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { FlagIcon, Icon, Tooltip } from "../widgets";
-import api, { CategoryEnum, Region, Score } from "../../api";
+import api, { CategoryEnum, Region } from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
@@ -12,14 +12,9 @@ import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import {
-  paramReplace,
-  SearchParams,
-  useCategoryParam,
-  useLapModeParam,
-  useRegionParam,
-} from "../../utils/SearchParams";
+import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import FormatDateDependable from "../widgets/VariedDate";
 import {
   I18nContext,
   translate,
@@ -30,88 +25,7 @@ import {
 import { SettingsContext } from "../../utils/Settings";
 import { RankingsMetrics } from "./RankingsPage";
 import { CategoryRadio } from "../widgets/CategorySelect";
-
-export interface ScoreDoubled extends Score {
-  precedesRepeat: boolean;
-  repeat: boolean;
-}
-
-type SortType =
-  | "trackAsc"
-  | "trackDesc"
-  | "lapAsc"
-  | "lapDesc"
-  | "timeAsc"
-  | "timeDesc"
-  | "rankAsc"
-  | "rankDesc"
-  | "stdAsc"
-  | "stdDesc"
-  | "prwrAsc"
-  | "prwrDesc"
-  | "dateAsc"
-  | "dateDesc";
-
-const Sorting: Record<string, any> = {
-  trackAsc: (a: Score, b: Score) => a.track - b.track,
-  trackDesc: (a: Score, b: Score) => b.track - a.track,
-  lapAsc: (a: Score, b: Score) => (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
-  lapDesc: (a: Score, b: Score) => (b.isLap ? 1 : 0) - (a.isLap ? 1 : 0),
-  rankAsc: (a: Score, b: Score) => a.rank - b.rank,
-  rankDesc: (a: Score, b: Score) => b.rank - a.rank,
-  timeAsc: (a: Score, b: Score) => a.value - b.value,
-  timeDesc: (a: Score, b: Score) => b.value - a.value,
-  stdAsc: (a: Score, b: Score) => a.standard - b.standard,
-  stdDesc: (a: Score, b: Score) => b.standard - a.standard,
-  prwrAsc: (a: Score, b: Score) => a.recordRatio - b.recordRatio,
-  prwrDesc: (a: Score, b: Score) => b.recordRatio - a.recordRatio,
-  dateAsc: (a: Score, b: Score) =>
-    (a.date ? a.date.valueOf() : -1000) - (b.date ? b.date.valueOf() : -1000),
-  dateDesc: (a: Score, b: Score) =>
-    (b.date ? b.date.valueOf() : -1000) - (a.date ? a.date.valueOf() : -1000),
-};
-
-export const Filtering = {
-  flapOnly: (a: Score) => a.isLap,
-  courseOnly: (a: Score) => !a.isLap,
-  overall: (a: Score) => true,
-};
-
-const useProfileTableSortParam = (searchParams: SearchParams) => {
-  const sortType: SortType =
-    (Object.keys(Sorting).find((key) => key === searchParams[0].get("sort")) as
-      | SortType
-      | undefined) ?? "trackAsc";
-  return {
-    sortType,
-    setSortType: (sortType: SortType) => {
-      const sort = sortType === "trackAsc" ? undefined : sortType;
-      searchParams[1]((prev) => paramReplace(prev, "sort", sort));
-    },
-  };
-};
-
-interface ThSortProps {
-  children: string;
-  states: SortType[];
-  sortType: SortType;
-  setSortType: (sortType: SortType) => void;
-}
-
-const ThSort = ({ children, states, sortType, setSortType }: ThSortProps) => {
-  const stateIndex = states.findIndex((r) => r === sortType);
-  const setTo = stateIndex < 0 ? 1 : states.length === stateIndex + 1 ? 0 : stateIndex + 1;
-  return (
-    <th
-      style={{ cursor: "pointer" }}
-      onClick={() => {
-        setSortType(states[setTo]);
-      }}
-    >
-      {children}
-    </th>
-  );
-};
+import ArrayTable, { ArrayTableCellData, ArrayTableData, Sort } from "../widgets/Table";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -125,7 +39,6 @@ const PlayerProfilePage = () => {
   const { category, setCategory } = useCategoryParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false);
   const { region, setRegion } = useRegionParam(searchParams);
-  const { sortType, setSortType } = useProfileTableSortParam(searchParams);
 
   const {
     isLoading: playerLoading,
@@ -151,22 +64,6 @@ const PlayerProfilePage = () => {
     "playerProfileScores",
   );
 
-  const sortedScores = scores
-    ?.filter(
-      lapMode === LapModeEnum.Overall
-        ? Filtering.overall
-        : lapMode === LapModeEnum.Course
-          ? Filtering.courseOnly
-          : Filtering.flapOnly,
-    )
-    .sort(Sorting.lapAsc)
-    .sort(Sorting[sortType])
-    .map((score, index, arr) => {
-      (score as ScoreDoubled).repeat = score.track === arr[index - 1]?.track;
-      (score as ScoreDoubled).precedesRepeat = score.track === arr[index + 1]?.track;
-      return score as ScoreDoubled;
-    });
-
   const siteHue = getCategorySiteHue(category, settings);
 
   const getAllRegions = (arr: Region[], startId: number): Region[] => {
@@ -182,6 +79,143 @@ const PlayerProfilePage = () => {
     cat: category !== CategoryEnum.NonShortcut ? category : null,
     lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
   };
+
+  const tableData: ArrayTableData = {
+    iconCellColumns: [-1, -2, -3],
+    rowSortData: [],
+  };
+
+  const sortedRows: ArrayTableCellData[][] =
+    scores?.map((score, index, arr) => {
+      const track = metadata.tracks?.find((track) => track.id === score.track);
+      const trackLink = (
+        <Link
+          to={resolvePage(
+            Pages.TrackChart,
+            { id: score.track },
+            {
+              reg: region.id !== 1 ? region.code.toLowerCase() : null,
+              cat: category !== CategoryEnum.NonShortcut ? category : null,
+              lap: lapMode === LapModeEnum.Lap ? lapMode : null,
+            },
+          )}
+        >
+          <span className="player-profile-columns-b1">{translateTrack(track, lang)}</span>
+          <span className="player-profile-columns-s1">{track?.abbr}</span>
+        </Link>
+      );
+      const timeClassName = score.category !== category ? "fallthrough" : "";
+      const timeLink = (
+        <Link
+          to={resolvePage(
+            Pages.TrackChart,
+            { id: score.track },
+            {
+              reg: region.id !== 1 ? region.code.toLowerCase() : null,
+              cat: category !== CategoryEnum.NonShortcut ? category : null,
+              lap: score.isLap ? LapModeEnum.Lap : null,
+              hl: score.value,
+            },
+          )}
+        >
+          {formatTime(score.value)}
+        </Link>
+      );
+
+      tableData.rowSortData?.push(
+        {
+          rowIdx: index,
+          sortKey: "track",
+          sortValue: index + (score.isLap ? -1 : 1),
+        },
+        {
+          rowIdx: index,
+          sortKey: "time",
+          sortValue: score.value,
+        },
+        {
+          rowIdx: index,
+          sortKey: "rank",
+          sortValue: score.rank,
+        },
+        {
+          rowIdx: index,
+          sortKey: "standard",
+          sortValue: score.standard,
+        },
+        {
+          rowIdx: index,
+          sortKey: "prwr",
+          sortValue: ~~score.recordRatio,
+        },
+        {
+          rowIdx: index,
+          sortKey: "date",
+          sortValue: +(score.date ?? new Date(0)),
+        },
+      );
+
+      return [
+        {
+          content: trackLink,
+          expandCell: [
+            arr[index - 1] && score.isLap && arr[index - 1].track === score.track,
+            false,
+          ],
+          className: "overall-shown sort-hidden",
+        },
+        {
+          content: trackLink,
+          className: "overall-hidden sort-shown",
+        },
+        {
+          content: score.isLap ? null : timeLink,
+          className: timeClassName + " overall-shown",
+        },
+        {
+          content: timeLink,
+          expandCell: [false, !score.isLap],
+          className: timeClassName + " overall-shown",
+        },
+        {
+          content: timeLink,
+          className: timeClassName + " overall-hidden",
+        },
+        { content: score.rank },
+        { content: getStandardLevel(metadata, score.standard)?.name },
+        { content: (score.recordRatio * 100).toFixed(2) + "%" },
+        {
+          content: (
+            <FormatDateDependable
+              date={score.date}
+              bigClass="player-profile-columns-b1"
+              smallClass="player-profile-columns-s1"
+            />
+          ),
+        },
+        {
+          content: score.videoLink ? (
+            <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
+              <Icon icon="Video" />
+            </a>
+          ) : null,
+        },
+        {
+          content: score.ghostLink ? (
+            <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
+              <Icon icon="Ghost" />
+            </a>
+          ) : null,
+        },
+        {
+          content: score.comment ? (
+            <Tooltip text={score.comment}>
+              <Icon icon="Comment" />
+            </Tooltip>
+          ) : null,
+        },
+      ] as ArrayTableCellData[];
+    }) ?? [];
 
   return (
     <>
@@ -399,170 +433,86 @@ const PlayerProfilePage = () => {
         </div>
         <div className="module">
           <Deferred isWaiting={metadata.isLoading || scoresLoading}>
-            <table>
-              <thead>
-                <tr>
-                  <th
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setSortType("trackAsc");
-                    }}
-                  >
-                    {translate("playerProfilePageTrackColumn", lang)}
-                  </th>
-                  {lapMode === LapModeEnum.Overall ? (
-                    <>
-                      <ThSort
-                        states={["trackAsc", "timeAsc", "timeDesc"]}
-                        sortType={sortType}
-                        setSortType={setSortType}
-                      >
-                        {translate("playerProfilePageCourseTimeColumn", lang)}
-                      </ThSort>
-                      <ThSort
-                        states={["trackAsc", "timeAsc", "timeDesc"]}
-                        sortType={sortType}
-                        setSortType={setSortType}
-                      >
-                        {translate("playerProfilePageLapTimeColumn", lang)}
-                      </ThSort>
-                    </>
-                  ) : (
-                    <ThSort
-                      states={["trackAsc", "timeAsc", "timeDesc"]}
-                      sortType={sortType}
-                      setSortType={setSortType}
-                    >
-                      {translate("playerProfilePageTimeColumn", lang)}
-                    </ThSort>
-                  )}
-                  <ThSort
-                    states={["trackAsc", "rankAsc", "rankDesc"]}
-                    sortType={sortType}
-                    setSortType={setSortType}
-                  >
-                    {translate("playerProfilePageRankColumn", lang)}
-                  </ThSort>
-                  <ThSort
-                    states={["trackAsc", "stdAsc", "stdDesc"]}
-                    sortType={sortType}
-                    setSortType={setSortType}
-                  >
-                    {translate("playerProfilePageStandardColumn", lang)}
-                  </ThSort>
-                  <ThSort
-                    states={["trackAsc", "prwrDesc", "prwrAsc"]}
-                    sortType={sortType}
-                    setSortType={setSortType}
-                  >
-                    {translate("playerProfilePagePRWRColumn", lang)}
-                  </ThSort>
-                  <ThSort
-                    states={["trackAsc", "dateAsc", "dateDesc"]}
-                    sortType={sortType}
-                    setSortType={setSortType}
-                  >
-                    {translate("playerProfilePageDateColumn", lang)}
-                  </ThSort>
-                  <th className="icon-cell" />
-                  <th className="icon-cell" />
-                  <th className="icon-cell" />
-                </tr>
-              </thead>
-              <tbody className="table-hover-rows">
-                {sortedScores?.map((score) => {
-                  const track = metadata.tracks?.find((r) => r.id === score.track);
-                  return (
-                    <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
-                      {score.precedesRepeat ? (
-                        <td rowSpan={2}>
-                          <Link
-                            to={resolvePage(
-                              Pages.TrackChart,
-                              { id: score.track },
-                              {
-                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                cat: category !== CategoryEnum.NonShortcut ? category : null,
-                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
-                              },
-                            )}
-                          >
-                            <span className="player-profile-columns-b1">
-                              {translateTrack(track, lang)}
-                            </span>
-                            <span className="player-profile-columns-s1">{track?.abbr}</span>
-                          </Link>
-                        </td>
-                      ) : score.repeat ? (
-                        <></>
-                      ) : (
-                        <td>
-                          <Link
-                            to={resolvePage(
-                              Pages.TrackChart,
-                              { id: score.track },
-                              {
-                                reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                                cat: category !== CategoryEnum.NonShortcut ? category : null,
-                                lap: lapMode === LapModeEnum.Lap ? lapMode : null,
-                              },
-                            )}
-                          >
-                            <span className="player-profile-columns-b1">
-                              {translateTrack(track, lang)}
-                            </span>
-                            <span className="player-profile-columns-s1">{track?.abbr}</span>
-                          </Link>
-                        </td>
-                      )}
-                      {score.isLap && lapMode === LapModeEnum.Overall && <td />}
-                      <td className={score?.category !== category ? "fallthrough" : ""}>
-                        <Link
-                          to={resolvePage(
-                            Pages.TrackChart,
-                            { id: score.track },
-                            {
-                              reg: region.id !== 1 ? region.code.toLowerCase() : null,
-                              cat: category !== CategoryEnum.NonShortcut ? category : null,
-                              lap: score.isLap ? LapModeEnum.Lap : null,
-                              hl: score.value,
-                            },
-                          )}
-                        >
-                          {formatTime(score.value)}
-                        </Link>
-                      </td>
-                      {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
-                      <td>{score.rank}</td>
-                      <td>{getStandardLevel(metadata, score.standard)?.name}</td>
-                      <td>{(score.recordRatio * 100).toFixed(2) + "%"}</td>
-                      <td>{score.date ? formatDate(score.date) : "????-??-??"}</td>
-                      <td className="icon-cell">
-                        {score.videoLink && (
-                          <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
-                            <Icon icon="Video" />
-                          </a>
-                        )}
-                      </td>
-                      <td className="icon-cell">
-                        {score.ghostLink && (
-                          <a href={score.ghostLink} target="_blank" rel="noopener noreferrer">
-                            <Icon icon="Ghost" />
-                          </a>
-                        )}
-                      </td>
-                      <td className="icon-cell">
-                        {score.comment && (
-                          <Tooltip text={score.comment}>
-                            <Icon icon="Comment" />
-                          </Tooltip>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <ArrayTable
+              headerRows={[
+                [
+                  {
+                    content: translate("playerProfilePageTrackColumn", lang),
+                    className: "overall-shown sort-hidden",
+                    thSort: { sortKey: "track", allowedSort: [Sort.Descending, Sort.Reset] },
+                  },
+                  {
+                    content: translate("playerProfilePageTrackColumn", lang),
+                    className: "overall-hidden sort-shown",
+                    thSort: { sortKey: "track", allowedSort: [Sort.Descending, Sort.Reset] },
+                  },
+                  {
+                    content: translate("playerProfilePageCourseTimeColumn", lang),
+                    className: "overall-shown",
+                    thSort: {
+                      sortKey: "time",
+                      allowedSort: [Sort.Ascending, Sort.Descending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: translate("playerProfilePageLapTimeColumn", lang),
+                    className: "overall-shown",
+                    thSort: {
+                      sortKey: "time",
+                      allowedSort: [Sort.Ascending, Sort.Descending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: translate("playerProfilePageTimeColumn", lang),
+                    className: "overall-hidden",
+                    thSort: {
+                      sortKey: "time",
+                      allowedSort: [Sort.Ascending, Sort.Descending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: translate("playerProfilePageRankColumn", lang),
+                    thSort: {
+                      sortKey: "rank",
+                      allowedSort: [Sort.Ascending, Sort.Descending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: translate("playerProfilePageStandardColumn", lang),
+                    thSort: {
+                      sortKey: "standard",
+                      allowedSort: [Sort.Ascending, Sort.Descending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: translate("playerProfilePagePRWRColumn", lang),
+                    thSort: {
+                      sortKey: "prwr",
+                      allowedSort: [Sort.Descending, Sort.Ascending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: translate("playerProfilePageDateColumn", lang),
+                    thSort: {
+                      sortKey: "date",
+                      allowedSort: [Sort.Ascending, Sort.Descending, Sort.Reset],
+                    },
+                  },
+                  {
+                    content: null,
+                  },
+                  {
+                    content: null,
+                  },
+                  {
+                    content: null,
+                  },
+                ],
+              ]}
+              rows={sortedRows}
+              tableData={tableData}
+              className={"player-profile-table " + lapMode}
+            />
           </Deferred>
         </div>
       </OverwriteColor>

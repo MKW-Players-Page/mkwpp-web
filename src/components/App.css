@@ -195,6 +195,40 @@ td.lock-table-cells {
   }
 }
 
+.player-profile-table.overall .overall-hidden {
+  display: none;
+}
+
+.player-profile-table.overall .overall-shown {
+  display: table-cell;
+}
+
+.player-profile-table.sorted:not(.track) .sort-hidden {
+  display: none;
+}
+
+.player-profile-table.sorted:not(.track) .sort-shown {
+  display: table-cell;
+}
+
+.player-profile-table.course .overall-hidden,
+.player-profile-table.lap .overall-hidden {
+  display: table-cell;
+}
+
+.player-profile-table.course .overall-shown,
+.player-profile-table.lap .overall-shown {
+  display: none;
+}
+
+.player-profile-table.course tbody tr:nth-child(2n) {
+  display: none;
+}
+
+.player-profile-table.lap tbody tr:nth-child(2n + 1) {
+  display: none;
+}
+
 .player-profile-columns-s1 {
   display: none;
 }

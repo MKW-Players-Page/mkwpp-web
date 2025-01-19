@@ -1,14 +1,19 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
 
 type RowIdx = number;
 type ColIdx = number;
 
+export enum Sort {
+  Ascending = -1,
+  Reset = 0,
+  Descending = 1,
+}
+
 export interface ThSortData {
   sortKey: string;
-  asc?: boolean;
-  desc?: boolean;
+  allowedSort: Sort[];
 }
 
 export interface ArrayTableCellData {
@@ -28,6 +33,8 @@ interface ArrayTableRowProps {
   cellArea: number[][][];
   className?: string;
   reference?: React.MutableRefObject<HTMLTableRowElement | null>;
+  sort?: [string, Sort] | null;
+  setSort?: React.Dispatch<React.SetStateAction<[string, Sort]>>;
 }
 
 const ArrayTableRow = ({
@@ -38,6 +45,8 @@ const ArrayTableRow = ({
   iconCellColumns,
   className,
   reference: ref,
+  sort,
+  setSort,
 }: ArrayTableRowProps) => {
   const { settings } = useContext(SettingsContext);
   const Cell: keyof JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
@@ -49,6 +58,24 @@ const ArrayTableRow = ({
           <></>
         ) : (
           <Cell
+            onClick={
+              th && cell.thSort !== undefined
+                ? () => {
+                    if (cell.thSort !== undefined && setSort !== undefined) {
+                      if (!sort || sort[0] !== cell.thSort?.sortKey || sort[1] === Sort.Reset)
+                        setSort([cell.thSort?.sortKey, cell.thSort?.allowedSort[0]]);
+                      if (sort && sort[0] === cell.thSort?.sortKey)
+                        setSort([
+                          cell.thSort?.sortKey,
+                          cell.thSort?.allowedSort[cell.thSort?.allowedSort.indexOf(sort[1]) + 1] ??
+                            cell.thSort?.allowedSort[0],
+                        ]);
+                      console.log(sort);
+                    }
+                  }
+                : undefined
+            }
+            style={{ cursor: th && cell.thSort ? "pointer" : "" }}
             className={`${
               settings.lockTableCells && cell.lockedCell === true ? "lock-table-cells force-bg" : ""
             }${cell.className ? " " + cell.className : ""}${
@@ -81,7 +108,7 @@ export interface ArrayTableData {
   rowKeys?: string[];
   infiniteScrollData?: { padding: number; extraDependencies: any[] };
   highlightedRow?: RowIdx;
-  rowSortData?: RowSortData;
+  rowSortData?: RowSortData[];
 }
 
 export interface ArrayTableProps {
@@ -101,6 +128,8 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     headerCellArea: createCellAreaMap(headerRows ? headerRows : []),
     footerCellArea: createCellAreaMap(footerRows ? footerRows : []),
   };
+
+  const [sort, setSort] = useState<[string, Sort]>(["", Sort.Reset]);
 
   const highlightRow = useRef<HTMLTableRowElement | null>(null);
   useEffect(() => {
@@ -132,8 +161,18 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     />
   );
 
+  let sortBlueprint = tableData?.rowSortData
+    ?.filter((r) => r.sortKey === sort[0])
+    .sort((a, b) => a.sortValue - b.sortValue);
+  if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
+
   return (
-    <table className={className}>
+    <table
+      className={
+        className +
+        (sort[0] !== "" && sort[1] !== Sort.Reset ? ` sorted ${sort[0]} ${sort[1]}` : "")
+      }
+    >
       {headerRows ? (
         <thead>
           {headerRows.map((row, rowIdx) => (
@@ -144,6 +183,8 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
               cellArea={areas.headerCellArea}
               row={row}
               th
+              sort={sort}
+              setSort={setSort}
             />
           ))}
         </thead>
@@ -160,7 +201,18 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
           preElement={tableData.highlightedRow ?? 0}
         />
       ) : (
-        <tbody className="table-hover-rows">{rows.map(mapFn)}</tbody>
+        <tbody className="table-hover-rows">
+          {
+            rows.map(mapFn).reduce((acc, val, idx) => {
+              let newIdx = idx;
+              if (sort[1] !== Sort.Reset)
+                newIdx = acc?.findIndex((r) => (r ? r.rowIdx === idx : false));
+
+              (acc[newIdx] as unknown as React.ReactNode) = val;
+              return acc;
+            }, sortBlueprint?.slice() ?? []) as React.ReactNode
+          }
+        </tbody>
       )}
       {footerRows ? (
         <tfoot>
