@@ -15,7 +15,7 @@ export const useInfiniteScroll = (
   useEffect(() => {
     const observer = new IntersectionObserver((e) => {
       const clientHeightCheck = document.documentElement.clientHeight / 2;
-      e.forEach(function (row) {
+      const functionR = async function (row: IntersectionObserverEntry) {
         const elemNth =
           Array.from(row.target.parentNode?.children ?? []).indexOf(row.target) + sliceStart;
         if (row.isIntersecting) {
@@ -25,13 +25,16 @@ export const useInfiniteScroll = (
             setLastElementNum(elemNth);
           }
         } else {
-          if (row.boundingClientRect.top < clientHeightCheck) {
-            if (elemNth === firstElementNum + 1) setFirstElementNum(elemNth);
+          if (row.boundingClientRect.top > clientHeightCheck) {
+            if (elemNth < lastElementNum) setLastElementNum(elemNth);
           } else {
-            if (elemNth === lastElementNum - 1) setLastElementNum(elemNth);
+            if (elemNth > firstElementNum) setFirstElementNum(elemNth);
           }
         }
-      });
+      };
+      const half = Math.floor(e.length / 2);
+      for (let i = e.length - 1; i > half; i--) functionR(e[i]);
+      for (let i = 0; i < half; i++) functionR(e[i]);
     });
 
     if (tbodyElement.current !== null)
