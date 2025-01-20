@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
+import Icon from "./Icon";
 
 type RowIdx = number;
 type ColIdx = number;
@@ -70,7 +71,6 @@ const ArrayTableRow = ({
                           cell.thSort?.allowedSort[cell.thSort?.allowedSort.indexOf(sort[1]) + 1] ??
                             cell.thSort?.allowedSort[0],
                         ]);
-                      console.log(sort);
                     }
                   }
                 : undefined
@@ -87,7 +87,20 @@ const ArrayTableRow = ({
             rowSpan={cellArea[rowIdx][idx][0]}
             colSpan={cellArea[rowIdx][idx][1]}
           >
-            {cell.content}
+            {th &&
+            cell.thSort !== undefined &&
+            sort &&
+            cell.thSort.sortKey === sort[0] &&
+            Sort.Reset !== sort[1] ? (
+              <span style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>{cell.content}</span>
+                <span>
+                  <Icon icon={sort[1] === Sort.Ascending ? "Caret" : "UpsideDownCaret"} />
+                </span>
+              </span>
+            ) : (
+              cell.content
+            )}
           </Cell>
         ),
       )}
