@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 import Deferred from "../widgets/Deferred";
 import api from "../../api";
@@ -11,15 +11,68 @@ import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 
 const PlayerListPage = () => {
-  const { isLoading, data: players } = useApi(() => api.timetrialsPlayersList(), [], "playerList");
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
-  const { user } = useContext(UserContext);
+  const { user, isLoading: userIsLoading } = useContext(UserContext);
 
   const [playerFilter, setPlayerFilter] = useState("");
+
+  const translationCache = useRef<Record<number, string>>({});
+  useEffect(() => {
+    translationCache.current = {};
+  }, [lang]);
+
+  const { isLoading, data: players } = useApi(
+    () =>
+      api.timetrialsPlayersList().then(
+        (players) =>
+          players
+            .map((player) => {
+              const locationString =
+                translationCache.current[player?.region ?? 0] ??
+                translateRegionNameFull(metadata, lang, player.region);
+              const nameNormalized = player.name.toLowerCase().normalize("NFKD");
+              const sortAlias = player.alias?.toLowerCase().normalize("NFKD") ?? nameNormalized;
+
+              return [
+                [
+                  {
+                    content: (
+                      <PlayerMention
+                        precalcPlayer={player}
+                        precalcRegionId={player.region ?? undefined}
+                        xxFlag={true}
+                      />
+                    ),
+                  },
+                  { content: locationString },
+                ],
+                (filter: string) =>
+                  !(
+                    filter === "" ||
+                    nameNormalized.includes(filter) ||
+                    sortAlias.includes(filter) ||
+                    locationString.toLowerCase().normalize("NFKD").includes(filter)
+                  ),
+                player.id === user?.player,
+                sortAlias,
+              ];
+            })
+            .sort((p1, p2) => (p1[3] > p2[3] ? 1 : 0)) as unknown as [
+            ArrayTableCellData[],
+            (filter: string) => boolean,
+            boolean,
+            string,
+          ][],
+      ),
+    [metadata.isLoading, lang, userIsLoading],
+    "playerList",
+  );
+
   const tableData: ArrayTableData = {
     infiniteScrollData: { extraDependencies: [isLoading], padding: 35 },
     classNames: [],
+    rowKeys: [],
   };
 
   return (
@@ -57,8 +110,8 @@ const PlayerListPage = () => {
           {translate("playerListPageSearchBtn", lang)}
         </button>
       </div>
-      <div className="module player-list">
-        <Deferred isWaiting={isLoading}>
+      <div className="module player-list table-hover-rows">
+        <Deferred isWaiting={isLoading || metadata.isLoading || userIsLoading}>
           <ArrayTable
             headerRows={[
               [
@@ -67,43 +120,26 @@ const PlayerListPage = () => {
               ],
             ]}
             rows={
-              players
-                ?.sort((p1, p2) => ((p1.alias ?? p1.name) > (p2.alias ?? p2.name) ? 1 : 0))
-                .reduce((accumulator: ArrayTableCellData[][], player, index) => {
-                  const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
+              players?.reduce(
+                (
+                  accumulator: ArrayTableCellData[][],
+                  [row, filterFunc, isLoggedInUser, rowKey],
+                  index,
+                ) => {
+                  if (filterFunc(playerFilter)) return accumulator;
 
-                  if (
-                    !(
-                      playerFilter === "" ||
-                      player.name.toLowerCase().normalize("NFKD").includes(playerFilter) ||
-                      (player.alias &&
-                        player.alias.toLowerCase().normalize("NFKD").includes(playerFilter)) ||
-                      regionNameFull.toLowerCase().normalize("NFKD").includes(playerFilter)
-                    )
-                  )
-                    return accumulator;
-
-                  if (user && player.id === user.player)
+                  if (isLoggedInUser)
                     tableData.classNames?.push({
                       className: "highlighted",
                       rowIdx: accumulator.length,
                     });
 
-                  accumulator.push([
-                    {
-                      content: (
-                        <PlayerMention
-                          precalcPlayer={player}
-                          precalcRegionId={player.region ?? undefined}
-                          xxFlag={true}
-                        />
-                      ),
-                    },
-                    { content: regionNameFull },
-                  ]);
-
+                  tableData.rowKeys?.push(rowKey);
+                  accumulator.push(row);
                   return accumulator;
-                }, []) ?? []
+                },
+                [],
+              ) ?? []
             }
             tableData={tableData}
           />
