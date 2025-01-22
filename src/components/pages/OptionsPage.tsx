@@ -134,6 +134,21 @@ const OptionsPage = () => {
       </div>
       <div className="module">
         <div className="module-content">
+          <h2>{translate("optionsPageBrowserOptSidebarAnimHeading", lang)}</h2>
+          <div style={horizDivStyle}>
+            <p>{translate("optionsPageBrowserOptSidebarAnimParagraph", lang)}</p>
+            <input
+              type="checkbox"
+              onChange={() =>
+                setSettings(setSettingKV(settings, "sidebarAnim", !settings.sidebarAnim))
+              }
+              defaultChecked={settings.sidebarAnim}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="module">
+        <div className="module-content">
           <h2>{translate("optionsPageBrowserOptHueShiftHeading", lang)}</h2>
           <ColorSlider
             paragraphText={translate("constantCategoryNameNoSCLong", lang)}
