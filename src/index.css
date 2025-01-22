@@ -64,6 +64,9 @@
   --input-border-color: hsl(
     from #405463 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
   );
+  --input-selected: hsl(
+    from #4054c0 var(--site-hue) calc(s + var(--saturation-shift)) calc(l + var(--luminosity-shift))
+  );
   /* Other */
   --tooltip-background-color: rgba(0, 0, 0, 0.9);
 }
