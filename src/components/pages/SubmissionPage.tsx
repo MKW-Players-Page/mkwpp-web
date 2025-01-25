@@ -5,7 +5,7 @@ import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
 import api, { CategoryEnum, EditScoreSubmission, Score } from "../../api";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
 import { handleBars, I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
@@ -381,9 +381,19 @@ const TimesheetTab = () => {
 const SubmissionPage = () => {
   const { isLoading, user } = useContext(UserContext);
   const { lang } = useContext(I18nContext);
+  const navigate = useNavigate();
 
   return (
     <>
+      <Link
+        to=""
+        onClick={(e) => {
+          e.preventDefault();
+          navigate(-1);
+        }}
+      >
+        {translate("genericBackButton", lang)}
+      </Link>
       <Deferred isWaiting={isLoading}>
         {!user && <Navigate to={resolvePage(Pages.UserLogin)} />}
         <h1>{translate("submissionPageTabbedModuleHeading", lang)}</h1>
