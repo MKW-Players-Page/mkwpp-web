@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import api, { Region, Track, TrackCup, StandardLevel } from "../api";
+import api, { Region, Track, TrackCup, StandardLevel, Standard } from "../api";
 import { useApi } from "../hooks";
 import { WorldRegion } from "./Defaults";
 
@@ -8,7 +8,7 @@ import { WorldRegion } from "./Defaults";
 export interface Metadata {
   isLoading: boolean;
   regions: Region[];
-  standards?: StandardLevel[];
+  standardLevels?: StandardLevel[];
   cups?: TrackCup[];
   tracks?: Track[];
 }
@@ -19,14 +19,14 @@ export interface Metadata {
  */
 export const useMetadata = (): Metadata => {
   const regions = useApi(() => api.timetrialsRegionsList(), [], "regions");
-  const standards = useApi(() => api.timetrialsStandardsList(), [], "standards");
+  const standards = useApi(() => api.timetrialsStandardlevelsList(), [], "standardLevels");
   const cups = useApi(() => api.timetrialsCupsList(), [], "cups");
   const tracks = useApi(() => api.timetrialsTracksList(), [], "tracks");
 
   return {
     isLoading: regions.isLoading || standards.isLoading || cups.isLoading || tracks.isLoading,
     regions: regions.data ?? [WorldRegion],
-    standards: standards.data,
+    standardLevels: standards.data,
     cups: cups.data,
     tracks: tracks.data,
   };
@@ -56,20 +56,12 @@ export const getRegionById = (metadata: Metadata, regionId: number) => {
  * @param standardId The id of the standard
  * @returns A StandardLevel object, or `undefined` if no standard with the given id exists.
  */
-export const getStandardLevel = (metadata: Metadata, standardId: number) => {
-  if (!metadata.standards) {
+export const getStandardLevel = (metadata: Metadata, standard: Standard | number) => {
+  if (!metadata.standardLevels) {
     return undefined;
   }
-
-  // This is obviously inefficient but this doesn't appear to cause any measurable slow downs...
-  for (const level of metadata.standards) {
-    const standard = level.standards.find((s) => s.id === standardId);
-    if (standard) {
-      return level;
-    }
-  }
-
-  return undefined;
+  if (typeof standard === "number") return metadata.standardLevels.find((s) => s.id === standard);
+  return metadata.standardLevels.find((s) => s.id === standard.level);
 };
 
 /**
