@@ -73,3 +73,11 @@ export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) =>
 export const eligibleCategories = (category: CategoryEnum) => {
   return Object.values(CategoryEnum).slice(0, Object.values(CategoryEnum).indexOf(category) + 1);
 };
+
+/** Return the highest category eligible for a given category. */
+export const highestEligibleCategory = (
+  category: CategoryEnum,
+  trackCategories: CategoryEnum[],
+) => {
+  return trackCategories.slice(0, Object.values(CategoryEnum).indexOf(category)).at(-1);
+};
