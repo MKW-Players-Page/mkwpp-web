@@ -339,7 +339,7 @@ const ContributionsPage = () => {
             {translate("contributionsPageSpecialCreditsUpdatersParagraph", lang)}{" "}
             <PlayerMention id={1167} />, <PlayerMention id={145} />, <PlayerMention id={630} />,{" "}
             <PlayerMention id={144} />, <PlayerMention id={1588} />, <PlayerMention id={1372} />,{" "}
-            <PlayerMention id={308} />
+            <PlayerMention id={308} />, <PlayerMention id={180} />
           </p>
           <p>
             {translate("contributionsPageSpecialCreditsFormerUpdatersParagraph", lang)}{" "}

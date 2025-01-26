@@ -82,9 +82,11 @@ const App = () => {
             <Navbar navbarHidden={navbarHidden} />
             <div
               onClick={() => setNavbarHidden(true)}
-              className={`darkener${navbarHidden ? "" : " navbarShown"}`}
+              className={`darkener${navbarHidden ? "" : " navbar-shown"}`}
             ></div>
-            <div className={`content${navbarHidden ? "" : " navbarShown"}`}>
+            <div
+              className={`content${navbarHidden ? "" : " navbar-shown"}${settings.sidebarAnim ? " sidebar-anim" : ""}`}
+            >
               <MetadataContext.Provider value={metadata}>
                 <Outlet />
               </MetadataContext.Provider>

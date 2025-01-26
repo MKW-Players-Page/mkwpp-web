@@ -1,9 +1,13 @@
 .content {
   padding-top: calc(var(--header-height) + 20px);
-  margin-left: calc(20px);
+  margin-left: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
   overflow-x: clip;
+}
+
+.content.sidebar-anim {
+  transition: margin-left 1s;
 }
 
 .darkener {
@@ -16,13 +20,13 @@
 }
 
 @media (orientation: landscape) {
-  .content.navbarShown {
+  .content.navbar-shown {
     margin-left: calc(var(--navbar-width) + 20px);
   }
 }
 
 @media (orientation: portrait) {
-  .darkener.navbarShown {
+  .darkener.navbar-shown {
     display: initial;
   }
 }

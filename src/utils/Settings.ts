@@ -8,6 +8,7 @@ export interface Settings {
   categoryHueColorSC: number;
   categoryHueColorUnres: number;
   debugTranslation: boolean;
+  sidebarAnim: boolean;
 }
 
 export const SettingsDataKey = "browserSettings";
@@ -27,6 +28,8 @@ export const browserSettingDefault = (key: keyof Settings) => {
     case "categoryHueColorUnres":
       return 216;
     case "debugTranslation":
+      return false;
+    case "sidebarAnim":
       return false;
     default:
       return undefined;
@@ -61,6 +64,7 @@ export const browserSettingsLoadParse = (): Settings => {
     "categoryHueColorSC",
     "categoryHueColorUnres",
     "debugTranslation",
+    "sidebarAnim",
   ];
   for (const key in objectBrowserSettings)
     if (!SettingsKeys.includes(key)) delete objectBrowserSettings[key];

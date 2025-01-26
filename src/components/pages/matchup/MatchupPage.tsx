@@ -13,10 +13,10 @@ import { useCategoryParam, useIdsParam, useLapModeParam } from "../../../utils/S
 import { ApiState, useApiArray } from "../../../hooks/ApiHook";
 import api, { CategoryEnum, Score, PlayerStats, Player } from "../../../api";
 import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
-import Dropdown, { DropdownData, DropdownItemSetDataChild } from "../../widgets/Dropdown";
 import { TimetrialsRankingsListMetricEnum } from "../../../api/generated";
 import { RankingsMetrics } from "../RankingsPage";
 import { CategoryRadio } from "../../widgets/CategorySelect";
+import RadioButtons from "../../widgets/RadioButtons";
 
 interface MatchupData {
   playerData: Player;
@@ -616,36 +616,19 @@ const MatchupPage = () => {
           <></>
         ) : (
           <div className="module-row wrap">
-            <Dropdown
-              data={
+            <RadioButtons
+              state={differenceMode}
+              setState={setDifferenceMode}
+              data={[
                 {
-                  type: "Normal",
-                  value: differenceMode,
-                  valueSetter: setDifferenceMode,
-                  defaultItemSet: 0,
-                  data: [
-                    {
-                      id: 0,
-                      children: [
-                        {
-                          type: "DropdownItemData",
-                          element: {
-                            text: translate("matchupPageDiffColToFirst", lang),
-                            value: false,
-                          },
-                        } as DropdownItemSetDataChild,
-                        {
-                          type: "DropdownItemData",
-                          element: {
-                            text: translate("matchupPageDiffColToNext", lang),
-                            value: true,
-                          },
-                        } as DropdownItemSetDataChild,
-                      ],
-                    },
-                  ],
-                } as DropdownData
-              }
+                  text: translate("matchupPageDiffColToFirst", lang),
+                  value: false,
+                },
+                {
+                  text: translate("matchupPageDiffColToNext", lang),
+                  value: true,
+                },
+              ]}
             />
           </div>
         )}

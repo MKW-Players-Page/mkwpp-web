@@ -83,7 +83,7 @@ const RegionSelectionDropdown = ({
           type: "DropdownItemData",
           element: {
             text: translateRegionName(region, lang),
-            rightIcon: <FlagIcon region={region} />,
+            rightIcon: <FlagIcon region={region} showRegFlagRegardless />,
             value: region,
           } as DropdownItemData,
         });

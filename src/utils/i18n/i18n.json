@@ -15038,6 +15038,15 @@
     "pt": "",
     "es": ""
   },
+  "optionsPageBrowserOptSidebarAnimHeading": {
+    "it": "Animazione della sidebar [Lenta e sperimentale]",
+    "en": "Sidebar Animation [Laggy & Experimental]",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "optionsPageBrowserOptHueShiftHeading": {
     "it": "Cambia Colori Sito",
     "en": "Change Site Hues",
@@ -15059,6 +15068,15 @@
   "optionsPageBrowserOptLockTableCellParagraph": {
     "it": "Blocca le celle delle table delle classifiche dove opportuno",
     "en": "Lock leaderboard table cells where it makes sense",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageBrowserOptSidebarAnimParagraph": {
+    "it": "Aggiunge animazioni varie con la sidebar, questo è sperimentale in quanto alcune pagine semplicemente laggano.",
+    "en": "Adds extra moving stuff with the sidebar, this is experimental as some pages just lag.",
     "fr": "",
     "de": "",
     "jp": "",
