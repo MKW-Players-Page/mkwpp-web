@@ -86,6 +86,22 @@ import { ReactComponent as FlagCY } from "../../assets/flags/cy.svg";
 import { ReactComponent as FlagCZ } from "../../assets/flags/cz.svg";
 import { ReactComponent as FlagDE } from "../../assets/flags/de.svg";
 import { ReactComponent as FlagDEAT } from "../../assets/flags/deat.svg";
+import { ReactComponent as FlagDEBB } from "../../assets/flags/debb.svg";
+import { ReactComponent as FlagDEBE } from "../../assets/flags/debe.svg";
+import { ReactComponent as FlagDEBW } from "../../assets/flags/debw.svg";
+import { ReactComponent as FlagDEBY } from "../../assets/flags/deby.svg";
+import { ReactComponent as FlagDEHB } from "../../assets/flags/dehb.svg";
+import { ReactComponent as FlagDEHE } from "../../assets/flags/dehe.svg";
+import { ReactComponent as FlagDEHH } from "../../assets/flags/dehh.svg";
+import { ReactComponent as FlagDEMV } from "../../assets/flags/demv.svg";
+import { ReactComponent as FlagDENI } from "../../assets/flags/deni.svg";
+import { ReactComponent as FlagDENW } from "../../assets/flags/denw.svg";
+import { ReactComponent as FlagDERP } from "../../assets/flags/derp.svg";
+import { ReactComponent as FlagDESH } from "../../assets/flags/desh.svg";
+import { ReactComponent as FlagDESL } from "../../assets/flags/desl.svg";
+import { ReactComponent as FlagDESN } from "../../assets/flags/desn.svg";
+import { ReactComponent as FlagDEST } from "../../assets/flags/dest.svg";
+import { ReactComponent as FlagDETH } from "../../assets/flags/deth.svg";
 import { ReactComponent as FlagDG } from "../../assets/flags/dg.svg";
 import { ReactComponent as FlagDJ } from "../../assets/flags/dj.svg";
 import { ReactComponent as FlagDK } from "../../assets/flags/dk.svg";
@@ -448,6 +464,22 @@ export const Flags = {
   cz: FlagCZ,
   de: FlagDE,
   deat: FlagDEAT,
+  debb: FlagDEBB,
+  debe: FlagDEBE,
+  debw: FlagDEBW,
+  deby: FlagDEBY,
+  dehb: FlagDEHB,
+  dehe: FlagDEHE,
+  dehh: FlagDEHH,
+  demv: FlagDEMV,
+  deni: FlagDENI,
+  denw: FlagDENW,
+  derp: FlagDERP,
+  desh: FlagDESH,
+  desl: FlagDESL,
+  desn: FlagDESN,
+  dest: FlagDEST,
+  deth: FlagDETH,
   dg: FlagDG,
   dj: FlagDJ,
   dk: FlagDK,
