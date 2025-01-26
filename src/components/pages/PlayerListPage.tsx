@@ -1,70 +1,79 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 import Deferred from "../widgets/Deferred";
 import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
-import { PlayerBasic } from "../../api";
 import { useState } from "react";
 import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
-import { useInfiniteScroll } from "../../hooks/ScrollHook";
-
-interface PlayerForFilter extends PlayerBasic {
-  simplifiedName: string;
-  simplifiedAlias: string;
-}
-
-interface PlayerListRowProp {
-  player: PlayerForFilter;
-  playerFilter: string;
-}
-const PlayerListRow = ({ player, playerFilter }: PlayerListRowProp) => {
-  const metadata = useContext(MetadataContext);
-  const { lang } = useContext(I18nContext);
-  const { user } = useContext(UserContext);
-  const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
-
-  return (
-    <tr className={user && player.id === user.player ? "highlighted" : ""}>
-      <td>
-        <PlayerMention
-          precalcPlayer={player}
-          precalcRegionId={player.region ?? undefined}
-          xxFlag={true}
-        />
-      </td>
-      <td>{regionNameFull}</td>
-    </tr>
-  );
-};
+import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 
 const PlayerListPage = () => {
-  const { isLoading, data: players } = useApi(
-    () =>
-      api.timetrialsPlayersList().then((arr) =>
-        (
-          arr.map((r) => {
-            (r as PlayerForFilter).simplifiedName = r.name.toLowerCase().normalize("NFKD");
-            (r as PlayerForFilter).simplifiedAlias = (r.alias ?? r.name)
-              .toLowerCase()
-              .normalize("NFKD");
-            return r;
-          }) as PlayerForFilter[]
-        ).sort((a, b) => (a.simplifiedAlias > b.simplifiedAlias ? 1 : -1)),
-      ),
-    [],
-    "playerList",
-  );
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
+  const { user, isLoading: userIsLoading } = useContext(UserContext);
 
   const [playerFilter, setPlayerFilter] = useState("");
 
-  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(35, players?.length ?? 0, [
-    isLoading,
-  ]);
+  const translationCache = useRef<Record<number, string>>({});
+  useEffect(() => {
+    translationCache.current = {};
+  }, [lang]);
+
+  const { isLoading, data: players } = useApi(
+    () =>
+      api.timetrialsPlayersList().then(
+        (players) =>
+          players
+            .map((player) => {
+              const locationString =
+                translationCache.current[player?.region ?? 0] ??
+                translateRegionNameFull(metadata, lang, player.region);
+              const nameNormalized = player.name.toLowerCase().normalize("NFKD");
+              const sortAlias = player.alias?.toLowerCase().normalize("NFKD") ?? nameNormalized;
+
+              return [
+                [
+                  {
+                    content: (
+                      <PlayerMention
+                        precalcPlayer={player}
+                        precalcRegionId={player.region ?? undefined}
+                        xxFlag={true}
+                      />
+                    ),
+                  },
+                  { content: locationString },
+                ],
+                (filter: string) =>
+                  !(
+                    filter === "" ||
+                    nameNormalized.includes(filter) ||
+                    sortAlias.includes(filter) ||
+                    locationString.toLowerCase().normalize("NFKD").includes(filter)
+                  ),
+                player.id === user?.player,
+                sortAlias,
+              ];
+            })
+            .sort((p1, p2) => (p1[3] > p2[3] ? 1 : 0)) as unknown as [
+            ArrayTableCellData[],
+            (filter: string) => boolean,
+            boolean,
+            string,
+          ][],
+      ),
+    [metadata.isLoading, lang, userIsLoading],
+    "playerList",
+  );
+
+  const tableData: ArrayTableData = {
+    infiniteScrollData: { extraDependencies: [isLoading], padding: 35 },
+    classNames: [],
+    rowKeys: [],
+  };
 
   return (
     <>
@@ -101,35 +110,39 @@ const PlayerListPage = () => {
           {translate("playerListPageSearchBtn", lang)}
         </button>
       </div>
-      <div className="module player-list">
-        <Deferred isWaiting={isLoading}>
-          <table>
-            <thead>
-              <tr>
-                <th>{translate("playerListPageNameCol", lang)}</th>
-                <th>{translate("playerListPageLocationCol", lang)}</th>
-              </tr>
-            </thead>
-            <tbody ref={tbodyElement} className="table-hover-rows">
-              {players
-                ?.filter((player) => {
-                  const regionNameFull = translateRegionNameFull(metadata, lang, player.region);
+      <div className="module player-list table-hover-rows">
+        <Deferred isWaiting={isLoading || metadata.isLoading || userIsLoading}>
+          <ArrayTable
+            headerRows={[
+              [
+                { content: translate("playerListPageNameCol", lang) },
+                { content: translate("playerListPageLocationCol", lang) },
+              ],
+            ]}
+            rows={
+              players?.reduce(
+                (
+                  accumulator: ArrayTableCellData[][],
+                  [row, filterFunc, isLoggedInUser, rowKey],
+                  index,
+                ) => {
+                  if (filterFunc(playerFilter)) return accumulator;
 
-                  return (
-                    playerFilter === "" ||
-                    (player as PlayerForFilter).simplifiedName.includes(playerFilter) ||
-                    (player as PlayerForFilter).simplifiedAlias.includes(playerFilter) ||
-                    regionNameFull.toLowerCase().normalize("NFKD").includes(playerFilter)
-                  );
-                })
-                .map((player, idx) => {
-                  if (idx < sliceStart || idx >= sliceEnd) return <></>;
-                  return (
-                    <PlayerListRow key={player.id} player={player} playerFilter={playerFilter} />
-                  );
-                })}
-            </tbody>
-          </table>
+                  if (isLoggedInUser)
+                    tableData.classNames?.push({
+                      className: "highlighted",
+                      rowIdx: accumulator.length,
+                    });
+
+                  tableData.rowKeys?.push(rowKey);
+                  accumulator.push(row);
+                  return accumulator;
+                },
+                [],
+              ) ?? []
+            }
+            tableData={tableData}
+          />
         </Deferred>
       </div>
     </>

@@ -14,7 +14,6 @@ import SubmissionCard from "../widgets/SubmissionCard";
 import RadioButtons from "../widgets/RadioButtons";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
 import { formatDate, formatTime } from "../../utils/Formatters";
-import { Filtering, ScoreDoubled } from "./PlayerProfilePage";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
@@ -132,6 +131,17 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
       </OverwriteColor>
     </>
   );
+};
+
+interface ScoreDoubled extends Score {
+  precedesRepeat: boolean;
+  repeat: boolean;
+}
+
+const Filtering = {
+  flapOnly: (a: Score) => a.isLap,
+  courseOnly: (a: Score) => !a.isLap,
+  overall: (a: Score) => true,
 };
 
 const TimesheetTab = () => {

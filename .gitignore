@@ -12,9 +12,10 @@
 # production
 /build
 
-# vscode
+# ide
 /.vscode
 *.code-workspace
+/.zed
 
 # misc
 .DS_Store

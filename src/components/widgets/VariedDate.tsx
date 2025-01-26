@@ -1,5 +1,5 @@
 export interface FormatDateDependableProps {
-  date: Date;
+  date: Date | null | undefined;
   smallClass: string;
   bigClass: string;
 }
@@ -14,16 +14,19 @@ export interface FormatDateDependableProps {
  * @returns A human readable date element
  */
 const FormatDateDependable = ({ date, smallClass, bigClass }: FormatDateDependableProps) => {
-  const year = date.getUTCFullYear();
-  const month = date.getUTCMonth() + 1;
-  const day = date.getUTCDate();
-  const dateStr = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  let dateStr = "????-??-??";
+  if (date !== undefined && date !== null) {
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+    dateStr = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  }
   return (
-    <>
+    <span>
       <span className={bigClass}>{dateStr.substring(0, 2)}</span>
       <span className={smallClass}>'</span>
       {dateStr.substring(2)}
-    </>
+    </span>
   );
 };
 

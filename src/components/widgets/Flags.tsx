@@ -762,7 +762,8 @@ export interface FlagProps {
 }
 
 const Flag = ({ flag, useSvg }: FlagProps) => {
-  if (!useSvg) return <img src={`/mkw/flags/${codeToFlag(flag)}.svg`} alt={`${flag}.svg`} />;
+  if (!useSvg)
+    return <img loading="lazy" src={`/mkw/flags/${codeToFlag(flag)}.svg`} alt={`${flag}.svg`} />;
   const FlagSVG = Flags[flag];
   if (FlagSVG === undefined) return <></>;
   return <FlagSVG />;

@@ -7,6 +7,7 @@ import { ReactComponent as CommentIcon } from "../../assets/icons/comment.svg";
 import { ReactComponent as GhostIcon } from "../../assets/icons/ghost.svg";
 import { ReactComponent as VideoIcon } from "../../assets/icons/video.svg";
 import { ReactComponent as DropdownCaret } from "../../assets/icons/dropdowncaret.svg";
+import { ReactComponent as CaretUpsideDown } from "../../assets/icons/caretupsidedown.svg";
 import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.svg";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { ReactComponent as SubmissionAcceptedIcon } from "../../assets/icons/submissionAccepted.svg";
@@ -23,6 +24,7 @@ export const Icons = {
   Ghost: GhostIcon,
   Video: VideoIcon,
   Caret: DropdownCaret,
+  UpsideDownCaret: CaretUpsideDown,
   Hamburger: HamburgerIcon,
   Edit: EditIcon,
   SubmissionAccepted: SubmissionAcceptedIcon,

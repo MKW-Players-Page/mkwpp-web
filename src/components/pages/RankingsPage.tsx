@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../widgets/Deferred";
@@ -21,7 +21,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import { LapModeRadio } from "../widgets/LapModeSelect";
-import { useInfiniteScroll } from "../../hooks/ScrollHook";
+import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -110,19 +110,75 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     "playerRankings",
   );
 
-  const highlightElement = useRef(null);
-  useEffect(() => {
-    if (highlightElement !== null) {
-      (highlightElement.current as unknown as HTMLDivElement)?.scrollIntoView({
-        inline: "center",
-        block: "center",
+  const tableArray: ArrayTableCellData[][] = [];
+  const tableData: ArrayTableData = {
+    classNames: [],
+    infiniteScrollData: { padding: 35, extraDependencies: [isLoading] },
+    rowKeys: [],
+  };
+  let hasHighlightRow = false;
+
+  rankings?.forEach((stats, idx, arr) => {
+    if (
+      highlight &&
+      ((metric.metricOrder < 0 &&
+        metric.getHighlightValue(stats) < highlight &&
+        (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1]) > highlight)) ||
+        (metric.metricOrder > 0 &&
+          metric.getHighlightValue(stats) > highlight &&
+          (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1]) < highlight)))
+    ) {
+      hasHighlightRow = true;
+      tableData.classNames?.push({
+        rowIdx: idx,
+        className: "highlighted",
+      });
+      tableData.rowKeys?.push("highlight");
+      tableArray.push([
+        { content: null },
+        { content: translate("genericRankingsYourHighlightedValue", lang) },
+        {
+          content:
+            metric.metric === "total_record_ratio"
+              ? highlight.toFixed(4) + "%"
+              : metric.metric === "total_score"
+                ? formatTime(highlight)
+                : highlight,
+        },
+      ]);
+    }
+
+    if (stats.player.id === user?.player || metric.getHighlightValue(stats) === highlight) {
+      if (highlight !== null && metric.getHighlightValue(stats) === highlight)
+        tableData.highlightedRow = idx;
+      tableData.classNames?.push({
+        rowIdx: idx + (hasHighlightRow ? 1 : 0),
+        className: "highlighted",
       });
     }
-  }, [highlightElement, isLoading]);
 
-  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(35, rankings?.length ?? 0, [
-    isLoading,
-  ]);
+    tableData.rowKeys?.push(`${stats.player.id}`);
+    tableArray.push([
+      { content: stats.rank },
+      {
+        content: (
+          <PlayerMention
+            precalcPlayer={stats.player}
+            precalcRegionId={stats.player.region ?? undefined}
+            xxFlag={true}
+            showRegFlagRegardless={
+              region.type === "country" ||
+              region.type === "subnational" ||
+              region.type === "subnational_group"
+            }
+          />
+        ),
+      },
+      {
+        content: metric.getValueString(stats),
+      },
+    ]);
+  });
 
   const siteHue = getCategorySiteHue(category, settings);
 
@@ -142,80 +198,19 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             setValue={setRegion}
           />
         </div>
-        <div className="module">
+        <div className="module table-hover-rows">
           <Deferred isWaiting={isLoading}>
-            <table>
-              <thead>
-                <tr>
-                  <th>{translate("rankingsPageRankCol", lang)}</th>
-                  <th>{translate("rankingsPagePlayerCol", lang)}</th>
-                  <th>{translate(metric.titleKey, lang)}</th>
-                </tr>
-              </thead>
-              <tbody ref={tbodyElement} className="table-hover-rows">
-                {rankings?.map((stats, idx, arr) => {
-                  if (idx < sliceStart || idx >= sliceEnd) return <></>;
-                  return (
-                    <>
-                      {highlight &&
-                      ((metric.metricOrder < 0 &&
-                        metric.getHighlightValue(stats) < highlight &&
-                        (arr[idx - 1] === undefined ||
-                          metric.getHighlightValue(arr[idx - 1]) > highlight)) ||
-                        (metric.metricOrder > 0 &&
-                          metric.getHighlightValue(stats) > highlight &&
-                          (arr[idx - 1] === undefined ||
-                            metric.getHighlightValue(arr[idx - 1]) < highlight))) ? (
-                        <>
-                          <tr ref={highlightElement} key={highlight} className="highlighted">
-                            <td />
-                            <td>{translate("genericRankingsYourHighlightedValue", lang)}</td>
-                            <td>
-                              {metric.metric === "total_record_ratio"
-                                ? highlight.toFixed(4) + "%"
-                                : metric.metric === "total_score"
-                                  ? formatTime(highlight)
-                                  : highlight}
-                            </td>
-                          </tr>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                      <tr
-                        key={stats.player.id}
-                        className={
-                          stats.player.id === user?.player ||
-                          metric.getHighlightValue(stats) === highlight
-                            ? "highlighted"
-                            : ""
-                        }
-                        ref={
-                          metric.getHighlightValue(stats) === highlight
-                            ? highlightElement
-                            : undefined
-                        }
-                      >
-                        <td>{stats.rank}</td>
-                        <td>
-                          <PlayerMention
-                            precalcPlayer={stats.player}
-                            precalcRegionId={stats.player.region ?? undefined}
-                            xxFlag={true}
-                            showRegFlagRegardless={
-                              region.type === "country" ||
-                              region.type === "subnational" ||
-                              region.type === "subnational_group"
-                            }
-                          />
-                        </td>
-                        <td>{metric.getValueString(stats)}</td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
+            <ArrayTable
+              rows={tableArray}
+              headerRows={[
+                [
+                  { content: translate("rankingsPageRankCol", lang) },
+                  { content: translate("rankingsPagePlayerCol", lang) },
+                  { content: translate(metric.titleKey, lang) },
+                ],
+              ]}
+              tableData={tableData}
+            />
           </Deferred>
         </div>
       </OverwriteColor>
