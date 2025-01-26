@@ -5,10 +5,10 @@ import "./StandardsPage.css";
 
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
-import { getCategoryNumerical, getCategorySiteHue } from "../../../utils/EnumUtils";
+import { getCategorySiteHue } from "../../../utils/EnumUtils";
 import { formatTime } from "../../../utils/Formatters";
-import { MetadataContext } from "../../../utils/Metadata";
-import api, { Standard } from "../../../api";
+import { getStandardLevel, MetadataContext } from "../../../utils/Metadata";
+import api from "../../../api";
 import OverwriteColor from "../../widgets/OverwriteColor";
 import Dropdown, {
   DropdownData,
@@ -25,6 +25,7 @@ import {
   I18nContext,
   translate,
   translateCategoryName,
+  translateStandardName,
   translateTrack,
 } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
@@ -50,7 +51,7 @@ const StandardDropdown = ({ levelId, setLevelId }: StandardDropdownProps) => {
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
 
-  const standardsData: DropdownItemSetDataChild[] = metadata.standards?.map((l) => {
+  const standardsData: DropdownItemSetDataChild[] = metadata.standardLevels?.map((l) => {
     return {
       type: "DropdownItemData",
       element: { text: l.name, value: l.id },
@@ -135,10 +136,6 @@ const Filter: Record<number, number[]> = {
   42: [30, 31, 32, 33],
 };
 
-interface StandardWithName extends Standard {
-  name: string;
-}
-
 const StandardsPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
@@ -150,6 +147,12 @@ const StandardsPage = () => {
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
   const { user } = useContext(UserContext);
+
+  const { data: standards, isLoading: standardsLoading } = useApi(
+    () => api.timetrialsStandardsList({ category }),
+    [category],
+    "standards",
+  );
 
   const { data: userScores, isLoading: scoresLoading } = useApi(
     () => api.timetrialsPlayersScoresList({ category, id: user?.player ?? 1 }),
@@ -169,96 +172,89 @@ const StandardsPage = () => {
     "playerProfileStats",
   );
 
-  const level: { standards: StandardWithName[] } = { standards: [] };
-  metadata.standards
-    ?.filter((l) =>
-      levelId < 35 ? l.id === levelId : levelId === 43 || Filter[levelId].includes(l.id),
-    )
-    .forEach((l) => {
-      const newLevel = l.standards.map((r) => {
-        (r as StandardWithName).name = l.name;
-        return r;
-      });
-      level.standards.push(...(newLevel as unknown as StandardWithName[]));
-    });
-
   const tableData: ArrayTableData = { classNames: [] };
 
-  const filteredStandards: ArrayTableCellData[][] = level?.standards
-    .filter(
-      (r, _, arr) =>
-        r.name !== "Newbie" &&
-        (r.category === category ||
-          arr
-            .filter((j) => j.category <= category && r.track === j.track && r.isLap === j.isLap)
-            .sort((a, b) => getCategoryNumerical(a.category) - getCategoryNumerical(b.category))
-            .at(-1)?.id === r.id) &&
-        (track === -5 || r.track === track),
-    )
-    .sort((a, b) => a.track - b.track || a.level - b.level || (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0))
-    .map((standard, idx, arr) => {
-      const track = metadata.tracks?.find((track) => track.id === standard.track);
-      const value = formatTime(standard.value ?? 0);
-
-      if (
-        user &&
-        !scoresLoading &&
-        (standard.value ?? 0) >
-          (userScores?.find(
-            (score) =>
-              standard.category >= score.category &&
-              standard.track === score.track &&
-              score.isLap === standard.isLap,
-          )?.value ?? 360000)
+  const filteredStandards: ArrayTableCellData[][] =
+    standards
+      ?.filter(
+        (standard, _, arr) =>
+          standard.level !== 34 &&
+          (levelId < 34
+            ? standard.level === levelId
+            : levelId === 43 || Filter[levelId].includes(standard.level)) &&
+          (track === -5 || standard.track === track),
       )
-        tableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
+      .sort(
+        (a, b) => a.track - b.track || a.level - b.level || (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
+      )
+      .map((standard, idx, arr) => {
+        const track = metadata.tracks?.find((track) => track.id === standard.track);
+        const value = formatTime(standard.value ?? 0);
 
-      return [
-        {
-          content: (
-            <Link
-              to={resolvePage(
-                Pages.TrackChart,
-                { id: standard.track },
-                { lap: standard.isLap ? LapModeEnum.Lap : null },
-              )}
-            >
-              {translateTrack(track, lang)}
-            </Link>
-          ),
-          className: "table-track-col table-b1",
-          expandCell: [
-            arr[idx - 1] && standard.isLap && arr[idx - 1].track === standard.track,
-            false,
-          ],
-        },
-        {
-          content: (
-            <Link
-              to={resolvePage(
-                Pages.TrackChart,
-                { id: standard.track },
-                { lap: standard.isLap ? LapModeEnum.Lap : null },
-              )}
-            >
-              <>
-                <span className="table-b3">{translateTrack(track, lang)}</span>
-                <span className="table-s3">{track?.abbr}</span>
-              </>
-            </Link>
-          ),
-          className: "table-track-col table-s1",
-        },
-        {
-          content: translateCategoryName(standard.category, lang),
-          className: "table-b2",
-        },
-        { content: standard.name },
-        { content: standard.isLap ? null : value, className: "table-b1" },
-        { content: value, expandCell: [false, !standard.isLap], className: "table-b1" },
-        { content: value, className: "table-s1" },
-      ] as ArrayTableCellData[];
-    });
+        if (
+          user &&
+          !scoresLoading &&
+          (standard.value ?? 0) >
+            (userScores?.find(
+              (score) =>
+                standard.category >= score.category &&
+                standard.track === score.track &&
+                score.isLap === standard.isLap,
+            )?.value ?? 360000)
+        )
+          tableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
+
+        return [
+          {
+            content: (
+              <Link
+                to={resolvePage(
+                  Pages.TrackChart,
+                  { id: standard.track },
+                  { lap: standard.isLap ? LapModeEnum.Lap : null },
+                )}
+              >
+                {translateTrack(track, lang)}
+              </Link>
+            ),
+            className: "table-track-col table-b1",
+            expandCell: [
+              arr[idx - 1] && standard.isLap && arr[idx - 1].track === standard.track,
+              false,
+            ],
+          },
+          {
+            content: (
+              <Link
+                to={resolvePage(
+                  Pages.TrackChart,
+                  { id: standard.track },
+                  { lap: standard.isLap ? LapModeEnum.Lap : null },
+                )}
+              >
+                <>
+                  <span className="table-b3">{translateTrack(track, lang)}</span>
+                  <span className="table-s3">{track?.abbr}</span>
+                </>
+              </Link>
+            ),
+            className: "table-track-col table-s1",
+          },
+          {
+            content: translateCategoryName(standard.category, lang),
+            className: "table-b2",
+          },
+          {
+            content: translateStandardName(
+              getStandardLevel(metadata, standard.level)?.code ?? "NW",
+              lang,
+            ),
+          },
+          { content: standard.isLap ? null : value, className: "table-b1" },
+          { content: value, expandCell: [false, !standard.isLap], className: "table-b1" },
+          { content: value, className: "table-s1" },
+        ] as ArrayTableCellData[];
+      }) ?? [];
 
   const siteHue = getCategorySiteHue(category, settings);
 
@@ -280,7 +276,7 @@ const StandardsPage = () => {
             { "--track-selected": track === -5 ? "table-cell" : "none" } as React.CSSProperties
           }
         >
-          <Deferred isWaiting={metadata.isLoading || scoresLoading}>
+          <Deferred isWaiting={metadata.isLoading || scoresLoading || standardsLoading}>
             <ArrayTable
               headerRows={[
                 [
@@ -330,7 +326,7 @@ const StandardsPage = () => {
                 ],
               ]}
               rows={
-                metadata.standards?.map((l, idx) => {
+                metadata.standardLevels?.map((l, idx) => {
                   if (
                     user &&
                     !userStatsLoading &&
@@ -339,7 +335,7 @@ const StandardsPage = () => {
                     secondTableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
                   return [
                     {
-                      content: l.name,
+                      content: translateStandardName(l.code, lang),
                     },
                     { content: l.value },
                   ];
