@@ -20,6 +20,7 @@ import {
   translate,
   translateRegionName,
   translateRegionNameFull,
+  translateStandardName,
   translateTrack,
 } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
@@ -182,7 +183,7 @@ const PlayerProfilePage = () => {
           className: timeClassName + " overall-hidden",
         },
         { content: score.rank },
-        { content: getStandardLevel(metadata, score.standard)?.name },
+        { content: translateStandardName(getStandardLevel(metadata, score.standard), lang) },
         { content: (score.recordRatio * 100).toFixed(2) + "%" },
         {
           content: (

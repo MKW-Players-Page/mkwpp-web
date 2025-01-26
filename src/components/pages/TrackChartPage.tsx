@@ -21,7 +21,12 @@ import {
   useRowHighlightParam,
 } from "../../utils/SearchParams";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
-import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
+import {
+  I18nContext,
+  translate,
+  translateStandardName,
+  translateTrack,
+} from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
@@ -137,7 +142,7 @@ const TrackChartPage = () => {
         content: formatTime(score.value),
         className: score.category !== category ? "fallthrough" : undefined,
       },
-      { content: getStandardLevel(metadata, score.standard)?.name },
+      { content: translateStandardName(getStandardLevel(metadata, score.standard), lang) },
       {
         content: score.date ? (
           <FormatDateDependable

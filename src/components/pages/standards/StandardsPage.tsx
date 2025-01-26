@@ -54,7 +54,7 @@ const StandardDropdown = ({ levelId, setLevelId }: StandardDropdownProps) => {
   const standardsData: DropdownItemSetDataChild[] = metadata.standardLevels?.map((l) => {
     return {
       type: "DropdownItemData",
-      element: { text: l.name, value: l.id },
+      element: { text: translateStandardName(l, lang), value: l.id },
     } as DropdownItemSetDataChild;
   }) ?? [
     { type: "DropdownItemData", element: { text: "God", value: 1 } },
@@ -245,10 +245,7 @@ const StandardsPage = () => {
             className: "table-b2",
           },
           {
-            content: translateStandardName(
-              getStandardLevel(metadata, standard.level)?.code ?? "NW",
-              lang,
-            ),
+            content: translateStandardName(getStandardLevel(metadata, standard), lang),
           },
           { content: standard.isLap ? null : value, className: "table-b1" },
           { content: value, expandCell: [false, !standard.isLap], className: "table-b1" },
@@ -335,7 +332,7 @@ const StandardsPage = () => {
                     secondTableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
                   return [
                     {
-                      content: translateStandardName(l.code, lang),
+                      content: translateStandardName(l, lang),
                     },
                     { content: l.value },
                   ];
