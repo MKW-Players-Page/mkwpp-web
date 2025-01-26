@@ -3207,7 +3207,7 @@
     "it": "Germania",
     "en": "Germany",
     "fr": "",
-    "de": "",
+    "de": "Deutschland",
     "jp": "",
     "pt": "",
     "es": ""
@@ -3226,6 +3226,438 @@
     "en": "German States",
     "fr": "",
     "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEBW": {
+    "it": "Baden-Württemberg",
+    "en": "Baden-Württemberg",
+    "fr": "Bade-Wurtemberg",
+    "de": "Baden-Württemberg",
+    "jp": "バーデン＝ヴュルテンベルク州の旗 バーデン＝ヴュルテンベルク州",
+    "pt": "Baden-Württemberg",
+    "es": "Baden-Wurtemberg"
+  },
+  "constantRegionRecordDEBW": {
+    "it": "Record del Baden-Württemberg",
+    "en": "Baden-Württemberg Records",
+    "fr": "",
+    "de": "Baden-Württemberg-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEBW": {
+    "it": "Distretti del Baden-Württemberg",
+    "en": "Baden-Württemberg Districts",
+    "fr": "",
+    "de": "Baden-Württemberg Regierungsbezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEBY": {
+    "it": "Baviera",
+    "en": "Bavaria",
+    "fr": "Bavière",
+    "de": "Bayern",
+    "jp": "バイエルン州の旗 バイエルン自由州",
+    "pt": "Baviera",
+    "es": "Baviera"
+  },
+  "constantRegionRecordDEBY": {
+    "it": "Record Bavaresi",
+    "en": "Bavarian Records",
+    "fr": "",
+    "de": "Bayern-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEBY": {
+    "it": "Distretti Bavaresi",
+    "en": "Bavarian Districts",
+    "fr": "",
+    "de": "Bayern Regierungsbezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEBE": {
+    "it": "Berlino",
+    "en": "Berlin",
+    "fr": "Berlin",
+    "de": "Berlin",
+    "jp": "ベルリンの旗 ベルリン",
+    "pt": "Berlim",
+    "es": "Berlín"
+  },
+  "constantRegionRecordDEBE": {
+    "it": "Record Berlinesi",
+    "en": "Berliner Records",
+    "fr": "",
+    "de": "Berlin-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEBE": {
+    "it": "Quartieri Berlinesi",
+    "en": "Berlin Boroughs",
+    "fr": "",
+    "de": "Berlin Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEBB": {
+    "it": "Brandeburgo",
+    "en": "Brandenburg",
+    "fr": "Brandebourg",
+    "de": "Brandenburg",
+    "jp": "ブランデンブルク州の旗 ブランデンブルク州",
+    "pt": "Brandemburgo",
+    "es": "Brandeburgo"
+  },
+  "constantRegionRecordDEBB": {
+    "it": "Record Brandeburghesi",
+    "en": "Brandenburg Records",
+    "fr": "",
+    "de": "Brandenburg-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEBB": {
+    "it": "Distretti Brandeburghesi",
+    "en": "Brandenburg Districts",
+    "fr": "",
+    "de": "Brandenburg Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEHB": {
+    "it": "Brema",
+    "en": "Bremen",
+    "fr": "Brême",
+    "de": "Bremen",
+    "jp": "ブレーメン州の旗 自由ハンザ都市ブレーメン",
+    "pt": "Bremen",
+    "es": "Bremen"
+  },
+  "constantRegionRecordDEHB": {
+    "it": "Record Bremesi",
+    "en": "Bremen Records",
+    "fr": "",
+    "de": "Bremen-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEHB": {
+    "it": "Città Bremesi",
+    "en": "Bremen Cities",
+    "fr": "",
+    "de": "Bremen Städte",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEHH": {
+    "it": "Amburgo",
+    "en": "Hamburg",
+    "fr": "Hambourg",
+    "de": "Hamburg",
+    "jp": "ハンブルクの旗 自由ハンザ都市ハンブルク",
+    "pt": "Hamburgo",
+    "es": "Hamburgo"
+  },
+  "constantRegionRecordDEHH": {
+    "it": "Record d'Amburgo",
+    "en": "Hamburger Records",
+    "fr": "",
+    "de": "Hamburg-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEHH": {
+    "it": "Quartieri  d'Amburgo",
+    "en": "Hamburger Boroughs",
+    "fr": "",
+    "de": "Hamburg Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEHE": {
+    "it": "Assia",
+    "en": "Hesse",
+    "fr": "Hesse",
+    "de": "Hessen",
+    "jp": "ヘッセン州の旗 ヘッセン州",
+    "pt": "Hesse",
+    "es": "Hesse"
+  },
+  "constantRegionRecordDEHE": {
+    "it": "Record dell'Assia",
+    "en": "Hesse Records",
+    "fr": "",
+    "de": "Hessen-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEHE": {
+    "it": "Distretti dell'Assia",
+    "en": "Hesse Districts",
+    "fr": "",
+    "de": "Hessen Regierungsbezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEMV": {
+    "it": "Meclemburgo-Pomerania Anteriore",
+    "en": "Mecklenburg-Western Pomerania",
+    "fr": "Mecklembourg-Poméranie-Occidentale",
+    "de": "Mecklenburg-Vorpommern",
+    "jp": "メクレンブルク＝フォアポンメルン州の旗 メクレンブルク＝フォアポンメルン州",
+    "pt": "Meclemburgo-Pomerânia Ocidental",
+    "es": "Mecklemburgo-Pomerania Occidental"
+  },
+  "constantRegionRecordDEMV": {
+    "it": "Record del Meclemburgo-Pomerania Anteriore",
+    "en": "Mecklenburg-Western Pomerania Records",
+    "fr": "",
+    "de": "Mecklenburg-Vorpommern-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEMV": {
+    "it": "Distretti del Meclemburgo-Pomerania Anteriore",
+    "en": "Mecklenburg-Western Pomerania Districts",
+    "fr": "",
+    "de": "Mecklenburg-Vorpommern Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDENI": {
+    "it": "Bassa Sassonia",
+    "en": "Lower Saxony",
+    "fr": "Basse-Saxe",
+    "de": "Niedersachsen",
+    "jp": "ニーダーザクセン州の旗 ニーダーザクセン州",
+    "pt": "Baixa Saxônia",
+    "es": "Baja Sajonia"
+  },
+  "constantRegionRecordDENI": {
+    "it": "Record Basso-Sassoni",
+    "en": "Lower Saxon Records",
+    "fr": "",
+    "de": "Niedersachsen-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDENI": {
+    "it": "Distretti Basso-Sassoni",
+    "en": "Lower Saxon Districts",
+    "fr": "",
+    "de": "Niedersachsen Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDENW": {
+    "it": "Renania Settentrionale-Vestfalia",
+    "en": "North Rhine-Westphalia",
+    "fr": "Rhénanie-du-Nord-Westphalie",
+    "de": "Nordrhein-Westfalen",
+    "jp": "ノルトライン＝ヴェストファーレン州の旗 ノルトライン＝ヴェストファーレン州",
+    "pt": "Renânia do Norte-Vestfália",
+    "es": "Renania del Norte-Westfalia"
+  },
+  "constantRegionRecordDENW": {
+    "it": "Record della Renania Settentrionale-Vestfalia",
+    "en": "North Rhine-Westphalia Records",
+    "fr": "",
+    "de": "Nordrhein-Westfalen-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDENW": {
+    "it": "Distretti della Renania Settentrionale-Vestfalia",
+    "en": "North Rhine-Westphalia Districts",
+    "fr": "",
+    "de": "Nordrhein-Westfalen Regierungsbezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDERP": {
+    "it": "Renania-Palatinato",
+    "en": "Rhineland-Palatinate",
+    "fr": "Rhénanie-Palatinat",
+    "de": "Rheinland-Pfalz",
+    "jp": "ラインラント＝プファルツ州の旗 ラインラント＝プファルツ州",
+    "pt": "Renânia-Palatinado",
+    "es": "Renania-Palatinado"
+  },
+  "constantRegionRecordDERP": {
+    "it": "Record della Renania-Palatinato",
+    "en": "Renania-Palatinato Records",
+    "fr": "",
+    "de": "Rheinland-Pfalz-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDERP": {
+    "it": "Distretti della Renania-Palatinato",
+    "en": "Renania-Palatinato Districts",
+    "fr": "",
+    "de": "Rheinland-Pfalz Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDESL": {
+    "it": "Saarland",
+    "en": "Saarland",
+    "fr": "Sarre",
+    "de": "Saarland",
+    "jp": "ザールラント州の旗 ザールラント州",
+    "pt": "Sarre",
+    "es": "Sarre"
+  },
+  "constantRegionRecordDESL": {
+    "it": "Record del Saarland",
+    "en": "Saarland Records",
+    "fr": "",
+    "de": "Saarland-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDESL": {
+    "it": "Distretti del Saarland",
+    "en": "Saarland Districts",
+    "fr": "",
+    "de": "Saarland Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDESN": {
+    "it": "Sassonia",
+    "en": "Saxony",
+    "fr": "Saxe",
+    "de": "Sachsen",
+    "jp": "ザクセン州の旗 ザクセン自由州",
+    "pt": "Saxônia",
+    "es": "Sajonia"
+  },
+  "constantRegionRecordDESN": {
+    "it": "Record Sassoni",
+    "en": "Saxon Records",
+    "fr": "",
+    "de": "Sachsen-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDESN": {
+    "it": "Distretti Sassoni",
+    "en": "Saxon Districts",
+    "fr": "",
+    "de": "Sachsen Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDEST": {
+    "it": "Sassonia-Anhalt",
+    "en": "Saxony-Anhalt",
+    "fr": "Saxe-Anhalt",
+    "de": "Sachsen-Anhalt",
+    "jp": "ザクセン＝アンハルト州の旗 ザクセン＝アンハルト州",
+    "pt": "Saxônia-Anhalt",
+    "es": "Sajonia-Anhalt"
+  },
+  "constantRegionRecordDEST": {
+    "it": "Record Sassoni-Anhalt",
+    "en": "Saxon-Anhalt Records",
+    "fr": "",
+    "de": "Sachsen-Anhalt-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDEST": {
+    "it": "Distretti Sassoni-Anhalt",
+    "en": "Saxon-Anhalt Districts",
+    "fr": "",
+    "de": "Sachsen-Anhalt Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDESH": {
+    "it": "Schleswig-Holstein",
+    "en": "Schleswig-Holstein",
+    "fr": "Slesvig-Holsace",
+    "de": "Schleswig-Holstein",
+    "jp": "シュレースヴィヒ＝ホルシュタイン州の旗 シュレースヴィヒ＝ホルシュタイン州",
+    "pt": "Schleswig-Holstein",
+    "es": "Schleswig-Holstein"
+  },
+  "constantRegionRecordDESH": {
+    "it": "Record del Schleswig-Holstein",
+    "en": "Schleswig-Holstein Records",
+    "fr": "",
+    "de": "Schleswig-Holstein-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDESH": {
+    "it": "Distretti del Schleswig-Holstein",
+    "en": "Schleswig-Holstein Districts",
+    "fr": "",
+    "de": "Schleswig-Holstein Bezirke",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionDETH": {
+    "it": "Turingia",
+    "en": "Thuringia",
+    "fr": "Thuringe",
+    "de": "Thüringen",
+    "jp": "テューリンゲン州の旗 テューリンゲン自由州",
+    "pt": "Turíngia",
+    "es": "Turingia"
+  },
+  "constantRegionRecordDETH": {
+    "it": "Record della Turingia",
+    "en": "Thuringian Records",
+    "fr": "",
+    "de": "Thüringen-Rekorde",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionSubregionsDETH": {
+    "it": "Distretti della Turingia",
+    "en": "Thuringian Districts",
+    "fr": "",
+    "de": "Thüringen Bezirke",
     "jp": "",
     "pt": "",
     "es": ""
