@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { MetadataContext, useMetadata } from "../utils/Metadata";
 
 import "./App.css";
+import "./App.scss";
 import { Header, Navbar } from "./global";
 import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";

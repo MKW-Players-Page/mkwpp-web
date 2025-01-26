@@ -45,8 +45,8 @@ const ArrayTableRow = ({
                 ? " icon-cell"
                 : ""
             }`}
-            rowSpan={cellArea[rowIdx][idx][0]}
-            colSpan={cellArea[rowIdx][idx][1]}
+            rowSpan={cellArea[rowIdx][idx][0] > 1 ? cellArea[rowIdx][idx][0] : undefined}
+            colSpan={cellArea[rowIdx][idx][1] > 1 ? cellArea[rowIdx][idx][1] : undefined}
           >
             {cell.content}
           </Cell>

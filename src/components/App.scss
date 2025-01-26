@@ -1,0 +1,34 @@
+@mixin recursive-tr($n) {
+  + tr {
+    background-color: var(--header-background-color);
+    @if $n > 2 {
+      @include recursive-tr($n - 1);
+    }
+  }
+}
+
+td.force-bg:hover,
+td.force-bg:active {
+  background-color: var(--header-background-color);
+}
+
+.table-hover-rows {
+  td:hover,
+  td:active {
+    background-color: var(--header-background-color);
+  }
+
+  tr:hover,
+  tr:active {
+    td:not([rowspan]) {
+      background-color: var(--header-background-color);
+    }
+  }
+}
+
+@for $n from 2 through 6 {
+  tr:has(td[rowspan="#{$n}"]:hover),
+  tr:has(td[rowspan="#{$n}"]:active) {
+    @include recursive-tr($n);
+  }
+}

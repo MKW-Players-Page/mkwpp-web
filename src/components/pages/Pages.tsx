@@ -7,7 +7,7 @@ import PlayerListPage from "./PlayerListPage";
 import PlayerProfilePage from "./PlayerProfilePage";
 import RankingsPage, { RankingsMetrics } from "./RankingsPage";
 import RulesPage from "./RulesPage";
-import StandardsPage from "./StandardsPage";
+import StandardsPage from "./standards/StandardsPage";
 import TrackChartPage from "./TrackChartPage";
 import TrackListPage from "./TrackListPage";
 import TrackRecordsPage from "./TrackRecordsPage";
