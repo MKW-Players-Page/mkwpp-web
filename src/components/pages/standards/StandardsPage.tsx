@@ -8,7 +8,7 @@ import Deferred from "../../widgets/Deferred";
 import { getCategorySiteHue } from "../../../utils/EnumUtils";
 import { formatTime } from "../../../utils/Formatters";
 import { getStandardLevel, MetadataContext } from "../../../utils/Metadata";
-import api from "../../../api";
+import api, { CategoryEnum } from "../../../api";
 import OverwriteColor from "../../widgets/OverwriteColor";
 import Dropdown, {
   DropdownData,
@@ -246,7 +246,7 @@ const StandardsPage = () => {
           },
           {
             content: translateCategoryName(standard.category, lang),
-            className: "table-b2",
+            className: "table-b2 table-category-col",
           },
           {
             content: translateStandardName(getStandardLevel(metadata, standard), lang),
@@ -274,7 +274,10 @@ const StandardsPage = () => {
         <div
           className={`module standards-table ${lapMode.toLowerCase()}`}
           style={
-            { "--track-selected": track === -5 ? "table-cell" : "none" } as React.CSSProperties
+            {
+              "--track-selected": track === -5 ? "table-cell" : "none",
+              "--category-selected": category === CategoryEnum.NonShortcut ? "none" : "table-cell",
+            } as React.CSSProperties
           }
         >
           <Deferred isWaiting={metadata.isLoading || scoresLoading || standardsLoading}>
@@ -291,7 +294,7 @@ const StandardsPage = () => {
                   },
                   {
                     content: translate("standardsPageCategoryCol", lang),
-                    className: "table-b2",
+                    className: "table-category-col table-b2",
                   },
                   { content: translate("standardsPageStandardCol", lang) },
                   {

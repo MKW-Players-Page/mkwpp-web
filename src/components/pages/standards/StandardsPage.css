@@ -1,5 +1,9 @@
 .table-track-col {
-  display: var(--track-selected);
+  display: var(--track-selected) !important;
+}
+
+.table-category-col {
+  display: var(--category-selected) !important;
 }
 
 .table-s1,
