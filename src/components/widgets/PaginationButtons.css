@@ -5,10 +5,10 @@
   cursor: pointer;
   border: solid var(--module-border-color);
   border-width: 0 1px 0 0;
-  max-width: 100px;
 }
 
 input.page-number-button {
+  max-width: 70px;
   border: none;
   display: inline;
   background-color: var(--module-background-color);
