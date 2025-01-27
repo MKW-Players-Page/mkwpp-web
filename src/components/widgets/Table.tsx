@@ -170,7 +170,6 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
   if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
 
   let dataToRows = rows
-    .slice()
     .map((row, rowIdx) => () => (
       <ArrayTableRow
         reference={
