@@ -28,8 +28,7 @@
   .table-b1 {
     display: none;
   }
-  
-  .table-track-col {
+  .table-s1.table-track-col {
     display: var(--track-selected);
   }
 
