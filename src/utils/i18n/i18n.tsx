@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 /* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
 
-import { CategoryEnum, Region, RegionTypeEnum, Track } from "../../api";
+import { CategoryEnum, Region, RegionTypeEnum, StandardLevel, Track } from "../../api";
 import { getRegionById, Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
 import { LapModeEnum } from "../../components/widgets/LapModeSelect";
@@ -193,4 +193,11 @@ export const translateLapModeName = (lapMode: LapModeEnum, lang: Language): stri
     case LapModeEnum.Overall:
       return translate("constantLapModeOverall", lang);
   }
+};
+
+export const translateStandardName = (
+  standardLevel: StandardLevel | undefined,
+  lang: Language,
+): string => {
+  return translate(`constantStandardLevel${standardLevel?.code ?? "NW"}` as TranslationKey, lang);
 };

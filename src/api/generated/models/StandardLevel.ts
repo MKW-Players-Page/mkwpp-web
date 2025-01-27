@@ -13,13 +13,6 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Standard } from './Standard';
-import {
-    StandardFromJSON,
-    StandardFromJSONTyped,
-    StandardToJSON,
-} from './Standard';
-
 /**
  * 
  * @export
@@ -39,23 +32,17 @@ export interface StandardLevel {
      */
     name: string;
     /**
+     * 
+     * @type {string}
+     * @memberof StandardLevel
+     */
+    code: string;
+    /**
      * Points awarded for achieving this standard level. The lower the better.
      * @type {number}
      * @memberof StandardLevel
      */
     value: number;
-    /**
-     * Whether this was part of the original 2010s standard set.
-     * @type {boolean}
-     * @memberof StandardLevel
-     */
-    isLegacy: boolean;
-    /**
-     * 
-     * @type {Array<Standard>}
-     * @memberof StandardLevel
-     */
-    readonly standards: Array<Standard>;
 }
 
 /**
@@ -64,9 +51,8 @@ export interface StandardLevel {
 export function instanceOfStandardLevel(value: object): value is StandardLevel {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('code' in value) || value['code'] === undefined) return false;
     if (!('value' in value) || value['value'] === undefined) return false;
-    if (!('isLegacy' in value) || value['isLegacy'] === undefined) return false;
-    if (!('standards' in value) || value['standards'] === undefined) return false;
     return true;
 }
 
@@ -82,21 +68,20 @@ export function StandardLevelFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'id': json['id'],
         'name': json['name'],
+        'code': json['code'],
         'value': json['value'],
-        'isLegacy': json['is_legacy'],
-        'standards': ((json['standards'] as Array<any>).map(StandardFromJSON)),
     };
 }
 
-export function StandardLevelToJSON(value?: Omit<StandardLevel, 'id'|'standards'> | null): any {
+export function StandardLevelToJSON(value?: Omit<StandardLevel, 'id'> | null): any {
     if (value == null) {
         return value;
     }
     return {
         
         'name': value['name'],
+        'code': value['code'],
         'value': value['value'],
-        'is_legacy': value['isLegacy'],
     };
 }
 

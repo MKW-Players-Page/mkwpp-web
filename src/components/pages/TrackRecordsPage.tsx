@@ -13,7 +13,13 @@ import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/S
 import { UserContext } from "../../utils/User";
 import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
-import { I18nContext, translate, translateRegionName, translateTrack } from "../../utils/i18n/i18n";
+import {
+  I18nContext,
+  translate,
+  translateRegionName,
+  translateStandardName,
+  translateTrack,
+} from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
@@ -131,7 +137,10 @@ const TrackRecordsPage = () => {
         out[Indexes.TimeCellSmall].className = "track-records-columns-s1";
         out[isLap ? Indexes.LapTimeCellBig : Indexes.CourseTimeCellBig].className =
           "track-records-columns-b1";
-        out[Indexes.Standards].content = getStandardLevel(metadata, score.standard)?.name;
+        out[Indexes.Standards].content = translateStandardName(
+          getStandardLevel(metadata, score.standard),
+          lang,
+        );
         if (score.date) {
           out[Indexes.Date].content = (
             <FormatDateDependable

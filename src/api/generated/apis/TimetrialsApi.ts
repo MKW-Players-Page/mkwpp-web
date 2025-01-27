@@ -29,6 +29,7 @@ import type {
   ScoreSubmission,
   ScoreWithPlayer,
   SiteChampion,
+  Standard,
   StandardLevel,
   Track,
   TrackCup,
@@ -62,6 +63,8 @@ import {
     ScoreWithPlayerToJSON,
     SiteChampionFromJSON,
     SiteChampionToJSON,
+    StandardFromJSON,
+    StandardToJSON,
     StandardLevelFromJSON,
     StandardLevelToJSON,
     TrackFromJSON,
@@ -140,7 +143,7 @@ export interface TimetrialsScoresLatestListRequest {
 }
 
 export interface TimetrialsStandardsListRequest {
-    isLegacy?: boolean;
+    category: TimetrialsStandardsListCategoryEnum;
 }
 
 export interface TimetrialsSubmissionsCreateCreateRequest {
@@ -812,11 +815,42 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
     /**
      */
-    async timetrialsStandardsListRaw(requestParameters: TimetrialsStandardsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StandardLevel>>> {
+    async timetrialsStandardlevelsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<StandardLevel>>> {
         const queryParameters: any = {};
 
-        if (requestParameters['isLegacy'] != null) {
-            queryParameters['is_legacy'] = requestParameters['isLegacy'];
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/timetrials/standardlevels/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StandardLevelFromJSON));
+    }
+
+    /**
+     */
+    async timetrialsStandardlevelsList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StandardLevel>> {
+        const response = await this.timetrialsStandardlevelsListRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async timetrialsStandardsListRaw(requestParameters: TimetrialsStandardsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Standard>>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling timetrialsStandardsList().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['category'] != null) {
+            queryParameters['category'] = requestParameters['category'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -828,12 +862,12 @@ export class TimetrialsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StandardLevelFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(StandardFromJSON));
     }
 
     /**
      */
-    async timetrialsStandardsList(requestParameters: TimetrialsStandardsListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<StandardLevel>> {
+    async timetrialsStandardsList(requestParameters: TimetrialsStandardsListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Standard>> {
         const response = await this.timetrialsStandardsListRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1457,6 +1491,15 @@ export const TimetrialsRegionsRankingsListTypeEnum = {
     Subnational: 'subnational'
 } as const;
 export type TimetrialsRegionsRankingsListTypeEnum = typeof TimetrialsRegionsRankingsListTypeEnum[keyof typeof TimetrialsRegionsRankingsListTypeEnum];
+/**
+ * @export
+ */
+export const TimetrialsStandardsListCategoryEnum = {
+    NonShortcut: 'nonsc',
+    Shortcut: 'sc',
+    Unrestricted: 'unres'
+} as const;
+export type TimetrialsStandardsListCategoryEnum = typeof TimetrialsStandardsListCategoryEnum[keyof typeof TimetrialsStandardsListCategoryEnum];
 /**
  * @export
  */

@@ -440,6 +440,312 @@
     "pt": "",
     "es": "N64 Castillo de Bowser"
   },
+  "constantStandardLevelGD": {
+    "it": "Dio",
+    "en": "God",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelMA": {
+    "it": "Mito A",
+    "en": "Myth A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelMB": {
+    "it": "Mito B",
+    "en": "Myth B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelMC": {
+    "it": "Mito C",
+    "en": "Myth C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelMD": {
+    "it": "Mito D",
+    "en": "Myth D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelLA": {
+    "it": "Leggenda A",
+    "en": "Legend A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelLB": {
+    "it": "Leggenda B",
+    "en": "Legend B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelLC": {
+    "it": "Leggenda C",
+    "en": "Legend C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelLD": {
+    "it": "Leggenda D",
+    "en": "Legend D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelKA": {
+    "it": "Re A",
+    "en": "King A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelKB": {
+    "it": "Re B",
+    "en": "King B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelKC": {
+    "it": "Re C",
+    "en": "King C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelKD": {
+    "it": "Re D",
+    "en": "King D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelHA": {
+    "it": "Eroe A",
+    "en": "Hero A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelHB": {
+    "it": "Eroe B",
+    "en": "Hero B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelHC": {
+    "it": "Eroe C",
+    "en": "Hero C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelHD": {
+    "it": "Eroe D",
+    "en": "Hero D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelEA": {
+    "it": "Esperto A",
+    "en": "Expert A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelEB": {
+    "it": "Esperto B",
+    "en": "Expert B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelEC": {
+    "it": "Esperto C",
+    "en": "Expert C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelED": {
+    "it": "Esperto D",
+    "en": "Expert D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelIA": {
+    "it": "Intermedio A",
+    "en": "Intermediate A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelIB": {
+    "it": "Intermedio B",
+    "en": "Intermediate B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelIC": {
+    "it": "Intermedio C",
+    "en": "Intermediate C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelID": {
+    "it": "Intermedio D",
+    "en": "Intermediate D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelAA": {
+    "it": "Apprendista A",
+    "en": "Apprentice A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelAB": {
+    "it": "Apprendista B",
+    "en": "Apprentice B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelAC": {
+    "it": "Apprendista C",
+    "en": "Apprentice C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelAD": {
+    "it": "Apprendista D",
+    "en": "Apprentice D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelBA": {
+    "it": "Principiante A",
+    "en": "Beginner A",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelBB": {
+    "it": "Principiante B",
+    "en": "Beginner B",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelBC": {
+    "it": "Principiante C",
+    "en": "Beginner C",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelBD": {
+    "it": "Principiante D",
+    "en": "Beginner D",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantStandardLevelNW": {
+    "it": "Novizio",
+    "en": "Newbie",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantRegionXX": {
     "it": "Sconosciuta",
     "en": "Unknown",
@@ -13077,7 +13383,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllMyth": {
-    "it": "Tutti i Myth",
+    "it": "Tutti i Mito",
     "en": "All Myth",
     "fr": "",
     "de": "",
@@ -13086,7 +13392,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllLegend": {
-    "it": "Tutti i Legend",
+    "it": "Tutti i Leggenda",
     "en": "All Legend",
     "fr": "",
     "de": "",
@@ -13095,7 +13401,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllKing": {
-    "it": "Tutti i King",
+    "it": "Tutti i Re",
     "en": "All King",
     "fr": "",
     "de": "",
@@ -13104,7 +13410,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllHero": {
-    "it": "Tutti gli Hero",
+    "it": "Tutti gli Eroe",
     "en": "All Hero",
     "fr": "",
     "de": "",
@@ -13113,7 +13419,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllExpert": {
-    "it": "Tutti gli Expert",
+    "it": "Tutti gli Esperto",
     "en": "All Expert",
     "fr": "",
     "de": "",
@@ -13122,7 +13428,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllIntermediate": {
-    "it": "Tutti gli Intermediate",
+    "it": "Tutti gli Intermedio",
     "en": "All Intermediate",
     "fr": "",
     "de": "",
@@ -13131,7 +13437,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllApprentice": {
-    "it": "Tutti gli Apprentice",
+    "it": "Tutti gli Apprendista",
     "en": "All Apprentice",
     "fr": "",
     "de": "",
@@ -13140,7 +13446,7 @@
     "es": ""
   },
   "standardsPageStandardDropdownAllBeginner": {
-    "it": "Tutti i Beginner",
+    "it": "Tutti i Principiante",
     "en": "All Beginner",
     "fr": "",
     "de": "",
