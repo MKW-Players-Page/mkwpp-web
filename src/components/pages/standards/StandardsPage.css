@@ -1,5 +1,5 @@
 .table-track-col {
-  display: var(--track-selected) !important;
+  display: var(--track-selected);
 }
 
 .table-category-col {
@@ -27,6 +27,10 @@
   }
   .table-b1 {
     display: none;
+  }
+  
+  .table-track-col {
+    display: var(--track-selected);
   }
 
   .standards-table.course tbody tr:nth-child(2n) {
