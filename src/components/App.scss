@@ -1,6 +1,9 @@
 @mixin recursive-tr($n) {
   + tr {
     background-color: var(--header-background-color);
+    td {
+      background-color: var(--header-background-color);
+    }
     @if $n > 2 {
       @include recursive-tr($n - 1);
     }
