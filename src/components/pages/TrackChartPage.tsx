@@ -17,6 +17,7 @@ import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import {
   useCategoryParam,
   useLapModeParam,
+  usePageNumber,
   useRegionParam,
   useRowHighlightParam,
 } from "../../utils/SearchParams";
@@ -32,6 +33,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import FormatDateDependable from "../widgets/VariedDate";
+import { PaginationButtonRow } from "../widgets/PaginationButtons";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -43,6 +45,7 @@ const TrackChartPage = () => {
   const { category, setCategory } = useCategoryParam(searchParams, ["hl"]);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, true, ["hl"]);
   const { region, setRegion } = useRegionParam(searchParams);
+  const { pageNumber, setPageNumber } = usePageNumber(searchParams);
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const metadata = useContext(MetadataContext);
@@ -177,6 +180,8 @@ const TrackChartPage = () => {
     ]);
   });
 
+  const perPageRows = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / perPageRows);
   const siteHue = getCategorySiteHue(category, settings);
 
   return (
@@ -239,6 +244,12 @@ const TrackChartPage = () => {
             setValue={setRegion}
           />
         </div>
+
+        <PaginationButtonRow
+          selectedPage={pageNumber}
+          setSelectedPage={setPageNumber}
+          numberOfPages={maxPageNumber}
+        />
         <div className="module table-hover-rows">
           <Deferred isWaiting={metadata.isLoading || isLoading}>
             <ArrayTable
@@ -259,6 +270,12 @@ const TrackChartPage = () => {
             />
           </Deferred>
         </div>
+
+        <PaginationButtonRow
+          selectedPage={pageNumber}
+          setSelectedPage={setPageNumber}
+          numberOfPages={maxPageNumber}
+        />
       </OverwriteColor>
     </>
   );

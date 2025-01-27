@@ -184,6 +184,9 @@ const RankingsPage = ({ metric }: RankingsProps) => {
 
   const siteHue = getCategorySiteHue(category, settings);
 
+  const perPageRows = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / perPageRows);
+
   return (
     <>
       <h1>{translate(metric.titleKey, lang)}</h1>
@@ -203,12 +206,12 @@ const RankingsPage = ({ metric }: RankingsProps) => {
         <PaginationButtonRow
           selectedPage={pageNumber}
           setSelectedPage={setPageNumber}
-          numberOfPages={15}
+          numberOfPages={maxPageNumber}
         />
         <div className="module table-hover-rows">
           <Deferred isWaiting={isLoading}>
             <ArrayTable
-              rows={tableArray}
+              rows={tableArray.slice((pageNumber - 1) * perPageRows, pageNumber * perPageRows)}
               headerRows={[
                 [
                   { content: translate("rankingsPageRankCol", lang) },
@@ -220,6 +223,11 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             />
           </Deferred>
         </div>
+        <PaginationButtonRow
+          selectedPage={pageNumber}
+          setSelectedPage={setPageNumber}
+          numberOfPages={maxPageNumber}
+        />
       </OverwriteColor>
     </>
   );
