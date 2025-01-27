@@ -174,6 +174,8 @@ const StandardsPage = () => {
 
   const tableData: ArrayTableData = { classNames: [] };
 
+  let hasHighlightedRow = [false, false];
+
   const filteredStandards: ArrayTableCellData[][] =
     standards
       ?.filter(
@@ -191,18 +193,23 @@ const StandardsPage = () => {
         const track = metadata.tracks?.find((track) => track.id === standard.track);
         const value = formatTime(standard.value ?? 0);
 
+        if (idx > 0 && arr[idx - 1].track !== standard.track) hasHighlightedRow = [false, false];
+
         if (
+          !hasHighlightedRow[+(standard?.isLap ?? false)] &&
           user &&
           !scoresLoading &&
           (standard.value ?? 0) >
             (userScores?.find(
               (score) =>
-                standard.category >= score.category &&
                 standard.track === score.track &&
-                score.isLap === standard.isLap,
+                score.isLap === standard.isLap &&
+                category >= score.category,
             )?.value ?? 360000)
-        )
+        ) {
+          hasHighlightedRow[+(standard?.isLap ?? false)] = true;
           tableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
+        }
 
         return [
           {
@@ -218,10 +225,7 @@ const StandardsPage = () => {
               </Link>
             ),
             className: "table-track-col table-b1",
-            expandCell: [
-              arr[idx - 1] && standard.isLap && arr[idx - 1].track === standard.track,
-              false,
-            ],
+            expandCell: [idx > 0 && standard.isLap && arr[idx - 1].track === standard.track, false],
           },
           {
             content: (
