@@ -83,7 +83,6 @@ const TrackChartPage = () => {
   const tableData: ArrayTableData = {
     iconCellColumns: [-1, -2, -3],
     classNames: [],
-    infiniteScrollData: { padding: 45, extraDependencies: [isLoading] },
     rowKeys: [],
   };
   let hasHighlightRow = false;

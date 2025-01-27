@@ -113,7 +113,6 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const tableArray: ArrayTableCellData[][] = [];
   const tableData: ArrayTableData = {
     classNames: [],
-    infiniteScrollData: { padding: 35, extraDependencies: [isLoading] },
     rowKeys: [],
   };
   let hasHighlightRow = false;

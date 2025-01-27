@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
 import Icon from "./Icon";
 
@@ -119,7 +118,6 @@ export interface ArrayTableData {
   iconCellColumns?: number[];
   classNames?: { rowIdx: RowIdx; className: string }[];
   rowKeys?: string[];
-  infiniteScrollData?: { padding: number; extraDependencies: any[] };
   highlightedRow?: RowIdx;
   rowSortData?: RowSortData[];
 }
@@ -156,24 +154,6 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     }
   }, [highlightRow]);
 
-  const mapFn = (row: ArrayTableCellData[], rowIdx: RowIdx): React.ReactNode => (
-    <ArrayTableRow
-      reference={
-        tableData?.highlightedRow !== undefined && rowIdx === tableData.highlightedRow
-          ? highlightRow
-          : undefined
-      }
-      rowIdx={rowIdx}
-      iconCellColumns={tableData?.iconCellColumns}
-      cellArea={areas.bodyCellArea}
-      row={row}
-      className={tableData?.classNames
-        ?.filter((d) => d.rowIdx === rowIdx)
-        .map((d) => d.className)
-        .join(" ")}
-    />
-  );
-
   let sortBlueprint = tableData?.rowSortData
     ?.filter((r) => r.sortKey === sort[0])
     .sort((a, b) => a.sortValue - b.sortValue);
@@ -204,19 +184,27 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
       ) : (
         <></>
       )}
-      {tableData?.infiniteScrollData !== undefined ? (
-        <InfiniteScrollTBody
-          pad={tableData.infiniteScrollData.padding}
-          maxLen={rows.length}
-          extraDep={tableData.infiniteScrollData.extraDependencies}
-          mapFn={mapFn}
-          rows={rows}
-          preElement={tableData.highlightedRow ?? 0}
-        />
-      ) : (
-        <tbody className="table-hover-rows">
-          {
-            rows.map(mapFn).reduce((acc, val, idx) => {
+      <tbody className="table-hover-rows">
+        {
+          rows
+            .map((row, rowIdx) => (
+              <ArrayTableRow
+                reference={
+                  tableData?.highlightedRow !== undefined && rowIdx === tableData.highlightedRow
+                    ? highlightRow
+                    : undefined
+                }
+                rowIdx={rowIdx}
+                iconCellColumns={tableData?.iconCellColumns}
+                cellArea={areas.bodyCellArea}
+                row={row}
+                className={tableData?.classNames
+                  ?.filter((d) => d.rowIdx === rowIdx)
+                  .map((d) => d.className)
+                  .join(" ")}
+              />
+            ))
+            .reduce((acc, val, idx) => {
               let newIdx = idx;
               if (sort[1] !== Sort.Reset)
                 newIdx = acc?.findIndex((r) => (r ? r.rowIdx === idx : false));
@@ -224,9 +212,8 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
               (acc[newIdx] as unknown as React.ReactNode) = val;
               return acc;
             }, sortBlueprint?.slice() ?? []) as React.ReactNode
-          }
-        </tbody>
-      )}
+        }
+      </tbody>
       {footerRows ? (
         <tfoot>
           {footerRows.map((row, rowIdx) => (
@@ -243,33 +230,6 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
         <></>
       )}
     </table>
-  );
-};
-
-interface InfiniteScrollTBodyProps {
-  pad: number;
-  maxLen: number;
-  extraDep: any[];
-  mapFn: (row: ArrayTableCellData[], rowIdx: number) => React.ReactNode;
-  rows: ArrayTableCellData[][];
-  preElement?: RowIdx;
-}
-
-const InfiniteScrollTBody = ({
-  rows,
-  pad,
-  maxLen,
-  extraDep,
-  mapFn,
-  preElement,
-}: InfiniteScrollTBodyProps) => {
-  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(pad, maxLen, extraDep, preElement);
-  return (
-    <tbody ref={tbodyElement}>
-      {rows.map((row, rowIdx) => {
-        return rowIdx < sliceEnd && rowIdx >= sliceStart ? mapFn(row, rowIdx) : <></>;
-      })}
-    </tbody>
   );
 };
 

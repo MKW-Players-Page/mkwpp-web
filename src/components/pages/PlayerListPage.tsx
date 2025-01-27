@@ -70,7 +70,6 @@ const PlayerListPage = () => {
   );
 
   const tableData: ArrayTableData = {
-    infiniteScrollData: { extraDependencies: [isLoading], padding: 35 },
     classNames: [],
     rowKeys: [],
   };
