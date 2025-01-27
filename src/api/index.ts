@@ -4,7 +4,7 @@ import { getToken, isAuthenticated } from "../utils/Auth";
 export * from "./generated/models";
 
 const apiConfiguration = new Configuration({
-  basePath: "http://localhost:8000",
+  basePath: process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8000",
   apiKey: () => (isAuthenticated() ? `Token ${getToken()}` : ""),
 });
 
