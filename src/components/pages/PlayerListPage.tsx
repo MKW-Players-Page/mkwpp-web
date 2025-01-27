@@ -97,8 +97,11 @@ const PlayerListPage = () => {
       [],
     ) ?? [];
 
-  const perPageRows = 100;
-  const maxPageNumber = Math.ceil(tableArray.length / perPageRows);
+  const rowsPerPage = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
+  tableData.paginationData = {
+    rowsPerPage,
+  };
 
   return (
     <>
@@ -150,7 +153,7 @@ const PlayerListPage = () => {
                 { content: translate("playerListPageLocationCol", lang) },
               ],
             ]}
-            rows={tableArray.slice((pageNumber - 1) * perPageRows, pageNumber * perPageRows)}
+            rows={tableArray}
             tableData={tableData}
           />
         </Deferred>

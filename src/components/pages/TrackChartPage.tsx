@@ -180,8 +180,12 @@ const TrackChartPage = () => {
     ]);
   });
 
-  const perPageRows = 100;
-  const maxPageNumber = Math.ceil(tableArray.length / perPageRows);
+  const rowsPerPage = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
+  tableData.paginationData = {
+    rowsPerPage,
+  };
+
   const siteHue = getCategorySiteHue(category, settings);
 
   return (
@@ -244,7 +248,6 @@ const TrackChartPage = () => {
             setValue={setRegion}
           />
         </div>
-
         <PaginationButtonRow
           selectedPage={pageNumber}
           setSelectedPage={setPageNumber}
@@ -270,7 +273,6 @@ const TrackChartPage = () => {
             />
           </Deferred>
         </div>
-
         <PaginationButtonRow
           selectedPage={pageNumber}
           setSelectedPage={setPageNumber}

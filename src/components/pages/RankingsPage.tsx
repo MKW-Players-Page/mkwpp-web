@@ -184,8 +184,11 @@ const RankingsPage = ({ metric }: RankingsProps) => {
 
   const siteHue = getCategorySiteHue(category, settings);
 
-  const perPageRows = 100;
-  const maxPageNumber = Math.ceil(tableArray.length / perPageRows);
+  const rowsPerPage = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
+  tableData.paginationData = {
+    rowsPerPage,
+  };
 
   return (
     <>
@@ -211,7 +214,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
         <div className="module table-hover-rows">
           <Deferred isWaiting={isLoading}>
             <ArrayTable
-              rows={tableArray.slice((pageNumber - 1) * perPageRows, pageNumber * perPageRows)}
+              rows={tableArray}
               headerRows={[
                 [
                   { content: translate("rankingsPageRankCol", lang) },

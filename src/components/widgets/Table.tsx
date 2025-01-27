@@ -1,4 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { usePageNumber } from "../../utils/SearchParams";
 import { SettingsContext } from "../../utils/Settings";
 import Icon from "./Icon";
 
@@ -119,6 +121,9 @@ export interface ArrayTableData {
   classNames?: { rowIdx: RowIdx; className: string }[];
   rowKeys?: string[];
   highlightedRow?: RowIdx;
+  paginationData?: {
+    rowsPerPage: number;
+  };
   rowSortData?: RowSortData[];
 }
 
@@ -142,14 +147,19 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
 
   const [sort, setSort] = useState<[string, Sort]>(["", Sort.Reset]);
 
+  const searchParams = useSearchParams();
+  const { pageNumber, setPageNumber } = usePageNumber(searchParams);
+
   const highlightRow = useRef<HTMLTableRowElement | null>(null);
+  const highlightRowPassed = useRef<boolean>(false);
   useEffect(() => {
-    if (highlightRow.current !== null) {
+    if (highlightRow.current !== null && highlightRowPassed.current !== true) {
       highlightRow.current.scrollIntoView({
         block: "center",
         inline: "center",
         behavior: "auto",
       });
+      highlightRowPassed.current = true;
       highlightRow.current = null;
     }
   }, [highlightRow]);
@@ -158,6 +168,49 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     ?.filter((r) => r.sortKey === sort[0])
     .sort((a, b) => a.sortValue - b.sortValue);
   if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
+
+  let dataToRows = rows
+    .slice()
+    .map((row, rowIdx) => () => (
+      <ArrayTableRow
+        reference={
+          tableData?.highlightedRow !== undefined &&
+          rowIdx === tableData.highlightedRow &&
+          highlightRowPassed.current !== true
+            ? highlightRow
+            : undefined
+        }
+        rowIdx={rowIdx}
+        iconCellColumns={tableData?.iconCellColumns}
+        cellArea={areas.bodyCellArea}
+        row={row}
+        className={tableData?.classNames
+          ?.filter((d) => d.rowIdx === rowIdx)
+          .map((d) => d.className)
+          .join(" ")}
+      />
+    ))
+    .reduce(
+      (acc: (() => JSX.Element | RowSortData)[], val, idx) => {
+        let newIdx = idx;
+        if (sort[1] !== Sort.Reset)
+          newIdx = acc?.findIndex((r) => (r ? (r() as RowSortData).rowIdx === idx : false));
+
+        acc[newIdx] = val;
+        return acc;
+      },
+      sortBlueprint?.map((r) => () => r) ?? [],
+    );
+
+  if (tableData && tableData.paginationData) {
+    if (highlightRowPassed.current !== true && tableData.highlightedRow)
+      setPageNumber(Math.ceil(tableData.highlightedRow / tableData.paginationData.rowsPerPage));
+
+    dataToRows.slice(
+      (pageNumber - 1) * tableData.paginationData.rowsPerPage,
+      pageNumber * tableData.paginationData.rowsPerPage,
+    );
+  }
 
   return (
     <table
@@ -184,36 +237,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
       ) : (
         <></>
       )}
-      <tbody className="table-hover-rows">
-        {
-          rows
-            .map((row, rowIdx) => (
-              <ArrayTableRow
-                reference={
-                  tableData?.highlightedRow !== undefined && rowIdx === tableData.highlightedRow
-                    ? highlightRow
-                    : undefined
-                }
-                rowIdx={rowIdx}
-                iconCellColumns={tableData?.iconCellColumns}
-                cellArea={areas.bodyCellArea}
-                row={row}
-                className={tableData?.classNames
-                  ?.filter((d) => d.rowIdx === rowIdx)
-                  .map((d) => d.className)
-                  .join(" ")}
-              />
-            ))
-            .reduce((acc, val, idx) => {
-              let newIdx = idx;
-              if (sort[1] !== Sort.Reset)
-                newIdx = acc?.findIndex((r) => (r ? r.rowIdx === idx : false));
-
-              (acc[newIdx] as unknown as React.ReactNode) = val;
-              return acc;
-            }, sortBlueprint?.slice() ?? []) as React.ReactNode
-        }
-      </tbody>
+      <tbody className="table-hover-rows">{dataToRows.map((r) => r()) as React.ReactNode}</tbody>
       {footerRows ? (
         <tfoot>
           {footerRows.map((row, rowIdx) => (
