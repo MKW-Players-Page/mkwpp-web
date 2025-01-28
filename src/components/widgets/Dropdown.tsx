@@ -294,10 +294,12 @@ const NormalDropdown = ({
         if (
           !(
             e.relatedTarget?.classList.contains("dropdown-itemset-setter") ||
-            e.relatedTarget?.classList.contains("dropdown-item")
+            e.relatedTarget?.classList.contains("dropdown-item") ||
+            e.relatedTarget?.classList.contains("dropdown-list")
           ) &&
           dropdownListShown
         ) {
+          console.log(e.relatedTarget);
           setSelectedItemSet(selectedValueItemSet);
           setDropdownListShown(false);
         }
@@ -386,7 +388,8 @@ const TextInputDropdown = ({
           if (
             !(
               e.relatedTarget?.classList.contains("dropdown-itemset-setter") ||
-              e.relatedTarget?.classList.contains("dropdown-item")
+              e.relatedTarget?.classList.contains("dropdown-item") ||
+              e.relatedTarget?.classList.contains("dropdown-list")
             ) &&
             dropdownListShown
           ) {
