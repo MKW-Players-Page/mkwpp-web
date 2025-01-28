@@ -1,0 +1,12 @@
+[package]
+name = "mkw_lib"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+time = { version = "0.3.34", features = [ "formatting", "macros", "serde", "parsing" ] }
+bytes = "1.4.0"

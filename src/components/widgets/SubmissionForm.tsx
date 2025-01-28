@@ -1,3 +1,5 @@
+import init, { read_rkg } from "mkw_lib";
+
 import { useContext, useEffect, useState } from "react";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
 import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
@@ -89,6 +91,10 @@ const SubmissionForm = ({
   if (doneFunc === undefined || doneFunc === null) doneFunc = () => setState(initialState);
 
   const { lang } = useContext(I18nContext);
+
+  init().then(() => {
+    read_rkg();
+  });
 
   const metadata = useContext(MetadataContext);
 
@@ -319,7 +325,7 @@ const SubmissionForm = ({
               type="date"
               field="date"
               disabled={editModeScore !== undefined}
-              min="2009-04-01"
+              min="2008-04-01"
               max={`${todayDate.getFullYear().toString().padStart(4, "0")}-${(todayDate.getMonth() + 1).toString().padStart(2, "0")}-${todayDate.getDate().toString().padStart(2, "0")}`}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
             />

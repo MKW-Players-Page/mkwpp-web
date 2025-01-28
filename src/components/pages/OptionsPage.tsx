@@ -97,6 +97,19 @@ const OptionsPage = () => {
               </div>
             </div>
           </div>
+          <div className="module">
+            <div className="module-content">
+              <h2>Content Editable</h2>
+              <div style={horizDivStyle}>
+                <p>Click on this to enable design mode (disables on refresh)</p>
+                <input
+                  type="checkbox"
+                  onChange={() => (document.designMode = "on")}
+                  defaultChecked={false}
+                />
+              </div>
+            </div>
+          </div>
         </>
       ) : (
         <></>
