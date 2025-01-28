@@ -32,7 +32,7 @@ export const getHighestValid = (category: CategoryEnum, trackCategories: Categor
   const x = trackCategories
     .sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b))
     .filter((r) => getCategoryNumerical(r) <= getCategoryNumerical(category));
-  return x.at(-1);
+  return x[x.length - 1];
 };
 
 export const countryAFTopNumerical = (x: TimetrialsRegionsRankingsListTopEnum) => {
@@ -79,5 +79,6 @@ export const highestEligibleCategory = (
   category: CategoryEnum,
   trackCategories: CategoryEnum[],
 ) => {
-  return trackCategories.slice(0, Object.values(CategoryEnum).indexOf(category)).at(-1);
+  const x = trackCategories.slice(0, Object.values(CategoryEnum).indexOf(category));
+  return x[x.length - 1];
 };
