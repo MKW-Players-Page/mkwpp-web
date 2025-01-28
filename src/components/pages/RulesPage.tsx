@@ -538,6 +538,7 @@ const RulesPage = () => {
               <></>
             </TrackCategory>
             <TrackCategory trackName={translate("constantTrackNameRSL", lang)}>
+              <p>{translate("rulesPageTrackCategoriesRSLNoSC", lang)}</p>
               <p>
                 {handleBars(translate("rulesPageTrackCategoriesRSLSC", lang), [
                   [
@@ -558,7 +559,6 @@ const RulesPage = () => {
                   ],
                 ])}
               </p>
-              <></>
             </TrackCategory>
             <TrackCategory trackName={translate("constantTrackNameRSGB", lang)}>
               <p>{translate("rulesPageTrackCategoriesRSGBNoSC", lang)}</p>

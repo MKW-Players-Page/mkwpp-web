@@ -316,6 +316,11 @@ const ContributionsPage = () => {
             workedOnBy={[1165]}
           />
           <FeatureElement
+            title={translate("contributionsPageFeatureStandardsHeading", lang)}
+            description={<>{translate("contributionsPageFeatureStandardsParagraph", lang)}</>}
+            workedOnBy={[1165, 918]}
+          />
+          <FeatureElement
             title={translate("contributionsPageFeatureChartsHeading", lang)}
             description={<>{translate("contributionsPageFeatureChartsParagraph", lang)}</>}
             workedOnBy={[1165]}
