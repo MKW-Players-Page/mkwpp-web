@@ -11537,6 +11537,51 @@
     "pt": "",
     "es": ""
   },
+  "navbarLabelWheelTops": {
+    "it": "Top 10 Wii Wheel",
+    "en": "Wii Wheel Tops",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "navbarLabelFlapWR": {
+    "it": "Storico Record Flap",
+    "en": "Flap WR History",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "navbarLabelKartTops": {
+    "it": "Top 10 Kart",
+    "en": "Kart Tops",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "navbarLabelNITops": {
+    "it": "Top 10 Shroomless",
+    "en": "Shroomless Tops",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "navbarLabelAltTops": {
+    "it": "Top 10 Strat Alternative",
+    "en": "Alt Strat Tops",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "homePageWelcomeHeading": {
     "it": "Benvenuto!",
     "en": "Welcome!",
