@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useInfiniteScroll } from "../../hooks/ScrollHook";
 import { SettingsContext } from "../../utils/Settings";
 import Icon from "./Icon";
 
@@ -33,7 +32,7 @@ interface ArrayTableRowProps {
   th?: boolean;
   cellArea: number[][][];
   className?: string;
-  reference?: React.MutableRefObject<HTMLTableRowElement | null>;
+  id?: string;
   sort?: [string, Sort] | null;
   setSort?: React.Dispatch<React.SetStateAction<[string, Sort]>>;
 }
@@ -45,7 +44,7 @@ const ArrayTableRow = ({
   cellArea,
   iconCellColumns,
   className,
-  reference: ref,
+  id,
   sort,
   setSort,
 }: ArrayTableRowProps) => {
@@ -53,7 +52,7 @@ const ArrayTableRow = ({
   const Cell: keyof JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
 
   return (
-    <tr ref={ref} className={className}>
+    <tr id={id} className={className}>
       {row.map((cell, idx, arr) =>
         cell.expandCell && cell.expandCell.includes(true) ? (
           <></>
@@ -119,8 +118,12 @@ export interface ArrayTableData {
   iconCellColumns?: number[];
   classNames?: { rowIdx: RowIdx; className: string }[];
   rowKeys?: string[];
-  infiniteScrollData?: { padding: number; extraDependencies: any[] };
   highlightedRow?: RowIdx;
+  paginationData?: {
+    rowsPerPage: number;
+    page: number;
+    setPage?: (x: number) => void;
+  };
   rowSortData?: RowSortData[];
 }
 
@@ -144,40 +147,68 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
 
   const [sort, setSort] = useState<[string, Sort]>(["", Sort.Reset]);
 
-  const highlightRow = useRef<HTMLTableRowElement | null>(null);
+  const highlightRowPassed = useRef<boolean>(false);
   useEffect(() => {
-    if (highlightRow.current !== null) {
-      highlightRow.current.scrollIntoView({
+    const highlightElement = document.getElementById("highlightElement");
+    if (highlightRowPassed.current !== true && highlightElement) {
+      highlightElement.scrollIntoView({
         block: "center",
         inline: "center",
         behavior: "auto",
       });
-      highlightRow.current = null;
+      highlightRowPassed.current = true;
     }
-  }, [highlightRow]);
-
-  const mapFn = (row: ArrayTableCellData[], rowIdx: RowIdx): React.ReactNode => (
-    <ArrayTableRow
-      reference={
-        tableData?.highlightedRow !== undefined && rowIdx === tableData.highlightedRow
-          ? highlightRow
-          : undefined
-      }
-      rowIdx={rowIdx}
-      iconCellColumns={tableData?.iconCellColumns}
-      cellArea={areas.bodyCellArea}
-      row={row}
-      className={tableData?.classNames
-        ?.filter((d) => d.rowIdx === rowIdx)
-        .map((d) => d.className)
-        .join(" ")}
-    />
-  );
+  }, [tableData?.paginationData?.page, highlightRowPassed]);
 
   let sortBlueprint = tableData?.rowSortData
     ?.filter((r) => r.sortKey === sort[0])
     .sort((a, b) => a.sortValue - b.sortValue);
   if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
+
+  let dataToRows = rows
+    .map((row, rowIdx) => (
+      <ArrayTableRow
+        id={
+          tableData?.highlightedRow !== undefined &&
+          rowIdx === tableData.highlightedRow &&
+          highlightRowPassed.current !== true
+            ? "highlightElement"
+            : undefined
+        }
+        rowIdx={rowIdx}
+        iconCellColumns={tableData?.iconCellColumns}
+        cellArea={areas.bodyCellArea}
+        row={row}
+        className={tableData?.classNames
+          ?.filter((d) => d.rowIdx === rowIdx)
+          .map((d) => d.className)
+          .join(" ")}
+      />
+    ))
+    .reduce((acc: (JSX.Element | RowSortData)[], val, idx) => {
+      let newIdx = idx;
+      if (sort[1] !== Sort.Reset)
+        newIdx = acc?.findIndex((r) => (r ? (r as RowSortData).rowIdx === idx : false));
+
+      acc[newIdx] = val;
+      return acc;
+    }, sortBlueprint?.slice() ?? []);
+
+  if (tableData && tableData.paginationData) {
+    if (
+      tableData.paginationData.setPage !== undefined &&
+      highlightRowPassed.current !== true &&
+      tableData.highlightedRow !== undefined
+    ) {
+      tableData.paginationData.setPage(
+        Math.ceil(tableData.highlightedRow / tableData.paginationData.rowsPerPage),
+      );
+    }
+    dataToRows = dataToRows.slice(
+      (tableData.paginationData.page - 1) * tableData.paginationData.rowsPerPage,
+      tableData.paginationData.page * tableData.paginationData.rowsPerPage,
+    );
+  }
 
   return (
     <table
@@ -204,29 +235,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
       ) : (
         <></>
       )}
-      {tableData?.infiniteScrollData !== undefined ? (
-        <InfiniteScrollTBody
-          pad={tableData.infiniteScrollData.padding}
-          maxLen={rows.length}
-          extraDep={tableData.infiniteScrollData.extraDependencies}
-          mapFn={mapFn}
-          rows={rows}
-          preElement={tableData.highlightedRow ?? 0}
-        />
-      ) : (
-        <tbody className="table-hover-rows">
-          {
-            rows.map(mapFn).reduce((acc, val, idx) => {
-              let newIdx = idx;
-              if (sort[1] !== Sort.Reset)
-                newIdx = acc?.findIndex((r) => (r ? r.rowIdx === idx : false));
-
-              (acc[newIdx] as unknown as React.ReactNode) = val;
-              return acc;
-            }, sortBlueprint?.slice() ?? []) as React.ReactNode
-          }
-        </tbody>
-      )}
+      <tbody className="table-hover-rows">{dataToRows as React.ReactNode}</tbody>
       {footerRows ? (
         <tfoot>
           {footerRows.map((row, rowIdx) => (
@@ -243,33 +252,6 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
         <></>
       )}
     </table>
-  );
-};
-
-interface InfiniteScrollTBodyProps {
-  pad: number;
-  maxLen: number;
-  extraDep: any[];
-  mapFn: (row: ArrayTableCellData[], rowIdx: number) => React.ReactNode;
-  rows: ArrayTableCellData[][];
-  preElement?: RowIdx;
-}
-
-const InfiniteScrollTBody = ({
-  rows,
-  pad,
-  maxLen,
-  extraDep,
-  mapFn,
-  preElement,
-}: InfiniteScrollTBodyProps) => {
-  const [sliceStart, sliceEnd, tbodyElement] = useInfiniteScroll(pad, maxLen, extraDep, preElement);
-  return (
-    <tbody ref={tbodyElement}>
-      {rows.map((row, rowIdx) => {
-        return rowIdx < sliceEnd && rowIdx >= sliceStart ? mapFn(row, rowIdx) : <></>;
-      })}
-    </tbody>
   );
 };
 
