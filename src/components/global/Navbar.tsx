@@ -185,6 +185,31 @@ const SECTIONS: NavbarSection[] = [
         url: "//github.com/MKW-Players-Page",
         external: true,
       },
+      {
+        label: "navbarLabelWheelTops",
+        url: "//tinyurl.com/wiiwheeltops",
+        external: true,
+      },
+      {
+        label: "navbarLabelFlapWR",
+        url: "//tinyurl.com/flapwrs",
+        external: true,
+      },
+      {
+        label: "navbarLabelKartTops",
+        url: "//mkwkartrecords.com/",
+        external: true,
+      },
+      {
+        label: "navbarLabelNITops",
+        url: "//tinyurl.com/shroomlesstops",
+        external: true,
+      },
+      {
+        label: "navbarLabelAltTops",
+        url: "//tinyurl.com/alttops",
+        external: true,
+      },
     ],
   },
 ];
