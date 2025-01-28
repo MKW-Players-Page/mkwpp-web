@@ -184,6 +184,8 @@ const TrackChartPage = () => {
   const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
   tableData.paginationData = {
     rowsPerPage,
+    page: pageNumber,
+    setPage: setPageNumber,
   };
 
   const siteHue = getCategorySiteHue(category, settings);

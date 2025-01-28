@@ -188,6 +188,8 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
   tableData.paginationData = {
     rowsPerPage,
+    page: pageNumber,
+    setPage: setPageNumber,
   };
 
   return (

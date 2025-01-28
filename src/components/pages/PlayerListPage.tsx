@@ -101,6 +101,7 @@ const PlayerListPage = () => {
   const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
   tableData.paginationData = {
     rowsPerPage,
+    page: pageNumber,
   };
 
   return (

@@ -1,6 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { usePageNumber } from "../../utils/SearchParams";
 import { SettingsContext } from "../../utils/Settings";
 import Icon from "./Icon";
 
@@ -34,7 +32,7 @@ interface ArrayTableRowProps {
   th?: boolean;
   cellArea: number[][][];
   className?: string;
-  reference?: React.MutableRefObject<HTMLTableRowElement | null>;
+  id?: string;
   sort?: [string, Sort] | null;
   setSort?: React.Dispatch<React.SetStateAction<[string, Sort]>>;
 }
@@ -46,7 +44,7 @@ const ArrayTableRow = ({
   cellArea,
   iconCellColumns,
   className,
-  reference: ref,
+  id,
   sort,
   setSort,
 }: ArrayTableRowProps) => {
@@ -54,7 +52,7 @@ const ArrayTableRow = ({
   const Cell: keyof JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
 
   return (
-    <tr ref={ref} className={className}>
+    <tr id={id} className={className}>
       {row.map((cell, idx, arr) =>
         cell.expandCell && cell.expandCell.includes(true) ? (
           <></>
@@ -123,6 +121,8 @@ export interface ArrayTableData {
   highlightedRow?: RowIdx;
   paginationData?: {
     rowsPerPage: number;
+    page: number;
+    setPage?: (x: number) => void;
   };
   rowSortData?: RowSortData[];
 }
@@ -147,22 +147,18 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
 
   const [sort, setSort] = useState<[string, Sort]>(["", Sort.Reset]);
 
-  const searchParams = useSearchParams();
-  const { pageNumber, setPageNumber } = usePageNumber(searchParams);
-
-  const highlightRow = useRef<HTMLTableRowElement | null>(null);
   const highlightRowPassed = useRef<boolean>(false);
   useEffect(() => {
-    if (highlightRow.current !== null && highlightRowPassed.current !== true) {
-      highlightRow.current.scrollIntoView({
+    const highlightElement = document.getElementById("highlightElement");
+    if (highlightRowPassed.current !== true && highlightElement) {
+      highlightElement.scrollIntoView({
         block: "center",
         inline: "center",
         behavior: "auto",
       });
       highlightRowPassed.current = true;
-      highlightRow.current = null;
     }
-  }, [highlightRow]);
+  }, [tableData?.paginationData?.page, highlightRowPassed]);
 
   let sortBlueprint = tableData?.rowSortData
     ?.filter((r) => r.sortKey === sort[0])
@@ -170,13 +166,13 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
   if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
 
   let dataToRows = rows
-    .map((row, rowIdx) => () => (
+    .map((row, rowIdx) => (
       <ArrayTableRow
-        reference={
+        id={
           tableData?.highlightedRow !== undefined &&
           rowIdx === tableData.highlightedRow &&
           highlightRowPassed.current !== true
-            ? highlightRow
+            ? "highlightElement"
             : undefined
         }
         rowIdx={rowIdx}
@@ -189,25 +185,28 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
           .join(" ")}
       />
     ))
-    .reduce(
-      (acc: (() => JSX.Element | RowSortData)[], val, idx) => {
-        let newIdx = idx;
-        if (sort[1] !== Sort.Reset)
-          newIdx = acc?.findIndex((r) => (r ? (r() as RowSortData).rowIdx === idx : false));
+    .reduce((acc: (JSX.Element | RowSortData)[], val, idx) => {
+      let newIdx = idx;
+      if (sort[1] !== Sort.Reset)
+        newIdx = acc?.findIndex((r) => (r ? (r as RowSortData).rowIdx === idx : false));
 
-        acc[newIdx] = val;
-        return acc;
-      },
-      sortBlueprint?.map((r) => () => r) ?? [],
-    );
+      acc[newIdx] = val;
+      return acc;
+    }, sortBlueprint?.slice() ?? []);
 
   if (tableData && tableData.paginationData) {
-    if (highlightRowPassed.current !== true && tableData.highlightedRow)
-      setPageNumber(Math.ceil(tableData.highlightedRow / tableData.paginationData.rowsPerPage));
-
-    dataToRows.slice(
-      (pageNumber - 1) * tableData.paginationData.rowsPerPage,
-      pageNumber * tableData.paginationData.rowsPerPage,
+    if (
+      tableData.paginationData.setPage !== undefined &&
+      highlightRowPassed.current !== true &&
+      tableData.highlightedRow !== undefined
+    ) {
+      tableData.paginationData.setPage(
+        Math.ceil(tableData.highlightedRow / tableData.paginationData.rowsPerPage),
+      );
+    }
+    dataToRows = dataToRows.slice(
+      (tableData.paginationData.page - 1) * tableData.paginationData.rowsPerPage,
+      tableData.paginationData.page * tableData.paginationData.rowsPerPage,
     );
   }
 
@@ -236,7 +235,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
       ) : (
         <></>
       )}
-      <tbody className="table-hover-rows">{dataToRows.map((r) => r()) as React.ReactNode}</tbody>
+      <tbody className="table-hover-rows">{dataToRows as React.ReactNode}</tbody>
       {footerRows ? (
         <tfoot>
           {footerRows.map((row, rowIdx) => (
