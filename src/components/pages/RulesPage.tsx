@@ -211,6 +211,12 @@ const RulesPage = () => {
                       {translate("rulesPageTrackCategoriesMGSCWallRide2LinkText", lang)}
                     </Lnk>,
                   ],
+                  [
+                    "rulesPageTrackCategoriesMGSCWallRide3LinkText",
+                    <Lnk url="//youtu.be/3Dr_bFQNSMc?t=20">
+                      {translate("rulesPageTrackCategoriesMGSCWallRide3LinkText", lang)}
+                    </Lnk>,
+                  ],
                 ])}
               </p>
               <p>
