@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "../pages";
 import { CategoryEnum, Region } from "../../api";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { getFirstRankedParent, getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
 import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
@@ -137,18 +137,21 @@ const ComplexRegionSelection = ({
   );
   const sortedSubregions = groupBy(
     [...sortedRegions.country_group, ...sortedRegions.country],
-    (i) => i.parent ?? -1,
+    (i) => getFirstRankedParent(metadata, i)?.id ?? -1,
   );
 
   const getRegionHierarchy = (region: Region): Region[] => {
-    if (!region.parent) {
-      return [region];
+    if (!region.parent) return [region];
+
+    let parent = getRegionById(metadata, region.parent);
+    const out: Region[] = [region];
+
+    while (parent !== undefined && parent.id > 0) {
+      if (parent.isRanked) out.push(parent);
+      parent = getRegionById(metadata, parent?.parent ?? 0);
     }
-    const parent = getRegionById(metadata, region.parent);
-    if (!parent) {
-      return [region];
-    }
-    return [...getRegionHierarchy(parent), region];
+
+    return out.reverse();
   };
 
   const selectedRegions = region ? getRegionHierarchy(region).map((region) => region.id) : [];

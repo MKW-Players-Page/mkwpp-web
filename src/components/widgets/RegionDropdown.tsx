@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { Region } from "../../api";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { getFirstRankedParent, getRegionById, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionDropdown.css";
 import Dropdown, {
@@ -52,8 +52,10 @@ const RegionSelectionDropdown = ({
 
   const sortedRegions = groupBy(
     regions.filter((r) => r.isRanked || !ranked),
-    (i) => i.parent ?? 0,
+    (i) => (ranked ? getFirstRankedParent(metadata, i)?.id : i.parent) ?? 0,
   );
+
+  console.log(sortedRegions);
 
   for (let [parentId, children] of Object.entries(sortedRegions)) {
     const parentIdConv = parseInt(parentId);
@@ -66,7 +68,7 @@ const RegionSelectionDropdown = ({
         type: "DropdownItemSetSetterData",
         element: {
           text: translate("genericBackButton", lang),
-          toItemSetId: parent.parent ?? 0,
+          toItemSetId: getFirstRankedParent(metadata, parent)?.id ?? 0,
         } as DropdownItemSetSetterData,
       });
 
