@@ -40,7 +40,7 @@ const ButtonNumberTypeable = ({ maxPageNumber, setSelectedPage }: ButtonNumberTy
           e.key !== "ArrowLeft" &&
           e.key !== "ArrowRight" &&
           e.key !== "ArrowUp" &&
-          !"012345689".includes(e.key)
+          !"0123456789".includes(e.key)
         )
           e.preventDefault();
       }}
