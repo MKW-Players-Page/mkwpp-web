@@ -9,11 +9,16 @@ import { useState } from "react";
 import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
+import { usePageNumber } from "../../utils/SearchParams";
+import { useSearchParams } from "react-router-dom";
+import { PaginationButtonRow } from "../widgets/PaginationButtons";
 
 const PlayerListPage = () => {
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
   const { user, isLoading: userIsLoading } = useContext(UserContext);
+  const searchParams = useSearchParams();
+  const { pageNumber, setPageNumber } = usePageNumber(searchParams);
 
   const [playerFilter, setPlayerFilter] = useState("");
 
@@ -70,9 +75,33 @@ const PlayerListPage = () => {
   );
 
   const tableData: ArrayTableData = {
-    infiniteScrollData: { extraDependencies: [isLoading], padding: 35 },
     classNames: [],
     rowKeys: [],
+  };
+
+  const tableArray =
+    players?.reduce(
+      (accumulator: ArrayTableCellData[][], [row, filterFunc, isLoggedInUser, rowKey], index) => {
+        if (filterFunc(playerFilter)) return accumulator;
+
+        if (isLoggedInUser)
+          tableData.classNames?.push({
+            className: "highlighted",
+            rowIdx: accumulator.length,
+          });
+
+        tableData.rowKeys?.push(rowKey);
+        accumulator.push(row);
+        return accumulator;
+      },
+      [],
+    ) ?? [];
+
+  const rowsPerPage = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
+  tableData.paginationData = {
+    rowsPerPage,
+    page: pageNumber,
   };
 
   return (
@@ -110,6 +139,12 @@ const PlayerListPage = () => {
           {translate("playerListPageSearchBtn", lang)}
         </button>
       </div>
+
+      <PaginationButtonRow
+        selectedPage={pageNumber}
+        setSelectedPage={setPageNumber}
+        numberOfPages={maxPageNumber}
+      />
       <div className="module player-list table-hover-rows">
         <Deferred isWaiting={isLoading || metadata.isLoading || userIsLoading}>
           <ArrayTable
@@ -119,32 +154,17 @@ const PlayerListPage = () => {
                 { content: translate("playerListPageLocationCol", lang) },
               ],
             ]}
-            rows={
-              players?.reduce(
-                (
-                  accumulator: ArrayTableCellData[][],
-                  [row, filterFunc, isLoggedInUser, rowKey],
-                  index,
-                ) => {
-                  if (filterFunc(playerFilter)) return accumulator;
-
-                  if (isLoggedInUser)
-                    tableData.classNames?.push({
-                      className: "highlighted",
-                      rowIdx: accumulator.length,
-                    });
-
-                  tableData.rowKeys?.push(rowKey);
-                  accumulator.push(row);
-                  return accumulator;
-                },
-                [],
-              ) ?? []
-            }
+            rows={tableArray}
             tableData={tableData}
           />
         </Deferred>
       </div>
+
+      <PaginationButtonRow
+        selectedPage={pageNumber}
+        setSelectedPage={setPageNumber}
+        numberOfPages={maxPageNumber}
+      />
     </>
   );
 };

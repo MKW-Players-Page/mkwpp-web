@@ -13,6 +13,7 @@ import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import {
   useCategoryParam,
   useLapModeParam,
+  usePageNumber,
   useRegionParam,
   useRowHighlightParam,
 } from "../../utils/SearchParams";
@@ -22,6 +23,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
+import { PaginationButtonRow } from "../widgets/PaginationButtons";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -92,6 +94,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const { category, setCategory } = useCategoryParam(searchParams, ["hl"]);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false, ["hl"]);
   const { region, setRegion } = useRegionParam(searchParams);
+  const { pageNumber, setPageNumber } = usePageNumber(searchParams);
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const { lang } = useContext(I18nContext);
@@ -113,7 +116,6 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const tableArray: ArrayTableCellData[][] = [];
   const tableData: ArrayTableData = {
     classNames: [],
-    infiniteScrollData: { padding: 35, extraDependencies: [isLoading] },
     rowKeys: [],
   };
   let hasHighlightRow = false;
@@ -182,6 +184,14 @@ const RankingsPage = ({ metric }: RankingsProps) => {
 
   const siteHue = getCategorySiteHue(category, settings);
 
+  const rowsPerPage = 100;
+  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
+  tableData.paginationData = {
+    rowsPerPage,
+    page: pageNumber,
+    setPage: setPageNumber,
+  };
+
   return (
     <>
       <h1>{translate(metric.titleKey, lang)}</h1>
@@ -198,6 +208,11 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             setValue={setRegion}
           />
         </div>
+        <PaginationButtonRow
+          selectedPage={pageNumber}
+          setSelectedPage={setPageNumber}
+          numberOfPages={maxPageNumber}
+        />
         <div className="module table-hover-rows">
           <Deferred isWaiting={isLoading}>
             <ArrayTable
@@ -213,6 +228,11 @@ const RankingsPage = ({ metric }: RankingsProps) => {
             />
           </Deferred>
         </div>
+        <PaginationButtonRow
+          selectedPage={pageNumber}
+          setSelectedPage={setPageNumber}
+          numberOfPages={maxPageNumber}
+        />
       </OverwriteColor>
     </>
   );

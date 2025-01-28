@@ -161,6 +161,17 @@ export const useRegionParam = (searchParams: SearchParams) => {
   };
 };
 
+export const usePageNumber = (searchParams: SearchParams) => {
+  const pageNumber = parseInt(searchParams[0].get("page") ?? "1");
+  return {
+    pageNumber,
+    setPageNumber: (pageNumber: number) => {
+      const page = pageNumber === 1 ? undefined : pageNumber;
+      searchParams[1]((prev) => paramReplace(prev, "page", page?.toString()));
+    },
+  };
+};
+
 export const useStandardLevelIdParam = (searchParams: SearchParams) => {
   let levelId = parseInt(searchParams[0].get("std") ?? "1");
   if (levelId > 43) levelId = 1;
