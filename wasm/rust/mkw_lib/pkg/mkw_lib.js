@@ -468,15 +468,41 @@ export class RKG {
   /**
    * @returns {number}
    */
-  get date() {
-    const ret = wasm.__wbg_get_rkg_date(this.__wbg_ptr);
+  get year() {
+    const ret = wasm.__wbg_get_rkg_year(this.__wbg_ptr);
     return ret;
   }
   /**
    * @param {number} arg0
    */
-  set date(arg0) {
-    wasm.__wbg_set_rkg_date(this.__wbg_ptr, arg0);
+  set year(arg0) {
+    wasm.__wbg_set_rkg_year(this.__wbg_ptr, arg0);
+  }
+  /**
+   * @returns {number}
+   */
+  get month() {
+    const ret = wasm.__wbg_get_rkg_month(this.__wbg_ptr);
+    return ret;
+  }
+  /**
+   * @param {number} arg0
+   */
+  set month(arg0) {
+    wasm.__wbg_set_rkg_month(this.__wbg_ptr, arg0);
+  }
+  /**
+   * @returns {number}
+   */
+  get day() {
+    const ret = wasm.__wbg_get_rkg_day(this.__wbg_ptr);
+    return ret;
+  }
+  /**
+   * @param {number} arg0
+   */
+  set day(arg0) {
+    wasm.__wbg_set_rkg_day(this.__wbg_ptr, arg0);
   }
   /**
    * @returns {Miniturbo}

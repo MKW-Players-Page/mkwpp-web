@@ -8,9 +8,9 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
-time = { version = "0.3.34", features = [ "formatting", "macros", "serde", "parsing" ] }
 bytes = "1.4.0"
 js-sys = "*"
+chrono = "*"
 
 [lints.rust]
 unused_imports = "deny"

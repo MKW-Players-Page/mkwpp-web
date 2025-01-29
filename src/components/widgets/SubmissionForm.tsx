@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
 import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
 import { useApi } from "../../hooks";
-import { formatDate, formatTime, parseTime } from "../../utils/Formatters";
+import { formatTime, parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
@@ -291,15 +291,15 @@ const SubmissionForm = ({
                           }
 
                           try {
-                            const { time, track, date, free } = read_rkg(
-                              new Uint8Array(await actualUpload.files[0].arrayBuffer()),
-                            );
+                            const arr = new Uint8Array(await actualUpload.files[0].arrayBuffer());
+
+                            const { time, track, year, month, day, free } = read_rkg(arr);
 
                             setState((prev) => ({
                               ...prev,
                               value: formatTime(time),
-                              date: formatDate(new Date(date)),
-                              track: track,
+                              track: track + 1,
+                              date: `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`,
                             }));
 
                             free();

@@ -13,13 +13,21 @@ pub fn read_rkg(rkg_bytes: js_sys::Uint8Array) -> Result<RKG, u32> {
         return Err(1);
     }
 
-    let parse_time = read_rkg_format_time(&rkg_bytes[4..7]);
-    if parse_time.is_err() {
-        return Err(2);
+    match read_rkg_format_time(&rkg_bytes[4..7]) {
+        Ok(v) => out_rkg.time = v,
+        Err(_) => return Err(2),
     }
-    out_rkg.time = parse_time.unwrap();
 
     out_rkg.track = RegularTrack::from(rkg_bytes[7] >> 2);
+
+    match read_rkg_format_date(&rkg_bytes[9..12]) {
+        Ok(v) => {
+            out_rkg.year = (v[0] as u16) + 2000;
+            out_rkg.month = v[1];
+            out_rkg.day = v[2];
+        }
+        Err(_) => return Err(3),
+    }
 
     // All other data is currently not read, so...
     return Ok(out_rkg);
@@ -45,13 +53,29 @@ pub fn read_rkg_format_time(bytes: &[u8]) -> Result<i32, ()> {
     // Go up 8 lines for the breakdown of why
     let seconds = second_byte >> 2;
 
-    let milliseconds: i32 = (((second_byte & 0b00000011) as i32) << 8) | (bytes[2] as i32);
+    let milliseconds: i32 =
+        (((second_byte & 0b00000011) as i32) << 8) | (*bytes.get(2).ok_or(())? as i32);
 
     // (Minutes * 60000) + (Seconds * 1000) + Milliseconds =
     // = (2*Minutes * 30000) + (Seconds * 1000) + Milliseconds
     let final_time: i32 = ((minutes as i32) * 30000) + ((seconds as i32) * 1000) + milliseconds;
 
     return Ok(final_time);
+}
+
+pub fn read_rkg_format_date(bytes: &[u8]) -> Result<[u8; 3], ()> {
+    // 3 Bytes, where Y = Year, M = Month and D = Days, and X = Unrelated.
+    // 1. 0bXXXXYYYY
+    // 2. 0bYYYMMMMD
+    // 3. 0bDDDDXXXX
+
+    // Y relative to year 2000
+    let second_byte = *bytes.get(1).ok_or(())?;
+    let year = (((*bytes.first().ok_or(())?) << 3) | (second_byte >> 5)) & 0b01111111; // The minutes are doubled here
+    let month = (second_byte << 3) >> 4;
+    let day = ((second_byte << 4) | (*bytes.get(2).ok_or(())? >> 4)) & 0b00011111;
+
+    return Ok([year, month, day]);
 }
 
 #[wasm_bindgen]
@@ -63,7 +87,10 @@ pub struct RKG {
     pub time: i32,
     pub combo: Combo,
     pub controller: Controller,
-    pub date: f64,
+    // date as unix timestamp in seconds
+    pub year: u16,
+    pub month: u8,
+    pub day: u8,
     pub miniturbo: Miniturbo,
     pub lap1: i32,
     pub lap2: i32,
@@ -80,8 +107,9 @@ impl Default for RKG {
             combo: Combo::default(),
             controller: Controller::Unknown,
             miniturbo: Miniturbo::Unknown,
-            // unix time for 2008-04-01
-            date: 1207008000000.0,
+            year: 2008,
+            month: 4,
+            day: 1,
             lap1: 120000,
             lap2: 120000,
             lap3: 120000,
@@ -564,38 +592,38 @@ impl Vehicle {
 impl From<usize> for RegularTrack {
     fn from(value: usize) -> Self {
         return match value {
-            0 => RegularTrack::LC,
-            1 => RegularTrack::MMM,
-            2 => RegularTrack::MG,
-            3 => RegularTrack::TF,
-            4 => RegularTrack::MC,
-            5 => RegularTrack::CM,
-            6 => RegularTrack::DKSC,
-            7 => RegularTrack::WGM,
-            8 => RegularTrack::DC,
-            9 => RegularTrack::KC,
-            10 => RegularTrack::MT,
-            11 => RegularTrack::GV,
-            12 => RegularTrack::DDR,
-            13 => RegularTrack::MH,
-            14 => RegularTrack::BC,
-            15 => RegularTrack::RR,
-            16 => RegularTrack::RPB,
-            17 => RegularTrack::RYF,
-            18 => RegularTrack::RGV2,
-            19 => RegularTrack::RMR,
-            20 => RegularTrack::RSL,
-            21 => RegularTrack::RSGB,
-            22 => RegularTrack::RDS,
-            23 => RegularTrack::RWS,
-            24 => RegularTrack::RDH,
-            25 => RegularTrack::RBC3,
-            26 => RegularTrack::RDKJP,
-            27 => RegularTrack::RMC,
-            28 => RegularTrack::RMC3,
-            29 => RegularTrack::RPG,
-            30 => RegularTrack::RDKM,
-            31 => RegularTrack::RBC,
+            0x08 => RegularTrack::LC,
+            0x01 => RegularTrack::MMM,
+            0x02 => RegularTrack::MG,
+            0x04 => RegularTrack::TF,
+            0x00 => RegularTrack::MC,
+            0x05 => RegularTrack::CM,
+            0x06 => RegularTrack::DKSC,
+            0x07 => RegularTrack::WGM,
+            0x09 => RegularTrack::DC,
+            0x0F => RegularTrack::KC,
+            0x0B => RegularTrack::MT,
+            0x03 => RegularTrack::GV,
+            0x0E => RegularTrack::DDR,
+            0x0A => RegularTrack::MH,
+            0x0C => RegularTrack::BC,
+            0x0D => RegularTrack::RR,
+            0x10 => RegularTrack::RPB,
+            0x14 => RegularTrack::RYF,
+            0x19 => RegularTrack::RGV2,
+            0x1A => RegularTrack::RMR,
+            0x1B => RegularTrack::RSL,
+            0x1F => RegularTrack::RSGB,
+            0x17 => RegularTrack::RDS,
+            0x12 => RegularTrack::RWS,
+            0x15 => RegularTrack::RDH,
+            0x1E => RegularTrack::RBC3,
+            0x1D => RegularTrack::RDKJP,
+            0x11 => RegularTrack::RMC,
+            0x18 => RegularTrack::RMC3,
+            0x16 => RegularTrack::RPG,
+            0x13 => RegularTrack::RDKM,
+            0x1C => RegularTrack::RBC,
             _ => panic!(),
         };
     }
@@ -603,38 +631,38 @@ impl From<usize> for RegularTrack {
 impl From<u8> for RegularTrack {
     fn from(value: u8) -> Self {
         return match value {
-            0 => RegularTrack::LC,
-            1 => RegularTrack::MMM,
-            2 => RegularTrack::MG,
-            3 => RegularTrack::TF,
-            4 => RegularTrack::MC,
-            5 => RegularTrack::CM,
-            6 => RegularTrack::DKSC,
-            7 => RegularTrack::WGM,
-            8 => RegularTrack::DC,
-            9 => RegularTrack::KC,
-            10 => RegularTrack::MT,
-            11 => RegularTrack::GV,
-            12 => RegularTrack::DDR,
-            13 => RegularTrack::MH,
-            14 => RegularTrack::BC,
-            15 => RegularTrack::RR,
-            16 => RegularTrack::RPB,
-            17 => RegularTrack::RYF,
-            18 => RegularTrack::RGV2,
-            19 => RegularTrack::RMR,
-            20 => RegularTrack::RSL,
-            21 => RegularTrack::RSGB,
-            22 => RegularTrack::RDS,
-            23 => RegularTrack::RWS,
-            24 => RegularTrack::RDH,
-            25 => RegularTrack::RBC3,
-            26 => RegularTrack::RDKJP,
-            27 => RegularTrack::RMC,
-            28 => RegularTrack::RMC3,
-            29 => RegularTrack::RPG,
-            30 => RegularTrack::RDKM,
-            31 => RegularTrack::RBC,
+            0x08 => RegularTrack::LC,
+            0x01 => RegularTrack::MMM,
+            0x02 => RegularTrack::MG,
+            0x04 => RegularTrack::TF,
+            0x00 => RegularTrack::MC,
+            0x05 => RegularTrack::CM,
+            0x06 => RegularTrack::DKSC,
+            0x07 => RegularTrack::WGM,
+            0x09 => RegularTrack::DC,
+            0x0F => RegularTrack::KC,
+            0x0B => RegularTrack::MT,
+            0x03 => RegularTrack::GV,
+            0x0E => RegularTrack::DDR,
+            0x0A => RegularTrack::MH,
+            0x0C => RegularTrack::BC,
+            0x0D => RegularTrack::RR,
+            0x10 => RegularTrack::RPB,
+            0x14 => RegularTrack::RYF,
+            0x19 => RegularTrack::RGV2,
+            0x1A => RegularTrack::RMR,
+            0x1B => RegularTrack::RSL,
+            0x1F => RegularTrack::RSGB,
+            0x17 => RegularTrack::RDS,
+            0x12 => RegularTrack::RWS,
+            0x15 => RegularTrack::RDH,
+            0x1E => RegularTrack::RBC3,
+            0x1D => RegularTrack::RDKJP,
+            0x11 => RegularTrack::RMC,
+            0x18 => RegularTrack::RMC3,
+            0x16 => RegularTrack::RPG,
+            0x13 => RegularTrack::RDKM,
+            0x1C => RegularTrack::RBC,
             _ => panic!(),
         };
     }

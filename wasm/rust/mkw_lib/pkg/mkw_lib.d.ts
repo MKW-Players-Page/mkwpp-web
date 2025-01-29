@@ -150,7 +150,9 @@ export class RKG {
   time: number;
   combo: Combo;
   controller: Controller;
-  date: number;
+  year: number;
+  month: number;
+  day: number;
   miniturbo: Miniturbo;
   lap1: number;
   lap2: number;
@@ -178,8 +180,12 @@ export interface InitOutput {
   readonly __wbg_set_rkg_combo: (a: number, b: number) => void;
   readonly __wbg_get_rkg_controller: (a: number) => number;
   readonly __wbg_set_rkg_controller: (a: number, b: number) => void;
-  readonly __wbg_get_rkg_date: (a: number) => number;
-  readonly __wbg_set_rkg_date: (a: number, b: number) => void;
+  readonly __wbg_get_rkg_year: (a: number) => number;
+  readonly __wbg_set_rkg_year: (a: number, b: number) => void;
+  readonly __wbg_get_rkg_month: (a: number) => number;
+  readonly __wbg_set_rkg_month: (a: number, b: number) => void;
+  readonly __wbg_get_rkg_day: (a: number) => number;
+  readonly __wbg_set_rkg_day: (a: number, b: number) => void;
   readonly __wbg_get_rkg_miniturbo: (a: number) => number;
   readonly __wbg_set_rkg_miniturbo: (a: number, b: number) => void;
   readonly __wbg_get_rkg_lap1: (a: number) => number;
