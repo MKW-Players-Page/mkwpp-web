@@ -55,8 +55,6 @@ const RegionSelectionDropdown = ({
     (i) => (ranked ? getFirstRankedParent(metadata, i)?.id : i.parent) ?? 0,
   );
 
-  console.log(sortedRegions);
-
   for (let [parentId, children] of Object.entries(sortedRegions)) {
     const parentIdConv = parseInt(parentId);
 

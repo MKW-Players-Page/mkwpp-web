@@ -299,7 +299,6 @@ const NormalDropdown = ({
           ) &&
           dropdownListShown
         ) {
-          console.log(e.relatedTarget);
           setSelectedItemSet(selectedValueItemSet);
           setDropdownListShown(false);
         }
