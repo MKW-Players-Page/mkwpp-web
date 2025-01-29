@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export function read_rkg(): RKG;
+export function read_rkg(rkg_bytes: Uint8Array): RKG;
 export enum Character {
   Mario = 0,
   BabyPeach = 1,
@@ -168,7 +168,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly read_rkg: () => number;
+  readonly read_rkg: (a: any) => [number, number, number];
   readonly __wbg_rkg_free: (a: number, b: number) => void;
   readonly __wbg_get_rkg_track: (a: number) => number;
   readonly __wbg_set_rkg_track: (a: number, b: number) => void;
@@ -199,6 +199,7 @@ export interface InitOutput {
   readonly __wbg_get_combo_character: (a: number) => number;
   readonly __wbg_set_combo_character: (a: number, b: number) => void;
   readonly __wbindgen_export_0: WebAssembly.Table;
+  readonly __externref_table_dealloc: (a: number) => void;
   readonly __wbindgen_start: () => void;
 }
 

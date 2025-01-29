@@ -4,10 +4,25 @@ use wasm_bindgen::prelude::*;
 pub const RKGD_MAGIC_NUMBERS: [u8; 4] = [0x52, 0x4B, 0x47, 0x44];
 
 #[wasm_bindgen]
-pub fn read_rkg() -> RKG {
-  let out_rkg = RKG::default();
-  
-  return out_rkg
+pub fn read_rkg(rkg_bytes: js_sys::Uint8Array) -> Result<RKG, u32> {
+    let rkg_bytes = rkg_bytes.to_vec();
+
+    let mut out_rkg = RKG::default();
+
+    if !rkg_bytes.starts_with(&RKGD_MAGIC_NUMBERS) {
+        return Err(1);
+    }
+
+    let parse_time = read_rkg_format_time(&rkg_bytes[4..7]);
+    if parse_time.is_err() {
+        return Err(2);
+    }
+    out_rkg.time = parse_time.unwrap();
+
+    out_rkg.track = RegularTrack::from(rkg_bytes[7] >> 2);
+
+    // All other data is currently not read, so...
+    return Ok(out_rkg);
 }
 
 pub fn read_rkg_format_time(bytes: &[u8]) -> Result<i32, ()> {
@@ -77,18 +92,9 @@ impl Default for RKG {
 
 impl RKG {
     pub fn set_splits_from_chadsoft_ckgd(&mut self, ckgd: &Bytes) {
-        self.lap1 = match read_rkg_format_time(ckgd.get(0x11..0x14).unwrap()) {
-            Ok(v) => v,
-            Err(_) => 120000,
-        };
-        self.lap2 = match read_rkg_format_time(ckgd.get(0x14..0x17).unwrap()) {
-            Ok(v) => v,
-            Err(_) => 120000,
-        };
-        self.lap3 = match read_rkg_format_time(ckgd.get(0x17..0x1A).unwrap()) {
-            Ok(v) => v,
-            Err(_) => 120000,
-        };
+        self.lap1 = read_rkg_format_time(ckgd.get(0x11..0x14).unwrap()).unwrap_or(120000);
+        self.lap2 = read_rkg_format_time(ckgd.get(0x14..0x17).unwrap()).unwrap_or(120000);
+        self.lap3 = read_rkg_format_time(ckgd.get(0x17..0x1A).unwrap()).unwrap_or(120000);
     }
 }
 
@@ -105,7 +111,7 @@ impl Default for Shroomstrat {
 }
 
 impl Shroomstrat {
-    fn new(laps: Vec<u16>) -> Self {
+    pub fn new(laps: Vec<u16>) -> Self {
         let mut shroomstrat: u16 = 0;
         for (i, shrooms) in laps.iter().enumerate().take(4) {
             shroomstrat |= shrooms << (14 - (i * 2)); // wtf did this do again???

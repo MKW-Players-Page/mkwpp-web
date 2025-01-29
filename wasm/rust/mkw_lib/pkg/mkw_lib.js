@@ -28,12 +28,22 @@ function getStringFromWasm0(ptr, len) {
   ptr = ptr >>> 0;
   return cachedTextDecoder.decode(getUint8ArrayMemory0().subarray(ptr, ptr + len));
 }
+
+function takeFromExternrefTable0(idx) {
+  const value = wasm.__wbindgen_export_0.get(idx);
+  wasm.__externref_table_dealloc(idx);
+  return value;
+}
 /**
+ * @param {Uint8Array} rkg_bytes
  * @returns {RKG}
  */
-export function read_rkg() {
-  const ret = wasm.read_rkg();
-  return RKG.__wrap(ret);
+export function read_rkg(rkg_bytes) {
+  const ret = wasm.read_rkg(rkg_bytes);
+  if (ret[2]) {
+    throw takeFromExternrefTable0(ret[1]);
+  }
+  return RKG.__wrap(ret[0]);
 }
 
 function _assertClass(instance, klass) {
@@ -610,6 +620,21 @@ async function __wbg_load(module, imports) {
 function __wbg_get_imports() {
   const imports = {};
   imports.wbg = {};
+  imports.wbg.__wbg_buffer_609cc3eee51ed158 = function (arg0) {
+    const ret = arg0.buffer;
+    return ret;
+  };
+  imports.wbg.__wbg_length_a446193dc22c12f8 = function (arg0) {
+    const ret = arg0.length;
+    return ret;
+  };
+  imports.wbg.__wbg_new_a12002a7f91c75be = function (arg0) {
+    const ret = new Uint8Array(arg0);
+    return ret;
+  };
+  imports.wbg.__wbg_set_65595bdd868b3009 = function (arg0, arg1, arg2) {
+    arg0.set(arg1, arg2 >>> 0);
+  };
   imports.wbg.__wbindgen_init_externref_table = function () {
     const table = wasm.__wbindgen_export_0;
     const offset = table.grow(4);
@@ -618,6 +643,14 @@ function __wbg_get_imports() {
     table.set(offset + 1, null);
     table.set(offset + 2, true);
     table.set(offset + 3, false);
+  };
+  imports.wbg.__wbindgen_memory = function () {
+    const ret = wasm.memory;
+    return ret;
+  };
+  imports.wbg.__wbindgen_number_new = function (arg0) {
+    const ret = arg0;
+    return ret;
   };
   imports.wbg.__wbindgen_throw = function (arg0, arg1) {
     throw new Error(getStringFromWasm0(arg0, arg1));

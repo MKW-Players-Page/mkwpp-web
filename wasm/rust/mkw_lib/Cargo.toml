@@ -10,3 +10,18 @@ crate-type = ["cdylib"]
 wasm-bindgen = "0.2"
 time = { version = "0.3.34", features = [ "formatting", "macros", "serde", "parsing" ] }
 bytes = "1.4.0"
+js-sys = "*"
+
+[lints.rust]
+unused_imports = "deny"
+
+[lints.clippy]
+needless_return = "allow"
+implicit_return = "deny" # Fuck you.
+too_many_arguments = "allow"
+needless_borrow = "deny"
+duplicate_mod = "deny"
+exit = "deny"
+manual_string_new = "deny"
+string_to_string = "deny"
+fn_to_numeric_cast_any = "deny" # Why would you do this?
