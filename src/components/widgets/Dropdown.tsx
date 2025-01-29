@@ -294,7 +294,8 @@ const NormalDropdown = ({
         if (
           !(
             e.relatedTarget?.classList.contains("dropdown-itemset-setter") ||
-            e.relatedTarget?.classList.contains("dropdown-item")
+            e.relatedTarget?.classList.contains("dropdown-item") ||
+            e.relatedTarget?.classList.contains("dropdown-list")
           ) &&
           dropdownListShown
         ) {
@@ -386,7 +387,8 @@ const TextInputDropdown = ({
           if (
             !(
               e.relatedTarget?.classList.contains("dropdown-itemset-setter") ||
-              e.relatedTarget?.classList.contains("dropdown-item")
+              e.relatedTarget?.classList.contains("dropdown-item") ||
+              e.relatedTarget?.classList.contains("dropdown-list")
             ) &&
             dropdownListShown
           ) {

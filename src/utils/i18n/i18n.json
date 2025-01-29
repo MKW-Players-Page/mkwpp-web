@@ -12177,8 +12177,8 @@
     "es": ""
   },
   "rulesPageTrackCategoriesMGSC": {
-    "it": "Wallride, come {{rulesPageTrackCategoriesMGSCWallRide1LinkText}} o {{rulesPageTrackCategoriesMGSCWallRide2LinkText}}, sono permessi.",
-    "en": "Wallrides, such as {{rulesPageTrackCategoriesMGSCWallRide1LinkText}} or {{rulesPageTrackCategoriesMGSCWallRide2LinkText}}, are allowed.",
+    "it": "Wallride, come {{rulesPageTrackCategoriesMGSCWallRide1LinkText}}, {{rulesPageTrackCategoriesMGSCWallRide2LinkText}} o {{rulesPageTrackCategoriesMGSCWallRide3LinkText}}, sono permessi.",
+    "en": "Wallrides, such as {{rulesPageTrackCategoriesMGSCWallRide1LinkText}}, {{rulesPageTrackCategoriesMGSCWallRide2LinkText}} or {{rulesPageTrackCategoriesMGSCWallRide3LinkText}}, are allowed.",
     "fr": "",
     "de": "",
     "jp": "",
@@ -12197,6 +12197,15 @@
   "rulesPageTrackCategoriesMGSCWallRide2LinkText": {
     "it": "quello all'ultima curva",
     "en": "the one on the last turn",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "rulesPageTrackCategoriesMGSCWallRide3LinkText": {
+    "it": "quello alla terza curva",
+    "en": "the one on the third turn",
     "fr": "",
     "de": "",
     "jp": "",

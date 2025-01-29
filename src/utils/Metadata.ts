@@ -50,6 +50,18 @@ export const getRegionById = (metadata: Metadata, regionId: number) => {
   return metadata.regions.find((region: Region) => region.id === regionId);
 };
 
+export const getFirstRankedParent = (metadata: Metadata, region: Region): Region | undefined => {
+  if (!region.parent) return undefined;
+  let parent = getRegionById(metadata, region.parent);
+
+  while (parent !== undefined && parent.id > 0) {
+    if (parent.isRanked) return parent;
+    parent = getRegionById(metadata, parent?.parent ?? 0);
+  }
+
+  return undefined;
+};
+
 /** The standard level of the standard with the given id.
  *
  * @param metadata The Metadata object returned from `useContext(MetadataContext)`
