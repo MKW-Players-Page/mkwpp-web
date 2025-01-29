@@ -293,16 +293,20 @@ const SubmissionForm = ({
                           try {
                             const arr = new Uint8Array(await actualUpload.files[0].arrayBuffer());
 
-                            const { time, track, year, month, day, free } = read_rkg(arr);
+                            const data = read_rkg(arr);
+
+                            const newStateData = {
+                              value: formatTime(data.time),
+                              track: data.track + 1,
+                              date: `${data.year}-${data.month.toString().padStart(2, "0")}-${data.day.toString().padStart(2, "0")}`,
+                            };
+
+                            data.free();
 
                             setState((prev) => ({
                               ...prev,
-                              value: formatTime(time),
-                              track: track + 1,
-                              date: `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`,
+                              ...newStateData,
                             }));
-
-                            free();
                           } catch (e) {
                             console.log("wasm error:", e);
                           }
