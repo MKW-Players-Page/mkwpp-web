@@ -44,7 +44,7 @@ const RegionSelectionDropdown = ({
 
   const dropdownData: DropdownData = {
     type: "Normal",
-    defaultItemSet: value.parent ?? 0,
+    defaultItemSet: (ranked ? getFirstRankedParent(metadata, value)?.id : value.parent) ?? 0,
     value: value,
     valueSetter: setValue,
     data: [],
