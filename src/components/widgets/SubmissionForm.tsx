@@ -285,10 +285,7 @@ const SubmissionForm = ({
                       actualUpload.addEventListener("change", async () => {
                         const wasm = init();
                         wasm.then(async () => {
-                          if (!actualUpload.files) {
-                            document.getElementById("root")?.removeChild(actualUpload);
-                            return;
-                          }
+                          if (!actualUpload.files) return;
 
                           try {
                             const arr = new Uint8Array(await actualUpload.files[0].arrayBuffer());
@@ -310,11 +307,10 @@ const SubmissionForm = ({
                           } catch (e) {
                             console.log("wasm error:", e);
                           }
-
-                          document.getElementById("root")?.removeChild(actualUpload);
                         });
                         await wasm;
                       });
+                      document.getElementById("root")?.removeChild(actualUpload);
                     }}
                     className="submit-style"
                   >
