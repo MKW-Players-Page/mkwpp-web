@@ -216,9 +216,10 @@ const SECTIONS: NavbarSection[] = [
 
 export interface NavbarProps {
   navbarHidden: boolean;
+  setNavbarHidden: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Navbar = ({ navbarHidden }: NavbarProps) => {
+const Navbar = ({ navbarHidden, setNavbarHidden }: NavbarProps) => {
   const { lang } = useContext(I18nContext);
 
   return (
@@ -236,7 +237,16 @@ const Navbar = ({ navbarHidden }: NavbarProps) => {
                       {translate(item.label, lang)}
                     </a>
                   ) : (
-                    <Link to={item.url}>{translate(item.label, lang)}</Link>
+                    <Link
+                      onClick={
+                        window.innerWidth < window.innerHeight
+                          ? () => setNavbarHidden(true)
+                          : undefined
+                      }
+                      to={item.url}
+                    >
+                      {translate(item.label, lang)}
+                    </Link>
                   )}
                 </li>
               ))}
