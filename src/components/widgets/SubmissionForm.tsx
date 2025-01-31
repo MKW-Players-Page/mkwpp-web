@@ -1,8 +1,10 @@
+import init, { read_rkg } from "mkw_lib";
+
 import { useContext, useEffect, useState } from "react";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
 import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
 import { useApi } from "../../hooks";
-import { parseTime } from "../../utils/Formatters";
+import { formatTime, parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
@@ -260,16 +262,62 @@ const SubmissionForm = ({
         {state.state === SubmitStateEnum.Form && (
           <Form
             extraButtons={
-              deleteId !== undefined && (
-                <div
-                  onClick={() => {
-                    deleteFunction(deleteId).then(() => doneFunc());
-                  }}
-                  className="submit-style"
-                >
-                  {translate("submissionPageSubmitTabDeleteBtn", lang)}
-                </div>
-              )
+              <>
+                {deleteId !== undefined && (
+                  <div
+                    onClick={() => {
+                      deleteFunction(deleteId).then(() => doneFunc());
+                    }}
+                    className="submit-style"
+                  >
+                    {translate("submissionPageSubmitTabDeleteBtn", lang)}
+                  </div>
+                )}
+                {deleteId === undefined && editModeScore === undefined && (
+                  <div
+                    onClick={() => {
+                      const actualUpload = document.createElement("input");
+                      actualUpload.type = "file";
+                      actualUpload.style.display = "hidden";
+                      actualUpload.accept = ".rkg";
+                      document.getElementById("root")?.appendChild(actualUpload);
+                      actualUpload.click();
+                      actualUpload.addEventListener("change", async () => {
+                        const wasm = init();
+                        wasm.then(async () => {
+                          if (!actualUpload.files) return;
+
+                          try {
+                            const arr = new Uint8Array(await actualUpload.files[0].arrayBuffer());
+
+                            const data = read_rkg(arr);
+
+                            const newStateData = {
+                              value: formatTime(data.time),
+                              track: data.track + 1,
+                              date: `${data.year}-${data.month.toString().padStart(2, "0")}-${data.day.toString().padStart(2, "0")}`,
+                            };
+
+                            data.free();
+
+                            setState((prev) => ({
+                              ...prev,
+                              ...newStateData,
+                            }));
+                          } catch (e) {
+                            console.log("wasm error:", e);
+                          }
+                        });
+                        await wasm;
+                      });
+                      document.getElementById("root")?.removeChild(actualUpload);
+                    }}
+                    className="submit-style"
+                  >
+                    {translate("submissionPageSubmitTabUploadRKGBtn", lang)}
+                  </div>
+                )}
+              </>
             }
             state={state}
             setState={setState}
@@ -319,7 +367,7 @@ const SubmissionForm = ({
               type="date"
               field="date"
               disabled={editModeScore !== undefined}
-              min="2009-04-01"
+              min="2008-04-01"
               max={`${todayDate.getFullYear().toString().padStart(4, "0")}-${(todayDate.getMonth() + 1).toString().padStart(2, "0")}-${todayDate.getDate().toString().padStart(2, "0")}`}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
             />

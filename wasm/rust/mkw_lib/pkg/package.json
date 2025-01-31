@@ -1,0 +1,15 @@
+{
+  "name": "mkw_lib",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "mkw_lib_bg.wasm",
+    "mkw_lib.js",
+    "mkw_lib.d.ts"
+  ],
+  "main": "mkw_lib.js",
+  "types": "mkw_lib.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

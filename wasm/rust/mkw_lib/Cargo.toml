@@ -1,0 +1,27 @@
+[package]
+name = "mkw_lib"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+bytes = "1.4.0"
+js-sys = "*"
+chrono = "*"
+
+[lints.rust]
+unused_imports = "deny"
+
+[lints.clippy]
+needless_return = "allow"
+implicit_return = "deny" # Fuck you.
+too_many_arguments = "allow"
+needless_borrow = "deny"
+duplicate_mod = "deny"
+exit = "deny"
+manual_string_new = "deny"
+string_to_string = "deny"
+fn_to_numeric_cast_any = "deny" # Why would you do this?
