@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { MetadataContext, useMetadata } from "../utils/Metadata";
@@ -26,6 +26,7 @@ const App = () => {
   const metadata = useMetadata();
 
   const [navbarHidden, setNavbarHidden] = useState(window.innerWidth < window.innerHeight);
+  const isLandscape = useRef(window.innerWidth < window.innerHeight);
   const initialUserState = { isLoading: true };
   const [user, setUserState] = useState<AppUserState>(initialUserState);
   const [langCode, setLangCodeState] = useState(getLang());
@@ -46,28 +47,25 @@ const App = () => {
   };
 
   useLayoutEffect(() => {
-    let isLandscape = window.innerWidth >= window.innerHeight;
     const updateSize = () => {
       if (window.innerWidth < window.innerHeight) {
         // If it's turned to portrait
-        if (isLandscape) {
+        if (isLandscape.current) {
           // And was landscape
-          isLandscape = false;
+          isLandscape.current = false;
           setNavbarHidden(true);
         }
       } else {
         // If it's turned to landscape
-        if (!isLandscape) {
+        if (!isLandscape.current) {
           // And was portrait
-          isLandscape = true;
+          isLandscape.current = true;
         }
       }
     };
     window.addEventListener("resize", updateSize);
-    updateSize();
     return () => window.removeEventListener("resize", updateSize);
-    // eslint-disable-next-line
-  }, []);
+  });
 
   useEffect(() => {
     fetchCurrentUser(setUser);
@@ -79,7 +77,7 @@ const App = () => {
         <I18nContext.Provider value={{ lang: langCode, setLang, translations: i18nJson }}>
           <SettingsContext.Provider value={{ settings, setSettings }}>
             <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
-            <Navbar navbarHidden={navbarHidden} />
+            <Navbar navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
             <div
               onClick={() => setNavbarHidden(true)}
               className={`darkener${navbarHidden ? "" : " navbar-shown"}`}
