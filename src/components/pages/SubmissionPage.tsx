@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import init from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
 import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
@@ -23,6 +24,33 @@ import PlayerMention from "../widgets/PlayerMention";
 
 const SubmitTab = () => {
   return <SubmissionForm />;
+};
+
+const BulkSubmitTab = () => {
+  const { lang } = useContext(I18nContext);
+
+  return (
+    <div className="module-content">
+      <div
+        onClick={() => {
+          const actualUpload = document.createElement("input");
+          actualUpload.type = "file";
+          actualUpload.style.display = "hidden";
+          actualUpload.accept = ".rksys";
+          document.getElementById("root")?.appendChild(actualUpload);
+          actualUpload.click();
+          actualUpload.addEventListener("change", async () => {
+            const wasm = init();
+            await wasm;
+          });
+          document.getElementById("root")?.removeChild(actualUpload);
+        }}
+        className="submit-style"
+      >
+        {translate("submissionPageSubmitTabUploadRKSYSBtn", lang)}
+      </div>
+    </div>
+  );
 };
 
 enum SubmissionFilter {
@@ -409,6 +437,10 @@ const SubmissionPage = () => {
         <h1>{translate("submissionPageTabbedModuleHeading", lang)}</h1>
         <TabbedModule>
           <Tab title={translate("submissionPageSubmitTabTitle", lang)} element={<SubmitTab />} />
+          <Tab
+            title={translate("submissionPageBulkSubmitTabTitle", lang)}
+            element={<BulkSubmitTab />}
+          />
           <Tab
             title={translate("submissionPageSubmissionsTabTitle", lang)}
             element={<SubmissionsTab />}

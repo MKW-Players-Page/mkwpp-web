@@ -14228,6 +14228,15 @@
     "pt": "",
     "es": ""
   },
+  "submissionPageBulkSubmitTabTitle": {
+    "it": "Carica in massa",
+    "en": "Bulk Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "submissionPageSubmissionsTabTitle": {
     "it": "In attesa",
     "en": "My Submissions",
@@ -14276,6 +14285,15 @@
   "submissionPageSubmitTabDeleteBtn": {
     "it": "Elimina Submission",
     "en": "Delete Submission",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabUploadRKSYSBtn": {
+    "it": "Carica File RKSYS",
+    "en": "Upload RKSYS File",
     "fr": "",
     "de": "",
     "jp": "",
