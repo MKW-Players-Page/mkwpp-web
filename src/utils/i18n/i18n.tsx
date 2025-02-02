@@ -59,9 +59,9 @@ export const I18nContext = createContext<I18nContextType>({
 
 export const handleBars = (
   stringWithHandleBars: string,
-  handleBarKeyReplPairs: [string, string | JSX.Element][],
+  handleBarKeyReplPairs: [string, string | React.ReactNode][],
 ) => {
-  let intermediateArray: (string | JSX.Element)[] = [stringWithHandleBars];
+  let intermediateArray: (string | React.ReactNode)[] = [stringWithHandleBars];
   for (let [key, value] of handleBarKeyReplPairs) {
     intermediateArray = intermediateArray
       .map((part) => {

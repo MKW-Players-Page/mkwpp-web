@@ -14228,6 +14228,60 @@
     "pt": "",
     "es": ""
   },
+  "submissionPageBulkSubmitTabTitle": {
+    "it": "Carica in massa",
+    "en": "Bulk Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabLicence": {
+    "it": "Patente {{number}}",
+    "en": "Licence {{number}}",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabHowTo": {
+    "it": "",
+    "en": "To submit a ghost, click on the edit icon, then after making sure the information is correct, click on \"Submit\".",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabTrackCol": {
+    "it": "Pista",
+    "en": "Track",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabTimeCol": {
+    "it": "Tempo",
+    "en": "Time",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageBulkSubmitTabDateCol": {
+    "it": "Data",
+    "en": "Date",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "submissionPageSubmissionsTabTitle": {
     "it": "In attesa",
     "en": "My Submissions",
@@ -14276,6 +14330,15 @@
   "submissionPageSubmitTabDeleteBtn": {
     "it": "Elimina Submission",
     "en": "Delete Submission",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "submissionPageSubmitTabUploadRKSYSBtn": {
+    "it": "Carica File RKSYS",
+    "en": "Upload RKSYS File",
     "fr": "",
     "de": "",
     "jp": "",

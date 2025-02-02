@@ -18,14 +18,13 @@ import {
   translate,
   translateRegionName,
   translateStandardName,
-  translateTrack,
 } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
-import FormatDateDependable from "../widgets/VariedDate";
+import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -84,8 +83,11 @@ const TrackRecordsPage = () => {
                 { lap: isLap ? LapModeEnum.Lap : null },
               )}
             >
-              <span className="track-records-columns-b2">{translateTrack(track, lang)}</span>
-              <span className="track-records-columns-s2">{track.abbr}</span>
+              <SmallBigTrackFormat
+                track={track}
+                bigClass="track-records-columns-b2"
+                smallClass="track-records-columns-s2"
+              />
             </Link>
           ),
           expandCell: [isLap && big, false],
@@ -143,7 +145,7 @@ const TrackRecordsPage = () => {
         );
         if (score.date) {
           out[Indexes.Date].content = (
-            <FormatDateDependable
+            <SmallBigDateFormat
               date={score.date}
               smallClass={"track-records-columns-s1"}
               bigClass={"track-records-columns-b1"}

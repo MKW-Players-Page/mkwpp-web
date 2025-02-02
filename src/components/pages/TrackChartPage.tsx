@@ -32,8 +32,8 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
-import FormatDateDependable from "../widgets/VariedDate";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
+import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -147,7 +147,7 @@ const TrackChartPage = () => {
       { content: translateStandardName(getStandardLevel(metadata, score.standard), lang) },
       {
         content: score.date ? (
-          <FormatDateDependable
+          <SmallBigDateFormat
             date={score.date}
             smallClass={"track-chart-page-s1"}
             bigClass={"track-chart-page-b1"}

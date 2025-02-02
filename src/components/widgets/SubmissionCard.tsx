@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ScoreSubmission } from "../../api";
-import { formatTime } from "../../utils/Formatters";
+import { formatDate, formatTime } from "../../utils/Formatters";
 import {
   handleBars,
   I18nContext,
@@ -76,7 +76,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                 </span>
                 <OverwriteColor hue={216}>
                   <ObscuredModule
-                    setReload={setReload}
+                    onClose={() => setReload(Math.random())}
                     stateVisible={visibleObscured}
                     setStateVisible={setVisibleObscured}
                   >
@@ -87,16 +87,12 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       starterCategory={submission.category}
                       starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
                       starterValue={formatTime(submission.value)}
-                      starterDate={
-                        submission.date
-                          ? `${submission.date.getFullYear().toString().padStart(4, "0")}-${(submission.date.getMonth() + 1).toString().padStart(2, "0")}-${submission.date.getDate().toString().padStart(2, "0")}`
-                          : undefined
-                      }
+                      starterDate={submission.date ? formatDate(submission.date) : undefined}
                       starterGhostLink={submission.ghostLink ?? undefined}
                       starterVideoLink={submission.videoLink ?? undefined}
                       starterComment={submission.comment ?? undefined}
                       starterSubmitterNote={submission.submitterNote ?? undefined}
-                      doneFunc={() => {
+                      onSuccess={() => {
                         setVisibleObscured(false);
                         setReload(Math.random());
                       }}

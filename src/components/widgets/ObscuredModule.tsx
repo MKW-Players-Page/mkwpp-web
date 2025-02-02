@@ -6,19 +6,19 @@ export interface ObscuredModuleProps {
   children: ReactNode;
   stateVisible: boolean;
   setStateVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setReload?: React.Dispatch<React.SetStateAction<number>>;
+  onClose?: () => void;
 }
 
 const ObscuredModule = ({
   children,
   stateVisible,
   setStateVisible,
-  setReload,
+  onClose,
 }: ObscuredModuleProps) => {
   const closeFn: MouseEventHandler<HTMLDivElement> = (e) => {
     if (e.target === e.currentTarget) {
       setStateVisible(false);
-      if (setReload !== undefined) setReload(Math.random());
+      if (onClose !== undefined) onClose();
     }
   };
 

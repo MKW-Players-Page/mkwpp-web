@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export function read_rksys(rksys_bytes: Uint8Array, rkpd_bitmap: number): RKG[];
 export function read_rkg(rkg_bytes: Uint8Array): RKG;
 export enum Character {
   Mario = 0,
@@ -63,6 +64,13 @@ export enum Miniturbo {
   Automatic = 0,
   Manual = 1,
   Unknown = 2,
+}
+export enum RKGReadErrors {
+  IsNotRKG = 0,
+  IsNotValidTime = 1,
+  IsNotValidDate = 2,
+  IsNotValidRKSYS = 3,
+  NotCorrectLength = 4,
 }
 export enum RegularTrack {
   LC = 0,
@@ -170,6 +178,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly read_rksys: (a: any, b: number) => [number, number, number, number];
   readonly read_rkg: (a: any) => [number, number, number];
   readonly __wbg_rkg_free: (a: number, b: number) => void;
   readonly __wbg_get_rkg_track: (a: number) => number;
@@ -206,6 +215,8 @@ export interface InitOutput {
   readonly __wbg_set_combo_character: (a: number, b: number) => void;
   readonly __wbindgen_export_0: WebAssembly.Table;
   readonly __externref_table_dealloc: (a: number) => void;
+  readonly __externref_drop_slice: (a: number, b: number) => void;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_start: () => void;
 }
 

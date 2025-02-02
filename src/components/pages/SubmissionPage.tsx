@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import init, { read_rksys, RKG } from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
 import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
-import api, { CategoryEnum, EditScoreSubmission, Score } from "../../api";
-import { MetadataContext } from "../../utils/Metadata";
+import api, { CategoryEnum, EditScoreSubmission, Score, Track } from "../../api";
+import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
@@ -20,9 +21,213 @@ import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { SettingsContext } from "../../utils/Settings";
 import ObscuredModule from "../widgets/ObscuredModule";
 import PlayerMention from "../widgets/PlayerMention";
+import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
+import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 
 const SubmitTab = () => {
-  return <SubmissionForm />;
+  const { lang } = useContext(I18nContext);
+  return <SubmissionForm disclaimerText={translate("submissionPageSubmitTabWarning1", lang)} />;
+};
+
+interface RKGExportedTime {
+  tempId: number;
+  track: Track;
+  time: number;
+  date: Date;
+}
+
+interface BulkSubmitEditBtnProps {
+  data: RKGExportedTime;
+  deleteFunc: () => void;
+}
+
+const BulkSubmitEditBtn = ({ data, deleteFunc }: BulkSubmitEditBtnProps) => {
+  const [visibleObscured, setVisibleObscured] = useState(false);
+
+  return (
+    <>
+      <span
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setVisibleObscured(true);
+        }}
+      >
+        <Icon icon="Edit" />
+      </span>
+      <OverwriteColor hue={216}>
+        <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
+          <SubmissionForm
+            starterTrack={data.track.id}
+            starterValue={formatTime(data.time)}
+            starterDate={formatDate(data.date)}
+            onSuccess={() => {
+              setVisibleObscured(false);
+              deleteFunc();
+            }}
+          />
+        </ObscuredModule>
+      </OverwriteColor>
+    </>
+  );
+};
+
+const BulkSubmitTab = () => {
+  const { lang } = useContext(I18nContext);
+  const metadata = useContext(MetadataContext);
+
+  // technically unsafe but, be real
+  const ids = useRef(0);
+
+  const lic1 = useRef<null | HTMLInputElement>(null);
+  const lic2 = useRef<null | HTMLInputElement>(null);
+  const lic3 = useRef<null | HTMLInputElement>(null);
+  const lic4 = useRef<null | HTMLInputElement>(null);
+
+  const [times, setTimes] = useState<RKGExportedTime[]>([]);
+  const rows: ArrayTableCellData[][] = times.map((time) => {
+    const deleteFunc = () => {
+      setTimes((prev) => prev.filter((oldTime) => time.tempId !== oldTime.tempId));
+    };
+
+    return [
+      {
+        content: (
+          <SmallBigTrackFormat
+            track={time.track}
+            bigClass="submission-page-bulk-submit-table-b1"
+            smallClass="submission-page-bulk-submit-table-s1"
+          />
+        ),
+      },
+      {
+        content: formatTime(time.time),
+      },
+      {
+        content: (
+          <SmallBigDateFormat
+            date={time.date}
+            bigClass="submission-page-bulk-submit-table-b1"
+            smallClass="submission-page-bulk-submit-table-s1"
+          />
+        ),
+      },
+      {
+        content: <BulkSubmitEditBtn data={time} deleteFunc={deleteFunc} />,
+      },
+      {
+        content: (
+          <span style={{ cursor: "pointer" }} onClick={deleteFunc}>
+            <Icon icon="Delete" />
+          </span>
+        ),
+      },
+    ];
+  });
+
+  return (
+    <Deferred isWaiting={metadata.isLoading}>
+      <div className="module-content">
+        <OverwriteColor hue={50}>
+          <div style={{ padding: "5px" }} className="module">
+            {translate("submissionPageBulkSubmitTabHowTo", lang)}
+          </div>
+        </OverwriteColor>
+        <div className="module-row wrap" style={{ marginBottom: "16px" }}>
+          <div className="module-row">
+            <label htmlFor="lic1">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 1]])}
+            </label>
+            <input type="checkbox" id="lic1" ref={lic1} defaultChecked={true} />
+          </div>
+          <div className="module-row">
+            <label htmlFor="lic2">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 2]])}
+            </label>
+            <input type="checkbox" id="lic2" ref={lic2} defaultChecked={true} />
+          </div>
+          <div className="module-row">
+            <label htmlFor="lic3">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 3]])}
+            </label>
+            <input type="checkbox" id="lic3" ref={lic3} defaultChecked={true} />
+          </div>
+          <div className="module-row">
+            <label htmlFor="lic4">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 4]])}
+            </label>
+            <input type="checkbox" id="lic4" ref={lic4} defaultChecked={true} />
+          </div>
+        </div>
+        <div
+          style={{ marginBottom: "16px" }}
+          onClick={() => {
+            const actualUpload = document.createElement("input");
+            actualUpload.type = "file";
+            actualUpload.style.display = "hidden";
+            actualUpload.accept = ".dat";
+            document.getElementById("root")?.appendChild(actualUpload);
+            actualUpload.click();
+            const bitMapLicenses =
+              0b0000 |
+              (lic1.current && lic1.current.checked ? 0b0001 : 0) |
+              (lic2.current && lic2.current.checked ? 0b0010 : 0) |
+              (lic3.current && lic3.current.checked ? 0b0100 : 0) |
+              (lic4.current && lic4.current.checked ? 0b1000 : 0);
+            actualUpload.addEventListener("change", async () => {
+              const wasm = init().then(async () => {
+                if (!actualUpload.files) return;
+
+                try {
+                  const arr = new Uint8Array(await actualUpload.files[0].arrayBuffer());
+
+                  const data = read_rksys(arr, bitMapLicenses);
+
+                  const newTimes: RKGExportedTime[] = data.map((readTime: RKG) => {
+                    const { time, track, year, month, day } = readTime;
+                    readTime.free();
+
+                    ids.current++;
+
+                    return {
+                      tempId: ids.current,
+                      time,
+                      track: getTrackById(metadata.tracks, track + 1) as Track,
+                      date: new Date(
+                        `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`,
+                      ),
+                    };
+                  });
+
+                  setTimes((prev) => [...prev, ...newTimes]);
+                } catch (e) {
+                  console.log("wasm error:", e);
+                }
+              });
+
+              await wasm;
+            });
+            document.getElementById("root")?.removeChild(actualUpload);
+          }}
+          className="submit-style"
+        >
+          {translate("submissionPageSubmitTabUploadRKSYSBtn", lang)}
+        </div>
+        <ArrayTable
+          headerRows={[
+            [
+              { content: translate("submissionPageBulkSubmitTabTrackCol", lang) },
+              { content: translate("submissionPageBulkSubmitTabDateCol", lang) },
+              { content: translate("submissionPageBulkSubmitTabTimeCol", lang) },
+              { content: null },
+              { content: null },
+            ],
+          ]}
+          rows={rows}
+          tableData={{ iconCellColumns: [-1, -2] }}
+        />
+      </div>
+    </Deferred>
+  );
 };
 
 enum SubmissionFilter {
@@ -89,6 +294,7 @@ interface TimesheetTabEditBtnProps {
 
 const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEditBtnProps) => {
   const [visibleObscured, setVisibleObscured] = useState(false);
+  const { lang } = useContext(I18nContext);
 
   return (
     <>
@@ -102,7 +308,7 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
       </span>
       <OverwriteColor hue={216}>
         <ObscuredModule
-          setReload={setReload}
+          onClose={() => setReload(Math.random())}
           stateVisible={visibleObscured}
           setStateVisible={setVisibleObscured}
         >
@@ -112,20 +318,17 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
             starterCategory={score.category}
             starterLapMode={score.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
             starterValue={formatTime(score.value)}
-            starterDate={
-              score.date
-                ? `${score.date.getFullYear().toString().padStart(4, "0")}-${(score.date.getMonth() + 1).toString().padStart(2, "0")}-${score.date.getDate().toString().padStart(2, "0")}`
-                : undefined
-            }
+            starterDate={score.date ? formatDate(score.date) : undefined}
             deleteId={patchUpData?.id}
             starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink ?? undefined}
             starterVideoLink={patchUpData?.videoLink ?? score.videoLink ?? undefined}
             starterComment={patchUpData?.comment ?? score.comment ?? undefined}
             starterSubmitterNote={patchUpData?.submitterNote ?? undefined}
-            doneFunc={() => {
+            onSuccess={() => {
               setVisibleObscured(false);
               setReload(Math.random());
             }}
+            disclaimerText={translate("submissionPageSubmitTabWarning2", lang)}
           />
         </ObscuredModule>
       </OverwriteColor>
@@ -409,6 +612,10 @@ const SubmissionPage = () => {
         <h1>{translate("submissionPageTabbedModuleHeading", lang)}</h1>
         <TabbedModule>
           <Tab title={translate("submissionPageSubmitTabTitle", lang)} element={<SubmitTab />} />
+          <Tab
+            title={translate("submissionPageBulkSubmitTabTitle", lang)}
+            element={<BulkSubmitTab />}
+          />
           <Tab
             title={translate("submissionPageSubmissionsTabTitle", lang)}
             element={<SubmissionsTab />}
