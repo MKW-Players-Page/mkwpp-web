@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
-import {
-  I18nContext,
-  translate,
-  translateCategoryName,
-  translateTrack,
-} from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateCategoryName } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
@@ -17,7 +12,7 @@ import { LapModeEnum } from "./LapModeSelect";
 import PlayerMention from "./PlayerMention";
 
 import "./RecentTimes.css";
-import SmallBigFormat, { SmallBigFormatDate } from "./SmallBigFormat";
+import { SmallBigDateFormat, SmallBigTrackFormat } from "./SmallBigFormat";
 import ArrayTable from "./Table";
 
 interface RecentTimesProps {
@@ -86,12 +81,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                         },
                       )}
                     >
-                      <SmallBigFormat
-                        smallText={track?.abbr}
-                        bigText={translateTrack(track, lang)}
-                        bigClass="b3"
-                        smallClass="s3"
-                      />
+                      <SmallBigTrackFormat track={track} bigClass="b3" smallClass="s3" />
                     </Link>
                   ),
                   lockedCell: true,
@@ -120,7 +110,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                 },
                 {
                   content: (
-                    <SmallBigFormatDate
+                    <SmallBigDateFormat
                       date={data.date as Date}
                       smallClass={"s1 b4"}
                       bigClass={"b1"}

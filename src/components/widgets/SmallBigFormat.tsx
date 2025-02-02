@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { Track } from "../../api";
+import { I18nContext, translateTrack } from "../../utils/i18n/i18n";
+
 export interface SmallBigFormatProps {
   smallText: React.ReactNode;
   bigText: React.ReactNode;
@@ -14,7 +18,26 @@ const SmallBigFormat = ({ smallText, bigText, smallClass, bigClass }: SmallBigFo
   );
 };
 
-export interface SmallBigFormatDateProps {
+export interface SmallBigTrackFormatProps {
+  track: Track | undefined;
+  smallClass: string;
+  bigClass: string;
+}
+
+export const SmallBigTrackFormat = ({ track, smallClass, bigClass }: SmallBigTrackFormatProps) => {
+  const { lang } = useContext(I18nContext);
+
+  return (
+    <SmallBigFormat
+      bigClass={bigClass}
+      smallClass={smallClass}
+      bigText={translateTrack(track, lang)}
+      smallText={track?.abbr}
+    />
+  );
+};
+
+export interface SmallBigDateFormatProps {
   date: Date | null | undefined;
   smallClass: string;
   bigClass: string;
@@ -29,7 +52,7 @@ export interface SmallBigFormatDateProps {
  * @param date The date to format
  * @returns A human readable date element
  */
-export const SmallBigFormatDate = ({ date, smallClass, bigClass }: SmallBigFormatDateProps) => {
+export const SmallBigDateFormat = ({ date, smallClass, bigClass }: SmallBigDateFormatProps) => {
   let dateStr = "????-??-??";
   if (date !== undefined && date !== null) {
     const year = date.getUTCFullYear();

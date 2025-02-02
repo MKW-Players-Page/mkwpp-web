@@ -356,6 +356,19 @@ span.track-records-columns-s1,
   }
 }
 
+.submission-page-bulk-submit-table-s1 {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .submission-page-bulk-submit-table-s1 {
+    display: table-cell;
+  }
+  .submission-page-bulk-submit-table-b1 {
+    display: none;
+  }
+}
+
 .submission-timesheet-columns-s1 {
   display: none;
 }

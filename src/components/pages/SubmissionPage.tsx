@@ -22,6 +22,7 @@ import { SettingsContext } from "../../utils/Settings";
 import ObscuredModule from "../widgets/ObscuredModule";
 import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
+import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 
 const SubmitTab = () => {
   const { lang } = useContext(I18nContext);
@@ -90,13 +91,25 @@ const BulkSubmitTab = () => {
 
     return [
       {
-        content: translateTrack(time.track, lang),
+        content: (
+          <SmallBigTrackFormat
+            track={time.track}
+            bigClass="submission-page-bulk-submit-table-b1"
+            smallClass="submission-page-bulk-submit-table-s1"
+          />
+        ),
       },
       {
         content: formatTime(time.time),
       },
       {
-        content: formatDate(time.date),
+        content: (
+          <SmallBigDateFormat
+            date={time.date}
+            bigClass="submission-page-bulk-submit-table-b1"
+            smallClass="submission-page-bulk-submit-table-s1"
+          />
+        ),
       },
       {
         content: <BulkSubmitEditBtn data={time} deleteFunc={deleteFunc} />,

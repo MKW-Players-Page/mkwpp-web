@@ -33,7 +33,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
-import { SmallBigFormatDate } from "../widgets/SmallBigFormat";
+import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -147,7 +147,7 @@ const TrackChartPage = () => {
       { content: translateStandardName(getStandardLevel(metadata, score.standard), lang) },
       {
         content: score.date ? (
-          <SmallBigFormatDate
+          <SmallBigDateFormat
             date={score.date}
             smallClass={"track-chart-page-s1"}
             bigClass={"track-chart-page-b1"}
