@@ -127,7 +127,7 @@ const BulkSubmitTab = () => {
   return (
     <Deferred isWaiting={metadata.isLoading}>
       <div className="module-content">
-        <OverwriteColor hue={50}>
+        <OverwriteColor hue={170}>
           <div style={{ padding: "5px" }} className="module">
             {translate("submissionPageBulkSubmitTabHowTo", lang)}
           </div>
