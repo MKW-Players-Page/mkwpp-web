@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import api, { CategoryEnum, ScoreSubmission } from "../../api";
 import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
 import { useApi } from "../../hooks";
-import { formatTime, parseTime } from "../../utils/Formatters";
+import { formatDate, formatTime, parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
@@ -52,7 +52,9 @@ export interface StarterData {
   starterSubmitterNote?: string;
   deleteId?: number;
   editModeScore?: Score;
-  doneFunc?: any;
+  doneFunc?: () => void;
+  onSuccess?: () => void;
+  disclaimerText?: string;
 }
 
 const SubmissionForm = ({
@@ -69,6 +71,8 @@ const SubmissionForm = ({
   deleteId,
   editModeScore,
   doneFunc,
+  onSuccess,
+  disclaimerText,
 }: StarterData) => {
   const { user } = useContext(UserContext);
 
@@ -242,18 +246,15 @@ const SubmissionForm = ({
   };
 
   const todayDate = new Date();
+  if (onSuccess !== undefined && state.state === SubmitStateEnum.Success) onSuccess();
 
   return (
     <div className="module-content">
-      {editModeScore !== undefined ? (
-        <></>
-      ) : (
+      {disclaimerText && (
         <OverwriteColor hue={50}>
           <div style={{ padding: "5px" }} className="module">
             {"⚠️ "}
-            {deleteId === undefined
-              ? translate("submissionPageSubmitTabWarning1", lang)
-              : translate("submissionPageSubmitTabWarning2", lang)}
+            {disclaimerText}
             {" ⚠️"}
           </div>
         </OverwriteColor>
@@ -266,7 +267,9 @@ const SubmissionForm = ({
                 {deleteId !== undefined && (
                   <div
                     onClick={() => {
-                      deleteFunction(deleteId).then(() => doneFunc());
+                      deleteFunction(deleteId).then(() => {
+                        if (doneFunc !== undefined) doneFunc();
+                      });
                     }}
                     className="submit-style"
                   >
@@ -368,7 +371,7 @@ const SubmissionForm = ({
               field="date"
               disabled={editModeScore !== undefined}
               min="2008-04-01"
-              max={`${todayDate.getFullYear().toString().padStart(4, "0")}-${(todayDate.getMonth() + 1).toString().padStart(2, "0")}-${todayDate.getDate().toString().padStart(2, "0")}`}
+              max={formatDate(todayDate)}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
             />
             <Field

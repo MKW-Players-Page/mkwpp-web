@@ -34,6 +34,46 @@ function takeFromExternrefTable0(idx) {
   wasm.__externref_table_dealloc(idx);
   return value;
 }
+
+let cachedDataViewMemory0 = null;
+
+function getDataViewMemory0() {
+  if (
+    cachedDataViewMemory0 === null ||
+    cachedDataViewMemory0.buffer.detached === true ||
+    (cachedDataViewMemory0.buffer.detached === undefined &&
+      cachedDataViewMemory0.buffer !== wasm.memory.buffer)
+  ) {
+    cachedDataViewMemory0 = new DataView(wasm.memory.buffer);
+  }
+  return cachedDataViewMemory0;
+}
+
+function getArrayJsValueFromWasm0(ptr, len) {
+  ptr = ptr >>> 0;
+  const mem = getDataViewMemory0();
+  const result = [];
+  for (let i = ptr; i < ptr + 4 * len; i += 4) {
+    result.push(wasm.__wbindgen_export_0.get(mem.getUint32(i, true)));
+  }
+  wasm.__externref_drop_slice(ptr, len);
+  return result;
+}
+/**
+ * @param {Uint8Array} rksys_bytes
+ * @param {number} rkpd_bitmap
+ * @returns {RKG[]}
+ */
+export function read_rksys(rksys_bytes, rkpd_bitmap) {
+  const ret = wasm.read_rksys(rksys_bytes, rkpd_bitmap);
+  if (ret[3]) {
+    throw takeFromExternrefTable0(ret[2]);
+  }
+  var v1 = getArrayJsValueFromWasm0(ret[0], ret[1]).slice();
+  wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
+  return v1;
+}
+
 /**
  * @param {Uint8Array} rkg_bytes
  * @returns {RKG}
@@ -183,6 +223,21 @@ export const Miniturbo = Object.freeze({
   1: "Manual",
   Unknown: 2,
   2: "Unknown",
+});
+/**
+ * @enum {0 | 1 | 2 | 3 | 4}
+ */
+export const RKGReadErrors = Object.freeze({
+  IsNotRKG: 0,
+  0: "IsNotRKG",
+  IsNotValidTime: 1,
+  1: "IsNotValidTime",
+  IsNotValidDate: 2,
+  2: "IsNotValidDate",
+  IsNotValidRKSYS: 3,
+  3: "IsNotValidRKSYS",
+  NotCorrectLength: 4,
+  4: "NotCorrectLength",
 });
 /**
  * @enum {0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31}
@@ -658,6 +713,10 @@ function __wbg_get_imports() {
     const ret = new Uint8Array(arg0);
     return ret;
   };
+  imports.wbg.__wbg_rkg_new = function (arg0) {
+    const ret = RKG.__wrap(arg0);
+    return ret;
+  };
   imports.wbg.__wbg_set_65595bdd868b3009 = function (arg0, arg1, arg2) {
     arg0.set(arg1, arg2 >>> 0);
   };
@@ -690,6 +749,7 @@ function __wbg_init_memory(imports, memory) {}
 function __wbg_finalize_init(instance, module) {
   wasm = instance.exports;
   __wbg_init.__wbindgen_wasm_module = module;
+  cachedDataViewMemory0 = null;
   cachedUint8ArrayMemory0 = null;
 
   wasm.__wbindgen_start();

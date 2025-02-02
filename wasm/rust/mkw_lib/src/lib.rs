@@ -1,39 +1,120 @@
-use bytes::Bytes;
 use wasm_bindgen::prelude::*;
 
 pub const RKGD_MAGIC_NUMBERS: [u8; 4] = [0x52, 0x4B, 0x47, 0x44];
+pub const RKPD_MAGIC_NUMBERS: [u8; 4] = [0x52, 0x4B, 0x50, 0x44];
+pub const RKSD_MAGIC_NUMBERS: [u8; 4] = [0x52, 0x4B, 0x53, 0x44];
+pub const RKPD_LENGTH: usize = 0x8CC0;
+pub const LICENSE_GHOST_DATA_OFFSET: usize = 0x28000;
+pub const LICENSE_GHOST_DATA_LENGTH: usize = 0xA5000;
+pub const MAX_GHOST_DATA_LENGTH: usize = 0x2800;
 
 #[wasm_bindgen]
-pub fn read_rkg(rkg_bytes: js_sys::Uint8Array) -> Result<RKG, u32> {
-    let rkg_bytes = rkg_bytes.to_vec();
+pub enum RKGReadErrors {
+    IsNotRKG,
+    IsNotValidTime,
+    IsNotValidDate,
+    IsNotValidRKSYS,
+    NotCorrectLength,
+}
 
+#[wasm_bindgen]
+pub fn read_rksys(
+    rksys_bytes: js_sys::Uint8Array,
+    rkpd_bitmap: u8,
+) -> Result<Vec<RKG>, RKGReadErrors> {
+    let rksys_bytes = rksys_bytes.to_vec();
+    if !rksys_bytes.starts_with(&RKSD_MAGIC_NUMBERS) {
+        return Err(RKGReadErrors::IsNotValidRKSYS);
+    }
+    if rksys_bytes.len() != 2867200 {
+        return Err(RKGReadErrors::IsNotValidRKSYS);
+    }
+
+    let mut out_vec = std::vec::Vec::new();
+    out_vec.reserve_exact(32 * 4); // Reserves exactly as many ghosts as can be saved on file
+
+    for license_number in 0..4 {
+        if rkpd_bitmap & (0b0001 << license_number) == 0 {
+            continue;
+        }
+        let rkpd_magic_numbers_idx = RKPD_LENGTH * license_number + 8;
+        if !rksys_bytes[rkpd_magic_numbers_idx..rkpd_magic_numbers_idx + 4]
+            .starts_with(&RKPD_MAGIC_NUMBERS)
+        {
+            continue;
+        }
+
+        let index = license_number * LICENSE_GHOST_DATA_LENGTH + LICENSE_GHOST_DATA_OFFSET;
+        let rkpd_ghost_data = rksys_bytes[index..(index + LICENSE_GHOST_DATA_LENGTH)]
+            .try_into()
+            .map_err(|_| RKGReadErrors::NotCorrectLength)?;
+
+        match read_rkpd(rkpd_ghost_data) {
+            Ok(v) => out_vec.extend(v),
+            Err(e) => return Err(e),
+        }
+    }
+
+    return Ok(out_vec);
+}
+
+pub fn read_rkpd(ghost_data: [u8; LICENSE_GHOST_DATA_LENGTH]) -> Result<Vec<RKG>, RKGReadErrors> {
+    let mut out_vec = vec![];
+    out_vec.reserve_exact(32);
+
+    for track_index in 0..32 {
+        let rkg_index = track_index * MAX_GHOST_DATA_LENGTH;
+
+        match read_rkg_internal(&ghost_data[rkg_index..(rkg_index + MAX_GHOST_DATA_LENGTH)]) {
+            Err(_) => continue,
+            Ok(v) => out_vec.push(v),
+        };
+    }
+
+    return Ok(out_vec);
+}
+
+#[wasm_bindgen]
+pub fn read_rkg(rkg_bytes: js_sys::Uint8Array) -> Result<RKG, RKGReadErrors> {
+    return read_rkg_internal(&rkg_bytes.to_vec());
+}
+
+pub fn read_rkg_internal(rkg_bytes: &[u8]) -> Result<RKG, RKGReadErrors> {
     let mut out_rkg = RKG::default();
 
     if !rkg_bytes.starts_with(&RKGD_MAGIC_NUMBERS) {
-        return Err(1);
+        return Err(RKGReadErrors::IsNotRKG);
     }
 
-    match read_rkg_format_time(&rkg_bytes[4..7]) {
+    match read_rkg_format_time(
+        &rkg_bytes[4..7]
+            .try_into()
+            .map_err(|_| RKGReadErrors::NotCorrectLength)?,
+    ) {
         Ok(v) => out_rkg.time = v,
-        Err(_) => return Err(2),
+        Err(e) => return Err(e),
     }
 
     out_rkg.track = RegularTrack::from(rkg_bytes[7] >> 2);
 
-    match read_rkg_format_date(&rkg_bytes[9..12]) {
+    match read_rkg_format_date(
+        &rkg_bytes[9..12]
+            .try_into()
+            .map_err(|_| RKGReadErrors::NotCorrectLength)?,
+    ) {
         Ok(v) => {
             out_rkg.year = (v[0] as u16) + 2000;
             out_rkg.month = v[1];
             out_rkg.day = v[2];
         }
-        Err(_) => return Err(3),
+        Err(e) => return Err(e),
     }
 
     // All other data is currently not read, so...
     return Ok(out_rkg);
 }
 
-pub fn read_rkg_format_time(bytes: &[u8]) -> Result<i32, ()> {
+pub fn read_rkg_format_time(bytes: &[u8; 3]) -> Result<i32, RKGReadErrors> {
     // 3 Bytes, where M = Minutes, S = Seconds and C = Millis.
     // 1. 0bMMMMMMMS
     // 2. 0bSSSSSSCC
@@ -45,16 +126,16 @@ pub fn read_rkg_format_time(bytes: &[u8]) -> Result<i32, ()> {
     // 1. 0b00001010
     // 2. 0b11101111
     // 3. 0b11100111
-    let minutes = *bytes.first().ok_or(())?; // The minutes are doubled here
+    let minutes = *bytes.first().ok_or(RKGReadErrors::IsNotValidTime)?; // The minutes are doubled here
 
-    let second_byte = *bytes.get(1).ok_or(())?;
+    let second_byte = *bytes.get(1).ok_or(RKGReadErrors::IsNotValidTime)?;
 
     // You don't need the first bit, because 59 = 6 bits
     // Go up 8 lines for the breakdown of why
     let seconds = second_byte >> 2;
 
-    let milliseconds: i32 =
-        (((second_byte & 0b00000011) as i32) << 8) | (*bytes.get(2).ok_or(())? as i32);
+    let milliseconds: i32 = (((second_byte & 0b00000011) as i32) << 8)
+        | (*bytes.get(2).ok_or(RKGReadErrors::IsNotValidTime)? as i32);
 
     // (Minutes * 60000) + (Seconds * 1000) + Milliseconds =
     // = (2*Minutes * 30000) + (Seconds * 1000) + Milliseconds
@@ -63,17 +144,19 @@ pub fn read_rkg_format_time(bytes: &[u8]) -> Result<i32, ()> {
     return Ok(final_time);
 }
 
-pub fn read_rkg_format_date(bytes: &[u8]) -> Result<[u8; 3], ()> {
+pub fn read_rkg_format_date(bytes: &[u8; 3]) -> Result<[u8; 3], RKGReadErrors> {
     // 3 Bytes, where Y = Year, M = Month and D = Days, and X = Unrelated.
     // 1. 0bXXXXYYYY
     // 2. 0bYYYMMMMD
     // 3. 0bDDDDXXXX
 
     // Y relative to year 2000
-    let second_byte = *bytes.get(1).ok_or(())?;
-    let year = (((*bytes.first().ok_or(())?) << 3) | (second_byte >> 5)) & 0b01111111; // The minutes are doubled here
+    let second_byte = *bytes.get(1).ok_or(RKGReadErrors::IsNotValidDate)?;
+    let year = (((*bytes.first().ok_or(RKGReadErrors::IsNotValidDate)?) << 3) | (second_byte >> 5))
+        & 0b01111111; // The minutes are doubled here
     let month = (second_byte << 3) >> 4;
-    let day = ((second_byte << 4) | (*bytes.get(2).ok_or(())? >> 4)) & 0b00011111;
+    let day = ((second_byte << 4) | (*bytes.get(2).ok_or(RKGReadErrors::IsNotValidDate)? >> 4))
+        & 0b00011111;
 
     return Ok([year, month, day]);
 }
@@ -118,13 +201,13 @@ impl Default for RKG {
     }
 }
 
-impl RKG {
-    pub fn set_splits_from_chadsoft_ckgd(&mut self, ckgd: &Bytes) {
-        self.lap1 = read_rkg_format_time(ckgd.get(0x11..0x14).unwrap()).unwrap_or(120000);
-        self.lap2 = read_rkg_format_time(ckgd.get(0x14..0x17).unwrap()).unwrap_or(120000);
-        self.lap3 = read_rkg_format_time(ckgd.get(0x17..0x1A).unwrap()).unwrap_or(120000);
-    }
-}
+// impl RKG {
+//     pub fn set_splits_from_chadsoft_ckgd(&mut self, ckgd: &Bytes) {
+//         self.lap1 = read_rkg_format_time(ckgd.get(0x11..0x14).unwrap()).unwrap_or(120000);
+//         self.lap2 = read_rkg_format_time(ckgd.get(0x14..0x17).unwrap()).unwrap_or(120000);
+//         self.lap3 = read_rkg_format_time(ckgd.get(0x17..0x1A).unwrap()).unwrap_or(120000);
+//     }
+// }
 
 #[wasm_bindgen]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]

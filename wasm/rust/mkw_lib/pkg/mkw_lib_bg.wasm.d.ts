@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export const memory: WebAssembly.Memory;
+export const read_rksys: (a: any, b: number) => [number, number, number, number];
 export const read_rkg: (a: any) => [number, number, number];
 export const __wbg_rkg_free: (a: number, b: number) => void;
 export const __wbg_get_rkg_track: (a: number) => number;
@@ -37,4 +38,6 @@ export const __wbg_get_combo_character: (a: number) => number;
 export const __wbg_set_combo_character: (a: number, b: number) => void;
 export const __wbindgen_export_0: WebAssembly.Table;
 export const __externref_table_dealloc: (a: number) => void;
+export const __externref_drop_slice: (a: number, b: number) => void;
+export const __wbindgen_free: (a: number, b: number, c: number) => void;
 export const __wbindgen_start: () => void;

@@ -213,7 +213,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
   return (
     <table
       className={
-        className +
+        (className ?? "") +
         (sort[0] !== "" && sort[1] !== Sort.Reset ? ` sorted ${sort[0]} ${sort[1]}` : "")
       }
     >
