@@ -96,10 +96,6 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                         setVisibleObscured(false);
                         setReload(Math.random());
                       }}
-                      doneFunc={() => {
-                        setVisibleObscured(false);
-                        setReload(Math.random());
-                      }}
                     />
                   </ObscuredModule>
                 </OverwriteColor>

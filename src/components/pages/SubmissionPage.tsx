@@ -59,10 +59,6 @@ const BulkSubmitEditBtn = ({ data, deleteFunc }: BulkSubmitEditBtnProps) => {
             starterTrack={data.track.id}
             starterValue={formatTime(data.time)}
             starterDate={formatDate(data.date)}
-            doneFunc={() => {
-              setVisibleObscured(false);
-              deleteFunc();
-            }}
             onSuccess={() => {
               setVisibleObscured(false);
               deleteFunc();
@@ -303,10 +299,6 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
             starterComment={patchUpData?.comment ?? score.comment ?? undefined}
             starterSubmitterNote={patchUpData?.submitterNote ?? undefined}
             onSuccess={() => {
-              setVisibleObscured(false);
-              setReload(Math.random());
-            }}
-            doneFunc={() => {
               setVisibleObscured(false);
               setReload(Math.random());
             }}
