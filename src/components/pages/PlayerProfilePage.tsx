@@ -14,7 +14,6 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
-import FormatDateDependable from "../widgets/VariedDate";
 import {
   I18nContext,
   translate,
@@ -27,6 +26,7 @@ import { SettingsContext } from "../../utils/Settings";
 import { RankingsMetrics } from "./RankingsPage";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData, Sort } from "../widgets/Table";
+import { SmallBigFormatDate } from "../widgets/SmallBigFormat";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -187,7 +187,7 @@ const PlayerProfilePage = () => {
         { content: (score.recordRatio * 100).toFixed(2) + "%" },
         {
           content: (
-            <FormatDateDependable
+            <SmallBigFormatDate
               date={score.date}
               bigClass="player-profile-columns-b1"
               smallClass="player-profile-columns-s1"

@@ -116,19 +116,27 @@ const BulkSubmitTab = () => {
       <div className="module-content">
         <div className="module-row wrap" style={{ marginBottom: "16px" }}>
           <div className="module-row">
-            <label htmlFor="lic1">License 1</label>
+            <label htmlFor="lic1">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 1]])}
+            </label>
             <input type="checkbox" id="lic1" ref={lic1} defaultChecked={true} />
           </div>
           <div className="module-row">
-            <label htmlFor="lic2">License 2</label>
+            <label htmlFor="lic2">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 2]])}
+            </label>
             <input type="checkbox" id="lic2" ref={lic2} defaultChecked={true} />
           </div>
           <div className="module-row">
-            <label htmlFor="lic3">License 3</label>
+            <label htmlFor="lic3">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 3]])}
+            </label>
             <input type="checkbox" id="lic3" ref={lic3} defaultChecked={true} />
           </div>
           <div className="module-row">
-            <label htmlFor="lic4">License 4</label>
+            <label htmlFor="lic4">
+              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 4]])}
+            </label>
             <input type="checkbox" id="lic4" ref={lic4} defaultChecked={true} />
           </div>
         </div>
@@ -189,9 +197,9 @@ const BulkSubmitTab = () => {
         <ArrayTable
           headerRows={[
             [
-              { content: "Track" },
-              { content: "Date" },
-              { content: "Time" },
+              { content: translate("submissionPageBulkSubmitTabTrackCol", lang) },
+              { content: translate("submissionPageBulkSubmitTabDateCol", lang) },
+              { content: translate("submissionPageBulkSubmitTabTimeCol", lang) },
               { content: null },
               { content: null },
             ],

@@ -17,8 +17,8 @@ import { LapModeEnum } from "./LapModeSelect";
 import PlayerMention from "./PlayerMention";
 
 import "./RecentTimes.css";
+import SmallBigFormat, { SmallBigFormatDate } from "./SmallBigFormat";
 import ArrayTable from "./Table";
-import FormatDateDependable from "./VariedDate";
 
 interface RecentTimesProps {
   records?: boolean;
@@ -86,8 +86,12 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                         },
                       )}
                     >
-                      <span className="s3">{track?.abbr}</span>
-                      <span className="b3">{translateTrack(track, lang)}</span>
+                      <SmallBigFormat
+                        smallText={track?.abbr}
+                        bigText={translateTrack(track, lang)}
+                        bigClass="b3"
+                        smallClass="s3"
+                      />
                     </Link>
                   ),
                   lockedCell: true,
@@ -116,7 +120,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                 },
                 {
                   content: (
-                    <FormatDateDependable
+                    <SmallBigFormatDate
                       date={data.date as Date}
                       smallClass={"s1 b4"}
                       bigClass={"b1"}

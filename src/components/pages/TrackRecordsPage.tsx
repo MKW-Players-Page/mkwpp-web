@@ -25,7 +25,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
-import FormatDateDependable from "../widgets/VariedDate";
+import SmallBigFormat, { SmallBigFormatDate } from "../widgets/SmallBigFormat";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -84,8 +84,12 @@ const TrackRecordsPage = () => {
                 { lap: isLap ? LapModeEnum.Lap : null },
               )}
             >
-              <span className="track-records-columns-b2">{translateTrack(track, lang)}</span>
-              <span className="track-records-columns-s2">{track.abbr}</span>
+              <SmallBigFormat
+                smallText={track.abbr}
+                bigText={translateTrack(track, lang)}
+                bigClass="track-records-columns-b2"
+                smallClass="track-records-columns-s2"
+              />
             </Link>
           ),
           expandCell: [isLap && big, false],
@@ -143,7 +147,7 @@ const TrackRecordsPage = () => {
         );
         if (score.date) {
           out[Indexes.Date].content = (
-            <FormatDateDependable
+            <SmallBigFormatDate
               date={score.date}
               smallClass={"track-records-columns-s1"}
               bigClass={"track-records-columns-b1"}
