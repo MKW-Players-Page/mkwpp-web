@@ -127,6 +127,11 @@ const BulkSubmitTab = () => {
   return (
     <Deferred isWaiting={metadata.isLoading}>
       <div className="module-content">
+        <OverwriteColor hue={50}>
+          <div style={{ padding: "5px" }} className="module">
+            {translate("submissionPageBulkSubmitTabHowTo", lang)}
+          </div>
+        </OverwriteColor>
         <div className="module-row wrap" style={{ marginBottom: "16px" }}>
           <div className="module-row">
             <label htmlFor="lic1">
