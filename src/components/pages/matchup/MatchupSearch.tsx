@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Pages, resolvePage } from "./../Pages";
 import PlayerSelectDropdown from "../../widgets/PlayerSelectDropdown";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
+import { Icon } from "../../widgets";
 
 interface PlayerSelectFieldProp {
   nth: number;
@@ -21,7 +22,9 @@ const PlayerSelectField = ({
 }: PlayerSelectFieldProp) => {
   const { lang } = useContext(I18nContext);
   return (
-    <div className="module-row">
+    <div className="module-row"
+    style={{maxHeight:"43px"}}
+    >
       <span
         style={{
           marginBottom: "16px",
@@ -39,7 +42,7 @@ const PlayerSelectField = ({
           className="module"
           style={{ flexShrink: 10, alignSelf: "stretch", fontSize: ".7em", padding: "4px" }}
         >
-          ✖
+          <Icon icon="Delete" />
         </button>
       ) : (
         <></>
