@@ -17,6 +17,7 @@ import { TimetrialsRankingsListMetricEnum } from "../../../api/generated";
 import { RankingsMetrics } from "../RankingsPage";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import RadioButtons from "../../widgets/RadioButtons";
+import ArrayTable, { ArrayTableCellData } from "../../widgets/Table";
 
 interface MatchupData {
   playerData: Player;
@@ -601,6 +602,23 @@ const MatchupPage = () => {
     lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
   };
 
+  const headerRows: ArrayTableCellData[][] = [[{content:null}],[{content:translate("matchupPageTrackCol",lang), lockedCell: true}]];
+  
+  for (let idx = 0; idx < matchupData.length; idx++) {
+    if (matchupDataIsLoading) break;
+    const playerData = matchupData[idx].data as MatchupData;
+    headerRows[0].push({ content: <PlayerMention precalcPlayer={playerData.playerData} /> });
+    if (layoutTypeBig) {
+      headerRows[0].push({ content: null, expandCell: [false, true] });
+      headerRows[1].push({ content: translate('matchupPageCourseCol', lang) }, { content: translate('matchupPageLapCol', lang) });
+    } else {
+      headerRows[1].push({ content: translate('matchupPageTimeCol', lang) });
+    }
+    if (isTwoPlayers && idx === 1) continue; 
+    headerRows[0].push({ content: null, expandCell: [false, true] });
+    headerRows[1].push({ content: translate('matchupPageDiffCol', lang) });
+  }
+  
   return (
     <>
       {/* Redirect if any id is invalid or API fetch failed */}
@@ -612,7 +630,7 @@ const MatchupPage = () => {
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
         </div>
-        {matchupData.length === 2 ? (
+        {isTwoPlayers ? (
           <></>
         ) : (
           <div className="module-row wrap">
@@ -636,195 +654,11 @@ const MatchupPage = () => {
           isWaiting={metadata.isLoading || matchupDataIsLoading || elaboratedMatchupData.isLoading}
         >
           <div className="module" ref={tableModule}>
-            <table>
-              <thead>
-                <tr>
-                  <>
-                    <th
-                      className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}
-                    />
-                    {matchupData.map((playerData, idx, arr) => (
-                      <>
-                        <th
-                          colSpan={
-                            layoutTypeBig &&
-                            lapMode === LapModeEnum.Overall &&
-                            !elaboratedMatchupData.onlyOneLapType
-                              ? 2
-                              : 1
-                          }
-                        >
-                          <PlayerMention precalcPlayer={playerData.data?.playerData} />
-                        </th>
-                        {isTwoPlayers && idx === 1 ? <></> : <th />}
-                      </>
-                    ))}
-                  </>
-                </tr>
-                <tr>
-                  <th className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
-                    {translate("matchupPageTrackCol", lang)}
-                  </th>
-                  {matchupData.map((playerData, idx, arr) => (
-                    <>
-                      {layoutTypeBig &&
-                      lapMode === LapModeEnum.Overall &&
-                      !elaboratedMatchupData.onlyOneLapType ? (
-                        <>
-                          <th>{translate("matchupPageCourseCol", lang)}</th>
-                          <th>{translate("matchupPageLapCol", lang)}</th>
-                          {isTwoPlayers && idx === 1 ? (
-                            <></>
-                          ) : (
-                            <th>{translate("matchupPageDiffCol", lang)}</th>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          <th>{translate("matchupPageTimeCol", lang)}</th>
-                          {isTwoPlayers && idx === 1 ? (
-                            <></>
-                          ) : (
-                            <th>{translate("matchupPageDiffCol", lang)}</th>
-                          )}
-                        </>
-                      )}
-                    </>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="table-hover-rows">
-                {elaboratedMatchupData.scoresSortedForLoop.map((scores, idx, arr) => (
-                  <MatchupPageTableRow
-                    layoutTypeBig={
-                      layoutTypeBig &&
-                      lapMode === LapModeEnum.Overall &&
-                      !elaboratedMatchupData.onlyOneLapType
-                    }
-                    lastId={elaboratedMatchupData.allTrackIds[idx - 1]}
-                    id={elaboratedMatchupData.allTrackIds[idx]}
-                    nextId={elaboratedMatchupData.allTrackIds[idx + 1]}
-                    category={category}
-                    lapMode={lapMode}
-                    differenceMode={differenceMode}
-                    isTwoPlayers={isTwoPlayers}
-                    orderedScores={elaboratedMatchupData.scoresSortedByTime[idx]}
-                    orderedScoresIndexes={elaboratedMatchupData.scoresSortedByTimeIndexes[idx]}
-                    orderedScoresPersonalDeltas={
-                      elaboratedMatchupData.scoresSortedPersonalDeltas[idx]
-                    }
-                    orderedScoresPersonalDeltasToNext={
-                      elaboratedMatchupData.scoresSortedPersonalDeltasToNext[idx]
-                    }
-                    orderedScoreDelta={elaboratedMatchupData.scoresSortedByTimeDelta[idx]}
-                    scores={elaboratedMatchupData.scoresSortedForLoop[idx]}
-                    scoresRgbValues={elaboratedMatchupData.scoresSortedForLoopRgbValue[idx]}
-                  />
-                ))}
-              </tbody>
-              <tfoot>
-                <MatchupPageTableFooterRow
-                  redirectParams={rankingsRedirectParams}
-                  isTwoPlayers={isTwoPlayers}
-                  enumKey="total_score"
-                  matchupData={matchupData}
-                  differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFuncDiff={formatTimeDiff}
-                />
-                <MatchupPageTableFooterRow
-                  redirectParams={rankingsRedirectParams}
-                  isTwoPlayers={isTwoPlayers}
-                  enumKey="total_rank"
-                  matchupData={matchupData}
-                  differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFuncDiff={(x) => {
-                    const r = (x / scoreCountForFooter).toFixed(4);
-                    return x > 0 ? `+` + r : r;
-                  }}
-                />
-                <MatchupPageTableFooterRow
-                  redirectParams={rankingsRedirectParams}
-                  isTwoPlayers={isTwoPlayers}
-                  enumKey="total_standard"
-                  matchupData={matchupData}
-                  differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFuncDiff={(x) => {
-                    const r = (x / scoreCountForFooter).toFixed(4);
-                    return x > 0 ? `+` + r : r;
-                  }}
-                />
-                <MatchupPageTableFooterRow
-                  redirectParams={rankingsRedirectParams}
-                  isTwoPlayers={isTwoPlayers}
-                  enumKey="total_record_ratio"
-                  matchupData={matchupData}
-                  differenceMode={differenceMode}
-                  layoutTypeBig={layoutTypeBig && lapMode === LapModeEnum.Overall}
-                  displayFuncDiff={(x) => {
-                    const r = ((x / scoreCountForFooter) * 100).toFixed(4) + "%";
-                    return x > 0 ? `+` + r : r;
-                  }}
-                />
-                <tr>
-                  <th className={`force-bg${settings.lockTableCells ? " lock-table-cells" : ""}`}>
-                    {translate("matchupPageTallyRow", lang)}
-                  </th>
-                  <>
-                    {elaboratedMatchupData.tallyWins.map((score, idx, arr) => {
-                      const orderedScores = [...arr].sort((a, b) => b - a);
-                      const scoreIndex = orderedScores.findIndex((r) => r === score);
-                      const orderedScoreDelta =
-                        orderedScores[orderedScores.length - 1] - orderedScores[0];
-                      const rgbValue =
-                        100 +
-                        Math.floor(
-                          (155 * (orderedScores[orderedScores.length - 1] - score)) /
-                            orderedScoreDelta,
-                        );
-                      return (
-                        <>
-                          <th
-                            colSpan={layoutTypeBig && lapMode === LapModeEnum.Overall ? 2 : 1}
-                            style={{
-                              textDecoration: scoreIndex === 0 ? "underline" : "",
-                            }}
-                          >
-                            {score}
-                            {` ${score === 1 ? translate("matchupPageTallyRowWinsSingular", lang) : translate("matchupPageTallyRowWinsPlural", lang)}`}
-                          </th>
-                          {isTwoPlayers && idx === 1 ? (
-                            <></>
-                          ) : (
-                            <th
-                              style={{
-                                color: isTwoPlayers
-                                  ? scoreIndex === 0
-                                    ? `rgb(100,255,100)`
-                                    : `rgb(255,100,100)`
-                                  : `rgb(255,${rgbValue},${rgbValue})`,
-                              }}
-                            >
-                              {isTwoPlayers
-                                ? scoreIndex === 0
-                                  ? "+" + -orderedScoreDelta
-                                  : orderedScoreDelta
-                                : differenceMode
-                                  ? scoreIndex === 0
-                                    ? 0
-                                    : orderedScores[scoreIndex - 1] - score
-                                  : score - orderedScores[0]}
-                            </th>
-                          )}
-                        </>
-                      );
-                    })}
-                  </>
-                </tr>
-              </tfoot>
-            </table>
+            <ArrayTable 
+              headerRows={headerRows}
+            rows={[]}
+            footerRows={[]}
+            />
           </div>
         </Deferred>
       </OverwriteColor>
