@@ -137,25 +137,25 @@ const BulkSubmitTab = () => {
             <label htmlFor="lic1">
               {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 1]])}
             </label>
-            <input type="checkbox" id="lic1" ref={lic1} defaultChecked={true} />
+            <input type="checkbox" id="lic1" ref={lic1} defaultChecked />
           </div>
           <div className="module-row">
             <label htmlFor="lic2">
               {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 2]])}
             </label>
-            <input type="checkbox" id="lic2" ref={lic2} defaultChecked={true} />
+            <input type="checkbox" id="lic2" ref={lic2} defaultChecked />
           </div>
           <div className="module-row">
             <label htmlFor="lic3">
               {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 3]])}
             </label>
-            <input type="checkbox" id="lic3" ref={lic3} defaultChecked={true} />
+            <input type="checkbox" id="lic3" ref={lic3} defaultChecked />
           </div>
           <div className="module-row">
             <label htmlFor="lic4">
               {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 4]])}
             </label>
-            <input type="checkbox" id="lic4" ref={lic4} defaultChecked={true} />
+            <input type="checkbox" id="lic4" ref={lic4} defaultChecked />
           </div>
         </div>
         <div

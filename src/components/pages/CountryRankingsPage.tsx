@@ -101,7 +101,7 @@ const CountryRankingsPage = () => {
       {
         content: (
           <>
-            <FlagIcon showRegFlagRegardless={true} region={stats.region} />
+            <FlagIcon showRegFlagRegardless region={stats.region} />
             <span>{stats.region.name}</span>
           </>
         ),

@@ -29,7 +29,7 @@ export const TrackTopsHomePage = () => {
     <Deferred isWaiting={metadata.isLoading}>
       {metadata.regions && metadata.cups && (
         <Navigate
-          replace={true}
+          replace
           to={resolvePage(Pages.TrackTops, {
             region: metadata.regions[0].code.toLowerCase(),
             cup: metadata.cups[0].id,
@@ -128,7 +128,7 @@ const TrackTopsPage = () => {
                                     <PlayerMention
                                       precalcPlayer={score.player}
                                       precalcRegionId={score.player.region ?? undefined}
-                                      xxFlag={true}
+                                      xxFlag
                                       showRegFlagRegardless={
                                         region.type === "country" ||
                                         region.type === "subnational" ||

@@ -101,7 +101,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                     <PlayerMention
                       precalcPlayer={data.player}
                       precalcRegionId={data.player.region ?? undefined}
-                      xxFlag={true}
+                      xxFlag
                     />
                   ),
                 },

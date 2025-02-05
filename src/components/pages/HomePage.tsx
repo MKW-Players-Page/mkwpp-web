@@ -28,7 +28,7 @@ const HomePage = () => {
         </div>
         <div style={{ flex: 1 }}>
           <DiscordEmbed />
-          <RecentTimes records={true} limit={30} />
+          <RecentTimes records limit={30} />
           <RecentTimes records={false} limit={30} />
         </div>
         <ExpandableModule heading={translate("homePageRecentTrackListPart", lang)}>

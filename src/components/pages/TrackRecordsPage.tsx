@@ -125,12 +125,8 @@ const TrackRecordsPage = () => {
           <PlayerMention
             precalcPlayer={score.player}
             precalcRegionId={score.player.region ?? undefined}
-            xxFlag={true}
-            showRegFlagRegardless={
-              region.type === "country" ||
-              region.type === "subnational" ||
-              region.type === "subnational_group"
-            }
+            xxFlag
+            showRegFlagRegardless
           />
         );
         out[Indexes.TimeCellSmall].content = out[
@@ -189,7 +185,7 @@ const TrackRecordsPage = () => {
           />
           <RegionSelectionDropdown
             onePlayerMin={false}
-            twoPlayerMin={true}
+            twoPlayerMin
             ranked={false}
             value={region}
             setValue={setRegion}

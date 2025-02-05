@@ -58,7 +58,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
               </a>
             )}
             {submission.comment && (
-              <Tooltip left={true} text={submission.comment}>
+              <Tooltip left text={submission.comment}>
                 <Icon icon="Comment" />
               </Tooltip>
             )}
