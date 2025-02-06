@@ -209,7 +209,7 @@ const elaboratePlayerData = (
     if (orderedScoreDelta === 0) return 255;
     return 255 - Math.floor((averageFinDeltas[idx] / orderedScoreDelta) * 155);
   });
-  
+
   const averageStandardSorted = matchupData
     .map((r) => (r.data?.statsData.totalStandard ?? 0) / scoresForFooter)
     .sort((a, b) => a - b);
@@ -227,37 +227,32 @@ const elaboratePlayerData = (
     if (orderedScoreDelta === 0) return 255;
     return 255 - Math.floor((averageStandardDeltas[idx] / orderedScoreDelta) * 155);
   });
-  
+
   const prwrSorted = matchupData
-    .map((r) => (r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter * 100)
-    .sort((a, b) => b-a);
+    .map((r) => ((r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter) * 100)
+    .sort((a, b) => b - a);
   const prwrDeltas = matchupData.map(
-    (r) => prwrSorted[0] - (r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter  * 100,
+    (r) => prwrSorted[0] - ((r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter) * 100,
   );
   const prwrDeltasToNext = matchupData.map((r) => {
-    const thisScore = (r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter  * 100;
+    const thisScore = ((r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter) * 100;
     const index = prwrSorted.findIndex((score) => score === thisScore);
     return thisScore - prwrSorted[index < 2 ? 0 : index - 1];
   });
   const prwrRGB = prwrSorted.map((_, idx) => {
-    const orderedScoreDelta =
-      prwrSorted[0] - prwrSorted[prwrSorted.length - 1] ;
+    const orderedScoreDelta = prwrSorted[0] - prwrSorted[prwrSorted.length - 1];
     if (orderedScoreDelta === 0) return 255;
     return 255 - Math.floor((prwrDeltas[idx] / orderedScoreDelta) * 155);
   });
-  
-  const tallyWinsSorted = tallyWins.slice().sort((a, b) => b-a);
-  const tallyWinsDeltas = tallyWins.map(
-    (r) => r- tallyWinsSorted[0],
-  );
+
+  const tallyWinsSorted = tallyWins.slice().sort((a, b) => b - a);
+  const tallyWinsDeltas = tallyWins.map((r) => r - tallyWinsSorted[0]);
   const tallyWinsDeltasToNext = tallyWins.map((r) => {
     const index = tallyWinsSorted.findIndex((score) => score === r);
     return r - tallyWinsSorted[index < 2 ? 0 : index - 1];
   });
   const tallyWinsRGB = tallyWinsSorted.map((_, idx) => {
-    const orderedScoreDelta =
-      tallyWinsSorted[tallyWinsSorted.length - 1] -tallyWinsSorted[0] 
-   ;
+    const orderedScoreDelta = tallyWinsSorted[tallyWinsSorted.length - 1] - tallyWinsSorted[0];
     if (orderedScoreDelta === 0) return 255;
     return 255 - Math.floor((tallyWinsDeltas[idx] / orderedScoreDelta) * 155);
   });
@@ -278,12 +273,12 @@ const elaboratePlayerData = (
     averageStandardDeltasToNext,
     averageStandardRGB,
     prwrDeltas,
-  prwrDeltasToNext,
-  prwrRGB,
+    prwrDeltasToNext,
+    prwrRGB,
     tallyWins,
     tallyWinsDeltas,
-  tallyWinsDeltasToNext,
-  tallyWinsRGB,
+    tallyWinsDeltasToNext,
+    tallyWinsRGB,
   };
 };
 
@@ -401,38 +396,46 @@ const MatchupPage = () => {
       const isLap = elaboratedMatchupData.allTrackIds[rowIdx] % 2 === 1;
       const track = getTrackById(metadata.tracks, trackId);
 
-      if ((lapMode === LapModeEnum.Lap && !isLap) || (lapMode === LapModeEnum.Course && isLap)) { skipNum++; continue;}
+      if ((lapMode === LapModeEnum.Lap && !isLap) || (lapMode === LapModeEnum.Course && isLap)) {
+        skipNum++;
+        continue;
+      }
       if (idx === 0) {
         rows.push([]);
-          rows[rowIdx - skipNum].push({
-            content: (
-              <Link
-                to={resolvePage(
-                  Pages.TrackChart,
-                  { id: trackId },
-                  {
-                    cat: category !== CategoryEnum.NonShortcut ? category : null,
-                    lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
-                  },
-                )}
-              >
-                <SmallBigTrackFormat
-                  track={track}
-                  smallClass="matchup-columns-s1"
-                  bigClass="matchup-columns-b1"
-                />
-              </Link>
-            ),
-            lockedCell: true,
-              expandCell: [lapMode === LapModeEnum.Overall && isLap, false],
-          });
+        rows[rowIdx - skipNum].push({
+          content: (
+            <Link
+              to={resolvePage(
+                Pages.TrackChart,
+                { id: trackId },
+                {
+                  cat: category !== CategoryEnum.NonShortcut ? category : null,
+                  lap: lapMode !== LapModeEnum.Overall ? lapMode : null,
+                },
+              )}
+            >
+              <SmallBigTrackFormat
+                track={track}
+                smallClass="matchup-columns-s1"
+                bigClass="matchup-columns-b1"
+              />
+            </Link>
+          ),
+          lockedCell: true,
+          expandCell: [lapMode === LapModeEnum.Overall && isLap, false],
+        });
       }
 
       const score = playerData.scoreData.find(
         (score) => score.track === trackId && score.isLap === isLap,
       );
       rows[rowIdx - skipNum].push({
-        content: layoutTypeBig && isLap && lapMode !== LapModeEnum.Lap ? null : score ? formatTime(score.value) : "-",
+        content:
+          layoutTypeBig && isLap && lapMode !== LapModeEnum.Lap
+            ? null
+            : score
+              ? formatTime(score.value)
+              : "-",
         className: score !== undefined && score.category !== category ? "fallthrough" : "",
         style: {
           fontWeight:
@@ -480,7 +483,8 @@ const MatchupPage = () => {
         textDecoration: elaboratedMatchupData.totalTimeDeltas[idx] === 0 ? "underline" : "",
       },
     });
-    if (layoutTypeBig && lapMode === LapModeEnum.Overall) footerRows[0].push({ content: null, expandCell: [false, true] });
+    if (layoutTypeBig && lapMode === LapModeEnum.Overall)
+      footerRows[0].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0)
       footerRows[0].push({
         content: formatTimeDiff(
@@ -501,11 +505,14 @@ const MatchupPage = () => {
         },
       });
 
-    footerRows[1].push({ content: playerData.statsData.totalRank / scoreCountForFooter,
+    footerRows[1].push({
+      content: playerData.statsData.totalRank / scoreCountForFooter,
       style: {
         textDecoration: elaboratedMatchupData.averageFinDeltas[idx] === 0 ? "underline" : "",
-      }, });
-    if (layoutTypeBig && lapMode === LapModeEnum.Overall) footerRows[1].push({ content: null, expandCell: [false, true] });
+      },
+    });
+    if (layoutTypeBig && lapMode === LapModeEnum.Overall)
+      footerRows[1].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
         ? elaboratedMatchupData.averageFinDeltas[idx] === 0
@@ -526,12 +533,15 @@ const MatchupPage = () => {
         },
       });
     }
-    
-    footerRows[2].push({ content: playerData.statsData.totalStandard / scoreCountForFooter,
+
+    footerRows[2].push({
+      content: playerData.statsData.totalStandard / scoreCountForFooter,
       style: {
         textDecoration: elaboratedMatchupData.averageStandardDeltas[idx] === 0 ? "underline" : "",
-      }, });
-    if (layoutTypeBig && lapMode === LapModeEnum.Overall) footerRows[2].push({ content: null, expandCell: [false, true] });
+      },
+    });
+    if (layoutTypeBig && lapMode === LapModeEnum.Overall)
+      footerRows[2].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
         ? elaboratedMatchupData.averageStandardDeltas[idx] === 0
@@ -552,12 +562,16 @@ const MatchupPage = () => {
         },
       });
     }
-    
-    footerRows[3].push({ content: (playerData.statsData.totalRecordRatio / scoreCountForFooter * 100).toFixed(4) + "%",
+
+    footerRows[3].push({
+      content:
+        ((playerData.statsData.totalRecordRatio / scoreCountForFooter) * 100).toFixed(4) + "%",
       style: {
         textDecoration: elaboratedMatchupData.prwrDeltas[idx] === 0 ? "underline" : "",
-      }, });
-    if (layoutTypeBig && lapMode === LapModeEnum.Overall) footerRows[3].push({ content: null, expandCell: [false, true] });
+      },
+    });
+    if (layoutTypeBig && lapMode === LapModeEnum.Overall)
+      footerRows[3].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
         ? elaboratedMatchupData.prwrDeltas[idx] === 0
@@ -578,12 +592,23 @@ const MatchupPage = () => {
         },
       });
     }
-    
-    footerRows[4].push({ content: elaboratedMatchupData.tallyWins[idx] +" " + translate(elaboratedMatchupData.tallyWins[idx] === 1 ? "matchupPageTallyRowWinsSingular" : "matchupPageTallyRowWinsPlural" , lang),
+
+    footerRows[4].push({
+      content:
+        elaboratedMatchupData.tallyWins[idx] +
+        " " +
+        translate(
+          elaboratedMatchupData.tallyWins[idx] === 1
+            ? "matchupPageTallyRowWinsSingular"
+            : "matchupPageTallyRowWinsPlural",
+          lang,
+        ),
       style: {
         textDecoration: elaboratedMatchupData.tallyWinsDeltas[idx] === 0 ? "underline" : "",
-      }, });
-    if (layoutTypeBig && lapMode === LapModeEnum.Overall) footerRows[4].push({ content: null, expandCell: [false, true] });
+      },
+    });
+    if (layoutTypeBig && lapMode === LapModeEnum.Overall)
+      footerRows[4].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
         ? elaboratedMatchupData.tallyWinsDeltas[idx] === 0
@@ -593,7 +618,7 @@ const MatchupPage = () => {
           ? elaboratedMatchupData.tallyWinsDeltasToNext[idx]
           : elaboratedMatchupData.tallyWinsDeltas[idx];
       footerRows[4].push({
-        content: (content > 0 ? "+" + content : content),
+        content: content > 0 ? "+" + content : content,
 
         style: {
           color: isTwoPlayers
@@ -604,7 +629,6 @@ const MatchupPage = () => {
         },
       });
     }
-
   }
 
   return (
