@@ -131,12 +131,8 @@ const TrackChartPage = () => {
           <PlayerMention
             precalcPlayer={score.player}
             precalcRegionId={score.player.region ?? undefined}
-            xxFlag={true}
-            showRegFlagRegardless={
-              region.type === "country" ||
-              region.type === "subnational" ||
-              region.type === "subnational_group"
-            }
+            xxFlag
+            showRegFlagRegardless
           />
         ),
       },
@@ -243,8 +239,8 @@ const TrackChartPage = () => {
           <CategoryRadio options={track?.categories} value={category} onChange={setCategory} />
           <LapModeRadio value={lapMode} onChange={setLapMode} />
           <RegionSelectionDropdown
-            onePlayerMin={true}
-            twoPlayerMin={true}
+            onePlayerMin
+            twoPlayerMin
             ranked={false}
             value={region}
             setValue={setRegion}
