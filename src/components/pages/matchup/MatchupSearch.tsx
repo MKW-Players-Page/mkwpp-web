@@ -22,9 +22,7 @@ const PlayerSelectField = ({
 }: PlayerSelectFieldProp) => {
   const { lang } = useContext(I18nContext);
   return (
-    <div className="module-row"
-    style={{maxHeight:"43px"}}
-    >
+    <div className="module-row" style={{ maxHeight: "43px" }}>
       <span
         style={{
           marginBottom: "16px",
