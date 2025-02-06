@@ -20,13 +20,12 @@ import {
   translateRegionName,
   translateRegionNameFull,
   translateStandardName,
-  translateTrack,
 } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { RankingsMetrics } from "./RankingsPage";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData, Sort } from "../widgets/Table";
-import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
+import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -101,8 +100,11 @@ const PlayerProfilePage = () => {
             },
           )}
         >
-          <span className="player-profile-columns-b1">{translateTrack(track, lang)}</span>
-          <span className="player-profile-columns-s1">{track?.abbr}</span>
+          <SmallBigTrackFormat
+            track={track}
+            smallClass="player-profile-columns-s1"
+            bigClass="player-profile-columns-b1"
+          />
         </Link>
       );
       const timeClassName = score.category !== category ? "fallthrough" : "";
@@ -256,7 +258,7 @@ const PlayerProfilePage = () => {
                             element: {
                               text: translateRegionName(region, lang),
                               value: region,
-                              rightIcon: <FlagIcon region={region} />,
+                              rightIcon: <FlagIcon region={region} showRegFlagRegardless />,
                             },
                           };
                         }),

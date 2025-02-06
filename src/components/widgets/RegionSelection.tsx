@@ -159,7 +159,7 @@ const ComplexRegionSelection = ({
   return (
     <div>
       <RegionSelection
-        shown={true}
+        shown
         cupId={cupId}
         regions={sortedRegions.world}
         selectedRegions={selectedRegions}
@@ -167,7 +167,7 @@ const ComplexRegionSelection = ({
         currentLap={currentLap}
       />
       <RegionSelection
-        shown={true}
+        shown
         cupId={cupId}
         regions={sortedRegions.continent}
         selectedRegions={selectedRegions}

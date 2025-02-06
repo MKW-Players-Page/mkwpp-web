@@ -63,7 +63,7 @@ const PastChampsPage = () => {
                         <PlayerMention
                           precalcPlayer={champ.player}
                           precalcRegionId={champ.player.region ?? undefined}
-                          xxFlag={true}
+                          xxFlag
                         />
                       ),
                     },

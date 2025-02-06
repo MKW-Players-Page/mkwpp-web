@@ -167,7 +167,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
           <PlayerMention
             precalcPlayer={stats.player}
             precalcRegionId={stats.player.region ?? undefined}
-            xxFlag={true}
+            xxFlag
             showRegFlagRegardless={
               region.type === "country" ||
               region.type === "subnational" ||
@@ -203,7 +203,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
           <RegionSelectionDropdown
             onePlayerMin={false}
             twoPlayerMin={false}
-            ranked={true}
+            ranked
             value={region}
             setValue={setRegion}
           />

@@ -46,7 +46,7 @@ const PlayerListPage = () => {
                       <PlayerMention
                         precalcPlayer={player}
                         precalcRegionId={player.region ?? undefined}
-                        xxFlag={true}
+                        xxFlag
                       />
                     ),
                   },

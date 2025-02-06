@@ -389,10 +389,7 @@ const SubmissionForm = ({
               field="comment"
               label={translate("submissionPageSubmitTabCommentLabel", lang)}
             />
-            <Tooltip
-              text={translate("submissionPageSubmitTabSubmitterNoteTooltip", lang)}
-              left={true}
-            >
+            <Tooltip text={translate("submissionPageSubmitTabSubmitterNoteTooltip", lang)} left>
               <Field
                 type="text"
                 field="submitterNote"
