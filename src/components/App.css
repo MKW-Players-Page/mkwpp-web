@@ -298,6 +298,19 @@ span.track-records-columns-s1,
   }
 }
 
+.matchup-columns-s1 {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .matchup-columns-s1 {
+    display: table-cell;
+  }
+  .matchup-columns-b1 {
+    display: none;
+  }
+}
+
 @media (max-width: 670px) {
   .past-champs-s1 {
     display: none;
