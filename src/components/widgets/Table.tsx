@@ -17,9 +17,10 @@ export interface ThSortData {
 }
 
 export interface ArrayTableCellData {
+  content: React.ReactNode;
   lockedCell?: boolean;
   className?: string;
-  content: React.ReactNode;
+  style?: React.CSSProperties;
   /** Lets cells above and to the left expand into it. Up and then Left respectively */
   expandCell?: [boolean, boolean];
   thSort?: ThSortData;
@@ -74,7 +75,7 @@ const ArrayTableRow = ({
                   }
                 : undefined
             }
-            style={{ cursor: th && cell.thSort ? "pointer" : "" }}
+            style={{ cursor: th && cell.thSort ? "pointer" : "", ...cell.style }}
             className={`${
               settings.lockTableCells && cell.lockedCell === true ? "lock-table-cells force-bg" : ""
             }${cell.className ? " " + cell.className : ""}${
@@ -268,6 +269,7 @@ const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
         for (let checkingCellIdx = cellIdx + 1; true; checkingCellIdx++) {
           if (
             row[checkingCellIdx] !== undefined &&
+            row[checkingCellIdx] !== undefined &&
             row[checkingCellIdx].expandCell !== undefined &&
             (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
           ) {
@@ -281,6 +283,7 @@ const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
       for (let checkingRowIdx = rowIdx + 1; true; checkingRowIdx++) {
         if (
           cells[checkingRowIdx] !== undefined &&
+          cells[checkingRowIdx][cellIdx] !== undefined &&
           cells[checkingRowIdx][cellIdx].expandCell !== undefined &&
           (cells[checkingRowIdx][cellIdx].expandCell as [boolean, boolean])[0]
         ) {
