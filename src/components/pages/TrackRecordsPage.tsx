@@ -126,7 +126,11 @@ const TrackRecordsPage = () => {
             precalcPlayer={score.player}
             precalcRegionId={score.player.region ?? undefined}
             xxFlag
-            showRegFlagRegardless
+            showRegFlagRegardless={
+              region.type === "country" ||
+              region.type === "subnational" ||
+              region.type === "subnational_group"
+            }
           />
         );
         out[Indexes.TimeCellSmall].content = out[
