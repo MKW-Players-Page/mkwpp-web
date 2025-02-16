@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { Pages, resolvePage } from "../Pages";
 import { coreApi } from "../../../api";
@@ -61,6 +61,9 @@ const UserLoginPage = () => {
           field="password"
           label={translate("userLoginPagePasswordLabel", lang)}
         />
+        <Link to={resolvePage(Pages.UserPasswordForgot)}>
+          {translate("userLoginPageForgotPassword", lang)}
+        </Link>
       </Form>
     </>
   );

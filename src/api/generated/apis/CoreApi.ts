@@ -18,8 +18,11 @@ import type {
   Auth,
   BlogPost,
   BlogPostSummary,
+  PasswordChange,
+  PasswordReset,
+  PasswordResetRequest,
+  Token,
   User,
-  VerificationToken,
 } from '../models/index';
 import {
     AuthFromJSON,
@@ -28,10 +31,16 @@ import {
     BlogPostToJSON,
     BlogPostSummaryFromJSON,
     BlogPostSummaryToJSON,
+    PasswordChangeFromJSON,
+    PasswordChangeToJSON,
+    PasswordResetFromJSON,
+    PasswordResetToJSON,
+    PasswordResetRequestFromJSON,
+    PasswordResetRequestToJSON,
+    TokenFromJSON,
+    TokenToJSON,
     UserFromJSON,
     UserToJSON,
-    VerificationTokenFromJSON,
-    VerificationTokenToJSON,
 } from '../models/index';
 
 export interface CoreBlogRetrieveRequest {
@@ -42,12 +51,28 @@ export interface CoreLoginCreateRequest {
     auth: Omit<Auth, 'token'|'expiry'>;
 }
 
+export interface CorePasswordChangeCreateRequest {
+    passwordChange: PasswordChange;
+}
+
+export interface CorePasswordResetCreateRequest {
+    passwordReset: PasswordReset;
+}
+
+export interface CorePasswordResetRequestCreateRequest {
+    passwordResetRequest: PasswordResetRequest;
+}
+
+export interface CorePasswordResetVerifyCreateRequest {
+    token: Token;
+}
+
 export interface CoreSignupCreateRequest {
     user: Omit<User, 'player'>;
 }
 
 export interface CoreVerifyCreateRequest {
-    verificationToken: VerificationToken;
+    token: Token;
 }
 
 /**
@@ -197,6 +222,142 @@ export class CoreApi extends runtime.BaseAPI {
 
     /**
      */
+    async corePasswordChangeCreateRaw(requestParameters: CorePasswordChangeCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['passwordChange'] == null) {
+            throw new runtime.RequiredError(
+                'passwordChange',
+                'Required parameter "passwordChange" was null or undefined when calling corePasswordChangeCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/core/password/change/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PasswordChangeToJSON(requestParameters['passwordChange']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async corePasswordChangeCreate(requestParameters: CorePasswordChangeCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.corePasswordChangeCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async corePasswordResetCreateRaw(requestParameters: CorePasswordResetCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['passwordReset'] == null) {
+            throw new runtime.RequiredError(
+                'passwordReset',
+                'Required parameter "passwordReset" was null or undefined when calling corePasswordResetCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/core/password/reset/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PasswordResetToJSON(requestParameters['passwordReset']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async corePasswordResetCreate(requestParameters: CorePasswordResetCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.corePasswordResetCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async corePasswordResetRequestCreateRaw(requestParameters: CorePasswordResetRequestCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['passwordResetRequest'] == null) {
+            throw new runtime.RequiredError(
+                'passwordResetRequest',
+                'Required parameter "passwordResetRequest" was null or undefined when calling corePasswordResetRequestCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/core/password/reset/request/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PasswordResetRequestToJSON(requestParameters['passwordResetRequest']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async corePasswordResetRequestCreate(requestParameters: CorePasswordResetRequestCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.corePasswordResetRequestCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async corePasswordResetVerifyCreateRaw(requestParameters: CorePasswordResetVerifyCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['token'] == null) {
+            throw new runtime.RequiredError(
+                'token',
+                'Required parameter "token" was null or undefined when calling corePasswordResetVerifyCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/core/password/reset/verify/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: TokenToJSON(requestParameters['token']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async corePasswordResetVerifyCreate(requestParameters: CorePasswordResetVerifyCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.corePasswordResetVerifyCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
     async coreSignupCreateRaw(requestParameters: CoreSignupCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         if (requestParameters['user'] == null) {
             throw new runtime.RequiredError(
@@ -259,10 +420,10 @@ export class CoreApi extends runtime.BaseAPI {
     /**
      */
     async coreVerifyCreateRaw(requestParameters: CoreVerifyCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters['verificationToken'] == null) {
+        if (requestParameters['token'] == null) {
             throw new runtime.RequiredError(
-                'verificationToken',
-                'Required parameter "verificationToken" was null or undefined when calling coreVerifyCreate().'
+                'token',
+                'Required parameter "token" was null or undefined when calling coreVerifyCreate().'
             );
         }
 
@@ -277,7 +438,7 @@ export class CoreApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: VerificationTokenToJSON(requestParameters['verificationToken']),
+            body: TokenToJSON(requestParameters['token']),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);

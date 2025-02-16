@@ -90,7 +90,7 @@ const Form = <T extends FormState>({
   const errors = state.errors["non_field_errors"];
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <form className="form" onSubmit={onSubmit} noValidate>
       {title && <h1>{title}</h1>}
       {errors && <p className="field-error">{errors}</p>}
       <div className="form-fields">

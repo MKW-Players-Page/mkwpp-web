@@ -18,6 +18,8 @@ import BlogPostPage from "./blog/BlogPostPage";
 import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
+import UserPasswordForgotPage from "./user/UserPasswordForgotPage";
+import UserPasswordResetPage from "./user/UserPasswordResetPage";
 import { buildQueryParamString } from "../../utils/SearchParams";
 import CountryRankingsPage from "./CountryRankingsPage";
 import ContributionsPage from "./ContributionsPage";
@@ -140,6 +142,14 @@ export const Pages: PageMap = {
   UserLogin: {
     path: "/login",
     element: <UserLoginPage />,
+  },
+  UserPasswordForgot: {
+    path: "/password/forgot",
+    element: <UserPasswordForgotPage />,
+  },
+  UserPasswordReset: {
+    path: "/password/reset",
+    element: <UserPasswordResetPage />,
   },
 };
 
