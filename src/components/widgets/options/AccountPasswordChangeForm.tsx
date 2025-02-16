@@ -39,7 +39,7 @@ const AccountPasswordChangeForm = () => {
 
     coreApi
       .corePasswordChangeCreate({
-        passwordChange: { oldPassword: state.old_password, newPassword: state.new_password }
+        passwordChange: { oldPassword: state.old_password, newPassword: state.new_password },
       })
       .then(() => {
         setState(initialState);
@@ -56,9 +56,7 @@ const AccountPasswordChangeForm = () => {
   return (
     <>
       {success && (
-        <p className="form-success">
-          {translate("optionsPageAccountOptPasswordSuccess", lang)}
-        </p>
+        <p className="form-success">{translate("optionsPageAccountOptPasswordSuccess", lang)}</p>
       )}
       <Form
         state={state}
@@ -70,17 +68,17 @@ const AccountPasswordChangeForm = () => {
           type="password"
           field="old_password"
           label={translate("optionsPageAccountOptPasswordLabelOldPassword", lang)}
-          />
+        />
         <Field
           type="password"
           field="new_password"
           label={translate("optionsPageAccountOptPasswordLabelNewPassword", lang)}
-          />
+        />
         <Field
           type="password"
           field="new_password2"
           label={translate("optionsPageAccountOptPasswordLabelConfirmNewPassword", lang)}
-          />
+        />
       </Form>
     </>
   );
