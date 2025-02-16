@@ -7,6 +7,9 @@ models/BlogPost.ts
 models/BlogPostSummary.ts
 models/CategoryEnum.ts
 models/EditScoreSubmission.ts
+models/PasswordChange.ts
+models/PasswordReset.ts
+models/PasswordResetRequest.ts
 models/PatchedPlayerUpdate.ts
 models/Player.ts
 models/PlayerAward.ts
@@ -26,11 +29,11 @@ models/SiteChampion.ts
 models/Standard.ts
 models/StandardLevel.ts
 models/StatusEnum.ts
+models/Token.ts
 models/TopScoreCountEnum.ts
 models/Track.ts
 models/TrackCup.ts
 models/User.ts
 models/UserWithPlayer.ts
-models/VerificationToken.ts
 models/index.ts
 runtime.ts

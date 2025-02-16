@@ -104,6 +104,11 @@ h2 {
   padding-bottom: 6px;
 }
 
+h3 {
+  font-size: 1.15rem;
+  padding-bottom: 6px;
+}
+
 a {
   color: var(--text-color);
   text-decoration: none;

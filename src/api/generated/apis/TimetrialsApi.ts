@@ -93,6 +93,7 @@ export interface TimetrialsPlayersRetrieveRequest {
 export interface TimetrialsPlayersScoresListRequest {
     category: TimetrialsPlayersScoresListCategoryEnum;
     id: number;
+    date?: Date;
     lapMode?: TimetrialsPlayersScoresListLapModeEnum;
     region?: number;
 }
@@ -127,6 +128,7 @@ export interface TimetrialsRecordsLatestListRequest {
 
 export interface TimetrialsRecordsListRequest {
     category: TimetrialsRecordsListCategoryEnum;
+    date?: Date;
     lapMode?: TimetrialsRecordsListLapModeEnum;
     region?: number;
 }
@@ -182,6 +184,7 @@ export interface TimetrialsTracksScoresListRequest {
     category: TimetrialsTracksScoresListCategoryEnum;
     id: number;
     lapMode: TimetrialsTracksScoresListLapModeEnum;
+    date?: Date;
     limit?: number;
     offset?: number;
     region?: number;
@@ -191,6 +194,7 @@ export interface TimetrialsTracksTopsListRequest {
     category: TimetrialsTracksTopsListCategoryEnum;
     id: number;
     lapMode: TimetrialsTracksTopsListLapModeEnum;
+    date?: Date;
     region?: number;
 }
 
@@ -377,6 +381,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['date'] != null) {
+            queryParameters['date'] = (requestParameters['date'] as any).toISOString().substring(0,10);
         }
 
         if (requestParameters['lapMode'] != null) {
@@ -657,6 +665,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['date'] != null) {
+            queryParameters['date'] = (requestParameters['date'] as any).toISOString().substring(0,10);
         }
 
         if (requestParameters['lapMode'] != null) {
@@ -1258,6 +1270,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
             queryParameters['category'] = requestParameters['category'];
         }
 
+        if (requestParameters['date'] != null) {
+            queryParameters['date'] = (requestParameters['date'] as any).toISOString().substring(0,10);
+        }
+
         if (requestParameters['lapMode'] != null) {
             queryParameters['lap_mode'] = requestParameters['lapMode'];
         }
@@ -1321,6 +1337,10 @@ export class TimetrialsApi extends runtime.BaseAPI {
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
+        }
+
+        if (requestParameters['date'] != null) {
+            queryParameters['date'] = (requestParameters['date'] as any).toISOString().substring(0,10);
         }
 
         if (requestParameters['lapMode'] != null) {

@@ -14084,6 +14084,51 @@
     "pt": "",
     "es": ""
   },
+  "userActivationPageContentMissingToken": {
+    "it": "",
+    "en": "Token is missing from your account activation link.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userActivationPageContentSuccess": {
+    "it": "",
+    "en": "Your account has been successfully activated! You may now log in.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userActivationPageContentUnknownError": {
+    "it": "",
+    "en": "An unknown error occurred while trying to activate your account.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userActivationPageHeadingFailure": {
+    "it": "",
+    "en": "Account Verification Failed",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userActivationPageHeadingSuccess": {
+    "it": "",
+    "en": "Account Activated",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "userJoinPageFormLabel": {
     "it": "Registrati",
     "en": "Join",
@@ -14204,6 +14249,141 @@
   "userLoginPagePasswordLabel": {
     "it": "Password",
     "en": "Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userLoginPageForgotPassword": {
+    "it": "",
+    "en": "Forgot password?",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordForgotPageContentSuccess": {
+    "it": "",
+    "en": "An email has been sent to you with a link to reset your password.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordForgotPageEmailLabel": {
+    "it": "",
+    "en": "Email",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordForgotPageHeading": {
+    "it": "",
+    "en": "Reset Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordForgotPageSubmitLabel": {
+    "it": "",
+    "en": "Submit",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageHeading": {
+    "it": "",
+    "en": "Reset Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPagePasswordLabel": {
+    "it": "Password",
+    "en": "Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPagePassword2Label": {
+    "it": "Conferma Password",
+    "en": "Confirm Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageResultContentSuccess": {
+    "it": "",
+    "en": "You may now log in with your new password.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageResultContentUnknownError": {
+    "it": "",
+    "en": "An unknown error occurred.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageResultTitleFailure": {
+    "it": "",
+    "en": "Could not reset password.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageResultTitleMissingToken": {
+    "it": "",
+    "en": "Token is missing from the password reset link.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageResultTitleSuccess": {
+    "it": "",
+    "en": "Password reset successful!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageResultTitleVerificationFailed": {
+    "it": "",
+    "en": "Could not verify password reset token.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "userPasswordResetPageSubmitLabel": {
+    "it": "",
+    "en": "Submit",
     "fr": "",
     "de": "",
     "jp": "",

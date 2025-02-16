@@ -44,6 +44,7 @@ const UserJoinPage = () => {
         },
       }));
 
+      done();
       return;
     }
 

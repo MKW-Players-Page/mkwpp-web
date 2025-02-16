@@ -1,78 +1,108 @@
-import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useReducer } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
+import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Deferred from "../../widgets/Deferred";
-import { Pages, resolvePage } from "../Pages";
+
+enum UserActivationActionType {
+  SUCCESS = "SUCCESS",
+  FAILURE = "FAILURE",
+}
+
+interface UserActivationAction {
+  type: UserActivationActionType;
+  payload: string;
+}
 
 interface UserActivationState {
   isLoading: boolean;
-  error?: string;
+  isSuccess?: boolean;
+  content?: string;
 }
+
+const initialState: UserActivationState = { isLoading: true };
+
+const userActivationReducer = (state: UserActivationState, action: UserActivationAction) => {
+  const { type, payload } = action;
+  switch (type) {
+    case UserActivationActionType.SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        content: payload,
+      };
+    case UserActivationActionType.FAILURE:
+      if (state.isSuccess === undefined) {
+        return {
+          ...state,
+          isLoading: false,
+          isSuccess: false,
+          content: payload,
+        };
+      } else {
+        return state;
+      }
+    default:
+      return state;
+  }
+};
 
 const UserActivationPage = () => {
   const [query] = useSearchParams();
 
   const token = query.get("token");
 
-  const initialState = { isLoading: true };
-  const [state, setState] = useState<UserActivationState>(initialState);
+  const { lang } = useContext(I18nContext);
+
+  const [state, dispatch] = useReducer(userActivationReducer, initialState);
 
   useEffect(() => {
     if (!token) {
-      setState({
-        isLoading: false,
-        error: "The activation link is missing a verification token!",
+      dispatch({
+        type: UserActivationActionType.FAILURE,
+        payload: translate("userActivationPageContentMissingToken", lang),
       });
     } else {
       coreApi
-        .coreVerifyCreate({ verificationToken: { token } })
+        .coreVerifyCreate({ token: { token } })
         .then(() => {
-          setState({ isLoading: false });
+          dispatch({
+            type: UserActivationActionType.SUCCESS,
+            payload: translate("userActivationPageContentSuccess", lang),
+          });
         })
         .catch((error: ResponseError) => {
           error.response
             .json()
             .then((json) => {
-              setState({
-                isLoading: false,
-                error: json,
+              dispatch({
+                type: UserActivationActionType.FAILURE,
+                payload: json.detail,
               });
             })
             .catch(() => {
-              setState({
-                isLoading: false,
-                error: "Something went wrong. Please contact an administrator.",
+              dispatch({
+                type: UserActivationActionType.FAILURE,
+                payload: translate("userActivationPageContentUnknownError", lang),
               });
             });
         });
     }
-  }, [token]);
+  }, [lang, token]);
 
   return (
     <Deferred isWaiting={state.isLoading}>
-      {state.error ? (
-        <>
-          <h1>Account verification failed</h1>
-          <div className="module">
-            <div className="module-content">{state.error}</div>
-          </div>
-        </>
-      ) : (
-        <>
-          <h1>Your account has been activated!</h1>
-          <div className="module">
-            <div className="module-content">
-              You may now{" "}
-              <b>
-                <Link to={resolvePage(Pages.UserLogin)}>log in</Link>
-              </b>
-              .
-            </div>
-          </div>
-        </>
-      )}
+      <h1>
+        {state.isSuccess
+          ? translate("userActivationPageHeadingSuccess", lang)
+          : translate("userActivationPageHeadingFailure", lang)}
+      </h1>
+      <div className="module">
+        <div className="module-content">{state.content}</div>
+      </div>
     </Deferred>
   );
 };

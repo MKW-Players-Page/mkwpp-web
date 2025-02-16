@@ -38,11 +38,11 @@ export interface PlayerBasic {
      */
     region?: number | null;
     /**
-     * User account associated with this player profile.
+     * 
      * @type {number}
      * @memberof PlayerBasic
      */
-    user?: number | null;
+    user: number;
     /**
      * Can be anything, but is meant to be the player's online pseudonym.
      * @type {string}
@@ -69,6 +69,7 @@ export interface PlayerBasic {
 export function instanceOfPlayerBasic(value: object): value is PlayerBasic {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('user' in value) || value['user'] === undefined) return false;
     return true;
 }
 
@@ -85,7 +86,7 @@ export function PlayerBasicFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'id': json['id'],
         'name': json['name'],
         'region': json['region'] == null ? undefined : json['region'],
-        'user': json['user'] == null ? undefined : json['user'],
+        'user': json['user'],
         'alias': json['alias'] == null ? undefined : json['alias'],
         'joinedDate': json['joined_date'] == null ? undefined : (new Date(json['joined_date'])),
         'lastActivity': json['last_activity'] == null ? undefined : (new Date(json['last_activity'])),
