@@ -9,6 +9,7 @@ import ColorSlider from "../widgets/ColorSlider";
 import Deferred from "../widgets/Deferred";
 import PlayerMention from "../widgets/PlayerMention";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
+import AccountPasswordChangeForm from "../widgets/options/AccountPasswordChangeForm";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);
@@ -304,6 +305,12 @@ const OptionsPage = () => {
                   {translate("optionsPageSaveBtnText", lang)}
                 </button>
               </Deferred>
+            </div>
+          </div>
+          <div className="module">
+            <div className="module-content">
+              <h2>{translate("optionsPageAccountOptPasswordHeading", lang)}</h2>
+              <AccountPasswordChangeForm />
             </div>
           </div>
         </>
