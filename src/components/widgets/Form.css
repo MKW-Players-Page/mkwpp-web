@@ -2,6 +2,12 @@
   margin-bottom: 28px;
 }
 
+.form-success {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: green;
+}
+
 .field {
   margin-bottom: 16px;
 }

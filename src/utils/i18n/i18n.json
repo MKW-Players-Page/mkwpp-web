@@ -15749,6 +15749,51 @@
     "pt": "",
     "es": ""
   },
+  "optionsPageAccountOptPasswordHeading": {
+    "it": "Aggiorna Password",
+    "en": "Update Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptPasswordLabelOldPassword": {
+    "it": "",
+    "en": "Old Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptPasswordLabelNewPassword": {
+    "it": "",
+    "en": "New Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptPasswordLabelConfirmNewPassword": {
+    "it": "",
+    "en": "Confirm New Password",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptPasswordSuccess": {
+    "it": "",
+    "en": "Password updated successfully!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "optionsPageSaveBtnText": {
     "it": "Salva",
     "en": "Save",
