@@ -1,0 +1,12 @@
+.blog-post {
+  padding: 12px;
+  font-size: 0.9rem;
+}
+
+.blog-post p {
+  margin-bottom: 16px;
+}
+
+.blog-post a {
+  text-decoration: underline;
+}

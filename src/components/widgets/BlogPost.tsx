@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BlogPost } from "../../api";
 import { I18nContext } from "../../utils/i18n/i18n";
 import { Pages, resolvePage } from "../pages";
+import "./BlogPost.css";
 
 export interface BlogPostModuleProps {
   post: BlogPost;
@@ -27,7 +28,7 @@ const BlogPostModule = ({ post, style }: BlogPostModuleProps) => {
           .replaceAll(" ", String.fromCharCode(0x00a0))}{" "}
         - {post.author.username}
       </div>
-      <div className="module-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className="blog-post" dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
   );
 };
