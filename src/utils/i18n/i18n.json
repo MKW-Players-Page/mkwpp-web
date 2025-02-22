@@ -14084,6 +14084,222 @@
     "pt": "",
     "es": ""
   },
+  "profileHomePageHeading": {
+    "it": "",
+    "en": "Your Profile",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageWelcome": {
+    "it": "",
+    "en": "Welcome to the Mario Kart Wii Players' Page!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageInstructions": {
+    "it": "",
+    "en": "Your account has not been linked to a player profile yet.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageInstructionsCreate": {
+    "it": "",
+    "en": "If you are new to the site, you can create a new profile and start building your timesheet.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageInstructionsClaim": {
+    "it": "",
+    "en": "If you are already listed on the site, you can claim your profile and wait for an admin to approve.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageReady": {
+    "it": "",
+    "en": "Ready to join the competition?",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageButtonLabelCreate": {
+    "it": "",
+    "en": "Create New Profile",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileHomePageButtonLabelClaim": {
+    "it": "",
+    "en": "Claim Existing Profile",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageHeading": {
+    "it": "",
+    "en": "Claim Profile",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageErrorNoPlayerSelected": {
+    "it": "",
+    "en": "Please select a player.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageConfirmationSummary": {
+    "it": "",
+    "en": "You are about to claim the following profile: ",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageConfirmationWarning": {
+    "it": "",
+    "en": "Are you sure this is your profile? Claiming someone else's profile may result in a ban.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageButtonLabelClaim": {
+    "it": "",
+    "en": "Claim",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageButtonLabelConfirm": {
+    "it": "",
+    "en": "Confirm",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageButtonLabelCancel": {
+    "it": "",
+    "en": "Cancel",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageSuccess": {
+    "it": "",
+    "en": "Your profile has been successfully linked to your account! Let's get karting!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileClaimPageFailure": {
+    "it": "",
+    "en": "Something went wrong trying to claim this profile. Try again later, and if the error persists, please contact an administrator.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageHeading": {
+    "it": "",
+    "en": "Create Profile",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageFieldLabelName": {
+    "it": "",
+    "en": "Full Name",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageFieldLabelAlias": {
+    "it": "",
+    "en": "Alias",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageFieldLabelRegion": {
+    "it": "",
+    "en": "Region",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageSubmitLabel": {
+    "it": "",
+    "en": "Create",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageSuccess": {
+    "it": "",
+    "en": "Your profile has been created successfully! Let's get karting!",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageFailure": {
+    "it": "",
+    "en": "Something went wrong trying to create this profile. Try again later, and if the error persists, please contact an administrator.",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "userActivationPageContentMissingToken": {
     "it": "",
     "en": "Token is missing from your account activation link.",

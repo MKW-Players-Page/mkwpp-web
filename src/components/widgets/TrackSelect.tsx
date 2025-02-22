@@ -88,8 +88,8 @@ const TrackSelect = ({ metadata, field, label, disabled }: TrackSelectProps) => 
         disabled={disabled || disabledByForm}
         value={parseInt(getValue(field) ?? "0")}
       />
-      {errors.map((error) => (
-        <p className="field-error">{error}</p>
+      {errors.map((error, index) => (
+        <p key={index} className="field-error">{error}</p>
       ))}
     </div>
   );

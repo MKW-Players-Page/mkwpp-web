@@ -21,6 +21,8 @@ import type {
   PasswordChange,
   PasswordReset,
   PasswordResetRequest,
+  ProfileClaim,
+  ProfileCreate,
   Token,
   User,
 } from '../models/index';
@@ -37,6 +39,10 @@ import {
     PasswordResetToJSON,
     PasswordResetRequestFromJSON,
     PasswordResetRequestToJSON,
+    ProfileClaimFromJSON,
+    ProfileClaimToJSON,
+    ProfileCreateFromJSON,
+    ProfileCreateToJSON,
     TokenFromJSON,
     TokenToJSON,
     UserFromJSON,
@@ -65,6 +71,14 @@ export interface CorePasswordResetRequestCreateRequest {
 
 export interface CorePasswordResetVerifyCreateRequest {
     token: Token;
+}
+
+export interface CoreProfileClaimCreateRequest {
+    profileClaim: ProfileClaim;
+}
+
+export interface CoreProfileCreateCreateRequest {
+    profileCreate: Omit<ProfileCreate, 'id'>;
 }
 
 export interface CoreSignupCreateRequest {
@@ -354,6 +368,81 @@ export class CoreApi extends runtime.BaseAPI {
      */
     async corePasswordResetVerifyCreate(requestParameters: CorePasswordResetVerifyCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.corePasswordResetVerifyCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async coreProfileClaimCreateRaw(requestParameters: CoreProfileClaimCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['profileClaim'] == null) {
+            throw new runtime.RequiredError(
+                'profileClaim',
+                'Required parameter "profileClaim" was null or undefined when calling coreProfileClaimCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/core/profile/claim`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ProfileClaimToJSON(requestParameters['profileClaim']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async coreProfileClaimCreate(requestParameters: CoreProfileClaimCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.coreProfileClaimCreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async coreProfileCreateCreateRaw(requestParameters: CoreProfileCreateCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProfileCreate>> {
+        if (requestParameters['profileCreate'] == null) {
+            throw new runtime.RequiredError(
+                'profileCreate',
+                'Required parameter "profileCreate" was null or undefined when calling coreProfileCreateCreate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // knoxApiToken authentication
+        }
+
+        const response = await this.request({
+            path: `/api/core/profile/create`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: ProfileCreateToJSON(requestParameters['profileCreate']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ProfileCreateFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async coreProfileCreateCreate(requestParameters: CoreProfileCreateCreateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProfileCreate> {
+        const response = await this.coreProfileCreateCreateRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**

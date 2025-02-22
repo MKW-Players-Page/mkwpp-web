@@ -15,6 +15,8 @@ export * from './PlayerAwardTypeEnum';
 export * from './PlayerBasic';
 export * from './PlayerStats';
 export * from './PlayerUpdate';
+export * from './ProfileClaim';
+export * from './ProfileCreate';
 export * from './RecentScore';
 export * from './Region';
 export * from './RegionStats';
