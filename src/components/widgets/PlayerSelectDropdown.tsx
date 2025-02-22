@@ -35,11 +35,14 @@ const PlayerSelectDropdown = ({
     element: { text: translate("matchupPageDefaultValue", lang), value: 0 },
   };
 
-  const filter = filterFn ?? ((player: Player) => {
-    return restrictSet === undefined || (
-      blacklist ? restrictSet.includes(player.id) : !restrictSet.includes(player.id)
-    );
-  });
+  const filter =
+    filterFn ??
+    ((player: Player) => {
+      return (
+        restrictSet === undefined ||
+        (blacklist ? restrictSet.includes(player.id) : !restrictSet.includes(player.id))
+      );
+    });
 
   return (
     <Dropdown
