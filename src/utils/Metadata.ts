@@ -1,7 +1,8 @@
 import { createContext } from "react";
 
-import api, { Region, Track, TrackCup, StandardLevel, Standard } from "../api";
+import api, { Region, StandardLevel, Standard } from "../api";
 import { useApi } from "../hooks";
+import { Cup, Track } from "../rust_api";
 import { WorldRegion } from "./Defaults";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
@@ -9,7 +10,7 @@ export interface Metadata {
   isLoading: boolean;
   regions: Region[];
   standardLevels?: StandardLevel[];
-  cups?: TrackCup[];
+  cups?: Cup[];
   tracks?: Track[];
 }
 
@@ -20,8 +21,8 @@ export interface Metadata {
 export const useMetadata = (): Metadata => {
   const regions = useApi(() => api.timetrialsRegionsList(), [], "regions");
   const standards = useApi(() => api.timetrialsStandardlevelsList(), [], "standardLevels");
-  const cups = useApi(() => api.timetrialsCupsList(), [], "cups");
-  const tracks = useApi(() => api.timetrialsTracksList(), [], "tracks");
+  const cups = useApi(() => Cup.get(), [], "cups");
+  const tracks = useApi(() => Track.get(), [], "tracks");
 
   return {
     isLoading: regions.isLoading || standards.isLoading || cups.isLoading || tracks.isLoading,

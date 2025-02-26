@@ -31,8 +31,6 @@ import type {
   SiteChampion,
   Standard,
   StandardLevel,
-  Track,
-  TrackCup,
 } from '../models/index';
 import {
     EditScoreSubmissionFromJSON,
@@ -67,10 +65,6 @@ import {
     StandardToJSON,
     StandardLevelFromJSON,
     StandardLevelToJSON,
-    TrackFromJSON,
-    TrackToJSON,
-    TrackCupFromJSON,
-    TrackCupToJSON,
 } from '../models/index';
 
 export interface TimetrialsAwardsListRequest {
@@ -272,31 +266,7 @@ export class TimetrialsApi extends runtime.BaseAPI {
         const response = await this.timetrialsChampionsListRaw(requestParameters, initOverrides);
         return await response.value();
     }
-
-    /**
-     */
-    async timetrialsCupsListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<TrackCup>>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/timetrials/cups/`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TrackCupFromJSON));
-    }
-
-    /**
-     */
-    async timetrialsCupsList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<TrackCup>> {
-        const response = await this.timetrialsCupsListRaw(initOverrides);
-        return await response.value();
-    }
-
+    
     /**
      */
     async timetrialsPlayersListRaw(requestParameters: TimetrialsPlayersListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<PlayerBasic>>> {
@@ -1214,30 +1184,6 @@ export class TimetrialsApi extends runtime.BaseAPI {
      */
     async timetrialsSubmissionsSubmittersRemoveDestroy(requestParameters: TimetrialsSubmissionsSubmittersRemoveDestroyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.timetrialsSubmissionsSubmittersRemoveDestroyRaw(requestParameters, initOverrides);
-    }
-
-    /**
-     */
-    async timetrialsTracksListRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Track>>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/timetrials/tracks/`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TrackFromJSON));
-    }
-
-    /**
-     */
-    async timetrialsTracksList(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Track>> {
-        const response = await this.timetrialsTracksListRaw(initOverrides);
-        return await response.value();
     }
 
     /**

@@ -61,7 +61,7 @@ const TrackTopsPage = () => {
   const tops = useApiArray(
     (params) => api.timetrialsTracksTopsList(params),
     4,
-    cup?.tracks.map((track) => ({
+    cup?.trackIds.map((track) => ({
       id: track,
       category,
       lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
@@ -106,7 +106,7 @@ const TrackTopsPage = () => {
           >
             {cup &&
               metadata.tracks
-                ?.filter((track) => cup.tracks.includes(track.id))
+                ?.filter((track) => cup.trackIds.includes(track.id))
                 .map((track, index) => {
                   const trackCategory = getHighestValid(category, track?.categories ?? []);
                   return (

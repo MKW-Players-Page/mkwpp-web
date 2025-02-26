@@ -3,7 +3,8 @@ import init, { read_rksys, RKG } from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
 import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
-import api, { CategoryEnum, EditScoreSubmission, Score, Track } from "../../api";
+import api, { CategoryEnum, EditScoreSubmission, Score } from "../../api";
+import { Track } from "../../rust_api";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { Link, Navigate, useNavigate } from "react-router-dom";

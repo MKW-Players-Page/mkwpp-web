@@ -5,8 +5,9 @@ import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import "./CupsList.css";
-import { CategoryEnum, Region, TrackCup } from "../../api";
+import { CategoryEnum, Region } from "../../api";
 import { LapModeEnum } from "./LapModeSelect";
+import { Cup } from "../../rust_api";
 
 interface CupsListNoTracksProps {
   currentRegion: Region;
@@ -51,7 +52,7 @@ export const CupsListNoTracks = ({
 };
 
 interface CupNoTracksProps {
-  cup: TrackCup;
+  cup: Cup;
   selected: boolean;
   href: string;
 }
@@ -69,7 +70,7 @@ const CupNoTracks = ({ cup, selected, href }: CupNoTracksProps) => {
 };
 
 interface CupTracksProps {
-  cup: TrackCup;
+  cup: Cup;
 }
 
 const CupTracks = ({ cup }: CupTracksProps) => {
@@ -81,7 +82,7 @@ const CupTracks = ({ cup }: CupTracksProps) => {
       <div className="module-content cups-list-cup">
         <b>{translate(`constantCup${cup.code.toUpperCase()}` as TranslationKey, lang)}</b>
         <ul>
-          {cup.tracks.map((trackId) => (
+          {cup.trackIds.map((trackId) => (
             <li key={trackId}>
               <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
                 {translateTrack(getTrackById(metadata.tracks, trackId), lang)}
@@ -103,6 +104,7 @@ const CupTracks = ({ cup }: CupTracksProps) => {
 
 const CupsList = () => {
   const metadata = useContext(MetadataContext);
+  console.log(metadata);
   return (
     <>
       <Deferred isWaiting={metadata.isLoading}>

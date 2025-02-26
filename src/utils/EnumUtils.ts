@@ -15,7 +15,7 @@ export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) =
   }
 };
 
-export const getCategoryNumerical = (category: CategoryEnum) => {
+export const getCategoryNumerical = (category: CategoryEnum): number => {
   switch (category) {
     case "nonsc":
       return 0;
@@ -25,6 +25,17 @@ export const getCategoryNumerical = (category: CategoryEnum) => {
       return 2;
     default:
       return -1;
+  }
+};
+
+export const getCategoryFromNumber = (categoryId: number): CategoryEnum => {
+  switch (categoryId) {
+    case 0:
+      return CategoryEnum.NonShortcut;
+    case 1:
+      return CategoryEnum.Shortcut;
+    default:
+      return CategoryEnum.Unrestricted;
   }
 };
 

@@ -29,7 +29,5 @@ export * from './StandardLevel';
 export * from './StatusEnum';
 export * from './Token';
 export * from './TopScoreCountEnum';
-export * from './Track';
-export * from './TrackCup';
 export * from './User';
 export * from './UserWithPlayer';

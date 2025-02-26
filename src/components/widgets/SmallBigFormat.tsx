@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Track } from "../../api";
+import { Track } from "../../rust_api";
 import { I18nContext, translateTrack } from "../../utils/i18n/i18n";
 
 export interface SmallBigFormatProps {
