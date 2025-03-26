@@ -1,17 +1,18 @@
 import init, { read_rkg } from "mkw_lib";
 
 import { useContext, useEffect, useState } from "react";
-import api, { CategoryEnum, ScoreSubmission } from "../../api";
+import api, { ScoreSubmission } from "../../api";
 import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime, parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { LapModeEnum, LapModeRadioField } from "./LapModeSelect";
+import { CategoryEnum, LapModeEnum } from "../../rust_api";
+import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
 import Tooltip from "./Tooltip";
@@ -98,7 +99,7 @@ const SubmissionForm = ({
 
   const metadata = useContext(MetadataContext);
 
-  const track = getTrackById(metadata.tracks, +state.track);
+  const track = metadata.getTrackById(+state.track);
   const categories = track ? track.categories : [];
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";
 import { FormContext } from "./Form";
 import { FlagIcon } from "./Icon";
@@ -59,7 +59,7 @@ const PlayerSelectDropdown = ({
                     element: {
                       text: player.alias ?? player.name,
                       value: player.id,
-                      rightIcon: <FlagIcon region={getRegionById(metadata, player.region ?? 0)} />,
+                      rightIcon: <FlagIcon region={metadata.getRegionById(player.region ?? 0)} />,
                     },
                   };
                 }) as DropdownItemSetDataChild[]) ?? []),

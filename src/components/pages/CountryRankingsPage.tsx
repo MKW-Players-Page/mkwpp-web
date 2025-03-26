@@ -25,7 +25,8 @@ import {
 } from "../../api/generated";
 import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeEnum } from "../../rust_api";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 

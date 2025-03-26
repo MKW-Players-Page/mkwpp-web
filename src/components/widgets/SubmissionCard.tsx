@@ -8,7 +8,7 @@ import {
   translateCategoryName,
   translateTrack,
 } from "../../utils/i18n/i18n";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import Icon from "./Icon";
 import ObscuredModule from "./ObscuredModule";
 import OverwriteColor from "./OverwriteColor";
@@ -17,7 +17,7 @@ import Tooltip from "./Tooltip";
 
 import "./SubmissionCard.css";
 import PlayerMention from "./PlayerMention";
-import { LapModeEnum } from "./LapModeSelect";
+import { LapModeEnum } from "../../rust_api";
 import { SettingsContext } from "../../utils/Settings";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 
@@ -37,7 +37,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
   return (
     <OverwriteColor hue={siteHue} className="outer-card-div">
       <div key={submission.id} className="card">
-        <p>{translateTrack(getTrackById(metadata.tracks, submission.track), lang)}</p>
+        <p>{translateTrack(metadata.getTrackById(submission.track), lang)}</p>
         <p>{translateCategoryName(submission.category, lang)}</p>
         <p>
           {submission.isLap
@@ -114,13 +114,13 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                   <div>
                     {handleBars(
                       translate("submissionPageMySubmissionsTabTooltipSubmittedBy", lang),
-                      [["name", <PlayerMention precalcPlayer={submission.submittedBy.player} />]],
+                      [["name", <PlayerMention playerOrId={submission.submittedBy.player} />]],
                     )}
                   </div>
                   <div>
                     {handleBars(
                       translate("submissionPageMySubmissionsTabTooltipSubmittedFor", lang),
-                      [["name", <PlayerMention precalcPlayer={submission.player} />]],
+                      [["name", <PlayerMention playerOrId={submission.player} />]],
                     )}
                   </div>
                   <div>
@@ -149,7 +149,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                         [
                           "name",
                           submission.reviewedBy ? (
-                            <PlayerMention precalcPlayer={submission.reviewedBy.player} />
+                            <PlayerMention playerOrId={submission.reviewedBy.player} />
                           ) : (
                             translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang)
                           ),

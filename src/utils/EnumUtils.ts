@@ -1,21 +1,21 @@
-import { CategoryEnum } from "../api";
+import { CategoryEnum } from "../rust_api";
 import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
 import { Settings } from "./Settings";
 
 export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) => {
   switch (category) {
-    case "nonsc":
+    case 0:
       return settings.categoryHueColorNonSC;
-    case "sc":
+    case 1:
       return settings.categoryHueColorSC;
-    case "unres":
+    case 2:
       return settings.categoryHueColorUnres;
     default:
       return settings.categoryHueColorUnres;
   }
 };
 
-export const getCategoryNumerical = (category: CategoryEnum): number => {
+export const getCategoryNumerical = (category: string): number => {
   switch (category) {
     case "nonsc":
       return 0;
@@ -40,9 +40,7 @@ export const getCategoryFromNumber = (categoryId: number): CategoryEnum => {
 };
 
 export const getHighestValid = (category: CategoryEnum, trackCategories: CategoryEnum[]) => {
-  const x = trackCategories
-    .sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b))
-    .filter((r) => getCategoryNumerical(r) <= getCategoryNumerical(category));
+  const x = trackCategories.sort((a, b) => a - b).filter((r) => r <= category);
   return x[x.length - 1];
 };
 

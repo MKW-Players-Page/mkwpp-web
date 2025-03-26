@@ -1,5 +1,5 @@
 import { apiFetch } from "..";
-import { CategoryEnum } from "../../api";
+import { CategoryEnum } from "../";
 import { getCategoryFromNumber } from "../../utils/EnumUtils";
 
 interface JsonTrack {

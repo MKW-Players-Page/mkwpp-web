@@ -1,13 +1,17 @@
 import { useContext } from "react";
 import { SetURLSearchParams } from "react-router-dom";
-import { CategoryEnum, Region } from "../api";
-import { LapModeEnum } from "../components/widgets/LapModeSelect";
 import { MetadataContext } from "./Metadata";
-import { WorldRegion } from "./Defaults";
 import {
   TimetrialsRegionsRankingsListTopEnum,
   TimetrialsRegionsRankingsListTypeEnum,
 } from "../api/generated";
+import {
+  Region,
+  LapModeEnum,
+  CategoryEnum,
+  stringToLapModeEnum,
+  stringToCategoryEnum,
+} from "../rust_api";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -28,14 +32,12 @@ export const paramReplace = (
 };
 
 export const useCategoryParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
-  const category =
-    Object.values(CategoryEnum).find((value) => value === searchParams[0].get("cat")) ??
-    CategoryEnum.NonShortcut;
+  const category = stringToCategoryEnum(searchParams[0].get("cat") ?? "");
   return {
     category,
     setCategory: (category: CategoryEnum) => {
       const cat = category === CategoryEnum.NonShortcut ? undefined : category;
-      searchParams[1]((prev) => paramReplace(prev, "cat", cat, overwriteParams));
+      searchParams[1]((prev) => paramReplace(prev, "cat", cat?.toString(), overwriteParams));
     },
   };
 };
@@ -84,16 +86,11 @@ export const useLapModeParam = (
   overwriteParams: string[] = [],
 ) => {
   const defVal = restrictedSet ? LapModeEnum.Course : LapModeEnum.Overall;
-  const lapMode =
-    Object.values(LapModeEnum).find((value) =>
-      restrictedSet
-        ? value !== LapModeEnum.Overall && value === searchParams[0].get("lap")
-        : value === searchParams[0].get("lap"),
-    ) ?? defVal;
+  const lapMode = stringToLapModeEnum(searchParams[0].get("lap") ?? "", restrictedSet);
   return {
     lapMode,
     setLapMode: (lapMode: LapModeEnum) => {
-      const lap = lapMode === defVal ? undefined : lapMode;
+      const lap = lapMode === defVal ? undefined : lapMode.toString();
       searchParams[1]((prev) => paramReplace(prev, "lap", lap, overwriteParams));
     },
   };
@@ -149,13 +146,15 @@ export const useRegionTypeRestrictedParam = (
 export const useRegionParam = (searchParams: SearchParams) => {
   const metadata = useContext(MetadataContext);
 
-  const region =
-    metadata.regions?.find((region) => region.code.toLowerCase() === searchParams[0].get("reg")) ??
-    WorldRegion;
+  const region = metadata.isLoading
+    ? Region.worldDefault()
+    : (metadata.regions?.find(
+        (region) => region.code.toLowerCase() === searchParams[0].get("reg"),
+      ) ?? Region.worldDefault());
   return {
     region,
     setRegion: (region: Region) => {
-      const reg = region.code === WorldRegion.code ? undefined : region;
+      const reg = region.code === Region.worldDefault().code ? undefined : region;
       searchParams[1]((prev) => paramReplace(prev, "reg", reg?.code.toLowerCase()));
     },
   };

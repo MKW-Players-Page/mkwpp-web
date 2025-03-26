@@ -1,15 +1,10 @@
 import { useContext } from "react";
 import { I18nContext, translateLapModeName } from "../../utils/i18n/i18n";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
+import { LapModeEnum, stringToLapModeEnum } from "../../rust_api";
 
 import { FormContext } from "./Form";
 import RadioButtons from "./RadioButtons";
-
-export enum LapModeEnum {
-  Course = "course",
-  Lap = "lap",
-  Overall = "overall",
-}
 
 export interface LapModeSelectProps {
   /** Whether to include Overall as an option. Defaults to false if not defined. */
@@ -109,9 +104,9 @@ export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps
       <p>{label}</p>
       <LapModeSelect
         includeOverall={includeOverall}
-        value={getValue(field) as LapModeEnum}
+        value={stringToLapModeEnum(getValue(field) ?? "", includeOverall)}
         onChange={(lapMode) => {
-          setValue(field, lapMode);
+          setValue(field, lapMode.toString());
         }}
         disabled={disabled}
       />
@@ -132,9 +127,9 @@ export const LapModeRadioField = ({
       <p>{label}</p>
       <LapModeRadio
         includeOverall={includeOverall}
-        value={getValue(field) as LapModeEnum}
+        value={stringToLapModeEnum(getValue(field) ?? "", includeOverall)}
         onChange={(lapMode) => {
-          setValue(field, lapMode);
+          setValue(field, lapMode.toString());
         }}
         disabled={disabledByForm || disabled}
       />

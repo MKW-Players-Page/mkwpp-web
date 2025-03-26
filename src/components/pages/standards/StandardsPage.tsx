@@ -6,9 +6,8 @@ import "./StandardsPage.css";
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
 import { getCategorySiteHue } from "../../../utils/EnumUtils";
-import { formatTime } from "../../../utils/Formatters";
-import { getStandardLevel, MetadataContext } from "../../../utils/Metadata";
-import api, { CategoryEnum } from "../../../api";
+import { formatLapMode, formatTime } from "../../../utils/Formatters";
+import { MetadataContext } from "../../../utils/Metadata";
 import OverwriteColor from "../../widgets/OverwriteColor";
 import Dropdown, {
   DropdownData,
@@ -31,7 +30,8 @@ import {
 import { SettingsContext } from "../../../utils/Settings";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../../widgets/Table";
-import { LapModeEnum, LapModeRadio } from "../../widgets/LapModeSelect";
+import { LapModeRadio } from "../../widgets/LapModeSelect";
+import { CategoryEnum, LapModeEnum, Timesheet } from "../../../rust_api";
 import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import { TrackDropdown } from "../../widgets/TrackSelect";
@@ -148,28 +148,10 @@ const StandardsPage = () => {
   const { settings } = useContext(SettingsContext);
   const { user } = useContext(UserContext);
 
-  const { data: standards, isLoading: standardsLoading } = useApi(
-    () => api.timetrialsStandardsList({ category }),
-    [category],
-    "standards",
-  );
-
   const { data: userScores, isLoading: scoresLoading } = useApi(
-    () => api.timetrialsPlayersScoresList({ category, id: user?.player ?? 1 }),
+    () => Timesheet.get(user?.player ?? 1, category),
     [user?.player, category],
-    "playerProfileScores",
-  );
-
-  const { isLoading: userStatsLoading, data: userStats } = useApi(
-    () =>
-      api.timetrialsPlayersStatsRetrieve({
-        id: user?.player ?? 1,
-        category,
-        lapMode,
-        region: 1,
-      }),
-    [user?.player, category, lapMode],
-    "playerProfileStats",
+    "Timesheet.get",
   );
 
   const tableData: ArrayTableData = { classNames: [] };
@@ -177,32 +159,37 @@ const StandardsPage = () => {
   let hasHighlightedRow = [false, false];
 
   const filteredStandards: ArrayTableCellData[][] =
-    standards
+    metadata.standards
       ?.filter(
         (standard, _, arr) =>
-          standard.level !== 34 &&
+          standard.standardLevelId !== 34 &&
+          standard.category === category &&
           (levelId < 34
-            ? standard.level === levelId
-            : levelId === 43 || Filter[levelId].includes(standard.level)) &&
-          (track === -5 || standard.track === track),
+            ? standard.standardLevelId === levelId
+            : levelId === 43 || Filter[levelId].includes(standard.standardLevelId)) &&
+          (track === -5 || standard.trackId === track),
       )
       .sort(
-        (a, b) => a.track - b.track || a.level - b.level || (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
+        (a, b) =>
+          a.trackId - b.trackId ||
+          a.standardLevelId - b.standardLevelId ||
+          (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
       )
       .map((standard, idx, arr) => {
-        const track = metadata.tracks?.find((track) => track.id === standard.track);
+        const track = metadata.tracks?.find((track) => track.id === standard.trackId);
         const value = formatTime(standard.value ?? 0);
 
-        if (idx > 0 && arr[idx - 1].track !== standard.track) hasHighlightedRow = [false, false];
+        if (idx > 0 && arr[idx - 1].trackId !== standard.trackId)
+          hasHighlightedRow = [false, false];
 
         if (
           !hasHighlightedRow[+(standard?.isLap ?? false)] &&
           user &&
           !scoresLoading &&
           (standard.value ?? 0) >
-            (userScores?.find(
+            (userScores?.times.find(
               (score) =>
-                standard.track === score.track &&
+                standard.trackId === score.trackId &&
                 score.isLap === standard.isLap &&
                 category >= score.category,
             )?.value ?? 360000)
@@ -217,7 +204,7 @@ const StandardsPage = () => {
               <Link
                 to={resolvePage(
                   Pages.TrackChart,
-                  { id: standard.track },
+                  { id: standard.trackId },
                   { lap: standard.isLap ? LapModeEnum.Lap : null },
                 )}
               >
@@ -225,14 +212,17 @@ const StandardsPage = () => {
               </Link>
             ),
             className: "table-track-col table-b1",
-            expandCell: [idx > 0 && standard.isLap && arr[idx - 1].track === standard.track, false],
+            expandCell: [
+              idx > 0 && standard.isLap && arr[idx - 1].trackId === standard.trackId,
+              false,
+            ],
           },
           {
             content: (
               <Link
                 to={resolvePage(
                   Pages.TrackChart,
-                  { id: standard.track },
+                  { id: standard.trackId },
                   { lap: standard.isLap ? LapModeEnum.Lap : null },
                 )}
               >
@@ -249,7 +239,7 @@ const StandardsPage = () => {
             className: "table-b2 table-category-col",
           },
           {
-            content: translateStandardName(getStandardLevel(metadata, standard), lang),
+            content: translateStandardName(metadata.getStandardLevel(standard), lang),
           },
           { content: standard.isLap ? null : value, className: "table-b1" },
           { content: value, expandCell: [false, !standard.isLap], className: "table-b1" },
@@ -272,7 +262,7 @@ const StandardsPage = () => {
           <LapModeRadio className="table-s1" value={lapMode} onChange={setLapMode} />
         </div>
         <div
-          className={`module standards-table ${lapMode.toLowerCase()}`}
+          className={`module standards-table ${formatLapMode(lapMode).toLowerCase()}`}
           style={
             {
               "--track-selected": track === -5 ? "table-cell" : "none",
@@ -280,7 +270,7 @@ const StandardsPage = () => {
             } as React.CSSProperties
           }
         >
-          <Deferred isWaiting={metadata.isLoading || scoresLoading || standardsLoading}>
+          <Deferred isWaiting={metadata.isLoading || scoresLoading}>
             <ArrayTable
               headerRows={[
                 [
@@ -317,7 +307,7 @@ const StandardsPage = () => {
           </Deferred>
         </div>
         <div className="module">
-          <Deferred isWaiting={metadata.isLoading || userStatsLoading}>
+          <Deferred isWaiting={metadata.isLoading || scoresLoading}>
             <ArrayTable
               headerRows={[
                 [
@@ -331,11 +321,7 @@ const StandardsPage = () => {
               ]}
               rows={
                 metadata.standardLevels?.map((l, idx) => {
-                  if (
-                    user &&
-                    !userStatsLoading &&
-                    (userStats?.totalStandard ?? 36 * 64) / 64 < l.value
-                  )
+                  if (user && !scoresLoading && (userScores?.arr ?? 36 * 64) < l.value)
                     secondTableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
                   return [
                     {

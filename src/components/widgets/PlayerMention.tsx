@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import api, { Player, Region } from "../../api";
+import { Player, Region } from "../../rust_api";
 import { useApi } from "../../hooks";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
+import { PlayerBasic } from "../../rust_api";
+import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import { FlagIcon } from "./Icon";
 
@@ -14,16 +15,10 @@ export interface FlagIconSpanPlayerIdProps {
 
 const FlagIconSpanPlayerId = ({ id, showRegFlagRegardless, xxFlag }: FlagIconSpanPlayerIdProps) => {
   const metadata = useContext(MetadataContext);
-  const { data: player } = useApi(
-    () => api.timetrialsPlayersRetrieve({ id: id }),
-    [id],
-    "player",
-    [],
-    false,
-  );
-  return player?.region !== undefined || xxFlag ? (
+  const { data: player } = useApi(() => PlayerBasic.getPlayerBasic(id), [id], "player", [], false);
+  return player?.regionId !== undefined || xxFlag ? (
     <FlagIcon
-      region={getRegionById(metadata, player?.region ?? 0)}
+      region={metadata.getRegionById(player?.regionId ?? 0)}
       showRegFlagRegardless={showRegFlagRegardless}
     />
   ) : (
@@ -39,7 +34,10 @@ export interface FlagIconSpanProps {
 
 const FlagIconSpan = ({ region, showRegFlagRegardless, xxFlag }: FlagIconSpanProps) => {
   return region !== undefined || xxFlag ? (
-    <FlagIcon region={region} showRegFlagRegardless={showRegFlagRegardless} />
+    <FlagIcon
+      region={xxFlag && region?.id === 1 ? undefined : region}
+      showRegFlagRegardless={showRegFlagRegardless}
+    />
   ) : (
     <></>
   );
@@ -50,13 +48,7 @@ export interface PlayerTextFromIdProps {
 }
 
 const PlayerTextFromId = ({ id }: PlayerTextFromIdProps) => {
-  const { data: player } = useApi(
-    () => api.timetrialsPlayersRetrieve({ id: id }),
-    [id],
-    "player",
-    [],
-    false,
-  );
+  const { data: player } = useApi(() => PlayerBasic.getPlayerBasic(id), [id], "player", [], false);
 
   return <>{player?.alias ?? player?.name}</>;
 };
@@ -75,7 +67,7 @@ const PlayerMentionNoPrecalc = ({
   const metadata = useContext(MetadataContext);
 
   const { isLoading, data: player } = useApi(
-    () => api.timetrialsPlayersRetrieve({ id: id }),
+    () => PlayerBasic.getPlayerBasic(id, metadata),
     [id],
     "player",
     [],
@@ -87,7 +79,7 @@ const PlayerMentionNoPrecalc = ({
   return (
     <>
       <FlagIconSpan
-        region={getRegionById(metadata, player?.region ?? 0)}
+        region={metadata.getRegionById(player?.regionId ?? 0)}
         showRegFlagRegardless={showRegFlagRegardless}
         xxFlag={xxFlag}
       />
@@ -97,44 +89,43 @@ const PlayerMentionNoPrecalc = ({
 };
 
 export interface PlayerMentionProps {
-  id?: number;
-  precalcPlayer?: Player;
-  precalcRegion?: Region;
-  precalcRegionId?: number;
+  playerOrId: number | PlayerBasic | Player;
+  regionOrId?: number | Region;
   showRegFlagRegardless?: boolean;
   xxFlag?: boolean;
 }
 
 const PlayerMention = ({
-  id,
+  playerOrId,
+  regionOrId,
   showRegFlagRegardless,
-  precalcRegion,
-  precalcRegionId,
-  precalcPlayer,
   xxFlag,
 }: PlayerMentionProps) => {
   const metadata = useContext(MetadataContext);
 
   if (metadata.isLoading) return <>Loading..</>;
-  if (id === undefined && precalcPlayer === undefined) return <>Error.</>;
 
-  const region =
-    (precalcRegion ?? precalcRegionId !== undefined)
-      ? getRegionById(metadata, precalcRegionId as number)
-      : precalcPlayer !== undefined
-        ? getRegionById(metadata, precalcPlayer.region as number)
-        : undefined;
+  let resolvedPlayerId: number = typeof playerOrId === "number" ? playerOrId : playerOrId.id;
+
+  const region: Region | undefined =
+    regionOrId !== undefined
+      ? typeof regionOrId === "number"
+        ? metadata.getRegionById(regionOrId)
+        : regionOrId
+      : typeof playerOrId === "number"
+        ? undefined
+        : metadata.getRegionById(playerOrId.regionId);
 
   return (
     <Link
       to={resolvePage(Pages.PlayerProfile, {
-        id: precalcPlayer !== undefined ? precalcPlayer.id : id,
+        id: resolvedPlayerId,
       })}
     >
-      {region === undefined && precalcPlayer === undefined ? (
+      {region === undefined && typeof playerOrId === "number" ? (
         <PlayerMentionNoPrecalc
           xxFlag={!!xxFlag}
-          id={id as number}
+          id={resolvedPlayerId}
           showRegFlagRegardless={!!showRegFlagRegardless}
         />
       ) : (
@@ -149,16 +140,16 @@ const PlayerMention = ({
             ) : (
               <FlagIconSpanPlayerId
                 xxFlag={!!xxFlag}
-                id={id as number}
+                id={resolvedPlayerId}
                 showRegFlagRegardless={!!showRegFlagRegardless}
               />
             )}
           </>
           <>
-            {precalcPlayer ? (
-              (precalcPlayer.alias ?? precalcPlayer.name)
+            {typeof playerOrId !== "number" ? (
+              (playerOrId.alias ?? playerOrId.name)
             ) : (
-              <PlayerTextFromId id={id as number} />
+              <PlayerTextFromId id={resolvedPlayerId} />
             )}
           </>
         </>

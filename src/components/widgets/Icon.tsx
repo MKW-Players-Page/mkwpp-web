@@ -1,4 +1,3 @@
-import { Region } from "../../api";
 import "./Icon.css";
 import Flag from "./Flags";
 import { Flags } from "./Flags";
@@ -17,8 +16,8 @@ import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { useContext } from "react";
 import { SettingsContext } from "../../utils/Settings";
-import { getRegionById, MetadataContext } from "../../utils/Metadata";
-import { WorldRegion } from "../../utils/Defaults";
+import { MetadataContext } from "../../utils/Metadata";
+import { Region, RegionType } from "../../rust_api";
 
 export const Icons = {
   Comment: CommentIcon,
@@ -61,15 +60,15 @@ export const FlagIcon = ({ region, showRegFlagRegardless, width }: FlagIconProps
 
   const getFirstValidRegion = (region: Region): Region => {
     if (
-      region.parent === undefined ||
-      region.parent === null ||
-      region.type === "country" ||
-      region.type === "country_group" ||
-      region.type === "continent" ||
-      region.type === "world"
+      region.parentId === undefined ||
+      region.parentId === null ||
+      region.regionType === RegionType.Country ||
+      region.regionType === RegionType.CountryGroup ||
+      region.regionType === RegionType.Continent ||
+      region.regionType === RegionType.World
     )
       return region;
-    return getFirstValidRegion(getRegionById(metadata, region.parent) ?? WorldRegion);
+    return getFirstValidRegion(metadata.getRegionById(region.parentId) ?? Region.worldDefault());
   };
 
   const computeRegionCode =

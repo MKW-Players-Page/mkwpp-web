@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { I18nContext, translate, translateTrack, TranslationKey } from "../../utils/i18n/i18n";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import "./CupsList.css";
-import { CategoryEnum, Region } from "../../api";
-import { LapModeEnum } from "./LapModeSelect";
-import { Cup } from "../../rust_api";
+import { Cup, Region, CategoryEnum, LapModeEnum } from "../../rust_api";
 
 interface CupsListNoTracksProps {
   currentRegion: Region;
@@ -85,7 +83,7 @@ const CupTracks = ({ cup }: CupTracksProps) => {
           {cup.trackIds.map((trackId) => (
             <li key={trackId}>
               <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
-                {translateTrack(getTrackById(metadata.tracks, trackId), lang)}
+                {translateTrack(metadata.getTrackById(trackId), lang)}
               </Link>
             </li>
           ))}
@@ -104,7 +102,6 @@ const CupTracks = ({ cup }: CupTracksProps) => {
 
 const CupsList = () => {
   const metadata = useContext(MetadataContext);
-  console.log(metadata);
   return (
     <>
       <Deferred isWaiting={metadata.isLoading}>

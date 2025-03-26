@@ -2,13 +2,14 @@ import { useContext, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "../pages";
-import { CategoryEnum, Region } from "../../api";
-import { getFirstRankedParent, getRegionById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 
 import "./RegionSelection.css";
 import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
-import { LapModeEnum } from "./LapModeSelect";
 import { FlagIcon } from "./Icon";
+import { Region, RegionType, CategoryEnum, LapModeEnum } from "../../rust_api";
+import { useApi } from "../../hooks";
+import Deferred from "./Deferred";
 
 export interface ComplexRegionSelectionProps {
   region?: Region;
@@ -119,8 +120,12 @@ const ComplexRegionSelection = ({
   currentLap,
 }: ComplexRegionSelectionProps) => {
   const metadata = useContext(MetadataContext);
-  if (metadata.isLoading) return <></>;
-  const regions = metadata.regions;
+  const { data: sortedRegions, isLoading: sortedRegionsIsLoading } = useApi(
+    () => Region.getRegionTypeHashmap(),
+    [],
+    "regionTypeHashMap",
+  );
+  if (metadata.isLoading || sortedRegions === undefined || sortedRegionsIsLoading) return <></>;
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     arr.reduce(
@@ -131,60 +136,64 @@ const ComplexRegionSelection = ({
       {} as Record<K, T[]>,
     );
 
-  const sortedRegions = groupBy(
-    regions.filter((r) => r.isRanked),
-    (i) => i.type,
-  );
   const sortedSubregions = groupBy(
-    [...sortedRegions.country_group, ...sortedRegions.country],
-    (i) => getFirstRankedParent(metadata, i)?.id ?? -1,
+    [...sortedRegions[RegionType.CountryGroup], ...sortedRegions[RegionType.Country]].reduce(
+      (acc: Region[], id) => Region.reduceRankedViaId(metadata, acc, id),
+      [],
+    ),
+    (region) => metadata.getFirstRankedParent(region)?.id ?? -1,
   );
 
-  const getRegionHierarchy = (region: Region): Region[] => {
-    if (!region.parent) return [region];
-
-    let parent = getRegionById(metadata, region.parent);
-    const out: Region[] = [region];
-
-    while (parent !== undefined && parent.id > 0) {
-      if (parent.isRanked) out.push(parent);
-      parent = getRegionById(metadata, parent?.parent ?? 0);
+  const getRegionHierarchy = (regions: Region[]): Region[] => {
+    const latest = regions[regions.length - 1];
+    if (!latest.parentId) return regions.reverse();
+    let parent = metadata.getFirstRankedParent(latest);
+    if (parent) {
+      regions.push(parent);
+      return getRegionHierarchy(regions);
     }
-
-    return out.reverse();
+    return regions.reverse();
   };
 
-  const selectedRegions = region ? getRegionHierarchy(region).map((region) => region.id) : [];
+  const selectedRegions = region ? getRegionHierarchy([region]).map((region) => region.id) : [];
 
   return (
     <div>
-      <RegionSelection
-        shown
-        cupId={cupId}
-        regions={sortedRegions.world}
-        selectedRegions={selectedRegions}
-        currentCategory={currentCategory}
-        currentLap={currentLap}
-      />
-      <RegionSelection
-        shown
-        cupId={cupId}
-        regions={sortedRegions.continent}
-        selectedRegions={selectedRegions}
-        currentCategory={currentCategory}
-        currentLap={currentLap}
-      />
-      {Object.keys(sortedSubregions).map((sortedSubregionsKey) => (
+      <Deferred isWaiting={sortedRegionsIsLoading}>
         <RegionSelection
-          key={sortedSubregionsKey}
-          shown={selectedRegions.includes(parseInt(sortedSubregionsKey))}
+          shown
           cupId={cupId}
-          regions={sortedSubregions[parseInt(sortedSubregionsKey)]}
+          regions={sortedRegions[RegionType.World].reduce(
+            (acc: Region[], id) => Region.reduceRankedViaId(metadata, acc, id),
+            [],
+          )}
           selectedRegions={selectedRegions}
           currentCategory={currentCategory}
           currentLap={currentLap}
         />
-      ))}
+        <RegionSelection
+          shown
+          cupId={cupId}
+          regions={sortedRegions[RegionType.Continent].reduce(
+            (acc: Region[], id) => Region.reduceRankedViaId(metadata, acc, id),
+            [],
+          )}
+          selectedRegions={selectedRegions}
+          currentCategory={currentCategory}
+          currentLap={currentLap}
+        />
+        {Object.keys(sortedSubregions).map((sortedSubregionsKey) => (
+          <RegionSelection
+            key={sortedSubregionsKey}
+            shown={selectedRegions.includes(parseInt(sortedSubregionsKey))}
+            cupId={cupId}
+            regions={sortedSubregions[parseInt(sortedSubregionsKey)]}
+            selectedRegions={selectedRegions}
+            currentCategory={currentCategory}
+            currentLap={currentLap}
+          />
+        ))}
+      </Deferred>
     </div>
   );
 };

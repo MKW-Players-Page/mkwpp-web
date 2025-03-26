@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { setSettingKV, SettingsContext } from "../../utils/Settings";
@@ -10,6 +9,7 @@ import Deferred from "../widgets/Deferred";
 import PlayerMention from "../widgets/PlayerMention";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 import AccountPasswordChangeForm from "../widgets/options/AccountPasswordChangeForm";
+import { Player } from "../../rust_api";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);
@@ -24,7 +24,7 @@ const OptionsPage = () => {
 
   // it doesn't matter what player is loaded if you aren't logged in.
   const { isLoading: playerLoading, data: player } = useApi(
-    () => api.timetrialsPlayersRetrieve({ id: user?.player ?? 1 }),
+    () => Player.getPlayer(user?.player ?? 1),
     [user],
     "loadedUser",
   );
@@ -193,7 +193,7 @@ const OptionsPage = () => {
                   {translate("optionsPageSubmitterParagraph", lang)}
                   {submitters === undefined || submitters.length === 0
                     ? translate("optionsPageSubmitterListNoOne", lang)
-                    : submitters.map((r) => <PlayerMention precalcPlayer={r} />)}
+                    : submitters.map((r) => <PlayerMention playerOrId={r} />)}
                 </p>
                 <p className="field-error">{newSubmitterIdFieldError}</p>
                 <PlayerSelectDropdown

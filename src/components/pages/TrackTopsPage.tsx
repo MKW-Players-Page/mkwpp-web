@@ -3,9 +3,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
-import api, { CategoryEnum } from "../../api";
-import { TimetrialsTracksTopsListLapModeEnum } from "../../api/generated";
+import { LapModeRadio } from "../widgets/LapModeSelect";
 import { useApiArray } from "../../hooks/ApiHook";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
@@ -15,12 +13,12 @@ import ComplexRegionSelection from "../widgets/RegionSelection";
 import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useCategoryParam, useLapModeParam } from "../../utils/SearchParams";
-import { WorldRegion } from "../../utils/Defaults";
 import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import { CupsListNoTracks } from "../widgets/CupsList";
+import { Region, RegionType, Score, LapModeEnum, CategoryEnum } from "../../rust_api";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
@@ -53,19 +51,25 @@ const TrackTopsPage = () => {
   const { lang } = useContext(I18nContext);
 
   const region =
-    metadata.regions.find((r) => r.code.toLowerCase() === regionCode && r.isRanked) ?? WorldRegion;
+    metadata.regions.find((r) => r.code.toLowerCase() === regionCode && r.isRanked) ??
+    Region.worldDefault();
   const cup = metadata.cups?.find((c) => c.id === cupId);
 
   const { user } = useContext(UserContext);
 
   const tops = useApiArray(
-    (params) => api.timetrialsTracksTopsList(params),
+    (params) =>
+      Score.getChart(
+        params.trackId,
+        category,
+        lapMode === LapModeEnum.Lap,
+        region.id,
+        undefined,
+        10,
+      ),
     4,
     cup?.trackIds.map((track) => ({
-      id: track,
-      category,
-      lapMode: lapMode as TimetrialsTracksTopsListLapModeEnum,
-      region: region.id,
+      trackId: track,
     })) || [],
     [category, cup, lapMode, region, metadata.isLoading],
     "trackTop10s",
@@ -126,13 +130,13 @@ const TrackTopsPage = () => {
                                   <td>{score.rank}</td>
                                   <td>
                                     <PlayerMention
-                                      precalcPlayer={score.player}
-                                      precalcRegionId={score.player.region ?? undefined}
+                                      playerOrId={score.player}
+                                      regionOrId={score.player.regionId ?? undefined}
                                       xxFlag
                                       showRegFlagRegardless={
-                                        region.type === "country" ||
-                                        region.type === "subnational" ||
-                                        region.type === "subnational_group"
+                                        region.regionType === RegionType.Country ||
+                                        region.regionType === RegionType.Subnational ||
+                                        region.regionType === RegionType.SubnationalGroup
                                       }
                                     />
                                   </td>

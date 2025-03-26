@@ -4,16 +4,17 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { FlagIcon, Icon, Tooltip } from "../widgets";
-import api, { CategoryEnum, Region } from "../../api";
+import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { formatDate, formatTime } from "../../utils/Formatters";
-import { getRegionById, getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeEnum, CategoryEnum, Region, RegionType } from "../../rust_api";
 import {
   I18nContext,
   translate,
@@ -67,7 +68,7 @@ const PlayerProfilePage = () => {
   const siteHue = getCategorySiteHue(category, settings);
 
   const getAllRegions = (arr: Region[], startId: number): Region[] => {
-    let region = getRegionById(metadata, startId);
+    let region = metadata.getRegionById(startId);
     if (region === undefined) return arr;
     arr.push(region);
     if (region.parent === undefined || region.parent === null) return arr;
@@ -185,7 +186,7 @@ const PlayerProfilePage = () => {
           className: timeClassName + " overall-hidden",
         },
         { content: score.rank },
-        { content: translateStandardName(getStandardLevel(metadata, score.standard), lang) },
+        { content: translateStandardName(metadata.getStandardLevel(score.standard), lang) },
         { content: (score.recordRatio * 100).toFixed(2) + "%" },
         {
           content: (
@@ -227,11 +228,11 @@ const PlayerProfilePage = () => {
       <h1>
         <FlagIcon
           showRegFlagRegardless={
-            region.type === "country" ||
-            region.type === "subnational" ||
-            region.type === "subnational_group"
+            region.regionType === RegionType.Country ||
+            region.regionType === RegionType.Subnational ||
+            region.regionType === RegionType.SubnationalGroup
           }
-          region={getRegionById(metadata, player?.region ?? 0)}
+          region={metadata.getRegionById(player?.region ?? 0)}
         />
         {player?.name ?? <>&nbsp;</>}
       </h1>

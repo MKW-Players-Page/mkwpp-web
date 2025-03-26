@@ -11,7 +11,6 @@ import RecentTimes from "../widgets/RecentTimes";
 
 const HomePage = () => {
   const { lang } = useContext(I18nContext);
-
   const { isLoading: blogPostsLoading, data: posts } = useApi(
     () => coreApi.coreBlogLatestList(),
     [],

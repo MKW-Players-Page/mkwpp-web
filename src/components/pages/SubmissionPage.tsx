@@ -3,9 +3,9 @@ import init, { read_rksys, RKG } from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
 import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
-import api, { CategoryEnum, EditScoreSubmission, Score } from "../../api";
+import api, { EditScoreSubmission, Score } from "../../api";
 import { Track } from "../../rust_api";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
@@ -14,7 +14,7 @@ import { handleBars, I18nContext, translate, translateTrack } from "../../utils/
 import SubmissionForm from "../widgets/SubmissionForm";
 import SubmissionCard from "../widgets/SubmissionCard";
 import RadioButtons from "../widgets/RadioButtons";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeRadio } from "../widgets/LapModeSelect";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import OverwriteColor from "../widgets/OverwriteColor";
@@ -24,6 +24,7 @@ import ObscuredModule from "../widgets/ObscuredModule";
 import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
+import { CategoryEnum, LapModeEnum } from "../../rust_api";
 
 const SubmitTab = () => {
   const { lang } = useContext(I18nContext);
@@ -192,7 +193,7 @@ const BulkSubmitTab = () => {
                     return {
                       tempId: ids.current,
                       time,
-                      track: getTrackById(metadata.tracks, track + 1) as Track,
+                      track: metadata.getTrackById(track + 1) as Track,
                       date: new Date(
                         `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`,
                       ),
@@ -201,7 +202,7 @@ const BulkSubmitTab = () => {
 
                   setTimes((prev) => [...prev, ...newTimes]);
                 } catch (e) {
-                  console.log("wasm error:", e);
+                  console.error("wasm error:", e);
                 }
               });
 
@@ -521,7 +522,7 @@ const TimesheetTab = () => {
                                         "name",
                                         submission.reviewedBy ? (
                                           <PlayerMention
-                                            precalcPlayer={submission.reviewedBy.player}
+                                            playerOrId={submission.reviewedBy.player}
                                           />
                                         ) : (
                                           translate(

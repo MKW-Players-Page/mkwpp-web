@@ -1,14 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import api, { CategoryEnum } from "../../api";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { I18nContext, translate, translateCategoryName } from "../../utils/i18n/i18n";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import ExpandableModule from "./ExpandableModule";
-import { LapModeEnum } from "./LapModeSelect";
+import { CategoryEnum, LapModeEnum, Score } from "../../rust_api";
 import PlayerMention from "./PlayerMention";
 
 import "./RecentTimes.css";
@@ -24,20 +23,17 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
 
-  const adjustedRecords = !!records;
-
   const { isLoading: recentTimesLoading, data: recentTimes } = useApi(
-    adjustedRecords
-      ? () => api.timetrialsRecordsLatestList({ limit })
-      : () => api.timetrialsScoresLatestList({ limit }),
-    [],
-    adjustedRecords ? "recentRecords" : "recentTimes",
+    () => Score.getRecent(limit, !!records),
+    [metadata.isLoading],
+    records ? "recentRecords" : "recentTimes",
   );
+
   return (
     <ExpandableModule
       style={{ containerType: "inline-size" }}
       heading={
-        adjustedRecords
+        records
           ? translate("recentTimesRecentRecordsHeading", lang)
           : translate("recentTimesRecentTimesHeading", lang)
       }
@@ -66,14 +62,14 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
           ]}
           rows={
             recentTimes?.map((data) => {
-              const track = getTrackById(metadata.tracks, data.track);
+              const track = metadata.getTrackById(data.trackId);
               return [
                 {
                   content: (
                     <Link
                       to={resolvePage(
                         Pages.TrackChart,
-                        { id: data.track },
+                        { id: data.trackId },
                         {
                           cat: data.category !== CategoryEnum.NonShortcut ? data.category : null,
                           lap: data.isLap ? LapModeEnum.Lap : null,
@@ -99,8 +95,8 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                 {
                   content: (
                     <PlayerMention
-                      precalcPlayer={data.player}
-                      precalcRegionId={data.player.region ?? undefined}
+                      playerOrId={data.player}
+                      regionOrId={data.player.regionId ?? undefined}
                       xxFlag
                     />
                   ),
@@ -111,7 +107,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                 {
                   content: (
                     <SmallBigDateFormat
-                      date={data.date as Date}
+                      date={new Date(data.date)}
                       smallClass={"s1 b4"}
                       bigClass={"b1"}
                     />

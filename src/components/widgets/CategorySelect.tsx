@@ -1,9 +1,8 @@
 import { useContext } from "react";
 
 import { FormContext } from "./Form";
-import { CategoryEnum } from "../../api";
+import { CategoryEnum, CategoryEnumValues, stringToCategoryEnum } from "../../rust_api";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
-import { getCategoryNumerical } from "../../utils/EnumUtils";
 import { I18nContext, translateCategoryName } from "../../utils/i18n/i18n";
 import RadioButtons from "./RadioButtons";
 
@@ -21,10 +20,10 @@ export interface CategorySelectProps {
 export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySelectProps) => {
   const { lang } = useContext(I18nContext);
 
-  if (!options) {
-    options = Object.values(CategoryEnum);
+  if (options === undefined) {
+    options = CategoryEnumValues;
   }
-  options.sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b));
+  options.sort((a, b) => a - b);
 
   return (
     <RadioButtons
@@ -42,10 +41,10 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   disabled = !!disabled;
   const { lang } = useContext(I18nContext);
 
-  if (!options) {
-    options = Object.values(CategoryEnum);
+  if (options === undefined) {
+    options = CategoryEnumValues;
   }
-  options.sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b));
+  options.sort((a, b) => a - b);
 
   return (
     <Dropdown
@@ -94,9 +93,9 @@ export const CategoryField = ({ options, field, label, disabled }: CategoryField
       <p>{label}</p>
       <CategorySelect
         options={options}
-        value={getValue(field) as CategoryEnum}
+        value={stringToCategoryEnum(getValue(field) ?? "")}
         onChange={(category) => {
-          setValue(field, category);
+          setValue(field, category.toString());
         }}
         disabled={disabled || disabledByForm}
       />
@@ -112,9 +111,9 @@ export const CategoryRadioField = ({ options, field, label, disabled }: Category
       <p>{label}</p>
       <CategoryRadio
         options={options}
-        value={getValue(field) as CategoryEnum}
+        value={stringToCategoryEnum(getValue(field) ?? "")}
         onChange={(category) => {
-          setValue(field, category);
+          setValue(field, category.toString());
         }}
         disabled={disabledByForm || disabled}
       />

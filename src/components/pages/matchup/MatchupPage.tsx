@@ -2,16 +2,17 @@ import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
-import { getTrackById, MetadataContext } from "../../../utils/Metadata";
+import { MetadataContext } from "../../../utils/Metadata";
 import OverwriteColor from "../../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../../utils/EnumUtils";
-import { LapModeEnum, LapModeRadio } from "../../widgets/LapModeSelect";
+import { CategoryEnum, LapModeEnum } from "../../../rust_api";
+import { LapModeRadio } from "../../widgets/LapModeSelect";
 import PlayerMention from "../../widgets/PlayerMention";
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
 import { useCategoryParam, useIdsParam, useLapModeParam } from "../../../utils/SearchParams";
 import { ApiState, useApiArray } from "../../../hooks/ApiHook";
-import api, { CategoryEnum, Score, PlayerStats, Player } from "../../../api";
+import api, { Score, PlayerStats, Player } from "../../../api";
 import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import RadioButtons from "../../widgets/RadioButtons";
@@ -375,7 +376,7 @@ const MatchupPage = () => {
     if (elaboratedMatchupData.isLoading) break;
     const playerData = matchupData[idx].data as MatchupData;
 
-    headerRows[0].push({ content: <PlayerMention precalcPlayer={playerData.playerData} /> });
+    headerRows[0].push({ content: <PlayerMention playerOrId={playerData.playerData} /> });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall) {
       headerRows[0].push({ content: null, expandCell: [false, true] });
       headerRows[1].push(
@@ -394,7 +395,7 @@ const MatchupPage = () => {
     for (let rowIdx = 0; rowIdx < elaboratedMatchupData.allTrackIds.length; rowIdx++) {
       const trackId = elaboratedMatchupData.allTrackIds[rowIdx] >>> 1;
       const isLap = elaboratedMatchupData.allTrackIds[rowIdx] % 2 === 1;
-      const track = getTrackById(metadata.tracks, trackId);
+      const track = metadata.getTrackById(trackId);
 
       if ((lapMode === LapModeEnum.Lap && !isLap) || (lapMode === LapModeEnum.Course && isLap)) {
         skipNum++;
