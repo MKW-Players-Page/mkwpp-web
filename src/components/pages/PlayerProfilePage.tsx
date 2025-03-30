@@ -4,9 +4,8 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { FlagIcon, Icon, Tooltip } from "../widgets";
-import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
-import { formatDate, formatTime } from "../../utils/Formatters";
+import { formatLapMode, formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
@@ -14,7 +13,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeRadio } from "../widgets/LapModeSelect";
-import { LapModeEnum, CategoryEnum, Region, RegionType } from "../../rust_api";
+import { LapModeEnum, CategoryEnum, Region, RegionType, Timesheet, Player } from "../../rust_api";
 import {
   I18nContext,
   translate,
@@ -45,24 +44,12 @@ const PlayerProfilePage = () => {
     isLoading: playerLoading,
     data: player,
     error: playerError,
-  } = useApi(() => api.timetrialsPlayersRetrieve({ id }), [id], "playerProfile");
+  } = useApi(() => Player.getPlayer(id), [id], "playerProfile");
 
-  const { isLoading: statsLoading, data: stats } = useApi(
-    () =>
-      api.timetrialsPlayersStatsRetrieve({
-        id,
-        category,
-        lapMode,
-        region: region?.id ?? 1,
-      }),
+  const { isLoading: timesheetLoading, data: timesheet } = useApi(
+    () => Timesheet.get(id, category, lapMode, region?.id ?? 1),
     [id, category, lapMode, region],
-    "playerProfileStats",
-  );
-
-  const { isLoading: scoresLoading, data: scores } = useApi(
-    () => api.timetrialsPlayersScoresList({ id, category, region: region?.id ?? 1 }),
-    [id, category, region],
-    "playerProfileScores",
+    "playerProfileTimesheet",
   );
 
   const siteHue = getCategorySiteHue(category, settings);
@@ -87,13 +74,13 @@ const PlayerProfilePage = () => {
   };
 
   const sortedRows: ArrayTableCellData[][] =
-    scores?.map((score, index, arr) => {
-      const track = metadata.tracks?.find((track) => track.id === score.track);
+    timesheet?.times?.map((score, index, arr) => {
+      const track = metadata.tracks?.find((track) => track.id === score.trackId);
       const trackLink = (
         <Link
           to={resolvePage(
             Pages.TrackChart,
-            { id: score.track },
+            { id: score.trackId },
             {
               reg: region.id !== 1 ? region.code.toLowerCase() : null,
               cat: category !== CategoryEnum.NonShortcut ? category : null,
@@ -113,7 +100,7 @@ const PlayerProfilePage = () => {
         <Link
           to={resolvePage(
             Pages.TrackChart,
-            { id: score.track },
+            { id: score.trackId },
             {
               reg: region.id !== 1 ? region.code.toLowerCase() : null,
               cat: category !== CategoryEnum.NonShortcut ? category : null,
@@ -145,17 +132,17 @@ const PlayerProfilePage = () => {
         {
           rowIdx: index,
           sortKey: "standard",
-          sortValue: score.standard,
+          sortValue: metadata.getStandardLevel(score.stdLvlCode)?.value,
         },
         {
           rowIdx: index,
           sortKey: "prwr",
-          sortValue: ~~score.recordRatio,
+          sortValue: ~~score.prwr,
         },
         {
           rowIdx: index,
           sortKey: "date",
-          sortValue: +(score.date ?? new Date(0)),
+          sortValue: +new Date(score.date ?? 0),
         },
       );
 
@@ -163,7 +150,7 @@ const PlayerProfilePage = () => {
         {
           content: trackLink,
           expandCell: [
-            arr[index - 1] && score.isLap && arr[index - 1].track === score.track,
+            arr[index - 1] && score.isLap && arr[index - 1].trackId === score.trackId,
             false,
           ],
           className: "overall-shown sort-hidden",
@@ -186,12 +173,12 @@ const PlayerProfilePage = () => {
           className: timeClassName + " overall-hidden",
         },
         { content: score.rank },
-        { content: translateStandardName(metadata.getStandardLevel(score.standard), lang) },
-        { content: (score.recordRatio * 100).toFixed(2) + "%" },
+        { content: translateStandardName(score.stdLvlCode, lang) },
+        { content: (score.prwr * 100).toFixed(2) + "%" },
         {
           content: (
             <SmallBigDateFormat
-              date={score.date}
+              date={new Date(score.date)}
               bigClass="player-profile-columns-b1"
               smallClass="player-profile-columns-s1"
             />
@@ -232,7 +219,7 @@ const PlayerProfilePage = () => {
             region.regionType === RegionType.Subnational ||
             region.regionType === RegionType.SubnationalGroup
           }
-          region={metadata.getRegionById(player?.region ?? 0)}
+          region={metadata.getRegionById(player?.regionId ?? 0)}
         />
         {player?.name ?? <>&nbsp;</>}
       </h1>
@@ -240,7 +227,7 @@ const PlayerProfilePage = () => {
         <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
-          {player?.region !== undefined && player?.region !== null && player?.region !== 1 ? (
+          {player?.regionId !== undefined && player?.regionId !== null && player?.regionId !== 1 ? (
             <Dropdown
               data={
                 {
@@ -251,7 +238,7 @@ const PlayerProfilePage = () => {
                   data: [
                     {
                       id: 0,
-                      children: getAllRegions([], player?.region ?? 1)
+                      children: getAllRegions([], player?.regionId ?? 1)
                         .reverse()
                         .map((region) => {
                           return {
@@ -279,7 +266,7 @@ const PlayerProfilePage = () => {
                 <tbody>
                   <tr>
                     <td>{translate("playerProfilePageLocation", lang)}</td>
-                    <td>{translateRegionNameFull(metadata, lang, player?.region)}</td>
+                    <td>{translateRegionNameFull(metadata, lang, player?.regionId)}</td>
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageAlias", lang)}</td>
@@ -287,18 +274,18 @@ const PlayerProfilePage = () => {
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageDateJoined", lang)}</td>
-                    <td>{player?.joinedDate && formatDate(player.joinedDate)}</td>
+                    <td>{new Date(player?.joinedDate ?? 0).toLocaleDateString(lang)}</td>
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageLastActivity", lang)}</td>
-                    <td>{player?.lastActivity && formatDate(player.lastActivity)}</td>
+                    <td>{new Date(player?.lastActivity ?? 0).toLocaleDateString(lang)}</td>
                   </tr>
                 </tbody>
               </table>
             </Deferred>
           </div>
           <div className="module">
-            <Deferred isWaiting={statsLoading}>
+            <Deferred isWaiting={timesheetLoading}>
               <table>
                 <tbody>
                   <tr>
@@ -310,22 +297,18 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats ? (
-                        <Link
-                          to={resolvePage(
-                            Pages.RankingsAverageFinish,
-                            {},
-                            {
-                              ...rankingsRedirectParams,
-                              hl: RankingsMetrics.AverageFinish.getHighlightValue(stats),
-                            },
-                          )}
-                        >
-                          {RankingsMetrics.AverageFinish.getValueString(stats)}
-                        </Link>
-                      ) : (
-                        "-"
-                      )}
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsAverageFinish,
+                          {},
+                          {
+                            ...rankingsRedirectParams,
+                            hl: RankingsMetrics.AverageFinish.getHighlightValue(timesheet?.af ?? 0),
+                          },
+                        )}
+                      >
+                        {RankingsMetrics.AverageFinish.getValueString(timesheet?.af ?? 0)}
+                      </Link>
                     </td>
                   </tr>
                   <tr>
@@ -337,22 +320,20 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats ? (
-                        <Link
-                          to={resolvePage(
-                            Pages.RankingsAverageStandard,
-                            {},
-                            {
-                              ...rankingsRedirectParams,
-                              hl: RankingsMetrics.AverageStandard.getHighlightValue(stats),
-                            },
-                          )}
-                        >
-                          {RankingsMetrics.AverageStandard.getValueString(stats)}
-                        </Link>
-                      ) : (
-                        "-"
-                      )}
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsAverageStandard,
+                          {},
+                          {
+                            ...rankingsRedirectParams,
+                            hl: RankingsMetrics.AverageStandard.getHighlightValue(
+                              timesheet?.arr ?? 0,
+                            ),
+                          },
+                        )}
+                      >
+                        {RankingsMetrics.AverageStandard.getValueString(timesheet?.arr ?? 0)}
+                      </Link>
                     </td>
                   </tr>
                   <tr>
@@ -368,22 +349,20 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats ? (
-                        <Link
-                          to={resolvePage(
-                            Pages.RankingsAverageRecordRatio,
-                            {},
-                            {
-                              ...rankingsRedirectParams,
-                              hl: RankingsMetrics.AverageRecordRatio.getHighlightValue(stats),
-                            },
-                          )}
-                        >
-                          {RankingsMetrics.AverageRecordRatio.getValueString(stats)}
-                        </Link>
-                      ) : (
-                        "-"
-                      )}
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsAverageRecordRatio,
+                          {},
+                          {
+                            ...rankingsRedirectParams,
+                            hl: RankingsMetrics.AverageRecordRatio.getHighlightValue(
+                              timesheet?.prwr ?? 0,
+                            ),
+                          },
+                        )}
+                      >
+                        {RankingsMetrics.AverageRecordRatio.getValueString(timesheet?.prwr ?? 0)}
+                      </Link>
                     </td>
                   </tr>
                   <tr>
@@ -393,22 +372,20 @@ const PlayerProfilePage = () => {
                       </Link>
                     </td>
                     <td>
-                      {stats ? (
-                        <Link
-                          to={resolvePage(
-                            Pages.RankingsTotalTime,
-                            {},
-                            {
-                              ...rankingsRedirectParams,
-                              hl: RankingsMetrics.TotalTime.getHighlightValue(stats),
-                            },
-                          )}
-                        >
-                          {RankingsMetrics.TotalTime.getValueString(stats)}
-                        </Link>
-                      ) : (
-                        "-"
-                      )}
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsTotalTime,
+                          {},
+                          {
+                            ...rankingsRedirectParams,
+                            hl: RankingsMetrics.TotalTime.getHighlightValue(
+                              timesheet?.totalTime ?? 0,
+                            ),
+                          },
+                        )}
+                      >
+                        {RankingsMetrics.TotalTime.getValueString(timesheet?.totalTime ?? 0)}
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
@@ -436,7 +413,7 @@ const PlayerProfilePage = () => {
           </div>
         </div>
         <div className="module">
-          <Deferred isWaiting={metadata.isLoading || scoresLoading}>
+          <Deferred isWaiting={metadata.isLoading || timesheetLoading}>
             <ArrayTable
               headerRows={[
                 [
@@ -515,7 +492,7 @@ const PlayerProfilePage = () => {
               ]}
               rows={sortedRows}
               tableData={tableData}
-              className={"player-profile-table " + lapMode}
+              className={"player-profile-table " + formatLapMode(lapMode).toLowerCase()}
             />
           </Deferred>
         </div>

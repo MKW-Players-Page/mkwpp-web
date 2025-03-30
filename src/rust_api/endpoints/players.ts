@@ -62,15 +62,15 @@ export class PlayerBasic {
 
 export class Player extends PlayerBasic {
   readonly bio?: string;
-  readonly joinedDate: Date;
-  readonly lastActivity: Date;
+  readonly joinedDate: string;
+  readonly lastActivity: string;
 
   constructor(
     id: number,
     name: string,
     regionId: number,
-    joinedDate: Date,
-    lastActivity: Date,
+    joinedDate: string,
+    lastActivity: string,
     bio?: string,
     alias?: string,
   ) {
@@ -94,7 +94,7 @@ export class Player extends PlayerBasic {
 
     if (actuallyFetch.length === 0) return new Promise(() => alreadyGrabbed);
 
-    return apiFetch<Array<Player>>("/custom/players/select_basic", {
+    return apiFetch<Array<Player>>("/custom/players/select", {
       body: JSON.stringify(ids),
       method: "POST",
       headers: {

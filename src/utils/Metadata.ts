@@ -91,11 +91,12 @@ export class Metadata {
    * @param standardId The id of the standard
    * @returns A StandardLevel object, or `undefined` if no standard with the given id exists.
    */
-  getStandardLevel(standard: Standard | number): StandardLevel | undefined {
+  getStandardLevel(standard: Standard | number | string): StandardLevel | undefined {
     if (!this.standardLevels) {
       return undefined;
     }
 
+    if (typeof standard === "string") return this.standardLevels.find((s) => s.code === standard);
     const standardLevelId = typeof standard === "number" ? standard : standard.standardLevelId;
     return this.standardLevels.find((s) => s.id === standardLevelId);
   }

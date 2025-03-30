@@ -5,19 +5,19 @@ type Time = Omit<Score, "player">;
 
 export class Timesheet {
   times: Array<Time>;
-  af?: number;
-  totalTime?: number;
-  tally?: number;
-  arr?: number;
-  prwr?: number;
+  af: number;
+  totalTime: number;
+  tally: number;
+  arr: number;
+  prwr: number;
 
   constructor(
     times: Array<Time>,
-    af?: number,
-    totalTime?: number,
-    tally?: number,
-    arr?: number,
-    prwr?: number,
+    af: number,
+    totalTime: number,
+    tally: number,
+    arr: number,
+    prwr: number,
   ) {
     this.times = times;
     this.af = af;

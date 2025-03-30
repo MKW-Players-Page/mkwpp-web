@@ -60,11 +60,11 @@ export class Score {
   readonly player: PlayerBasic;
   readonly trackId: number;
   readonly date: string;
+  readonly rank: number;
+  readonly prwr: number;
   readonly videoLink?: string;
   readonly ghostLink?: string;
   readonly comment?: string;
-  readonly rank?: number;
-  readonly prwr?: number;
   readonly initialRank?: number;
 
   constructor(
@@ -76,11 +76,11 @@ export class Score {
     player: PlayerBasic,
     trackId: number,
     date: string,
+    rank: number,
+    prwr: number,
     video_link?: string,
     ghost_link?: string,
     comment?: string,
-    rank?: number,
-    prwr?: number,
     initialRank?: number,
   ) {
     this.id = id;
@@ -91,11 +91,11 @@ export class Score {
     this.player = player;
     this.trackId = trackId;
     this.date = date;
+    this.rank = rank;
+    this.prwr = prwr;
     this.videoLink = video_link;
     this.ghostLink = ghost_link;
     this.comment = comment;
-    this.rank = rank;
-    this.prwr = prwr;
     this.initialRank = initialRank;
   }
 
