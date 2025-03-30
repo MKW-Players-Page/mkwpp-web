@@ -59,8 +59,8 @@ export const RankingsMetrics: RankingsMetricMap = {
     descriptionKey: "rankingsPageAverageRecordRatioDescription",
     metric: MetricEnum.PersonalRecordToWorldRecord,
     metricOrder: -1,
-    getHighlightValue: (prwr) => parseInt(prwr.toFixed(4)),
-    getValueString: (prwr) => prwr.toFixed(4) + "%",
+    getHighlightValue: (prwr) => parseInt((prwr * 100).toFixed(4)),
+    getValueString: (prwr) => (prwr * 100).toFixed(4) + "%",
   },
   TotalTime: {
     titleKey: "rankingsPageTotalTimeTitle",
