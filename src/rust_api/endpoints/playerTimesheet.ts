@@ -36,6 +36,6 @@ export class Timesheet {
   ): Promise<Timesheet> {
     return apiFetch(
       `/custom/scores/timesheet/${playerId}${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
-    ).then((r) => r.json());
+    );
   }
 }

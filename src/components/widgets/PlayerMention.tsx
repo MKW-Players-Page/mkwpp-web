@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Player, Region } from "../../rust_api";
+import { Region, PlayerBasic } from "../../rust_api";
 import { useApi } from "../../hooks";
-import { PlayerBasic } from "../../rust_api";
 import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import { FlagIcon } from "./Icon";
@@ -107,7 +106,7 @@ const PlayerMention = ({
 
   let resolvedPlayerId: number = typeof playerOrId === "number" ? playerOrId : playerOrId.id;
   if (typeof playerOrId !== "number") metadata.cachePlayers = [playerOrId];
-  
+
   const region: Region | undefined =
     regionOrId !== undefined
       ? typeof regionOrId === "number"

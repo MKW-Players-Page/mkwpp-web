@@ -37,15 +37,15 @@ export class Region {
   }
 
   public static async get(): Promise<Array<Region>> {
-    return apiFetch("/custom/regions/with_player_count").then((r) => r.json());
+    return apiFetch("/custom/regions/with_player_count");
   }
 
   public static async getRegionTypeHashmap(): Promise<Record<RegionType, number[]>> {
-    return apiFetch("/custom/regions/type_hashmap").then((r) => r.json());
+    return apiFetch("/custom/regions/type_hashmap");
   }
 
   public static async getRegionDescendentsTree(): Promise<RegionTree> {
-    return apiFetch("/custom/regions/descendence_tree").then((r) => r.json());
+    return apiFetch("/custom/regions/descendence_tree");
   }
 
   public static reduceRankedViaId(metadata: Metadata, acc: Region[], id: number): Region[] {

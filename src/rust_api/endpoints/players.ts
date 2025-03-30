@@ -19,7 +19,7 @@ export class PlayerBasic {
   }
 
   public static async getPlayerList(): Promise<Array<PlayerBasic>> {
-    return apiFetch("/custom/players/list").then((r) => r.json());
+    return apiFetch("/custom/players/list");
   }
 
   public static async getPlayersBasic(
@@ -39,22 +39,23 @@ export class PlayerBasic {
 
     if (actuallyFetch.length === 0) return new Promise((res) => res(alreadyGrabbed));
 
-    return apiFetch("/custom/players/select_basic", {
+    return apiFetch<Array<PlayerBasic>>("/custom/players/select_basic", {
       body: JSON.stringify(ids),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((r) => r.json())
-      .then((r: Array<PlayerBasic>) => {
-        if (metadata !== undefined) metadata.cachePlayers = r;
-        r.push(...alreadyGrabbed);
-        return r;
-      });
+    }).then((r) => {
+      if (metadata !== undefined) metadata.cachePlayers = r;
+      r.push(...alreadyGrabbed);
+      return r;
+    });
   }
 
-  public static async getPlayerBasic(id: number, metadata?: Metadata): Promise<PlayerBasic | undefined> {
+  public static async getPlayerBasic(
+    id: number,
+    metadata?: Metadata,
+  ): Promise<PlayerBasic | undefined> {
     return this.getPlayersBasic([id], metadata).then((r) => r[0]);
   }
 }
@@ -93,19 +94,17 @@ export class Player extends PlayerBasic {
 
     if (actuallyFetch.length === 0) return new Promise(() => alreadyGrabbed);
 
-    return apiFetch("/custom/players/select_basic", {
+    return apiFetch<Array<Player>>("/custom/players/select_basic", {
       body: JSON.stringify(ids),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((r) => r.json())
-      .then((r: Array<Player>) => {
-        if (metadata !== undefined) metadata.cachePlayers = r;
-        r.push(...alreadyGrabbed);
-        return r;
-      });
+    }).then((r) => {
+      if (metadata !== undefined) metadata.cachePlayers = r;
+      r.push(...alreadyGrabbed);
+      return r;
+    });
   }
 
   public static async getPlayer(id: number, metadata?: Metadata): Promise<Player | undefined> {

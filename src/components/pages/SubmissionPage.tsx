@@ -278,8 +278,8 @@ const SubmissionsTab = () => {
               filter === SubmissionFilter.All
                 ? true
                 : filter === SubmissionFilter.ByYou
-                  ? submission.submittedBy.player.id === user?.player
-                  : submission.player.id === user?.player,
+                  ? submission.submittedBy.player.id === user?.playerId
+                  : submission.player.id === user?.playerId,
             )
             .map((submission) => <SubmissionCard setReload={setReload} submission={submission} />)}
         </div>
@@ -360,7 +360,7 @@ const TimesheetTab = () => {
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
   const { isLoading: scoresLoading, data: scores } = useApi(
-    () => api.timetrialsPlayersScoresList({ id: user?.player ?? 1, category, region: 1 }),
+    () => api.timetrialsPlayersScoresList({ id: user?.playerId ?? 1, category, region: 1 }),
     [user, category, reload],
     "playerProfileScores",
   );

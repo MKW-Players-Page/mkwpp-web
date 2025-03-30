@@ -23,18 +23,16 @@ export class Track {
   }
 
   public static async get(): Promise<Array<Track>> {
-    return apiFetch("/raw/tracks")
-      .then((r) => r.json())
-      .then((r) =>
-        r.map(
-          (z: JsonTrack) =>
-            new Track(
-              z.id,
-              z.cupId,
-              z.abbr,
-              z.categories.map((r) => getCategoryFromNumber(r)),
-            ),
-        ),
-      );
+    return apiFetch<Array<JsonTrack>>("/raw/tracks").then((r) =>
+      r.map(
+        (z: JsonTrack) =>
+          new Track(
+            z.id,
+            z.cupId,
+            z.abbr,
+            z.categories.map((r) => getCategoryFromNumber(r)),
+          ),
+      ),
+    );
   }
 }

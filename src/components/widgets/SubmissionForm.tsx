@@ -79,7 +79,7 @@ const SubmissionForm = ({
 
   const initialState = {
     state: SubmitStateEnum.Form,
-    player: starterPlayer ?? user?.player ?? 1,
+    player: starterPlayer ?? user?.playerId ?? 1,
     track: starterTrack ?? 1,
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
@@ -334,7 +334,7 @@ const SubmissionForm = ({
                 editModeScore !== undefined
                   ? [state.player]
                   : [
-                      deleteId !== undefined ? state.player : (user?.player ?? 0),
+                      deleteId !== undefined ? state.player : (user?.playerId ?? 0),
                       ...(submittees === undefined || submittees.length === 0
                         ? []
                         : submittees.map((r) => r.id as number)),

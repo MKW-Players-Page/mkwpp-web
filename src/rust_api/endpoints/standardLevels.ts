@@ -14,6 +14,6 @@ export class StandardLevel {
   }
 
   public static async get(): Promise<Array<StandardLevel>> {
-    return apiFetch("/raw/standard_levels").then((r) => r.json());
+    return apiFetch("/raw/standard_levels");
   }
 }

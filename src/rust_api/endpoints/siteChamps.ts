@@ -14,10 +14,8 @@ export class SiteChamp {
   }
 
   public static async get(category?: CategoryEnum): Promise<Array<SiteChamp>> {
-    return apiFetch(
+    return apiFetch<Array<unknown>>(
       category === undefined ? "/raw/site_champs" : `/custom/site_champs/category/${category}`,
-    )
-      .then((r) => r.json())
-      .then((r) => r.map((r: any) => new SiteChamp(r.id, r.playerId, r.category, r.dateInstated)));
+    ).then((r) => r.map((r: any) => new SiteChamp(r.id, r.playerId, r.category, r.dateInstated)));
   }
 }

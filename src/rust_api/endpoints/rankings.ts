@@ -31,6 +31,6 @@ export class Ranking {
   ): Promise<Array<Ranking>> {
     return apiFetch(
       `/custom/rankings/${type}${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
-    ).then((r) => r.json());
+    );
   }
 }

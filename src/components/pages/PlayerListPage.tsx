@@ -59,7 +59,7 @@ const PlayerListPage = () => {
                     sortAlias.includes(filter) ||
                     locationString.toLowerCase().normalize("NFKD").includes(filter)
                   ),
-                player.id === user?.player,
+                player.id === user?.playerId,
                 sortAlias,
               ];
             })

@@ -6,7 +6,6 @@ import { MetadataContext, useMetadata } from "../utils/Metadata";
 import "./App.css";
 import "./App.scss";
 import { Header, Navbar } from "./global";
-import { User } from "../api";
 import { fetchCurrentUser, UserContext } from "../utils/User";
 import { getLang, I18nContext, Language } from "../utils/i18n/i18n";
 import i18nJson from "../utils/i18n/i18n.json";
@@ -16,6 +15,7 @@ import {
   SettingsContext,
   SettingsDataKey,
 } from "../utils/Settings";
+import { User } from "../rust_api";
 
 interface AppUserState {
   isLoading: boolean;

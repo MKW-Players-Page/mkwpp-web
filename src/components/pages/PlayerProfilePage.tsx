@@ -71,8 +71,8 @@ const PlayerProfilePage = () => {
     let region = metadata.getRegionById(startId);
     if (region === undefined) return arr;
     arr.push(region);
-    if (region.parent === undefined || region.parent === null) return arr;
-    return getAllRegions(arr, region.parent);
+    if (region.parentId === undefined || region.parentId === null) return arr;
+    return getAllRegions(arr, region.parentId);
   };
 
   const rankingsRedirectParams = {

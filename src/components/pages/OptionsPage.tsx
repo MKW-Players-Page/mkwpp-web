@@ -24,7 +24,7 @@ const OptionsPage = () => {
 
   // it doesn't matter what player is loaded if you aren't logged in.
   const { isLoading: playerLoading, data: player } = useApi(
-    () => Player.getPlayer(user?.player ?? 1),
+    () => Player.getPlayer(user?.playerId ?? 1),
     [user],
     "loadedUser",
   );
@@ -200,7 +200,7 @@ const OptionsPage = () => {
                   id={newSubmitterId}
                   setId={newSubmitterSetId}
                   blacklist
-                  restrictSet={[user.player]}
+                  restrictSet={[user.playerId]}
                 />
                 <button
                   style={{ marginRight: "10px" }}

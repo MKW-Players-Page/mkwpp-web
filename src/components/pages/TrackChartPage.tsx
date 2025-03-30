@@ -107,7 +107,7 @@ const TrackChartPage = () => {
       ]);
     }
 
-    if (user?.player === score.player.id || score.value === highlight) {
+    if (user?.playerId === score.player.id || score.value === highlight) {
       if (highlight !== null && score.value === highlight) tableData.highlightedRow = idx;
       tableData.classNames?.push({
         rowIdx: idx + (hasHighlightRow ? 1 : 0),

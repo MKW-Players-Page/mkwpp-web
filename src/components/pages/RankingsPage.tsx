@@ -139,7 +139,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
       ]);
     }
 
-    if (stats.player.id === user?.player || metric.getHighlightValue(stats.value) === highlight) {
+    if (stats.player.id === user?.playerId || metric.getHighlightValue(stats.value) === highlight) {
       if (highlight !== null && metric.getHighlightValue(stats.value) === highlight)
         tableData.highlightedRow = idx;
       tableData.classNames?.push({

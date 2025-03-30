@@ -12,6 +12,6 @@ export class Cup {
   }
 
   public static async get(): Promise<Array<Cup>> {
-    return apiFetch("/raw/cups").then((r) => r.json());
+    return apiFetch("/raw/cups");
   }
 }

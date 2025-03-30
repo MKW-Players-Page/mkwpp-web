@@ -79,7 +79,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
               {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
               <Link
                 className="small-hide"
-                to={resolvePage(Pages.PlayerProfile, { id: user.player })}
+                to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
               >
                 {user.username}
               </Link>
@@ -135,7 +135,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
             onClick={(e) => {
               setAccountActionsVisible(false);
             }}
-            to={resolvePage(Pages.PlayerProfile, { id: user.player })}
+            to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
           >
             {user.username}
           </Link>

@@ -25,6 +25,6 @@ export class Standard {
   }
 
   public static async get(): Promise<Array<Standard>> {
-    return apiFetch("/raw/standards").then((r) => r.json());
+    return apiFetch("/raw/standards");
   }
 }

@@ -149,8 +149,8 @@ const StandardsPage = () => {
   const { user } = useContext(UserContext);
 
   const { data: userScores, isLoading: scoresLoading } = useApi(
-    () => Timesheet.get(user?.player ?? 1, category),
-    [user?.player, category],
+    () => Timesheet.get(user?.playerId ?? 1, category),
+    [user?.playerId, category],
     "Timesheet.get",
   );
 

@@ -124,7 +124,7 @@ const TrackTopsPage = () => {
                                 <tr
                                   key={score.id}
                                   className={
-                                    user && score.player.id === user.player ? "highlighted" : ""
+                                    user && score.player.id === user.playerId ? "highlighted" : ""
                                   }
                                 >
                                   <td>{score.rank}</td>

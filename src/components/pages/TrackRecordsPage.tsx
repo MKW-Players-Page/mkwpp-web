@@ -116,7 +116,7 @@ const TrackRecordsPage = () => {
       });
       const score = scores?.find((score) => score.trackId === track.id && score.isLap === isLap);
       if (score !== undefined) {
-        if (score?.player.id === user?.player)
+        if (score?.player.id === user?.playerId)
           tableData.classNames?.push({
             rowIdx: (track.id - 1) * 4 + (isLap ? 1 : 0) + (big ? 0 : 2),
             className: "highlighted",

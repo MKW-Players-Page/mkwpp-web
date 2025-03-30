@@ -1,6 +1,7 @@
+export { User, AuthData } from "./endpoints/user";
 export { Cup } from "./endpoints/cups";
 export { Track } from "./endpoints/tracks";
-export { Player, PlayerBasic } from "./endpoints/players";
+export { Player, PlayerBasic, typeguardPlayer } from "./endpoints/players";
 export { Region, RegionType, type RegionTree, worldDefault } from "./endpoints/regions";
 export { StandardLevel } from "./endpoints/standardLevels";
 export { Standard } from "./endpoints/standards";
@@ -19,7 +20,7 @@ export { Timesheet } from "./endpoints/playerTimesheet";
 
 const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 
-export const apiFetch = (endpoint: string, init?: RequestInit): Promise<Response> => {
+export const apiFetch = async <T>(endpoint: string, init?: RequestInit): Promise<T> => {
   if (
     init &&
     (init?.method === "GET" || init?.method === "HEAD" || init?.method === undefined) &&
@@ -27,7 +28,22 @@ export const apiFetch = (endpoint: string, init?: RequestInit): Promise<Response
   )
     console.error("Method can't be GET or HEAD and have a body");
 
-  return fetch(url + "/v1" + endpoint, { method: "GET", ...init });
+  return fetch(url + "/v1" + endpoint, { method: "GET", ...init })
+    .then((r) => r.json())
+    .then((r) => {
+      if (typeguardErrorResponse(r)) {
+        // eslint-disable-next-line
+        throw { non_field_errors: r.non_field_errors, ...r.field_errors };
+      }
+      return r;
+    });
 };
 
-export const dateReviver = () => {};
+export interface FinalErrorResponse {
+  non_field_errors: string[];
+  field_errors: Record<string, string[]>;
+}
+
+const typeguardErrorResponse = (x: Object): x is FinalErrorResponse => {
+  return x.hasOwnProperty("non_field_errors") && x.hasOwnProperty("field_errors");
+};

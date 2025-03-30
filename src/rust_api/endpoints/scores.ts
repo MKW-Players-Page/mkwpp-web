@@ -109,7 +109,7 @@ export class Score {
   ): Promise<Array<Score>> {
     return apiFetch(
       `/custom/scores/chart/${trackId}${buildQueryParamString({ cat: category, lap: +isLap, reg: regionId, dat: date, lim: limit })}`,
-    ).then((r) => r.json());
+    );
   }
 
   public static async getRecords(
@@ -120,15 +120,13 @@ export class Score {
   ): Promise<Array<Score>> {
     return apiFetch(
       `/custom/scores/records/${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
-    ).then((r) => r.json());
+    );
   }
 
   public static async getRecent(
     limit: number,
     recordsOnly: boolean = false,
   ): Promise<Array<ScoreByDate>> {
-    return apiFetch(`/custom/scores/recent/${limit}/${recordsOnly ? "records" : "all"}`).then((r) =>
-      r.json(),
-    );
+    return apiFetch(`/custom/scores/recent/${limit}/${recordsOnly ? "records" : "all"}`);
   }
 }
