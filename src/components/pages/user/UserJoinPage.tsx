@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router";
 
 import { Pages, resolvePage } from "../Pages";
 import Form, { Field } from "../../widgets/Form";

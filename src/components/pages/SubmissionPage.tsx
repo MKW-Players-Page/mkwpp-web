@@ -6,7 +6,7 @@ import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
 import api, { CategoryEnum, EditScoreSubmission, Score, Track } from "../../api";
 import { getTrackById, MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
 import { handleBars, I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";

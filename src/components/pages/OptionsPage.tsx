@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import api from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";

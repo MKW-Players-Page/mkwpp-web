@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router";
 
 import { Pages, resolvePage } from "../Pages";
 import { coreApi } from "../../../api";

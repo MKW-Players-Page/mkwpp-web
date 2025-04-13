@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import api, { Player, Region } from "../../api";
 import { useApi } from "../../hooks";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
