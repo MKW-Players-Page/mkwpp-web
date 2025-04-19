@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";

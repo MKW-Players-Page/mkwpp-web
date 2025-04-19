@@ -5,7 +5,7 @@ import parse from "html-react-parser";
 
 interface TrackCategoryProps {
   trackName: string;
-  children: JSX.Element[];
+  children: React.ReactElement[];
 }
 
 const TrackCategory = ({ trackName, children }: TrackCategoryProps) => {

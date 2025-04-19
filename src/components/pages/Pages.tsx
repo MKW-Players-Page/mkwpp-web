@@ -1,4 +1,4 @@
-import { RouteObject, generatePath } from "react-router-dom";
+import { RouteObject, generatePath } from "react-router";
 
 import HomePage from "./HomePage";
 import MatchupHomePage from "./matchup/MatchupSearch";

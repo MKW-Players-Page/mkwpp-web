@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 
 import { MetadataContext, useMetadata } from "../utils/Metadata";
 

@@ -1,5 +1,5 @@
 export interface OverwriteColorProp {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   hue?: number;
   saturationShift?: number;
   luminosityShift?: number;

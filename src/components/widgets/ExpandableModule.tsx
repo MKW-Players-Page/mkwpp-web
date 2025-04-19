@@ -6,7 +6,7 @@ export interface ExpandableModuleProps {
   heading: string;
   defaultExpanded?: boolean;
   style?: React.CSSProperties;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const ExpandableModule = ({ children, defaultExpanded, heading, style }: ExpandableModuleProps) => {

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SetURLSearchParams } from "react-router-dom";
+import { SetURLSearchParams } from "react-router";
 import { CategoryEnum, Region } from "../api";
 import { LapModeEnum } from "../components/widgets/LapModeSelect";
 import { MetadataContext } from "./Metadata";

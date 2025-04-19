@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 import Deferred from "../widgets/Deferred";
 import api from "../../api";
