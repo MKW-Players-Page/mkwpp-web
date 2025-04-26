@@ -8,7 +8,7 @@ export interface DropdownProp {
 
 interface DropdownListProp {
   shown: boolean;
-  children: JSX.Element[];
+  children: React.ReactNode;
   x: number;
   y: number;
   width: number;
@@ -19,9 +19,9 @@ interface DropdownItemSetSetterProp {
   /** Displayed Text */
   text: string;
   /** Optional Left-side Icon */
-  leftIcon?: JSX.Element;
+  leftIcon?: React.ReactNode;
   /** Optional Right-side Icon */
-  rightIcon?: JSX.Element;
+  rightIcon?: React.ReactNode;
   /** Value of item set ID to go to. */
   toItemSetId: number;
   /** Do not set this value. This is automatically set by <DropdownItemSet>. */
@@ -60,18 +60,18 @@ export interface DropdownItemData {
   /** Item Value */
   value: any;
   /** Optional Left-side Icon */
-  leftIcon?: JSX.Element;
+  leftIcon?: React.ReactNode;
   /** Optional Right-side Icon */
-  rightIcon?: JSX.Element;
+  rightIcon?: React.ReactNode;
 }
 
 export interface DropdownItemSetSetterData {
   /** Displayed Text */
   text: string;
   /** Optional Left-side Icon */
-  leftIcon?: JSX.Element;
+  leftIcon?: React.ReactNode;
   /** Optional Right-side Icon */
-  rightIcon?: JSX.Element;
+  rightIcon?: React.ReactNode;
   /** Value of item set ID to go to. */
   toItemSetId: number;
 }
@@ -242,8 +242,8 @@ interface NormalDropdownProp {
   selectedValueItemSetChildrenLength: number;
   setDropdownListShown: React.Dispatch<React.SetStateAction<boolean>>;
   dropdownListShown: boolean;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   text: string;
   setSelectedItemSet: React.Dispatch<React.SetStateAction<number>>;
   setDropdownListPos: React.Dispatch<React.SetStateAction<any>>;
@@ -317,8 +317,8 @@ interface TextInputDropdownProp {
   selectedValueItemSetChildrenLength: number;
   setDropdownListShown: React.Dispatch<React.SetStateAction<boolean>>;
   dropdownListShown: boolean;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   text: string;
   setSelectedItemSet: React.Dispatch<React.SetStateAction<number>>;
   setDropdownListPos: React.Dispatch<React.SetStateAction<any>>;
@@ -431,9 +431,9 @@ interface DropdownItemProp {
   /** Item Value */
   value: any;
   /** Optional Left-side Icon */
-  leftIcon?: JSX.Element;
+  leftIcon?: React.ReactNode;
   /** Optional Right-side Icon */
-  rightIcon?: JSX.Element;
+  rightIcon?: React.ReactNode;
   /** Value State Setter */
   valueSetter: React.Dispatch<React.SetStateAction<any>>;
   /** Do not set this value. This is automatically set by <DropdownItemSet>. */

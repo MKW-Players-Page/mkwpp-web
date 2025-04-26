@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";

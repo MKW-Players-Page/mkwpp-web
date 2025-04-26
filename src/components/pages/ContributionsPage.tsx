@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { handleBars, I18nContext, Language, LanguageName, translate } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -360,8 +360,8 @@ const ContributionsPage = () => {
 
 interface FeatureProps {
   title?: string;
-  description?: JSX.Element;
-  images?: JSX.Element;
+  description?: React.ReactNode;
+  images?: React.ReactNode;
   workedOnBy?: number[];
   suggestedBy?: number[];
 }

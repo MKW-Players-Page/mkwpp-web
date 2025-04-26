@@ -50,7 +50,7 @@ const ArrayTableRow = ({
   setSort,
 }: ArrayTableRowProps) => {
   const { settings } = useContext(SettingsContext);
-  const Cell: keyof JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
+  const Cell: keyof React.JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
 
   return (
     <tr id={id} className={className}>
@@ -186,7 +186,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
           .join(" ")}
       />
     ))
-    .reduce((acc: (JSX.Element | RowSortData)[], val, idx) => {
+    .reduce((acc: (React.ReactElement | RowSortData)[], val, idx) => {
       let newIdx = idx;
       if (sort[1] !== Sort.Reset)
         newIdx = acc?.findIndex((r) => (r ? (r as RowSortData).rowIdx === idx : false));

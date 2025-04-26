@@ -10,7 +10,7 @@ import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18
 import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { usePageNumber } from "../../utils/SearchParams";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 
 const PlayerListPage = () => {
