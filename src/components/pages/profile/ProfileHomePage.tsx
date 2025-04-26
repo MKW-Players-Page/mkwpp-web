@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router";
 
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { UserContext } from "../../../utils/User";

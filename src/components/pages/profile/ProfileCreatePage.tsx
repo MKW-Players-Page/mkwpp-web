@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
