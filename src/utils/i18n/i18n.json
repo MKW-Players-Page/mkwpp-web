@@ -14264,6 +14264,24 @@
     "pt": "",
     "es": ""
   },
+  "profileCreatePageFieldLabelContinent": {
+    "it": "",
+    "en": "Continent",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "profileCreatePageFieldLabelCountry": {
+    "it": "",
+    "en": "Country",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "profileCreatePageFieldLabelRegion": {
     "it": "",
     "en": "Region",
