@@ -155,8 +155,8 @@ export interface SelectFieldProps {
 export const SelectField = ({ options, field, label }: SelectFieldProps) => {
   const { getValue, setValue, getErrors, disabled } = useContext(FormContext);
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setValue(field, e.target.value);
+  const onChange = (value: string) => {
+    setValue(field, value);
   };
 
   const errors = getErrors(field);

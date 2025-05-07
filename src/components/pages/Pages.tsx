@@ -15,6 +15,9 @@ import TrackTopsPage, { TrackTopsHomePage } from "./TrackTopsPage";
 import SubmissionPage from "./SubmissionPage";
 import BlogListPage from "./blog/BlogListPage";
 import BlogPostPage from "./blog/BlogPostPage";
+import ProfileClaimPage from "./profile/ProfileClaimPage";
+import ProfileCreatePage from "./profile/ProfileCreatePage";
+import ProfileHomePage from "./profile/ProfileHomePage";
 import UserActivationPage from "./user/UserActivationPage";
 import UserJoinPage, { UserJoinSuccessPage } from "./user/UserJoinPage";
 import UserLoginPage from "./user/UserLoginPage";
@@ -106,6 +109,18 @@ export const Pages: PageMap = {
   PastChamps: {
     path: "/champs",
     element: <PastChampsPage />,
+  },
+  ProfileHome: {
+    path: "/profile",
+    element: <ProfileHomePage />,
+  },
+  ProfileClaim: {
+    path: "/profile/claim",
+    element: <ProfileClaimPage />,
+  },
+  ProfileCreate: {
+    path: "/profile/create",
+    element: <ProfileCreatePage />,
   },
   Options: {
     path: "/options",

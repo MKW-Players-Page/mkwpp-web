@@ -51,6 +51,11 @@
   padding: 12px;
 }
 
+.module-content ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+
 .module-row {
   display: flex;
   flex-direction: row;

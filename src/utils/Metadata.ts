@@ -62,6 +62,20 @@ export const getFirstRankedParent = (metadata: Metadata, region: Region): Region
   return undefined;
 };
 
+export const isRegionChildOf = (metadata: Metadata, region: Region, parent: Region): boolean => {
+  if (region.parent === parent.id) {
+    return true;
+  }
+  if (!region.parent) {
+    return false;
+  }
+  const nextRegion = getRegionById(metadata, region.parent);
+  if (!nextRegion) {
+    return false;
+  }
+  return isRegionChildOf(metadata, nextRegion, parent);
+};
+
 /** The standard level of the standard with the given id.
  *
  * @param metadata The Metadata object returned from `useContext(MetadataContext)`

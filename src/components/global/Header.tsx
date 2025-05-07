@@ -76,10 +76,13 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
         <div className="account-actions">
           {user ? (
             <>
-              {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
               <Link
                 className="small-hide"
-                to={resolvePage(Pages.PlayerProfile, { id: user.player })}
+                to={
+                  user.player !== 0
+                    ? resolvePage(Pages.PlayerProfile, { id: user.player })
+                    : resolvePage(Pages.ProfileHome)
+                }
               >
                 {user.username}
               </Link>

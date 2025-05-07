@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import api from "../../api";
+
+import api, { Player } from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { getRegionById, MetadataContext } from "../../utils/Metadata";
@@ -10,6 +11,7 @@ import { FlagIcon } from "./Icon";
 export interface PlayerSelectDropdownProps {
   setId: React.Dispatch<React.SetStateAction<number>>;
   id: number;
+  filterFn?: (player: Player) => boolean;
   restrictSet?: number[];
   blacklist?: boolean;
   disabled?: boolean;
@@ -18,6 +20,7 @@ export interface PlayerSelectDropdownProps {
 const PlayerSelectDropdown = ({
   id,
   setId,
+  filterFn,
   restrictSet,
   blacklist,
   disabled,
@@ -32,6 +35,15 @@ const PlayerSelectDropdown = ({
     element: { text: translate("matchupPageDefaultValue", lang), value: 0 },
   };
 
+  const filter =
+    filterFn ??
+    ((player: Player) => {
+      return (
+        restrictSet === undefined ||
+        (blacklist ? restrictSet.includes(player.id) : !restrictSet.includes(player.id))
+      );
+    });
+
   return (
     <Dropdown
       data={{
@@ -45,13 +57,7 @@ const PlayerSelectDropdown = ({
             id: 0,
             children: [
               ...((players
-                ?.filter((player) =>
-                  restrictSet !== undefined
-                    ? blacklist
-                      ? !restrictSet.includes(player.id)
-                      : restrictSet.includes(player.id)
-                    : true,
-                )
+                ?.filter(filter)
                 .sort((a, b) => ((a.alias ?? a.name) < (b.alias ?? b.name) ? -1 : 1))
                 .map((player) => {
                   return {
@@ -73,28 +79,33 @@ const PlayerSelectDropdown = ({
 };
 
 export interface PlayerSelectDropdownFieldProps {
+  filterFn?: (player: Player) => boolean;
   restrictSet?: number[];
   blacklist?: boolean;
   disabled?: boolean;
   /** Name of the state property to manage */
   field: string;
   /** Field label */
-  label: string;
+  label?: string;
 }
 
 export const PlayerSelectDropdownField = ({
+  filterFn,
   restrictSet,
   blacklist,
   field,
   label,
   disabled,
 }: PlayerSelectDropdownFieldProps) => {
-  const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
+  const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
+
+  const errors = getErrors(field);
 
   return (
     <div className="field">
-      <p>{label}</p>
+      {label && <p>{label}</p>}
       <PlayerSelectDropdown
+        filterFn={filterFn}
         restrictSet={restrictSet}
         blacklist={blacklist}
         id={parseInt(getValue(field) ?? "1")}
@@ -103,6 +114,11 @@ export const PlayerSelectDropdownField = ({
         }}
         disabled={disabledByForm || !!disabled}
       />
+      {errors.map((error, index) => (
+        <p key={index} className="field-error">
+          {error}
+        </p>
+      ))}
     </div>
   );
 };

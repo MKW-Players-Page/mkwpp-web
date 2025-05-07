@@ -17,6 +17,8 @@ models/PlayerAwardTypeEnum.ts
 models/PlayerBasic.ts
 models/PlayerStats.ts
 models/PlayerUpdate.ts
+models/ProfileClaim.ts
+models/ProfileCreate.ts
 models/RecentScore.ts
 models/Region.ts
 models/RegionStats.ts
