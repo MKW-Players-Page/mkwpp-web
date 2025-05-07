@@ -31,7 +31,7 @@ const makeRegionList = (regions: Region[], lang: Language) => {
       ...regions.map((region) => ({
         label: translateRegionName(region, lang),
         value: region.id.toString(),
-      }))
+      })),
     ].sort((a, b) => a.label.localeCompare(b.label)),
   ];
 };
