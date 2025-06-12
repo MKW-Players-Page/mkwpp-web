@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import api from "../../api";
 import { useApi } from "../../hooks";
+import { PlayerBasic } from "../../rust_api";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";
@@ -22,7 +23,7 @@ const PlayerSelectDropdown = ({
   blacklist,
   disabled,
 }: PlayerSelectDropdownProps) => {
-  const { data: players } = useApi(() => api.timetrialsPlayersList(), [], "playerData");
+  const { data: players } = useApi(() => PlayerBasic.getPlayerList(), [], "playerData");
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
   const defaultValue: DropdownItemSetDataChild = {
@@ -59,7 +60,13 @@ const PlayerSelectDropdown = ({
                     element: {
                       text: player.alias ?? player.name,
                       value: player.id,
-                      rightIcon: <FlagIcon region={metadata.getRegionById(player.region ?? 0)} />,
+                      rightIcon: (
+                        <FlagIcon
+                          region={metadata.getRegionById(
+                            player.regionId === 1 ? 0 : player.regionId,
+                          )}
+                        />
+                      ),
                     },
                   };
                 }) as DropdownItemSetDataChild[]) ?? []),

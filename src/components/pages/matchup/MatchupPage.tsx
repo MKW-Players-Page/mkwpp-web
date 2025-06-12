@@ -1,4 +1,4 @@
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
@@ -11,277 +11,13 @@ import PlayerMention from "../../widgets/PlayerMention";
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
 import { useCategoryParam, useIdsParam, useLapModeParam } from "../../../utils/SearchParams";
-import { ApiState, useApiArray } from "../../../hooks/ApiHook";
-import api, { Score, PlayerStats, Player } from "../../../api";
+import { useApi } from "../../../hooks/ApiHook";
 import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import RadioButtons from "../../widgets/RadioButtons";
 import ArrayTable, { ArrayTableCellData } from "../../widgets/Table";
 import { SmallBigTrackFormat } from "../../widgets/SmallBigFormat";
-
-interface MatchupData {
-  playerData: Player;
-  scoreData: Array<Score>;
-  statsData: PlayerStats;
-}
-
-interface getPlayerDataParams {
-  id: number;
-  category: CategoryEnum;
-  lapMode: LapModeEnum;
-}
-
-const getPlayerData = async ({
-  id,
-  category,
-  lapMode,
-}: getPlayerDataParams): Promise<MatchupData> => {
-  const scoreDataRequest = api.timetrialsPlayersScoresList({ id: id, category, region: 1 });
-  const playerDataRequest = api.timetrialsPlayersRetrieve({ id });
-  const statsDataRequest = api.timetrialsPlayersStatsRetrieve({
-    id: id,
-    category,
-    lapMode,
-    region: 1,
-  });
-  return {
-    playerData: await playerDataRequest,
-    scoreData: await scoreDataRequest,
-    statsData: await statsDataRequest,
-  };
-};
-
-interface ElaborateMatchupData {
-  isLoading: boolean;
-  allTrackIds: number[];
-  scoresSortedPersonalDeltas: (number | undefined)[][];
-  scoresSortedPersonalDeltasToNext: (number | undefined)[][];
-  scoresSortedForLoopRgbValue: (number | undefined)[][];
-  totalTimeDeltas: number[];
-  totalTimeDeltasToNext: number[];
-  totalTimeRGB: number[];
-  averageFinDeltas: number[];
-  averageFinDeltasToNext: number[];
-  averageFinRGB: number[];
-  averageStandardDeltas: number[];
-  averageStandardDeltasToNext: number[];
-  averageStandardRGB: number[];
-  prwrDeltas: number[];
-  prwrDeltasToNext: number[];
-  prwrRGB: number[];
-  tallyWins: number[];
-  tallyWinsDeltas: number[];
-  tallyWinsDeltasToNext: number[];
-  tallyWinsRGB: number[];
-}
-
-const elaboratePlayerData = (
-  matchupData: ApiState<MatchupData>[],
-  lapMode: LapModeEnum,
-): ElaborateMatchupData => {
-  for (const matchup of matchupData)
-    if (matchup.isLoading || matchup.data === undefined)
-      return {
-        isLoading: true,
-        allTrackIds: [],
-        scoresSortedPersonalDeltas: [[]],
-        scoresSortedPersonalDeltasToNext: [[]],
-        scoresSortedForLoopRgbValue: [[]],
-        totalTimeDeltas: [],
-        totalTimeDeltasToNext: [],
-        totalTimeRGB: [],
-        averageFinDeltas: [],
-        averageFinDeltasToNext: [],
-        averageFinRGB: [],
-        averageStandardDeltas: [],
-        averageStandardDeltasToNext: [],
-        averageStandardRGB: [],
-        prwrDeltas: [],
-        prwrDeltasToNext: [],
-        prwrRGB: [],
-        tallyWins: [],
-        tallyWinsDeltas: [],
-        tallyWinsDeltasToNext: [],
-        tallyWinsRGB: [],
-      };
-
-  const tempAllTrackIds = new Set<number>();
-  for (const player of matchupData)
-    for (const score of player.data?.scoreData ?? []) {
-      tempAllTrackIds.add(
-        (score.track << 1) ^
-          (lapMode === LapModeEnum.Overall
-            ? (score.isLap ?? false)
-              ? 1
-              : 0
-            : lapMode === LapModeEnum.Course
-              ? 0
-              : 1),
-      );
-    }
-  const allTrackIds = Array.from(tempAllTrackIds).sort((a, b) => a - b);
-
-  const scoresSortedPersonalDeltas = [];
-  const scoresSortedPersonalDeltasToNext = [];
-  const scoresSortedForLoopRgbValue = [];
-  const tallyWins = matchupData.map(() => 0);
-  for (const trackId of allTrackIds) {
-    const tempArray = [];
-    for (const player of matchupData)
-      tempArray.push(
-        player.data?.scoreData.find(
-          (score) => score.isLap === (trackId % 2 === 1) && score.track === trackId >>> 1,
-        ),
-      );
-
-    const thisSortedArray: number[] = tempArray
-      .reduce((acc: number[], score) => {
-        if (score === undefined) return acc;
-        acc.push(score.value);
-        return acc;
-      }, [])
-      .sort((a, b) => a - b);
-
-    const tempRgbValues = new Array(matchupData.length);
-    const tempScoresSortedPersonalDeltas = new Array(matchupData.length);
-    const tempScoresSortedPersonalDeltasToNext = new Array(matchupData.length);
-    for (let i = 0; i < tempArray.length; i++) {
-      const score = tempArray[i];
-      if (score === undefined) continue;
-
-      const orderedScoreDelta = thisSortedArray[thisSortedArray.length - 1] - thisSortedArray[0];
-
-      tempRgbValues[i] =
-        orderedScoreDelta === 0
-          ? 255
-          : 100 +
-            Math.floor(
-              (155 * (thisSortedArray[thisSortedArray.length - 1] - score.value)) /
-                orderedScoreDelta,
-            );
-
-      const thisSortedIndex = thisSortedArray.findIndex(
-        (sortedScore) => sortedScore === score.value,
-      );
-      tempScoresSortedPersonalDeltas[i] = thisSortedArray[0] - score.value;
-      tempScoresSortedPersonalDeltasToNext[i] =
-        thisSortedIndex === 0 ? 0 : thisSortedArray[thisSortedIndex - 1] - score.value;
-
-      if (thisSortedIndex === 0) tallyWins[i]++;
-    }
-
-    scoresSortedForLoopRgbValue.push(tempRgbValues);
-    scoresSortedPersonalDeltas.push(tempScoresSortedPersonalDeltas);
-    scoresSortedPersonalDeltasToNext.push(tempScoresSortedPersonalDeltasToNext);
-  }
-
-  const totalTimeSorted = matchupData
-    .map((r) => r.data?.statsData.totalScore ?? 0)
-    .sort((a, b) => a - b);
-  const totalTimeDeltas = matchupData.map(
-    (r) => (r.data?.statsData.totalScore ?? 0) - totalTimeSorted[0],
-  );
-  const totalTimeDeltasToNext = matchupData.map((r) => {
-    const thisScore = r.data?.statsData.totalScore ?? 0;
-    const index = totalTimeSorted.findIndex((score) => score === thisScore);
-    return thisScore - totalTimeSorted[index < 2 ? 0 : index - 1];
-  });
-  const totalTimeRGB = totalTimeSorted.map((_, idx) => {
-    const orderedScoreDelta = totalTimeSorted[totalTimeSorted.length - 1] - totalTimeSorted[0];
-    if (orderedScoreDelta === 0) return 255;
-    return 255 - Math.floor((totalTimeDeltas[idx] / orderedScoreDelta) * 155);
-  });
-
-  const scoresForFooter = lapMode === LapModeEnum.Overall ? 64 : 32;
-
-  const averageFinSorted = matchupData
-    .map((r) => (r.data?.statsData.totalRank ?? 0) / scoresForFooter)
-    .sort((a, b) => a - b);
-  const averageFinDeltas = matchupData.map(
-    (r) => (r.data?.statsData.totalRank ?? 0) / scoresForFooter - averageFinSorted[0],
-  );
-  const averageFinDeltasToNext = matchupData.map((r) => {
-    const thisScore = (r.data?.statsData.totalRank ?? 0) / scoresForFooter;
-    const index = averageFinSorted.findIndex((score) => score === thisScore);
-    return thisScore - averageFinSorted[index < 2 ? 0 : index - 1];
-  });
-  const averageFinRGB = averageFinSorted.map((_, idx) => {
-    const orderedScoreDelta = averageFinSorted[averageFinSorted.length - 1] - averageFinSorted[0];
-    if (orderedScoreDelta === 0) return 255;
-    return 255 - Math.floor((averageFinDeltas[idx] / orderedScoreDelta) * 155);
-  });
-
-  const averageStandardSorted = matchupData
-    .map((r) => (r.data?.statsData.totalStandard ?? 0) / scoresForFooter)
-    .sort((a, b) => a - b);
-  const averageStandardDeltas = matchupData.map(
-    (r) => (r.data?.statsData.totalStandard ?? 0) / scoresForFooter - averageStandardSorted[0],
-  );
-  const averageStandardDeltasToNext = matchupData.map((r) => {
-    const thisScore = (r.data?.statsData.totalStandard ?? 0) / scoresForFooter;
-    const index = averageStandardSorted.findIndex((score) => score === thisScore);
-    return thisScore - averageStandardSorted[index < 2 ? 0 : index - 1];
-  });
-  const averageStandardRGB = averageStandardSorted.map((_, idx) => {
-    const orderedScoreDelta =
-      averageStandardSorted[averageStandardSorted.length - 1] - averageStandardSorted[0];
-    if (orderedScoreDelta === 0) return 255;
-    return 255 - Math.floor((averageStandardDeltas[idx] / orderedScoreDelta) * 155);
-  });
-
-  const prwrSorted = matchupData
-    .map((r) => ((r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter) * 100)
-    .sort((a, b) => b - a);
-  const prwrDeltas = matchupData.map(
-    (r) => prwrSorted[0] - ((r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter) * 100,
-  );
-  const prwrDeltasToNext = matchupData.map((r) => {
-    const thisScore = ((r.data?.statsData.totalRecordRatio ?? 0) / scoresForFooter) * 100;
-    const index = prwrSorted.findIndex((score) => score === thisScore);
-    return thisScore - prwrSorted[index < 2 ? 0 : index - 1];
-  });
-  const prwrRGB = prwrSorted.map((_, idx) => {
-    const orderedScoreDelta = prwrSorted[0] - prwrSorted[prwrSorted.length - 1];
-    if (orderedScoreDelta === 0) return 255;
-    return 255 - Math.floor((prwrDeltas[idx] / orderedScoreDelta) * 155);
-  });
-
-  const tallyWinsSorted = tallyWins.slice().sort((a, b) => b - a);
-  const tallyWinsDeltas = tallyWins.map((r) => r - tallyWinsSorted[0]);
-  const tallyWinsDeltasToNext = tallyWins.map((r) => {
-    const index = tallyWinsSorted.findIndex((score) => score === r);
-    return r - tallyWinsSorted[index < 2 ? 0 : index - 1];
-  });
-  const tallyWinsRGB = tallyWinsSorted.map((_, idx) => {
-    const orderedScoreDelta = tallyWinsSorted[tallyWinsSorted.length - 1] - tallyWinsSorted[0];
-    if (orderedScoreDelta === 0) return 255;
-    return 255 - Math.floor((tallyWinsDeltas[idx] / orderedScoreDelta) * 155);
-  });
-
-  return {
-    isLoading: false,
-    allTrackIds,
-    scoresSortedForLoopRgbValue,
-    scoresSortedPersonalDeltas,
-    scoresSortedPersonalDeltasToNext,
-    totalTimeDeltas,
-    totalTimeDeltasToNext,
-    totalTimeRGB,
-    averageFinDeltas,
-    averageFinDeltasToNext,
-    averageFinRGB,
-    averageStandardDeltas,
-    averageStandardDeltasToNext,
-    averageStandardRGB,
-    prwrDeltas,
-    prwrDeltasToNext,
-    prwrRGB,
-    tallyWins,
-    tallyWinsDeltas,
-    tallyWinsDeltasToNext,
-    tallyWinsRGB,
-  };
-};
+import { MatchupData } from "../../../rust_api/endpoints/playerTimesheet";
 
 const MatchupPage = () => {
   const searchParams = useSearchParams();
@@ -294,24 +30,15 @@ const MatchupPage = () => {
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
 
-  const matchupData = useApiArray(
-    (params: getPlayerDataParams) => getPlayerData(params),
-    ids.length,
-    ids.map((id) => {
-      return {
-        id,
-        category,
-        lapMode,
-      };
-    }),
+  const { isLoading: matchupDataIsLoading, data: matchupData } = useApi(
+    () => MatchupData.get(ids),
     [category, lapMode],
     "playerData",
     [],
     false,
   );
 
-  const isTwoPlayers = matchupData.length === 2;
-  const matchupDataIsLoading = matchupData.map((r) => r.isLoading).includes(true);
+  const isTwoPlayers = matchupData?.playerData.length === 2;
   const siteHue = getCategorySiteHue(category, settings);
 
   const tableModule = useRef<HTMLDivElement | null>(null);
@@ -347,19 +74,15 @@ const MatchupPage = () => {
     ids,
   ]);
 
-  const [elaboratedMatchupData, setElaboratedMatchupData] = useState(
-    elaboratePlayerData(matchupData, lapMode),
-  );
-  useEffect(
-    () => setElaboratedMatchupData(elaboratePlayerData(matchupData, lapMode)),
-    [matchupData, lapMode],
-  );
-
-  const scoreCountForFooter = lapMode === LapModeEnum.Overall ? 64 : 32;
   const headerRows: ArrayTableCellData[][] = [
     [{ content: null }],
     [{ content: translate("matchupPageTrackCol", lang), lockedCell: true }],
   ];
+
+  const tmpAllTrackIds: Set<number> = new Set();
+  for (const data of matchupData?.playerData ?? [])
+    for (const score of data.times) tmpAllTrackIds.add(score.trackId * 2 + Number(score.isLap));
+  const allTrackIds = Array.from(tmpAllTrackIds).sort((a, b) => a - b);
 
   const rows: ArrayTableCellData[][] = [];
 
@@ -371,12 +94,11 @@ const MatchupPage = () => {
     [{ content: translate("matchupPageTallyRow", lang), lockedCell: true }],
   ];
 
-  for (let idx = 0; idx < matchupData.length; idx++) {
+  for (let idx = 0; idx < (matchupData?.playerData.length ?? 0); idx++) {
     if (matchupDataIsLoading) break;
-    if (elaboratedMatchupData.isLoading) break;
-    const playerData = matchupData[idx].data as MatchupData;
+    if (matchupData === undefined) break;
 
-    headerRows[0].push({ content: <PlayerMention playerOrId={playerData.playerData} /> });
+    headerRows[0].push({ content: <PlayerMention playerOrId={ids[idx]} /> });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall) {
       headerRows[0].push({ content: null, expandCell: [false, true] });
       headerRows[1].push(
@@ -391,19 +113,16 @@ const MatchupPage = () => {
       headerRows[1].push({ content: translate("matchupPageDiffCol", lang) });
     }
 
-    let skipNum = 0;
-    for (let rowIdx = 0; rowIdx < elaboratedMatchupData.allTrackIds.length; rowIdx++) {
-      const trackId = elaboratedMatchupData.allTrackIds[rowIdx] >>> 1;
-      const isLap = elaboratedMatchupData.allTrackIds[rowIdx] % 2 === 1;
+    for (let rowIdx = 0; rowIdx < allTrackIds.length; rowIdx++) {
+      const trackId = allTrackIds[rowIdx] >>> 1;
+      const isLap = allTrackIds[rowIdx] % 2 === 1;
       const track = metadata.getTrackById(trackId);
 
-      if ((lapMode === LapModeEnum.Lap && !isLap) || (lapMode === LapModeEnum.Course && isLap)) {
-        skipNum++;
+      if ((lapMode === LapModeEnum.Lap && !isLap) || (lapMode === LapModeEnum.Course && isLap))
         continue;
-      }
       if (idx === 0) {
         rows.push([]);
-        rows[rowIdx - skipNum].push({
+        rows[rowIdx].push({
           content: (
             <Link
               to={resolvePage(
@@ -427,10 +146,12 @@ const MatchupPage = () => {
         });
       }
 
-      const score = playerData.scoreData.find(
-        (score) => score.track === trackId && score.isLap === isLap,
+      const score = matchupData.playerData[idx].times.find(
+        (score) => score.trackId === trackId && score.isLap === isLap,
       );
-      rows[rowIdx - skipNum].push({
+      const isFirst = matchupData.diffFirst[idx][rowIdx] === 0;
+
+      rows[rowIdx].push({
         content:
           layoutTypeBig && isLap && lapMode !== LapModeEnum.Lap
             ? null
@@ -439,49 +160,45 @@ const MatchupPage = () => {
               : "-",
         className: score !== undefined && score.category !== category ? "fallthrough" : "",
         style: {
-          fontWeight:
-            elaboratedMatchupData.scoresSortedPersonalDeltas[rowIdx][idx] === 0 ? "bold" : "",
+          fontWeight: isFirst ? "bold" : "",
         },
       });
       if (layoutTypeBig && lapMode === LapModeEnum.Overall)
-        rows[rowIdx - skipNum].push({
+        rows[rowIdx].push({
           content: isLap ? (score ? formatTime(score.value) : "-") : null,
           className: score !== undefined && score.category !== category ? "fallthrough" : "",
           style: {
-            fontWeight:
-              elaboratedMatchupData.scoresSortedPersonalDeltas[rowIdx][idx] === 0 ? "bold" : "",
+            fontWeight: isFirst ? "bold" : "",
           },
         });
 
-      const isFirst = elaboratedMatchupData.scoresSortedPersonalDeltas[rowIdx][idx] === 0;
-
       if (idx === 1 && isTwoPlayers) continue;
-      rows[rowIdx - skipNum].push({
+      rows[rowIdx].push({
         content: score
           ? formatTimeDiff(
-              isTwoPlayers
-                ? isFirst
-                  ? (elaboratedMatchupData.scoresSortedPersonalDeltas[rowIdx][1] ?? 0)
-                  : -(elaboratedMatchupData.scoresSortedPersonalDeltas[rowIdx][0] ?? 0)
-                : differenceMode
-                  ? -(elaboratedMatchupData.scoresSortedPersonalDeltasToNext[rowIdx][idx] ?? 0)
-                  : -(elaboratedMatchupData.scoresSortedPersonalDeltas[rowIdx][idx] ?? 0),
-            )
+            isTwoPlayers
+              ? isFirst
+                ? -(matchupData.diffFirst[1][rowIdx] ?? 0)
+                : (matchupData.diffFirst[0][rowIdx] ?? 0)
+              : differenceMode
+                ? (matchupData.diffNext[idx][rowIdx] ?? 0)
+                : (matchupData.diffFirst[idx][rowIdx] ?? 0),
+          )
           : "-",
         style: {
           color: isTwoPlayers
             ? isFirst
               ? `rgb(100,255,100)`
               : `rgb(255,100,100)`
-            : `rgb(255,${elaboratedMatchupData.scoresSortedForLoopRgbValue[rowIdx][idx]},${elaboratedMatchupData.scoresSortedForLoopRgbValue[rowIdx][idx]})`,
+            : `rgb(255,${matchupData.rgbDiff[idx][rowIdx]},${matchupData.rgbDiff[idx][rowIdx]})`,
         },
       });
     }
 
     footerRows[0].push({
-      content: formatTime(playerData.statsData.totalScore),
+      content: formatTime(matchupData.playerData[idx].totalTime),
       style: {
-        textDecoration: elaboratedMatchupData.totalTimeDeltas[idx] === 0 ? "underline" : "",
+        textDecoration: matchupData.diffTotalTimeFirst[idx] === 0 ? "underline" : "",
       },
     });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall)
@@ -490,143 +207,142 @@ const MatchupPage = () => {
       footerRows[0].push({
         content: formatTimeDiff(
           isTwoPlayers
-            ? elaboratedMatchupData.totalTimeDeltas[idx] === 0
-              ? -elaboratedMatchupData.totalTimeDeltas[1]
-              : elaboratedMatchupData.totalTimeDeltas[0]
+            ? matchupData.diffTotalTimeFirst[idx] === 0
+              ? -matchupData.diffTotalTimeFirst[1]
+              : matchupData.diffTotalTimeFirst[0]
             : differenceMode
-              ? elaboratedMatchupData.totalTimeDeltasToNext[idx]
-              : elaboratedMatchupData.totalTimeDeltas[idx],
+              ? matchupData.diffTotalTimeNext[idx]
+              : matchupData.diffTotalTimeFirst[idx],
         ),
         style: {
           color: isTwoPlayers
-            ? elaboratedMatchupData.totalTimeDeltas[idx] === 0
+            ? matchupData.diffTotalTimeFirst[idx] === 0
               ? `rgb(100,255,100)`
               : `rgb(255,100,100)`
-            : `rgb(255,${elaboratedMatchupData.totalTimeRGB[idx]},${elaboratedMatchupData.totalTimeRGB[idx]})`,
+            : `rgb(255,${matchupData.rgbDiffTotalTime[idx]},${matchupData.rgbDiffTotalTime[idx]})`,
         },
       });
 
     footerRows[1].push({
-      content: playerData.statsData.totalRank / scoreCountForFooter,
+      content: matchupData.playerData[idx].af,
       style: {
-        textDecoration: elaboratedMatchupData.averageFinDeltas[idx] === 0 ? "underline" : "",
+        textDecoration: matchupData.diffAfFirst[idx] === 0 ? "underline" : "",
       },
     });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall)
       footerRows[1].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
-        ? elaboratedMatchupData.averageFinDeltas[idx] === 0
-          ? -elaboratedMatchupData.averageFinDeltas[1]
-          : elaboratedMatchupData.averageFinDeltas[0]
+        ? matchupData.diffAfFirst[idx] === 0
+          ? -matchupData.diffAfFirst[1]
+          : matchupData.diffAfFirst[0]
         : differenceMode
-          ? elaboratedMatchupData.averageFinDeltasToNext[idx]
-          : elaboratedMatchupData.averageFinDeltas[idx];
+          ? matchupData.diffAfNext[idx]
+          : matchupData.diffAfFirst[idx];
       footerRows[1].push({
         content: content > 0 ? "+" + content : content,
 
         style: {
           color: isTwoPlayers
-            ? elaboratedMatchupData.averageFinDeltas[idx] === 0
+            ? matchupData.diffAfFirst[idx] === 0
               ? `rgb(100,255,100)`
               : `rgb(255,100,100)`
-            : `rgb(255,${elaboratedMatchupData.averageFinRGB[idx]},${elaboratedMatchupData.averageFinRGB[idx]})`,
+            : `rgb(255,${matchupData.rgbDiffAf[idx]},${matchupData.rgbDiffAf[idx]})`,
         },
       });
     }
 
     footerRows[2].push({
-      content: playerData.statsData.totalStandard / scoreCountForFooter,
+      content: matchupData.playerData[idx].arr,
       style: {
-        textDecoration: elaboratedMatchupData.averageStandardDeltas[idx] === 0 ? "underline" : "",
+        textDecoration: matchupData.diffArrFirst[idx] === 0 ? "underline" : "",
       },
     });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall)
       footerRows[2].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
-        ? elaboratedMatchupData.averageStandardDeltas[idx] === 0
-          ? -elaboratedMatchupData.averageStandardDeltas[1]
-          : elaboratedMatchupData.averageStandardDeltas[0]
+        ? matchupData.diffArrFirst[idx] === 0
+          ? -matchupData.diffArrFirst[1]
+          : matchupData.diffArrFirst[0]
         : differenceMode
-          ? elaboratedMatchupData.averageStandardDeltasToNext[idx]
-          : elaboratedMatchupData.averageStandardDeltas[idx];
+          ? matchupData.diffArrNext[idx]
+          : matchupData.diffArrFirst[idx];
       footerRows[2].push({
         content: content > 0 ? "+" + content : content,
 
         style: {
           color: isTwoPlayers
-            ? elaboratedMatchupData.averageStandardDeltas[idx] === 0
+            ? matchupData.diffArrFirst[idx] === 0
               ? `rgb(100,255,100)`
               : `rgb(255,100,100)`
-            : `rgb(255,${elaboratedMatchupData.averageStandardRGB[idx]},${elaboratedMatchupData.averageStandardRGB[idx]})`,
+            : `rgb(255,${matchupData.rgbDiffArr[idx]},${matchupData.rgbDiffArr[idx]})`,
         },
       });
     }
 
     footerRows[3].push({
-      content:
-        ((playerData.statsData.totalRecordRatio / scoreCountForFooter) * 100).toFixed(4) + "%",
+      content: (matchupData.playerData[idx].prwr * 100).toFixed(4) + "%",
       style: {
-        textDecoration: elaboratedMatchupData.prwrDeltas[idx] === 0 ? "underline" : "",
+        textDecoration: matchupData.diffPrwrFirst[idx] === 0 ? "underline" : "",
       },
     });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall)
       footerRows[3].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
-      const content = isTwoPlayers
-        ? elaboratedMatchupData.prwrDeltas[idx] === 0
-          ? elaboratedMatchupData.prwrDeltas[1]
-          : -elaboratedMatchupData.prwrDeltas[0]
+      const content = (isTwoPlayers
+        ? matchupData.diffPrwrFirst[idx] === 0
+          ? matchupData.diffPrwrFirst[1]
+          : -matchupData.diffPrwrFirst[0]
         : differenceMode
-          ? elaboratedMatchupData.prwrDeltasToNext[idx]
-          : elaboratedMatchupData.prwrDeltas[idx];
+          ? matchupData.diffPrwrNext[idx]
+          : matchupData.diffPrwrFirst[idx]) * 100;
       footerRows[3].push({
         content: (content > 0 ? "+" + content.toFixed(4) : content.toFixed(4)) + "%",
 
         style: {
           color: isTwoPlayers
-            ? elaboratedMatchupData.prwrDeltas[idx] === 0
-              ? `rgb(100,255,100)`
+            ? matchupData.diffPrwrFirst[idx] === 0
+              ?  `rgb(100,255,100)`
               : `rgb(255,100,100)`
-            : `rgb(255,${elaboratedMatchupData.prwrRGB[idx]},${elaboratedMatchupData.prwrRGB[idx]})`,
+            : `rgb(255,${matchupData.rgbDiffPrwr[idx]},${matchupData.rgbDiffPrwr[idx]})`,
         },
       });
     }
 
     footerRows[4].push({
       content:
-        elaboratedMatchupData.tallyWins[idx] +
+        matchupData.wins[idx] +
         " " +
         translate(
-          elaboratedMatchupData.tallyWins[idx] === 1
+          matchupData.wins[idx] === 1
             ? "matchupPageTallyRowWinsSingular"
             : "matchupPageTallyRowWinsPlural",
           lang,
         ),
       style: {
-        textDecoration: elaboratedMatchupData.tallyWinsDeltas[idx] === 0 ? "underline" : "",
+        textDecoration: matchupData.diffWinsFirst[idx] === 0 ? "underline" : "",
       },
     });
     if (layoutTypeBig && lapMode === LapModeEnum.Overall)
       footerRows[4].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
       const content = isTwoPlayers
-        ? elaboratedMatchupData.tallyWinsDeltas[idx] === 0
-          ? -elaboratedMatchupData.tallyWinsDeltas[1]
-          : elaboratedMatchupData.tallyWinsDeltas[0]
+        ? matchupData.diffWinsFirst[idx] === 0
+          ? -matchupData.diffWinsFirst[1]
+          : matchupData.diffWinsFirst[0]
         : differenceMode
-          ? elaboratedMatchupData.tallyWinsDeltasToNext[idx]
-          : elaboratedMatchupData.tallyWinsDeltas[idx];
+          ? matchupData.diffWinsNext[idx]
+          : matchupData.diffWinsFirst[idx];
       footerRows[4].push({
         content: content > 0 ? "+" + content : content,
 
         style: {
           color: isTwoPlayers
-            ? elaboratedMatchupData.tallyWinsDeltas[idx] === 0
+            ? matchupData.diffWinsFirst[idx] === 0
               ? `rgb(100,255,100)`
               : `rgb(255,100,100)`
-            : `rgb(255,${elaboratedMatchupData.tallyWinsRGB[idx]},${elaboratedMatchupData.tallyWinsRGB[idx]})`,
+            : `rgb(255,${matchupData.rgbDiffWins[idx]},${matchupData.rgbDiffWins[idx]})`,
         },
       });
     }
@@ -663,9 +379,7 @@ const MatchupPage = () => {
             />
           </div>
         )}
-        <Deferred
-          isWaiting={metadata.isLoading || matchupDataIsLoading || elaboratedMatchupData.isLoading}
-        >
+        <Deferred isWaiting={metadata.isLoading || matchupDataIsLoading}>
           <div className="module" ref={tableModule}>
             <ArrayTable headerRows={headerRows} rows={rows} footerRows={footerRows} />
           </div>

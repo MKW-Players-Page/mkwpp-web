@@ -39,3 +39,96 @@ export class Timesheet {
     );
   }
 }
+
+export class MatchupData {
+  playerData: Array<Timesheet>;
+  wins: Array<number>;
+  diffFirst: Array<Array<number>>;
+  diffNext: Array<Array<number>>;
+  diffAfFirst: Array<number>;
+  diffAfNext: Array<number>;
+  diffTotalTimeFirst: Array<number>;
+  diffTotalTimeNext: Array<number>;
+  diffTallyFirst: Array<number>;
+  diffTallyNext: Array<number>;
+  diffArrFirst: Array<number>;
+  diffArrNext: Array<number>;
+  diffPrwrFirst: Array<number>;
+  diffPrwrNext: Array<number>;
+  diffWinsFirst: Array<number>;
+  diffWinsNext: Array<number>;
+  rgbDiff: Array<Array<Number>>;
+  rgbDiffAf: Array<Number>;
+  rgbDiffTotalTime: Array<Number>;
+  rgbDiffTally: Array<Number>;
+  rgbDiffArr: Array<Number>;
+  rgbDiffPrwr: Array<Number>;
+  rgbDiffWins: Array<Number>;
+
+  constructor(
+    playerData: Array<Timesheet>,
+    wins: Array<number>,
+    diffFirst: Array<Array<number>>,
+    diffNext: Array<Array<number>>,
+    diffAfFirst: Array<number>,
+    diffAfNext: Array<number>,
+    diffTotalTimeFirst: Array<number>,
+    diffTotalTimeNext: Array<number>,
+    diffTallyFirst: Array<number>,
+    diffTallyNext: Array<number>,
+    diffArrFirst: Array<number>,
+    diffArrNext: Array<number>,
+    diffPrwrFirst: Array<number>,
+    diffPrwrNext: Array<number>,
+    diffWinsFirst: Array<number>,
+    diffWinsNext: Array<number>,
+    rgbDiff: Array<Array<Number>>,
+    rgbDiffAf: Array<Number>,
+    rgbDiffTotalTime: Array<Number>,
+    rgbDiffTally: Array<Number>,
+    rgbDiffArr: Array<Number>,
+    rgbDiffPrwr: Array<Number>,
+    rgbDiffWins: Array<Number>,
+  ) {
+    this.playerData = playerData;
+    this.wins = wins;
+    this.diffFirst = diffFirst;
+    this.diffNext = diffNext;
+    this.diffAfFirst = diffAfFirst;
+    this.diffAfNext = diffAfNext;
+    this.diffTotalTimeFirst = diffTotalTimeFirst;
+    this.diffTotalTimeNext = diffTotalTimeNext;
+    this.diffTallyFirst = diffTallyFirst;
+    this.diffTallyNext = diffTallyNext;
+    this.diffArrFirst = diffArrFirst;
+    this.diffArrNext = diffArrNext;
+    this.diffPrwrFirst = diffPrwrFirst;
+    this.diffPrwrNext = diffPrwrNext;
+    this.diffWinsFirst = diffWinsFirst;
+    this.diffWinsNext = diffWinsNext;
+    this.rgbDiff = rgbDiff;
+    this.rgbDiffAf = rgbDiffAf;
+    this.rgbDiffTotalTime = rgbDiffTotalTime;
+    this.rgbDiffTally = rgbDiffTally;
+    this.rgbDiffArr = rgbDiffArr;
+    this.rgbDiffPrwr = rgbDiffPrwr;
+    this.rgbDiffWins = rgbDiffWins;
+  }
+
+  public static async get(
+    playerIds: Array<number>,
+    category: CategoryEnum = CategoryEnum.NonShortcut,
+    lapMode: LapModeEnum = LapModeEnum.Overall,
+    regionId: number = 1,
+    date?: Date,
+  ): Promise<MatchupData> {
+    return apiFetch(
+      `/custom/scores/matchup${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(playerIds),
+      },
+    );
+  }
+}
