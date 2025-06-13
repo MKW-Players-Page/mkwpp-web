@@ -55,6 +55,22 @@ export class User {
     });
   }
 
+  public static async password_change(
+    userId: number,
+    oldPassword: string,
+    newPassword: string,
+  ): Promise<null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<null>("/auth/update_password", {
+      body: JSON.stringify({ sessionToken, userId, oldPassword, newPassword }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
   public static async fetch_data(): Promise<null | User> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
