@@ -1,5 +1,6 @@
-import { apiFetch } from "..";
+import { apiFetch, PlayerBasic } from "..";
 import { getToken } from "../../utils/Auth";
+import { Metadata } from "../../utils/Metadata";
 
 export class AuthData {
   sessionToken: string;
@@ -64,5 +65,74 @@ export class User {
         "Content-Type": "application/json",
       },
     });
+  }
+
+  public static async update_bio(userId: number, bio: string): Promise<null | string> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<string>("/auth/player/updbio", {
+      body: JSON.stringify({ sessionToken, userId, data: bio }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  public static async update_alias(userId: number, alias: string): Promise<null | string> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<string>("/auth/player/updalias", {
+      body: JSON.stringify({ sessionToken, userId, data: alias }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  public static async add_to_submitter_list(
+    userId: number,
+    playerId: number,
+  ): Promise<null | number> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<number>("/auth/player/updalias", {
+      body: JSON.stringify({ sessionToken, userId, playerId }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  public static async remove_from_submitter_list(
+    userId: number,
+    playerId: number,
+  ): Promise<null | number> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<number>("/auth/player/updalias", {
+      body: JSON.stringify({ sessionToken, userId, playerId }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  public static async get_submitter_list(
+    userId: number,
+    metadata?: Metadata,
+  ): Promise<null | Array<PlayerBasic>> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<Array<number>>("/auth/player/submitters", {
+      body: JSON.stringify({ sessionToken, userId }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((r) => PlayerBasic.getPlayersBasic(r, metadata));
   }
 }

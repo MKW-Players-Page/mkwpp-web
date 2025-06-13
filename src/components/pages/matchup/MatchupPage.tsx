@@ -176,14 +176,14 @@ const MatchupPage = () => {
       rows[rowIdx].push({
         content: score
           ? formatTimeDiff(
-            isTwoPlayers
-              ? isFirst
-                ? -(matchupData.diffFirst[1][rowIdx] ?? 0)
-                : (matchupData.diffFirst[0][rowIdx] ?? 0)
-              : differenceMode
-                ? (matchupData.diffNext[idx][rowIdx] ?? 0)
-                : (matchupData.diffFirst[idx][rowIdx] ?? 0),
-          )
+              isTwoPlayers
+                ? isFirst
+                  ? -(matchupData.diffFirst[1][rowIdx] ?? 0)
+                  : (matchupData.diffFirst[0][rowIdx] ?? 0)
+                : differenceMode
+                  ? (matchupData.diffNext[idx][rowIdx] ?? 0)
+                  : (matchupData.diffFirst[idx][rowIdx] ?? 0),
+            )
           : "-",
         style: {
           color: isTwoPlayers
@@ -290,20 +290,21 @@ const MatchupPage = () => {
     if (layoutTypeBig && lapMode === LapModeEnum.Overall)
       footerRows[3].push({ content: null, expandCell: [false, true] });
     if (!isTwoPlayers || idx === 0) {
-      const content = (isTwoPlayers
-        ? matchupData.diffPrwrFirst[idx] === 0
-          ? matchupData.diffPrwrFirst[1]
-          : -matchupData.diffPrwrFirst[0]
-        : differenceMode
-          ? matchupData.diffPrwrNext[idx]
-          : matchupData.diffPrwrFirst[idx]) * 100;
+      const content =
+        (isTwoPlayers
+          ? matchupData.diffPrwrFirst[idx] === 0
+            ? matchupData.diffPrwrFirst[1]
+            : -matchupData.diffPrwrFirst[0]
+          : differenceMode
+            ? matchupData.diffPrwrNext[idx]
+            : matchupData.diffPrwrFirst[idx]) * 100;
       footerRows[3].push({
         content: (content > 0 ? "+" + content.toFixed(4) : content.toFixed(4)) + "%",
 
         style: {
           color: isTwoPlayers
             ? matchupData.diffPrwrFirst[idx] === 0
-              ?  `rgb(100,255,100)`
+              ? `rgb(100,255,100)`
               : `rgb(255,100,100)`
             : `rgb(255,${matchupData.rgbDiffPrwr[idx]},${matchupData.rgbDiffPrwr[idx]})`,
         },
