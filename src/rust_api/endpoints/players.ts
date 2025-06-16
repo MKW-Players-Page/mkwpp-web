@@ -39,13 +39,16 @@ export class PlayerBasic {
 
     if (actuallyFetch.length === 0) return new Promise((res) => res(alreadyGrabbed));
 
-    return apiFetch<Array<PlayerBasic>>("/custom/players/select_basic", {
-      body: JSON.stringify(ids),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    return apiFetch<Array<PlayerBasic>>(
+      "/custom/players/select_basic",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    }).then((r) => {
+      ids,
+    ).then((r) => {
       if (metadata !== undefined) metadata.cachePlayers = r;
       r.push(...alreadyGrabbed);
       return r;
@@ -94,13 +97,16 @@ export class Player extends PlayerBasic {
 
     if (actuallyFetch.length === 0) return new Promise(() => alreadyGrabbed);
 
-    return apiFetch<Array<Player>>("/custom/players/select", {
-      body: JSON.stringify(ids),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    return apiFetch<Array<Player>>(
+      "/custom/players/select",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    }).then((r) => {
+      ids,
+    ).then((r) => {
       if (metadata !== undefined) metadata.cachePlayers = r;
       r.push(...alreadyGrabbed);
       return r;

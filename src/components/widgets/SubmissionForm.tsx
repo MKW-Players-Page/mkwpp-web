@@ -1,8 +1,6 @@
 import init, { read_rkg } from "mkw_lib";
 
 import { useContext, useEffect, useState } from "react";
-import api, { ScoreSubmission } from "../../api";
-import { EditScoreSubmission, ResponseError, Score } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatDate, formatTime, parseTime } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
@@ -11,7 +9,7 @@ import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { CategoryEnum, LapModeEnum } from "../../rust_api";
+import { CategoryEnum, LapModeEnum, Score, User } from "../../rust_api";
 import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
@@ -51,7 +49,7 @@ export interface StarterData {
   starterVideoLink?: string;
   starterComment?: string;
   starterSubmitterNote?: string;
-  deleteId?: number;
+  submissionId?: number;
   editModeScore?: Score;
   doneFunc?: () => void;
   onSuccess?: () => void;
@@ -69,7 +67,7 @@ const SubmissionForm = ({
   starterVideoLink,
   starterComment,
   starterSubmitterNote,
-  deleteId,
+  submissionId,
   editModeScore,
   doneFunc,
   onSuccess,
@@ -93,7 +91,11 @@ const SubmissionForm = ({
     submitting: false,
   };
   const [state, setState] = useState<SubmitTabState>(initialState);
-  if (doneFunc === undefined || doneFunc === null) doneFunc = () => setState(initialState);
+  if (doneFunc === undefined || doneFunc === null)
+    doneFunc = () => {
+      setState(initialState);
+      if (onSuccess !== undefined) onSuccess();
+    };
 
   const { lang } = useContext(I18nContext);
 
@@ -108,22 +110,7 @@ const SubmissionForm = ({
     }
   }, [state, track]);
 
-  const { data: submittees } = useApi(() => api.timetrialsSubmissionsSubmitteesList());
-
-  const deleteFunction =
-    deleteId !== undefined
-      ? editModeScore !== undefined
-        ? async (id: number) => {
-            return api.timetrialsSubmissionsEditsDeleteDestroy({
-              id: id,
-            });
-          }
-        : async (id: number) => {
-            return api.timetrialsSubmissionsDeleteDestroy({
-              id: id,
-            });
-          }
-      : async (x: any) => {};
+  const { data: submittees } = useApi(() => User.get_submittee_list(user?.userId ?? 0, metadata));
 
   const submit = (done: () => void) => {
     setState((prev) => ({ ...prev, errors: {} }));
@@ -187,61 +174,66 @@ const SubmissionForm = ({
 
     const uploadFunction: () => Promise<any> =
       editModeScore !== undefined
-        ? async () => {
-            let out = {
-              scoreId: editModeScore.id,
-              submitterNote: state.submitterNote,
-            };
+        ? submissionId !== undefined
+          ? async () =>
+              User.edit_edit_submission(
+                submissionId,
+                user?.userId,
+                editModeScore.id,
+                new Date(date),
+                state.submitterNote,
+                (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
+                (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
+                (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
+              )
+          : async () =>
+              User.create_edit_submission(
+                user?.userId,
+                editModeScore.id,
+                new Date(date),
+                state.submitterNote,
+                (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
+                (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
+                (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
+              )
+        : submissionId !== undefined
+          ? async () =>
+              User.edit_submission(
+                submissionId,
+                user.userId,
+                value as number,
+                state.category,
+                state.lapMode === LapModeEnum.Lap,
+                state.player,
+                +state.track,
+                new Date(date),
+                state.videoLink,
+                state.ghostLink,
+                state.comment,
+                state.submitterNote,
+              )
+          : async () =>
+              User.create_submission(
+                user.userId,
+                value as number,
+                state.category,
+                state.lapMode === LapModeEnum.Lap,
+                state.player,
+                +state.track,
+                new Date(date),
+                state.videoLink,
+                state.ghostLink,
+                state.comment,
+                state.submitterNote,
+              );
 
-            if ((editModeScore.ghostLink ?? "") !== state.ghostLink)
-              (out as any).ghostLink = state.ghostLink;
-
-            if ((editModeScore.comment ?? "") !== state.comment)
-              (out as any).comment = state.comment;
-
-            if ((editModeScore.videoLink ?? "") !== state.videoLink)
-              (out as any).videoLink = state.videoLink;
-            // TODO: fix openapi
-            return api.timetrialsSubmissionsEditsCreateCreate({
-              editScoreSubmission: out as EditScoreSubmission,
-            });
-          }
-        : async () =>
-            api.timetrialsSubmissionsCreateCreate({
-              scoreSubmission: {
-                playerId: state.player,
-                value: value as number,
-                track: +state.track,
-                category: state.category,
-                isLap: state.lapMode === LapModeEnum.Lap,
-                date: new Date(date),
-                ghostLink: state.ghostLink,
-                videoLink: state.videoLink,
-                comment: state.comment,
-                submitterNote: state.submitterNote,
-              } as ScoreSubmission,
-            });
-
-    deleteFunction(deleteId as number)
-      .then(uploadFunction)
+    uploadFunction()
       .then(() => {
         setState({ ...initialState, state: SubmitStateEnum.Success });
         done();
       })
-      .catch((error: ResponseError) => {
-        error.response
-          .json()
-          .then((json) => {
-            setState((prev) => ({ ...prev, errors: { ...json } }));
-          })
-          .catch(() => {
-            setState((prev) => ({
-              ...prev,
-              errors: {
-                non_field_errors: [translate("submissionPageSubmitTabGenericErr", lang)],
-              },
-            }));
-          });
+      .catch((error) => {
+        setState((prev) => ({ ...prev, errors: error }));
         done();
       });
   };
@@ -265,10 +257,19 @@ const SubmissionForm = ({
           <Form
             extraButtons={
               <>
-                {deleteId !== undefined && (
+                {submissionId !== undefined && (
                   <div
                     onClick={() => {
-                      deleteFunction(deleteId).then(() => {
+                      const deleteFunction =
+                        editModeScore !== undefined
+                          ? async () => {
+                              return User.delete_edit_submission(user?.userId ?? 0, submissionId);
+                            }
+                          : async () => {
+                              return User.delete_submission(user?.userId ?? 0, submissionId);
+                            };
+
+                      deleteFunction().then(() => {
                         if (doneFunc !== undefined) doneFunc();
                       });
                     }}
@@ -277,7 +278,7 @@ const SubmissionForm = ({
                     {translate("submissionPageSubmitTabDeleteBtn", lang)}
                   </div>
                 )}
-                {deleteId === undefined && editModeScore === undefined && (
+                {submissionId === undefined && editModeScore === undefined && (
                   <div
                     onClick={() => {
                       const actualUpload = document.createElement("input");
@@ -334,8 +335,8 @@ const SubmissionForm = ({
                 editModeScore !== undefined
                   ? [state.player]
                   : [
-                      deleteId !== undefined ? state.player : (user?.playerId ?? 0),
-                      ...(submittees === undefined || submittees.length === 0
+                      submissionId !== undefined ? state.player : (user?.playerId ?? 0),
+                      ...(submittees === undefined || submittees === null || submittees.length === 0
                         ? []
                         : submittees.map((r) => r.id as number)),
                     ]

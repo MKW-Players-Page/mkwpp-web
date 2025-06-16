@@ -49,6 +49,8 @@ export interface PlayerTextFromIdProps {
 const PlayerTextFromId = ({ id }: PlayerTextFromIdProps) => {
   const { data: player } = useApi(() => PlayerBasic.getPlayerBasic(id), [id], "player", [], false);
 
+  console.log(player);
+
   return <>{player?.alias ?? player?.name}</>;
 };
 

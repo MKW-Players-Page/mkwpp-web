@@ -1,7 +1,7 @@
 import { CategoryEnum, Score, apiFetch, LapModeEnum } from "..";
 import { buildQueryParamString } from "../../utils/SearchParams";
 
-type Time = Omit<Score, "player">;
+export type Time = Omit<Score, "player">;
 
 export class Timesheet {
   times: Array<Time>;
@@ -127,8 +127,8 @@ export class MatchupData {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(playerIds),
       },
+      playerIds,
     );
   }
 }
