@@ -2,16 +2,18 @@ import { useContext } from "react";
 import { SetURLSearchParams } from "react-router-dom";
 import { MetadataContext } from "./Metadata";
 import {
-  TimetrialsRegionsRankingsListTopEnum,
-  TimetrialsRegionsRankingsListTypeEnum,
-} from "../api/generated";
-import {
   Region,
   LapModeEnum,
   CategoryEnum,
   stringToLapModeEnum,
   stringToCategoryEnum,
+  RegionType,
 } from "../rust_api";
+import {
+  CountryRankingsTopEnum,
+  stringToCountryRankingsTopEnum,
+} from "../rust_api/endpoints/countryRankings";
+import { stringToRegionType } from "../rust_api/endpoints/regions";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -97,48 +99,24 @@ export const useLapModeParam = (
 };
 
 export const useTopParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
-  const gottenTop = searchParams[0].get("top") ?? TimetrialsRegionsRankingsListTopEnum.Records;
-  const top =
-    Object.values(TimetrialsRegionsRankingsListTopEnum).find((value) => value === gottenTop) ??
-    TimetrialsRegionsRankingsListTopEnum.Records;
+  const top = stringToCountryRankingsTopEnum(searchParams[0].get("lim") ?? "");
   return {
     top,
-    setTopNumber: (top: TimetrialsRegionsRankingsListTopEnum) => {
-      searchParams[1]((prev) =>
-        paramReplace(
-          prev,
-          "top",
-          top === TimetrialsRegionsRankingsListTopEnum.Records ? undefined : top,
-          overwriteParams,
-        ),
-      );
+    setTopNumber: (limit: CountryRankingsTopEnum) => {
+      searchParams[1]((prev) => paramReplace(prev, "lim", limit?.toString(), overwriteParams));
     },
   };
 };
 
-export const useRegionTypeRestrictedParam = (
-  searchParams: SearchParams,
-  overwriteParams: string[] = [],
-) => {
-  const gottenRegionType =
-    (searchParams[0].get("regty") as TimetrialsRegionsRankingsListTypeEnum) ??
-    TimetrialsRegionsRankingsListTypeEnum.Country;
+export const useRegionTypeParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
+  const gottenRegionType = stringToRegionType(searchParams[0].get("rty") ?? "");
   const regionType =
-    [
-      TimetrialsRegionsRankingsListTypeEnum.Subnational,
-      TimetrialsRegionsRankingsListTypeEnum.Continent,
-    ].find((value) => value === gottenRegionType) ?? TimetrialsRegionsRankingsListTypeEnum.Country;
+    [RegionType.Subnational, RegionType.Continent].find((value) => value === gottenRegionType) ??
+    RegionType.Country;
   return {
     regionType,
-    setRegionType: (regionType: TimetrialsRegionsRankingsListTypeEnum) => {
-      searchParams[1]((prev) =>
-        paramReplace(
-          prev,
-          "regty",
-          regionType === TimetrialsRegionsRankingsListTypeEnum.Country ? undefined : regionType,
-          overwriteParams,
-        ),
-      );
+    setRegionType: (regionType: RegionType) => {
+      searchParams[1]((prev) => paramReplace(prev, "rty", regionType.toString(), overwriteParams));
     },
   };
 };

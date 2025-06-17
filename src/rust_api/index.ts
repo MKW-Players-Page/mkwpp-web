@@ -24,6 +24,13 @@ export {
   SubmissionStatusValues,
   stringToSubmissionStatusEnum,
 } from "./endpoints/submissions";
+export {
+  CountryRankingsTopEnum,
+  CountryRankingsTopEnumValues,
+  stringToCountryRankingsTopEnum,
+  countryRankingsTopEnumTopToString,
+  CountryRanking,
+} from "./endpoints/countryRankings";
 
 const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 

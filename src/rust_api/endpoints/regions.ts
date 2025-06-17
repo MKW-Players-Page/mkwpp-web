@@ -10,6 +10,23 @@ export enum RegionType {
   Subnational = 5,
 }
 
+export const stringToRegionType = (x: string): RegionType => {
+  switch (x) {
+    case "1":
+      return RegionType.Continent;
+    case "2":
+      return RegionType.CountryGroup;
+    case "3":
+      return RegionType.Country;
+    case "4":
+      return RegionType.SubnationalGroup;
+    case "5":
+      return RegionType.Subnational;
+    default:
+      return RegionType.World;
+  }
+};
+
 export type RegionTree = Record<number, Array<number | RegionTree>>;
 
 export class Region {

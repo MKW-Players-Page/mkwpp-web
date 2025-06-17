@@ -44,36 +44,6 @@ export const getHighestValid = (category: CategoryEnum, trackCategories: Categor
   return x[x.length - 1];
 };
 
-export const countryAFTopNumerical = (x: TimetrialsRegionsRankingsListTopEnum) => {
-  switch (x) {
-    case TimetrialsRegionsRankingsListTopEnum.Records:
-      return 1;
-    case TimetrialsRegionsRankingsListTopEnum.Top3:
-      return 2;
-    case TimetrialsRegionsRankingsListTopEnum.Top5:
-      return 3;
-    case TimetrialsRegionsRankingsListTopEnum.Top10:
-      return 4;
-    case TimetrialsRegionsRankingsListTopEnum.All:
-      return 5;
-  }
-};
-
-export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) => {
-  switch (x) {
-    case TimetrialsRegionsRankingsListTopEnum.Records:
-      return "Records";
-    case TimetrialsRegionsRankingsListTopEnum.Top3:
-      return "Top 3";
-    case TimetrialsRegionsRankingsListTopEnum.Top5:
-      return "Top 5";
-    case TimetrialsRegionsRankingsListTopEnum.Top10:
-      return "Top 10";
-    case TimetrialsRegionsRankingsListTopEnum.All:
-      return "All";
-  }
-};
-
 /** Return all categories eligible for a given category. For example, eligible categories for
  * Shortcut are Shortcut, since it is the category itself, as well as NonShortcut, since the rules
  * of Shortcut all apply to NonShortcut. NonShortcut returns only itself since it is has the most
