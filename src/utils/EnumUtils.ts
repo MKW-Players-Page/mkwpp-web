@@ -1,5 +1,4 @@
 import { CategoryEnum } from "../rust_api";
-import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
 import { Settings } from "./Settings";
 
 export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) => {

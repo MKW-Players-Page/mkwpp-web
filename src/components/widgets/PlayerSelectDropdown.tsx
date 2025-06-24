@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import api from "../../api";
 import { useApi } from "../../hooks";
 import { PlayerBasic } from "../../rust_api";
 import { I18nContext, translate } from "../../utils/i18n/i18n";

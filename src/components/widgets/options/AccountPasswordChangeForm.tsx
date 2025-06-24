@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 
-import { ResponseError } from "../../../api/generated";
 import { User } from "../../../rust_api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { UserContext } from "../../../utils/User";

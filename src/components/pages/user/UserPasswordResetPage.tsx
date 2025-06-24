@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { coreApi } from "../../../api";
 import { ResponseError } from "../../../api/generated";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Deferred from "../../widgets/Deferred";
