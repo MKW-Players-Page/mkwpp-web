@@ -97,6 +97,45 @@ export class User {
     );
   }
 
+  public static async forgot_password(email: string): Promise<null> {
+    return apiFetch<null>(
+      "/auth/password_forgot",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { email },
+    );
+  }
+
+  public static async reset_password(token: string, password: string): Promise<null> {
+    return apiFetch<null>(
+      "/auth/password_reset",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { token, password },
+    );
+  }
+
+  public static async reset_password_check_token(token: string): Promise<boolean> {
+    return apiFetch<{ is_valid: boolean }>(
+      "/auth/password_reset_check_token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { token },
+    ).then((r) => r.is_valid);
+  }
+
   public static async fetch_data(): Promise<null | User> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));

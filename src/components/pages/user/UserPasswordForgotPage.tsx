@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 
-import { coreApi } from "../../../api";
-import { ResponseError } from "../../../api/generated";
+import { FinalErrorResponse, User } from "../../../rust_api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Form, { Field, FormState } from "../../widgets/Form";
 
@@ -20,13 +19,10 @@ const UserPasswordResetForm = ({ closeForm }: UserPasswordResetFormProps) => {
   const [state, setState] = useState<UserPasswordResetFormState>(initialState);
 
   const submit = (done: () => void) => {
-    coreApi
-      .corePasswordResetRequestCreate({ passwordResetRequest: { email: state.email } })
+    User.forgot_password(state.email)
       .then(closeForm)
-      .catch((error: ResponseError) => {
-        error.response.json().then((json) => {
-          setState((prev) => ({ ...prev, errors: { ...json } }));
-        });
+      .catch((error: FinalErrorResponse) => {
+        setState((prev) => ({ ...prev, errors: error.field_errors }));
       })
       .finally(done);
   };

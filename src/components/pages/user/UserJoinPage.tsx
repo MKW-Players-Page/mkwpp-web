@@ -48,7 +48,6 @@ const UserJoinPage = () => {
 
     User.register(state.username, state.password, state.email).then(
       (r) => {
-        console.log(resolvePage(Pages.UserJoinSuccess));
         navigate(resolvePage(Pages.UserJoinSuccess));
         done();
       },

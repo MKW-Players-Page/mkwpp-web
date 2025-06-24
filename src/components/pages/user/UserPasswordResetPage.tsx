@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { ResponseError } from "../../../api/generated";
+import { FinalErrorResponse, User } from "../../../rust_api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Deferred from "../../widgets/Deferred";
 import Form, { Field, FormState } from "../../widgets/Form";
@@ -35,25 +35,18 @@ const UserPasswordResetForm = ({ token, closeForm }: UserPasswordResetFormProps)
       return;
     }
 
-    coreApi
-      .corePasswordResetCreate({ passwordReset: { token, password: state.password } })
+    User.reset_password(token, state.password)
       .then(() => {
         closeForm(
           translate("userPasswordResetPageResultTitleSuccess", lang),
           translate("userPasswordResetPageResultContentSuccess", lang),
         );
       })
-      .catch((error: ResponseError) => {
-        if (error.response.status === 400) {
-          error.response.json().then((json) => {
-            setState((prev) => ({ ...prev, errors: { ...json } }));
-          });
-        } else {
+      .catch((error: FinalErrorResponse) => {
           closeForm(
             translate("userPasswordResetPageResultTitleFailure", lang),
-            translate("userPasswordResetPageResultContentUnknownError", lang),
+            error.non_field_errors.toString(),
           );
-        }
       })
       .finally(done);
   };
@@ -90,7 +83,7 @@ interface UserPasswordResetState {
 const UserPasswordResetPage = () => {
   const [query] = useSearchParams();
 
-  const token = query.get("token");
+  const token = query.get("tkn");
 
   const { lang } = useContext(I18nContext);
 
@@ -109,14 +102,18 @@ const UserPasswordResetPage = () => {
     };
 
     if (token) {
-      coreApi
-        .corePasswordResetVerifyCreate({ token: { token } })
-        .then(() => setState((prev) => ({ ...prev, isLoading: false, showForm: true })))
-        .catch((error: ResponseError) => {
-          error.response
-            .json()
-            .then((json) => tokenVerificationFailed(json.detail))
-            .catch(tokenVerificationFailed);
+        User.reset_password_check_token(token)
+        .then((r) => {
+            if (r) {
+                
+                setState((prev) => ({ ...prev, isLoading: false, showForm: r }))
+            }else {
+                
+                tokenVerificationFailed("Token not valid");
+            }
+        })
+        .catch((error: FinalErrorResponse) => {
+          tokenVerificationFailed(error.non_field_errors.toString());
         });
     } else {
       tokenVerificationFailed(translate("userPasswordResetPageResultTitleMissingToken", lang));
