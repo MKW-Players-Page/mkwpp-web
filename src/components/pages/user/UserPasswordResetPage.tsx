@@ -43,10 +43,10 @@ const UserPasswordResetForm = ({ token, closeForm }: UserPasswordResetFormProps)
         );
       })
       .catch((error: FinalErrorResponse) => {
-          closeForm(
-            translate("userPasswordResetPageResultTitleFailure", lang),
-            error.non_field_errors.toString(),
-          );
+        closeForm(
+          translate("userPasswordResetPageResultTitleFailure", lang),
+          error.non_field_errors.toString(),
+        );
       })
       .finally(done);
   };
@@ -102,15 +102,13 @@ const UserPasswordResetPage = () => {
     };
 
     if (token) {
-        User.reset_password_check_token(token)
+      User.reset_password_check_token(token)
         .then((r) => {
-            if (r) {
-                
-                setState((prev) => ({ ...prev, isLoading: false, showForm: r }))
-            }else {
-                
-                tokenVerificationFailed("Token not valid");
-            }
+          if (r) {
+            setState((prev) => ({ ...prev, isLoading: false, showForm: r }));
+          } else {
+            tokenVerificationFailed("Token not valid");
+          }
         })
         .catch((error: FinalErrorResponse) => {
           tokenVerificationFailed(error.non_field_errors.toString());

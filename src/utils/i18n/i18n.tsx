@@ -6,14 +6,7 @@ import i18nJson from "./i18n.json";
 import { Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
 import { FlagIcon } from "../../components/widgets";
-import {
-  Region,
-  RegionType,
-  CategoryEnum,
-  Track,
-  LapModeEnum,
-  StandardLevel,
-} from "../../api";
+import { Region, RegionType, CategoryEnum, Track, LapModeEnum, StandardLevel } from "../../api";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
