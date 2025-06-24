@@ -9,7 +9,7 @@ import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { CategoryEnum, LapModeEnum, Score, User } from "../../rust_api";
+import { CategoryEnum, LapModeEnum, Score, User } from "../../api";
 import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";

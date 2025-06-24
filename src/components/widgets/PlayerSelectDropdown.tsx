@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useApi } from "../../hooks";
-import { PlayerBasic } from "../../rust_api";
+import { PlayerBasic } from "../../api";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";

@@ -13,7 +13,7 @@ import {
   Track,
   LapModeEnum,
   StandardLevel,
-} from "../../rust_api";
+} from "../../api";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;

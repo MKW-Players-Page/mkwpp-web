@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { FormContext } from "./Form";
-import { CategoryEnum, CategoryEnumValues, stringToCategoryEnum } from "../../rust_api";
+import { CategoryEnum, CategoryEnumValues, stringToCategoryEnum } from "../../api";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 import { I18nContext, translateCategoryName } from "../../utils/i18n/i18n";
 import RadioButtons from "./RadioButtons";

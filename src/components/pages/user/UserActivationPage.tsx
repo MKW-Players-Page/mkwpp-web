@@ -1,6 +1,6 @@
 import { useContext, useEffect, useReducer } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FinalErrorResponse, User } from "../../../rust_api";
+import { FinalErrorResponse, User } from "../../../api";
 
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Deferred from "../../widgets/Deferred";

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { FinalErrorResponse, User } from "../../../rust_api";
+import { FinalErrorResponse, User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Form, { Field, FormState } from "../../widgets/Form";
 

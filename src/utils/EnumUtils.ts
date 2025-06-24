@@ -1,4 +1,4 @@
-import { CategoryEnum } from "../rust_api";
+import { CategoryEnum } from "../api";
 import { Settings } from "./Settings";
 
 export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) => {

@@ -10,7 +10,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable from "../widgets/Table";
-import { SiteChamp } from "../../rust_api";
+import { SiteChamp } from "../../api";
 
 const PastChampsPage = () => {
   const { lang } = useContext(I18nContext);

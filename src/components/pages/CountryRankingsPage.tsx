@@ -23,7 +23,7 @@ import {
   countryRankingsTopEnumTopToString,
   CountryRankingsTopEnumValues,
   RegionType,
-} from "../../rust_api";
+} from "../../api";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { useMetadata } from "../../utils/Metadata";

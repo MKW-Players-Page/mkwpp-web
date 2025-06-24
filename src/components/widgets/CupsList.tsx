@@ -5,7 +5,7 @@ import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import "./CupsList.css";
-import { Cup, Region, CategoryEnum, LapModeEnum } from "../../rust_api";
+import { Cup, Region, CategoryEnum, LapModeEnum } from "../../api";
 
 interface CupsListNoTracksProps {
   currentRegion: Region;

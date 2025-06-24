@@ -7,7 +7,7 @@ import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { useContext } from "react";
 import CupsList from "../widgets/CupsList";
 import RecentTimes from "../widgets/RecentTimes";
-import { BlogPost } from "../../rust_api";
+import { BlogPost } from "../../api";
 
 const HomePage = () => {
   const { lang } = useContext(I18nContext);

@@ -15,7 +15,7 @@ import {
   SettingsContext,
   SettingsDataKey,
 } from "../utils/Settings";
-import { User } from "../rust_api";
+import { User } from "../api";
 
 interface AppUserState {
   isLoading: boolean;

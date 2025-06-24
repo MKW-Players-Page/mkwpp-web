@@ -7,7 +7,7 @@ import { integerOr } from "../../../utils/Numbers";
 import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { Pages, resolvePage } from "../Pages";
-import { BlogPost } from "../../../rust_api";
+import { BlogPost } from "../../../api";
 
 const BlogPostPage = () => {
   const { id: idStr } = useParams();

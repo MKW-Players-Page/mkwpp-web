@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { I18nContext, translateLapModeName } from "../../utils/i18n/i18n";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
-import { LapModeEnum, stringToLapModeEnum } from "../../rust_api";
+import { LapModeEnum, stringToLapModeEnum } from "../../api";
 
 import { FormContext } from "./Form";
 import RadioButtons from "./RadioButtons";

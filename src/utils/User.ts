@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { User, AuthData } from "../rust_api";
+import { User, AuthData } from "../api";
 import { clearToken, setToken } from "./Auth";
 
 export interface UserContextType {

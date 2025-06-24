@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { Region, RegionTree } from "../../rust_api";
+import { Region, RegionTree } from "../../api";
 import { MetadataContext } from "../../utils/Metadata";
 
 import "./RegionDropdown.css";

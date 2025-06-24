@@ -8,12 +8,12 @@ import {
   stringToLapModeEnum,
   stringToCategoryEnum,
   RegionType,
-} from "../rust_api";
+} from "../api";
 import {
   CountryRankingsTopEnum,
   stringToCountryRankingsTopEnum,
-} from "../rust_api/endpoints/countryRankings";
-import { stringToRegionType } from "../rust_api/endpoints/regions";
+} from "../api/endpoints/countryRankings";
+import { stringToRegionType } from "../api/endpoints/regions";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 

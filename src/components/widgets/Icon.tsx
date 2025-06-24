@@ -17,7 +17,7 @@ import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { useContext } from "react";
 import { SettingsContext } from "../../utils/Settings";
 import { MetadataContext } from "../../utils/Metadata";
-import { Region, RegionType } from "../../rust_api";
+import { Region, RegionType } from "../../api";
 
 export const Icons = {
   Comment: CommentIcon,

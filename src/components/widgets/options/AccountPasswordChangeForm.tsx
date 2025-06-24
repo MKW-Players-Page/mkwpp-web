@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { User } from "../../../rust_api";
+import { User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { UserContext } from "../../../utils/User";
 import Form, { Field, FormState } from "../Form";

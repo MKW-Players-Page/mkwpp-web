@@ -5,7 +5,7 @@ import { SettingsContext } from "../../../utils/Settings";
 import { MetadataContext } from "../../../utils/Metadata";
 import OverwriteColor from "../../widgets/OverwriteColor";
 import { getCategorySiteHue } from "../../../utils/EnumUtils";
-import { CategoryEnum, LapModeEnum } from "../../../rust_api";
+import { CategoryEnum, LapModeEnum } from "../../../api";
 import { LapModeRadio } from "../../widgets/LapModeSelect";
 import PlayerMention from "../../widgets/PlayerMention";
 import { Pages, resolvePage } from "../Pages";
@@ -17,7 +17,7 @@ import { CategoryRadio } from "../../widgets/CategorySelect";
 import RadioButtons from "../../widgets/RadioButtons";
 import ArrayTable, { ArrayTableCellData } from "../../widgets/Table";
 import { SmallBigTrackFormat } from "../../widgets/SmallBigFormat";
-import { MatchupData } from "../../../rust_api/endpoints/playerTimesheet";
+import { MatchupData } from "../../../api/endpoints/playerTimesheet";
 
 const MatchupPage = () => {
   const searchParams = useSearchParams();

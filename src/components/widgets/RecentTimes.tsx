@@ -7,7 +7,7 @@ import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import ExpandableModule from "./ExpandableModule";
-import { CategoryEnum, LapModeEnum, Score } from "../../rust_api";
+import { CategoryEnum, LapModeEnum, Score } from "../../api";
 import PlayerMention from "./PlayerMention";
 
 import "./RecentTimes.css";

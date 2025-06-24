@@ -13,7 +13,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeRadio } from "../widgets/LapModeSelect";
-import { LapModeEnum, CategoryEnum, Region, RegionType, Timesheet, Player } from "../../rust_api";
+import { LapModeEnum, CategoryEnum, Region, RegionType, Timesheet, Player } from "../../api";
 import {
   I18nContext,
   translate,

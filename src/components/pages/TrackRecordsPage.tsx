@@ -22,7 +22,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
-import { LapModeEnum, RegionType, Score } from "../../rust_api";
+import { LapModeEnum, RegionType, Score } from "../../api";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 

@@ -1,4 +1,4 @@
-import { LapModeEnum } from "../rust_api";
+import { LapModeEnum } from "../api";
 
 /** Given a time in milliseconds, format it to a string in the form of
  *

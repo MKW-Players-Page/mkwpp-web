@@ -7,7 +7,7 @@ import { MetadataContext } from "../../utils/Metadata";
 import "./RegionSelection.css";
 import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
 import { FlagIcon } from "./Icon";
-import { Region, RegionType, CategoryEnum, LapModeEnum } from "../../rust_api";
+import { Region, RegionType, CategoryEnum, LapModeEnum } from "../../api";
 import { useApi } from "../../hooks";
 import Deferred from "./Deferred";
 

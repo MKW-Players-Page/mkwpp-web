@@ -13,7 +13,7 @@ import {
   Timesheet,
   Time,
   SubmissionStatus,
-} from "../../rust_api";
+} from "../../api";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { Link, Navigate, useNavigate } from "react-router-dom";

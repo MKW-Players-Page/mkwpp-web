@@ -1,5 +1,5 @@
 import { DependencyList, useEffect, useState } from "react";
-import { FinalErrorResponse } from "../rust_api";
+import { FinalErrorResponse } from "../api";
 
 export interface ApiState<T> {
   isLoading: boolean;

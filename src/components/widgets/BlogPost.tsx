@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BlogPost } from "../../rust_api";
+import { BlogPost } from "../../api";
 import { Pages, resolvePage } from "../pages";
 import "./BlogPost.css";
 import PlayerMention from "./PlayerMention";

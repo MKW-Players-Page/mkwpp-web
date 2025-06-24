@@ -4,7 +4,7 @@ import { Pages, resolvePage } from "../Pages";
 import Form, { Field } from "../../widgets/Form";
 import { UserContext } from "../../../utils/User";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
-import { User } from "../../../rust_api";
+import { User } from "../../../api";
 
 interface UserJoinState {
   email: string;

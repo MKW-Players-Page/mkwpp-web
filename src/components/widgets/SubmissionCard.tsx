@@ -16,7 +16,7 @@ import Tooltip from "./Tooltip";
 
 import "./SubmissionCard.css";
 import PlayerMention from "./PlayerMention";
-import { LapModeEnum, Submission, SubmissionStatus } from "../../rust_api";
+import { LapModeEnum, Submission, SubmissionStatus } from "../../api";
 import { SettingsContext } from "../../utils/Settings";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 

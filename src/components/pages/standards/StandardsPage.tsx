@@ -31,7 +31,7 @@ import { SettingsContext } from "../../../utils/Settings";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../../widgets/Table";
 import { LapModeRadio } from "../../widgets/LapModeSelect";
-import { CategoryEnum, LapModeEnum, Timesheet } from "../../../rust_api";
+import { CategoryEnum, LapModeEnum, Timesheet } from "../../../api";
 import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import { TrackDropdown } from "../../widgets/TrackSelect";

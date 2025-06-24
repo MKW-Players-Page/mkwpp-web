@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useApi } from "../hooks";
-import { Cup, Track, Region, StandardLevel, Standard, Player, PlayerBasic } from "../rust_api";
-import { typeguardPlayer } from "../rust_api/endpoints/players";
+import { Cup, Track, Region, StandardLevel, Standard, Player, PlayerBasic } from "../api";
+import { typeguardPlayer } from "../api/endpoints/players";
 
 /** Metadata fetched from the API. Data may be missing if `isLoading` is true. */
 export class Metadata {

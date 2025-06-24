@@ -22,7 +22,7 @@ import { CategoryRadio } from "../widgets/CategorySelect";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
-import { MetricEnum, Ranking, RegionType } from "../../rust_api";
+import { MetricEnum, Ranking, RegionType } from "../../api";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;

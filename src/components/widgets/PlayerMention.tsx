@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Region, PlayerBasic } from "../../rust_api";
+import { Region, PlayerBasic } from "../../api";
 import { useApi } from "../../hooks";
 import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";

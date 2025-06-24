@@ -5,7 +5,7 @@ import Deferred from "../../widgets/Deferred";
 import { useApi } from "../../../hooks";
 import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
-import { BlogPost } from "../../../rust_api";
+import { BlogPost } from "../../../api";
 import PlayerMention from "../../widgets/PlayerMention";
 
 const BlogListPage = () => {

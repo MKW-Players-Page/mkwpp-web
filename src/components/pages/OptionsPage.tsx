@@ -9,7 +9,7 @@ import Deferred from "../widgets/Deferred";
 import PlayerMention from "../widgets/PlayerMention";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 import AccountPasswordChangeForm from "../widgets/options/AccountPasswordChangeForm";
-import { Player, User } from "../../rust_api";
+import { Player, User } from "../../api";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);

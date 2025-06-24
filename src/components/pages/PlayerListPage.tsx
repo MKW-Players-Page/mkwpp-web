@@ -11,7 +11,7 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table
 import { usePageNumber } from "../../utils/SearchParams";
 import { useSearchParams } from "react-router-dom";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
-import { PlayerBasic } from "../../rust_api/";
+import { PlayerBasic } from "../../api";
 
 const PlayerListPage = () => {
   const { lang } = useContext(I18nContext);

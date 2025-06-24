@@ -18,7 +18,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import { CupsListNoTracks } from "../widgets/CupsList";
-import { Region, RegionType, Score, LapModeEnum, CategoryEnum } from "../../rust_api";
+import { Region, RegionType, Score, LapModeEnum, CategoryEnum } from "../../api";
 
 export const TrackTopsHomePage = () => {
   const metadata = useContext(MetadataContext);
