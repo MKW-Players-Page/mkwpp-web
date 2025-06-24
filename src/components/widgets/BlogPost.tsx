@@ -22,8 +22,7 @@ const BlogPostModule = ({ post, style }: BlogPostModuleProps) => {
           <b>{post.title}</b>
         )}
         <br />
-        {post.publishedAt}{" "}
-        - <PlayerMention playerOrId={post.authorId} />
+        {post.publishedAt} - <PlayerMention playerOrId={post.authorId} />
       </div>
       <div className="blog-post" dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>

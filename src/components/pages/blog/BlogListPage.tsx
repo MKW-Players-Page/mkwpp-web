@@ -32,7 +32,9 @@ const BlogListPage = () => {
                     <Link to={resolvePage(Pages.BlogPost, { id: post.id })}>{post.title}</Link>
                   </td>
                   <td>{post.publishedAt}</td>
-                  <td><PlayerMention playerOrId={post.authorId} /></td>
+                  <td>
+                    <PlayerMention playerOrId={post.authorId} />
+                  </td>
                 </tr>
               ))}
             </tbody>
