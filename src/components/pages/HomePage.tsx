@@ -1,5 +1,4 @@
 import Deferred from "../widgets/Deferred";
-import { coreApi } from "../../api";
 import { useApi } from "../../hooks";
 import { BlogPostModule } from "../widgets";
 import DiscordEmbed from "../widgets/DiscordEmbed";
@@ -8,11 +7,12 @@ import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { useContext } from "react";
 import CupsList from "../widgets/CupsList";
 import RecentTimes from "../widgets/RecentTimes";
+import { BlogPost } from "../../rust_api";
 
 const HomePage = () => {
   const { lang } = useContext(I18nContext);
   const { isLoading: blogPostsLoading, data: posts } = useApi(
-    () => coreApi.coreBlogLatestList(),
+    () => BlogPost.getList(4),
     [],
     "blogPosts",
   );
@@ -22,7 +22,7 @@ const HomePage = () => {
       <div className="home-page-grid">
         <div style={{ flex: 2, minWidth: "250px" }}>
           <Deferred isWaiting={blogPostsLoading}>
-            {posts?.slice(0, 4)?.map((post) => <BlogPostModule post={post} />)}
+            {posts?.map((post) => <BlogPostModule post={post} />)}
           </Deferred>
         </div>
         <div style={{ flex: 1 }}>

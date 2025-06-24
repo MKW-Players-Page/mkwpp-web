@@ -1,3 +1,4 @@
+export { BlogPost } from "./endpoints/blogPost";
 export { User, AuthData } from "./endpoints/user";
 export { Cup } from "./endpoints/cups";
 export { Track } from "./endpoints/tracks";

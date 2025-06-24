@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
-import { coreApi } from "../../../api";
 import { useApi } from "../../../hooks";
 import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
+import { BlogPost } from "../../../rust_api";
+import PlayerMention from "../../widgets/PlayerMention";
 
 const BlogListPage = () => {
-  const { isLoading, data: posts } = useApi(() => coreApi.coreBlogList(), [], "blogPosts");
+  const { isLoading, data: posts } = useApi(() => BlogPost.getList(2147483647), [], "blogPosts");
   const { lang } = useContext(I18nContext);
 
   return (
@@ -30,8 +31,8 @@ const BlogListPage = () => {
                   <td>
                     <Link to={resolvePage(Pages.BlogPost, { id: post.id })}>{post.title}</Link>
                   </td>
-                  <td>{new Date(post.publishedAt * 1000).toLocaleDateString(lang)}</td>
-                  <td>{post.author.username}</td>
+                  <td>{post.publishedAt}</td>
+                  <td><PlayerMention playerOrId={post.authorId} /></td>
                 </tr>
               ))}
             </tbody>

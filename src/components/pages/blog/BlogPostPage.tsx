@@ -2,19 +2,19 @@ import { Link, useParams } from "react-router-dom";
 
 import Deferred from "../../widgets/Deferred";
 import { BlogPostModule } from "../../widgets";
-import { coreApi } from "../../../api";
 import { useApi } from "../../../hooks";
 import { integerOr } from "../../../utils/Numbers";
 import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { Pages, resolvePage } from "../Pages";
+import { BlogPost } from "../../../rust_api";
 
 const BlogPostPage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
   const { isLoading, data: post } = useApi(
-    () => coreApi.coreBlogRetrieve({ id }),
+    () => BlogPost.getById(id),
     [id],
     "blogPosts",
   );
