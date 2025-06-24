@@ -1,8 +1,7 @@
 import { useContext, useEffect, useReducer } from "react";
 import { useSearchParams } from "react-router-dom";
+import { FinalErrorResponse, User } from "../../../rust_api";
 
-import { coreApi } from "../../../api";
-import { ResponseError } from "../../../api/generated";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Deferred from "../../widgets/Deferred";
 
@@ -53,7 +52,7 @@ const userActivationReducer = (state: UserActivationState, action: UserActivatio
 const UserActivationPage = () => {
   const [query] = useSearchParams();
 
-  const token = query.get("token");
+  const token = query.get("tkn");
 
   const { lang } = useContext(I18nContext);
 
@@ -66,29 +65,18 @@ const UserActivationPage = () => {
         payload: translate("userActivationPageContentMissingToken", lang),
       });
     } else {
-      coreApi
-        .coreVerifyCreate({ token: { token } })
+      User.activate(token)
         .then(() => {
           dispatch({
             type: UserActivationActionType.SUCCESS,
             payload: translate("userActivationPageContentSuccess", lang),
           });
         })
-        .catch((error: ResponseError) => {
-          error.response
-            .json()
-            .then((json) => {
-              dispatch({
-                type: UserActivationActionType.FAILURE,
-                payload: json.detail,
-              });
-            })
-            .catch(() => {
-              dispatch({
-                type: UserActivationActionType.FAILURE,
-                payload: translate("userActivationPageContentUnknownError", lang),
-              });
-            });
+        .catch((error: FinalErrorResponse) => {
+          dispatch({
+            type: UserActivationActionType.FAILURE,
+            payload: error.non_field_errors.toString(),
+          });
         });
     }
   }, [lang, token]);

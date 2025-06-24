@@ -65,6 +65,19 @@ export class User {
     );
   }
 
+  public static async activate(token: string): Promise<{}> {
+    return apiFetch<{}>(
+      "/auth/activate",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { token },
+    );
+  }
+
   public static async password_change(
     userId: number,
     oldPassword: string,
