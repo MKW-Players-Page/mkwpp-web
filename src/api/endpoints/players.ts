@@ -49,7 +49,7 @@ export class PlayerBasic {
       },
       ids,
     ).then((r) => {
-      if (metadata !== undefined) metadata.cachePlayers = r;
+      if (metadata !== undefined) metadata.cachePlayers(...r);
       r.push(...alreadyGrabbed);
       return r;
     });
@@ -107,7 +107,7 @@ export class Player extends PlayerBasic {
       },
       ids,
     ).then((r) => {
-      if (metadata !== undefined) metadata.cachePlayers = r;
+      if (metadata !== undefined) metadata.cachePlayers(...r);
       r.push(...alreadyGrabbed);
       return r;
     });

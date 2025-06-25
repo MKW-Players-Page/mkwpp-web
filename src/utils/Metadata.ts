@@ -38,7 +38,7 @@ export class Metadata {
   /**
    * @param players All the players to push to the cache
    */
-  set cachePlayers(players: Array<Player | PlayerBasic>) {
+   cachePlayers(...players: Array<Player | PlayerBasic>) {
     for (const player of players) {
       if (
         this.cached.players[player.id] !== undefined &&

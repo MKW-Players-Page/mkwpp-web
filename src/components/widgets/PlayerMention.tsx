@@ -107,7 +107,7 @@ const PlayerMention = ({
   if (metadata.isLoading) return <>Loading..</>;
 
   let resolvedPlayerId: number = typeof playerOrId === "number" ? playerOrId : playerOrId.id;
-  if (typeof playerOrId !== "number") metadata.cachePlayers = [playerOrId];
+  if (typeof playerOrId !== "number") metadata.cachePlayers(playerOrId);
 
   const region: Region | undefined =
     regionOrId !== undefined
