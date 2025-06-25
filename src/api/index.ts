@@ -75,10 +75,15 @@ export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: a
 };
 
 export interface FinalErrorResponse {
+  error_code: number;
   non_field_errors: string[];
   field_errors: Record<string, string[]>;
 }
 
 const typeguardErrorResponse = (x: Object): x is FinalErrorResponse => {
-  return x.hasOwnProperty("non_field_errors") && x.hasOwnProperty("field_errors");
+  return (
+    x.hasOwnProperty("non_field_errors") &&
+    x.hasOwnProperty("field_errors") &&
+    x.hasOwnProperty("error_code")
+  );
 };
