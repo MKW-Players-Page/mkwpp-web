@@ -328,7 +328,7 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
             starterCategory={score.category}
             starterLapMode={score.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
             starterValue={formatTime(score.value)}
-            starterDate={score.date}
+            starterDate={formatDate(new Date(score.date * 1000))}
             submissionId={patchUpData?.id}
             starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink ?? undefined}
             starterVideoLink={patchUpData?.videoLink ?? score.videoLink ?? undefined}
@@ -457,7 +457,7 @@ const TimesheetTab = () => {
                       </td>
                       {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td>{score.rank}</td>
-                      <td>{score.date}</td>
+                      <td>{formatDate(new Date(score.date * 1000))}</td>
                       <td className="icon-cell">
                         {score.videoLink && (
                           <a href={score.videoLink} target="_blank" rel="noopener noreferrer">

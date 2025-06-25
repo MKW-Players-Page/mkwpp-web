@@ -34,12 +34,12 @@ export class Submission {
   readonly isLap: boolean;
   readonly playerId: number;
   readonly trackId: number;
-  readonly date: string;
+  readonly date: number;
   readonly status: SubmissionStatus;
   readonly submitterId: number;
-  readonly submittedAt: string;
+  readonly submittedAt: number;
   readonly reviewerId?: number;
-  readonly reviewedAt?: string;
+  readonly reviewedAt?: number;
   readonly scoreId?: number;
   readonly videoLink?: string;
   readonly ghostLink?: string;
@@ -54,12 +54,12 @@ export class Submission {
     isLap: boolean,
     playerId: number,
     trackId: number,
-    date: string,
+    date: number,
     status: SubmissionStatus,
     submitterId: number,
-    submittedAt: string,
+    submittedAt: number,
     reviewerId?: number,
-    reviewedAt?: string,
+    reviewedAt?: number,
     scoreId?: number,
     videoLink?: string,
     ghostLink?: string,
@@ -92,14 +92,14 @@ export class EditSubmission {
   readonly id: number;
   readonly status: SubmissionStatus;
   readonly submitterId: number; // This is actually a Player Id, the Backend converts it
-  readonly submittedAt: string;
-  readonly date: Date;
+  readonly submittedAt: number;
+  readonly date: number;
   readonly video_link_edited: boolean;
   readonly ghost_link_edited: boolean;
   readonly comment_edited: boolean;
   readonly date_edited: boolean;
   readonly reviewerId?: number; // This is actually a Player Id, the Backend converts it
-  readonly reviewedAt?: string;
+  readonly reviewedAt?: number;
   readonly scoreId?: number;
   readonly videoLink?: string;
   readonly ghostLink?: string;
@@ -111,14 +111,14 @@ export class EditSubmission {
     id: number,
     status: SubmissionStatus,
     submitterId: number,
-    submittedAt: string,
+    submittedAt: number,
     video_link_edited: boolean,
     ghost_link_edited: boolean,
     comment_edited: boolean,
-    date: Date,
+    date: number,
     date_edited: boolean,
     reviewerId?: number,
-    reviewedAt?: string,
+    reviewedAt?: number,
     scoreId?: number,
     videoLink?: string,
     ghostLink?: string,

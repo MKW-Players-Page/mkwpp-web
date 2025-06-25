@@ -178,7 +178,7 @@ const PlayerProfilePage = () => {
         {
           content: (
             <SmallBigDateFormat
-              date={new Date(score.date)}
+              date={new Date(score.date * 1000)}
               bigClass="player-profile-columns-b1"
               smallClass="player-profile-columns-s1"
             />

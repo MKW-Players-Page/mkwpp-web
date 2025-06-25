@@ -107,7 +107,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                 {
                   content: (
                     <SmallBigDateFormat
-                      date={new Date(data.date)}
+                      date={new Date(data.date * 1000)}
                       smallClass={"s1 b4"}
                       bigClass={"b1"}
                     />

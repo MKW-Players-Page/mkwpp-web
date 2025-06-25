@@ -59,7 +59,7 @@ export class Score {
   readonly isLap: boolean;
   readonly player: PlayerBasic;
   readonly trackId: number;
-  readonly date: string;
+  readonly date: number;
   readonly rank: number;
   readonly prwr: number;
   readonly videoLink?: string;
@@ -75,7 +75,7 @@ export class Score {
     isLap: boolean,
     player: PlayerBasic,
     trackId: number,
-    date: string,
+    date: number,
     rank: number,
     prwr: number,
     video_link?: string,

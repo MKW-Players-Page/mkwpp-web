@@ -140,7 +140,7 @@ const TrackChartPage = () => {
       {
         content: score.date ? (
           <SmallBigDateFormat
-            date={new Date(score.date)}
+            date={new Date(score.date * 1000)}
             smallClass={"track-chart-page-s1"}
             bigClass={"track-chart-page-b1"}
           />

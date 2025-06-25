@@ -31,7 +31,7 @@ const BlogListPage = () => {
                   <td>
                     <Link to={resolvePage(Pages.BlogPost, { id: post.id })}>{post.title}</Link>
                   </td>
-                  <td>{post.publishedAt}</td>
+                  <td>{new Date(post.publishedAt * 1000).toLocaleString(lang)}</td>
                   <td>
                     <PlayerMention playerOrId={post.authorId} />
                   </td>

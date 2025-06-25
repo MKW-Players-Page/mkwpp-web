@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { formatTime } from "../../utils/Formatters";
+import { formatDate, formatTime } from "../../utils/Formatters";
 import {
   handleBars,
   I18nContext,
@@ -86,7 +86,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       starterCategory={submission.category}
                       starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
                       starterValue={formatTime(submission.value)}
-                      starterDate={submission.date}
+                      starterDate={formatDate(new Date(submission.date * 1000))}
                       starterGhostLink={submission.ghostLink ?? undefined}
                       starterVideoLink={submission.videoLink ?? undefined}
                       starterComment={submission.comment ?? undefined}

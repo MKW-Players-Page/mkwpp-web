@@ -65,15 +65,15 @@ export class PlayerBasic {
 
 export class Player extends PlayerBasic {
   readonly bio?: string;
-  readonly joinedDate: string;
-  readonly lastActivity: string;
+  readonly joinedDate: number;
+  readonly lastActivity: number;
 
   constructor(
     id: number,
     name: string,
     regionId: number,
-    joinedDate: string,
-    lastActivity: string,
+    joinedDate: number,
+    lastActivity: number,
     bio?: string,
     alias?: string,
   ) {

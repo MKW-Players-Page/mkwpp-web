@@ -6,7 +6,7 @@ export class BlogPost {
   readonly title: string;
   readonly content: string;
   readonly isPublished: boolean;
-  readonly publishedAt: string;
+  readonly publishedAt: number;
   readonly authorId: number;
 
   constructor(
@@ -14,7 +14,7 @@ export class BlogPost {
     title: string,
     content: string,
     isPublished: boolean,
-    publishedAt: string,
+    publishedAt: number,
     authorId: number,
   ) {
     this.id = id;
