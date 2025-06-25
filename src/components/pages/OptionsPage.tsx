@@ -22,7 +22,7 @@ const OptionsPage = () => {
     alignItems: "center",
   };
 
-  const [forciblyReloadPlayer, forciblyReloadPlayerS] = useState(0);
+  const [forciblyReloadPlayer, triggerForciblyReloadPlayer] = useState(0);
   // it doesn't matter what player is loaded if you aren't logged in.
   const { isLoading: playerLoading, data: player } = useApi(
     () => Player.getPlayer(user?.playerId ?? 1),
@@ -261,7 +261,7 @@ const OptionsPage = () => {
                     if (aliasTextArea.current === null || newAlias === (player?.alias ?? ""))
                       return;
                     await User.update_alias(user.userId, newAlias).then((_) =>
-                      forciblyReloadPlayerS(Math.random()),
+                      triggerForciblyReloadPlayer(Math.random()),
                     );
                   }}
                 >
@@ -286,7 +286,7 @@ const OptionsPage = () => {
                     const newBio: string = (bioTextArea.current as any).value;
                     if (bioTextArea.current === null || newBio === (player?.bio ?? "")) return;
                     await User.update_bio(user.userId, newBio).then((_) =>
-                      forciblyReloadPlayerS(Math.random()),
+                      triggerForciblyReloadPlayer(Math.random()),
                     );
                   }}
                 >
