@@ -78,7 +78,7 @@ export class User {
     );
   }
 
-  public static async password_change(
+  public static async passwordChange(
     userId: number,
     oldPassword: string,
     newPassword: string,
@@ -97,7 +97,7 @@ export class User {
     );
   }
 
-  public static async forgot_password(email: string): Promise<null> {
+  public static async forgotPassword(email: string): Promise<null> {
     return apiFetch<null>(
       "/auth/password_forgot",
       {
@@ -110,7 +110,7 @@ export class User {
     );
   }
 
-  public static async reset_password(token: string, password: string): Promise<null> {
+  public static async resetPassword(token: string, password: string): Promise<null> {
     return apiFetch<null>(
       "/auth/password_reset",
       {
@@ -123,7 +123,7 @@ export class User {
     );
   }
 
-  public static async reset_password_check_token(token: string): Promise<boolean> {
+  public static async resetPasswordCheckToken(token: string): Promise<boolean> {
     return apiFetch<{ is_valid: boolean }>(
       "/auth/password_reset_check_token",
       {
@@ -136,7 +136,7 @@ export class User {
     ).then((r) => r.is_valid);
   }
 
-  public static async fetch_data(): Promise<null | User> {
+  public static async fetchData(): Promise<null | User> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch<User>(
@@ -151,7 +151,7 @@ export class User {
     );
   }
 
-  public static async update_bio(userId: number, bio: string): Promise<null | string> {
+  public static async updateBio(userId: number, bio: string): Promise<null | string> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch<string>(
@@ -166,7 +166,7 @@ export class User {
     );
   }
 
-  public static async update_alias(userId: number, alias: string): Promise<null | string> {
+  public static async updateAlias(userId: number, alias: string): Promise<null | string> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch<string>(
@@ -181,10 +181,7 @@ export class User {
     );
   }
 
-  public static async add_to_submitter_list(
-    userId: number,
-    playerId: number,
-  ): Promise<null | number> {
+  public static async addToSubmitterList(userId: number, playerId: number): Promise<null | number> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch<number>(
@@ -199,7 +196,7 @@ export class User {
     );
   }
 
-  public static async remove_from_submitter_list(
+  public static async removeFromSubmitterList(
     userId: number,
     playerId: number,
   ): Promise<null | number> {
@@ -217,7 +214,7 @@ export class User {
     );
   }
 
-  public static async get_submitter_list(
+  public static async getSubmitterList(
     userId: number,
     metadata?: Metadata,
   ): Promise<null | Array<PlayerBasic>> {
@@ -235,7 +232,7 @@ export class User {
     ).then((r) => PlayerBasic.getPlayersBasic(r, metadata));
   }
 
-  public static async get_submittee_list(
+  public static async getSubmitteeList(
     userId: number,
     metadata?: Metadata,
   ): Promise<null | Array<PlayerBasic>> {
@@ -253,7 +250,7 @@ export class User {
     ).then((r) => PlayerBasic.getPlayersBasic(r, metadata));
   }
 
-  public static async get_user_submissions_list(userId: number): Promise<null | Array<Submission>> {
+  public static async getUserSubmissionsList(userId: number): Promise<null | Array<Submission>> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch<Array<Submission>>(
@@ -268,7 +265,7 @@ export class User {
     );
   }
 
-  public static async create_submission(
+  public static async createSubmission(
     userId: number,
     value: number,
     category: CategoryEnum,
@@ -309,7 +306,7 @@ export class User {
     );
   }
 
-  public static async edit_submission(
+  public static async editSubmission(
     submissionId: number,
     userId: number,
     value: number,
@@ -352,7 +349,7 @@ export class User {
     );
   }
 
-  public static async delete_submission(userId: number, submissionId: number): Promise<null | {}> {
+  public static async deleteSubmission(userId: number, submissionId: number): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch<{}>(
@@ -367,7 +364,7 @@ export class User {
     );
   }
 
-  public static async get_user_edit_submissions_list(
+  public static async getUserEditSubmissionsList(
     userId: number,
   ): Promise<null | Array<EditSubmission>> {
     const sessionToken = getToken();
@@ -384,7 +381,7 @@ export class User {
     );
   }
 
-  public static async create_edit_submission(
+  public static async createEditSubmission(
     userId: number,
     scoreId: number,
     date: Date,
@@ -421,7 +418,7 @@ export class User {
     );
   }
 
-  public static async edit_edit_submission(
+  public static async editEditSubmission(
     editSubmissionId: number,
     userId: number,
     scoreId: number,
@@ -460,7 +457,7 @@ export class User {
     );
   }
 
-  public static async delete_edit_submission(
+  public static async deleteEditSubmission(
     userId: number,
     submissionId: number,
   ): Promise<null | {}> {

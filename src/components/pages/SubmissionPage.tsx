@@ -254,7 +254,7 @@ const SubmissionsTab = () => {
   const [filter, setFilter] = useState<SubmissionFilter>(SubmissionFilter.All);
 
   const { isLoading, data: submissions } = useApi(
-    () => User.get_user_submissions_list(user?.userId ?? 0),
+    () => User.getUserSubmissionsList(user?.userId ?? 0),
     [reload],
     "trackSubmissions",
   );
@@ -375,7 +375,7 @@ const TimesheetTab = () => {
 
   const { isLoading: editsLoading, data: edits } = useApi(
     () =>
-      User.get_user_edit_submissions_list(user?.userId ?? 0).then((r) =>
+      User.getUserEditSubmissionsList(user?.userId ?? 0).then((r) =>
         r?.sort((a, b) => +b.submittedAt - +a.submittedAt),
       ),
     [reload],

@@ -18,7 +18,7 @@ export const UserContext = createContext<UserContextType>({
  * using the given callback.
  */
 export const fetchCurrentUser = (setUser: (user?: User) => void) => {
-  User.fetch_data()
+  User.fetchData()
     .then((user) => {
       setUser(user ? user : undefined);
     })

@@ -19,7 +19,7 @@ const UserPasswordResetForm = ({ closeForm }: UserPasswordResetFormProps) => {
   const [state, setState] = useState<UserPasswordResetFormState>(initialState);
 
   const submit = (done: () => void) => {
-    User.forgot_password(state.email)
+    User.forgotPassword(state.email)
       .then(closeForm)
       .catch((error: FinalErrorResponse) => {
         setState((prev) => ({ ...prev, errors: error.field_errors }));

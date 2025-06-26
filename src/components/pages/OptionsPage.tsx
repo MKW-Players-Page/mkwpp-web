@@ -38,7 +38,7 @@ const OptionsPage = () => {
   const [newSubmitterIdFieldError, setNewSubmitterIdFieldError] = useState("");
   const [resetSubmittersList, setResetSubmittersList] = useState(0);
   const { isLoading: submittersLoading, data: submitters } = useApi(
-    () => User.get_submitter_list(user?.userId ?? 0),
+    () => User.getSubmitterList(user?.userId ?? 0),
     [user, resetSubmittersList],
     "loadedSubmitters",
   );
@@ -210,7 +210,7 @@ const OptionsPage = () => {
                       newSubmitterId !== 0 &&
                       !submitters?.map((r) => r.id).includes(newSubmitterId)
                     )
-                      User.add_to_submitter_list(user.userId, newSubmitterId).then(
+                      User.addToSubmitterList(user.userId, newSubmitterId).then(
                         () => {
                           setResetSubmittersList(Math.random());
                         },
@@ -232,7 +232,7 @@ const OptionsPage = () => {
                       newSubmitterId !== 0 &&
                       submitters?.map((r) => r.id).includes(newSubmitterId)
                     )
-                      User.remove_from_submitter_list(user.userId, newSubmitterId).then(() => {
+                      User.removeFromSubmitterList(user.userId, newSubmitterId).then(() => {
                         setResetSubmittersList(Math.random());
                       });
                     newSubmitterSetId(0);
@@ -260,7 +260,7 @@ const OptionsPage = () => {
                     const newAlias: string = (aliasTextArea.current as any).value;
                     if (aliasTextArea.current === null || newAlias === (player?.alias ?? ""))
                       return;
-                    await User.update_alias(user.userId, newAlias).then((_) =>
+                    await User.updateAlias(user.userId, newAlias).then((_) =>
                       triggerForciblyReloadPlayer(Math.random()),
                     );
                   }}
@@ -285,7 +285,7 @@ const OptionsPage = () => {
                   onClick={async () => {
                     const newBio: string = (bioTextArea.current as any).value;
                     if (bioTextArea.current === null || newBio === (player?.bio ?? "")) return;
-                    await User.update_bio(user.userId, newBio).then((_) =>
+                    await User.updateBio(user.userId, newBio).then((_) =>
                       triggerForciblyReloadPlayer(Math.random()),
                     );
                   }}

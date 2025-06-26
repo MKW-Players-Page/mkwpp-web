@@ -38,7 +38,7 @@ const AccountPasswordChangeForm = () => {
       return;
     }
 
-    User.password_change(user?.userId ?? 0, state.old_password, state.new_password)
+    User.passwordChange(user?.userId ?? 0, state.old_password, state.new_password)
       .then(() => {
         setState(initialState);
         setSuccess(true);

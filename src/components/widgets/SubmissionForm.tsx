@@ -110,7 +110,7 @@ const SubmissionForm = ({
     }
   }, [state, track]);
 
-  const { data: submittees } = useApi(() => User.get_submittee_list(user?.userId ?? 0, metadata));
+  const { data: submittees } = useApi(() => User.getSubmitteeList(user?.userId ?? 0, metadata));
 
   const submit = (done: () => void) => {
     setState((prev) => ({ ...prev, errors: {} }));
@@ -176,7 +176,7 @@ const SubmissionForm = ({
       editModeScore !== undefined
         ? submissionId !== undefined
           ? async () =>
-              User.edit_edit_submission(
+              User.editEditSubmission(
                 submissionId,
                 user?.userId,
                 editModeScore.id,
@@ -187,7 +187,7 @@ const SubmissionForm = ({
                 (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
               )
           : async () =>
-              User.create_edit_submission(
+              User.createEditSubmission(
                 user?.userId,
                 editModeScore.id,
                 new Date(date),
@@ -198,7 +198,7 @@ const SubmissionForm = ({
               )
         : submissionId !== undefined
           ? async () =>
-              User.edit_submission(
+              User.editSubmission(
                 submissionId,
                 user.userId,
                 value as number,
@@ -213,7 +213,7 @@ const SubmissionForm = ({
                 state.submitterNote,
               )
           : async () =>
-              User.create_submission(
+              User.createSubmission(
                 user.userId,
                 value as number,
                 state.category,
@@ -263,10 +263,10 @@ const SubmissionForm = ({
                       const deleteFunction =
                         editModeScore !== undefined
                           ? async () => {
-                              return User.delete_edit_submission(user?.userId ?? 0, submissionId);
+                              return User.deleteEditSubmission(user?.userId ?? 0, submissionId);
                             }
                           : async () => {
-                              return User.delete_submission(user?.userId ?? 0, submissionId);
+                              return User.deleteSubmission(user?.userId ?? 0, submissionId);
                             };
 
                       deleteFunction().then(() => {

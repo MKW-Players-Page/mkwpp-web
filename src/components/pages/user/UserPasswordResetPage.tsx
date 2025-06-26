@@ -35,7 +35,7 @@ const UserPasswordResetForm = ({ token, closeForm }: UserPasswordResetFormProps)
       return;
     }
 
-    User.reset_password(token, state.password)
+    User.resetPassword(token, state.password)
       .then(() => {
         closeForm(
           translate("userPasswordResetPageResultTitleSuccess", lang),
@@ -102,7 +102,7 @@ const UserPasswordResetPage = () => {
     };
 
     if (token) {
-      User.reset_password_check_token(token)
+      User.resetPasswordCheckToken(token)
         .then((r) => {
           if (r) {
             setState((prev) => ({ ...prev, isLoading: false, showForm: r }));
