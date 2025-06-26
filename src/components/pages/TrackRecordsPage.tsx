@@ -5,13 +5,12 @@ import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { Icon, Tooltip } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
-import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { UserContext } from "../../utils/User";
-import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import {
   I18nContext,
@@ -23,7 +22,8 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeEnum, RegionType, Score } from "../../api";
+import { LapModeRadio } from "../widgets/LapModeSelect";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 
 const TrackRecordsPage = () => {
@@ -40,10 +40,10 @@ const TrackRecordsPage = () => {
   const { user } = useContext(UserContext);
 
   const { isLoading, data: scores } = useApi(
-    () => api.timetrialsRecordsList({ category, region: region.id }),
-    [category, region, metadata.isLoading],
+    () => Score.getRecords(category, LapModeEnum.Overall, region.id),
+    [category, region.id, metadata.isLoading],
     "trackRecords",
-    [{ variable: metadata.regions.length, defaultValue: 1 }],
+    [{ variable: metadata.isLoading, defaultValue: true }],
   );
 
   const siteHue = getCategorySiteHue(category, settings);
@@ -114,22 +114,22 @@ const TrackRecordsPage = () => {
           ? "track-records-columns-b1"
           : `track-records-columns-s1 ${isLap ? "flap" : "course"}`,
       });
-      const score = scores?.find((score) => score.track === track.id && score.isLap === isLap);
+      const score = scores?.find((score) => score.trackId === track.id && score.isLap === isLap);
       if (score !== undefined) {
-        if (score?.player.id === user?.player)
+        if (score?.player.id === user?.playerId)
           tableData.classNames?.push({
             rowIdx: (track.id - 1) * 4 + (isLap ? 1 : 0) + (big ? 0 : 2),
             className: "highlighted",
           });
         out[Indexes.PlayerName].content = (
           <PlayerMention
-            precalcPlayer={score.player}
-            precalcRegionId={score.player.region ?? undefined}
+            playerOrId={score.player}
+            regionOrId={score.player.regionId}
             xxFlag
             showRegFlagRegardless={
-              region.type === "country" ||
-              region.type === "subnational" ||
-              region.type === "subnational_group"
+              region.regionType === RegionType.Country ||
+              region.regionType === RegionType.Subnational ||
+              region.regionType === RegionType.SubnationalGroup
             }
           />
         );
@@ -139,14 +139,11 @@ const TrackRecordsPage = () => {
         out[Indexes.TimeCellSmall].className = "track-records-columns-s1";
         out[isLap ? Indexes.LapTimeCellBig : Indexes.CourseTimeCellBig].className =
           "track-records-columns-b1";
-        out[Indexes.Standards].content = translateStandardName(
-          getStandardLevel(metadata, score.standard),
-          lang,
-        );
+        out[Indexes.Standards].content = translateStandardName(score.stdLvlCode, lang);
         if (score.date) {
           out[Indexes.Date].content = (
             <SmallBigDateFormat
-              date={score.date}
+              date={new Date(score.date * 1000)}
               smallClass={"track-records-columns-s1"}
               bigClass={"track-records-columns-b1"}
             />

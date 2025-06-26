@@ -1,15 +1,89 @@
-import { Configuration, CoreApi, TimetrialsApi } from "./generated";
-import { getToken, isAuthenticated } from "../utils/Auth";
+export { BlogPost } from "./endpoints/blogPost";
+export { User, AuthData } from "./endpoints/user";
+export { Cup } from "./endpoints/cups";
+export { Track } from "./endpoints/tracks";
+export { Player, PlayerBasic, typeguardPlayer } from "./endpoints/players";
+export { Region, RegionType, type RegionTree, worldDefault } from "./endpoints/regions";
+export { StandardLevel } from "./endpoints/standardLevels";
+export { Standard } from "./endpoints/standards";
+export { SiteChamp } from "./endpoints/siteChamps";
+export { Ranking, MetricEnum } from "./endpoints/rankings";
+export {
+  Score,
+  CategoryEnum,
+  CategoryEnumValues,
+  LapModeEnum,
+  LapModeEnumValues,
+  stringToCategoryEnum,
+  stringToLapModeEnum,
+} from "./endpoints/scores";
+export { Timesheet, type Time } from "./endpoints/playerTimesheet";
+export {
+  Submission,
+  EditSubmission,
+  SubmissionStatus,
+  SubmissionStatusValues,
+  stringToSubmissionStatusEnum,
+} from "./endpoints/submissions";
+export {
+  CountryRankingsTopEnum,
+  CountryRankingsTopEnumValues,
+  stringToCountryRankingsTopEnum,
+  countryRankingsTopEnumTopToString,
+  CountryRanking,
+} from "./endpoints/countryRankings";
 
-export * from "./generated/models";
+const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 
-const apiConfiguration = new Configuration({
-  basePath: process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8000",
-  apiKey: () => (isAuthenticated() ? `Token ${getToken()}` : ""),
-});
+export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: any): Promise<T> => {
+  if (
+    init &&
+    (init?.method === "GET" || init?.method === "HEAD" || init?.method === undefined) &&
+    init.body
+  )
+    console.error("Method can't be GET or HEAD and have a body");
 
-export const coreApi = new CoreApi(apiConfiguration);
+  if (body !== undefined && init !== undefined) {
+    let newBody: any = {};
+    if (Array.isArray(body)) newBody = [];
 
-const api = new TimetrialsApi(apiConfiguration);
+    for (const key in body) {
+      const item = body[key];
 
-export default api;
+      if (item === undefined || item === null) continue;
+
+      if (item instanceof Date) {
+        let string = item.toISOString();
+        newBody[key] = string.substring(0, string.length - 2);
+        continue;
+      }
+
+      newBody[key] = item;
+    }
+    init.body = JSON.stringify(newBody);
+  }
+
+  return fetch(url + "/v1" + endpoint, { method: "GET", ...init })
+    .then((r) => r.json())
+    .then((r) => {
+      if (typeguardErrorResponse(r)) {
+        // eslint-disable-next-line
+        throw { non_field_errors: r.non_field_errors, ...r.field_errors };
+      }
+      return r;
+    });
+};
+
+export interface FinalErrorResponse {
+  error_code: number;
+  non_field_errors: string[];
+  field_errors: Record<string, string[]>;
+}
+
+const typeguardErrorResponse = (x: Object): x is FinalErrorResponse => {
+  return (
+    x.hasOwnProperty("non_field_errors") &&
+    x.hasOwnProperty("field_errors") &&
+    x.hasOwnProperty("error_code")
+  );
+};

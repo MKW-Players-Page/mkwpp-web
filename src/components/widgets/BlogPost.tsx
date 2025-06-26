@@ -4,6 +4,7 @@ import { BlogPost } from "../../api";
 import { I18nContext } from "../../utils/i18n/i18n";
 import { Pages, resolvePage } from "../pages";
 import "./BlogPost.css";
+import PlayerMention from "./PlayerMention";
 
 export interface BlogPostModuleProps {
   post: BlogPost;
@@ -23,10 +24,8 @@ const BlogPostModule = ({ post, style }: BlogPostModuleProps) => {
           <b>{post.title}</b>
         )}
         <br />
-        {new Date(post.publishedAt * 1000)
-          .toLocaleString(lang)
-          .replaceAll(" ", String.fromCharCode(0x00a0))}{" "}
-        - {post.author.username}
+        {new Date(post.publishedAt * 1000).toLocaleString(lang)} -{" "}
+        <PlayerMention playerOrId={post.authorId} />
       </div>
       <div className="blog-post" dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>

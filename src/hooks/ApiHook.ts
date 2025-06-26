@@ -1,10 +1,10 @@
 import { DependencyList, useEffect, useState } from "react";
-import { ResponseError } from "../api/generated";
+import { FinalErrorResponse } from "../api";
 
 export interface ApiState<T> {
   isLoading: boolean;
   data?: T;
-  error?: ResponseError;
+  error?: FinalErrorResponse;
 }
 
 /** Allows for stalling requests if a variable is an undesired value */
@@ -51,7 +51,7 @@ export const useApi = <T>(
             async (data: T) => {
               setState({ isLoading: false, data });
             },
-            async (error: ResponseError) => {
+            async (error: FinalErrorResponse) => {
               setState({ isLoading: false, error });
             },
           ),
@@ -122,7 +122,7 @@ export const useApiArray = <T, R>(
                   ...prev.slice(i + 1),
                 ]);
               },
-              (error: ResponseError) => {
+              (error: FinalErrorResponse) => {
                 setState((prev) => [
                   ...prev.slice(0, i),
                   { isLoading: false, error },

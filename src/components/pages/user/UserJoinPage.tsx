@@ -1,12 +1,10 @@
 import { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-
 import { Pages, resolvePage } from "../Pages";
 import Form, { Field } from "../../widgets/Form";
-import { coreApi } from "../../../api";
-import { ResponseError } from "../../../api/generated";
 import { UserContext } from "../../../utils/User";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
+import { User } from "../../../api";
 
 interface UserJoinState {
   email: string;
@@ -48,23 +46,19 @@ const UserJoinPage = () => {
       return;
     }
 
-    coreApi
-      .coreSignupCreate({
-        user: { username: state.username, email: state.email, password: state.password },
-      })
-      .then(() => {
+    User.register(state.username, state.password, state.email).then(
+      (r) => {
         navigate(resolvePage(Pages.UserJoinSuccess));
         done();
-      })
-      .catch((error: ResponseError) => {
-        error.response.json().then((json) => {
-          setState((prev) => ({
-            ...prev,
-            errors: { ...json },
-          }));
-        });
-        done();
-      });
+      },
+      (error) => {
+        setState((prev) => ({
+          ...prev,
+          errors: error,
+        }));
+      },
+    );
+    done();
   };
 
   return (

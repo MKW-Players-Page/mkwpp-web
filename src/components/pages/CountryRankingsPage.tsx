@@ -3,51 +3,45 @@ import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../widgets/Deferred";
 import { FlagIcon } from "../widgets";
-import api from "../../api";
 import { useApi } from "../../hooks";
-import {
-  countryAFTopNumerical,
-  countryAFTopToString,
-  getCategorySiteHue,
-} from "../../utils/EnumUtils";
+import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import {
   useCategoryParam,
   useLapModeParam,
-  useRegionTypeRestrictedParam,
+  useRegionTypeParam,
   useRowHighlightParam,
   useTopParam,
 } from "../../utils/SearchParams";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import {
-  TimetrialsRegionsRankingsListTopEnum,
-  TimetrialsRegionsRankingsListTypeEnum,
-} from "../../api/generated";
-import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
+import { handleBars, I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeRadio } from "../widgets/LapModeSelect";
+import {
+  CountryRanking,
+  CountryRankingsTopEnum,
+  countryRankingsTopEnumTopToString,
+  CountryRankingsTopEnumValues,
+  RegionType,
+} from "../../api";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
+import { useMetadata } from "../../utils/Metadata";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams, ["hl"]);
   const { lapMode, setLapMode } = useLapModeParam(searchParams, false, ["hl"]);
   const { top, setTopNumber } = useTopParam(searchParams, ["hl"]);
-  const { regionType, setRegionType } = useRegionTypeRestrictedParam(searchParams, ["hl"]);
+  const { regionType, setRegionType } = useRegionTypeParam(searchParams, ["hl"]);
 
+  const metadata = useMetadata();
   const { settings } = useContext(SettingsContext);
   const { lang } = useContext(I18nContext);
 
   const highlight = useRowHighlightParam(searchParams).highlight;
   const { isLoading, data } = useApi(
-    () =>
-      api.timetrialsRegionsRankingsList({
-        category,
-        lapMode,
-        top,
-        type: regionType,
-      }),
+    () => CountryRanking.getChart(top, regionType, category, lapMode),
     [category, lapMode, top, regionType],
     "countryRankingsTops",
   );
@@ -60,16 +54,12 @@ const CountryRankingsPage = () => {
   let hasHighlightRow = false;
 
   data?.forEach((stats, idx, arr) => {
-    const calculatedValueStr = (
-      stats.totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32)
-    ).toFixed(4);
-    const calculatedValue = parseFloat(calculatedValueStr);
+    const region = metadata.getRegionById(stats.regionId);
 
     if (
       highlight &&
-      calculatedValue > highlight &&
-      (arr[idx - 1] === undefined ||
-        arr[idx - 1].totalRank / (lapMode === LapModeEnum.Overall ? 64 : 32) < highlight)
+      arr[idx - 1].value > highlight &&
+      (arr[idx - 1] === undefined || arr[idx - 1].value < highlight)
     ) {
       hasHighlightRow = true;
       tableData.highlightedRow = idx;
@@ -87,7 +77,7 @@ const CountryRankingsPage = () => {
       ]);
     }
 
-    if (calculatedValue === highlight) {
+    if (stats.value === highlight) {
       tableData.highlightedRow = idx;
       tableData.classNames?.push({
         rowIdx: idx + (hasHighlightRow ? 1 : 0),
@@ -95,19 +85,19 @@ const CountryRankingsPage = () => {
       });
     }
 
-    tableData.rowKeys?.push(`${stats.region.code}`);
+    tableData.rowKeys?.push(`${region?.code}`);
     tableArray.push([
       { content: stats.rank },
       {
         content: (
           <>
-            <FlagIcon showRegFlagRegardless region={stats.region} />
-            <span>{stats.region.name}</span>
+            <FlagIcon showRegFlagRegardless region={region} />
+            <span>{translateRegionName(region, lang)}</span>
           </>
         ),
       },
       {
-        content: calculatedValueStr,
+        content: stats.value,
       },
     ]);
   });
@@ -115,19 +105,19 @@ const CountryRankingsPage = () => {
 
   let text = "err";
   switch (top) {
-    case TimetrialsRegionsRankingsListTopEnum.Records:
+    case CountryRankingsTopEnum.Records:
       text = translate("countryRankingsPageExplanationRecords", lang);
       break;
-    case TimetrialsRegionsRankingsListTopEnum.Top3:
+    case CountryRankingsTopEnum.Top3:
       text = translate("countryRankingsPageExplanationTop3", lang);
       break;
-    case TimetrialsRegionsRankingsListTopEnum.Top5:
+    case CountryRankingsTopEnum.Top5:
       text = translate("countryRankingsPageExplanationTop5", lang);
       break;
-    case TimetrialsRegionsRankingsListTopEnum.Top10:
+    case CountryRankingsTopEnum.Top10:
       text = translate("countryRankingsPageExplanationTop10", lang);
       break;
-    case TimetrialsRegionsRankingsListTopEnum.All:
+    case CountryRankingsTopEnum.All:
       text = translate("countryRankingsPageExplanationAll", lang);
       break;
   }
@@ -154,14 +144,12 @@ const CountryRankingsPage = () => {
                 data: [
                   {
                     id: 0,
-                    children: Object.values(TimetrialsRegionsRankingsListTopEnum)
-                      .sort((a, b) => countryAFTopNumerical(a) - countryAFTopNumerical(b))
-                      .map((r) => {
-                        return {
-                          type: "DropdownItemData",
-                          element: { text: countryAFTopToString(r), value: r },
-                        };
-                      }),
+                    children: CountryRankingsTopEnumValues.map((r) => {
+                      return {
+                        type: "DropdownItemData",
+                        element: { text: countryRankingsTopEnumTopToString(r), value: r },
+                      };
+                    }),
                   },
                 ],
               } as DropdownData
@@ -178,16 +166,13 @@ const CountryRankingsPage = () => {
                   {
                     id: 0,
                     children: [
+                      [RegionType.Country, translate("countryRankingsPageDropdownCountries", lang)],
                       [
-                        TimetrialsRegionsRankingsListTypeEnum.Country,
-                        translate("countryRankingsPageDropdownCountries", lang),
-                      ],
-                      [
-                        TimetrialsRegionsRankingsListTypeEnum.Continent,
+                        RegionType.Continent,
                         translate("countryRankingsPageDropdownContinents", lang),
                       ],
                       [
-                        TimetrialsRegionsRankingsListTypeEnum.Subnational,
+                        RegionType.Subnational,
                         translate("countryRankingsPageDropdownSubregions", lang),
                       ],
                     ].map(([value, text]) => {

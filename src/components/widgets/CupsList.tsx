@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { I18nContext, translate, translateTrack, TranslationKey } from "../../utils/i18n/i18n";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import Deferred from "./Deferred";
 import "./CupsList.css";
-import { CategoryEnum, Region, TrackCup } from "../../api";
-import { LapModeEnum } from "./LapModeSelect";
+import { Cup, Region, CategoryEnum, LapModeEnum } from "../../api";
 
 interface CupsListNoTracksProps {
   currentRegion: Region;
@@ -51,7 +50,7 @@ export const CupsListNoTracks = ({
 };
 
 interface CupNoTracksProps {
-  cup: TrackCup;
+  cup: Cup;
   selected: boolean;
   href: string;
 }
@@ -69,7 +68,7 @@ const CupNoTracks = ({ cup, selected, href }: CupNoTracksProps) => {
 };
 
 interface CupTracksProps {
-  cup: TrackCup;
+  cup: Cup;
 }
 
 const CupTracks = ({ cup }: CupTracksProps) => {
@@ -81,10 +80,10 @@ const CupTracks = ({ cup }: CupTracksProps) => {
       <div className="module-content cups-list-cup">
         <b>{translate(`constantCup${cup.code.toUpperCase()}` as TranslationKey, lang)}</b>
         <ul>
-          {cup.tracks.map((trackId) => (
+          {cup.trackIds.map((trackId) => (
             <li key={trackId}>
               <Link to={resolvePage(Pages.TrackChart, { id: trackId })}>
-                {translateTrack(getTrackById(metadata.tracks, trackId), lang)}
+                {translateTrack(metadata.getTrackById(trackId), lang)}
               </Link>
             </li>
           ))}

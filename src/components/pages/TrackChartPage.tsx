@@ -4,11 +4,9 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { Icon, Tooltip } from "../widgets";
-import api from "../../api";
-import { CategoryEnum, TimetrialsTracksScoresListLapModeEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
-import { getStandardLevel, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { UserContext } from "../../utils/User";
 import { getCategorySiteHue, getHighestValid } from "../../utils/EnumUtils";
@@ -21,7 +19,8 @@ import {
   useRegionParam,
   useRowHighlightParam,
 } from "../../utils/SearchParams";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { CategoryEnum, LapModeEnum, RegionType, Score } from "../../api";
+import { LapModeRadio } from "../widgets/LapModeSelect";
 import {
   I18nContext,
   translate,
@@ -69,17 +68,10 @@ const TrackChartPage = () => {
   const nextTrackCat = getHighestValid(category, nextTrack?.categories ?? []);
 
   const { isLoading, data: scores } = useApi(
-    () =>
-      api.timetrialsTracksScoresList({
-        id,
-        category,
-        lapMode: lapMode as TimetrialsTracksScoresListLapModeEnum,
-        region: region.id,
-      }),
-
-    [category, lapMode, region, id, metadata.isLoading],
+    () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id),
+    [category, lapMode, region.id, id, metadata.isLoading],
     "trackCharts",
-    [{ variable: metadata.regions.length, defaultValue: 1 }],
+    [{ variable: metadata.isLoading, defaultValue: true }],
   );
 
   const tableArray: ArrayTableCellData[][] = [];
@@ -115,7 +107,7 @@ const TrackChartPage = () => {
       ]);
     }
 
-    if (user?.player === score.player.id || score.value === highlight) {
+    if (user?.playerId === score.player.id || score.value === highlight) {
       if (highlight !== null && score.value === highlight) tableData.highlightedRow = idx;
       tableData.classNames?.push({
         rowIdx: idx + (hasHighlightRow ? 1 : 0),
@@ -129,13 +121,13 @@ const TrackChartPage = () => {
       {
         content: (
           <PlayerMention
-            precalcPlayer={score.player}
-            precalcRegionId={score.player.region ?? undefined}
+            playerOrId={score.player}
+            regionOrId={score.player.regionId ?? undefined}
             xxFlag
             showRegFlagRegardless={
-              region.type === "country" ||
-              region.type === "subnational" ||
-              region.type === "subnational_group"
+              region.regionType === RegionType.Country ||
+              region.regionType === RegionType.Subnational ||
+              region.regionType === RegionType.SubnationalGroup
             }
           />
         ),
@@ -144,11 +136,11 @@ const TrackChartPage = () => {
         content: formatTime(score.value),
         className: score.category !== category ? "fallthrough" : undefined,
       },
-      { content: translateStandardName(getStandardLevel(metadata, score.standard), lang) },
+      { content: translateStandardName(score.stdLvlCode, lang) },
       {
         content: score.date ? (
           <SmallBigDateFormat
-            date={score.date}
+            date={new Date(score.date * 1000)}
             smallClass={"track-chart-page-s1"}
             bigClass={"track-chart-page-b1"}
           />

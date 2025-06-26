@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
-import api from "../../api";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
@@ -11,6 +10,7 @@ import { SettingsContext } from "../../utils/Settings";
 import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable from "../widgets/Table";
+import { SiteChamp } from "../../api";
 
 const PastChampsPage = () => {
   const { lang } = useContext(I18nContext);
@@ -19,15 +19,12 @@ const PastChampsPage = () => {
   const { category, setCategory } = useCategoryParam(searchParams);
   const siteHue = getCategorySiteHue(category, settings);
   const { isLoading, data: champs } = useApi(
-    () =>
-      api.timetrialsChampionsList({
-        category,
-      }),
+    () => SiteChamp.get(category),
     [category],
-    "pastChamps",
+    "siteChamps",
   );
 
-  const totalDuration = +new Date() / 1000 - 1208390400;
+  const totalDuration = +new Date() - 1208390400000;
 
   return (
     <>
@@ -54,18 +51,12 @@ const PastChampsPage = () => {
                   const nextExists = arr[idx + 1] !== undefined;
                   const duration = nextExists
                     ? arr[idx + 1].dateInstated - champ.dateInstated
-                    : Math.floor(+new Date() / 1000) - champ.dateInstated;
-                  const durationDays = duration / 86400;
+                    : +new Date() - champ.dateInstated;
+                  const durationDays = duration / 86400000;
                   const durationPerc = (duration / totalDuration) * 100;
                   return [
                     {
-                      content: (
-                        <PlayerMention
-                          precalcPlayer={champ.player}
-                          precalcRegionId={champ.player.region ?? undefined}
-                          xxFlag
-                        />
-                      ),
+                      content: <PlayerMention playerOrId={champ.playerId} xxFlag />,
                     },
                     {
                       content: new Date(champ.dateInstated * 1000).toLocaleDateString(lang),

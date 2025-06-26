@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 
 import Deferred from "../widgets/Deferred";
-import api from "../../api";
 import { useApi } from "../../hooks/ApiHook";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
@@ -12,6 +11,7 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table
 import { usePageNumber } from "../../utils/SearchParams";
 import { useSearchParams } from "react-router-dom";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
+import { PlayerBasic } from "../../api";
 
 const PlayerListPage = () => {
   const { lang } = useContext(I18nContext);
@@ -29,13 +29,13 @@ const PlayerListPage = () => {
 
   const { isLoading, data: players } = useApi(
     () =>
-      api.timetrialsPlayersList().then(
+      PlayerBasic.getPlayerList().then(
         (players) =>
           players
             .map((player) => {
               const locationString =
-                translationCache.current[player?.region ?? 0] ??
-                translateRegionNameFull(metadata, lang, player.region);
+                translationCache.current[player?.regionId ?? 0] ??
+                translateRegionNameFull(metadata, lang, player.regionId);
               const nameNormalized = player.name.toLowerCase().normalize("NFKD");
               const sortAlias = player.alias?.toLowerCase().normalize("NFKD") ?? nameNormalized;
 
@@ -44,8 +44,8 @@ const PlayerListPage = () => {
                   {
                     content: (
                       <PlayerMention
-                        precalcPlayer={player}
-                        precalcRegionId={player.region ?? undefined}
+                        playerOrId={player}
+                        regionOrId={player.regionId ?? undefined}
                         xxFlag
                       />
                     ),
@@ -59,7 +59,7 @@ const PlayerListPage = () => {
                     sortAlias.includes(filter) ||
                     locationString.toLowerCase().normalize("NFKD").includes(filter)
                   ),
-                player.id === user?.player,
+                player.id === user?.playerId,
                 sortAlias,
               ];
             })

@@ -3,11 +3,10 @@ import { createContext, useContext } from "react";
 /* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
 
-import { CategoryEnum, Region, RegionTypeEnum, StandardLevel, Track } from "../../api";
-import { getRegionById, Metadata } from "../Metadata";
+import { Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
-import { LapModeEnum } from "../../components/widgets/LapModeSelect";
 import { FlagIcon } from "../../components/widgets";
+import { Region, RegionType, CategoryEnum, Track, LapModeEnum, StandardLevel } from "../../api";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -140,17 +139,19 @@ export const translateRegionNameFull = (
   metadata: Metadata,
   lang: Language,
   regionCompute: number | Region | undefined | null,
+  turnWorldToUnknown = false,
 ) => {
   let region: typeof regionCompute = undefined;
   if (typeof regionCompute === "number") {
-    region = getRegionById(metadata, regionCompute);
+    region = metadata.getRegionById(regionCompute);
   } else {
     region = regionCompute;
   }
-  if (region === undefined || region === null) return translate("constantRegionXX", lang);
+  if (region === undefined || region === null || turnWorldToUnknown)
+    return translate("constantRegionXX", lang);
 
-  if ((region as Region).parent && (region as Region).type === RegionTypeEnum.Subnational) {
-    const parent = getRegionById(metadata, (region as Region).parent as number);
+  if (region.parentId && region.regionType === RegionType.Subnational) {
+    const parent = metadata.getRegionById(region.parentId);
     if (parent) {
       return `${translateRegionName(parent, lang)}, ${translateRegionName(region, lang)}`;
     }
@@ -196,8 +197,10 @@ export const translateLapModeName = (lapMode: LapModeEnum, lang: Language): stri
 };
 
 export const translateStandardName = (
-  standardLevel: StandardLevel | undefined,
+  standardLevel: StandardLevel | undefined | string,
   lang: Language,
 ): string => {
-  return translate(`constantStandardLevel${standardLevel?.code ?? "NW"}` as TranslationKey, lang);
+  return typeof standardLevel === "string"
+    ? translate(`constantStandardLevel${standardLevel}` as TranslationKey, lang)
+    : translate(`constantStandardLevel${standardLevel?.code ?? "NW"}` as TranslationKey, lang);
 };

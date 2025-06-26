@@ -138,11 +138,11 @@ const ContributionsPage = () => {
           <ul style={{ listStyleType: "disc" }}>
             {[
               {
-                player: <PlayerMention id={918} />,
+                player: <PlayerMention playerOrId={918} />,
                 langs: [LanguageName.Italian, LanguageName.English],
               },
-              { player: <PlayerMention id={1165} />, langs: [LanguageName.English] },
-              { player: <PlayerMention id={145} />, langs: [LanguageName.English] },
+              { player: <PlayerMention playerOrId={1165} />, langs: [LanguageName.English] },
+              { player: <PlayerMention playerOrId={145} />, langs: [LanguageName.English] },
             ].map((credit) => (
               <li>
                 {credit.player} ({credit.langs.join(", ")})
@@ -337,20 +337,22 @@ const ContributionsPage = () => {
           <h2>{translate("contributionsPageSpecialCreditsHeading", lang)}</h2>
           <p>
             {handleBars(translate("contributionsPageSpecialCreditsPenevParagraph", lang), [
-              ["Penev", <PlayerMention id={58} />],
+              ["Penev", <PlayerMention playerOrId={58} />],
             ])}
           </p>
           <p>
             {translate("contributionsPageSpecialCreditsUpdatersParagraph", lang)}{" "}
-            <PlayerMention id={1167} />, <PlayerMention id={145} />, <PlayerMention id={630} />,{" "}
-            <PlayerMention id={144} />, <PlayerMention id={1588} />, <PlayerMention id={1372} />,{" "}
-            <PlayerMention id={308} />, <PlayerMention id={180} />
+            <PlayerMention playerOrId={1167} />, <PlayerMention playerOrId={145} />,{" "}
+            <PlayerMention playerOrId={630} />, <PlayerMention playerOrId={144} />,{" "}
+            <PlayerMention playerOrId={1588} />, <PlayerMention playerOrId={1372} />,{" "}
+            <PlayerMention playerOrId={308} />, <PlayerMention playerOrId={180} />
           </p>
           <p>
             {translate("contributionsPageSpecialCreditsFormerUpdatersParagraph", lang)}{" "}
-            <PlayerMention id={1626} />, <PlayerMention id={1539} />, <PlayerMention id={1538} />,{" "}
-            <PlayerMention id={644} />, <PlayerMention id={383} />, <PlayerMention id={718} />,{" "}
-            <PlayerMention id={1598} />
+            <PlayerMention playerOrId={1626} />, <PlayerMention playerOrId={1539} />,{" "}
+            <PlayerMention playerOrId={1538} />, <PlayerMention playerOrId={644} />,{" "}
+            <PlayerMention playerOrId={383} />, <PlayerMention playerOrId={718} />,{" "}
+            <PlayerMention playerOrId={1598} />
           </p>
         </div>
       </div>
@@ -388,7 +390,7 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
             <div>{translate("contributionsPageFeatureWorkedOnBy", lang)}</div>
             {workedOnBy.map((r) => (
               <div>
-                <PlayerMention id={r} />
+                <PlayerMention playerOrId={r} />
               </div>
             ))}
           </div>
@@ -400,7 +402,7 @@ const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }:
             <div>{translate("contributionsPageFeatureSuggestedBy", lang)}</div>
             {suggestedBy.map((r) => (
               <div>
-                <PlayerMention id={r} />
+                <PlayerMention playerOrId={r} />
               </div>
             ))}
           </div>

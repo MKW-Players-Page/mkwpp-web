@@ -1,21 +1,20 @@
 import { CategoryEnum } from "../api";
-import { TimetrialsRegionsRankingsListTopEnum } from "../api/generated";
 import { Settings } from "./Settings";
 
 export const getCategorySiteHue = (category: CategoryEnum, settings: Settings) => {
   switch (category) {
-    case "nonsc":
+    case 0:
       return settings.categoryHueColorNonSC;
-    case "sc":
+    case 1:
       return settings.categoryHueColorSC;
-    case "unres":
+    case 2:
       return settings.categoryHueColorUnres;
     default:
       return settings.categoryHueColorUnres;
   }
 };
 
-export const getCategoryNumerical = (category: CategoryEnum) => {
+export const getCategoryNumerical = (category: string): number => {
   switch (category) {
     case "nonsc":
       return 0;
@@ -28,41 +27,20 @@ export const getCategoryNumerical = (category: CategoryEnum) => {
   }
 };
 
+export const getCategoryFromNumber = (categoryId: number): CategoryEnum => {
+  switch (categoryId) {
+    case 0:
+      return CategoryEnum.NonShortcut;
+    case 1:
+      return CategoryEnum.Shortcut;
+    default:
+      return CategoryEnum.Unrestricted;
+  }
+};
+
 export const getHighestValid = (category: CategoryEnum, trackCategories: CategoryEnum[]) => {
-  const x = trackCategories
-    .sort((a, b) => getCategoryNumerical(a) - getCategoryNumerical(b))
-    .filter((r) => getCategoryNumerical(r) <= getCategoryNumerical(category));
+  const x = trackCategories.sort((a, b) => a - b).filter((r) => r <= category);
   return x[x.length - 1];
-};
-
-export const countryAFTopNumerical = (x: TimetrialsRegionsRankingsListTopEnum) => {
-  switch (x) {
-    case TimetrialsRegionsRankingsListTopEnum.Records:
-      return 1;
-    case TimetrialsRegionsRankingsListTopEnum.Top3:
-      return 2;
-    case TimetrialsRegionsRankingsListTopEnum.Top5:
-      return 3;
-    case TimetrialsRegionsRankingsListTopEnum.Top10:
-      return 4;
-    case TimetrialsRegionsRankingsListTopEnum.All:
-      return 5;
-  }
-};
-
-export const countryAFTopToString = (x: TimetrialsRegionsRankingsListTopEnum) => {
-  switch (x) {
-    case TimetrialsRegionsRankingsListTopEnum.Records:
-      return "Records";
-    case TimetrialsRegionsRankingsListTopEnum.Top3:
-      return "Top 3";
-    case TimetrialsRegionsRankingsListTopEnum.Top5:
-      return "Top 5";
-    case TimetrialsRegionsRankingsListTopEnum.Top10:
-      return "Top 10";
-    case TimetrialsRegionsRankingsListTopEnum.All:
-      return "All";
-  }
 };
 
 /** Return all categories eligible for a given category. For example, eligible categories for

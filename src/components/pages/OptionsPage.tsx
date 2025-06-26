@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../api";
 import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { setSettingKV, SettingsContext } from "../../utils/Settings";
@@ -10,6 +9,7 @@ import Deferred from "../widgets/Deferred";
 import PlayerMention from "../widgets/PlayerMention";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 import AccountPasswordChangeForm from "../widgets/options/AccountPasswordChangeForm";
+import { Player, User } from "../../api";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);
@@ -22,10 +22,11 @@ const OptionsPage = () => {
     alignItems: "center",
   };
 
+  const [forciblyReloadPlayer, triggerForciblyReloadPlayer] = useState(0);
   // it doesn't matter what player is loaded if you aren't logged in.
   const { isLoading: playerLoading, data: player } = useApi(
-    () => api.timetrialsPlayersRetrieve({ id: user?.player ?? 1 }),
-    [user],
+    () => Player.getPlayer(user?.playerId ?? 1),
+    [user, forciblyReloadPlayer],
     "loadedUser",
   );
 
@@ -37,7 +38,7 @@ const OptionsPage = () => {
   const [newSubmitterIdFieldError, setNewSubmitterIdFieldError] = useState("");
   const [resetSubmittersList, setResetSubmittersList] = useState(0);
   const { isLoading: submittersLoading, data: submitters } = useApi(
-    () => api.timetrialsSubmissionsSubmittersList(),
+    () => User.getSubmitterList(user?.userId ?? 0),
     [user, resetSubmittersList],
     "loadedSubmitters",
   );
@@ -191,16 +192,16 @@ const OptionsPage = () => {
                 <h2>{translate("optionsPageSubmitterHeading", lang)}</h2>
                 <p style={{ marginBottom: "10px" }}>
                   {translate("optionsPageSubmitterParagraph", lang)}
-                  {submitters === undefined || submitters.length === 0
+                  {submitters === undefined || submitters === null || submitters.length === 0
                     ? translate("optionsPageSubmitterListNoOne", lang)
-                    : submitters.map((r) => <PlayerMention precalcPlayer={r} />)}
+                    : submitters.map((r) => <PlayerMention playerOrId={r} />)}
                 </p>
                 <p className="field-error">{newSubmitterIdFieldError}</p>
                 <PlayerSelectDropdown
                   id={newSubmitterId}
                   setId={newSubmitterSetId}
                   blacklist
-                  restrictSet={[user.player]}
+                  restrictSet={[user.playerId]}
                 />
                 <button
                   style={{ marginRight: "10px" }}
@@ -209,20 +210,16 @@ const OptionsPage = () => {
                       newSubmitterId !== 0 &&
                       !submitters?.map((r) => r.id).includes(newSubmitterId)
                     )
-                      api
-                        .timetrialsSubmissionsSubmittersAddCreate({
-                          id: newSubmitterId,
-                        })
-                        .then(
-                          () => {
-                            setResetSubmittersList(Math.random());
-                          },
-                          () => {
-                            setNewSubmitterIdFieldError(
-                              translate("optionsPageSubmitterListNoUserError", lang),
-                            );
-                          },
-                        );
+                      User.addToSubmitterList(user.userId, newSubmitterId).then(
+                        () => {
+                          setResetSubmittersList(Math.random());
+                        },
+                        () => {
+                          setNewSubmitterIdFieldError(
+                            translate("optionsPageSubmitterListNoUserError", lang),
+                          );
+                        },
+                      );
                     newSubmitterSetId(0);
                     setNewSubmitterIdFieldError("");
                   }}
@@ -235,13 +232,9 @@ const OptionsPage = () => {
                       newSubmitterId !== 0 &&
                       submitters?.map((r) => r.id).includes(newSubmitterId)
                     )
-                      api
-                        .timetrialsSubmissionsSubmittersRemoveDestroy({
-                          id: newSubmitterId,
-                        })
-                        .then(() => {
-                          setResetSubmittersList(Math.random());
-                        });
+                      User.removeFromSubmitterList(user.userId, newSubmitterId).then(() => {
+                        setResetSubmittersList(Math.random());
+                      });
                     newSubmitterSetId(0);
                     setNewSubmitterIdFieldError("");
                   }}
@@ -264,14 +257,12 @@ const OptionsPage = () => {
                 />
                 <button
                   onClick={async () => {
-                    if (
-                      aliasTextArea.current === null ||
-                      (aliasTextArea.current as any).value === (player?.alias ?? "")
-                    )
+                    const newAlias: string = (aliasTextArea.current as any).value;
+                    if (aliasTextArea.current === null || newAlias === (player?.alias ?? ""))
                       return;
-                    await api.timetrialsProfileUpdate({
-                      playerUpdate: { alias: (aliasTextArea.current as any).value },
-                    });
+                    await User.updateAlias(user.userId, newAlias).then((_) =>
+                      triggerForciblyReloadPlayer(Math.random()),
+                    );
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}
@@ -292,14 +283,11 @@ const OptionsPage = () => {
                 />
                 <button
                   onClick={async () => {
-                    if (
-                      bioTextArea.current === null ||
-                      (bioTextArea.current as any).value === (player?.bio ?? "")
-                    )
-                      return;
-                    await api.timetrialsProfileUpdate({
-                      playerUpdate: { bio: (bioTextArea.current as any).value },
-                    });
+                    const newBio: string = (bioTextArea.current as any).value;
+                    if (bioTextArea.current === null || newBio === (player?.bio ?? "")) return;
+                    await User.updateBio(user.userId, newBio).then((_) =>
+                      triggerForciblyReloadPlayer(Math.random()),
+                    );
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}

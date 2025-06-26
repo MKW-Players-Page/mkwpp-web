@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 
-import { coreApi } from "../../../api";
-import { ResponseError } from "../../../api/generated";
+import { User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
+import { UserContext } from "../../../utils/User";
 import Form, { Field, FormState } from "../Form";
 
 interface AccountPasswordChangeFormState extends FormState {
@@ -13,6 +13,7 @@ interface AccountPasswordChangeFormState extends FormState {
 
 const AccountPasswordChangeForm = () => {
   const { lang } = useContext(I18nContext);
+  const { user } = useContext(UserContext);
 
   const initialState = {
     old_password: "",
@@ -37,20 +38,15 @@ const AccountPasswordChangeForm = () => {
       return;
     }
 
-    coreApi
-      .corePasswordChangeCreate({
-        passwordChange: { oldPassword: state.old_password, newPassword: state.new_password },
-      })
+    User.passwordChange(user?.userId ?? 0, state.old_password, state.new_password)
       .then(() => {
         setState(initialState);
         setSuccess(true);
       })
-      .catch((error: ResponseError) => {
-        error.response.json().then((json) => {
-          setState((prev) => ({ ...prev, errors: { ...json } }));
-        });
-      })
-      .finally(done);
+      .catch((error) => {
+        setState((prev) => ({ ...prev, errors: error }));
+        done();
+      });
   };
 
   return (

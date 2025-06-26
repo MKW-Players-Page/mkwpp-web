@@ -2,8 +2,6 @@ import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Deferred from "../widgets/Deferred";
-import api from "../../api";
-import { PlayerStats, TimetrialsRankingsListMetricEnum as MetricEnum } from "../../api/generated";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { UserContext } from "../../utils/User";
@@ -24,14 +22,15 @@ import { CategoryRadio } from "../widgets/CategorySelect";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
+import { MetricEnum, Ranking, RegionType } from "../../api";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
   descriptionKey: TranslationKey;
   metric: MetricEnum;
   metricOrder: number;
-  getHighlightValue: (player: PlayerStats) => number;
-  getValueString: (player: PlayerStats) => string;
+  getHighlightValue: (stat: number) => number;
+  getValueString: (stat: number) => string;
 }
 
 export type RankingsMetricMap = {
@@ -42,46 +41,42 @@ export const RankingsMetrics: RankingsMetricMap = {
   AverageFinish: {
     titleKey: "rankingsPageAverageFinishTitle",
     descriptionKey: "rankingsPageAverageFinishDescription",
-    metric: "total_rank",
+    metric: MetricEnum.AverageFinish,
     metricOrder: +1,
-    getHighlightValue: (stats) =>
-      +(stats.totalRank / (stats.isLap === undefined ? 64 : 32)).toFixed(4),
-    getValueString: (stats) => String(stats.totalRank / (stats.isLap === undefined ? 64 : 32)),
+    getHighlightValue: (af) => parseInt(af.toFixed(4)),
+    getValueString: (af) => String(af),
   },
   AverageStandard: {
     titleKey: "rankingsPageAverageStandardTitle",
     descriptionKey: "rankingsPageAverageStandardDescription",
-    metric: "total_standard",
+    metric: MetricEnum.AverageRankRating,
     metricOrder: +1,
-    getHighlightValue: (stats) =>
-      +(stats.totalStandard / (stats.isLap === undefined ? 64 : 32)).toFixed(4),
-    getValueString: (stats) => String(stats.totalStandard / (stats.isLap === undefined ? 64 : 32)),
+    getHighlightValue: (arr) => parseInt(arr.toFixed(4)),
+    getValueString: (arr) => String(arr),
   },
   AverageRecordRatio: {
     titleKey: "rankingsPageAverageRecordRatioTitle",
     descriptionKey: "rankingsPageAverageRecordRatioDescription",
-    metric: "total_record_ratio",
+    metric: MetricEnum.PersonalRecordToWorldRecord,
     metricOrder: -1,
-    getHighlightValue: (stats) =>
-      +((stats.totalRecordRatio / (stats.isLap === undefined ? 64 : 32)) * 100).toFixed(4),
-    getValueString: (stats) =>
-      ((stats.totalRecordRatio / (stats.isLap === undefined ? 64 : 32)) * 100).toFixed(4) + "%",
+    getHighlightValue: (prwr) => parseInt((prwr * 100).toFixed(4)),
+    getValueString: (prwr) => (prwr * 100).toFixed(4) + "%",
   },
   TotalTime: {
     titleKey: "rankingsPageTotalTimeTitle",
     descriptionKey: "rankingsPageTotalTimeDescription",
-    metric: "total_score",
+    metric: MetricEnum.TotalTime,
     metricOrder: +1,
-    getHighlightValue: (stats) => stats.totalScore,
-    getValueString: (stats) => formatTime(stats.totalScore),
+    getHighlightValue: (totalTime) => totalTime,
+    getValueString: (totalTime) => formatTime(totalTime),
   },
   TallyPoints: {
     titleKey: "rankingsPageTallyPointsTitle",
     descriptionKey: "rankingsPageTallyPointsDescription",
-    metric: "leaderboard_points",
+    metric: MetricEnum.TallyPoints,
     metricOrder: -1,
-    getHighlightValue: (stats) => stats.leaderboardPoints,
-    getValueString: (stats) => String(stats.leaderboardPoints),
+    getHighlightValue: (tally) => tally,
+    getValueString: (tally) => String(tally),
   },
 };
 
@@ -102,13 +97,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const { settings } = useContext(SettingsContext);
 
   const { isLoading, data: rankings } = useApi(
-    () =>
-      api.timetrialsRankingsList({
-        category,
-        lapMode,
-        region: region.id,
-        metric: metric.metric,
-      }),
+    () => Ranking.getChart(metric.metric, category, lapMode, region.id),
     [category, lapMode, region],
     "playerRankings",
   );
@@ -124,11 +113,11 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     if (
       highlight &&
       ((metric.metricOrder < 0 &&
-        metric.getHighlightValue(stats) < highlight &&
-        (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1]) > highlight)) ||
+        metric.getHighlightValue(stats.value) < highlight &&
+        (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1].value) > highlight)) ||
         (metric.metricOrder > 0 &&
-          metric.getHighlightValue(stats) > highlight &&
-          (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1]) < highlight)))
+          metric.getHighlightValue(stats.value) > highlight &&
+          (arr[idx - 1] === undefined || metric.getHighlightValue(arr[idx - 1].value) < highlight)))
     ) {
       hasHighlightRow = true;
       tableData.classNames?.push({
@@ -141,17 +130,17 @@ const RankingsPage = ({ metric }: RankingsProps) => {
         { content: translate("genericRankingsYourHighlightedValue", lang) },
         {
           content:
-            metric.metric === "total_record_ratio"
+            metric.metric === MetricEnum.PersonalRecordToWorldRecord
               ? highlight.toFixed(4) + "%"
-              : metric.metric === "total_score"
+              : metric.metric === MetricEnum.TotalTime
                 ? formatTime(highlight)
                 : highlight,
         },
       ]);
     }
 
-    if (stats.player.id === user?.player || metric.getHighlightValue(stats) === highlight) {
-      if (highlight !== null && metric.getHighlightValue(stats) === highlight)
+    if (stats.player.id === user?.playerId || metric.getHighlightValue(stats.value) === highlight) {
+      if (highlight !== null && metric.getHighlightValue(stats.value) === highlight)
         tableData.highlightedRow = idx;
       tableData.classNames?.push({
         rowIdx: idx + (hasHighlightRow ? 1 : 0),
@@ -165,19 +154,19 @@ const RankingsPage = ({ metric }: RankingsProps) => {
       {
         content: (
           <PlayerMention
-            precalcPlayer={stats.player}
-            precalcRegionId={stats.player.region ?? undefined}
+            playerOrId={stats.player}
+            regionOrId={stats.player.regionId}
             xxFlag
             showRegFlagRegardless={
-              region.type === "country" ||
-              region.type === "subnational" ||
-              region.type === "subnational_group"
+              region.regionType === RegionType.Country ||
+              region.regionType === RegionType.Subnational ||
+              region.regionType === RegionType.SubnationalGroup
             }
           />
         ),
       },
       {
-        content: metric.getValueString(stats),
+        content: metric.getValueString(stats.value),
       },
     ]);
   });

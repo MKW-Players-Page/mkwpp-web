@@ -214,14 +214,6 @@ td.lock-table-cells {
   display: none;
 }
 
-.player-profile-table.course tbody tr:nth-child(2n) {
-  display: none;
-}
-
-.player-profile-table.lap tbody tr:nth-child(2n + 1) {
-  display: none;
-}
-
 .player-profile-columns-s1 {
   display: none;
 }

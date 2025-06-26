@@ -1,3 +1,5 @@
+import { LapModeEnum } from "../api";
+
 /** Given a time in milliseconds, format it to a string in the form of
  *
  * `m'ss"000`
@@ -71,4 +73,20 @@ export const formatDate = (date: Date) => {
   const month = date.getUTCMonth() + 1;
   const day = date.getUTCDate();
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+};
+
+/** Format LapMode into a readable string
+ *
+ * @param lap mode
+ * @returns A human readable lap mode string
+ */
+export const formatLapMode = (lapMode: LapModeEnum): "Overall" | "Lap" | "Course" => {
+  switch (lapMode) {
+    case LapModeEnum.Overall:
+      return "Overall";
+    case LapModeEnum.Lap:
+      return "Lap";
+    case LapModeEnum.Course:
+      return "Course";
+  }
 };

@@ -1,6 +1,5 @@
 import { createContext } from "react";
-
-import { Auth, coreApi, User } from "../api";
+import { User, AuthData } from "../api";
 import { clearToken, setToken } from "./Auth";
 
 export interface UserContextType {
@@ -19,10 +18,9 @@ export const UserContext = createContext<UserContextType>({
  * using the given callback.
  */
 export const fetchCurrentUser = (setUser: (user?: User) => void) => {
-  coreApi
-    .coreUserRetrieve()
+  User.fetchData()
     .then((user) => {
-      setUser(user);
+      setUser(user ? user : undefined);
     })
     .catch(() => {
       setUser();
@@ -30,8 +28,8 @@ export const fetchCurrentUser = (setUser: (user?: User) => void) => {
 };
 
 /** Store API token in local storage and update user context by fetching API. */
-export const loginUser = (setUser: (user?: User) => void, auth: Auth) => {
-  setToken(auth.token, auth.expiry);
+export const loginUser = (setUser: (user?: User) => void, auth: AuthData) => {
+  setToken(auth.sessionToken, auth.expiry);
   fetchCurrentUser(setUser);
 };
 
@@ -42,5 +40,5 @@ export const logoutUser = (setUser: (user?: User) => void) => {
     clearToken();
   };
 
-  coreApi.coreLogoutCreate().then(clearUserData).catch(clearUserData);
+  User.logout().then(clearUserData, clearUserData);
 };

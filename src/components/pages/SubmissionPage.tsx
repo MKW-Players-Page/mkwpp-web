@@ -3,8 +3,18 @@ import init, { read_rksys, RKG } from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
 import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
-import api, { CategoryEnum, EditScoreSubmission, Score, Track } from "../../api";
-import { getTrackById, MetadataContext } from "../../utils/Metadata";
+import {
+  Score,
+  Track,
+  User,
+  CategoryEnum,
+  LapModeEnum,
+  EditSubmission,
+  Timesheet,
+  Time,
+  SubmissionStatus,
+} from "../../api";
+import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Pages, resolvePage } from "./Pages";
@@ -13,7 +23,7 @@ import { handleBars, I18nContext, translate, translateTrack } from "../../utils/
 import SubmissionForm from "../widgets/SubmissionForm";
 import SubmissionCard from "../widgets/SubmissionCard";
 import RadioButtons from "../widgets/RadioButtons";
-import { LapModeEnum, LapModeRadio } from "../widgets/LapModeSelect";
+import { LapModeRadio } from "../widgets/LapModeSelect";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import OverwriteColor from "../widgets/OverwriteColor";
@@ -191,7 +201,7 @@ const BulkSubmitTab = () => {
                     return {
                       tempId: ids.current,
                       time,
-                      track: getTrackById(metadata.tracks, track + 1) as Track,
+                      track: metadata.getTrackById(track + 1) as Track,
                       date: new Date(
                         `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`,
                       ),
@@ -200,7 +210,7 @@ const BulkSubmitTab = () => {
 
                   setTimes((prev) => [...prev, ...newTimes]);
                 } catch (e) {
-                  console.log("wasm error:", e);
+                  console.error("wasm error:", e);
                 }
               });
 
@@ -244,7 +254,7 @@ const SubmissionsTab = () => {
   const [filter, setFilter] = useState<SubmissionFilter>(SubmissionFilter.All);
 
   const { isLoading, data: submissions } = useApi(
-    () => api.timetrialsSubmissionsList(),
+    () => User.getUserSubmissionsList(user?.userId ?? 0),
     [reload],
     "trackSubmissions",
   );
@@ -276,8 +286,8 @@ const SubmissionsTab = () => {
               filter === SubmissionFilter.All
                 ? true
                 : filter === SubmissionFilter.ByYou
-                  ? submission.submittedBy.player.id === user?.player
-                  : submission.player.id === user?.player,
+                  ? submission.submitterId === user?.playerId
+                  : submission.playerId === user?.playerId,
             )
             .map((submission) => <SubmissionCard setReload={setReload} submission={submission} />)}
         </div>
@@ -288,7 +298,7 @@ const SubmissionsTab = () => {
 
 interface TimesheetTabEditBtnProps {
   score: Score;
-  patchUpData?: EditScoreSubmission;
+  patchUpData?: EditSubmission;
   setReload: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -314,12 +324,12 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
         >
           <SubmissionForm
             editModeScore={score}
-            starterTrack={score.track}
+            starterTrack={score.trackId}
             starterCategory={score.category}
             starterLapMode={score.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
             starterValue={formatTime(score.value)}
-            starterDate={score.date ? formatDate(score.date) : undefined}
-            deleteId={patchUpData?.id}
+            starterDate={formatDate(new Date(score.date * 1000))}
+            submissionId={patchUpData?.id}
             starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink ?? undefined}
             starterVideoLink={patchUpData?.videoLink ?? score.videoLink ?? undefined}
             starterComment={patchUpData?.comment ?? score.comment ?? undefined}
@@ -342,9 +352,9 @@ interface ScoreDoubled extends Score {
 }
 
 const Filtering = {
-  flapOnly: (a: Score) => a.isLap,
-  courseOnly: (a: Score) => !a.isLap,
-  overall: (a: Score) => true,
+  flapOnly: (a: Time) => a.isLap,
+  courseOnly: (a: Time) => !a.isLap,
+  overall: (a: Time) => true,
 };
 
 const TimesheetTab = () => {
@@ -357,22 +367,22 @@ const TimesheetTab = () => {
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
-  const { isLoading: scoresLoading, data: scores } = useApi(
-    () => api.timetrialsPlayersScoresList({ id: user?.player ?? 1, category, region: 1 }),
+  const { isLoading: scoresLoading, data: timesheet } = useApi<Timesheet>(
+    () => Timesheet.get(user?.playerId ?? 0, category),
     [user, category, reload],
     "playerProfileScores",
   );
 
   const { isLoading: editsLoading, data: edits } = useApi(
     () =>
-      api
-        .timetrialsSubmissionsEditsList()
-        .then((r) => r.sort((a, b) => +b.submittedAt - +a.submittedAt)),
+      User.getUserEditSubmissionsList(user?.userId ?? 0).then((r) =>
+        r?.sort((a, b) => +b.submittedAt - +a.submittedAt),
+      ),
     [reload],
     "playerEdits",
   );
 
-  const sortedScores = scores
+  const sortedScores = timesheet?.times
     ?.filter(
       lapMode === LapModeEnum.Overall
         ? Filtering.overall
@@ -381,8 +391,8 @@ const TimesheetTab = () => {
           : Filtering.flapOnly,
     )
     .map((score, index, arr) => {
-      (score as ScoreDoubled).repeat = score.track === arr[index - 1]?.track;
-      (score as ScoreDoubled).precedesRepeat = score.track === arr[index + 1]?.track;
+      (score as ScoreDoubled).repeat = score.trackId === arr[index - 1]?.trackId;
+      (score as ScoreDoubled).precedesRepeat = score.trackId === arr[index + 1]?.trackId;
       return score as ScoreDoubled;
     });
 
@@ -420,10 +430,10 @@ const TimesheetTab = () => {
               </thead>
               <tbody className="table-hover-rows">
                 {sortedScores?.map((score) => {
-                  const track = metadata.tracks?.find((r) => r.id === score.track);
-                  const submission = edits?.find((x) => x.score.id === score.id);
+                  const track = metadata.tracks?.find((r) => r.id === score.trackId);
+                  const submission = edits?.find((x) => x.scoreId === score.id);
                   return (
-                    <tr key={`${score.isLap ? "l" : "c"}${score.track}`}>
+                    <tr key={`${score.isLap ? "l" : "c"}${score.trackId}`}>
                       {score.precedesRepeat ? (
                         <td rowSpan={2}>
                           <span className="submission-timesheet-columns-b1">
@@ -447,7 +457,7 @@ const TimesheetTab = () => {
                       </td>
                       {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td>{score.rank}</td>
-                      <td>{score.date ? formatDate(score.date) : "????-??-??"}</td>
+                      <td>{formatDate(new Date(score.date * 1000))}</td>
                       <td className="icon-cell">
                         {score.videoLink && (
                           <a href={score.videoLink} target="_blank" rel="noopener noreferrer">
@@ -487,7 +497,7 @@ const TimesheetTab = () => {
                                       "submissionPageMySubmissionsTabTooltipSubmittedAt",
                                       lang,
                                     ),
-                                    [["time", submission.submittedAt.toLocaleString(lang)]],
+                                    [["time", submission.submittedAt]],
                                   )}
                                 </div>
                               </span>
@@ -518,10 +528,9 @@ const TimesheetTab = () => {
                                     [
                                       [
                                         "name",
-                                        submission.reviewedBy ? (
-                                          <PlayerMention
-                                            precalcPlayer={submission.reviewedBy.player}
-                                          />
+                                        submission.reviewerId !== undefined &&
+                                        submission.reviewerId !== null ? (
+                                          <PlayerMention playerOrId={submission.reviewerId} />
                                         ) : (
                                           translate(
                                             "submissionPageMySubmissionsTabTooltipNotReviewed",
@@ -541,7 +550,7 @@ const TimesheetTab = () => {
                                     [
                                       [
                                         "time",
-                                        submission.reviewedAt?.toLocaleString(lang) ??
+                                        submission.reviewedAt ??
                                           translate(
                                             "submissionPageMySubmissionsTabTooltipNotReviewed",
                                             lang,
@@ -553,16 +562,16 @@ const TimesheetTab = () => {
                               </span>
                             }
                           >
-                            {submission.status === "accepted" ? (
+                            {submission.status === SubmissionStatus.Accepted ? (
                               <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
                                 <Icon icon="SubmissionAccepted" />
                               </OverwriteColor>
-                            ) : submission.status === "rejected" ? (
+                            ) : submission.status === SubmissionStatus.Rejected ? (
                               <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
                                 <Icon icon="SubmissionRejected" />
                               </OverwriteColor>
-                            ) : submission.status === "pending" ||
-                              submission.status === "on_hold" ? (
+                            ) : submission.status === SubmissionStatus.Pending ||
+                              submission.status === SubmissionStatus.OnHold ? (
                               <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
                                 <Icon icon="SubmissionPending" />
                               </OverwriteColor>
@@ -576,7 +585,9 @@ const TimesheetTab = () => {
                         <TimesheetTabEditBtn
                           setReload={setReload}
                           score={score}
-                          patchUpData={submission?.status === "pending" ? submission : undefined}
+                          patchUpData={
+                            submission?.status === SubmissionStatus.Pending ? submission : undefined
+                          }
                         />
                       </td>
                     </tr>
