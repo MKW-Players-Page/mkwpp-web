@@ -5,7 +5,7 @@ import "./StandardsPage.css";
 
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
-import { getCategorySiteHue } from "../../../utils/EnumUtils";
+import { getCategorySiteHue, getHighestValid } from "../../../utils/EnumUtils";
 import { formatLapMode, formatTime } from "../../../utils/Formatters";
 import { MetadataContext } from "../../../utils/Metadata";
 import OverwriteColor from "../../widgets/OverwriteColor";
@@ -158,12 +158,33 @@ const StandardsPage = () => {
 
   let hasHighlightedRow = [false, false];
 
+  const highestValidPerTrack = [
+    Array.from({ length: 31 }, (value, index) =>
+      getHighestValid(
+        category,
+        metadata.standards
+          ?.filter((r) => r.trackId === index + 1 && r.isLap === false)
+          .map((r) => r.category) ?? [CategoryEnum.NonShortcut],
+      ),
+    ),
+    Array.from({ length: 31 }, (value, index) =>
+      getHighestValid(
+        category,
+        metadata.standards
+          ?.filter((r) => r.trackId === index + 1 && r.isLap === true)
+          .map((r) => r.category) ?? [CategoryEnum.NonShortcut],
+      ),
+    ),
+  ];
+
   const filteredStandards: ArrayTableCellData[][] =
     metadata.standards
       ?.filter(
-        (standard, _, arr) =>
+        (standard) =>
           standard.standardLevelId !== 34 &&
-          standard.category === category &&
+          (category === CategoryEnum.NonShortcut
+            ? standard.category === category
+            : standard.category === highestValidPerTrack[+standard.isLap][standard.trackId - 1]) &&
           (levelId < 34
             ? standard.standardLevelId === levelId
             : levelId === 43 || Filter[levelId].includes(standard.standardLevelId)) &&
