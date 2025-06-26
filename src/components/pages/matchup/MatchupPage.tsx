@@ -81,7 +81,11 @@ const MatchupPage = () => {
 
   const tmpAllTrackIds: Set<number> = new Set();
   for (const data of matchupData?.playerData ?? [])
-    for (const score of data.times) tmpAllTrackIds.add(score.trackId * 2 + Number(score.isLap));
+    for (const score of data.times) {
+      if (lapMode !== LapModeEnum.Overall && score.isLap !== (LapModeEnum.Lap === lapMode))
+        continue;
+      tmpAllTrackIds.add(score.trackId * 2 + Number(score.isLap));
+    }
   const allTrackIds = Array.from(tmpAllTrackIds).sort((a, b) => a - b);
 
   const rows: ArrayTableCellData[][] = [];
