@@ -31,7 +31,7 @@ const MatchupPage = () => {
   const { settings } = useContext(SettingsContext);
 
   const { isLoading: matchupDataIsLoading, data: matchupData } = useApi(
-    () => MatchupData.get(ids),
+    () => MatchupData.get(ids, category, lapMode),
     [category, lapMode],
     "playerData",
     [],
