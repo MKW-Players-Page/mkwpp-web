@@ -4,13 +4,13 @@ export class SiteChamp {
   readonly id: number;
   readonly playerId: number;
   readonly category: CategoryEnum;
-  readonly dateInstated: Date;
+  readonly dateInstated: number;
 
-  constructor(id: number, playerId: number, category: CategoryEnum, dateInstated: Date | string) {
+  constructor(id: number, playerId: number, category: CategoryEnum, dateInstated: number) {
     this.id = id;
     this.playerId = playerId;
     this.category = category;
-    this.dateInstated = typeof dateInstated === "string" ? new Date(dateInstated) : dateInstated;
+    this.dateInstated = dateInstated;
   }
 
   public static async get(category?: CategoryEnum): Promise<Array<SiteChamp>> {

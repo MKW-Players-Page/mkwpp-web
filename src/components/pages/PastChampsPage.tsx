@@ -50,8 +50,8 @@ const PastChampsPage = () => {
                 champs?.map((champ, idx, arr) => {
                   const nextExists = arr[idx + 1] !== undefined;
                   const duration = nextExists
-                    ? +arr[idx + 1].dateInstated - +champ.dateInstated
-                    : +new Date() - +champ.dateInstated;
+                    ? arr[idx + 1].dateInstated - champ.dateInstated
+                    : +new Date() - champ.dateInstated;
                   const durationDays = duration / 86400000;
                   const durationPerc = (duration / totalDuration) * 100;
                   return [
@@ -59,11 +59,11 @@ const PastChampsPage = () => {
                       content: <PlayerMention playerOrId={champ.playerId} xxFlag />,
                     },
                     {
-                      content: champ.dateInstated.toLocaleDateString(lang),
+                      content: new Date(champ.dateInstated * 1000).toLocaleDateString(lang),
                     },
                     {
                       content: nextExists
-                        ? arr[idx + 1].dateInstated.toLocaleDateString(lang)
+                        ? new Date(arr[idx + 1].dateInstated * 1000).toLocaleDateString(lang)
                         : translate("pastChampsPageOngoing", lang),
                       className: "past-champs-s1",
                     },
