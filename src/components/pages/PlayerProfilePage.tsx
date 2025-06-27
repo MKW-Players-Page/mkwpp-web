@@ -273,6 +273,10 @@ const PlayerProfilePage = () => {
                     <td>{player?.alias}</td>
                   </tr>
                   <tr>
+                    <td>{translate("playerProfilePagePronouns", lang)}</td>
+                    <td>{player?.pronouns}</td>
+                  </tr>
+                  <tr>
                     <td>{translate("playerProfilePageDateJoined", lang)}</td>
                     <td>{new Date((player?.joinedDate ?? 0) * 1000).toLocaleDateString(lang)}</td>
                   </tr>
@@ -385,6 +389,29 @@ const PlayerProfilePage = () => {
                         )}
                       >
                         {RankingsMetrics.TotalTime.getValueString(timesheet?.totalTime ?? 0)}
+                      </Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Link to={resolvePage(Pages.RankingsTallyPoints, {}, rankingsRedirectParams)}>
+                        {translate("playerProfilePageTallyPointsTitle", lang)}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link
+                        to={resolvePage(
+                          Pages.RankingsTallyPoints,
+                          {},
+                          {
+                            ...rankingsRedirectParams,
+                            hl: RankingsMetrics.TallyPoints.getHighlightValue(
+                              timesheet?.tally ?? 0,
+                            ),
+                          },
+                        )}
+                      >
+                        {RankingsMetrics.TallyPoints.getValueString(timesheet?.tally ?? 0)}
                       </Link>
                     </td>
                   </tr>
