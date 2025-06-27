@@ -25,6 +25,7 @@ import CountryRankingsPage from "./CountryRankingsPage";
 import ContributionsPage from "./ContributionsPage";
 import PastChampsPage from "./PastChampsPage";
 import OptionsPage from "./OptionsPage";
+import AdminDasboard from "./admin/AdminDashboard";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -150,6 +151,10 @@ export const Pages: PageMap = {
   UserPasswordReset: {
     path: "/password/reset",
     element: <UserPasswordResetPage />,
+  },
+  AdminUi: {
+    path: "/admin/",
+    element: <AdminDasboard />,
   },
 };
 

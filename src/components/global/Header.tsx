@@ -8,6 +8,8 @@ import { logoutUser, UserContext } from "../../utils/User";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import Icon from "../widgets/Icon";
 import ObscuredModule from "../widgets/ObscuredModule";
+import { useApi } from "../../hooks";
+import { User } from "../../api";
 
 export interface HeaderProps {
   setNavbarHidden: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +17,13 @@ export interface HeaderProps {
 }
 
 const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
-  const { isLoading, user, setUser } = useContext(UserContext);
+  const { isLoading: userIsLoading, user, setUser } = useContext(UserContext);
+  const { isLoading: adminIsLoading, data: isAdmin } = useApi(
+    () => User.isAdmin(),
+    [user],
+    "isAdmin",
+  );
+  const isLoading = userIsLoading && adminIsLoading;
   const { lang } = useContext(I18nContext);
 
   const [accountActionsVisible, setAccountActionsVisible] = useState(false);
@@ -83,6 +91,13 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
               >
                 {user.username}
               </Link>
+              {isAdmin ? (
+                <Link className="small-hide" to={resolvePage(Pages.AdminUi)}>
+                  Admin UI
+                </Link>
+              ) : (
+                <></>
+              )}
               <Link className="small-hide" to={resolvePage(Pages.Options)}>
                 {translate("headerOptions", lang)}
               </Link>
@@ -147,6 +162,18 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
           >
             {translate("headerOptions", lang)}
           </Link>
+          {isAdmin ? (
+            <Link
+              onClick={(e) => {
+                setAccountActionsVisible(false);
+              }}
+              to={resolvePage(Pages.AdminUi)}
+            >
+              Admin UI
+            </Link>
+          ) : (
+            <></>
+          )}
           <Link
             onClick={(e) => {
               setAccountActionsVisible(false);
