@@ -274,11 +274,11 @@ const PlayerProfilePage = () => {
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageDateJoined", lang)}</td>
-                    <td>{new Date(player?.joinedDate ?? 0).toLocaleDateString(lang)}</td>
+                    <td>{new Date((player?.joinedDate ?? 0) * 1000).toLocaleDateString(lang)}</td>
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageLastActivity", lang)}</td>
-                    <td>{new Date(player?.lastActivity ?? 0).toLocaleDateString(lang)}</td>
+                    <td>{new Date((player?.lastActivity ?? 0) * 1000).toLocaleDateString(lang)}</td>
                   </tr>
                 </tbody>
               </table>
