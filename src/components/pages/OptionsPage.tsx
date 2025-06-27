@@ -30,6 +30,7 @@ const OptionsPage = () => {
     "loadedUser",
   );
 
+  const pronounsTextArea = useRef(null);
   const bioTextArea = useRef(null);
   const aliasTextArea = useRef(null);
   const navigate = useNavigate();
@@ -286,6 +287,35 @@ const OptionsPage = () => {
                     const newBio: string = (bioTextArea.current as any).value;
                     if (bioTextArea.current === null || newBio === (player?.bio ?? "")) return;
                     await User.updateBio(user.userId, newBio).then((_) =>
+                      triggerForciblyReloadPlayer(Math.random()),
+                    );
+                  }}
+                >
+                  {translate("optionsPageSaveBtnText", lang)}
+                </button>
+              </Deferred>
+            </div>
+          </div>
+          <div className="module">
+            <div className="module-content">
+              <Deferred isWaiting={playerLoading}>
+                <h2>{translate("optionsPageAccountOptPronounsHeading", lang)}</h2>
+                <textarea
+                  ref={pronounsTextArea}
+                  style={{ color: "#fff" }}
+                  maxLength={30}
+                  defaultValue={player?.pronouns ?? ""}
+                  className="module"
+                />
+                <button
+                  onClick={async () => {
+                    const newPronouns: string = (pronounsTextArea.current as any).value;
+                    if (
+                      pronounsTextArea.current === null ||
+                      newPronouns === (player?.pronouns ?? "")
+                    )
+                      return;
+                    await User.updatePronouns(user.userId, newPronouns).then((_) =>
                       triggerForciblyReloadPlayer(Math.random()),
                     );
                   }}

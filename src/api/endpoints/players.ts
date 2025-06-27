@@ -64,6 +64,7 @@ export class PlayerBasic {
 }
 
 export class Player extends PlayerBasic {
+  readonly pronouns?: string;
   readonly bio?: string;
   readonly joinedDate: number;
   readonly lastActivity: number;
@@ -76,9 +77,11 @@ export class Player extends PlayerBasic {
     lastActivity: number,
     bio?: string,
     alias?: string,
+    pronouns?: string,
   ) {
     super(id, name, regionId, alias);
     this.bio = bio;
+    this.pronouns = pronouns;
     this.joinedDate = joinedDate;
     this.lastActivity = lastActivity;
   }
