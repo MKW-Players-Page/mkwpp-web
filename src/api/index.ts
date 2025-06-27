@@ -3,7 +3,14 @@ export { User, AuthData } from "./endpoints/user";
 export { Cup } from "./endpoints/cups";
 export { Track } from "./endpoints/tracks";
 export { Player, PlayerBasic, typeguardPlayer } from "./endpoints/players";
-export { Region, RegionType, type RegionTree, worldDefault } from "./endpoints/regions";
+export {
+  Region,
+  RegionType,
+  type RegionTree,
+  RegionTypeValues,
+  stringToRegionType,
+  worldDefault,
+} from "./endpoints/regions";
 export { StandardLevel } from "./endpoints/standardLevels";
 export { Standard } from "./endpoints/standards";
 export { SiteChamp } from "./endpoints/siteChamps";

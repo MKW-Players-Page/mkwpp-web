@@ -14,7 +14,13 @@ import {
   useTopParam,
 } from "../../utils/SearchParams";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import { handleBars, I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
+import {
+  handleBars,
+  I18nContext,
+  translate,
+  translateRegionName,
+  translateRegionType,
+} from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import {
@@ -27,6 +33,7 @@ import {
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { useMetadata } from "../../utils/Metadata";
+import { RegionTypeRadio } from "../widgets/RegionTypeSelect";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -134,6 +141,11 @@ const CountryRankingsPage = () => {
         <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
+          <RegionTypeRadio
+            value={regionType}
+            onChange={setRegionType}
+            options={[RegionType.Country, RegionType.Continent, RegionType.Subnational]}
+          />
           <Dropdown
             data={
               {
@@ -148,37 +160,6 @@ const CountryRankingsPage = () => {
                       return {
                         type: "DropdownItemData",
                         element: { text: countryRankingsTopEnumTopToString(r), value: r },
-                      };
-                    }),
-                  },
-                ],
-              } as DropdownData
-            }
-          />
-          <Dropdown
-            data={
-              {
-                type: "Normal",
-                defaultItemSet: 0,
-                value: regionType,
-                valueSetter: setRegionType,
-                data: [
-                  {
-                    id: 0,
-                    children: [
-                      [RegionType.Country, translate("countryRankingsPageDropdownCountries", lang)],
-                      [
-                        RegionType.Continent,
-                        translate("countryRankingsPageDropdownContinents", lang),
-                      ],
-                      [
-                        RegionType.Subnational,
-                        translate("countryRankingsPageDropdownSubregions", lang),
-                      ],
-                    ].map(([value, text]) => {
-                      return {
-                        type: "DropdownItemData",
-                        element: { text, value },
                       };
                     }),
                   },
