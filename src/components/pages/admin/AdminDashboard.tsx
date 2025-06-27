@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { User } from "../../../api";
 import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import Deferred from "../../widgets/Deferred";
 import { Pages, resolvePage } from "../Pages";
 
-const AdminDasboard = () => {
+const AdminDashboard = () => {
   const { isLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
   const { user } = useContext(UserContext);
 
@@ -16,13 +16,14 @@ const AdminDasboard = () => {
       <section className="module">
         <Deferred isWaiting={isLoading}>
           {!isAdmin && <Navigate to={resolvePage(Pages.Home)} />}
-            <div className="module-content">
-              <h2>Welcome, {user?.username}</h2>
-            </div>
+          <div className="module-content">
+            <h2>Welcome, {user?.username}</h2>
+            <Link to={resolvePage(Pages.AdminUiRegions)}>Regions List</Link>
+          </div>
         </Deferred>
       </section>
     </>
   );
 };
 
-export default AdminDasboard;
+export default AdminDashboard;
