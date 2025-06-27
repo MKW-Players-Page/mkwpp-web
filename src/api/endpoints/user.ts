@@ -88,7 +88,7 @@ export class User {
     return apiFetch<null>(
       "/auth/update_password",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -101,7 +101,7 @@ export class User {
     return apiFetch<null>(
       "/auth/password_forgot",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -114,7 +114,7 @@ export class User {
     return apiFetch<null>(
       "/auth/password_reset",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -488,5 +488,20 @@ export class User {
       },
       { sessionToken, userId, data: submissionId },
     );
+  }
+
+  public static async isAdmin(): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ isAdmin: boolean }>(
+      "/auth/is_admin",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    ).then((r) => r.isAdmin);
   }
 }
