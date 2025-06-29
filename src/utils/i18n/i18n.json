@@ -13940,6 +13940,15 @@
     "pt": "",
     "es": ""
   },
+  "playerProfilePagePronouns": {
+    "it": "Pronomi",
+    "en": "Pronouns",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "playerProfilePageDateJoined": {
     "it": "Data di Registrazione",
     "en": "Date Joined",
@@ -15734,6 +15743,15 @@
   "optionsPageAccountOptBioHeading": {
     "it": "Aggiorna Biografia",
     "en": "Update Bio",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "optionsPageAccountOptPronounsHeading": {
+    "it": "Aggiorna Pronomi",
+    "en": "Update Pronouns",
     "fr": "",
     "de": "",
     "jp": "",

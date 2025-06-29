@@ -157,12 +157,27 @@ export class User {
     return apiFetch<string>(
       "/auth/player/updbio",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
       },
       { sessionToken, userId, data: bio },
+    );
+  }
+
+  public static async updatePronouns(userId: number, pronouns: string): Promise<null | string> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<string>(
+      "/auth/player/updpronouns",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, userId, data: pronouns },
     );
   }
 
@@ -172,7 +187,7 @@ export class User {
     return apiFetch<string>(
       "/auth/player/updalias",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -187,7 +202,7 @@ export class User {
     return apiFetch<number>(
       "/auth/player/addsubmitter",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -205,7 +220,7 @@ export class User {
     return apiFetch<number>(
       "/auth/player/remsubmitter",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
