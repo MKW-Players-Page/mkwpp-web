@@ -14,9 +14,8 @@ export interface RadioButtonsProps {
 }
 
 const RadioButtons = ({ data, state, setState, disabled, className }: RadioButtonsProps) => {
-  let functionSetState = setState;
   if (data.length === 1) disabled = true;
-  if (disabled) functionSetState = () => {};
+
   return (
     <div className={`${className ? className + " " : ""}module radio-button-row`}>
       {data.map((r) =>
@@ -24,9 +23,13 @@ const RadioButtons = ({ data, state, setState, disabled, className }: RadioButto
           <></>
         ) : (
           <div
-            onClick={() => {
-              functionSetState(r.value);
-            }}
+            onClick={
+              disabled
+                ? undefined
+                : () => {
+                    setState(r.value);
+                  }
+            }
             style={{ cursor: disabled ? "not-allowed" : "" }}
             className={`radio-button${state === r.value ? " active" : ""}`}
           >

@@ -9,7 +9,7 @@ import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { CategoryEnum, LapModeEnum, Score, User } from "../../api";
+import { CategoryEnum, LapModeEnum, Score, stringToCategoryEnum, User } from "../../api";
 import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
@@ -105,7 +105,12 @@ const SubmissionForm = ({
   const categories = track ? track.categories : [];
 
   useEffect(() => {
-    if (track && !track.categories.includes(state.category)) {
+    if (
+      track &&
+      !track.categories.includes(
+        typeof state.category === "string" ? stringToCategoryEnum(state.category) : state.category,
+      )
+    ) {
       setState((prev) => ({ ...prev, category: CategoryEnum.NonShortcut }));
     }
   }, [state, track]);
