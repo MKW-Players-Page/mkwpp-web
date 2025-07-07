@@ -1774,7 +1774,7 @@
   },
   "constantRegionSubregionsBN": {
     "it": "Sottoregioni del Brunei",
-    "en": " SubregionBruneians",
+    "en": "SubregionBruneians",
     "fr": "",
     "de": "",
     "jp": "",
@@ -14265,7 +14265,7 @@
     "es": ""
   },
   "userLoginPageForgotPassword": {
-    "it": "",
+    "it": "Password Dimenticata?",
     "en": "Forgot password?",
     "fr": "",
     "de": "",
@@ -15705,8 +15705,8 @@
     "es": ""
   },
   "optionsPageSubmitterParagraph": {
-    "it": "i 'Player Trustati' sono player a cui permetti di caricare tempi a tuo nome. I tuoi giocatori trustati: ",
-    "en": "'Player Submitters' are a number of players who you can allow to submit times for yourself. You have allowed already: ",
+    "it": "i 'Player Trustati' sono player a cui permetti di caricare tempi a tuo nome. I tuoi giocatori trustati:",
+    "en": "'Player Submitters' are a number of players who you can allow to submit times for yourself. You have allowed already:",
     "fr": "",
     "de": "",
     "jp": "",
