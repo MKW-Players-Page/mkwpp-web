@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSearchParams, Navigate } from "react-router-dom";
 import { Region, User } from "../../../../api";
 import { useApi } from "../../../../hooks";
@@ -9,26 +9,53 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../../../widgets
 import { Pages, resolvePage } from "../../Pages";
 import { Language, translateRegionName, translateRegionType } from "../../../../utils/i18n/i18n";
 import { FlagIcon } from "../../../widgets";
-import { Metadata } from "../../../../utils/Metadata";
+import { MetadataContext } from "../../../../utils/Metadata";
+import ObscuredModule from "../../../widgets/ObscuredModule";
+import AdminRegionModule from "./AdminRegionsModule";
+
+export interface AdminRegionUpdateButtonProps {
+  region: Region;
+}
+
+const AdminRegionUpdateButton = ({ region }: AdminRegionUpdateButtonProps) => {
+  const [visibleObscured, setVisibleObscured] = useState(false);
+  return (
+    <>
+      <span
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setVisibleObscured(true);
+        }}
+      >
+        {region.id}
+      </span>
+      <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
+        <AdminRegionModule region={region} />
+      </ObscuredModule>
+    </>
+  );
+};
 
 const AdminRegionsListPage = () => {
   const { isLoading: adminIsLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
   const searchParams = useSearchParams();
   const { pageNumber, setPageNumber } = usePageNumber(searchParams);
+  const metadata = useContext(MetadataContext);
 
   const [textFilter, setTextFilter] = useState("");
+  const [visibleObscured, setVisibleObscured] = useState(false);
 
   const { isLoading, data: regions } = useApi(
     () =>
       Region.get().then((regions) => {
-        const fakeMetadata = new Metadata(false, regions);
+        metadata.regions = regions;
         return regions
           .sort((a, b) => a.id - b.id)
           .map((region) => {
             const name = translateRegionName(region, Language.English);
             const nameNormalized = name.toLowerCase().normalize("NFKD");
             const parentRegion = region.parentId
-              ? fakeMetadata.getRegionById(region.parentId)
+              ? metadata.getRegionById(region.parentId)
               : undefined;
             const parentName = parentRegion
               ? translateRegionName(parentRegion, Language.English)
@@ -40,7 +67,7 @@ const AdminRegionsListPage = () => {
             return [
               [
                 {
-                  content: region.id,
+                  content: <AdminRegionUpdateButton region={region} />,
                 },
                 {
                   content: (
@@ -135,6 +162,18 @@ const AdminRegionsListPage = () => {
           Search
         </button>
       </div>
+
+      <button
+        className="module"
+        onClick={() => {
+          setVisibleObscured(true);
+        }}
+      >
+        New Region
+      </button>
+      <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
+        <AdminRegionModule />
+      </ObscuredModule>
 
       <PaginationButtonRow
         selectedPage={pageNumber}

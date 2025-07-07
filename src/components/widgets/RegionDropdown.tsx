@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { Region, RegionTree } from "../../api";
-import { MetadataContext } from "../../utils/Metadata";
+import { Metadata, MetadataContext } from "../../utils/Metadata";
 
 import "./RegionDropdown.css";
 import Dropdown, {
@@ -13,6 +13,7 @@ import Dropdown, {
 import { I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
 import { FlagIcon } from "./Icon";
 import { useApi } from "../../hooks";
+import { FormContext } from "./Form";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -20,6 +21,7 @@ export interface RegionSelectionDropdownProps {
   twoPlayerMin: boolean;
   value: Region;
   setValue: React.Dispatch<React.SetStateAction<any>>;
+  disabled?: boolean;
 }
 
 const RegionSelectionDropdown = ({
@@ -28,6 +30,7 @@ const RegionSelectionDropdown = ({
   onePlayerMin,
   value,
   setValue,
+  disabled,
 }: RegionSelectionDropdownProps) => {
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
@@ -46,6 +49,7 @@ const RegionSelectionDropdown = ({
     value: value,
     valueSetter: setValue,
     data: [],
+    disabled,
   };
 
   const read = (
@@ -119,3 +123,36 @@ const RegionSelectionDropdown = ({
 };
 
 export default RegionSelectionDropdown;
+
+export interface RegionSelectionDropdownFieldProps {
+  /** Name of the state property to manage */
+  field: string;
+  /** Field label */
+  label: string;
+  disabled?: boolean;
+}
+
+export const RegionSelectionDropdownField = ({
+  field,
+  label,
+  disabled,
+}: RegionSelectionDropdownFieldProps) => {
+  const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
+  const metadata = useContext(MetadataContext);
+
+  return (
+    <div className="field">
+      <p>{label}</p>
+      <RegionSelectionDropdown
+        value={metadata.getRegionById(parseInt(getValue(field) ?? "1")) ?? Region.worldDefault()}
+        setValue={(region) => {
+          setValue(field, region.id.toString());
+        }}
+        disabled={disabledByForm || !!disabled}
+        ranked={false}
+        onePlayerMin={false}
+        twoPlayerMin={false}
+      />
+    </div>
+  );
+};

@@ -114,13 +114,23 @@ export interface FieldProps {
   max?: string;
   min?: string;
   disabled?: boolean;
+  defaultChecked?: boolean;
 }
 
-export const Field = ({ type, field, label, placeholder, max, min, disabled }: FieldProps) => {
+export const Field = ({
+  type,
+  field,
+  label,
+  placeholder,
+  max,
+  min,
+  disabled,
+  defaultChecked,
+}: FieldProps) => {
   const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(field, e.target.value);
+    setValue(field, e.target.type === "checkbox" ? e.target.checked.toString() : e.target.value);
   };
 
   const errors = getErrors(field);
@@ -136,6 +146,7 @@ export const Field = ({ type, field, label, placeholder, max, min, disabled }: F
         placeholder={placeholder}
         max={max}
         min={min}
+        defaultChecked={defaultChecked}
       />
       {errors.map((error, index) => (
         <p key={index} className="field-error">
