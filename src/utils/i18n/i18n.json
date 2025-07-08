@@ -14094,7 +14094,7 @@
     "es": ""
   },
   "userActivationPageContentMissingToken": {
-    "it": "",
+    "it": "Manca il token nel link dell'attivazione dell'account",
     "en": "Token is missing from your account activation link.",
     "fr": "",
     "de": "",
@@ -14103,7 +14103,7 @@
     "es": ""
   },
   "userActivationPageContentSuccess": {
-    "it": "",
+    "it": "Il tuo account è stato attivato con successo! Adesso puoi accedere.",
     "en": "Your account has been successfully activated! You may now log in.",
     "fr": "",
     "de": "",
@@ -14112,7 +14112,7 @@
     "es": ""
   },
   "userActivationPageContentUnknownError": {
-    "it": "",
+    "it": "Si è verificato un errore sconosciuto durante il tentativo di attivazione del tuo account.",
     "en": "An unknown error occurred while trying to activate your account.",
     "fr": "",
     "de": "",
@@ -14121,7 +14121,7 @@
     "es": ""
   },
   "userActivationPageHeadingFailure": {
-    "it": "",
+    "it": "Verifica dell'account fallita",
     "en": "Account Verification Failed",
     "fr": "",
     "de": "",
@@ -14130,7 +14130,7 @@
     "es": ""
   },
   "userActivationPageHeadingSuccess": {
-    "it": "",
+    "it": "Account Attivato",
     "en": "Account Activated",
     "fr": "",
     "de": "",
@@ -14274,7 +14274,7 @@
     "es": ""
   },
   "userPasswordForgotPageContentSuccess": {
-    "it": "",
+    "it": "Una mail ti è stata mandata con un link per reimpostare la password",
     "en": "An email has been sent to you with a link to reset your password.",
     "fr": "",
     "de": "",
@@ -14283,7 +14283,7 @@
     "es": ""
   },
   "userPasswordForgotPageEmailLabel": {
-    "it": "",
+    "it": "Email",
     "en": "Email",
     "fr": "",
     "de": "",
@@ -14292,7 +14292,7 @@
     "es": ""
   },
   "userPasswordForgotPageHeading": {
-    "it": "",
+    "it": "Reimposta Password",
     "en": "Reset Password",
     "fr": "",
     "de": "",
@@ -14301,7 +14301,7 @@
     "es": ""
   },
   "userPasswordForgotPageSubmitLabel": {
-    "it": "",
+    "it": "Invia",
     "en": "Submit",
     "fr": "",
     "de": "",
@@ -14310,7 +14310,7 @@
     "es": ""
   },
   "userPasswordResetPageHeading": {
-    "it": "",
+    "it": "Reimposta Password",
     "en": "Reset Password",
     "fr": "",
     "de": "",
@@ -14337,7 +14337,7 @@
     "es": ""
   },
   "userPasswordResetPageResultContentSuccess": {
-    "it": "",
+    "it": "Ora puoi accedere con la tua nuova password.",
     "en": "You may now log in with your new password.",
     "fr": "",
     "de": "",
@@ -14346,7 +14346,7 @@
     "es": ""
   },
   "userPasswordResetPageResultContentUnknownError": {
-    "it": "",
+    "it": "Si è verificato un errore sconosciuto.",
     "en": "An unknown error occurred.",
     "fr": "",
     "de": "",
@@ -14355,7 +14355,7 @@
     "es": ""
   },
   "userPasswordResetPageResultTitleFailure": {
-    "it": "",
+    "it": "Impossibile reimpostare la password.",
     "en": "Could not reset password.",
     "fr": "",
     "de": "",
@@ -14364,7 +14364,7 @@
     "es": ""
   },
   "userPasswordResetPageResultTitleMissingToken": {
-    "it": "",
+    "it": "Manca il token dal link di reset password.",
     "en": "Token is missing from the password reset link.",
     "fr": "",
     "de": "",
@@ -14373,7 +14373,7 @@
     "es": ""
   },
   "userPasswordResetPageResultTitleSuccess": {
-    "it": "",
+    "it": "Password reimpostata con successo!",
     "en": "Password reset successful!",
     "fr": "",
     "de": "",
@@ -14382,7 +14382,7 @@
     "es": ""
   },
   "userPasswordResetPageResultTitleVerificationFailed": {
-    "it": "",
+    "it": "Impossibile verificare il token di reset password.",
     "en": "Could not verify password reset token.",
     "fr": "",
     "de": "",
@@ -14391,7 +14391,7 @@
     "es": ""
   },
   "userPasswordResetPageSubmitLabel": {
-    "it": "",
+    "it": "Invia",
     "en": "Submit",
     "fr": "",
     "de": "",
@@ -15777,7 +15777,7 @@
     "es": ""
   },
   "optionsPageAccountOptPasswordLabelOldPassword": {
-    "it": "",
+    "it": "Password Vecchia",
     "en": "Old Password",
     "fr": "",
     "de": "",
@@ -15786,7 +15786,7 @@
     "es": ""
   },
   "optionsPageAccountOptPasswordLabelNewPassword": {
-    "it": "",
+    "it": "Password Nuova",
     "en": "New Password",
     "fr": "",
     "de": "",
@@ -15795,7 +15795,7 @@
     "es": ""
   },
   "optionsPageAccountOptPasswordLabelConfirmNewPassword": {
-    "it": "",
+    "it": "Conferma Nuova Password",
     "en": "Confirm New Password",
     "fr": "",
     "de": "",
@@ -15804,7 +15804,7 @@
     "es": ""
   },
   "optionsPageAccountOptPasswordSuccess": {
-    "it": "",
+    "it": "Password aggiornata con successo!",
     "en": "Password updated successfully!",
     "fr": "",
     "de": "",
