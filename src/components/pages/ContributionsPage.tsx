@@ -142,6 +142,9 @@ const ContributionsPage = () => {
                 langs: [LanguageName.Italian, LanguageName.English],
               },
               { player: <PlayerMention playerOrId={1165} />, langs: [LanguageName.English] },
+              { player: <PlayerMention playerOrId={1230} />, langs: [LanguageName.Spanish] },
+              { player: <PlayerMention playerOrId={1231} />, langs: [LanguageName.Spanish] },
+              { player: <PlayerMention playerOrId={144} />, langs: [LanguageName.French] },
               { player: <PlayerMention playerOrId={145} />, langs: [LanguageName.English] },
             ].map((credit) => (
               <li>
