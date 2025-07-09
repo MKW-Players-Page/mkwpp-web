@@ -174,6 +174,10 @@ export const translateRegionName = (
   );
 };
 
+export const translateRegionType = (regionType: undefined | null | RegionType, lang: Language) => {
+  return translate(`constantRegionType${regionType}` as TranslationKey, lang);
+};
+
 export const translateCategoryName = (category: CategoryEnum, lang: Language): string => {
   switch (category) {
     case CategoryEnum.NonShortcut:

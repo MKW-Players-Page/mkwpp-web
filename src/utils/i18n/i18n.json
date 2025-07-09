@@ -11177,6 +11177,60 @@
     "pt": "",
     "es": ""
   },
+  "constantRegionType0": {
+    "it": "Mondo",
+    "en": "World",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionType1": {
+    "it": "Continente",
+    "en": "Continent",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionType2": {
+    "it": "Gruppo di Nazioni",
+    "en": "Country Group",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionType3": {
+    "it": "Nazione",
+    "en": "Country",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionType4": {
+    "it": "Gruppo di Regioni",
+    "en": "Subregion Group",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantRegionType5": {
+    "it": "Regione",
+    "en": "Subregion",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "headerOptions": {
     "it": "Impostazioni",
     "en": "Options",
@@ -13619,33 +13673,6 @@
   "countryRankingsPageExplanationAll": {
     "it": "Tutti i",
     "en": "All the",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "countryRankingsPageDropdownCountries": {
-    "it": "Nazioni",
-    "en": "Countries",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "countryRankingsPageDropdownContinents": {
-    "it": "Continenti",
-    "en": "Continents",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "countryRankingsPageDropdownSubregions": {
-    "it": "Regioni",
-    "en": "Subregions",
     "fr": "",
     "de": "",
     "jp": "",
