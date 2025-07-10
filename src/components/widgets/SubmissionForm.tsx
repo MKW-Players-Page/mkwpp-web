@@ -9,13 +9,21 @@ import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { CategoryEnum, LapModeEnum, Score, stringToCategoryEnum, User } from "../../api";
+import {
+  CategoryEnum,
+  LapModeEnum,
+  Score,
+  stringToCategoryEnum,
+  SubmissionStatus,
+  User,
+} from "../../api";
 import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
 import Tooltip from "./Tooltip";
 import TrackSelect from "./TrackSelect";
-import { mkwReleaseDate } from "../../utils/Numbers";
+import { TimeInputField } from "./TimeInput";
+import { SubmissionStatusRadioField } from "./SubmissionStatusSelect";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -35,6 +43,9 @@ interface SubmitTabState {
   videoLink: string;
   comment: string;
   submitterNote: string;
+  adminNote?: string;
+  reviewerNote?: string;
+  status?: SubmissionStatus;
   errored: boolean;
   errors: { [key: string]: string[] };
   submitting: boolean;
@@ -51,6 +62,10 @@ export interface StarterData {
   starterVideoLink?: string;
   starterComment?: string;
   starterSubmitterNote?: string;
+  starterAdminNote?: string;
+  starterReviewerNote?: string;
+  starterStatus?: SubmissionStatus;
+  isAdmin?: boolean;
   submissionId?: number;
   editModeScore?: Score;
   doneFunc?: () => void;
@@ -71,12 +86,16 @@ const SubmissionForm = ({
   starterSubmitterNote,
   submissionId,
   editModeScore,
+  starterAdminNote,
+  starterReviewerNote,
+  starterStatus,
+  isAdmin = false,
   doneFunc,
   onSuccess,
   disclaimerText,
 }: StarterData) => {
   const { user } = useContext(UserContext);
-
+  const todayDate = new Date();
   const initialState = {
     state: SubmitStateEnum.Form,
     player: starterPlayer ?? user?.playerId ?? 1,
@@ -84,11 +103,14 @@ const SubmissionForm = ({
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
     value: starterValue ?? 0,
-    date: starterDate ?? new Date(mkwReleaseDate),
+    date: starterDate ?? todayDate,
     ghostLink: starterGhostLink ?? "",
     videoLink: starterVideoLink ?? "",
     comment: starterComment ?? "",
     submitterNote: starterSubmitterNote ?? "",
+    adminNote: starterAdminNote,
+    reviewerNote: starterReviewerNote,
+    status: starterStatus,
     errors: {},
     errored: false,
     submitting: false,
@@ -120,7 +142,7 @@ const SubmissionForm = ({
 
   const { data: submittees } = useApi(() => User.getSubmitteeList(user?.userId ?? 0, metadata));
 
-  const submit = (done: () => void) => {
+  const submit = (done: () => void, asReview: boolean = false) => {
     setState((prev) => ({ ...prev, errors: {} }));
 
     if (!user) {
@@ -168,6 +190,10 @@ const SubmissionForm = ({
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
                 (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               )
           : async () =>
               User.createEditSubmission(
@@ -178,6 +204,10 @@ const SubmissionForm = ({
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
                 (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               )
         : submissionId !== undefined
           ? async () =>
@@ -194,6 +224,10 @@ const SubmissionForm = ({
                 state.ghostLink,
                 state.comment,
                 state.submitterNote,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               )
           : async () =>
               User.createSubmission(
@@ -208,6 +242,10 @@ const SubmissionForm = ({
                 state.ghostLink,
                 state.comment,
                 state.submitterNote,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               );
 
     uploadFunction()
@@ -221,7 +259,6 @@ const SubmissionForm = ({
       });
   };
 
-  const todayDate = new Date();
   if (onSuccess !== undefined && state.state === SubmitStateEnum.Success) onSuccess();
 
   return (
@@ -259,6 +296,16 @@ const SubmissionForm = ({
                     className="submit-style"
                   >
                     {translate("submissionPageSubmitTabDeleteBtn", lang)}
+                  </div>
+                )}
+                {isAdmin && (
+                  <div
+                    onClick={() => {
+                      submit(() => {}, true);
+                    }}
+                    className="submit-style"
+                  >
+                    Submit as Review
                   </div>
                 )}
                 {submissionId === undefined && editModeScore === undefined && (
@@ -394,6 +441,17 @@ const SubmissionForm = ({
                 label={translate("submissionPageSubmitTabSubmitterNoteLabel", lang)}
               />
             </Tooltip>
+            {isAdmin && (
+              <>
+                <div></div>
+                <Field type="text" field="reviewerNote" label="Reviewer Note" />
+                <div></div>
+                <Tooltip text={"This is only shown to admins"} left>
+                  <Field type="text" field="adminNote" label="Admin Note" />
+                </Tooltip>
+                <SubmissionStatusRadioField field="status" label="Status" />
+              </>
+            )}
           </Form>
         )}
         {state.state === SubmitStateEnum.Success && (

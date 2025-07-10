@@ -157,7 +157,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
 
   if (tableData?.paginationData !== undefined)
     tableData.paginationData.setMaxPageNumber(
-      Math.floor(passedInRows.length / tableData.paginationData.rowsPerPage),
+      Math.ceil(passedInRows.length / tableData.paginationData.rowsPerPage),
     );
 
   const areas = {

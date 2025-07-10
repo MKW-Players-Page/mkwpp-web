@@ -1,6 +1,13 @@
 import { apiFetch, PlayerBasic } from "..";
+<<<<<<< ours
 import { getToken } from "../../utils/Auth";
 import { dateToSeconds } from "../../utils/DateUtils";
+import { formatDate } from "../../utils/Formatters";
+||||||| ancestor
+=======
+import { getToken } from "../../utils/Auth";
+import { dateToSeconds } from "../../utils/DateUtils";
+>>>>>>> theirs
 import { buildQueryParamString } from "../../utils/SearchParams";
 
 export enum CategoryEnum {
@@ -110,7 +117,7 @@ export class Score {
     limit?: number,
   ): Promise<Array<Score>> {
     return apiFetch(
-      `/custom/scores/chart/${trackId}${buildQueryParamString({ cat: category, lap: +isLap, reg: regionId, dat: date, lim: limit })}`,
+      `/custom/scores/chart/${trackId}${buildQueryParamString({ cat: category, lap: +isLap, reg: regionId, dat: date === undefined ? undefined : formatDate(date), lim: limit })}`,
     );
   }
 

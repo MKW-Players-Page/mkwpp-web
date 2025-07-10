@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AdminScore, CategoryEnum } from "../../../../api";
+import { AdminScore, CategoryEnum, LapModeEnum } from "../../../../api";
 import { secondsToDate } from "../../../../utils/DateUtils";
 import { formatDate, formatTime, parseTime } from "../../../../utils/Formatters";
 import { Language, translate } from "../../../../utils/i18n/i18n";
@@ -12,6 +12,7 @@ import { CategoryRadioField } from "../../../widgets/CategorySelect";
 import Form, { FormState, Field } from "../../../widgets/Form";
 import { LapModeRadioField } from "../../../widgets/LapModeSelect";
 import { PlayerSelectDropdownField } from "../../../widgets/PlayerSelectDropdown";
+import { TimeInputField } from "../../../widgets/TimeInput";
 
 export interface AdminScoreModuleProps {
   score?: AdminScore;
@@ -20,7 +21,7 @@ export interface AdminScoreModuleProps {
 interface AdminScoreModuleState extends FormState {
   value: number;
   category: CategoryEnum;
-  isLap: boolean;
+  lapMode: LapModeEnum;
   playerId: number;
   trackId: number;
   date: Date;
@@ -36,7 +37,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
   const initialState: AdminScoreModuleState = {
     value: score?.value ?? 0,
     category: score?.category ?? CategoryEnum.NonShortcut,
-    isLap: score?.isLap ?? false,
+    lapMode: score?.isLap ? LapModeEnum.Lap : LapModeEnum.Course,
     playerId: score?.playerId ?? 1,
     trackId: score?.trackId ?? 1,
     date: score?.date ? secondsToDate(score.date) : new Date(mkwReleaseDate),
@@ -58,7 +59,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           score.id,
           state.value,
           state.category,
-          state.isLap,
+          state.lapMode === LapModeEnum.Lap,
           state.playerId,
           state.trackId,
           state.date,
@@ -72,7 +73,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
         AdminScore.insertScore(
           state.value,
           state.category,
-          state.isLap,
+          state.lapMode === LapModeEnum.Lap,
           state.playerId,
           state.trackId,
           state.date,
@@ -130,28 +131,11 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           field="category"
           label="Category"
         />
-        <LapModeRadioField field="isLap" label="Lap Mode" />
-        <Field
-          type="text"
-          field="value"
-          label="Time"
-          placeholder={`1'23"456`}
-          toStringFunction={formatTime}
-          fromStringFunction={(x) => {
-            const value = parseTime(x);
-            if (!value) {
-              setState((prev) => ({
-                ...prev,
-                errored: true,
-                errors: {
-                  ...prev.errors,
-                  value: [translate("submissionPageSubmitTabInvalidTimeErr", Language.English)],
-                },
-              }));
-            }
-            return value;
-          }}
-        />
+        <LapModeRadioField field="lapMode" label="Lap Mode" />
+        
+        <TimeInputField 
+        field="value"
+        label="Time"/>
         <Field
           type="date"
           field="date"

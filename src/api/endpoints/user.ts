@@ -6,6 +6,7 @@ import {
   CategoryEnum,
   RegionType,
   Player,
+  SubmissionStatus,
 } from "..";
 import { getToken } from "../../utils/Auth";
 import { formatDate } from "../../utils/Formatters";
@@ -301,6 +302,10 @@ export class User {
     ghostLink?: string,
     comment?: string,
     submitterNote?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -320,12 +325,16 @@ export class User {
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        adminNote,
         value,
         category,
         isLap,
         playerId,
         trackId,
         date: formatDate(date),
+        reviewerNote,
+        status,
+        reviewerId,
       },
     );
   }
@@ -343,9 +352,14 @@ export class User {
     ghostLink?: string,
     comment?: string,
     submitterNote?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
+    console.log("Right before sending", status, reviewerNote, reviewerId, adminNote)
     return apiFetch<{}>(
       "/auth/submissions/create_submission",
       {
@@ -363,6 +377,10 @@ export class User {
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        adminNote,
+        reviewerNote,
+        status,
+        reviewerId,
         value,
         category,
         isLap,
@@ -413,6 +431,10 @@ export class User {
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -434,6 +456,10 @@ export class User {
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        adminNote,
+        reviewerNote,
+        status,
+        reviewerId,
         dateEdited: false,
         videoLinkEdited: false,
         ghostLinkEdited: false,
@@ -451,6 +477,10 @@ export class User {
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -473,6 +503,10 @@ export class User {
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        reviewerNote,
+        status,
+        reviewerId,
+        adminNote,
         dateEdited: false,
         videoLinkEdited: false,
         ghostLinkEdited: false,

@@ -29,7 +29,9 @@ const AdminDashboard = () => {
               <li>
                 <Link to={resolvePage(Pages.AdminUiScores)}>Scores List</Link>
               </li>
-              <li>Submissions List</li>
+              <li>
+                <Link to={resolvePage(Pages.AdminUiSubmissions)}>Submissions List</Link>
+              </li>
               <li>Edit Submissions List</li>
             </ul>
           </div>

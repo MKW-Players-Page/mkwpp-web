@@ -28,17 +28,19 @@ export class PlayerBasic {
     ids: number[],
     metadata?: Metadata,
   ): Promise<Array<PlayerBasic>> {
-    let actuallyFetch: Array<number> = ids;
-    const alreadyGrabbed: Array<PlayerBasic> = [];
+    let actuallyFetchSet: Set<number> = new Set(ids);
+    const alreadyGrabbedSet: Set<PlayerBasic> = new Set();
     if (metadata !== undefined)
       for (const id of ids) {
         const player = metadata.getCachedPlayer(id);
         if (player !== undefined) {
-          alreadyGrabbed.push(player);
-          actuallyFetch = actuallyFetch.filter((r) => r !== id);
+          alreadyGrabbedSet.add(player);
+          actuallyFetchSet.delete(id);
         }
       }
 
+    const actuallyFetch = Array.from(actuallyFetchSet);
+    const alreadyGrabbed = Array.from(alreadyGrabbedSet);
     if (actuallyFetch.length === 0) return new Promise((res) => res(alreadyGrabbed));
 
     return apiFetch<Array<PlayerBasic>>(
@@ -89,17 +91,19 @@ export class Player extends PlayerBasic {
   }
 
   public static async getPlayers(ids: number[], metadata?: Metadata): Promise<Array<Player>> {
-    let actuallyFetch: Array<number> = ids;
-    const alreadyGrabbed: Array<Player> = [];
+    let actuallyFetchSet: Set<number> = new Set(ids);
+    const alreadyGrabbedSet: Set<Player> = new Set();
     if (metadata !== undefined)
       for (const id of ids) {
         const player = metadata.getCachedPlayer(id);
         if (player !== undefined && typeguardPlayer(player)) {
-          alreadyGrabbed.push(player);
-          actuallyFetch = actuallyFetch.filter((r) => r === id);
+          alreadyGrabbedSet.add(player);
+          actuallyFetchSet.delete(id);
         }
       }
 
+    const actuallyFetch = Array.from(actuallyFetchSet);
+    const alreadyGrabbed = Array.from(alreadyGrabbedSet);
     if (actuallyFetch.length === 0) return new Promise(() => alreadyGrabbed);
 
     return apiFetch<Array<Player>>(
