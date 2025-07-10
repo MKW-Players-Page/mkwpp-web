@@ -457,7 +457,7 @@ const TimesheetTab = () => {
                       </td>
                       {!score.isLap && lapMode === LapModeEnum.Overall && <td />}
                       <td>{score.rank}</td>
-                      <td>{formatDate(new Date(score.date * 1000))}</td>
+                      <td>{formatDate(secondsToDate(score.date))}</td>
                       <td className="icon-cell">
                         {score.videoLink && (
                           <a href={score.videoLink} target="_blank" rel="noopener noreferrer">

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { BlogPost } from "../../../api";
 import PlayerMention from "../../widgets/PlayerMention";
+import { secondsToDate } from "../../../utils/DateUtils";
 
 const BlogListPage = () => {
   const { isLoading, data: posts } = useApi(() => BlogPost.getList(2147483647), [], "blogPosts");
@@ -31,7 +32,7 @@ const BlogListPage = () => {
                   <td>
                     <Link to={resolvePage(Pages.BlogPost, { id: post.id })}>{post.title}</Link>
                   </td>
-                  <td>{new Date(post.publishedAt * 1000).toLocaleString(lang)}</td>
+                  <td>{secondsToDate(post.publishedAt).toLocaleString(lang)}</td>
                   <td>
                     <PlayerMention playerOrId={post.authorId} />
                   </td>
