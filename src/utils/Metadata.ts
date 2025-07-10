@@ -123,7 +123,11 @@ export const useMetadata = (): Metadata => {
   const standardLevels = useApi(() => StandardLevel.get(), [], "standardLevels");
   const standards = useApi(() => Standard.get(), [], "standards");
   const cups = useApi(() => Cup.get(), [], "cups");
-  const tracks = useApi(() => Track.get(), [], "tracks");
+  const tracks = useApi(
+    () => Track.get().then((tracks) => tracks.sort((a, b) => a.id - b.id)),
+    [],
+    "tracks",
+  );
 
   const metadata = new Metadata(
     regions.isLoading ||

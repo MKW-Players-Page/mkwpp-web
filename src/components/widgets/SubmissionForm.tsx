@@ -349,7 +349,7 @@ const SubmissionForm = ({
               field="value"
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
               placeholder={`1'23"456`}
-              toStringFunction={(x) => formatTime(x)}
+              toStringFunction={formatTime}
               fromStringFunction={(x) => {
                 const value = parseTime(x);
                 if (!value) {

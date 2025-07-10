@@ -17,6 +17,7 @@ export { Standard } from "./endpoints/standards";
 export { SiteChamp } from "./endpoints/siteChamps";
 export { Ranking, MetricEnum } from "./endpoints/rankings";
 export {
+  AdminScore,
   Score,
   CategoryEnum,
   CategoryEnumValues,

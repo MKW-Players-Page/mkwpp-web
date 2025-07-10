@@ -1,4 +1,6 @@
 import { apiFetch, PlayerBasic } from "..";
+import { getToken } from "../../utils/Auth";
+import { dateToSeconds } from "../../utils/DateUtils";
 import { buildQueryParamString } from "../../utils/SearchParams";
 
 export enum CategoryEnum {
@@ -128,5 +130,160 @@ export class Score {
     recordsOnly: boolean = false,
   ): Promise<Array<ScoreByDate>> {
     return apiFetch(`/custom/scores/recent/${limit}/${recordsOnly ? "records" : "all"}`);
+  }
+}
+
+export class AdminScore {
+  readonly id: number;
+  readonly value: number;
+  readonly category: CategoryEnum;
+  readonly isLap: boolean;
+  readonly playerId: number;
+  readonly trackId: number;
+  readonly date: number;
+  readonly videoLink?: string;
+  readonly ghostLink?: string;
+  readonly comment?: string;
+  readonly adminNote?: string;
+  readonly initialRank?: number;
+
+  constructor(
+    id: number,
+    value: number,
+    category: CategoryEnum,
+    isLap: boolean,
+    playerId: number,
+    trackId: number,
+    date: number,
+    videoLink?: string,
+    ghostLink?: string,
+    comment?: string,
+    adminNote?: string,
+    initialRank?: number,
+  ) {
+    this.id = id;
+    this.value = value;
+    this.category = category;
+    this.isLap = isLap;
+    this.playerId = playerId;
+    this.trackId = trackId;
+    this.date = date;
+    this.videoLink = videoLink;
+    this.ghostLink = ghostLink;
+    this.comment = comment;
+    this.adminNote = adminNote;
+    this.initialRank = initialRank;
+  }
+
+  public static async getList(trackId: number): Promise<Array<AdminScore> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/scores/list",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, trackId },
+    );
+  }
+
+  public static async insertScore(
+    value: number,
+    category: CategoryEnum,
+    isLap: boolean,
+    playerId: number,
+    trackId: number,
+    date: Date,
+    videoLink?: string,
+    ghostLink?: string,
+    comment?: string,
+    adminNote?: string,
+    initialRank?: number,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/scores/insert",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        value,
+        category,
+        isLap,
+        playerId,
+        trackId,
+        date: dateToSeconds(date),
+        videoLink,
+        ghostLink,
+        comment,
+        adminNote,
+        initialRank,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async editScore(
+    id: number,
+    value: number,
+    category: CategoryEnum,
+    isLap: boolean,
+    playerId: number,
+    trackId: number,
+    date: Date,
+    videoLink?: string,
+    ghostLink?: string,
+    comment?: string,
+    adminNote?: string,
+    initialRank?: number,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/scores/edit",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        id,
+        value,
+        category,
+        isLap,
+        playerId,
+        trackId,
+        date: dateToSeconds(date),
+        videoLink,
+        ghostLink,
+        comment,
+        adminNote,
+        initialRank,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async deleteScore(id: number): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/scores/delete",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, id },
+    ).then((r) => r.success);
   }
 }
