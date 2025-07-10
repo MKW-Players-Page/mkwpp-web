@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useSearchParams, Navigate } from "react-router-dom";
+import { useSearchParams, Navigate, Link } from "react-router-dom";
 import { Region, User } from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
@@ -12,6 +12,7 @@ import { FlagIcon } from "../../../widgets";
 import { MetadataContext } from "../../../../utils/Metadata";
 import ObscuredModule from "../../../widgets/ObscuredModule";
 import AdminRegionModule from "./AdminRegionsModule";
+import SearchBar from "../../../widgets/SearchBar";
 
 export interface AdminRegionUpdateButtonProps {
   region: Region;
@@ -45,27 +46,26 @@ const AdminRegionsListPage = () => {
   const [textFilter, setTextFilter] = useState("");
   const [visibleObscured, setVisibleObscured] = useState(false);
 
-  const { isLoading, data: regions } = useApi(
+  const { isLoading, data } = useApi(
     () =>
       Region.get().then((regions) => {
         metadata.regions = regions;
         return regions
           .sort((a, b) => a.id - b.id)
-          .map((region) => {
-            const name = translateRegionName(region, Language.English);
-            const nameNormalized = name.toLowerCase().normalize("NFKD");
-            const parentRegion = region.parentId
-              ? metadata.getRegionById(region.parentId)
-              : undefined;
-            const parentName = parentRegion
-              ? translateRegionName(parentRegion, Language.English)
-              : "None";
-            const isRankedText = region.isRanked ? "True" : "False";
+          .reduce(
+            (accumulator, region) => {
+              const name = translateRegionName(region, Language.English);
+              const parentRegion = region.parentId
+                ? metadata.getRegionById(region.parentId)
+                : undefined;
+              const parentName = parentRegion
+                ? translateRegionName(parentRegion, Language.English)
+                : "None";
+              const isRankedText = region.isRanked ? "True" : "False";
 
-            const regionType = translateRegionType(region.regionType, Language.English);
+              const regionType = translateRegionType(region.regionType, Language.English);
 
-            return [
-              [
+              accumulator.tableArray.push([
                 {
                   content: <AdminRegionUpdateButton region={region} />,
                 },
@@ -88,40 +88,37 @@ const AdminRegionsListPage = () => {
                   ),
                 },
                 { content: isRankedText },
-              ],
-              (filter: string) =>
-                !(
-                  filter === "" ||
-                  nameNormalized.includes(filter) ||
-                  region.id.toString().includes(filter) ||
-                  region.code.toLowerCase().normalize("NFKD").includes(filter) ||
-                  regionType.toLowerCase().normalize("NFKD").includes(filter) ||
-                  isRankedText.toLowerCase().normalize("NFKD").includes(filter)
-                ),
-              region.id,
-            ];
-          }) as unknown as [ArrayTableCellData[], (filter: string) => boolean, number][];
+              ]);
+              accumulator.keys.push(region.id.toString());
+              accumulator.filterStrings.push(
+                (name + region.id.toString() + region.code + regionType + isRankedText + parentName)
+                  .toLowerCase()
+                  .normalize("NFKD"),
+              );
+              return accumulator;
+            },
+            {
+              tableArray: [] as ArrayTableCellData[][],
+              keys: [] as string[],
+              filterStrings: [] as string[],
+            },
+          );
       }),
-    [],
+    [metadata],
     "regionList",
   );
 
   const tableData: ArrayTableData = {
     classNames: [],
-    rowKeys: [],
+    rowKeys: data?.keys ?? [],
+    filterData: {
+      rowStrings: data?.filterStrings ?? [],
+      currentString: textFilter,
+    },
   };
 
-  const tableArray =
-    regions?.reduce((accumulator: ArrayTableCellData[][], [row, filterFunc, rowKey]) => {
-      if (filterFunc(textFilter)) return accumulator;
-
-      tableData.rowKeys?.push(rowKey.toString());
-      accumulator.push(row);
-      return accumulator;
-    }, []) ?? [];
-
   const rowsPerPage = 100;
-  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
+  const maxPageNumber = Math.ceil((data?.tableArray?.length ?? 0) / rowsPerPage);
   tableData.paginationData = {
     rowsPerPage,
     page: pageNumber,
@@ -129,39 +126,9 @@ const AdminRegionsListPage = () => {
 
   return (
     <>
+      <Link to={resolvePage(Pages.AdminUi)}>« Back</Link>
       <h1>Regions List</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "4fr 1fr",
-          gridGap: "5px",
-        }}
-      >
-        <input
-          id="filterText"
-          type="text"
-          className="module"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") document.getElementById("searchBtn")?.click();
-          }}
-        />
-        <button
-          style={{
-            borderRadius: 0,
-          }}
-          id="searchBtn"
-          className="module"
-          onClick={(e) => {
-            setTextFilter(
-              (document.getElementById("filterText") as HTMLInputElement).value
-                .toLowerCase()
-                .normalize("NFKD"),
-            );
-          }}
-        >
-          Search
-        </button>
-      </div>
+      <SearchBar setFilterString={setTextFilter} />
 
       <button
         className="module"
@@ -194,7 +161,7 @@ const AdminRegionsListPage = () => {
                 { content: "Is Ranked" },
               ],
             ]}
-            rows={tableArray}
+            rows={data?.tableArray ?? []}
             tableData={tableData}
           />
         </Deferred>
