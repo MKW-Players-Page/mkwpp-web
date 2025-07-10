@@ -6,7 +6,15 @@ import i18nJson from "./i18n.json";
 import { Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
 import { FlagIcon } from "../../components/widgets";
-import { Region, RegionType, CategoryEnum, Track, LapModeEnum, StandardLevel } from "../../api";
+import {
+  Region,
+  RegionType,
+  CategoryEnum,
+  Track,
+  LapModeEnum,
+  StandardLevel,
+  SubmissionStatus,
+} from "../../api";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -176,6 +184,13 @@ export const translateRegionName = (
 
 export const translateRegionType = (regionType: undefined | null | RegionType, lang: Language) => {
   return translate(`constantRegionType${regionType}` as TranslationKey, lang);
+};
+
+export const translateSubmissionStatus = (
+  submissionStatus: undefined | null | SubmissionStatus,
+  lang: Language,
+) => {
+  return translate(`constantSubmissionStatus${submissionStatus}` as TranslationKey, lang);
 };
 
 export const translateCategoryName = (category: CategoryEnum, lang: Language): string => {
