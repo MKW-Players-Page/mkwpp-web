@@ -155,7 +155,11 @@ export const translateRegionNameFull = (
   } else {
     region = regionCompute;
   }
-  if (region === undefined || region === null || turnWorldToUnknown)
+  if (
+    region === undefined ||
+    region === null ||
+    (turnWorldToUnknown && region.regionType === RegionType.World)
+  )
     return translate("constantRegionXX", lang);
 
   if (region.parentId && region.regionType === RegionType.Subnational) {

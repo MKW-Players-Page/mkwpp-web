@@ -27,6 +27,7 @@ import PastChampsPage from "./PastChampsPage";
 import OptionsPage from "./OptionsPage";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminRegionsListPage from "./admin/regions/AdminRegions";
+import AdminPlayersListPage from "./admin/players/AdminPlayers";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -160,6 +161,10 @@ export const Pages: PageMap = {
   AdminUiRegions: {
     path: "/admin/regions",
     element: <AdminRegionsListPage />,
+  },
+  AdminUiPlayers: {
+    path: "/admin/players",
+    element: <AdminPlayersListPage />,
   },
 };
 

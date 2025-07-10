@@ -18,7 +18,18 @@ const AdminDashboard = () => {
           {!isAdmin && <Navigate to={resolvePage(Pages.Home)} />}
           <div className="module-content">
             <h2>Welcome, {user?.username}</h2>
-            <Link to={resolvePage(Pages.AdminUiRegions)}>Regions List</Link>
+            <ul>
+              <li>
+                <Link to={resolvePage(Pages.AdminUiRegions)}>Regions List</Link>
+              </li>
+              <li>
+                <Link to={resolvePage(Pages.AdminUiPlayers)}>Players List</Link>
+              </li>
+              <li>Users List</li>
+              <li>Scores List</li>
+              <li>Submissions List</li>
+              <li>Edit Submissions List</li>
+            </ul>
           </div>
         </Deferred>
       </section>

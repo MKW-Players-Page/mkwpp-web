@@ -1,5 +1,7 @@
 import { apiFetch } from "..";
+import { getToken } from "../../utils/Auth";
 import { Metadata } from "../../utils/Metadata";
+import { dateToSeconds } from "../../utils/DateUtils";
 
 export const typeguardPlayer = (x: Object): x is Player => {
   return x.hasOwnProperty("joinedDate") && x.hasOwnProperty("lastActivity");
@@ -118,5 +120,124 @@ export class Player extends PlayerBasic {
 
   public static async getPlayer(id: number, metadata?: Metadata): Promise<Player | undefined> {
     return this.getPlayers([id], metadata).then((r) => r[0]);
+  }
+}
+
+export class AdminPlayer extends Player {
+  readonly submitters: number[];
+
+  constructor(
+    id: number,
+    name: string,
+    regionId: number,
+    joinedDate: number,
+    lastActivity: number,
+    bio?: string,
+    alias?: string,
+    pronouns?: string,
+    submitters: number[] = [],
+  ) {
+    super(id, name, regionId, joinedDate, lastActivity, bio, alias, pronouns);
+    this.submitters = submitters;
+  }
+
+  public static async getAdminPlayerList(): Promise<Array<AdminPlayer> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/players/list",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    );
+  }
+
+  public static async insertPlayer(
+    name: string,
+    regionId: number,
+    joinedDate: Date,
+    lastActivity: Date,
+    submitters: Array<number>,
+    alias?: string,
+    bio?: string,
+    pronouns?: string,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/players/insert",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        name,
+        regionId,
+        joinedDate: dateToSeconds(joinedDate),
+        lastActivity: dateToSeconds(lastActivity),
+        submitters,
+        alias,
+        bio,
+        pronouns,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async editPlayer(
+    id: number,
+    name: string,
+    regionId: number,
+    joinedDate: Date,
+    lastActivity: Date,
+    submitters: Array<number>,
+    alias?: string,
+    bio?: string,
+    pronouns?: string,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/players/edit",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        id,
+        name,
+        regionId,
+        joinedDate: dateToSeconds(joinedDate),
+        lastActivity: dateToSeconds(lastActivity),
+        submitters,
+        alias,
+        bio,
+        pronouns,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async deletePlayer(id: number): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/players/delete",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, id },
+    ).then((r) => r.success);
   }
 }
