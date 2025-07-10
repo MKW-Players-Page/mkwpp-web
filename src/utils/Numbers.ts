@@ -21,3 +21,6 @@ export const integerOr = (value: any, fallback: number) => {
   const num = numberOr(value, 0.5);
   return num % 1 === 0 ? num : fallback;
 };
+
+/* 2008-04-16 12:00 AM UTC */
+export const mkwReleaseDate = 1208289600000;

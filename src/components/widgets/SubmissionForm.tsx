@@ -377,7 +377,7 @@ const SubmissionForm = ({
               type="date"
               field="date"
               disabled={editModeScore !== undefined}
-              min="2008-04-01"
+              min="2008-04-15"
               max={formatDate(todayDate)}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
             />
