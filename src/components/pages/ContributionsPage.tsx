@@ -142,6 +142,9 @@ const ContributionsPage = () => {
                 langs: [LanguageName.Italian, LanguageName.English],
               },
               { player: <PlayerMention playerOrId={1165} />, langs: [LanguageName.English] },
+              { player: <PlayerMention playerOrId={1230} />, langs: [LanguageName.Spanish] },
+              { player: <PlayerMention playerOrId={1231} />, langs: [LanguageName.Spanish] },
+              { player: <PlayerMention playerOrId={144} />, langs: [LanguageName.French] },
               { player: <PlayerMention playerOrId={145} />, langs: [LanguageName.English] },
             ].map((credit) => (
               <li>
@@ -154,7 +157,7 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translate("contributionsPageFeatureRoadmapHeading", lang)}</h2>
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureTimelineFilterHeading", lang)}
             description={handleBars(
               translate("contributionsPageFeatureTimelineFilterParagraph", lang),
@@ -176,12 +179,7 @@ const ContributionsPage = () => {
             }
             suggestedBy={[918]}
           />
-          <FeatureElement
-            title={translate("contributionsPageFeatureRustBackendHeading", lang)}
-            description={<>{translate("contributionsPageFeatureRustBackendParagraph", lang)}</>}
-            suggestedBy={[918]}
-          />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureChadsoftAPIInterfaceHeading", lang)}
             description={
               <>{translate("contributionsPageFeatureChadsoftAPIInterfaceParagraph", lang)}</>
@@ -193,23 +191,29 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translate("contributionsPageOngoingDevelopmentHeading", lang)}</h2>
-          <FeatureElement
+          <Feature
+            title={translate("contributionsPageFeatureRustBackendHeading", lang)}
+            description={<>{translate("contributionsPageFeatureRustBackendParagraph", lang)}</>}
+            workedOnBy={[918]}
+            suggestedBy={[918]}
+          />
+          <Feature
             title={translate("contributionsPageFeatureRivalriesHeading", lang)}
             description={<>{translate("contributionsPageFeatureRivalriesParagraph", lang)}</>}
             workedOnBy={[918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureAwardsHeading", lang)}
             description={<>{translate("contributionsPageFeatureAwardsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureUserSettingsHeading", lang)}
             description={<>{translate("contributionsPageFeatureUserSettingsParagraph", lang)}</>}
             workedOnBy={[918]}
             suggestedBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureFurtherSubregionsHeading", lang)}
             description={
               <>{translate("contributionsPageFeatureFurtherSubregionsParagraph", lang)}</>
@@ -217,17 +221,17 @@ const ContributionsPage = () => {
             workedOnBy={[1165, 918]}
             suggestedBy={[1165, 918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeaturePastChampsHeading", lang)}
             description={<>{translate("contributionsPageFeaturePastChampsParagraph", lang)}</>}
             workedOnBy={[1165, 1167]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureSubmissionHeading", lang)}
             description={<>{translate("contributionsPageFeatureSubmissionParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureSvgFlagsHeading", lang)}
             description={<>{translate("contributionsPageFeatureSvgFlagsParagraph", lang)}</>}
             workedOnBy={[1165, 918, 144]}
@@ -237,7 +241,7 @@ const ContributionsPage = () => {
       <div className="module">
         <div className="module-content">
           <h2>{translate("contributionsPageDevelopedCreditsHeading", lang)}</h2>
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureContributionsPageHeading", lang)}
             description={
               <>{translate("contributionsPageFeatureContributionsPageParagraph", lang)}</>
@@ -245,87 +249,87 @@ const ContributionsPage = () => {
             suggestedBy={[918]}
             workedOnBy={[918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureLocalizationHeading", lang)}
             description={<>{translate("contributionsPageFeatureLocalizationParagraph", lang)}</>}
             workedOnBy={[1165, 918]}
             suggestedBy={[1165, 918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureProfileFiltersHeading", lang)}
             description={<>{translate("contributionsPageFeatureProfileFiltersParagraph", lang)}</>}
             workedOnBy={[918]}
             suggestedBy={[918, 144]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureCountryAFHeading", lang)}
             description={<>{translate("contributionsPageFeatureCountryAFParagraph", lang)}</>}
             workedOnBy={[918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureMatchupsHeading", lang)}
             description={<>{translate("contributionsPageFeatureMatchupsParagraph", lang)}</>}
             workedOnBy={[1165, 918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureCustomDropdownsHeading", lang)}
             description={<>{translate("contributionsPageFeatureCustomDropdownsParagraph", lang)}</>}
             workedOnBy={[918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureRulesPageHeading", lang)}
             description={<>{translate("contributionsPageFeatureRulesPageParagraph", lang)}</>}
             workedOnBy={[918, 145]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureCategoryHueHeading", lang)}
             description={<>{translate("contributionsPageFeatureCategoryHueParagraph", lang)}</>}
             workedOnBy={[918, 1165]}
             suggestedBy={[144]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureTallyPointsHeading", lang)}
             description={<>{translate("contributionsPageFeatureTallyPointsParagraph", lang)}</>}
             suggestedBy={[1165, 630, 144]}
             workedOnBy={[1165, 918, 1167]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureRegionSelectionHeading", lang)}
             description={<>{translate("contributionsPageFeatureRegionSelectionParagraph", lang)}</>}
             suggestedBy={[918]}
             workedOnBy={[918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureTopsHeading", lang)}
             description={<>{translate("contributionsPageFeatureTopsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeaturePlayersHeading", lang)}
             description={<>{translate("contributionsPageFeaturePlayersParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureLoginHeading", lang)}
             description={<>{translate("contributionsPageFeatureLoginParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureRankingsHeading", lang)}
             description={<>{translate("contributionsPageFeatureRankingsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureStandardsHeading", lang)}
             description={<>{translate("contributionsPageFeatureStandardsParagraph", lang)}</>}
             workedOnBy={[1165, 918]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureChartsHeading", lang)}
             description={<>{translate("contributionsPageFeatureChartsParagraph", lang)}</>}
             workedOnBy={[1165]}
           />
-          <FeatureElement
+          <Feature
             title={translate("contributionsPageFeatureSiteHeading", lang)}
             description={<>{translate("contributionsPageFeatureSiteParagraph", lang)}</>}
             workedOnBy={[1165]}
@@ -343,16 +347,17 @@ const ContributionsPage = () => {
           <p>
             {translate("contributionsPageSpecialCreditsUpdatersParagraph", lang)}{" "}
             <PlayerMention playerOrId={1167} />, <PlayerMention playerOrId={145} />,{" "}
-            <PlayerMention playerOrId={630} />, <PlayerMention playerOrId={144} />,{" "}
+            <PlayerMention playerOrId={365} />, <PlayerMention playerOrId={144} />,{" "}
             <PlayerMention playerOrId={1588} />, <PlayerMention playerOrId={1372} />,{" "}
-            <PlayerMention playerOrId={308} />, <PlayerMention playerOrId={180} />
+            <PlayerMention playerOrId={308} />, <PlayerMention playerOrId={180} />,{" "}
+            <PlayerMention playerOrId={1204} />, <PlayerMention playerOrId={448} />,{" "}
           </p>
           <p>
             {translate("contributionsPageSpecialCreditsFormerUpdatersParagraph", lang)}{" "}
             <PlayerMention playerOrId={1626} />, <PlayerMention playerOrId={1539} />,{" "}
             <PlayerMention playerOrId={1538} />, <PlayerMention playerOrId={644} />,{" "}
             <PlayerMention playerOrId={383} />, <PlayerMention playerOrId={718} />,{" "}
-            <PlayerMention playerOrId={1598} />
+            <PlayerMention playerOrId={1598} />, <PlayerMention playerOrId={630} />
           </p>
         </div>
       </div>
@@ -368,7 +373,7 @@ interface FeatureProps {
   suggestedBy?: number[];
 }
 
-const FeatureElement = ({ title, description, images, suggestedBy, workedOnBy }: FeatureProps) => {
+const Feature = ({ title, description, images, suggestedBy, workedOnBy }: FeatureProps) => {
   const { lang } = useContext(I18nContext);
   return (
     <div>

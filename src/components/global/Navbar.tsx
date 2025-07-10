@@ -166,6 +166,11 @@ const SECTIONS: NavbarSection[] = [
         external: true,
       },
       {
+        label: "navbarLabelMKWorldPlayersPage",
+        url: "//www.mariokart64.com/mkworld/",
+        external: true,
+      },
+      {
         label: "navbarLabelCombinedRanks",
         url: "//www.mariokart64.com/combinedranks/",
         external: true,
