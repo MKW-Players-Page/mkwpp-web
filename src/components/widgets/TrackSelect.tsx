@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { FormContext } from "./Form";
-import { Metadata, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 
@@ -62,8 +62,6 @@ export const TrackDropdown = ({ value, onChange, disabled, allTracks }: TrackDro
 };
 
 export interface TrackSelectProps {
-  /** Metadata object */
-  metadata: Metadata;
   /** Name of the state property to control */
   field: string;
   /** Select label */
@@ -71,10 +69,10 @@ export interface TrackSelectProps {
   disabled?: boolean;
 }
 
-const TrackSelect = ({ metadata, field, label, disabled }: TrackSelectProps) => {
+const TrackSelect = ({ field, label, disabled }: TrackSelectProps) => {
   const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
 
-  const onChange = (e: string) => {
+  const onChange = (e: number) => {
     setValue(field, e);
   };
 
@@ -86,7 +84,7 @@ const TrackSelect = ({ metadata, field, label, disabled }: TrackSelectProps) => 
       <TrackDropdown
         onChange={onChange}
         disabled={disabled || disabledByForm}
-        value={parseInt(getValue(field) ?? "0")}
+        value={getValue(field)}
       />
       {errors.map((error) => (
         <p className="field-error">{error}</p>

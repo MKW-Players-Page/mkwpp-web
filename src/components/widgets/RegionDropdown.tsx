@@ -144,9 +144,9 @@ export const RegionSelectionDropdownField = ({
     <div className="field">
       <p>{label}</p>
       <RegionSelectionDropdown
-        value={metadata.getRegionById(parseInt(getValue(field) ?? "1")) ?? Region.worldDefault()}
+        value={metadata.getRegionById(getValue(field) ?? 1) ?? Region.worldDefault()}
         setValue={(region) => {
-          setValue(field, region.id.toString());
+          setValue(field, region.id);
         }}
         disabled={disabledByForm || !!disabled}
         ranked={false}

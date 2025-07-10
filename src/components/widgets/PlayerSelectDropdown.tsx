@@ -103,9 +103,9 @@ export const PlayerSelectDropdownField = ({
       <PlayerSelectDropdown
         restrictSet={restrictSet}
         blacklist={blacklist}
-        id={parseInt(getValue(field) ?? "1")}
+        id={getValue(field)}
         setId={(id) => {
-          setValue(field, id.toString());
+          setValue(field, id);
         }}
         disabled={disabledByForm || !!disabled}
       />

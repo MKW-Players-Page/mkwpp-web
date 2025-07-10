@@ -2,9 +2,10 @@ export { BlogPost } from "./endpoints/blogPost";
 export { User, AuthData } from "./endpoints/user";
 export { Cup } from "./endpoints/cups";
 export { Track } from "./endpoints/tracks";
-export { Player, PlayerBasic, typeguardPlayer } from "./endpoints/players";
+export { Player, PlayerBasic, typeguardPlayer, AdminPlayer } from "./endpoints/players";
 export {
   Region,
+  AdminRegion,
   RegionType,
   type RegionTree,
   RegionTypeValues,

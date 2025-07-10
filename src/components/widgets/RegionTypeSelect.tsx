@@ -37,7 +37,7 @@ export const RegionTypeRadio = ({ options, value, onChange, disabled }: RegionTy
   );
 };
 
-const CategorySelect = ({ options, value, onChange, disabled }: RegionTypeSelectProps) => {
+const RegionTypeSelect = ({ options, value, onChange, disabled }: RegionTypeSelectProps) => {
   disabled = !!disabled;
   const { lang } = useContext(I18nContext);
 
@@ -91,7 +91,7 @@ export const RegionTypeField = ({ options, field, label, disabled }: RegionTypeF
   return (
     <div className="field">
       <p>{label}</p>
-      <CategorySelect
+      <RegionTypeSelect
         options={options}
         value={stringToRegionType(getValue(field) ?? "")}
         onChange={(category) => {
@@ -106,19 +106,14 @@ export const RegionTypeField = ({ options, field, label, disabled }: RegionTypeF
 export const RegionTypeRadioField = ({ options, field, label, disabled }: RegionTypeFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
-  const value = getValue(field);
   return (
     <div className="field">
       <p>{label}</p>
       <RegionTypeRadio
         options={options}
-        value={
-          typeof value === "string"
-            ? stringToRegionType(getValue(field) ?? "")
-            : (value as unknown as RegionType)
-        }
-        onChange={(category) => {
-          setValue(field, category.toString());
+        value={getValue(field)}
+        onChange={(regionType) => {
+          setValue(field, regionType);
         }}
         disabled={disabledByForm || disabled}
       />
@@ -126,4 +121,4 @@ export const RegionTypeRadioField = ({ options, field, label, disabled }: Region
   );
 };
 
-export default CategorySelect;
+export default RegionTypeSelect;

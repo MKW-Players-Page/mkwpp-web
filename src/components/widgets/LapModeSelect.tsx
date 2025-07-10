@@ -104,9 +104,9 @@ export const LapModeField = ({ includeOverall, field, label }: LapModeFieldProps
       <p>{label}</p>
       <LapModeSelect
         includeOverall={includeOverall}
-        value={stringToLapModeEnum(getValue(field) ?? "", includeOverall)}
+        value={getValue(field)}
         onChange={(lapMode) => {
-          setValue(field, lapMode.toString());
+          setValue(field, lapMode);
         }}
         disabled={disabled}
       />

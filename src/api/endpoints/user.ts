@@ -1,7 +1,16 @@
-import { apiFetch, EditSubmission, PlayerBasic, Submission, CategoryEnum, RegionType } from "..";
+import {
+  apiFetch,
+  EditSubmission,
+  PlayerBasic,
+  Submission,
+  CategoryEnum,
+  RegionType,
+  Player,
+} from "..";
 import { getToken } from "../../utils/Auth";
 import { formatDate } from "../../utils/Formatters";
 import { Metadata } from "../../utils/Metadata";
+import { dateToSeconds } from "../../utils/DateUtils";
 
 export class AuthData {
   sessionToken: string;
@@ -503,61 +512,5 @@ export class User {
       },
       { sessionToken },
     ).then((r) => r.isAdmin);
-  }
-
-  public static async insertRegion(
-    code: string,
-    regionType: RegionType,
-    parentId: number,
-    isRanked = false,
-  ): Promise<boolean> {
-    const sessionToken = getToken();
-    if (sessionToken === null) return new Promise((res) => res(false));
-    return apiFetch<{ success: boolean }>(
-      "/admin/regions/insert",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-      { sessionToken, code, regionType, parentId, isRanked },
-    ).then((r) => r.success);
-  }
-
-  public static async editRegion(
-    id: number,
-    code: string,
-    regionType: RegionType,
-    parentId: number,
-    isRanked: boolean = false,
-  ): Promise<boolean> {
-    const sessionToken = getToken();
-    if (sessionToken === null) return new Promise((res) => res(false));
-    return apiFetch<{ success: boolean }>(
-      "/admin/regions/edit",
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-      { sessionToken, id, code, regionType, parentId, isRanked },
-    ).then((r) => r.success);
-  }
-
-  public static async deleteRegion(id: number): Promise<boolean> {
-    const sessionToken = getToken();
-    if (sessionToken === null) return new Promise((res) => res(false));
-    return apiFetch<{ success: boolean }>(
-      "/admin/regions/delete",
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-      { sessionToken, id },
-    ).then((r) => r.success);
   }
 }

@@ -15,6 +15,7 @@ import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
 import Tooltip from "./Tooltip";
 import TrackSelect from "./TrackSelect";
+import { mkwReleaseDate } from "../../utils/Numbers";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -28,12 +29,13 @@ interface SubmitTabState {
   track: number;
   category: CategoryEnum;
   lapMode: LapModeEnum;
-  value: string;
-  date: string;
+  value: number;
+  date: Date;
   ghostLink: string;
   videoLink: string;
   comment: string;
   submitterNote: string;
+  errored: boolean;
   errors: { [key: string]: string[] };
   submitting: boolean;
 }
@@ -43,8 +45,8 @@ export interface StarterData {
   starterTrack?: number;
   starterCategory?: CategoryEnum;
   starterLapMode?: LapModeEnum;
-  starterValue?: string;
-  starterDate?: string;
+  starterValue?: number;
+  starterDate?: Date;
   starterGhostLink?: string;
   starterVideoLink?: string;
   starterComment?: string;
@@ -81,13 +83,14 @@ const SubmissionForm = ({
     track: starterTrack ?? 1,
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
-    value: starterValue ?? "",
-    date: starterDate ?? "",
+    value: starterValue ?? 0,
+    date: starterDate ?? new Date(mkwReleaseDate),
     ghostLink: starterGhostLink ?? "",
     videoLink: starterVideoLink ?? "",
     comment: starterComment ?? "",
     submitterNote: starterSubmitterNote ?? "",
     errors: {},
+    errored: false,
     submitting: false,
   };
   const [state, setState] = useState<SubmitTabState>(initialState);
@@ -120,40 +123,15 @@ const SubmissionForm = ({
   const submit = (done: () => void) => {
     setState((prev) => ({ ...prev, errors: {} }));
 
-    let errored = false;
-
     if (!user) {
       setState((prev) => ({
         ...prev,
+        errored: true,
         errors: {
           non_field_errors: [translate("submissionPageSubmitTabNoPlayerProfileLinkErr", lang)],
         },
       }));
       return;
-    }
-
-    const value = parseTime(state.value);
-    if (!value) {
-      setState((prev) => ({
-        ...prev,
-        errors: {
-          ...prev.errors,
-          value: [translate("submissionPageSubmitTabInvalidTimeErr", lang)],
-        },
-      }));
-      errored = true;
-    }
-
-    const date = Date.parse(state.date);
-    if (Number.isNaN(date)) {
-      setState((prev) => ({
-        ...prev,
-        errors: {
-          ...prev.errors,
-          date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
-        },
-      }));
-      errored = true;
     }
 
     if (
@@ -164,15 +142,15 @@ const SubmissionForm = ({
     ) {
       setState((prev) => ({
         ...prev,
+        errored: true,
         errors: {
           ...prev.errors,
           non_field_errors: [translate("submissionPageSubmitTabNoEditErr", lang)],
         },
       }));
-      errored = true;
     }
 
-    if (errored) {
+    if (state.errored) {
       done();
       return;
     }
@@ -185,7 +163,7 @@ const SubmissionForm = ({
                 submissionId,
                 user?.userId,
                 editModeScore.id,
-                new Date(date),
+                state.date,
                 state.submitterNote,
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
@@ -195,7 +173,7 @@ const SubmissionForm = ({
               User.createEditSubmission(
                 user?.userId,
                 editModeScore.id,
-                new Date(date),
+                state.date,
                 state.submitterNote,
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
@@ -206,12 +184,12 @@ const SubmissionForm = ({
               User.editSubmission(
                 submissionId,
                 user.userId,
-                value as number,
+                state.value,
                 state.category,
                 state.lapMode === LapModeEnum.Lap,
                 state.player,
                 +state.track,
-                new Date(date),
+                state.date,
                 state.videoLink,
                 state.ghostLink,
                 state.comment,
@@ -220,12 +198,12 @@ const SubmissionForm = ({
           : async () =>
               User.createSubmission(
                 user.userId,
-                value as number,
+                state.value,
                 state.category,
                 state.lapMode === LapModeEnum.Lap,
                 state.player,
                 +state.track,
-                new Date(date),
+                state.date,
                 state.videoLink,
                 state.ghostLink,
                 state.comment,
@@ -303,9 +281,9 @@ const SubmissionForm = ({
                             const data = read_rkg(arr);
 
                             const newStateData = {
-                              value: formatTime(data.time),
+                              value: data.time,
                               track: data.track + 1,
-                              date: `${data.year}-${data.month.toString().padStart(2, "0")}-${data.day.toString().padStart(2, "0")}`,
+                              date: new Date(data.year, data.month - 1, data.day),
                             };
 
                             data.free();
@@ -350,7 +328,6 @@ const SubmissionForm = ({
               field="player"
             />
             <TrackSelect
-              metadata={metadata}
               disabled={editModeScore !== undefined}
               field="track"
               label={translate("submissionPageSubmitTabTrackLabel", lang)}
@@ -372,6 +349,21 @@ const SubmissionForm = ({
               field="value"
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
               placeholder={`1'23"456`}
+              toStringFunction={(x) => formatTime(x)}
+              fromStringFunction={(x) => {
+                const value = parseTime(x);
+                if (!value) {
+                  setState((prev) => ({
+                    ...prev,
+                    errored: true,
+                    errors: {
+                      ...prev.errors,
+                      value: [translate("submissionPageSubmitTabInvalidTimeErr", lang)],
+                    },
+                  }));
+                }
+                return value;
+              }}
             />
             <Field
               type="date"
@@ -380,6 +372,21 @@ const SubmissionForm = ({
               min="2008-04-15"
               max={formatDate(todayDate)}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
+              toStringFunction={formatDate}
+              fromStringFunction={(x) => {
+                try {
+                  return new Date(Date.parse(x));
+                } catch {
+                  setState((prev) => ({
+                    ...prev,
+                    errored: true,
+                    errors: {
+                      ...prev.errors,
+                      date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
+                    },
+                  }));
+                }
+              }}
             />
             <Field
               type="text"

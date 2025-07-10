@@ -33,6 +33,7 @@ import ObscuredModule from "../widgets/ObscuredModule";
 import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
+import { secondsToDate } from "../../utils/DateUtils";
 
 const SubmitTab = () => {
   const { lang } = useContext(I18nContext);
@@ -68,8 +69,8 @@ const BulkSubmitEditBtn = ({ data, deleteFunc }: BulkSubmitEditBtnProps) => {
         <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
           <SubmissionForm
             starterTrack={data.track.id}
-            starterValue={formatTime(data.time)}
-            starterDate={formatDate(data.date)}
+            starterValue={data.time}
+            starterDate={data.date}
             onSuccess={() => {
               setVisibleObscured(false);
               deleteFunc();
@@ -327,8 +328,8 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
             starterTrack={score.trackId}
             starterCategory={score.category}
             starterLapMode={score.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
-            starterValue={formatTime(score.value)}
-            starterDate={formatDate(new Date(score.date * 1000))}
+            starterValue={score.value}
+            starterDate={secondsToDate(score.date)}
             submissionId={patchUpData?.id}
             starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink ?? undefined}
             starterVideoLink={patchUpData?.videoLink ?? score.videoLink ?? undefined}

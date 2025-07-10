@@ -1,19 +1,11 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import {
-  CategoryEnum,
-  Region,
-  RegionType,
-  RegionTypeValues,
-  stringToRegionType,
-  User,
-} from "../../../../api";
+import { useNavigate } from "react-router-dom";
+import { AdminRegion, Region, RegionType, RegionTypeValues } from "../../../../api";
 import { FlagIcon, Tooltip } from "../../../widgets";
 import { Flags } from "../../../widgets/Flags";
 import Form, { FormState, Field } from "../../../widgets/Form";
 import { RegionSelectionDropdownField } from "../../../widgets/RegionDropdown";
 import { RegionTypeRadioField } from "../../../widgets/RegionTypeSelect";
-import { Pages, resolvePage } from "../../Pages";
 
 export interface AdminRegionModuleProps {
   region?: Region;
@@ -21,19 +13,17 @@ export interface AdminRegionModuleProps {
 
 interface AdminRegionModuleState extends FormState {
   code: string;
-  type: string;
-  isRanked: string;
-  parentId: string;
-  category: CategoryEnum;
+  type: RegionType;
+  isRanked: boolean;
+  parentId: number;
 }
 
 const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
   const initialState = {
     code: region?.code ?? "",
-    type: (region?.regionType ?? RegionType.World).toString(),
-    category: CategoryEnum.NonShortcut,
-    isRanked: region?.isRanked.toString() ?? "false",
-    parentId: region?.parentId?.toString() ?? "0",
+    type: region?.regionType ?? RegionType.World,
+    isRanked: region?.isRanked ?? false,
+    parentId: region?.parentId ?? 0,
     errors: {},
     submitting: false,
   };
@@ -43,20 +33,8 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
 
   const apiFunction = region
     ? async () =>
-        User.editRegion(
-          region.id,
-          state.code,
-          stringToRegionType(state.type),
-          parseInt(state.parentId),
-          "true" === state.isRanked,
-        )
-    : async () =>
-        User.insertRegion(
-          state.code,
-          stringToRegionType(state.type),
-          parseInt(state.parentId),
-          "true" === state.isRanked,
-        );
+        AdminRegion.editRegion(region.id, state.code, state.type, state.parentId, state.isRanked)
+    : async () => AdminRegion.insertRegion(state.code, state.type, state.parentId, state.isRanked);
 
   const submit = () =>
     apiFunction()
@@ -80,7 +58,7 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
           region ? (
             <div
               onClick={() => {
-                User.deleteRegion(region.id).then((r) => navigate(0));
+                AdminRegion.deleteRegion(region.id).then((r) => navigate(0));
               }}
               className="submit-style"
             >

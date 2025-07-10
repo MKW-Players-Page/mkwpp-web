@@ -106,19 +106,14 @@ export const CategoryField = ({ options, field, label, disabled }: CategoryField
 export const CategoryRadioField = ({ options, field, label, disabled }: CategoryFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
-  const value = getValue(field);
   return (
     <div className="field">
       <p>{label}</p>
       <CategoryRadio
         options={options}
-        value={
-          typeof value === "string"
-            ? stringToCategoryEnum(getValue(field) ?? "")
-            : (value as unknown as CategoryEnum)
-        }
+        value={getValue(field)}
         onChange={(category) => {
-          setValue(field, category.toString());
+          setValue(field, category);
         }}
         disabled={disabledByForm || disabled}
       />
