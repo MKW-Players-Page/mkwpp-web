@@ -115,6 +115,8 @@ export interface FieldProps {
   placeholder?: string;
   max?: string;
   min?: string;
+  step?: string;
+  pattern?: string;
   disabled?: boolean;
   defaultChecked?: boolean;
 }
@@ -128,6 +130,8 @@ export const Field = ({
   toStringFunction = (x) => x,
   max,
   min,
+  step,
+  pattern,
   disabled,
   defaultChecked,
 }: FieldProps) => {
@@ -155,6 +159,8 @@ export const Field = ({
         placeholder={placeholder}
         max={max}
         min={min}
+        step={step}
+        pattern={pattern}
         defaultChecked={defaultChecked}
       />
       {errors.map((error, index) => (

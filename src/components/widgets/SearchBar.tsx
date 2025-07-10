@@ -17,7 +17,7 @@ const SearchBar = ({ setFilterString }: SearchBarProps) => {
     >
       <input
         id="filterText"
-        type="text"
+        type="search"
         className="module"
         onKeyDown={(e) => {
           if (e.key === "Enter") document.getElementById("searchBtn")?.click();

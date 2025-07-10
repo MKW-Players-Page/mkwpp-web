@@ -343,28 +343,12 @@ const SubmissionForm = ({
               field="lapMode"
               label={translate("submissionPageSubmitTabModeLabel", lang)}
             />
-            <Field
-              type="text"
-              disabled={editModeScore !== undefined}
+
+            <TimeInputField
               field="value"
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
-              placeholder={`1'23"456`}
-              toStringFunction={formatTime}
-              fromStringFunction={(x) => {
-                const value = parseTime(x);
-                if (!value) {
-                  setState((prev) => ({
-                    ...prev,
-                    errored: true,
-                    errors: {
-                      ...prev.errors,
-                      value: [translate("submissionPageSubmitTabInvalidTimeErr", lang)],
-                    },
-                  }));
-                }
-                return value;
-              }}
             />
+
             <Field
               type="date"
               field="date"
