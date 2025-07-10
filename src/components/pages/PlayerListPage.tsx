@@ -89,6 +89,11 @@ const PlayerListPage = () => {
     "playerList",
   );
 
+  const rowsPerPage = 100;
+  const [maxPageNumber, setMaxPageNumber] = useState(
+    Math.ceil((data?.tableArray ?? []).length / rowsPerPage),
+  );
+
   const tableData: ArrayTableData = {
     classNames: [],
     rowKeys: [],
@@ -96,13 +101,11 @@ const PlayerListPage = () => {
       currentString: playerFilter,
       rowStrings: data?.filterStrings ?? [],
     },
-  };
-
-  const rowsPerPage = 100;
-  const maxPageNumber = Math.ceil((data?.tableArray ?? []).length / rowsPerPage);
-  tableData.paginationData = {
-    rowsPerPage,
-    page: pageNumber,
+    paginationData: {
+      rowsPerPage,
+      page: pageNumber,
+      setMaxPageNumber,
+    },
   };
 
   return (

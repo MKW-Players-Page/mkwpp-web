@@ -108,20 +108,23 @@ const AdminRegionsListPage = () => {
     "regionList",
   );
 
+  const rowsPerPage = 100;
+  const [maxPageNumber, setMaxPageNumber] = useState(
+    Math.ceil((data?.tableArray ?? []).length / rowsPerPage),
+  );
+
   const tableData: ArrayTableData = {
     classNames: [],
-    rowKeys: data?.keys ?? [],
+    rowKeys: [],
     filterData: {
-      rowStrings: data?.filterStrings ?? [],
       currentString: textFilter,
+      rowStrings: data?.filterStrings ?? [],
     },
-  };
-
-  const rowsPerPage = 100;
-  const maxPageNumber = Math.ceil((data?.tableArray?.length ?? 0) / rowsPerPage);
-  tableData.paginationData = {
-    rowsPerPage,
-    page: pageNumber,
+    paginationData: {
+      rowsPerPage,
+      page: pageNumber,
+      setMaxPageNumber,
+    },
   };
 
   return (

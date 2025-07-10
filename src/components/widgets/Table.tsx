@@ -123,6 +123,7 @@ export interface ArrayTableData {
   paginationData?: {
     rowsPerPage: number;
     page: number;
+    setMaxPageNumber: React.Dispatch<React.SetStateAction<number>>;
     setPage?: (x: number) => void;
   };
   filterData?: {
@@ -153,6 +154,11 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
           tableData.filterData?.rowStrings[index].includes(tableData.filterData?.currentString),
         )
       : rows;
+
+  if (tableData?.paginationData !== undefined)
+    tableData.paginationData.setMaxPageNumber(
+      Math.floor(passedInRows.length / tableData.paginationData.rowsPerPage),
+    );
 
   const areas = {
     bodyCellArea: createCellAreaMap(passedInRows),

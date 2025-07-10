@@ -179,6 +179,7 @@ const TrackChartPage = () => {
     rowsPerPage,
     page: pageNumber,
     setPage: setPageNumber,
+    setMaxPageNumber: () => {},
   };
 
   const siteHue = getCategorySiteHue(category, settings);
