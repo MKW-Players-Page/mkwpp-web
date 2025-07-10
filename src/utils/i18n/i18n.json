@@ -98,6 +98,42 @@
     "pt": "",
     "es": "Vuelta"
   },
+  "constantSubmissionStatus0": {
+    "en": "Pending",
+    "it": "",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantSubmissionStatus1": {
+    "en": "Accepted",
+    "it": "",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantSubmissionStatus2": {
+    "en": "Rejected",
+    "it": "",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantSubmissionStatus3": {
+    "en": "OnHold",
+    "it": "",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantCategoryNameNoSCLong": {
     "en": "No-Shortcut",
     "it": "Normale",
@@ -2328,7 +2364,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Cabo Verde"
   },
   "constantRegionRecordCV": {
     "en": "Cabo Verdean Records",
@@ -2337,7 +2373,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Récords Caboverdianos"
   },
   "constantRegionSubregionsCV": {
     "en": "Cabo Verdean Subregions",
