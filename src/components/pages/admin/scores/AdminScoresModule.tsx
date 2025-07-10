@@ -132,10 +132,8 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           label="Category"
         />
         <LapModeRadioField field="lapMode" label="Lap Mode" />
-        
-        <TimeInputField 
-        field="value"
-        label="Time"/>
+
+        <TimeInputField field="value" label="Time" />
         <Field
           type="date"
           field="date"

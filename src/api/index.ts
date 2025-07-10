@@ -44,7 +44,7 @@ export {
   CountryRanking,
 } from "./endpoints/countryRankings";
 
-const url = process.env.REACT_APP_BACKEND_URL ?? "http://192.168.0.102:8080";
+const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 
 export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: any): Promise<T> => {
   if (

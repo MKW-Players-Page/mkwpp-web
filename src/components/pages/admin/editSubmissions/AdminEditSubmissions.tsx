@@ -1,6 +1,13 @@
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link, useNavigate } from "react-router-dom";
-import { AdminEditSubmission, AdminScore, LapModeEnum, Player, SubmissionStatus, User } from "../../../../api";
+import {
+  AdminEditSubmission,
+  AdminScore,
+  LapModeEnum,
+  Player,
+  Score,
+  User,
+} from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
@@ -19,15 +26,15 @@ import ObscuredModule from "../../../widgets/ObscuredModule";
 import SearchBar from "../../../widgets/SearchBar";
 import { formatTime } from "../../../../utils/Formatters";
 import PlayerMention from "../../../widgets/PlayerMention";
-import { TrackDropdown } from "../../../widgets/TrackSelect";
 import SubmissionForm from "../../../widgets/SubmissionForm";
 import { secondsToDate } from "../../../../utils/DateUtils";
 
 export interface AdminEditSubmissionUpdateButtonProps {
-  submission: AdminEditSubmission;
+    submission: AdminEditSubmission;
+  score: AdminScore;
 }
 
-const AdminEditSubmissionUpdateButton = ({ submission }: AdminEditSubmissionUpdateButtonProps) => {
+const AdminEditSubmissionUpdateButton = ({ submission,score }: AdminEditSubmissionUpdateButtonProps) => {
   const [visibleObscured, setVisibleObscured] = useState(false);
   const navigate = useNavigate();
   return (
@@ -42,23 +49,24 @@ const AdminEditSubmissionUpdateButton = ({ submission }: AdminEditSubmissionUpda
       </span>
       <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
         <SubmissionForm
+        editModeScore={score as unknown as Score}
           submissionId={submission.id}
-          starterPlayer={submission.playerId}
-          starterTrack={submission.trackId}
-          starterCategory={submission.category}
-          starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
-          starterValue={submission.value}
+          starterPlayer={score.playerId}
+          starterTrack={score.trackId}
+          starterCategory={score.category}
+          starterLapMode={score.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
+          starterValue={score.value}
           starterDate={secondsToDate(submission.date)}
-          starterGhostLink={submission.ghostLink ?? undefined}
-          starterVideoLink={submission.videoLink ?? undefined}
-          starterComment={submission.comment ?? undefined}
-          starterSubmitterNote={submission.submitterNote ?? undefined}
+          starterGhostLink={submission.ghostLink}
+          starterVideoLink={submission.videoLink}
+          starterComment={submission.comment}
+          starterSubmitterNote={submission.submitterNote}
           starterAdminNote={submission.adminNote ?? ""}
           starterReviewerNote={submission.reviewerNote ?? ""}
           starterStatus={submission.status}
           isAdmin
           onSuccess={() => {
-           navigate(0);
+            navigate(0);
           }}
         />
       </ObscuredModule>
@@ -78,30 +86,29 @@ const AdminEditSubmissionsListPage = () => {
     () =>
       AdminEditSubmission.getList().then(async (submissions) => {
         if (submissions === null) return undefined;
-          const scores = submissions.map(submission => AdminScore.getById(submission.scoreId));
+        const scores = submissions.map((submission) => AdminScore.getById(submission.scoreId));
         await Player.getPlayersBasic(
-          submissions.flatMap((submission) => [
-            submission.playerId,
-            submission.submitterId,
-          ]),
+          submissions.flatMap((submission) => [submission.submitterId]),
           metadata,
         );
         return submissions
           .sort((a, b) => a.id - b.id)
           .reduce(
-            async (accumulatorPromise, submission) => {
-              const player = await Player.getPlayerBasic(submission.playerId, metadata);
+            async (accumulatorPromise, submission, index) => {
+                const score = await scores[index];
+                if (score === null) return accumulatorPromise;
+              const player = await Player.getPlayerBasic(score.playerId, metadata);
               const submitter = await Player.getPlayerBasic(submission.submitterId, metadata);
               if (submitter === undefined || player === undefined) return accumulatorPromise;
               const accumulator = await accumulatorPromise;
-              const timeFormatted = formatTime(submission.value);
+              const timeFormatted = formatTime(score.value);
               const trackName = translateTrack(
-                metadata.getTrackById(submission.trackId),
+                metadata.getTrackById(score.trackId),
                 Language.English,
               );
-              const categoryName = translateCategoryName(submission.category, Language.English);
+              const categoryName = translateCategoryName(score.category, Language.English);
               const lapModeName = translateLapModeName(
-                submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course,
+                score.isLap ? LapModeEnum.Lap : LapModeEnum.Course,
                 Language.English,
               );
               const submissionStatus = translateSubmissionStatus(
@@ -110,7 +117,7 @@ const AdminEditSubmissionsListPage = () => {
               );
               accumulator.tableArray.push([
                 {
-                  content: <AdminEditSubmissionUpdateButton submission={submission} />,
+                  content: <AdminEditSubmissionUpdateButton submission={submission} score={score} />,
                 },
                 { content: trackName },
                 { content: categoryName },
@@ -128,7 +135,7 @@ const AdminEditSubmissionsListPage = () => {
                 (
                   submission.id.toString() +
                   categoryName +
-                  submission.value +
+                  score.value +
                   lapModeName +
                   trackName +
                   timeFormatted +

@@ -190,8 +190,8 @@ export class AdminScore {
       { sessionToken, trackId },
     );
   }
-  
-  public static async getById(id: number): Promise<Array<AdminScore> | null> {
+
+  public static async getById(id: number): Promise<AdminScore | null> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch(

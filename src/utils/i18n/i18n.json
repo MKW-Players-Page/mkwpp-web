@@ -126,7 +126,7 @@
     "es": ""
   },
   "constantSubmissionStatus3": {
-    "en": "OnHold",
+    "en": "On Hold",
     "it": "",
     "fr": "",
     "de": "",
@@ -13723,33 +13723,6 @@
     "jp": "",
     "pt": "",
     "es": "Todos los"
-  },
-  "countryRankingsPageDropdownCountries": {
-    "it": "Nazioni",
-    "en": "Countries",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "countryRankingsPageDropdownContinents": {
-    "it": "Continenti",
-    "en": "Continents",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
-  },
-  "countryRankingsPageDropdownSubregions": {
-    "it": "Regioni",
-    "en": "Subregions",
-    "fr": "",
-    "de": "",
-    "jp": "",
-    "pt": "",
-    "es": ""
   },
   "countryRankingsPageRank": {
     "en": "Rank",

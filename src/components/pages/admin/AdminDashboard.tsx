@@ -32,7 +32,9 @@ const AdminDashboard = () => {
               <li>
                 <Link to={resolvePage(Pages.AdminUiSubmissions)}>Submissions List</Link>
               </li>
-              <li>Edit Submissions List</li>
+              <li>
+                <Link to={resolvePage(Pages.AdminUiEditSubmissions)}>Edit Submissions List</Link>
+              </li>
             </ul>
           </div>
         </Deferred>

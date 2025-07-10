@@ -359,7 +359,7 @@ export class User {
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    console.log("Right before sending", status, reviewerNote, reviewerId, adminNote)
+    console.log("Right before sending", status, reviewerNote, reviewerId, adminNote);
     return apiFetch<{}>(
       "/auth/submissions/create_submission",
       {

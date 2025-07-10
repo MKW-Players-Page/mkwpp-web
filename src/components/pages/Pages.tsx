@@ -30,6 +30,7 @@ import AdminRegionsListPage from "./admin/regions/AdminRegions";
 import AdminPlayersListPage from "./admin/players/AdminPlayers";
 import AdminScoresListPage from "./admin/scores/AdminScores";
 import AdminSubmissionsListPage from "./admin/submissions/AdminSubmissions";
+import AdminEditSubmissionsListPage from "./admin/editSubmissions/AdminEditSubmissions";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -175,6 +176,10 @@ export const Pages: PageMap = {
   AdminUiSubmissions: {
     path: "/admin/submissions",
     element: <AdminSubmissionsListPage />,
+  },
+  AdminUiEditSubmissions: {
+    path: "/admin/edit_submissions",
+    element: <AdminEditSubmissionsListPage />,
   },
 };
 

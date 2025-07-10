@@ -126,7 +126,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                   <div>
                     {handleBars(
                       translate("submissionPageMySubmissionsTabTooltipSubmittedAt", lang),
-                      [["time", submission.submittedAt]],
+                      [["time", secondsToDate(submission.submittedAt).toLocaleString(lang)]],
                     )}
                   </div>
                 </span>
@@ -165,7 +165,9 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       [
                         [
                           "time",
-                          submission.reviewedAt ??
+                          submission.reviewedAt ?
+                          secondsToDate(submission.reviewedAt).toLocaleString(lang)
+                          :
                             translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
                         ],
                       ],

@@ -331,10 +331,10 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
             starterValue={score.value}
             starterDate={secondsToDate(score.date)}
             submissionId={patchUpData?.id}
-            starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink ?? undefined}
-            starterVideoLink={patchUpData?.videoLink ?? score.videoLink ?? undefined}
-            starterComment={patchUpData?.comment ?? score.comment ?? undefined}
-            starterSubmitterNote={patchUpData?.submitterNote ?? undefined}
+            starterGhostLink={patchUpData?.ghostLink ?? score.ghostLink}
+            starterVideoLink={patchUpData?.videoLink ?? score.videoLink}
+            starterComment={patchUpData?.comment ?? score.comment}
+            starterSubmitterNote={patchUpData?.submitterNote}
             onSuccess={() => {
               setVisibleObscured(false);
               setReload(Math.random());
@@ -498,7 +498,7 @@ const TimesheetTab = () => {
                                       "submissionPageMySubmissionsTabTooltipSubmittedAt",
                                       lang,
                                     ),
-                                    [["time", submission.submittedAt]],
+                                    [["time", secondsToDate(submission.submittedAt).toLocaleString(lang)]],
                                   )}
                                 </div>
                               </span>
@@ -551,11 +551,10 @@ const TimesheetTab = () => {
                                     [
                                       [
                                         "time",
-                                        submission.reviewedAt ??
-                                          translate(
-                                            "submissionPageMySubmissionsTabTooltipNotReviewed",
-                                            lang,
-                                          ),
+                                        submission.reviewedAt ?
+                                        secondsToDate(submission.reviewedAt).toLocaleString(lang)
+                                        :
+                                          translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
                                       ],
                                     ],
                                   )}

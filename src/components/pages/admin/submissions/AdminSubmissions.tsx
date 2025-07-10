@@ -58,7 +58,7 @@ const AdminSubmissionUpdateButton = ({ submission }: AdminSubmissionUpdateButton
           starterStatus={submission.status}
           isAdmin
           onSuccess={() => {
-           navigate(0);
+            navigate(0);
           }}
         />
       </ObscuredModule>
@@ -79,10 +79,7 @@ const AdminSubmissionsListPage = () => {
       AdminSubmission.getList().then(async (submissions) => {
         if (submissions === null) return undefined;
         await Player.getPlayersBasic(
-          submissions.flatMap((submission) => [
-            submission.playerId,
-            submission.submitterId,
-          ]),
+          submissions.flatMap((submission) => [submission.playerId, submission.submitterId]),
           metadata,
         );
         return submissions
