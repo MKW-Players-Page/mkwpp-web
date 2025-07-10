@@ -167,7 +167,7 @@ const SECTIONS: NavbarSection[] = [
       },
       {
         label: "navbarLabelMKWorldPlayersPage",
-        url: "//www.mariokart64.com/mk8/",
+        url: "//www.mariokart64.com/mkworld/",
         external: true,
       },
       {
