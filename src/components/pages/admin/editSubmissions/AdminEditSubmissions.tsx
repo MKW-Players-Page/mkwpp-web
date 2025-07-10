@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link, useNavigate } from "react-router-dom";
-import { AdminSubmission, LapModeEnum, Player, SubmissionStatus, User } from "../../../../api";
+import { AdminEditSubmission, AdminScore, LapModeEnum, Player, SubmissionStatus, User } from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
@@ -23,11 +23,11 @@ import { TrackDropdown } from "../../../widgets/TrackSelect";
 import SubmissionForm from "../../../widgets/SubmissionForm";
 import { secondsToDate } from "../../../../utils/DateUtils";
 
-export interface AdminSubmissionUpdateButtonProps {
-  submission: AdminSubmission;
+export interface AdminEditSubmissionUpdateButtonProps {
+  submission: AdminEditSubmission;
 }
 
-const AdminSubmissionUpdateButton = ({ submission }: AdminSubmissionUpdateButtonProps) => {
+const AdminEditSubmissionUpdateButton = ({ submission }: AdminEditSubmissionUpdateButtonProps) => {
   const [visibleObscured, setVisibleObscured] = useState(false);
   const navigate = useNavigate();
   return (
@@ -66,7 +66,7 @@ const AdminSubmissionUpdateButton = ({ submission }: AdminSubmissionUpdateButton
   );
 };
 
-const AdminSubmissionsListPage = () => {
+const AdminEditSubmissionsListPage = () => {
   const { isLoading: adminIsLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
   const searchParams = useSearchParams();
   const { pageNumber, setPageNumber } = usePageNumber(searchParams);
@@ -76,8 +76,9 @@ const AdminSubmissionsListPage = () => {
 
   const { isLoading, data } = useApi(
     () =>
-      AdminSubmission.getList().then(async (submissions) => {
+      AdminEditSubmission.getList().then(async (submissions) => {
         if (submissions === null) return undefined;
+          const scores = submissions.map(submission => AdminScore.getById(submission.scoreId));
         await Player.getPlayersBasic(
           submissions.flatMap((submission) => [
             submission.playerId,
@@ -109,7 +110,7 @@ const AdminSubmissionsListPage = () => {
               );
               accumulator.tableArray.push([
                 {
-                  content: <AdminSubmissionUpdateButton submission={submission} />,
+                  content: <AdminEditSubmissionUpdateButton submission={submission} />,
                 },
                 { content: trackName },
                 { content: categoryName },
@@ -219,4 +220,4 @@ const AdminSubmissionsListPage = () => {
   );
 };
 
-export default AdminSubmissionsListPage;
+export default AdminEditSubmissionsListPage;

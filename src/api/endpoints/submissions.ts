@@ -101,7 +101,7 @@ export class EditSubmission {
   readonly date_edited: boolean;
   readonly reviewerId?: number; // This is actually a Player Id, the Backend converts it
   readonly reviewedAt?: number;
-  readonly scoreId?: number;
+  readonly scoreId: number;
   readonly videoLink?: string;
   readonly ghostLink?: string;
   readonly comment?: string;
@@ -118,9 +118,9 @@ export class EditSubmission {
     comment_edited: boolean,
     date: number,
     date_edited: boolean,
+    scoreId: number,
     reviewerId?: number,
     reviewedAt?: number,
-    scoreId?: number,
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
@@ -221,9 +221,9 @@ export class AdminEditSubmission extends EditSubmission {
     comment_edited: boolean,
     date: number,
     date_edited: boolean,
+    scoreId: number,
     reviewerId?: number,
     reviewedAt?: number,
-    scoreId?: number,
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
@@ -241,9 +241,9 @@ export class AdminEditSubmission extends EditSubmission {
       comment_edited,
       date,
       date_edited,
+      scoreId,
       reviewerId,
       reviewedAt,
-      scoreId,
       videoLink,
       ghostLink,
       comment,
@@ -252,7 +252,7 @@ export class AdminEditSubmission extends EditSubmission {
     );
     this.adminNote = adminNote;
   }
-  public static async getList(): Promise<Array<AdminSubmission> | null> {
+  public static async getList(): Promise<Array<AdminEditSubmission> | null> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
     return apiFetch(

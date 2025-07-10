@@ -1,13 +1,7 @@
 import { apiFetch, PlayerBasic } from "..";
-<<<<<<< ours
-import { getToken } from "../../utils/Auth";
-import { dateToSeconds } from "../../utils/DateUtils";
 import { formatDate } from "../../utils/Formatters";
-||||||| ancestor
-=======
 import { getToken } from "../../utils/Auth";
 import { dateToSeconds } from "../../utils/DateUtils";
->>>>>>> theirs
 import { buildQueryParamString } from "../../utils/SearchParams";
 
 export enum CategoryEnum {
@@ -194,6 +188,21 @@ export class AdminScore {
         },
       },
       { sessionToken, trackId },
+    );
+  }
+  
+  public static async getById(id: number): Promise<Array<AdminScore> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/scores/id",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, id },
     );
   }
 
