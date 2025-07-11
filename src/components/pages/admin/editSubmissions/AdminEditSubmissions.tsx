@@ -1,13 +1,6 @@
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link, useNavigate } from "react-router-dom";
-import {
-  AdminEditSubmission,
-  AdminScore,
-  LapModeEnum,
-  Player,
-  Score,
-  User,
-} from "../../../../api";
+import { AdminEditSubmission, AdminScore, LapModeEnum, Player, Score, User } from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
@@ -30,11 +23,14 @@ import SubmissionForm from "../../../widgets/SubmissionForm";
 import { secondsToDate } from "../../../../utils/DateUtils";
 
 export interface AdminEditSubmissionUpdateButtonProps {
-    submission: AdminEditSubmission;
+  submission: AdminEditSubmission;
   score: AdminScore;
 }
 
-const AdminEditSubmissionUpdateButton = ({ submission,score }: AdminEditSubmissionUpdateButtonProps) => {
+const AdminEditSubmissionUpdateButton = ({
+  submission,
+  score,
+}: AdminEditSubmissionUpdateButtonProps) => {
   const [visibleObscured, setVisibleObscured] = useState(false);
   const navigate = useNavigate();
   return (
@@ -49,7 +45,7 @@ const AdminEditSubmissionUpdateButton = ({ submission,score }: AdminEditSubmissi
       </span>
       <ObscuredModule stateVisible={visibleObscured} setStateVisible={setVisibleObscured}>
         <SubmissionForm
-        editModeScore={score as unknown as Score}
+          editModeScore={score as unknown as Score}
           submissionId={submission.id}
           starterPlayer={score.playerId}
           starterTrack={score.trackId}
@@ -95,8 +91,8 @@ const AdminEditSubmissionsListPage = () => {
           .sort((a, b) => a.id - b.id)
           .reduce(
             async (accumulatorPromise, submission, index) => {
-                const score = await scores[index];
-                if (score === null) return accumulatorPromise;
+              const score = await scores[index];
+              if (score === null) return accumulatorPromise;
               const player = await Player.getPlayerBasic(score.playerId, metadata);
               const submitter = await Player.getPlayerBasic(submission.submitterId, metadata);
               if (submitter === undefined || player === undefined) return accumulatorPromise;
@@ -117,7 +113,9 @@ const AdminEditSubmissionsListPage = () => {
               );
               accumulator.tableArray.push([
                 {
-                  content: <AdminEditSubmissionUpdateButton submission={submission} score={score} />,
+                  content: (
+                    <AdminEditSubmissionUpdateButton submission={submission} score={score} />
+                  ),
                 },
                 { content: trackName },
                 { content: categoryName },

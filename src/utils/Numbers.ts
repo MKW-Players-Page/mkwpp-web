@@ -22,5 +22,22 @@ export const integerOr = (value: any, fallback: number) => {
   return num % 1 === 0 ? num : fallback;
 };
 
+/** Filter out any non-numerical character from a string
+ * @param value string to parse
+ */
+export const filterOnlyNumerical = (value: string): string => {
+  let outStr = "";
+  for (let i = 0; i < value.length; i++) if ("0123456789".includes(value[i])) outStr += value[i];
+
+  return outStr;
+};
+
+/** Return the parsed value of only the numbers within the string
+ * @param value string to parse
+ */
+export const parseOnlyNumbers = (value: string): number => {
+  return parseInt(filterOnlyNumerical(value));
+};
+
 /* 2008-04-16 12:00 AM UTC */
 export const mkwReleaseDate = 1208289600000;

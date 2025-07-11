@@ -392,7 +392,7 @@ const SubmissionForm = ({
             />
 
             <TimeInputField
-            disabled={editModeScore !== undefined}
+              disabled={editModeScore !== undefined}
               field="value"
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
             />

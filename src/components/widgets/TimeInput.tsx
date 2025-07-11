@@ -1,4 +1,6 @@
 import { useContext, useRef } from "react";
+import { parseTime } from "../../utils/Formatters";
+import { parseOnlyNumbers } from "../../utils/Numbers";
 import { FormContext } from "./Form";
 
 export interface TimeInputProps {
@@ -11,28 +13,44 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
   const minutes = useRef<HTMLInputElement>(null);
   const seconds = useRef<HTMLInputElement>(null);
   const millis = useRef<HTMLInputElement>(null);
-  const onChange = () => {
+
+  const onChange = (e: React.ChangeEvent) => {
     let out = 0;
-    if (minutes.current?.value) {
-      if (parseInt(minutes.current.value) > 5) minutes.current.value = "5";
-      out += parseInt(minutes.current.value) * 60000;
+    if (minutes.current !== null) {
+      let minutesParsed = minutes.current.value ? parseOnlyNumbers(minutes.current.value) : 0;
+      if (isNaN(minutesParsed)) minutesParsed = 0;
+      if (minutesParsed > 5) minutes.current.value = "5";
+      out += Math.min(minutesParsed, 5) * 60000;
     } else {
       return value;
     }
-    if (seconds.current?.value) {
-      if (parseInt(seconds.current.value) > 59) seconds.current.value = "59";
-      out += parseInt(seconds.current.value) * 1000;
+    if (seconds.current !== null) {
+      let secondsParsed = seconds.current.value ? parseOnlyNumbers(seconds.current.value) : 0;
+      if (isNaN(secondsParsed)) secondsParsed = 0;
+      if (secondsParsed > 59) seconds.current.value = "59";
+      out += Math.min(secondsParsed, 59) * 1000;
     } else {
       return value;
     }
-    if (millis.current?.value) {
-      if (parseInt(millis.current.value) > 999) millis.current.value = "999";
-      out += parseInt(millis.current.value);
+    if (millis.current !== null) {
+      let millisParsed = millis.current.value ? parseOnlyNumbers(millis.current.value) : 0;
+      if (isNaN(millisParsed)) millisParsed = 0;
+      if (millisParsed > 999) millis.current.value = "999";
+      out += Math.min(millisParsed, 999);
     } else {
       return value;
     }
     setValue(out);
   };
+
+  const onPaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    const text = e.clipboardData.getData("text");
+    const parsed = parseTime(text);
+    if (parsed === null) return;
+    setValue(parsed);
+  };
+
   const defaultMinutes = Math.floor(value / 60000);
   const defaultSeconds = Math.floor(value / 1000) - defaultMinutes * 60;
   const defaultMillis = value - (defaultMinutes * 60000 + defaultSeconds * 1000);
@@ -40,7 +58,8 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
     <div>
       <input
         onChange={onChange}
-        defaultValue={defaultMinutes}
+        onPaste={onPaste}
+        value={defaultMinutes === 0 ? "" : defaultMinutes}
         type="number"
         ref={minutes}
         disabled={disabled}
@@ -53,7 +72,8 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
       :
       <input
         onChange={onChange}
-        defaultValue={defaultSeconds}
+        onPaste={onPaste}
+        value={defaultSeconds === 0 ? "" : defaultSeconds}
         type="number"
         ref={seconds}
         disabled={disabled}
@@ -66,7 +86,8 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
       .
       <input
         onChange={onChange}
-        defaultValue={defaultMillis}
+        onPaste={onPaste}
+        value={defaultMillis === 0 ? "" : defaultMillis}
         type="number"
         ref={millis}
         disabled={disabled}

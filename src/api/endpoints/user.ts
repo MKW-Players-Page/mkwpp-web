@@ -24,11 +24,11 @@ export class AuthData {
 }
 
 export class User {
-  readonly playerId: number = 0;
+  readonly playerId?: number = 0;
   readonly userId: number = 0;
   readonly username: string = "";
 
-  constructor(playerId: number, userId: number, username: string) {
+  constructor(userId: number, username: string, playerId?: number) {
     this.playerId = playerId;
     this.userId = userId;
     this.username = username;
@@ -359,7 +359,6 @@ export class User {
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    console.log("Right before sending", status, reviewerNote, reviewerId, adminNote);
     return apiFetch<{}>(
       "/auth/submissions/create_submission",
       {
@@ -546,5 +545,132 @@ export class User {
       },
       { sessionToken },
     ).then((r) => r.isAdmin);
+  }
+}
+
+export class AdminUser {
+  readonly id: number;
+  readonly username: string;
+  readonly email: string;
+  readonly isSuperuser: boolean;
+  readonly isStaff: boolean;
+  readonly isActive: boolean;
+  readonly isVerified: boolean;
+  readonly playerId?: number;
+
+  constructor(
+    id: number,
+    username: string,
+    email: string,
+    isSuperuser: boolean,
+    isStaff: boolean,
+    isActive: boolean,
+    isVerified: boolean,
+    playerId?: number,
+  ) {
+    this.id = id;
+    this.username = username;
+    this.email = email;
+    this.isSuperuser = isSuperuser;
+    this.isStaff = isStaff;
+    this.isActive = isActive;
+    this.isVerified = isVerified;
+    this.playerId = playerId;
+  }
+
+  public static async getList(): Promise<Array<AdminUser> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/users/list",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    );
+  }
+
+  public static async insertUser(
+    username: string,
+    password: string,
+    email: string,
+    isStaff: boolean,
+    isActive: boolean,
+    isVerified: boolean,
+    playerId?: number,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/users/insert",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        username,
+        password,
+        email,
+        isStaff,
+        isActive,
+        isVerified,
+        playerId,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async editUser(
+    id: number,
+    username: string,
+    password: string,
+    email: string,
+    isStaff: boolean,
+    isActive: boolean,
+    isVerified: boolean,
+    playerId?: number,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/users/edit",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        id,
+        username,
+        password,
+        email,
+        isStaff,
+        isActive,
+        isVerified,
+        playerId,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async deleteUser(id: number): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/users/delete",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, id },
+    ).then((r) => r.success);
   }
 }

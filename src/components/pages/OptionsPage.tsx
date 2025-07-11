@@ -202,7 +202,7 @@ const OptionsPage = () => {
                   id={newSubmitterId}
                   setId={newSubmitterSetId}
                   blacklist
-                  restrictSet={[user.playerId]}
+                  restrictSet={[user.playerId ?? 0]}
                 />
                 <button
                   style={{ marginRight: "10px" }}

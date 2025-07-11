@@ -498,7 +498,12 @@ const TimesheetTab = () => {
                                       "submissionPageMySubmissionsTabTooltipSubmittedAt",
                                       lang,
                                     ),
-                                    [["time", secondsToDate(submission.submittedAt).toLocaleString(lang)]],
+                                    [
+                                      [
+                                        "time",
+                                        secondsToDate(submission.submittedAt).toLocaleString(lang),
+                                      ],
+                                    ],
                                   )}
                                 </div>
                               </span>
@@ -551,10 +556,14 @@ const TimesheetTab = () => {
                                     [
                                       [
                                         "time",
-                                        submission.reviewedAt ?
-                                        secondsToDate(submission.reviewedAt).toLocaleString(lang)
-                                        :
-                                          translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
+                                        submission.reviewedAt
+                                          ? secondsToDate(submission.reviewedAt).toLocaleString(
+                                              lang,
+                                            )
+                                          : translate(
+                                              "submissionPageMySubmissionsTabTooltipNotReviewed",
+                                              lang,
+                                            ),
                                       ],
                                     ],
                                   )}

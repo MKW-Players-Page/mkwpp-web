@@ -165,10 +165,9 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       [
                         [
                           "time",
-                          submission.reviewedAt ?
-                          secondsToDate(submission.reviewedAt).toLocaleString(lang)
-                          :
-                            translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
+                          submission.reviewedAt
+                            ? secondsToDate(submission.reviewedAt).toLocaleString(lang)
+                            : translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
                         ],
                       ],
                     )}
