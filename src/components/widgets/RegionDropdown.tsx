@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { Region, RegionTree } from "../../api";
-import { Metadata, MetadataContext } from "../../utils/Metadata";
+import { MetadataContext } from "../../utils/Metadata";
 
 import "./RegionDropdown.css";
 import Dropdown, {

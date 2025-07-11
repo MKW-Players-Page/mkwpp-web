@@ -7,8 +7,7 @@ import Deferred from "../../../widgets/Deferred";
 import { PaginationButtonRow } from "../../../widgets/PaginationButtons";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../../../widgets/Table";
 import { Pages, resolvePage } from "../../Pages";
-import { Language, translateRegionNameFull } from "../../../../utils/i18n/i18n";
-import { FlagIcon } from "../../../widgets";
+
 import { MetadataContext } from "../../../../utils/Metadata";
 import ObscuredModule from "../../../widgets/ObscuredModule";
 import SearchBar from "../../../widgets/SearchBar";

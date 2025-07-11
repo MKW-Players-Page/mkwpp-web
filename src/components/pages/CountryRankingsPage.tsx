@@ -14,13 +14,7 @@ import {
   useTopParam,
 } from "../../utils/SearchParams";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import {
-  handleBars,
-  I18nContext,
-  translate,
-  translateRegionName,
-  translateRegionType,
-} from "../../utils/i18n/i18n";
+import { handleBars, I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import {

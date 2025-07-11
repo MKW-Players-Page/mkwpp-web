@@ -4,8 +4,6 @@ import {
   PlayerBasic,
   Submission,
   CategoryEnum,
-  RegionType,
-  Player,
   SubmissionStatus,
 } from "..";
 import { getToken } from "../../utils/Auth";

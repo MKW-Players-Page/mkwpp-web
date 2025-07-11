@@ -2,7 +2,7 @@ import init, { read_rkg } from "mkw_lib";
 
 import { useContext, useEffect, useState } from "react";
 import { useApi } from "../../hooks";
-import { formatDate, formatTime, parseTime } from "../../utils/Formatters";
+import { formatDate } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
