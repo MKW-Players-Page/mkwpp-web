@@ -112,8 +112,6 @@ const AdminUsersListPage = () => {
     },
   };
 
-  console.log(data);
-
   return (
     <>
       <Link to={resolvePage(Pages.AdminUi)}>« Back</Link>
