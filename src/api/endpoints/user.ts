@@ -7,7 +7,6 @@ import {
   SubmissionStatus,
 } from "..";
 import { getToken } from "../../utils/Auth";
-import { formatDate } from "../../utils/Formatters";
 import { Metadata } from "../../utils/Metadata";
 import { dateToSeconds } from "../../utils/DateUtils";
 
@@ -329,7 +328,7 @@ export class User {
         isLap,
         playerId,
         trackId,
-        date: formatDate(date),
+        date: dateToSeconds(date),
         reviewerNote,
         status,
         reviewerId,
@@ -383,7 +382,7 @@ export class User {
         isLap,
         playerId,
         trackId,
-        date: formatDate(date),
+        date: dateToSeconds(date),
       },
     );
   }
