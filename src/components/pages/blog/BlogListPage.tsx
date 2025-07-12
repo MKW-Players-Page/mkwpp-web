@@ -33,9 +33,7 @@ const BlogListPage = () => {
                     <Link to={resolvePage(Pages.BlogPost, { id: post.id })}>{post.title}</Link>
                   </td>
                   <td>{secondsToDate(post.publishedAt).toLocaleString(lang)}</td>
-                  <td>
-                    {post.authorId ? <PlayerMention playerOrId={post.authorId} /> : "-"}
-                  </td>
+                  <td>{post.authorId ? <PlayerMention playerOrId={post.authorId} /> : "-"}</td>
                 </tr>
               ))}
             </tbody>
