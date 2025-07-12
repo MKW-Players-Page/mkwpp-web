@@ -1,3 +1,5 @@
+import { dateToSeconds } from "../utils/DateUtils";
+
 export { BlogPost } from "./endpoints/blogPost";
 export { User, AdminUser, AuthData } from "./endpoints/user";
 export { Cup } from "./endpoints/cups";
@@ -64,8 +66,7 @@ export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: a
       if (item === undefined || item === null) continue;
 
       if (item instanceof Date) {
-        let string = item.toISOString();
-        newBody[key] = string.substring(0, string.length - 2);
+        newBody[key] = dateToSeconds(item);
         continue;
       }
 
