@@ -26,7 +26,7 @@ const BlogPostModule = ({ post, style }: BlogPostModuleProps) => {
         )}
         <br />
         {secondsToDate(post.publishedAt).toLocaleString(lang)} -{" "}
-        <PlayerMention playerOrId={post.authorId} />
+        {post.authorId ? <PlayerMention playerOrId={post.authorId} /> : "-"}
       </div>
       <div className="blog-post" dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>

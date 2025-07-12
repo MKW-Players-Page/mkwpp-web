@@ -34,7 +34,7 @@ const BlogListPage = () => {
                   </td>
                   <td>{secondsToDate(post.publishedAt).toLocaleString(lang)}</td>
                   <td>
-                    <PlayerMention playerOrId={post.authorId} />
+                    {post.authorId ? <PlayerMention playerOrId={post.authorId} /> : "-"}
                   </td>
                 </tr>
               ))}
