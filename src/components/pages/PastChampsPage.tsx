@@ -11,6 +11,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable from "../widgets/Table";
 import { SiteChamp } from "../../api";
+import { secondsToDate } from "../../utils/DateUtils";
 
 const PastChampsPage = () => {
   const { lang } = useContext(I18nContext);
@@ -59,11 +60,11 @@ const PastChampsPage = () => {
                       content: <PlayerMention playerOrId={champ.playerId} xxFlag />,
                     },
                     {
-                      content: new Date(champ.dateInstated * 1000).toLocaleDateString(lang),
+                      content: secondsToDate(champ.dateInstated).toLocaleDateString(lang),
                     },
                     {
                       content: nextExists
-                        ? new Date(arr[idx + 1].dateInstated * 1000).toLocaleDateString(lang)
+                        ? secondsToDate(arr[idx + 1].dateInstated).toLocaleDateString(lang)
                         : translate("pastChampsPageOngoing", lang),
                       className: "past-champs-s1",
                     },

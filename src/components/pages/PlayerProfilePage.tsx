@@ -26,6 +26,7 @@ import { RankingsMetrics } from "./RankingsPage";
 import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData, Sort } from "../widgets/Table";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
+import { secondsToDate } from "../../utils/DateUtils";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -178,7 +179,7 @@ const PlayerProfilePage = () => {
         {
           content: (
             <SmallBigDateFormat
-              date={new Date(score.date * 1000)}
+              date={secondsToDate(score.date)}
               bigClass="player-profile-columns-b1"
               smallClass="player-profile-columns-s1"
             />
@@ -278,11 +279,11 @@ const PlayerProfilePage = () => {
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageDateJoined", lang)}</td>
-                    <td>{new Date((player?.joinedDate ?? 0) * 1000).toLocaleDateString(lang)}</td>
+                    <td>{secondsToDate(player?.joinedDate ?? 0).toLocaleDateString(lang)}</td>
                   </tr>
                   <tr>
                     <td>{translate("playerProfilePageLastActivity", lang)}</td>
-                    <td>{new Date((player?.lastActivity ?? 0) * 1000).toLocaleDateString(lang)}</td>
+                    <td>{secondsToDate(player?.lastActivity ?? 0).toLocaleDateString(lang)}</td>
                   </tr>
                 </tbody>
               </table>

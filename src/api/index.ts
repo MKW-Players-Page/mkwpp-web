@@ -1,14 +1,25 @@
+import { dateToSeconds } from "../utils/DateUtils";
+
 export { BlogPost } from "./endpoints/blogPost";
-export { User, AuthData } from "./endpoints/user";
+export { User, AdminUser, AuthData } from "./endpoints/user";
 export { Cup } from "./endpoints/cups";
 export { Track } from "./endpoints/tracks";
-export { Player, PlayerBasic, typeguardPlayer } from "./endpoints/players";
-export { Region, RegionType, type RegionTree, worldDefault } from "./endpoints/regions";
+export { Player, PlayerBasic, typeguardPlayer, AdminPlayer } from "./endpoints/players";
+export {
+  Region,
+  AdminRegion,
+  RegionType,
+  type RegionTree,
+  RegionTypeValues,
+  stringToRegionType,
+  worldDefault,
+} from "./endpoints/regions";
 export { StandardLevel } from "./endpoints/standardLevels";
 export { Standard } from "./endpoints/standards";
 export { SiteChamp } from "./endpoints/siteChamps";
 export { Ranking, MetricEnum } from "./endpoints/rankings";
 export {
+  AdminScore,
   Score,
   CategoryEnum,
   CategoryEnumValues,
@@ -21,6 +32,8 @@ export { Timesheet, type Time } from "./endpoints/playerTimesheet";
 export {
   Submission,
   EditSubmission,
+  AdminSubmission,
+  AdminEditSubmission,
   SubmissionStatus,
   SubmissionStatusValues,
   stringToSubmissionStatusEnum,
@@ -53,8 +66,7 @@ export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: a
       if (item === undefined || item === null) continue;
 
       if (item instanceof Date) {
-        let string = item.toISOString();
-        newBody[key] = string.substring(0, string.length - 2);
+        newBody[key] = dateToSeconds(item);
         continue;
       }
 

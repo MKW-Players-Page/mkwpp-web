@@ -1,35 +1,32 @@
 import { useContext } from "react";
 
 import { FormContext } from "./Form";
-import { CategoryEnum, CategoryEnumValues, stringToCategoryEnum } from "../../api";
+import { SubmissionStatus, SubmissionStatusValues } from "../../api";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
-import { I18nContext, translateCategoryName } from "../../utils/i18n/i18n";
+import { I18nContext, translateSubmissionStatus } from "../../utils/i18n/i18n";
 import RadioButtons from "./RadioButtons";
 
-export interface CategorySelectProps {
-  /** Categories to include in select element. Default to all categories if not defined. */
-  options?: CategoryEnum[];
-  /** The currently selected category */
-  value: CategoryEnum;
-  /** Callback to invoke when user attempts to select a new category */
-  onChange: (category: CategoryEnum) => void;
+export interface SubmissionStatusSelectProps {
+  /** The currently selected status */
+  value: SubmissionStatus;
+  /** Callback to invoke when user attempts to select a new status */
+  onChange: (submissionStatus: SubmissionStatus) => void;
   /** Whether this element is disabled */
   disabled?: boolean;
 }
 
-export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySelectProps) => {
+export const SubmissionStatusRadio = ({
+  value,
+  onChange,
+  disabled,
+}: SubmissionStatusSelectProps) => {
   const { lang } = useContext(I18nContext);
-
-  if (options === undefined) {
-    options = CategoryEnumValues;
-  }
-  options.sort((a, b) => a - b);
 
   return (
     <RadioButtons
       disabled={!!disabled}
-      data={options.map((r) => {
-        return { text: translateCategoryName(r, lang), value: r };
+      data={SubmissionStatusValues.map((r) => {
+        return { text: translateSubmissionStatus(r, lang), value: r };
       })}
       state={value}
       setState={onChange}
@@ -37,14 +34,9 @@ export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySe
   );
 };
 
-const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectProps) => {
+const SubmissionStatusSelect = ({ value, onChange, disabled }: SubmissionStatusSelectProps) => {
   disabled = !!disabled;
   const { lang } = useContext(I18nContext);
-
-  if (options === undefined) {
-    options = CategoryEnumValues;
-  }
-  options.sort((a, b) => a - b);
 
   return (
     <Dropdown
@@ -58,11 +50,11 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
           data: [
             {
               id: 0,
-              children: options.map((category) => {
+              children: SubmissionStatusValues.map((category) => {
                 return {
                   type: "DropdownItemData",
                   element: {
-                    text: translateCategoryName(category, lang),
+                    text: translateSubmissionStatus(category, lang),
                     value: category,
                   },
                 } as DropdownItemSetDataChild;
@@ -75,9 +67,9 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   );
 };
 
-export interface CategoryFieldProps {
+export interface SubmissionStatusFieldProps {
   /** Categories to include in select element. Default to all categories if not defined. */
-  options?: CategoryEnum[];
+  options?: SubmissionStatus[];
   /** Name of the state property to manage */
   field: string;
   /** Field label */
@@ -85,15 +77,14 @@ export interface CategoryFieldProps {
   disabled?: boolean;
 }
 
-export const CategoryField = ({ options, field, label, disabled }: CategoryFieldProps) => {
+export const SubmissionStatusField = ({ field, label, disabled }: SubmissionStatusFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
       <p>{label}</p>
-      <CategorySelect
-        options={options}
-        value={stringToCategoryEnum(getValue(field) ?? "")}
+      <SubmissionStatusSelect
+        value={getValue(field) ?? SubmissionStatus.Pending}
         onChange={(category) => {
           setValue(field, category.toString());
         }}
@@ -103,17 +94,20 @@ export const CategoryField = ({ options, field, label, disabled }: CategoryField
   );
 };
 
-export const CategoryRadioField = ({ options, field, label, disabled }: CategoryFieldProps) => {
+export const SubmissionStatusRadioField = ({
+  field,
+  label,
+  disabled,
+}: SubmissionStatusFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
       <p>{label}</p>
-      <CategoryRadio
-        options={options}
+      <SubmissionStatusRadio
         value={getValue(field)}
-        onChange={(category) => {
-          setValue(field, category);
+        onChange={(submissionStatus) => {
+          setValue(field, submissionStatus);
         }}
         disabled={disabledByForm || disabled}
       />
@@ -121,4 +115,4 @@ export const CategoryRadioField = ({ options, field, label, disabled }: Category
   );
 };
 
-export default CategorySelect;
+export default SubmissionStatusSelect;

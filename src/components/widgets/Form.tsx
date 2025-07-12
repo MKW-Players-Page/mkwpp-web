@@ -14,8 +14,8 @@ import "./Form.css";
 
 /** Methods to provide a Field element with its data from the state of the parent Form. */
 export interface FormFieldAccess {
-  getValue: (field: string) => string | undefined;
-  setValue: (field: string, value: string) => void;
+  getValue: (field: string) => any | undefined;
+  setValue: (field: string, value: any) => void;
   getErrors: (field: string) => string[];
   disabled: boolean;
 }
@@ -69,9 +69,9 @@ const Form = <T extends FormState>({
   disabled = !!disabled || state.submitting;
 
   const getValue = (field: string) =>
-    Object.hasOwn(state, field) ? (state[field as keyof T] as string) : undefined;
+    Object.hasOwn(state, field) ? state[field as keyof T] : undefined;
 
-  const setValue = (field: string, value: string) => {
+  const setValue = (field: string, value: any) => {
     if (Object.hasOwn(state, field)) {
       setState((prev) => ({ ...prev, [field]: value }));
     }
@@ -110,17 +110,38 @@ export interface FieldProps {
   type: HTMLInputTypeAttribute;
   field: string;
   label: string;
+  fromStringFunction?: (x: string) => any;
+  toStringFunction?: (x: any) => string;
   placeholder?: string;
   max?: string;
   min?: string;
+  step?: string;
+  pattern?: string;
   disabled?: boolean;
+  defaultChecked?: boolean;
 }
 
-export const Field = ({ type, field, label, placeholder, max, min, disabled }: FieldProps) => {
+export const Field = ({
+  type,
+  field,
+  label,
+  placeholder,
+  fromStringFunction = (x) => x,
+  toStringFunction = (x) => x,
+  max,
+  min,
+  step,
+  pattern,
+  disabled,
+  defaultChecked,
+}: FieldProps) => {
   const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(field, e.target.value);
+    setValue(
+      field,
+      e.target.type === "checkbox" ? e.target.checked : fromStringFunction(e.target.value),
+    );
   };
 
   const errors = getErrors(field);
@@ -131,11 +152,14 @@ export const Field = ({ type, field, label, placeholder, max, min, disabled }: F
       <input
         disabled={disabledByForm || disabled}
         type={type}
-        value={getValue(field)}
+        value={toStringFunction(getValue(field))}
         onChange={onChange}
         placeholder={placeholder}
         max={max}
         min={min}
+        step={step}
+        pattern={pattern}
+        defaultChecked={defaultChecked}
       />
       {errors.map((error, index) => (
         <p key={index} className="field-error">
@@ -147,7 +171,7 @@ export const Field = ({ type, field, label, placeholder, max, min, disabled }: F
 };
 
 export interface SelectFieldProps {
-  options: { label: string; value: string }[];
+  options: { label: string; value: any }[];
   field: string;
   label: string;
 }

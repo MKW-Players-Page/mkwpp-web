@@ -13,6 +13,7 @@ export interface PlayerSelectDropdownProps {
   restrictSet?: number[];
   blacklist?: boolean;
   disabled?: boolean;
+  hideNoneValue?: boolean;
 }
 
 const PlayerSelectDropdown = ({
@@ -21,13 +22,14 @@ const PlayerSelectDropdown = ({
   restrictSet,
   blacklist,
   disabled,
+  hideNoneValue = true,
 }: PlayerSelectDropdownProps) => {
   const { data: players } = useApi(() => PlayerBasic.getPlayerList(), [], "playerData");
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
   const defaultValue: DropdownItemSetDataChild = {
     type: "DropdownItemData",
-    hidden: true,
+    hidden: hideNoneValue,
     autodeleteText: true,
     element: { text: translate("matchupPageDefaultValue", lang), value: 0 },
   };
@@ -86,6 +88,7 @@ export interface PlayerSelectDropdownFieldProps {
   field: string;
   /** Field label */
   label: string;
+  hideNoneValue?: boolean;
 }
 
 export const PlayerSelectDropdownField = ({
@@ -94,6 +97,7 @@ export const PlayerSelectDropdownField = ({
   field,
   label,
   disabled,
+  hideNoneValue = true,
 }: PlayerSelectDropdownFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
@@ -103,11 +107,12 @@ export const PlayerSelectDropdownField = ({
       <PlayerSelectDropdown
         restrictSet={restrictSet}
         blacklist={blacklist}
-        id={parseInt(getValue(field) ?? "1")}
+        id={getValue(field)}
         setId={(id) => {
-          setValue(field, id.toString());
+          setValue(field, id);
         }}
         disabled={disabledByForm || !!disabled}
+        hideNoneValue={hideNoneValue}
       />
     </div>
   );

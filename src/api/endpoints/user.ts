@@ -1,7 +1,14 @@
-import { apiFetch, EditSubmission, PlayerBasic, Submission, CategoryEnum } from "..";
+import {
+  apiFetch,
+  EditSubmission,
+  PlayerBasic,
+  Submission,
+  CategoryEnum,
+  SubmissionStatus,
+} from "..";
 import { getToken } from "../../utils/Auth";
-import { formatDate } from "../../utils/Formatters";
 import { Metadata } from "../../utils/Metadata";
+import { dateToSeconds } from "../../utils/DateUtils";
 
 export class AuthData {
   sessionToken: string;
@@ -14,11 +21,11 @@ export class AuthData {
 }
 
 export class User {
-  readonly playerId: number = 0;
+  readonly playerId?: number = 0;
   readonly userId: number = 0;
   readonly username: string = "";
 
-  constructor(playerId: number, userId: number, username: string) {
+  constructor(userId: number, username: string, playerId?: number) {
     this.playerId = playerId;
     this.userId = userId;
     this.username = username;
@@ -88,7 +95,7 @@ export class User {
     return apiFetch<null>(
       "/auth/update_password",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -101,7 +108,7 @@ export class User {
     return apiFetch<null>(
       "/auth/password_forgot",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -114,7 +121,7 @@ export class User {
     return apiFetch<null>(
       "/auth/password_reset",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -292,6 +299,10 @@ export class User {
     ghostLink?: string,
     comment?: string,
     submitterNote?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -311,12 +322,16 @@ export class User {
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        adminNote,
         value,
         category,
         isLap,
         playerId,
         trackId,
-        date: formatDate(date),
+        date: dateToSeconds(date),
+        reviewerNote,
+        status,
+        reviewerId,
       },
     );
   }
@@ -334,6 +349,10 @@ export class User {
     ghostLink?: string,
     comment?: string,
     submitterNote?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -354,12 +373,16 @@ export class User {
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        adminNote,
+        reviewerNote,
+        status,
+        reviewerId,
         value,
         category,
         isLap,
         playerId,
         trackId,
-        date: formatDate(date),
+        date: dateToSeconds(date),
       },
     );
   }
@@ -404,6 +427,10 @@ export class User {
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -420,11 +447,15 @@ export class User {
         userId,
         submitterId: userId,
         scoreId,
-        date: formatDate(date),
+        date: dateToSeconds(date),
         videoLink: videoLink === "" ? undefined : videoLink,
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        adminNote,
+        reviewerNote,
+        status,
+        reviewerId,
         dateEdited: false,
         videoLinkEdited: false,
         ghostLinkEdited: false,
@@ -442,6 +473,10 @@ export class User {
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
+    adminNote?: string,
+    reviewerNote?: string,
+    status?: SubmissionStatus,
+    reviewerId?: number,
   ): Promise<null | {}> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
@@ -459,11 +494,15 @@ export class User {
         userId,
         submitterId: userId,
         scoreId,
-        date: formatDate(date),
+        date: dateToSeconds(date),
         videoLink: videoLink === "" ? undefined : videoLink,
         ghostLink: ghostLink === "" ? undefined : ghostLink,
         comment: comment === "" ? undefined : comment,
         submitterNote: submitterNote === "" ? undefined : submitterNote,
+        reviewerNote,
+        status,
+        reviewerId,
+        adminNote,
         dateEdited: false,
         videoLinkEdited: false,
         ghostLinkEdited: false,
@@ -488,5 +527,147 @@ export class User {
       },
       { sessionToken, userId, data: submissionId },
     );
+  }
+
+  public static async isAdmin(): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ isAdmin: boolean }>(
+      "/admin/is_admin",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    ).then((r) => r.isAdmin);
+  }
+}
+
+export class AdminUser {
+  readonly id: number;
+  readonly username: string;
+  readonly email: string;
+  readonly isSuperuser: boolean;
+  readonly isStaff: boolean;
+  readonly isActive: boolean;
+  readonly isVerified: boolean;
+  readonly playerId?: number;
+
+  constructor(
+    id: number,
+    username: string,
+    email: string,
+    isSuperuser: boolean,
+    isStaff: boolean,
+    isActive: boolean,
+    isVerified: boolean,
+    playerId?: number,
+  ) {
+    this.id = id;
+    this.username = username;
+    this.email = email;
+    this.isSuperuser = isSuperuser;
+    this.isStaff = isStaff;
+    this.isActive = isActive;
+    this.isVerified = isVerified;
+    this.playerId = playerId;
+  }
+
+  public static async getList(): Promise<Array<AdminUser> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/users/list",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    );
+  }
+
+  public static async insertUser(
+    username: string,
+    password: string,
+    email: string,
+    isStaff: boolean,
+    isActive: boolean,
+    isVerified: boolean,
+    playerId?: number,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/users/insert",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        username,
+        password,
+        email,
+        isStaff,
+        isActive,
+        isVerified,
+        playerId,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async editUser(
+    id: number,
+    username: string,
+    password: string,
+    email: string,
+    isStaff: boolean,
+    isActive: boolean,
+    isVerified: boolean,
+    playerId?: number,
+  ): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/users/edit",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        sessionToken,
+        id,
+        username,
+        password,
+        email,
+        isStaff,
+        isActive,
+        isVerified,
+        playerId,
+      },
+    ).then((r) => r.success);
+  }
+
+  public static async deleteUser(id: number): Promise<boolean> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(false));
+    return apiFetch<{ success: boolean }>(
+      "/admin/users/delete",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, id },
+    ).then((r) => r.success);
   }
 }

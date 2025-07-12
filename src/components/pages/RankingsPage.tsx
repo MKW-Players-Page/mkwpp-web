@@ -179,6 +179,7 @@ const RankingsPage = ({ metric }: RankingsProps) => {
     rowsPerPage,
     page: pageNumber,
     setPage: setPageNumber,
+    setMaxPageNumber: () => {},
   };
 
   return (

@@ -25,6 +25,7 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table
 import { LapModeEnum, RegionType, Score } from "../../api";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
+import { secondsToDate } from "../../utils/DateUtils";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -143,7 +144,7 @@ const TrackRecordsPage = () => {
         if (score.date) {
           out[Indexes.Date].content = (
             <SmallBigDateFormat
-              date={new Date(score.date * 1000)}
+              date={secondsToDate(score.date)}
               smallClass={"track-records-columns-s1"}
               bigClass={"track-records-columns-b1"}
             />

@@ -47,7 +47,7 @@ export const formatTimeDiff = (diff: number) => {
  * @returns The parsed time in milliseconds
  */
 export const parseTime = (time: string) => {
-  const pattern = /^(?:(?:([0-9])[':]([0-9]{2}))|([0-9]{1,2}))[".]([0-9]{3})$/;
+  const pattern = /^(?:(?:([0-9]{1,2})[':]([0-9]{2}))|([0-9]{1,2}))[".]([0-9]{3})$/;
   const groups = time.match(pattern);
   if (!groups) {
     return null;

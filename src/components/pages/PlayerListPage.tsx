@@ -12,6 +12,7 @@ import { usePageNumber } from "../../utils/SearchParams";
 import { useSearchParams } from "react-router-dom";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { PlayerBasic } from "../../api";
+import SearchBar from "../widgets/SearchBar";
 
 const PlayerListPage = () => {
   const { lang } = useContext(I18nContext);
@@ -27,118 +28,90 @@ const PlayerListPage = () => {
     translationCache.current = {};
   }, [lang]);
 
-  const { isLoading, data: players } = useApi(
+  const { isLoading, data } = useApi(
     () =>
-      PlayerBasic.getPlayerList().then(
-        (players) =>
-          players
-            .map((player) => {
+      PlayerBasic.getPlayerList().then((players) =>
+        players
+          .map((player) => {
+            return {
+              player,
+              nameNormalized: player.name.toLowerCase().normalize("NFKD"),
+              aliasNormalized: player.alias?.toLowerCase().normalize("NFKD") ?? "",
+            };
+          })
+          .sort(
+            (
+              { nameNormalized: nameNormalized1, aliasNormalized: aliasNormalized1 },
+              { nameNormalized: nameNormalized2, aliasNormalized: aliasNormalized2 },
+            ) => {
+              const sortAlias1 = aliasNormalized1 ?? nameNormalized1;
+              const sortAlias2 = aliasNormalized2 ?? nameNormalized2;
+              return sortAlias1 > sortAlias2 ? 1 : 0;
+            },
+          )
+          .reduce(
+            (accumulator, { player, nameNormalized, aliasNormalized }, index) => {
               const locationString =
                 translationCache.current[player?.regionId ?? 0] ??
-                translateRegionNameFull(metadata, lang, player.regionId);
-              const nameNormalized = player.name.toLowerCase().normalize("NFKD");
-              const sortAlias = player.alias?.toLowerCase().normalize("NFKD") ?? nameNormalized;
+                translateRegionNameFull(metadata, lang, player.regionId, true);
 
-              return [
-                [
-                  {
-                    content: (
-                      <PlayerMention
-                        playerOrId={player}
-                        regionOrId={player.regionId ?? undefined}
-                        xxFlag
-                      />
-                    ),
-                  },
-                  { content: locationString },
-                ],
-                (filter: string) =>
-                  !(
-                    filter === "" ||
-                    nameNormalized.includes(filter) ||
-                    sortAlias.includes(filter) ||
-                    locationString.toLowerCase().normalize("NFKD").includes(filter)
+              accumulator.keys.push(player.id.toString());
+
+              if (player.id === user?.playerId) accumulator.loggedInUserIndex = index;
+              accumulator.tableArray.push([
+                {
+                  content: (
+                    <PlayerMention
+                      playerOrId={player}
+                      regionOrId={player.regionId ?? undefined}
+                      xxFlag
+                    />
                   ),
-                player.id === user?.playerId,
-                sortAlias,
-              ];
-            })
-            .sort((p1, p2) => (p1[3] > p2[3] ? 1 : 0)) as unknown as [
-            ArrayTableCellData[],
-            (filter: string) => boolean,
-            boolean,
-            string,
-          ][],
+                },
+                { content: locationString },
+              ]);
+
+              accumulator.filterStrings.push(
+                nameNormalized + aliasNormalized + locationString.toLowerCase().normalize("NFKD"),
+              );
+
+              return accumulator;
+            },
+            {
+              tableArray: [] as ArrayTableCellData[][],
+              filterStrings: [] as string[],
+              keys: [] as string[],
+              loggedInUserIndex: -1,
+            },
+          ),
       ),
     [metadata.isLoading, lang, userIsLoading],
     "playerList",
   );
 
+  const rowsPerPage = 100;
+  const [maxPageNumber, setMaxPageNumber] = useState(
+    Math.ceil((data?.tableArray ?? []).length / rowsPerPage),
+  );
+
   const tableData: ArrayTableData = {
     classNames: [],
     rowKeys: [],
-  };
-
-  const tableArray =
-    players?.reduce(
-      (accumulator: ArrayTableCellData[][], [row, filterFunc, isLoggedInUser, rowKey], index) => {
-        if (filterFunc(playerFilter)) return accumulator;
-
-        if (isLoggedInUser)
-          tableData.classNames?.push({
-            className: "highlighted",
-            rowIdx: accumulator.length,
-          });
-
-        tableData.rowKeys?.push(rowKey);
-        accumulator.push(row);
-        return accumulator;
-      },
-      [],
-    ) ?? [];
-
-  const rowsPerPage = 100;
-  const maxPageNumber = Math.ceil(tableArray.length / rowsPerPage);
-  tableData.paginationData = {
-    rowsPerPage,
-    page: pageNumber,
+    filterData: {
+      currentString: playerFilter,
+      rowStrings: data?.filterStrings ?? [],
+    },
+    paginationData: {
+      rowsPerPage,
+      page: pageNumber,
+      setMaxPageNumber,
+    },
   };
 
   return (
     <>
       <h1>{translate("playerListPageHeading", lang)}</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "4fr 1fr",
-          gridGap: "5px",
-        }}
-      >
-        <input
-          id="filterText"
-          type="text"
-          className="module"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") document.getElementById("searchBtn")?.click();
-          }}
-        />
-        <button
-          style={{
-            borderRadius: 0,
-          }}
-          id="searchBtn"
-          className="module"
-          onClick={(e) => {
-            setPlayerFilter(
-              (document.getElementById("filterText") as HTMLInputElement).value
-                .toLowerCase()
-                .normalize("NFKD"),
-            );
-          }}
-        >
-          {translate("playerListPageSearchBtn", lang)}
-        </button>
-      </div>
+      <SearchBar setFilterString={setPlayerFilter} onChange />
 
       <PaginationButtonRow
         selectedPage={pageNumber}
@@ -154,7 +127,7 @@ const PlayerListPage = () => {
                 { content: translate("playerListPageLocationCol", lang) },
               ],
             ]}
-            rows={tableArray}
+            rows={data?.tableArray ?? []}
             tableData={tableData}
           />
         </Deferred>

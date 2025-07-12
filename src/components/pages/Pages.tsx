@@ -25,6 +25,13 @@ import CountryRankingsPage from "./CountryRankingsPage";
 import ContributionsPage from "./ContributionsPage";
 import PastChampsPage from "./PastChampsPage";
 import OptionsPage from "./OptionsPage";
+import AdminDashboard from "./admin/AdminDashboard";
+import AdminRegionsListPage from "./admin/regions/AdminRegions";
+import AdminPlayersListPage from "./admin/players/AdminPlayers";
+import AdminScoresListPage from "./admin/scores/AdminScores";
+import AdminSubmissionsListPage from "./admin/submissions/AdminSubmissions";
+import AdminEditSubmissionsListPage from "./admin/editSubmissions/AdminEditSubmissions";
+import AdminUsersListPage from "./admin/users/AdminUsers";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -150,6 +157,34 @@ export const Pages: PageMap = {
   UserPasswordReset: {
     path: "/password/reset",
     element: <UserPasswordResetPage />,
+  },
+  AdminUi: {
+    path: "/admin/",
+    element: <AdminDashboard />,
+  },
+  AdminUiRegions: {
+    path: "/admin/regions",
+    element: <AdminRegionsListPage />,
+  },
+  AdminUiPlayers: {
+    path: "/admin/players",
+    element: <AdminPlayersListPage />,
+  },
+  AdminUiUsers: {
+    path: "/admin/users",
+    element: <AdminUsersListPage />,
+  },
+  AdminUiScores: {
+    path: "/admin/scores",
+    element: <AdminScoresListPage />,
+  },
+  AdminUiSubmissions: {
+    path: "/admin/submissions",
+    element: <AdminSubmissionsListPage />,
+  },
+  AdminUiEditSubmissions: {
+    path: "/admin/edit_submissions",
+    element: <AdminEditSubmissionsListPage />,
   },
 };
 

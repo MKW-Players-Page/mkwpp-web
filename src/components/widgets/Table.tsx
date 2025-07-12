@@ -123,7 +123,13 @@ export interface ArrayTableData {
   paginationData?: {
     rowsPerPage: number;
     page: number;
+    setMaxPageNumber: React.Dispatch<React.SetStateAction<number>>;
     setPage?: (x: number) => void;
+  };
+  filterData?: {
+    /* Each row in the table body should have a corresponding filter string here. */
+    rowStrings: string[];
+    currentString: string;
   };
   rowSortData?: RowSortData[];
 }
@@ -140,8 +146,22 @@ export interface ArrayTableProps {
 }
 
 const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: ArrayTableProps) => {
+  const passedInRows =
+    tableData?.filterData !== undefined &&
+    tableData.filterData.currentString !== "" &&
+    tableData.filterData.rowStrings.length === rows.length
+      ? rows.filter((row, index) =>
+          tableData.filterData?.rowStrings[index].includes(tableData.filterData?.currentString),
+        )
+      : rows;
+
+  if (tableData?.paginationData !== undefined)
+    tableData.paginationData.setMaxPageNumber(
+      Math.ceil(passedInRows.length / tableData.paginationData.rowsPerPage),
+    );
+
   const areas = {
-    bodyCellArea: createCellAreaMap(rows),
+    bodyCellArea: createCellAreaMap(passedInRows),
     headerCellArea: createCellAreaMap(headerRows ? headerRows : []),
     footerCellArea: createCellAreaMap(footerRows ? footerRows : []),
   };
@@ -166,7 +186,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     .sort((a, b) => a.sortValue - b.sortValue);
   if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
 
-  let dataToRows = rows
+  let dataToRows = passedInRows
     .map((row, rowIdx) => (
       <ArrayTableRow
         id={

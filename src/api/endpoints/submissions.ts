@@ -1,4 +1,5 @@
-import { CategoryEnum } from "..";
+import { apiFetch, CategoryEnum } from "..";
+import { getToken } from "../../utils/Auth";
 
 export enum SubmissionStatus {
   Pending = 0,
@@ -75,9 +76,9 @@ export class Submission {
     this.trackId = trackId;
     this.date = date;
     this.status = status;
-    this.submitterId = submitterId; // This is actually a Player Id, the Backend converts it
+    this.submitterId = submitterId; // This is actually a Player Id, because the Backend converts it
     this.submittedAt = submittedAt;
-    this.reviewerId = reviewerId; // This is actually a Player Id, the Backend converts it
+    this.reviewerId = reviewerId; // This is actually a Player Id, because the Backend converts it
     this.reviewedAt = reviewedAt;
     this.scoreId = scoreId;
     this.videoLink = videoLink;
@@ -100,7 +101,7 @@ export class EditSubmission {
   readonly date_edited: boolean;
   readonly reviewerId?: number; // This is actually a Player Id, the Backend converts it
   readonly reviewedAt?: number;
-  readonly scoreId?: number;
+  readonly scoreId: number;
   readonly videoLink?: string;
   readonly ghostLink?: string;
   readonly comment?: string;
@@ -117,9 +118,9 @@ export class EditSubmission {
     comment_edited: boolean,
     date: number,
     date_edited: boolean,
+    scoreId: number,
     reviewerId?: number,
     reviewedAt?: number,
-    scoreId?: number,
     videoLink?: string,
     ghostLink?: string,
     comment?: string,
@@ -143,5 +144,126 @@ export class EditSubmission {
     this.comment = comment;
     this.reviewerNote = reviewerNote;
     this.submitterNote = submitterNote;
+  }
+}
+
+export class AdminSubmission extends Submission {
+  readonly adminNote?: string;
+  constructor(
+    id: number,
+    value: number,
+    category: CategoryEnum,
+    isLap: boolean,
+    playerId: number,
+    trackId: number,
+    date: number,
+    status: SubmissionStatus,
+    submitterId: number,
+    submittedAt: number,
+    reviewerId?: number,
+    reviewedAt?: number,
+    scoreId?: number,
+    videoLink?: string,
+    ghostLink?: string,
+    comment?: string,
+    reviewerNote?: string,
+    submitterNote?: string,
+    adminNote?: string,
+  ) {
+    super(
+      id,
+      value,
+      category,
+      isLap,
+      playerId,
+      trackId,
+      date,
+      status,
+      submitterId,
+      submittedAt,
+      reviewerId,
+      reviewedAt,
+      scoreId,
+      videoLink,
+      ghostLink,
+      comment,
+      reviewerNote,
+      submitterNote,
+    );
+    this.adminNote = adminNote;
+  }
+
+  public static async getList(): Promise<Array<AdminSubmission> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/submissions/list_submissions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    );
+  }
+}
+
+export class AdminEditSubmission extends EditSubmission {
+  readonly adminNote?: string;
+  constructor(
+    id: number,
+    status: SubmissionStatus,
+    submitterId: number,
+    submittedAt: number,
+    video_link_edited: boolean,
+    ghost_link_edited: boolean,
+    comment_edited: boolean,
+    date: number,
+    date_edited: boolean,
+    scoreId: number,
+    reviewerId?: number,
+    reviewedAt?: number,
+    videoLink?: string,
+    ghostLink?: string,
+    comment?: string,
+    reviewerNote?: string,
+    submitterNote?: string,
+    adminNote?: string,
+  ) {
+    super(
+      id,
+      status,
+      submitterId,
+      submittedAt,
+      video_link_edited,
+      ghost_link_edited,
+      comment_edited,
+      date,
+      date_edited,
+      scoreId,
+      reviewerId,
+      reviewedAt,
+      videoLink,
+      ghostLink,
+      comment,
+      reviewerNote,
+      submitterNote,
+    );
+    this.adminNote = adminNote;
+  }
+  public static async getList(): Promise<Array<AdminEditSubmission> | null> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch(
+      "/admin/submissions/list_edit_submissions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken },
+    );
   }
 }

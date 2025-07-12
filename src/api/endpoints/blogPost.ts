@@ -7,7 +7,7 @@ export class BlogPost {
   readonly content: string;
   readonly isPublished: boolean;
   readonly publishedAt: number;
-  readonly authorId: number;
+  readonly authorId?: number;
 
   constructor(
     id: number,
@@ -15,7 +15,7 @@ export class BlogPost {
     content: string,
     isPublished: boolean,
     publishedAt: number,
-    authorId: number,
+    authorId?: number,
   ) {
     this.id = id;
     this.title = title;

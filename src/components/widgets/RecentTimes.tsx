@@ -13,6 +13,7 @@ import PlayerMention from "./PlayerMention";
 import "./RecentTimes.css";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "./SmallBigFormat";
 import ArrayTable from "./Table";
+import { secondsToDate } from "../../utils/DateUtils";
 
 interface RecentTimesProps {
   records?: boolean;
@@ -107,7 +108,7 @@ const RecentTimes = ({ records, limit }: RecentTimesProps) => {
                 {
                   content: (
                     <SmallBigDateFormat
-                      date={new Date(data.date * 1000)}
+                      date={secondsToDate(data.date)}
                       smallClass={"s1 b4"}
                       bigClass={"b1"}
                     />

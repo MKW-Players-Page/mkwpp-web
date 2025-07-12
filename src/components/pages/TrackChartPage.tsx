@@ -33,6 +33,7 @@ import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
+import { secondsToDate } from "../../utils/DateUtils";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -140,7 +141,7 @@ const TrackChartPage = () => {
       {
         content: score.date ? (
           <SmallBigDateFormat
-            date={new Date(score.date * 1000)}
+            date={secondsToDate(score.date)}
             smallClass={"track-chart-page-s1"}
             bigClass={"track-chart-page-b1"}
           />
@@ -178,6 +179,7 @@ const TrackChartPage = () => {
     rowsPerPage,
     page: pageNumber,
     setPage: setPageNumber,
+    setMaxPageNumber: () => {},
   };
 
   const siteHue = getCategorySiteHue(category, settings);

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { formatDate, formatTime } from "../../utils/Formatters";
+import { formatTime } from "../../utils/Formatters";
 import {
   handleBars,
   I18nContext,
@@ -19,6 +19,7 @@ import PlayerMention from "./PlayerMention";
 import { LapModeEnum, Submission, SubmissionStatus } from "../../api";
 import { SettingsContext } from "../../utils/Settings";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
+import { secondsToDate } from "../../utils/DateUtils";
 
 export interface SubmissionCardProps {
   submission: Submission;
@@ -85,8 +86,8 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       starterTrack={submission.trackId}
                       starterCategory={submission.category}
                       starterLapMode={submission.isLap ? LapModeEnum.Lap : LapModeEnum.Course}
-                      starterValue={formatTime(submission.value)}
-                      starterDate={formatDate(new Date(submission.date * 1000))}
+                      starterValue={submission.value}
+                      starterDate={secondsToDate(submission.date)}
                       starterGhostLink={submission.ghostLink ?? undefined}
                       starterVideoLink={submission.videoLink ?? undefined}
                       starterComment={submission.comment ?? undefined}
@@ -125,7 +126,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                   <div>
                     {handleBars(
                       translate("submissionPageMySubmissionsTabTooltipSubmittedAt", lang),
-                      [["time", submission.submittedAt]],
+                      [["time", secondsToDate(submission.submittedAt).toLocaleString(lang)]],
                     )}
                   </div>
                 </span>
@@ -164,8 +165,9 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       [
                         [
                           "time",
-                          submission.reviewedAt ??
-                            translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
+                          submission.reviewedAt
+                            ? secondsToDate(submission.reviewedAt).toLocaleString(lang)
+                            : translate("submissionPageMySubmissionsTabTooltipNotReviewed", lang),
                         ],
                       ],
                     )}

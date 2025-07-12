@@ -2,19 +2,28 @@ import init, { read_rkg } from "mkw_lib";
 
 import { useContext, useEffect, useState } from "react";
 import { useApi } from "../../hooks";
-import { formatDate, formatTime, parseTime } from "../../utils/Formatters";
+import { formatDate } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
 import Form, { Field } from "./Form";
-import { CategoryEnum, LapModeEnum, Score, stringToCategoryEnum, User } from "../../api";
+import {
+  CategoryEnum,
+  LapModeEnum,
+  Score,
+  stringToCategoryEnum,
+  SubmissionStatus,
+  User,
+} from "../../api";
 import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
 import Tooltip from "./Tooltip";
 import TrackSelect from "./TrackSelect";
+import { TimeInputField } from "./TimeInput";
+import { SubmissionStatusRadioField } from "./SubmissionStatusSelect";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -28,12 +37,16 @@ interface SubmitTabState {
   track: number;
   category: CategoryEnum;
   lapMode: LapModeEnum;
-  value: string;
-  date: string;
+  value: number;
+  date: Date;
   ghostLink: string;
   videoLink: string;
   comment: string;
   submitterNote: string;
+  adminNote?: string;
+  reviewerNote?: string;
+  status?: SubmissionStatus;
+  errored: boolean;
   errors: { [key: string]: string[] };
   submitting: boolean;
 }
@@ -43,12 +56,16 @@ export interface StarterData {
   starterTrack?: number;
   starterCategory?: CategoryEnum;
   starterLapMode?: LapModeEnum;
-  starterValue?: string;
-  starterDate?: string;
+  starterValue?: number;
+  starterDate?: Date;
   starterGhostLink?: string;
   starterVideoLink?: string;
   starterComment?: string;
   starterSubmitterNote?: string;
+  starterAdminNote?: string;
+  starterReviewerNote?: string;
+  starterStatus?: SubmissionStatus;
+  isAdmin?: boolean;
   submissionId?: number;
   editModeScore?: Score;
   doneFunc?: () => void;
@@ -69,25 +86,33 @@ const SubmissionForm = ({
   starterSubmitterNote,
   submissionId,
   editModeScore,
+  starterAdminNote,
+  starterReviewerNote,
+  starterStatus,
+  isAdmin = false,
   doneFunc,
   onSuccess,
   disclaimerText,
 }: StarterData) => {
   const { user } = useContext(UserContext);
-
+  const todayDate = new Date();
   const initialState = {
     state: SubmitStateEnum.Form,
     player: starterPlayer ?? user?.playerId ?? 1,
     track: starterTrack ?? 1,
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
-    value: starterValue ?? "",
-    date: starterDate ?? "",
+    value: starterValue ?? 0,
+    date: starterDate ?? todayDate,
     ghostLink: starterGhostLink ?? "",
     videoLink: starterVideoLink ?? "",
     comment: starterComment ?? "",
     submitterNote: starterSubmitterNote ?? "",
+    adminNote: starterAdminNote,
+    reviewerNote: starterReviewerNote,
+    status: starterStatus,
     errors: {},
+    errored: false,
     submitting: false,
   };
   const [state, setState] = useState<SubmitTabState>(initialState);
@@ -117,43 +142,18 @@ const SubmissionForm = ({
 
   const { data: submittees } = useApi(() => User.getSubmitteeList(user?.userId ?? 0, metadata));
 
-  const submit = (done: () => void) => {
+  const submit = (done: () => void, asReview: boolean = false) => {
     setState((prev) => ({ ...prev, errors: {} }));
-
-    let errored = false;
 
     if (!user) {
       setState((prev) => ({
         ...prev,
+        errored: true,
         errors: {
           non_field_errors: [translate("submissionPageSubmitTabNoPlayerProfileLinkErr", lang)],
         },
       }));
       return;
-    }
-
-    const value = parseTime(state.value);
-    if (!value) {
-      setState((prev) => ({
-        ...prev,
-        errors: {
-          ...prev.errors,
-          value: [translate("submissionPageSubmitTabInvalidTimeErr", lang)],
-        },
-      }));
-      errored = true;
-    }
-
-    const date = Date.parse(state.date);
-    if (Number.isNaN(date)) {
-      setState((prev) => ({
-        ...prev,
-        errors: {
-          ...prev.errors,
-          date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
-        },
-      }));
-      errored = true;
     }
 
     if (
@@ -164,15 +164,15 @@ const SubmissionForm = ({
     ) {
       setState((prev) => ({
         ...prev,
+        errored: true,
         errors: {
           ...prev.errors,
           non_field_errors: [translate("submissionPageSubmitTabNoEditErr", lang)],
         },
       }));
-      errored = true;
     }
 
-    if (errored) {
+    if (state.errored) {
       done();
       return;
     }
@@ -185,51 +185,67 @@ const SubmissionForm = ({
                 submissionId,
                 user?.userId,
                 editModeScore.id,
-                new Date(date),
+                state.date,
                 state.submitterNote,
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
                 (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               )
           : async () =>
               User.createEditSubmission(
                 user?.userId,
                 editModeScore.id,
-                new Date(date),
+                state.date,
                 state.submitterNote,
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
                 (editModeScore.comment ?? "") !== state.comment ? state.comment : undefined,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               )
         : submissionId !== undefined
           ? async () =>
               User.editSubmission(
                 submissionId,
                 user.userId,
-                value as number,
+                state.value,
                 state.category,
                 state.lapMode === LapModeEnum.Lap,
                 state.player,
                 +state.track,
-                new Date(date),
+                state.date,
                 state.videoLink,
                 state.ghostLink,
                 state.comment,
                 state.submitterNote,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               )
           : async () =>
               User.createSubmission(
                 user.userId,
-                value as number,
+                state.value,
                 state.category,
                 state.lapMode === LapModeEnum.Lap,
                 state.player,
                 +state.track,
-                new Date(date),
+                state.date,
                 state.videoLink,
                 state.ghostLink,
                 state.comment,
                 state.submitterNote,
+                state.adminNote,
+                state.reviewerNote,
+                state.status,
+                asReview ? user.userId : undefined,
               );
 
     uploadFunction()
@@ -243,7 +259,6 @@ const SubmissionForm = ({
       });
   };
 
-  const todayDate = new Date();
   if (onSuccess !== undefined && state.state === SubmitStateEnum.Success) onSuccess();
 
   return (
@@ -283,6 +298,16 @@ const SubmissionForm = ({
                     {translate("submissionPageSubmitTabDeleteBtn", lang)}
                   </div>
                 )}
+                {isAdmin && (
+                  <div
+                    onClick={() => {
+                      submit(() => {}, true);
+                    }}
+                    className="submit-style"
+                  >
+                    Submit as Review
+                  </div>
+                )}
                 {submissionId === undefined && editModeScore === undefined && (
                   <div
                     onClick={() => {
@@ -303,9 +328,9 @@ const SubmissionForm = ({
                             const data = read_rkg(arr);
 
                             const newStateData = {
-                              value: formatTime(data.time),
+                              value: data.time,
                               track: data.track + 1,
-                              date: `${data.year}-${data.month.toString().padStart(2, "0")}-${data.day.toString().padStart(2, "0")}`,
+                              date: new Date(data.year, data.month - 1, data.day),
                             };
 
                             data.free();
@@ -350,7 +375,6 @@ const SubmissionForm = ({
               field="player"
             />
             <TrackSelect
-              metadata={metadata}
               disabled={editModeScore !== undefined}
               field="track"
               label={translate("submissionPageSubmitTabTrackLabel", lang)}
@@ -366,20 +390,35 @@ const SubmissionForm = ({
               field="lapMode"
               label={translate("submissionPageSubmitTabModeLabel", lang)}
             />
-            <Field
-              type="text"
+
+            <TimeInputField
               disabled={editModeScore !== undefined}
               field="value"
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
-              placeholder={`1'23"456`}
             />
+
             <Field
               type="date"
               field="date"
               disabled={editModeScore !== undefined}
-              min="2008-04-01"
+              min="2008-04-15"
               max={formatDate(todayDate)}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
+              toStringFunction={formatDate}
+              fromStringFunction={(x) => {
+                try {
+                  return new Date(Date.parse(x));
+                } catch {
+                  setState((prev) => ({
+                    ...prev,
+                    errored: true,
+                    errors: {
+                      ...prev.errors,
+                      date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
+                    },
+                  }));
+                }
+              }}
             />
             <Field
               type="text"
@@ -403,6 +442,17 @@ const SubmissionForm = ({
                 label={translate("submissionPageSubmitTabSubmitterNoteLabel", lang)}
               />
             </Tooltip>
+            {isAdmin && (
+              <>
+                <div></div>
+                <Field type="text" field="reviewerNote" label="Reviewer Note" />
+                <div></div>
+                <Tooltip text={"This is only shown to admins"} left>
+                  <Field type="text" field="adminNote" label="Admin Note" />
+                </Tooltip>
+                <SubmissionStatusRadioField field="status" label="Status" />
+              </>
+            )}
           </Form>
         )}
         {state.state === SubmitStateEnum.Success && (

@@ -1,27 +1,27 @@
 import { useContext } from "react";
 
 import { FormContext } from "./Form";
-import { CategoryEnum, CategoryEnumValues, stringToCategoryEnum } from "../../api";
+import { RegionType, RegionTypeValues, stringToRegionType } from "../../api";
 import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
-import { I18nContext, translateCategoryName } from "../../utils/i18n/i18n";
+import { I18nContext, translateRegionType } from "../../utils/i18n/i18n";
 import RadioButtons from "./RadioButtons";
 
-export interface CategorySelectProps {
+export interface RegionTypeSelectProps {
   /** Categories to include in select element. Default to all categories if not defined. */
-  options?: CategoryEnum[];
+  options?: RegionType[];
   /** The currently selected category */
-  value: CategoryEnum;
+  value: RegionType;
   /** Callback to invoke when user attempts to select a new category */
-  onChange: (category: CategoryEnum) => void;
+  onChange: (category: RegionType) => void;
   /** Whether this element is disabled */
   disabled?: boolean;
 }
 
-export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySelectProps) => {
+export const RegionTypeRadio = ({ options, value, onChange, disabled }: RegionTypeSelectProps) => {
   const { lang } = useContext(I18nContext);
 
   if (options === undefined) {
-    options = CategoryEnumValues;
+    options = RegionTypeValues;
   }
   options.sort((a, b) => a - b);
 
@@ -29,7 +29,7 @@ export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySe
     <RadioButtons
       disabled={!!disabled}
       data={options.map((r) => {
-        return { text: translateCategoryName(r, lang), value: r };
+        return { text: translateRegionType(r, lang), value: r };
       })}
       state={value}
       setState={onChange}
@@ -37,12 +37,12 @@ export const CategoryRadio = ({ options, value, onChange, disabled }: CategorySe
   );
 };
 
-const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectProps) => {
+const RegionTypeSelect = ({ options, value, onChange, disabled }: RegionTypeSelectProps) => {
   disabled = !!disabled;
   const { lang } = useContext(I18nContext);
 
   if (options === undefined) {
-    options = CategoryEnumValues;
+    options = RegionTypeValues;
   }
   options.sort((a, b) => a - b);
 
@@ -62,7 +62,7 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
                 return {
                   type: "DropdownItemData",
                   element: {
-                    text: translateCategoryName(category, lang),
+                    text: translateRegionType(category, lang),
                     value: category,
                   },
                 } as DropdownItemSetDataChild;
@@ -75,9 +75,9 @@ const CategorySelect = ({ options, value, onChange, disabled }: CategorySelectPr
   );
 };
 
-export interface CategoryFieldProps {
+export interface RegionTypeFieldProps {
   /** Categories to include in select element. Default to all categories if not defined. */
-  options?: CategoryEnum[];
+  options?: RegionType[];
   /** Name of the state property to manage */
   field: string;
   /** Field label */
@@ -85,15 +85,15 @@ export interface CategoryFieldProps {
   disabled?: boolean;
 }
 
-export const CategoryField = ({ options, field, label, disabled }: CategoryFieldProps) => {
+export const RegionTypeField = ({ options, field, label, disabled }: RegionTypeFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
       <p>{label}</p>
-      <CategorySelect
+      <RegionTypeSelect
         options={options}
-        value={stringToCategoryEnum(getValue(field) ?? "")}
+        value={stringToRegionType(getValue(field) ?? "")}
         onChange={(category) => {
           setValue(field, category.toString());
         }}
@@ -103,17 +103,17 @@ export const CategoryField = ({ options, field, label, disabled }: CategoryField
   );
 };
 
-export const CategoryRadioField = ({ options, field, label, disabled }: CategoryFieldProps) => {
+export const RegionTypeRadioField = ({ options, field, label, disabled }: RegionTypeFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
   return (
     <div className="field">
       <p>{label}</p>
-      <CategoryRadio
+      <RegionTypeRadio
         options={options}
         value={getValue(field)}
-        onChange={(category) => {
-          setValue(field, category);
+        onChange={(regionType) => {
+          setValue(field, regionType);
         }}
         disabled={disabledByForm || disabled}
       />
@@ -121,4 +121,4 @@ export const CategoryRadioField = ({ options, field, label, disabled }: Category
   );
 };
 
-export default CategorySelect;
+export default RegionTypeSelect;
