@@ -111,7 +111,7 @@ const PlayerListPage = () => {
   return (
     <>
       <h1>{translate("playerListPageHeading", lang)}</h1>
-      <SearchBar setFilterString={setPlayerFilter} />
+      <SearchBar setFilterString={setPlayerFilter} onChange />
 
       <PaginationButtonRow
         selectedPage={pageNumber}

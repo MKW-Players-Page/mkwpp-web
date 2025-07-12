@@ -1,44 +1,59 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 
 export interface SearchBarProps {
   setFilterString: React.Dispatch<React.SetStateAction<string>>;
+  onChange?: boolean;
 }
 
-const SearchBar = ({ setFilterString }: SearchBarProps) => {
+const SearchBar = ({ setFilterString, onChange = false }: SearchBarProps) => {
   const { lang } = useContext(I18nContext);
+
+  let searchBar = useRef<HTMLInputElement>(null);
+
+  let setText = () =>
+    setFilterString((searchBar.current?.value ?? "").toLowerCase().normalize("NFKD"));
+
   return (
     <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "4fr 1fr",
-        gridGap: "5px",
-      }}
+      style={
+        onChange
+          ? undefined
+          : {
+              display: "grid",
+              gridTemplateColumns: "4fr 1fr",
+              gridGap: "5px",
+            }
+      }
     >
       <input
-        id="filterText"
+        ref={searchBar}
         type="search"
         className="module"
-        onKeyDown={(e) => {
-          if (e.key === "Enter") document.getElementById("searchBtn")?.click();
-        }}
+        onChange={onChange ? setText : undefined}
+        placeholder={onChange ? translate("playerListPageSearchBtn", lang) : undefined}
+        onKeyDown={
+          onChange
+            ? undefined
+            : (e) => {
+                if (e.key === "Enter") setText();
+              }
+        }
       />
-      <button
-        style={{
-          borderRadius: 0,
-        }}
-        id="searchBtn"
-        className="module"
-        onClick={(e) => {
-          setFilterString(
-            (document.getElementById("filterText") as HTMLInputElement).value
-              .toLowerCase()
-              .normalize("NFKD"),
-          );
-        }}
-      >
-        {translate("playerListPageSearchBtn", lang)}
-      </button>
+      {onChange ? (
+        <></>
+      ) : (
+        <button
+          style={{
+            borderRadius: 0,
+          }}
+          id="searchBtn"
+          className="module"
+          onClick={setText}
+        >
+          {translate("playerListPageSearchBtn", lang)}
+        </button>
+      )}
     </div>
   );
 };
