@@ -121,20 +121,15 @@ export const LapModeRadioField = ({
   disabled,
 }: LapModeFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
-  const value = getValue(field);
 
   return (
     <div className="field">
       <p>{label}</p>
       <LapModeRadio
         includeOverall={includeOverall}
-        value={
-          typeof value === "string"
-            ? stringToLapModeEnum(getValue(field) ?? "", includeOverall)
-            : (value as unknown as LapModeEnum)
-        }
+        value={getValue(field)}
         onChange={(lapMode) => {
-          setValue(field, lapMode.toString());
+          setValue(field, lapMode);
         }}
         disabled={disabledByForm || disabled}
       />
