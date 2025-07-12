@@ -85,12 +85,16 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
           {user ? (
             <>
               {/* TODO: Link to a page allowing user to claim a profile if they don't have one. */}
-              <Link
-                className="small-hide"
-                to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
-              >
-                {user.username}
-              </Link>
+              {user.playerId ? (
+                <Link
+                  className="small-hide"
+                  to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
+                >
+                  {user.username}
+                </Link>
+              ) : (
+                <></>
+              )}
               {isAdmin ? (
                 <Link className="small-hide" to={resolvePage(Pages.AdminUi)}>
                   Admin UI
@@ -146,14 +150,18 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
           stateVisible={accountActionsVisible}
           setStateVisible={setAccountActionsVisible}
         >
-          <Link
-            onClick={(e) => {
-              setAccountActionsVisible(false);
-            }}
-            to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
-          >
-            {user.username}
-          </Link>
+          {user.playerId ? (
+            <Link
+              onClick={(e) => {
+                setAccountActionsVisible(false);
+              }}
+              to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
+            >
+              {user.username}
+            </Link>
+          ) : (
+            <></>
+          )}
           <Link
             onClick={(e) => {
               setAccountActionsVisible(false);

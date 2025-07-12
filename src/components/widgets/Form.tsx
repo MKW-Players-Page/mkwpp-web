@@ -140,9 +140,7 @@ export const Field = ({
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(
       field,
-      e.target.type === "checkbox"
-        ? e.target.checked.toString()
-        : fromStringFunction(e.target.value),
+      e.target.type === "checkbox" ? e.target.checked : fromStringFunction(e.target.value),
     );
   };
 
