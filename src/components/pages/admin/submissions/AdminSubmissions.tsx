@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link, useNavigate } from "react-router-dom";
-import { AdminSubmission, LapModeEnum, Player, User } from "../../../../api";
+import { AdminSubmission, LapModeEnum, Player, SubmissionStatus, User } from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
@@ -105,7 +105,12 @@ const AdminSubmissionsListPage = () => {
               );
               accumulator.tableArray.push([
                 {
-                  content: <AdminSubmissionUpdateButton submission={submission} />,
+                  content:
+                    submission.status === SubmissionStatus.Accepted ? (
+                      submission.id
+                    ) : (
+                      <AdminSubmissionUpdateButton submission={submission} />
+                    ),
                 },
                 { content: trackName },
                 { content: categoryName },
@@ -146,7 +151,7 @@ const AdminSubmissionsListPage = () => {
           );
       }),
     [metadata],
-    "scoreList",
+    "editSubmissionsList",
   );
 
   const rowsPerPage = 100;
