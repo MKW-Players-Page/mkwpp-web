@@ -8,6 +8,7 @@ export class BlogPost {
   readonly isPublished: boolean;
   readonly publishedAt: number;
   readonly authorId?: number;
+  readonly username?: string;
 
   constructor(
     id: number,
@@ -16,6 +17,7 @@ export class BlogPost {
     isPublished: boolean,
     publishedAt: number,
     authorId?: number,
+    username?: string,
   ) {
     this.id = id;
     this.title = title;
@@ -23,6 +25,7 @@ export class BlogPost {
     this.isPublished = isPublished;
     this.publishedAt = publishedAt;
     this.authorId = authorId;
+    this.username = username;
   }
 
   public static async getList(limit: number): Promise<Array<BlogPost>> {
