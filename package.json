@@ -5,6 +5,7 @@
   "author": "narahiero@gmail.com",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.107",
     "@types/react": "^18.3.5",
@@ -57,7 +58,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@openapitools/openapi-generator-cli": "^2.13.5",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
