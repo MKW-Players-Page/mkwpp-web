@@ -143,6 +143,11 @@ const AdminParserOutputPage = () => {
     <>
       <Link to={resolvePage(Pages.AdminUi)}>« Back</Link>
       <h1>CSV Output Parser</h1>
+      <p>
+        WARNING! THIS PARSER DOES NOT HANDLE COUNTRIES! YOU MUST SET NEW PLAYER'S COUNTRIES MANUALLY
+        IN THE OUTPUT SECTION!
+      </p>
+      <p>Much love, FαlB</p>
       <Deferred isWaiting={isLoading || metadata.isLoading}>
         <div className="module">
           <div className="module-content">
