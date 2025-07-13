@@ -280,6 +280,7 @@ const AdminParserOutputPage = () => {
                   playerId,
                   scoreData.trackId,
                   scoreData.date,
+                  scoreData.videoLink === "" ? undefined : scoreData.videoLink,
                 );
               });
               await Promise.all(promises);
