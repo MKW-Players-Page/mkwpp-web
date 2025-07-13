@@ -17,7 +17,9 @@ import { FormContext } from "./Form";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
+  /* Hides all countries with 0 players */
   onePlayerMin: boolean;
+  /* Hides all countries with 1 or less players */
   twoPlayerMin: boolean;
   value: Region;
   setValue: React.Dispatch<React.SetStateAction<any>>;
@@ -45,7 +47,7 @@ const RegionSelectionDropdown = ({
 
   const dropdownData: DropdownData = {
     type: "Normal",
-    defaultItemSet: (ranked ? metadata.getFirstRankedParent(value)?.id : value.parentId) ?? 0,
+    defaultItemSet: (ranked ? metadata.getFirstRankedParent(value)?.id : value?.parentId) ?? 0,
     value: value,
     valueSetter: setValue,
     data: [],
