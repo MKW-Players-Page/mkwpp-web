@@ -20,6 +20,9 @@ const AdminDashboard = () => {
             <h2>Welcome, {user?.username}</h2>
             <ul>
               <li>
+                <Link to={resolvePage(Pages.AdminUiCSVParser)}>Parser Output</Link>
+              </li>
+              <li>
                 <Link to={resolvePage(Pages.AdminUiRegions)}>Regions List</Link>
               </li>
               <li>

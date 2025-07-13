@@ -32,6 +32,7 @@ import AdminScoresListPage from "./admin/scores/AdminScores";
 import AdminSubmissionsListPage from "./admin/submissions/AdminSubmissions";
 import AdminEditSubmissionsListPage from "./admin/editSubmissions/AdminEditSubmissions";
 import AdminUsersListPage from "./admin/users/AdminUsers";
+import AdminParserOutputPage from "./admin/parser/AdminParserOutput";
 
 export type PageMap = {
   [key: string]: RouteObject;
@@ -185,6 +186,10 @@ export const Pages: PageMap = {
   AdminUiEditSubmissions: {
     path: "/admin/edit_submissions",
     element: <AdminEditSubmissionsListPage />,
+  },
+  AdminUiCSVParser: {
+    path: "/admin/parser",
+    element: <AdminParserOutputPage />,
   },
 };
 
