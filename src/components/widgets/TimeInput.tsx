@@ -16,13 +16,14 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
 
   const onChange = (e: React.ChangeEvent) => {
     let out = 0;
-    if (minutes.current === null || seconds.current === null || millis.current === null) return value;
-    
+    if (minutes.current === null || seconds.current === null || millis.current === null)
+      return value;
+
     let minutesParsed = minutes.current.value ? parseOnlyNumbers(minutes.current.value) : 0;
     if (isNaN(minutesParsed)) minutesParsed = 0;
     if (minutesParsed > 5) minutes.current.value = "5";
     out += Math.min(minutesParsed, 5) * 60000;
-    
+
     let secondsParsed = seconds.current.value ? parseOnlyNumbers(seconds.current.value) : 0;
     if (isNaN(secondsParsed)) secondsParsed = 0;
     if (secondsParsed > 59) seconds.current.value = "59";
@@ -35,32 +36,32 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
 
     setValue(out);
   };
-  
+
   const defaultMinutes = Math.floor(value / 60000);
   const defaultSeconds = Math.floor(value / 1000) - defaultMinutes * 60;
   const defaultMillis = value - (defaultMinutes * 60000 + defaultSeconds * 1000);
-  
+
   const formatMinutes = () => {
-      if (minutes.current) minutes.current.value = String(defaultMinutes);
-  }
+    if (minutes.current) minutes.current.value = String(defaultMinutes);
+  };
   const formatSeconds = () => {
-      if (seconds.current) seconds.current.value = String(defaultSeconds).padStart(2, "0");
-  }
+    if (seconds.current) seconds.current.value = String(defaultSeconds).padStart(2, "0");
+  };
   const formatMillis = () => {
-      if (millis.current) millis.current.value = String(defaultMillis).padStart(3, "0");
-  }
-  
-const onPaste = (e: React.ClipboardEvent) => {
+    if (millis.current) millis.current.value = String(defaultMillis).padStart(3, "0");
+  };
+
+  const onPaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
     const text = e.clipboardData.getData("text");
     const parsed = parseTime(text);
     if (parsed === null) return;
     setValue(parsed);
     formatMinutes();
-  formatSeconds();
-  formatMillis();
-};
-    
+    formatSeconds();
+    formatMillis();
+  };
+
   return (
     <div>
       <input
