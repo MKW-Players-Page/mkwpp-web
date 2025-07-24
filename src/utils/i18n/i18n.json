@@ -105,7 +105,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Pendiente"
   },
   "constantSubmissionStatus1": {
     "en": "Accepted",
@@ -114,7 +114,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Aceptado"
   },
   "constantSubmissionStatus2": {
     "en": "Rejected",
@@ -123,7 +123,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Rechazado"
   },
   "constantSubmissionStatus3": {
     "en": "On Hold",
@@ -132,7 +132,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "En espera"
   },
   "constantCategoryNameNoSCLong": {
     "en": "No-Shortcut",
@@ -194,7 +194,7 @@
     "fr": "Circuit Luigi",
     "de": "Luigis Piste",
     "jp": "ルイージサーキット",
-    "pt": "",
+    "pt": "Circuito do Luigi",
     "es": "Circuito de Luigi"
   },
   "constantTrackNameMMM": {
@@ -203,7 +203,7 @@
     "fr": "Prairie Meuh Meuh",
     "de": "Kuhmuh-Weide",
     "jp": "モーモーカントリー",
-    "pt": "",
+    "pt": "Prado Mu Mu",
     "es": "Pradera Mu-Mu"
   },
   "constantTrackNameMG": {
@@ -212,7 +212,7 @@
     "fr": "Gorge Champignon",
     "de": "Pilz-Schlucht",
     "jp": "キノコキャニオン",
-    "pt": "",
+    "pt": "Ravina Cogumelo",
     "es": "Barranco Champiñón"
   },
   "constantTrackNameTF": {
@@ -221,7 +221,7 @@
     "fr": "Usine Toad",
     "de": "Toads Fabrik",
     "jp": "キノピオファクトリー",
-    "pt": "",
+    "pt": "Fábrica do Toad",
     "es": "Fábrica de Toad"
   },
   "constantTrackNameMC": {
@@ -230,7 +230,7 @@
     "fr": "Circuit Mario",
     "de": "Marios Piste",
     "jp": "マリオサーキット",
-    "pt": "",
+    "pt": "Circuito do Mario",
     "es": "Circuito Mario"
   },
   "constantTrackNameCM": {
@@ -239,7 +239,7 @@
     "fr": "Supermarché Coco",
     "de": "Kokos-Promenade",
     "jp": "ココナッツモール",
-    "pt": "",
+    "pt": "Centro Comercial Coco",
     "es": "Centro Cocotero"
   },
   "constantTrackNameDKSC": {
@@ -248,7 +248,7 @@
     "fr": "Pic DK",
     "de": "DK Skikane",
     "jp": "DKスノーボードクロス",
-    "pt": "",
+    "pt": "Pico DK",
     "es": "Cumbre DK"
   },
   "constantTrackNameWGM": {
@@ -257,7 +257,7 @@
     "fr": "Mine Wario",
     "de": "Warios Goldmine",
     "jp": "ワリオこうざん",
-    "pt": "",
+    "pt": "Mina de Ouro do Wario",
     "es": "Mina de Wario"
   },
   "constantTrackNameDC": {
@@ -266,7 +266,7 @@
     "fr": "Circuit Daisy",
     "de": "Daisys Piste",
     "jp": "デイジーサーキット",
-    "pt": "",
+    "pt": "Circuito da Daisy",
     "es": "Circuito de Daisy"
   },
   "constantTrackNameKC": {
@@ -275,7 +275,7 @@
     "fr": "Cap Koopa",
     "de": "Koopa-Kap",
     "jp": "ノコノコみさき",
-    "pt": "",
+    "pt": "Cabo Koopa",
     "es": "Colina de Koopa"
   },
   "constantTrackNameMT": {
@@ -284,7 +284,7 @@
     "fr": "Bois Vermeil",
     "de": "Blätterwald",
     "jp": "メイプルツリーハウス",
-    "pt": "",
+    "pt": "Pista de Árvores",
     "es": "Senda del Arce"
   },
   "constantTrackNameGV": {
@@ -293,7 +293,7 @@
     "fr": "Volcan Grondant",
     "de": "Vulkangrollen",
     "jp": "グラグラかざん",
-    "pt": "",
+    "pt": "Vulcão Rezingão",
     "es": "Volcán Gruñón"
   },
   "constantTrackNameDDR": {
@@ -302,7 +302,7 @@
     "fr": "Ruines Sec Sec",
     "de": "Staubtrockene Ruinen",
     "jp": "カラカラいせき",
-    "pt": "",
+    "pt": "Ruínas Seco-seco",
     "es": "Ruinas Seco-Seco"
   },
   "constantTrackNameMH": {
@@ -311,7 +311,7 @@
     "fr": "Route Clair de Lune",
     "de": "Mondblickstraße",
     "jp": "ムーンリッジ＆ハイウェイ",
-    "pt": "",
+    "pt": "Autoestrada ao Luar",
     "es": "Circuito Luz de Luna"
   },
   "constantTrackNameBC": {
@@ -320,7 +320,7 @@
     "fr": "Château de Bowser",
     "de": "Bowsers Festung",
     "jp": "クッパキャッスル",
-    "pt": "",
+    "pt": "Castelo do Bowser",
     "es": "Castillo de Bowser"
   },
   "constantTrackNameRR": {
@@ -329,7 +329,7 @@
     "fr": "Route Arc-en-ciel",
     "de": "Regenbogen-Boulevard",
     "jp": "レインボーロード",
-    "pt": "",
+    "pt": "Estrada Arco-Íris",
     "es": "Senda Arco Iris"
   },
   "constantTrackNameRPB": {
@@ -374,7 +374,7 @@
     "fr": "N64 Royaume Sorbet",
     "de": "N64 Sorbet-Land",
     "jp": "64 シャーベットランド",
-    "pt": "",
+    "pt": "N64 Circuito Gelado",
     "es": "N64 Tierra Sorbete"
   },
   "constantTrackNameRSGB": {
@@ -383,7 +383,7 @@
     "fr": "GBA Plage Maskass",
     "de": "GBA Shy Guy-Strand",
     "jp": "GBA ヘイホービーチ",
-    "pt": "",
+    "pt": "GBA Praia do Masquito",
     "es": "GBA Playa Shy Guy"
   },
   "constantTrackNameRDS": {
@@ -11220,7 +11220,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Mundo"
   },
   "constantRegionType1": {
     "en": "Continent",
@@ -11229,7 +11229,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Continente"
   },
   "constantRegionType2": {
     "en": "Country Group",
@@ -11238,7 +11238,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Grupo de países"
   },
   "constantRegionType3": {
     "en": "Country",
@@ -11247,7 +11247,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "País"
   },
   "constantRegionType4": {
     "en": "Subregion Group",
@@ -11256,7 +11256,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Grupo de Subregiones"
   },
   "constantRegionType5": {
     "en": "Subregion",
@@ -11265,7 +11265,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Subregión"
   },
   "headerOptions": {
     "en": "Options",
@@ -14019,7 +14019,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Pronombres"
   },
   "playerProfilePageDateJoined": {
     "en": "Date Joined",
@@ -14172,7 +14172,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Falta el token en el enlace de activación de tu cuenta."
   },
   "userActivationPageContentSuccess": {
     "en": "Your account has been successfully activated! You may now log in.",
@@ -14181,7 +14181,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "¡Tu cuenta ha sido activada con éxito! Ahora puedes iniciar sesión."
   },
   "userActivationPageContentUnknownError": {
     "en": "An unknown error occurred while trying to activate your account.",
@@ -14190,7 +14190,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Ocurrió un error desconocido al intentar activar tu cuenta."
   },
   "userActivationPageHeadingFailure": {
     "en": "Account Verification Failed",
@@ -14199,7 +14199,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Verificación de Cuenta Fallida"
   },
   "userActivationPageHeadingSuccess": {
     "en": "Account Activated",
@@ -14208,7 +14208,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Cuenta Activada"
   },
   "userJoinPageFormLabel": {
     "en": "Join",
@@ -14343,7 +14343,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "¿Olvidaste tu contraseña?"
   },
   "userPasswordForgotPageContentSuccess": {
     "en": "An email has been sent to you with a link to reset your password.",
@@ -14352,7 +14352,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Se te ha enviado un correo electrónico con un enlace para restablecer tu contraseña."
   },
   "userPasswordForgotPageEmailLabel": {
     "en": "Email",
@@ -14361,7 +14361,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Email"
   },
   "userPasswordForgotPageHeading": {
     "en": "Reset Password",
@@ -14370,7 +14370,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Restablecer contraseña"
   },
   "userPasswordForgotPageSubmitLabel": {
     "en": "Submit",
@@ -14379,7 +14379,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Enviar"
   },
   "userPasswordResetPageHeading": {
     "en": "Reset Password",
@@ -14388,7 +14388,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Restablecer contraseña"
   },
   "userPasswordResetPagePasswordLabel": {
     "en": "Password",
@@ -14397,7 +14397,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Contraseña"
   },
   "userPasswordResetPagePassword2Label": {
     "en": "Confirm Password",
@@ -14406,7 +14406,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Confirmar contraseña"
   },
   "userPasswordResetPageResultContentSuccess": {
     "en": "You may now log in with your new password.",
@@ -14415,7 +14415,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Ahora puedes iniciar sesión con tu nueva contraseña."
   },
   "userPasswordResetPageResultContentUnknownError": {
     "en": "An unknown error occurred.",
@@ -14424,7 +14424,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Ocurrió un error desconocido."
   },
   "userPasswordResetPageResultTitleFailure": {
     "en": "Could not reset password.",
@@ -14433,7 +14433,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "No se ha podido restablecer la contraseña."
   },
   "userPasswordResetPageResultTitleMissingToken": {
     "en": "Token is missing from the password reset link.",
@@ -14442,7 +14442,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Falta el token en el enlace para restablecer la contraseña."
   },
   "userPasswordResetPageResultTitleSuccess": {
     "en": "Password reset successful!",
@@ -14451,7 +14451,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "¡Restablecimiento de contraseña exitoso!"
   },
   "userPasswordResetPageResultTitleVerificationFailed": {
     "en": "Could not verify password reset token.",
@@ -14460,7 +14460,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "No se ha podido verificar el token de restablecimiento de contraseña."
   },
   "userPasswordResetPageSubmitLabel": {
     "en": "Submit",
@@ -14469,7 +14469,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Enviar"
   },
   "submissionPageTabbedModuleHeading": {
     "en": "Submit Times",
@@ -14496,7 +14496,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Envío masivo"
   },
   "submissionPageBulkSubmitTabLicence": {
     "en": "Licence {{number}}",
@@ -14505,7 +14505,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Licencia {{number}}"
   },
   "submissionPageBulkSubmitTabHowTo": {
     "en": "To submit a ghost, click on the edit icon, then after making sure the information is correct, click on \"Submit\".",
@@ -14514,7 +14514,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Para enviar un fantasma, haz clic en el ícono de editar, y después de asegurarte de que la información es correcta, haz clic en \"Enviar\"."
   },
   "submissionPageBulkSubmitTabTrackCol": {
     "en": "Track",
@@ -14523,7 +14523,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Pista"
   },
   "submissionPageBulkSubmitTabTimeCol": {
     "en": "Time",
@@ -14532,7 +14532,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Tiempo"
   },
   "submissionPageBulkSubmitTabDateCol": {
     "en": "Date",
@@ -14541,7 +14541,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Fecha"
   },
   "submissionPageSubmissionsTabTitle": {
     "en": "My Submissions",
@@ -14604,7 +14604,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Subir Archivo RKSYS"
   },
   "submissionPageSubmitTabUploadRKGBtn": {
     "en": "Upload RKG File",
@@ -14613,7 +14613,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Subir Archivo RKG"
   },
   "submissionPageSubmitTabCategoryLabel": {
     "en": "Category",
@@ -14847,7 +14847,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Por ti"
   },
   "submissionPageMySubmissionsTabFilterForYou": {
     "en": "For You",
@@ -14967,13 +14967,13 @@
     "es": "¿Hablas algún idioma además del Inglés?"
   },
   "contributionsPageQuestionsAndAnswers4": {
-    "en": "If your language does not have 100% completion (see one of the boxes below) you can contribute on Github by making a Pull Request; If you didn't understand, watch this video: {{video}}",
-    "it": "Se la tua lingua non è stata tradotta al 100% (vedi uno dei quadranti qua sotto) puoi contribuire su Github facendo una Pull Request; Se non hai inteso, guarda questo video: {{video}}",
-    "fr": "Si votre langue n'est pas complétée à 100% (voir ci-dessous) vous pouvez contribuer sur Github en créant une Pull request; pour plus d'informations, regardez cette vidéo: {{vidéo}}",
+    "en": "If your language does not have 100% completion, feel free to contribute either via GitHub or via the sheet at {{sheetLink}}. Learn more with this video: {{video}}",
+    "it": "Se la tua lingua non è stata completata al 100%, sentiti libero di contribuire o via GitHub, o via il foglio a {{sheetLink}}. Puoi imparare di più sul processo con questo video: {{video}}",
+    "fr": "",
     "de": "",
     "jp": "",
     "pt": "",
-    "es": "Si tu idioma no tiene un 100% de completitud (mira uno de los cuadros abajo), puedes contribuir en Github haciendo un Pull Request; Si no lo has entendido, mira este video: {{video}}"
+    "es": ""
   },
   "contributionsPageQuestionsAndAnswers5": {
     "en": "Do you know anything about Vexillology?",
@@ -15828,7 +15828,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Actualizar Pronombres"
   },
   "optionsPageAccountOptAliasHeading": {
     "en": "Update Alias",
@@ -15846,7 +15846,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Actualizar Contraseña"
   },
   "optionsPageAccountOptPasswordLabelOldPassword": {
     "en": "Old Password",
@@ -15855,7 +15855,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Contraseña Antigua"
   },
   "optionsPageAccountOptPasswordLabelNewPassword": {
     "en": "New Password",
@@ -15864,7 +15864,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Nueva Contraseña"
   },
   "optionsPageAccountOptPasswordLabelConfirmNewPassword": {
     "en": "Confirm New Password",
@@ -15873,7 +15873,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "Confirmar nueva Contraseña"
   },
   "optionsPageAccountOptPasswordSuccess": {
     "en": "Password updated successfully!",
@@ -15882,7 +15882,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": ""
+    "es": "¡Contraseña actualizada con éxito!"
   },
   "optionsPageSaveBtnText": {
     "en": "Save",
