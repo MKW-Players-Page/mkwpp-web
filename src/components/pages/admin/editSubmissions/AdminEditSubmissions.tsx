@@ -192,7 +192,7 @@ const AdminEditSubmissionsListPage = () => {
   return (
     <>
       <Link to={resolvePage(Pages.AdminUi)}>« Back</Link>
-      <h1>Submissions List</h1>
+      <h1>Edit Submissions List</h1>
       <SearchBar setFilterString={setTextFilter} />
 
       <Link to={resolvePage(Pages.Submission)}>
