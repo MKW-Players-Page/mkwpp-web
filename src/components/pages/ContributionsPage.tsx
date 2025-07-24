@@ -45,9 +45,18 @@ const ContributionsPage = () => {
       type: 1,
       text: handleBars(translate("contributionsPageQuestionsAndAnswers4", lang), [
         [
+          "sheetLink",
+          <Link
+            target="_blank"
+            to="//docs.google.com/spreadsheets/d/1mu2XyG_WQID0dYY0clTgRJAPg_oBb3BO5Z2Nb-VCDhg"
+          >
+            https://docs.google.com/spreadsheets/d/1mu2XyG_WQID0dYY0clTgRJAPg_oBb3BO5Z2Nb-VCDhg
+          </Link>,
+        ],
+        [
           "video",
-          <Link target="_blank" to="//youtu.be/PoItVI4r3QY">
-            https://youtu.be/PoItVI4r3QY
+          <Link target="_blank" to="//youtu.be/0U11gGmC5mo">
+            https://youtu.be/0U11gGmC5mo
           </Link>,
         ],
       ]),
