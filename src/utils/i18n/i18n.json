@@ -134,6 +134,51 @@
     "pt": "",
     "es": "En espera"
   },
+  "constantCountryRankingsTopEnumRecords": {
+    "en": "Records",
+    "it": "Record",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantCountryRankingsTopEnumTop3": {
+    "en": "Top 3",
+    "it": "Top 3",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantCountryRankingsTopEnumTop5": {
+    "en": "Top 5",
+    "it": "Top 5",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantCountryRankingsTopEnumTop10": {
+    "en": "Top 10",
+    "it": "Top 10",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
+  "constantCountryRankingsTopEnumAll": {
+    "en": "All",
+    "it": "Tutti",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "constantCategoryNameNoSCLong": {
     "en": "No-Shortcut",
     "it": "Normale",
@@ -13922,6 +13967,15 @@
     "pt": "",
     "es": "Circuitos"
   },
+  "trackListPageMoreTimes": {
+    "en": "Number of Entries",
+    "it": "Numero di voci",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "es": ""
+  },
   "recentTimesRecentRecordsHeading": {
     "en": "Recent Records",
     "it": "Record Recenti",
@@ -15774,7 +15828,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": "Player Submitters"
+    "es": ""
   },
   "optionsPageSubmitterParagraph": {
     "en": "'Player Submitters' are a number of players who you can allow to submit times for yourself. You have allowed already:",
@@ -15783,7 +15837,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "es": "Player Submitters' are a number of players who you can allow to submit times for yourself. You have allowed already:"
+    "es": ""
   },
   "optionsPageSubmitterListNoOne": {
     "en": "No One",

@@ -33,21 +33,6 @@ export const stringToCountryRankingsTopEnum = (x: string): CountryRankingsTopEnu
   }
 };
 
-export const countryRankingsTopEnumTopToString = (x: CountryRankingsTopEnum) => {
-  switch (x) {
-    case CountryRankingsTopEnum.Records:
-      return "Records";
-    case CountryRankingsTopEnum.Top3:
-      return "Top 3";
-    case CountryRankingsTopEnum.Top5:
-      return "Top 5";
-    case CountryRankingsTopEnum.Top10:
-      return "Top 10";
-    case CountryRankingsTopEnum.All:
-      return "All";
-  }
-};
-
 export class CountryRanking {
   readonly rank: number;
   readonly value: number;

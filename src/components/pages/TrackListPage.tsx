@@ -11,8 +11,7 @@ const TrackListPage = () => {
     <>
       <h1>{translate("trackListPageHeading", lang)}</h1>
       <CupsList />
-      <RecentTimes records limit={30} />
-      <RecentTimes records={false} limit={30} />
+      <RecentTimes canChangeLimit />
     </>
   );
 };

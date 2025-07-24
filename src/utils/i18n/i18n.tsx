@@ -14,6 +14,7 @@ import {
   LapModeEnum,
   StandardLevel,
   SubmissionStatus,
+  CountryRankingsTopEnum,
 } from "../../api";
 
 export type TranslationKey = keyof typeof i18nJson;
@@ -216,6 +217,24 @@ export const translateLapModeName = (lapMode: LapModeEnum, lang: Language): stri
       return translate("constantLapModeLap", lang);
     case LapModeEnum.Overall:
       return translate("constantLapModeOverall", lang);
+  }
+};
+
+export const translateCountryRankingsTopEnum = (
+  topType: CountryRankingsTopEnum,
+  lang: Language,
+): string => {
+  switch (topType) {
+    case CountryRankingsTopEnum.Records:
+      return translate("constantCountryRankingsTopEnumRecords", lang);
+    case CountryRankingsTopEnum.Top3:
+      return translate("constantCountryRankingsTopEnumTop3", lang);
+    case CountryRankingsTopEnum.Top5:
+      return translate("constantCountryRankingsTopEnumTop5", lang);
+    case CountryRankingsTopEnum.Top10:
+      return translate("constantCountryRankingsTopEnumTop10", lang);
+    case CountryRankingsTopEnum.All:
+      return translate("constantCountryRankingsTopEnumAll", lang);
   }
 };
 
