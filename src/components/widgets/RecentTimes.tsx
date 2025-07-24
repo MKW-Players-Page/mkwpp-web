@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
@@ -14,14 +14,15 @@ import "./RecentTimes.css";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "./SmallBigFormat";
 import ArrayTable, { ArrayTableCellData } from "./Table";
 import { secondsToDate } from "../../utils/DateUtils";
+import RadioButtons from "./RadioButtons";
 
 interface RecentTimesProps {
-  records?: boolean;
   limit: number;
 }
 
-const RecentTimes = ({ records = false, limit }: RecentTimesProps) => {
+const RecentTimes = ({ limit }: RecentTimesProps) => {
   const { lang } = useContext(I18nContext);
+  const [records, setRecords] = useState(false);
   const metadata = useContext(MetadataContext);
 
   const { isLoading: recentTimesLoading, data } = useApi(
@@ -88,7 +89,7 @@ const RecentTimes = ({ records = false, limit }: RecentTimesProps) => {
           { rows: [] as ArrayTableCellData[][], rowKeys: [] as string[] },
         ),
       ),
-    [metadata.isLoading, limit],
+    [metadata.isLoading, records, limit],
     records ? "recentRecords" : "recentTimes",
   );
 
@@ -101,6 +102,15 @@ const RecentTimes = ({ records = false, limit }: RecentTimesProps) => {
           : translate("recentTimesRecentTimesHeading", lang)
       }
     >
+      <RadioButtons
+        data={[
+          { text: "All", value: false },
+          { text: "Records", value: true },
+        ]}
+        state={records}
+        setState={setRecords}
+        className="recent-times-input"
+      />
       <Deferred isWaiting={recentTimesLoading || metadata.isLoading}>
         <ArrayTable
           className="recent-times-table"

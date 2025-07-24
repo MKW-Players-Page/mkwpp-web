@@ -5,6 +5,10 @@
   display: none;
 }
 
+.recent-times-input {
+  margin: 0;
+}
+
 @container (max-width: 800px) {
   .recent-times-table .s1 {
     display: table-cell;

@@ -27,11 +27,11 @@ const TrackListPage = () => {
           }
           setLimit(value);
         }}
+        step="30"
         min="1"
         pattern="[0-9]*"
       />
-      <RecentTimes records limit={limit} />
-      <RecentTimes records={false} limit={limit} />
+      <RecentTimes limit={limit} />
     </>
   );
 };
