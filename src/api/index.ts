@@ -42,7 +42,6 @@ export {
   CountryRankingsTopEnum,
   CountryRankingsTopEnumValues,
   stringToCountryRankingsTopEnum,
-  countryRankingsTopEnumTopToString,
   CountryRanking,
 } from "./endpoints/countryRankings";
 

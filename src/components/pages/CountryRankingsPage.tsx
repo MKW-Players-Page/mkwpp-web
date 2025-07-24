@@ -14,13 +14,18 @@ import {
   useTopParam,
 } from "../../utils/SearchParams";
 import Dropdown, { DropdownData } from "../widgets/Dropdown";
-import { handleBars, I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
+import {
+  handleBars,
+  I18nContext,
+  translate,
+  translateCountryRankingsTopEnum,
+  translateRegionName,
+} from "../../utils/i18n/i18n";
 import { SettingsContext } from "../../utils/Settings";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import {
   CountryRanking,
   CountryRankingsTopEnum,
-  countryRankingsTopEnumTopToString,
   CountryRankingsTopEnumValues,
   RegionType,
 } from "../../api";
@@ -153,7 +158,7 @@ const CountryRankingsPage = () => {
                     children: CountryRankingsTopEnumValues.map((r) => {
                       return {
                         type: "DropdownItemData",
-                        element: { text: countryRankingsTopEnumTopToString(r), value: r },
+                        element: { text: translateCountryRankingsTopEnum(r, lang), value: r },
                       };
                     }),
                   },
