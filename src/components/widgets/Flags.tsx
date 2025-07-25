@@ -39,6 +39,19 @@ import { ReactComponent as FlagBW } from "../../assets/flags/bw.svg";
 import { ReactComponent as FlagBY } from "../../assets/flags/by.svg";
 import { ReactComponent as FlagBZ } from "../../assets/flags/bz.svg";
 import { ReactComponent as FlagCA } from "../../assets/flags/ca.svg";
+import { ReactComponent as FlagCAAB } from "../../assets/flags/caab.svg";
+import { ReactComponent as FlagCABC } from "../../assets/flags/cabc.svg";
+import { ReactComponent as FlagCAMB } from "../../assets/flags/camb.svg";
+import { ReactComponent as FlagCANB } from "../../assets/flags/canb.svg";
+import { ReactComponent as FlagCANL } from "../../assets/flags/canl.svg";
+import { ReactComponent as FlagCANS } from "../../assets/flags/cans.svg";
+import { ReactComponent as FlagCANT } from "../../assets/flags/cant.svg";
+import { ReactComponent as FlagCANU } from "../../assets/flags/canu.svg";
+import { ReactComponent as FlagCAON } from "../../assets/flags/caon.svg";
+import { ReactComponent as FlagCAPE } from "../../assets/flags/cape.svg";
+import { ReactComponent as FlagCAQC } from "../../assets/flags/caqc.svg";
+import { ReactComponent as FlagCASK } from "../../assets/flags/cask.svg";
+import { ReactComponent as FlagCAYT } from "../../assets/flags/cayt.svg";
 import { ReactComponent as FlagCC } from "../../assets/flags/cc.svg";
 import { ReactComponent as FlagCD } from "../../assets/flags/cd.svg";
 import { ReactComponent as FlagCF } from "../../assets/flags/cf.svg";
@@ -417,6 +430,19 @@ export const Flags = {
   by: FlagBY,
   bz: FlagBZ,
   ca: FlagCA,
+  caab: FlagCAAB,
+  cabc: FlagCABC,
+  camb: FlagCAMB,
+  canb: FlagCANB,
+  canl: FlagCANL,
+  cans: FlagCANS,
+  cant: FlagCANT,
+  canu: FlagCANU,
+  caon: FlagCAON,
+  cape: FlagCAPE,
+  caqc: FlagCAQC,
+  cask: FlagCASK,
+  cayt: FlagCAYT,
   cc: FlagCC,
   cd: FlagCD,
   cf: FlagCF,
