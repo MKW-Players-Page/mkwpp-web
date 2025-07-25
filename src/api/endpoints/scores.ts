@@ -1,7 +1,7 @@
 import { apiFetch, PlayerBasic } from "..";
 import { formatDate } from "../../utils/Formatters";
 import { getToken } from "../../utils/Auth";
-import { dateToSeconds } from "../../utils/DateUtils";
+import { dateToSeconds, secondsToDate } from "../../utils/DateUtils";
 import { buildQueryParamString } from "../../utils/SearchParams";
 
 export enum CategoryEnum {
@@ -112,6 +112,19 @@ export class Score {
   ): Promise<Array<Score>> {
     return apiFetch(
       `/custom/scores/chart/${trackId}${buildQueryParamString({ cat: category, lap: +isLap, reg: regionId, dat: date === undefined ? undefined : formatDate(date), lim: limit })}`,
+    );
+  }
+
+  public static async getChartDates(
+    trackId: number,
+    category: CategoryEnum = CategoryEnum.NonShortcut,
+    isLap: boolean = false,
+    regionId: number = 1,
+  ): Promise<Array<Date>> {
+    return apiFetch<Array<number>>(
+      `/custom/scores/chart/${trackId}/dates${buildQueryParamString({ cat: category, lap: +isLap, reg: regionId })}`,
+    ).then((r: Array<number>) =>
+      r.sort((date1, date2) => date2 - date1).map((dateNum) => secondsToDate(dateNum)),
     );
   }
 

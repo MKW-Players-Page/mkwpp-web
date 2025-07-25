@@ -14,6 +14,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import {
   useCategoryParam,
+  useDateNumber,
   useLapModeParam,
   usePageNumber,
   useRegionParam,
@@ -34,6 +35,7 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
+import DateSlider from "../widgets/DateSlider";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -68,9 +70,18 @@ const TrackChartPage = () => {
   const prevTrackCat = getHighestValid(category, prevTrack?.categories ?? []);
   const nextTrackCat = getHighestValid(category, nextTrack?.categories ?? []);
 
-  const { isLoading, data: scores } = useApi(
-    () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id),
+  const { isLoading: validDatesLoading, data: validDates } = useApi(
+    () => Score.getChartDates(id, category, lapMode === LapModeEnum.Lap, region.id),
     [category, lapMode, region.id, id, metadata.isLoading],
+    "trackChartsDates",
+    [{ variable: metadata.isLoading, defaultValue: true }],
+  );
+
+  const { dateIndex, setDateIndex, date } = useDateNumber(searchParams, validDates ?? []);
+
+  const { isLoading, data: scores } = useApi(
+    () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id, date),
+    [category, lapMode, region.id, id, metadata.isLoading, dateIndex],
     "trackCharts",
     [{ variable: metadata.isLoading, defaultValue: true }],
   );
@@ -244,6 +255,13 @@ const TrackChartPage = () => {
             setValue={setRegion}
           />
         </div>
+        <Deferred isWaiting={validDatesLoading}>
+          <DateSlider
+            validDates={validDates ?? [new Date()]}
+            currentDateIndex={dateIndex}
+            setCurrentDateIndex={setDateIndex}
+          />
+        </Deferred>
         <PaginationButtonRow
           selectedPage={pageNumber}
           setSelectedPage={setPageNumber}

@@ -14,6 +14,7 @@ import {
   stringToCountryRankingsTopEnum,
 } from "../api/endpoints/countryRankings";
 import { stringToRegionType } from "../api/endpoints/regions";
+import { formatDate } from "./Formatters";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -146,6 +147,32 @@ export const usePageNumber = (searchParams: SearchParams) => {
       const page = pageNumber === 1 ? undefined : pageNumber;
       searchParams[1]((prev) => paramReplace(prev, "page", page?.toString()));
     },
+  };
+};
+
+export const useDateNumber = (searchParams: SearchParams, validDates: Date[]) => {
+  const dateStr = searchParams[0].get("dat");
+
+  if (validDates.length === 0)
+    return {
+      dateIndex: 0,
+      date: new Date(),
+      setDateIndex: (dateIndex: number) => {},
+    };
+
+  let dateIndex = 0;
+  if (dateStr !== null) {
+    const inputDate = new Date(dateStr);
+    dateIndex = validDates.findIndex((date) => date <= inputDate);
+  }
+
+  return {
+    dateIndex,
+    setDateIndex: (dateIndex: number) => {
+      const dateStr = dateIndex === 0 ? undefined : formatDate(validDates[dateIndex]);
+      searchParams[1]((prev) => paramReplace(prev, "dat", dateStr));
+    },
+    date: validDates[dateIndex],
   };
 };
 
