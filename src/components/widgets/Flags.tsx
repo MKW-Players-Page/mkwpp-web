@@ -7,6 +7,7 @@ import { ReactComponent as FlagAG } from "../../assets/flags/ag.svg";
 import { ReactComponent as FlagAI } from "../../assets/flags/ai.svg";
 import { ReactComponent as FlagAL } from "../../assets/flags/al.svg";
 import { ReactComponent as FlagAM } from "../../assets/flags/am.svg";
+import { ReactComponent as FlagAME } from "../../assets/flags/ame.svg";
 import { ReactComponent as FlagAO } from "../../assets/flags/ao.svg";
 import { ReactComponent as FlagAQ } from "../../assets/flags/aq.svg";
 import { ReactComponent as FlagAR } from "../../assets/flags/ar.svg";
@@ -130,7 +131,7 @@ import { ReactComponent as FlagER } from "../../assets/flags/er.svg";
 import { ReactComponent as FlagES } from "../../assets/flags/es.svg";
 import { ReactComponent as FlagESPT } from "../../assets/flags/espt.svg";
 import { ReactComponent as FlagET } from "../../assets/flags/et.svg";
-import { ReactComponent as FlagEUR } from "../../assets/flags/eu.svg"; // TODO: RENAMED!
+import { ReactComponent as FlagEUR } from "../../assets/flags/eur.svg";
 import { ReactComponent as FlagFI } from "../../assets/flags/fi.svg";
 import { ReactComponent as FlagFJ } from "../../assets/flags/fj.svg";
 import { ReactComponent as FlagFK } from "../../assets/flags/fk.svg";
@@ -256,9 +257,9 @@ import { ReactComponent as FlagNP } from "../../assets/flags/np.svg";
 import { ReactComponent as FlagNR } from "../../assets/flags/nr.svg";
 import { ReactComponent as FlagNU } from "../../assets/flags/nu.svg";
 import { ReactComponent as FlagNZ } from "../../assets/flags/nz.svg";
+import { ReactComponent as FlagOCE } from "../../assets/flags/oce.svg";
 import { ReactComponent as FlagOM } from "../../assets/flags/om.svg";
 import { ReactComponent as FlagPA } from "../../assets/flags/pa.svg";
-import { ReactComponent as FlagOCE } from "../../assets/flags/pc.svg"; // TODO: RENAMED!
 import { ReactComponent as FlagPE } from "../../assets/flags/pe.svg";
 import { ReactComponent as FlagPF } from "../../assets/flags/pf.svg";
 import { ReactComponent as FlagPG } from "../../assets/flags/pg.svg";
@@ -318,7 +319,6 @@ import { ReactComponent as FlagTZ } from "../../assets/flags/tz.svg";
 import { ReactComponent as FlagUA } from "../../assets/flags/ua.svg";
 import { ReactComponent as FlagUG } from "../../assets/flags/ug.svg";
 import { ReactComponent as FlagUM } from "../../assets/flags/um.svg";
-import { ReactComponent as FlagWORLD } from "../../assets/flags/un.svg"; // TODO: RENAMED!
 import { ReactComponent as FlagUS } from "../../assets/flags/us.svg";
 import { ReactComponent as FlagUSAK } from "../../assets/flags/usak.svg";
 import { ReactComponent as FlagUSAL } from "../../assets/flags/usal.svg";
@@ -381,6 +381,7 @@ import { ReactComponent as FlagVI } from "../../assets/flags/vi.svg";
 import { ReactComponent as FlagVN } from "../../assets/flags/vn.svg";
 import { ReactComponent as FlagVU } from "../../assets/flags/vu.svg";
 import { ReactComponent as FlagWF } from "../../assets/flags/wf.svg";
+import { ReactComponent as FlagWORLD } from "../../assets/flags/world.svg";
 import { ReactComponent as FlagWS } from "../../assets/flags/ws.svg";
 import { ReactComponent as FlagXK } from "../../assets/flags/xk.svg";
 import { ReactComponent as FlagXX } from "../../assets/flags/xx.svg";
@@ -398,6 +399,7 @@ export const Flags = {
   ai: FlagAI,
   al: FlagAL,
   am: FlagAM,
+  ame: FlagAME,
   ao: FlagAO,
   aq: FlagAQ,
   ar: FlagAR,
@@ -647,9 +649,9 @@ export const Flags = {
   nr: FlagNR,
   nu: FlagNU,
   nz: FlagNZ,
+  oce: FlagOCE,
   om: FlagOM,
   pa: FlagPA,
-  oce: FlagOCE,
   pe: FlagPE,
   pf: FlagPF,
   pg: FlagPG,
@@ -709,7 +711,6 @@ export const Flags = {
   ua: FlagUA,
   ug: FlagUG,
   um: FlagUM,
-  world: FlagWORLD,
   us: FlagUS,
   usak: FlagUSAK,
   usal: FlagUSAL,
@@ -772,6 +773,7 @@ export const Flags = {
   vn: FlagVN,
   vu: FlagVU,
   wf: FlagWF,
+  world: FlagWORLD,
   ws: FlagWS,
   xk: FlagXK,
   xx: FlagXX,
@@ -788,28 +790,10 @@ export interface FlagProps {
 }
 
 const Flag = ({ flag, useSvg }: FlagProps) => {
-  if (!useSvg)
-    return <img loading="lazy" src={`/mkw/flags/${codeToFlag(flag)}.svg`} alt={`${flag}.svg`} />;
+  if (!useSvg) return <img loading="lazy" src={`/mkw/flags/${flag}.svg`} alt={`${flag}.svg`} />;
   const FlagSVG = Flags[flag];
   if (FlagSVG === undefined) return <></>;
   return <FlagSVG />;
-};
-
-/**
- * @param flag flag code that comes from the code field in region data
- * @returns the code used for the svg file instead
- */
-const codeToFlag = (flag: string): string => {
-  switch (flag) {
-    case "eur":
-      return "eu";
-    case "oce":
-      return "pc";
-    case "world":
-      return "un";
-    default:
-      return flag;
-  }
 };
 
 export default Flag;
