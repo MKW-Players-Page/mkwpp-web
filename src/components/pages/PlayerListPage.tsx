@@ -33,10 +33,11 @@ const PlayerListPage = () => {
       PlayerBasic.getPlayerList().then((players) =>
         players
           .map((player) => {
+            const nameNormalized = player.name.toLowerCase().normalize("NFKD");
             return {
               player,
-              nameNormalized: player.name.toLowerCase().normalize("NFKD"),
-              aliasNormalized: player.alias?.toLowerCase().normalize("NFKD") ?? "",
+              nameNormalized,
+              aliasNormalized: player.alias?.toLowerCase().normalize("NFKD") ?? nameNormalized,
             };
           })
           .sort(
@@ -44,8 +45,8 @@ const PlayerListPage = () => {
               { nameNormalized: nameNormalized1, aliasNormalized: aliasNormalized1 },
               { nameNormalized: nameNormalized2, aliasNormalized: aliasNormalized2 },
             ) => {
-              const sortAlias1 = aliasNormalized1 ?? nameNormalized1;
-              const sortAlias2 = aliasNormalized2 ?? nameNormalized2;
+              const sortAlias1 = aliasNormalized1;
+              const sortAlias2 = aliasNormalized2;
               return sortAlias1 > sortAlias2 ? 1 : 0;
             },
           )
