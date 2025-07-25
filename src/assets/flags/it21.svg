@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-  <g fill-rule="evenodd">
-    <rect width="640" height="480" fill="#01419c"/>
-    <rect x="28.444" y="32" width="583.111" height="415.999" fill="#d5001d"/>
-    <rect x="28.444" y="192" width="583.111" height="96" fill="#fff"/>
-    <rect x="274.283" y="32" width="91.428" height="415.999" fill="#fff"/>
-    <path d="M 175.239 119.784 L 192.153 63.989 L 447.485 63.989 L 464.76 119.995 L 414.485 119.784 L 430.985 84.016 L 334.509 84.495 L 348 119.681 L 292.673 120.003 L 308.591 84.118 L 209.881 84.016 L 228.032 119.785 L 175.231 119.785 L 175.239 119.784 Z" fill="#01419c" stroke-width="0"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><g fill-rule="evenodd"><rect width="640" height="480" fill="#01419c"/><rect width="583.111" height="415.999" x="28.444" y="32" fill="#d5001d"/><rect width="583.111" height="96" x="28.444" y="192" fill="#fff"/><rect width="91.428" height="415.999" x="274.283" y="32" fill="#fff"/><path fill="#01419c" stroke-width="0" d="M 175.239 119.784 L 192.153 63.989 L 447.485 63.989 L 464.76 119.995 L 414.485 119.784 L 430.985 84.016 L 334.509 84.495 L 348 119.681 L 292.673 120.003 L 308.591 84.118 L 209.881 84.016 L 228.032 119.785 L 175.231 119.785 L 175.239 119.784 Z"/></g></svg>

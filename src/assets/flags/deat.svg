@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-deat" viewBox="0 0 640 480">
-  <path fill="#000" d="M0 0 h640 v160 H0 z"/>
-  <path fill="#fc0" d="M0 320 h640 v160 H0 z"/>
-  <path fill="red" d="M0 160 h640 v160 H0 z"/>
-  <path d="M0 480 L640 0" stroke="green" stroke-width="5"/>
-  <path fill="#c8102e" d="M0 480 l213.33333333333 -160 H640 v160  z" />
-  <path fill="#fff" d="M0 480 m213.33333333333 -160 l213.33333333333 -160 H640 v160  z" />
-  <path fill="#c8102e" d="M0 480 m213.33333333333 -160 m213.33333333333 -160 l213.33333333335 -160 H640 v160  z" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><path fill="#000" d="M0 0 h640 v160 H0 z"/><path fill="#fc0" d="M0 320 h640 v160 H0 z"/><path fill="red" d="M0 160 h640 v160 H0 z"/><path stroke="green" stroke-width="5" d="M0 480 L640 0"/><path fill="#c8102e" d="M0 480 l213.33333333333 -160 H640 v160 z"/><path fill="#fff" d="M0 480 m213.33333333333 -160 l213.33333333333 -160 H640 v160 z"/><path fill="#c8102e" d="M0 480 m213.33333333333 -160 m213.33333333333 -160 l213.33333333335 -160 H640 v160 z"/></svg>
