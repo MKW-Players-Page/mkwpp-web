@@ -16,6 +16,7 @@ import {
   SettingsDataKey,
 } from "../utils/Settings";
 import { User } from "../api";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 interface AppUserState {
   isLoading: boolean;
@@ -23,6 +24,35 @@ interface AppUserState {
 }
 
 const App = () => {
+  const muiTheme = createTheme({
+    components: {
+      MuiSlider: {
+        styleOverrides: {
+          root: {
+            color: "var(--input-selected)",
+          },
+        },
+      },
+      MuiToggleButton: {
+        styleOverrides: {
+          root: {
+            textTransform: "none",
+            "&.Mui-selected": {
+              color: "var(--text-color)",
+              backgroundColor: "var(--module-border-color)",
+            },
+            "&:hover, &.Mui-selected:hover": {
+              backgroundColor: "var(--module-background-color-focus)",
+            },
+            color: "var(--text-color)",
+            backgroundColor: "var(--module-background-color)",
+            borderColor: "var(--module-border-color)",
+          },
+        },
+      },
+    },
+  });
+
   const metadata = useMetadata();
 
   const [navbarHidden, setNavbarHidden] = useState(window.innerWidth < window.innerHeight);
@@ -76,19 +106,21 @@ const App = () => {
       <UserContext.Provider value={{ isLoading: user.isLoading, user: user.user, setUser }}>
         <I18nContext.Provider value={{ lang: langCode, setLang, translations: i18nJson }}>
           <SettingsContext.Provider value={{ settings, setSettings }}>
-            <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
-            <Navbar navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
-            <div
-              onClick={() => setNavbarHidden(true)}
-              className={`darkener${navbarHidden ? "" : " navbar-shown"}`}
-            ></div>
-            <div
-              className={`content${navbarHidden ? "" : " navbar-shown"}${settings.sidebarAnim ? " sidebar-anim" : ""}`}
-            >
-              <MetadataContext.Provider value={metadata}>
-                <Outlet />
-              </MetadataContext.Provider>
-            </div>
+            <ThemeProvider theme={muiTheme}>
+              <Header navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
+              <Navbar navbarHidden={navbarHidden} setNavbarHidden={setNavbarHidden} />
+              <div
+                onClick={() => setNavbarHidden(true)}
+                className={`darkener${navbarHidden ? "" : " navbar-shown"}`}
+              ></div>
+              <div
+                className={`content${navbarHidden ? "" : " navbar-shown"}${settings.sidebarAnim ? " sidebar-anim" : ""}`}
+              >
+                <MetadataContext.Provider value={metadata}>
+                  <Outlet />
+                </MetadataContext.Provider>
+              </div>
+            </ThemeProvider>
           </SettingsContext.Provider>
         </I18nContext.Provider>
       </UserContext.Provider>
