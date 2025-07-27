@@ -497,7 +497,9 @@ const TimesheetTab = () => {
                               </span>
                             }
                           >
-                            <Icon icon="Note" />
+                            <span>
+                              <Icon icon="Note" />
+                            </span>
                           </Tooltip>
                         )}
                       </td>
@@ -559,22 +561,24 @@ const TimesheetTab = () => {
                               </span>
                             }
                           >
-                            {submission.status === SubmissionStatus.Accepted ? (
-                              <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
-                                <Icon icon="SubmissionAccepted" />
-                              </OverwriteColor>
-                            ) : submission.status === SubmissionStatus.Rejected ? (
-                              <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
-                                <Icon icon="SubmissionRejected" />
-                              </OverwriteColor>
-                            ) : submission.status === SubmissionStatus.Pending ||
-                              submission.status === SubmissionStatus.OnHold ? (
-                              <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
-                                <Icon icon="SubmissionPending" />
-                              </OverwriteColor>
-                            ) : (
-                              <></>
-                            )}
+                            <span>
+                              {submission.status === SubmissionStatus.Accepted ? (
+                                <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
+                                  <Icon icon="SubmissionAccepted" />
+                                </OverwriteColor>
+                              ) : submission.status === SubmissionStatus.Rejected ? (
+                                <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
+                                  <Icon icon="SubmissionRejected" />
+                                </OverwriteColor>
+                              ) : submission.status === SubmissionStatus.Pending ||
+                                submission.status === SubmissionStatus.OnHold ? (
+                                <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
+                                  <Icon icon="SubmissionPending" />
+                                </OverwriteColor>
+                              ) : (
+                                <></>
+                              )}
+                            </span>
                           </Tooltip>
                         )}
                       </td>
