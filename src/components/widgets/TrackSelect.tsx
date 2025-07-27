@@ -2,8 +2,8 @@ import { useContext } from "react";
 
 import { FormContext } from "./Form";
 import { MetadataContext } from "../../utils/Metadata";
-import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
-import { I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
+import { I18nContext, translate, translateTrack, TranslationKey } from "../../utils/i18n/i18n";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 export interface TrackDropdownProps {
   /** The currently selected option. If included, the value for allTracks is `-5`. */
@@ -19,47 +19,63 @@ export const TrackDropdown = ({ value, onChange, disabled, allTracks }: TrackDro
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
 
-  const options: DropdownItemSetDataChild[] = [];
+  const options: number[] = [];
 
-  if (allTracks)
-    options.push({
-      type: "DropdownItemData",
-      element: {
-        text: translate("trackDropdownAllTracks", lang),
-        value: -5,
-      },
-    } as DropdownItemSetDataChild);
+  if (allTracks) options.push(-5);
 
-  metadata.tracks?.forEach((track) =>
-    options.push({
-      type: "DropdownItemData",
-      element: {
-        text: translateTrack(track, lang),
-        value: track.id,
-      },
-    } as DropdownItemSetDataChild),
-  );
+  metadata.tracks?.forEach((track) => options.push(track.id));
 
   return (
-    <Dropdown
-      data={
-        {
-          type: "Normal",
-          value: value,
-          valueSetter: onChange,
-          disabled: disabled,
-          defaultItemSet: 0,
-          data: [
-            {
-              id: 0,
-              children: options,
-            },
-          ],
-        } as DropdownData
-      }
+    <Autocomplete
+      value={value}
+      style={{ minWidth: "300px" }}
+      onChange={(_, v) => {
+        if (v === null) return;
+        onChange(v);
+      }}
+      disabled={disabled}
+      groupBy={(option) => {
+        if (option === -5) return "";
+        return translate(
+          `constantCup${metadata.cups?.find((cup) => cup.id === Math.floor((option - 1) / 4) + 1)?.code.toUpperCase()}` as TranslationKey,
+          lang,
+        );
+      }}
+      autoComplete
+      autoHighlight
+      openOnFocus
+      options={options}
+      filterOptions={createFilterOptions({
+        ignoreCase: true,
+        ignoreAccents: true,
+      })}
+      renderInput={(params) => {
+        // params.InputProps.startAdornment = <FlagIcon region={value} showRegFlagRegardless />;
+        return <TextField {...params} />;
+      }}
+      getOptionLabel={(option) => {
+        if (option === -5) return translate("trackDropdownAllTracks", lang);
+        return translateTrack(
+          metadata.tracks?.find((r) => r.id === option),
+          lang,
+        );
+      }}
+      renderOption={(props, option) => {
+        const { key, ...optionProps } = props;
+        const track = metadata.tracks?.find((r) => r.id === option);
+        const trackText =
+          option === -5 ? translate("trackDropdownAllTracks", lang) : translateTrack(track, lang);
+        return (
+          <li key={key} {...optionProps}>
+            {trackText}
+          </li>
+        );
+      }}
     />
   );
 };
+
+// Math.floor(id / 4) + 1 = cupNum
 
 export interface TrackSelectProps {
   /** Name of the state property to control */

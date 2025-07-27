@@ -3,14 +3,13 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { FlagIcon, Icon, Tooltip } from "../widgets";
+import { FlagIcon, Icon } from "../widgets";
 import { useApi } from "../../hooks/ApiHook";
 import { formatLapMode, formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
-import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import { LapModeEnum, CategoryEnum, Region, RegionType, Timesheet, Player } from "../../api";
@@ -27,6 +26,7 @@ import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData, Sort } from "../widgets/Table";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
+import { Autocomplete, createFilterOptions, TextField, Tooltip } from "@mui/material";
 
 const PlayerProfilePage = () => {
   const { id: idStr } = useParams();
@@ -201,8 +201,10 @@ const PlayerProfilePage = () => {
         },
         {
           content: score.comment ? (
-            <Tooltip text={score.comment}>
-              <Icon icon="Comment" />
+            <Tooltip title={score.comment}>
+              <span>
+                <Icon icon="Comment" />
+              </span>
             </Tooltip>
           ) : null,
         },
@@ -229,32 +231,38 @@ const PlayerProfilePage = () => {
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
           {player?.regionId !== undefined && player?.regionId !== null && player?.regionId !== 1 ? (
-            <Dropdown
-              data={
-                {
-                  type: "Normal",
-                  defaultItemSet: 0,
-                  value: region,
-                  valueSetter: setRegion,
-                  data: [
-                    {
-                      id: 0,
-                      children: getAllRegions([], player?.regionId ?? 1)
-                        .reverse()
-                        .map((region) => {
-                          return {
-                            type: "DropdownItemData",
-                            element: {
-                              text: translateRegionName(region, lang),
-                              value: region,
-                              rightIcon: <FlagIcon region={region} showRegFlagRegardless />,
-                            },
-                          };
-                        }),
-                    },
-                  ],
-                } as DropdownData
-              }
+            <Autocomplete
+              value={region}
+              style={{ minWidth: "300px" }}
+              onChange={(_, v) => {
+                if (v === null) return;
+                setRegion(v);
+              }}
+              autoComplete
+              autoHighlight
+              openOnFocus
+              options={getAllRegions([], player?.regionId ?? 1).reverse()}
+              filterOptions={createFilterOptions({
+                ignoreCase: true,
+                ignoreAccents: true,
+              })}
+              renderInput={(params) => {
+                params.InputProps.startAdornment = (
+                  <FlagIcon region={region} showRegFlagRegardless />
+                );
+
+                return <TextField {...params} />;
+              }}
+              getOptionLabel={(region) => translateRegionName(region, lang)}
+              renderOption={(props, option) => {
+                const { key, ...optionProps } = props;
+                return (
+                  <li key={key} {...optionProps}>
+                    {<FlagIcon region={option} showRegFlagRegardless />}
+                    {translateRegionName(option, lang)}
+                  </li>
+                );
+              }}
             />
           ) : (
             <></>

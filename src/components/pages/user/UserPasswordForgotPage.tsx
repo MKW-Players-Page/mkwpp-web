@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { FinalErrorResponse, User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
-import Form, { Field, FormState } from "../../widgets/Form";
+import Form, { FormState, TextFormField } from "../../widgets/Form";
 
 interface UserPasswordResetFormState extends FormState {
   email: string;
@@ -35,7 +35,7 @@ const UserPasswordResetForm = ({ closeForm }: UserPasswordResetFormProps) => {
       submitLabel={translate("userPasswordResetPageSubmitLabel", lang)}
       submit={submit}
     >
-      <Field
+      <TextFormField
         type="email"
         field="email"
         label={translate("userPasswordForgotPageEmailLabel", lang)}

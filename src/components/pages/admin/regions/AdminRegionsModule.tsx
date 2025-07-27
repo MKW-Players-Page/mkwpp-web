@@ -1,9 +1,10 @@
+import { Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminRegion, Region, RegionType, RegionTypeValues } from "../../../../api";
-import { FlagIcon, Tooltip } from "../../../widgets";
+import { FlagIcon } from "../../../widgets";
 import { Flags } from "../../../widgets/Flags";
-import Form, { FormState, Field } from "../../../widgets/Form";
+import Form, { FormState, SwitchFormField, TextFormField } from "../../../widgets/Form";
 import { RegionSelectionDropdownField } from "../../../widgets/RegionDropdown";
 import { RegionTypeRadioField } from "../../../widgets/RegionTypeSelect";
 
@@ -69,7 +70,7 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
       >
         {region ? (
           <p>
-            <Tooltip text={"This should not be modified while the server is running."} left>
+            <Tooltip title={"This should not be modified while the server is running."}>
               <span style={{ fontWeight: "700", fontSize: "1.4em" }}>ID - {region.id}</span>
             </Tooltip>
           </p>
@@ -78,7 +79,7 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
         )}
 
         <div style={{ display: "flex", gap: "16px", alignItems: "stretch" }}>
-          <Field type="text" field="code" label={"Code"} />
+          <TextFormField field="code" label={"Code"} />
           <FlagIcon
             region={state.code.toLocaleLowerCase() as keyof typeof Flags}
             showRegFlagRegardless
@@ -90,8 +91,7 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
 
         <RegionSelectionDropdownField field="parentId" label="Parent Region" />
 
-        <Field
-          type="checkbox"
+        <SwitchFormField
           field="isRanked"
           label="Is Ranked"
           defaultChecked={region?.isRanked ?? false}

@@ -6,10 +6,11 @@ import { setSettingKV, SettingsContext } from "../../utils/Settings";
 import { UserContext } from "../../utils/User";
 import ColorSlider from "../widgets/ColorSlider";
 import Deferred from "../widgets/Deferred";
-import PlayerMention from "../widgets/PlayerMention";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 import AccountPasswordChangeForm from "../widgets/options/AccountPasswordChangeForm";
 import { Player, User } from "../../api";
+import { Switch, TextField } from "@mui/material";
+import { arrayEquals } from "../../utils/ArrayUtils";
 
 const OptionsPage = () => {
   const { user } = useContext(UserContext);
@@ -34,17 +35,23 @@ const OptionsPage = () => {
   const bioTextArea = useRef(null);
   const aliasTextArea = useRef(null);
   const navigate = useNavigate();
-
-  const [newSubmitterId, newSubmitterSetId] = useState(0);
-  const [newSubmitterIdFieldError, setNewSubmitterIdFieldError] = useState("");
   const [resetSubmittersList, setResetSubmittersList] = useState(0);
+  const [submitterIds, setSubmitterIds] = useState<number[]>([]);
+  const [submitterIdsFieldError, setSubmitterIdsFieldError] = useState("");
+
   const { isLoading: submittersLoading, data: submitters } = useApi(
-    () => User.getSubmitterList(user?.userId ?? 0),
+    () =>
+      User.getSubmitterList(user?.userId ?? 0).then((submitters) => {
+        setSubmitterIds(submitters?.map((r) => r.id) ?? []);
+        return submitters;
+      }),
     [user, resetSubmittersList],
     "loadedSubmitters",
+    [{ variable: user?.userId, defaultValue: undefined }],
   );
 
   const [debugActive, setDebugActive] = useState(0);
+
   useEffect(() => {
     const eventListener = (e: KeyboardEvent) => {
       const debugText = "nobuo";
@@ -84,12 +91,7 @@ const OptionsPage = () => {
             <div className="module-content">
               <h2>Translation Keys</h2>
               <div style={horizDivStyle}>
-                <p>
-                  Click on this to show key text instead of translations for strings on the site
-                  (refresh for it to take effect)
-                </p>
-                <input
-                  type="checkbox"
+                <Switch
                   onChange={() =>
                     setSettings(
                       setSettingKV(settings, "debugTranslation", !settings.debugTranslation),
@@ -97,6 +99,10 @@ const OptionsPage = () => {
                   }
                   defaultChecked={settings.debugTranslation}
                 />
+                <p>
+                  Click on this to show key text instead of translations for strings on the site
+                  (refresh for it to take effect)
+                </p>
               </div>
             </div>
           </div>
@@ -104,12 +110,8 @@ const OptionsPage = () => {
             <div className="module-content">
               <h2>Content Editable</h2>
               <div style={horizDivStyle}>
+                <Switch onChange={() => (document.designMode = "on")} defaultChecked={false} />
                 <p>Click on this to enable design mode (disables on refresh)</p>
-                <input
-                  type="checkbox"
-                  onChange={() => (document.designMode = "on")}
-                  defaultChecked={false}
-                />
               </div>
             </div>
           </div>
@@ -122,14 +124,13 @@ const OptionsPage = () => {
         <div className="module-content">
           <h2>{translate("optionsPageBrowserOptRegFlagsHeading", lang)}</h2>
           <div style={horizDivStyle}>
-            <p>{translate("optionsPageBrowserOptRegFlagsParagraph", lang)}</p>
-            <input
-              type="checkbox"
+            <Switch
               onChange={() =>
                 setSettings(setSettingKV(settings, "showRegFlags", !settings.showRegFlags))
               }
               defaultChecked={settings.showRegFlags}
             />
+            <p>{translate("optionsPageBrowserOptRegFlagsParagraph", lang)}</p>
           </div>
         </div>
       </div>
@@ -137,14 +138,13 @@ const OptionsPage = () => {
         <div className="module-content">
           <h2>{translate("optionsPageBrowserOptLockTableCellHeading", lang)}</h2>
           <div style={horizDivStyle}>
-            <p>{translate("optionsPageBrowserOptLockTableCellParagraph", lang)}</p>
-            <input
-              type="checkbox"
+            <Switch
               onChange={() =>
                 setSettings(setSettingKV(settings, "lockTableCells", !settings.lockTableCells))
               }
               defaultChecked={settings.lockTableCells}
             />
+            <p>{translate("optionsPageBrowserOptLockTableCellParagraph", lang)}</p>
           </div>
         </div>
       </div>
@@ -152,14 +152,13 @@ const OptionsPage = () => {
         <div className="module-content">
           <h2>{translate("optionsPageBrowserOptSidebarAnimHeading", lang)}</h2>
           <div style={horizDivStyle}>
-            <p>{translate("optionsPageBrowserOptSidebarAnimParagraph", lang)}</p>
-            <input
-              type="checkbox"
+            <Switch
               onChange={() =>
                 setSettings(setSettingKV(settings, "sidebarAnim", !settings.sidebarAnim))
               }
               defaultChecked={settings.sidebarAnim}
             />
+            <p>{translate("optionsPageBrowserOptSidebarAnimParagraph", lang)}</p>
           </div>
         </div>
       </div>
@@ -193,14 +192,12 @@ const OptionsPage = () => {
                 <h2>{translate("optionsPageSubmitterHeading", lang)}</h2>
                 <p style={{ marginBottom: "10px" }}>
                   {translate("optionsPageSubmitterParagraph", lang)}
-                  {submitters === undefined || submitters === null || submitters.length === 0
-                    ? translate("optionsPageSubmitterListNoOne", lang)
-                    : submitters.map((r) => <PlayerMention playerOrId={r} />)}
                 </p>
-                <p className="field-error">{newSubmitterIdFieldError}</p>
+                <p className="field-error">{submitterIdsFieldError}</p>
                 <PlayerSelectDropdown
-                  id={newSubmitterId}
-                  setId={newSubmitterSetId}
+                  id={submitterIds}
+                  setId={setSubmitterIds}
+                  multiple
                   blacklist
                   restrictSet={[user.playerId ?? 0]}
                 />
@@ -208,39 +205,25 @@ const OptionsPage = () => {
                   style={{ marginRight: "10px" }}
                   onClick={async () => {
                     if (
-                      newSubmitterId !== 0 &&
-                      !submitters?.map((r) => r.id).includes(newSubmitterId)
+                      !arrayEquals(
+                        submitters?.map((r) => r.id) ?? [],
+                        submitterIds,
+                        (a, b) => a - b,
+                      )
                     )
-                      User.addToSubmitterList(user.userId, newSubmitterId).then(
+                      User.setSubmitterList(user.userId, submitterIds).then(
                         () => {
                           setResetSubmittersList(Math.random());
                         },
                         () => {
-                          setNewSubmitterIdFieldError(
+                          setSubmitterIdsFieldError(
                             translate("optionsPageSubmitterListNoUserError", lang),
                           );
                         },
                       );
-                    newSubmitterSetId(0);
-                    setNewSubmitterIdFieldError("");
                   }}
                 >
-                  {translate("optionsPageAddBtnText", lang)}
-                </button>
-                <button
-                  onClick={async () => {
-                    if (
-                      newSubmitterId !== 0 &&
-                      submitters?.map((r) => r.id).includes(newSubmitterId)
-                    )
-                      User.removeFromSubmitterList(user.userId, newSubmitterId).then(() => {
-                        setResetSubmittersList(Math.random());
-                      });
-                    newSubmitterSetId(0);
-                    setNewSubmitterIdFieldError("");
-                  }}
-                >
-                  {translate("optionsPageRemoveBtnText", lang)}
+                  {translate("optionsPageSaveBtnText", lang)}
                 </button>
               </Deferred>
             </div>
@@ -249,13 +232,12 @@ const OptionsPage = () => {
             <div className="module-content">
               <Deferred isWaiting={playerLoading}>
                 <h2>{translate("optionsPageAccountOptAliasHeading", lang)}</h2>
-                <textarea
-                  ref={aliasTextArea}
-                  style={{ color: "#fff" }}
-                  maxLength={64}
-                  defaultValue={player?.alias ?? ""}
-                  className="module"
-                />
+                <div>
+                  <TextField
+                    inputProps={{ maxLength: 64, ref: aliasTextArea }}
+                    defaultValue={player?.alias ?? ""}
+                  />
+                </div>
                 <button
                   onClick={async () => {
                     const newAlias: string = (aliasTextArea.current as any).value;
@@ -275,13 +257,13 @@ const OptionsPage = () => {
             <div className="module-content">
               <Deferred isWaiting={playerLoading}>
                 <h2>{translate("optionsPageAccountOptBioHeading", lang)}</h2>
-                <textarea
-                  ref={bioTextArea}
-                  style={{ color: "#fff" }}
-                  maxLength={1024}
-                  defaultValue={player?.bio ?? ""}
-                  className="module"
-                />
+                <div>
+                  <TextField
+                    inputProps={{ maxLength: 1024, ref: bioTextArea }}
+                    defaultValue={player?.bio ?? ""}
+                    multiline
+                  />
+                </div>
                 <button
                   onClick={async () => {
                     const newBio: string = (bioTextArea.current as any).value;
@@ -300,13 +282,12 @@ const OptionsPage = () => {
             <div className="module-content">
               <Deferred isWaiting={playerLoading}>
                 <h2>{translate("optionsPageAccountOptPronounsHeading", lang)}</h2>
-                <textarea
-                  ref={pronounsTextArea}
-                  style={{ color: "#fff" }}
-                  maxLength={30}
-                  defaultValue={player?.pronouns ?? ""}
-                  className="module"
-                />
+                <div>
+                  <TextField
+                    inputProps={{ maxLength: 30, ref: pronounsTextArea }}
+                    defaultValue={player?.pronouns ?? ""}
+                  />
+                </div>
                 <button
                   onClick={async () => {
                     const newPronouns: string = (pronounsTextArea.current as any).value;

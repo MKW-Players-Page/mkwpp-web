@@ -20,8 +20,14 @@ export class PlayerBasic {
     this.alias = alias;
   }
 
-  public static async getPlayerList(): Promise<Array<PlayerBasic>> {
-    return apiFetch("/custom/players/list");
+  public static async getPlayerList(metadata?: Metadata): Promise<Array<PlayerBasic>> {
+    return apiFetch<Array<PlayerBasic>>("/custom/players/list").then((players) => {
+      if (metadata !== undefined)
+        metadata.cachePlayers(
+          ...players.filter((player) => metadata.getCachedPlayer(player.id) === undefined),
+        );
+      return players;
+    });
   }
 
   public static async getPlayersBasic(

@@ -116,6 +116,7 @@ const RecentTimes = ({ defaultLimit, canChangeLimit = false }: RecentTimesProps)
           }}
           exclusive
           fullWidth
+          style={{ margin: 0 }}
           size="small"
         >
           <ToggleButton value={false}>

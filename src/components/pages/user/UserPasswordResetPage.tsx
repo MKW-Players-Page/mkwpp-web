@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { FinalErrorResponse, User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import Deferred from "../../widgets/Deferred";
-import Form, { Field, FormState } from "../../widgets/Form";
+import Form, { FormState, TextFormField } from "../../widgets/Form";
 
 interface UserPasswordResetFormState extends FormState {
   password: string;
@@ -59,15 +59,15 @@ const UserPasswordResetForm = ({ token, closeForm }: UserPasswordResetFormProps)
       submitLabel={translate("userPasswordResetPageSubmitLabel", lang)}
       submit={submit}
     >
-      <Field
-        type="password"
+      <TextFormField
         field="password"
         label={translate("userPasswordResetPagePasswordLabel", lang)}
+        password
       />
-      <Field
-        type="password"
+      <TextFormField
         field="password2"
         label={translate("userPasswordResetPagePassword2Label", lang)}
+        password
       />
     </Form>
   );

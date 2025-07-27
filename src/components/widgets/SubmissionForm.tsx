@@ -2,13 +2,12 @@ import init, { read_rkg } from "mkw_lib";
 
 import { useContext, useEffect, useState } from "react";
 import { useApi } from "../../hooks";
-import { formatDate } from "../../utils/Formatters";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { CategoryRadioField } from "./CategorySelect";
 import Deferred from "./Deferred";
-import Form, { Field } from "./Form";
+import Form, { DateFormField, TextFormField } from "./Form";
 import {
   CategoryEnum,
   LapModeEnum,
@@ -20,10 +19,11 @@ import {
 import { LapModeRadioField } from "./LapModeSelect";
 import OverwriteColor from "./OverwriteColor";
 import { PlayerSelectDropdownField } from "./PlayerSelectDropdown";
-import Tooltip from "./Tooltip";
 import TrackSelect from "./TrackSelect";
 import { TimeInputField } from "./TimeInput";
 import { SubmissionStatusRadioField } from "./SubmissionStatusSelect";
+import dayjs, { Dayjs } from "dayjs";
+import { mkwReleaseDate } from "../../utils/Numbers";
 
 enum SubmitStateEnum {
   Form = "form",
@@ -38,7 +38,7 @@ interface SubmitTabState {
   category: CategoryEnum;
   lapMode: LapModeEnum;
   value: number;
-  date: Date;
+  date: Dayjs;
   ghostLink: string;
   videoLink: string;
   comment: string;
@@ -95,7 +95,7 @@ const SubmissionForm = ({
   disclaimerText,
 }: StarterData) => {
   const { user } = useContext(UserContext);
-  const todayDate = new Date();
+  const todayDate = dayjs();
   const initialState = {
     state: SubmitStateEnum.Form,
     player: starterPlayer ?? user?.playerId ?? 1,
@@ -103,7 +103,7 @@ const SubmissionForm = ({
     category: starterCategory ?? CategoryEnum.NonShortcut,
     lapMode: starterLapMode ?? LapModeEnum.Course,
     value: starterValue ?? 0,
-    date: starterDate ?? todayDate,
+    date: dayjs(starterDate),
     ghostLink: starterGhostLink ?? "",
     videoLink: starterVideoLink ?? "",
     comment: starterComment ?? "",
@@ -156,6 +156,15 @@ const SubmissionForm = ({
       return;
     }
 
+    // setState((prev) => ({
+    //   ...prev,
+    //   errored: true,
+    //   errors: {
+    //     ...prev.errors,
+    //     date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
+    //   },
+    // }));
+
     if (
       editModeScore !== undefined &&
       initialState.ghostLink === state.ghostLink &&
@@ -185,7 +194,7 @@ const SubmissionForm = ({
                 submissionId,
                 user?.userId,
                 editModeScore.id,
-                state.date,
+                state.date.toDate(),
                 state.submitterNote,
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
@@ -199,7 +208,7 @@ const SubmissionForm = ({
               User.createEditSubmission(
                 user?.userId,
                 editModeScore.id,
-                state.date,
+                state.date.toDate(),
                 state.submitterNote,
                 (editModeScore.videoLink ?? "") !== state.videoLink ? state.videoLink : undefined,
                 (editModeScore.ghostLink ?? "") !== state.ghostLink ? state.ghostLink : undefined,
@@ -219,7 +228,7 @@ const SubmissionForm = ({
                 state.lapMode === LapModeEnum.Lap,
                 state.player,
                 +state.track,
-                state.date,
+                state.date.toDate(),
                 state.videoLink,
                 state.ghostLink,
                 state.comment,
@@ -237,7 +246,7 @@ const SubmissionForm = ({
                 state.lapMode === LapModeEnum.Lap,
                 state.player,
                 +state.track,
-                state.date,
+                state.date.toDate(),
                 state.videoLink,
                 state.ghostLink,
                 state.comment,
@@ -330,7 +339,7 @@ const SubmissionForm = ({
                             const newStateData = {
                               value: data.time,
                               track: data.track + 1,
-                              date: new Date(data.year, data.month - 1, data.day),
+                              date: dayjs(new Date(data.year, data.month - 1, data.day)),
                             };
 
                             data.free();
@@ -397,59 +406,38 @@ const SubmissionForm = ({
               label={translate("submissionPageSubmitTabTimeLabel", lang)}
             />
 
-            <Field
-              type="date"
+            <DateFormField
               field="date"
-              disabled={editModeScore !== undefined}
-              min="2008-04-15"
-              max={formatDate(todayDate)}
               label={translate("submissionPageSubmitTabDateLabel", lang)}
-              toStringFunction={formatDate}
-              fromStringFunction={(x) => {
-                try {
-                  return new Date(Date.parse(x));
-                } catch {
-                  setState((prev) => ({
-                    ...prev,
-                    errored: true,
-                    errors: {
-                      ...prev.errors,
-                      date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
-                    },
-                  }));
-                }
-              }}
+              maxDate={todayDate}
+              minDate={dayjs(mkwReleaseDate)}
             />
-            <Field
-              type="text"
+
+            <TextFormField
               field="ghostLink"
               label={translate("submissionPageSubmitTabGhostLabel", lang)}
             />
-            <Field
-              type="text"
+            <TextFormField
               field="videoLink"
               label={translate("submissionPageSubmitTabVideoLabel", lang)}
             />
-            <Field
-              type="text"
+            <TextFormField
               field="comment"
               label={translate("submissionPageSubmitTabCommentLabel", lang)}
             />
-            <Tooltip text={translate("submissionPageSubmitTabSubmitterNoteTooltip", lang)} left>
-              <Field
-                type="text"
-                field="submitterNote"
-                label={translate("submissionPageSubmitTabSubmitterNoteLabel", lang)}
-              />
-            </Tooltip>
+            <TextFormField
+              field="submitterNote"
+              label={translate("submissionPageSubmitTabSubmitterNoteLabel", lang)}
+              helperText={translate("submissionPageSubmitTabSubmitterNoteTooltip", lang)}
+            />
             {isAdmin && (
               <>
-                <div></div>
-                <Field type="text" field="reviewerNote" label="Reviewer Note" />
-                <div></div>
-                <Tooltip text={"This is only shown to admins"} left>
-                  <Field type="text" field="adminNote" label="Admin Note" />
-                </Tooltip>
+                <TextFormField field="reviewerNote" label="Reviewer Note" />
+                <TextFormField
+                  field="adminNote"
+                  label="Admin Note"
+                  helperText="This is only shown to admins."
+                />
                 <SubmissionStatusRadioField field="status" label="Status" />
               </>
             )}

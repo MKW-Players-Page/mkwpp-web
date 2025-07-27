@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { Icon, Tooltip } from "../widgets";
+import { Icon } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
@@ -26,6 +26,7 @@ import { LapModeEnum, RegionType, Score } from "../../api";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
+import { Tooltip } from "@mui/material";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -164,8 +165,10 @@ const TrackRecordsPage = () => {
           );
         if (score.comment)
           out[Indexes.Comment].content = (
-            <Tooltip text={score.comment}>
-              <Icon icon="Comment" />
+            <Tooltip title={score.comment}>
+              <span>
+                <Icon icon="Comment" />
+              </span>
             </Tooltip>
           );
       }

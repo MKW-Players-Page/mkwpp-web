@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { UserContext } from "../../../utils/User";
-import Form, { Field, FormState } from "../Form";
+import Form, { FormState, TextFormField } from "../Form";
 
 interface AccountPasswordChangeFormState extends FormState {
   old_password: string;
@@ -60,18 +60,18 @@ const AccountPasswordChangeForm = () => {
         submitLabel={translate("optionsPageSaveBtnText", lang)}
         submit={submit}
       >
-        <Field
-          type="password"
+        <TextFormField
+          password
           field="old_password"
           label={translate("optionsPageAccountOptPasswordLabelOldPassword", lang)}
         />
-        <Field
-          type="password"
+        <TextFormField
+          password
           field="new_password"
           label={translate("optionsPageAccountOptPasswordLabelNewPassword", lang)}
         />
-        <Field
-          type="password"
+        <TextFormField
+          password
           field="new_password2"
           label={translate("optionsPageAccountOptPasswordLabelConfirmNewPassword", lang)}
         />

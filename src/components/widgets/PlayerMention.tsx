@@ -92,6 +92,7 @@ export interface PlayerMentionProps {
   regionOrId?: number | Region;
   showRegFlagRegardless?: boolean;
   xxFlag?: boolean;
+  redirect?: boolean;
 }
 
 const PlayerMention = ({
@@ -99,6 +100,7 @@ const PlayerMention = ({
   regionOrId,
   showRegFlagRegardless,
   xxFlag,
+  redirect = true,
 }: PlayerMentionProps) => {
   const metadata = useContext(MetadataContext);
 
@@ -115,6 +117,44 @@ const PlayerMention = ({
       : typeof playerOrId === "number"
         ? undefined
         : metadata.getRegionById(playerOrId.regionId);
+
+  if (!redirect)
+    return (
+      <span>
+        {region === undefined && typeof playerOrId === "number" ? (
+          <PlayerMentionNoPrecalc
+            xxFlag={!!xxFlag}
+            id={resolvedPlayerId}
+            showRegFlagRegardless={!!showRegFlagRegardless}
+          />
+        ) : (
+          <>
+            <>
+              {region !== undefined ? (
+                <FlagIconSpan
+                  region={region}
+                  showRegFlagRegardless={!!showRegFlagRegardless}
+                  xxFlag={!!xxFlag}
+                />
+              ) : (
+                <FlagIconSpanPlayerId
+                  xxFlag={!!xxFlag}
+                  id={resolvedPlayerId}
+                  showRegFlagRegardless={!!showRegFlagRegardless}
+                />
+              )}
+            </>
+            <>
+              {typeof playerOrId !== "number" ? (
+                (playerOrId.alias ?? playerOrId.name)
+              ) : (
+                <PlayerTextFromId id={resolvedPlayerId} />
+              )}
+            </>
+          </>
+        )}
+      </span>
+    );
 
   return (
     <Link

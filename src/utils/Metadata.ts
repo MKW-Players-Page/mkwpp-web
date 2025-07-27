@@ -62,8 +62,8 @@ export class Metadata {
    * @param regionId The id of the region to find
    * @returns The region object, or `undefined` if no region with the given id exists.
    */
-  getRegionById(regionId: number) {
-    if (!this.regions) {
+  getRegionById(regionId?: number) {
+    if (!this.regions || regionId === undefined) {
       return undefined;
     }
 

@@ -3,7 +3,7 @@ import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
-import { Icon, Tooltip } from "../widgets";
+import { Icon } from "../widgets";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
@@ -34,6 +34,7 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
+import { Tooltip } from "@mui/material";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -165,8 +166,10 @@ const TrackChartPage = () => {
       },
       {
         content: score?.comment && (
-          <Tooltip text={score.comment}>
-            <Icon icon="Comment" />
+          <Tooltip title={score.comment}>
+            <span>
+              <Icon icon="Comment" />
+            </span>
           </Tooltip>
         ),
       },
