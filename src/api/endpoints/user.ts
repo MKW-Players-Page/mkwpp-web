@@ -236,6 +236,24 @@ export class User {
     );
   }
 
+  public static async setSubmitterList(
+    userId: number,
+    playerIds: number[],
+  ): Promise<null | number> {
+    const sessionToken = getToken();
+    if (sessionToken === null) return new Promise((res) => res(null));
+    return apiFetch<number>(
+      "/auth/player/setsubmitters",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+      { sessionToken, userId, playerIds },
+    );
+  }
+
   public static async getSubmitterList(
     userId: number,
     metadata?: Metadata,
