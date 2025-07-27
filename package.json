@@ -19,7 +19,6 @@
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
     "serve": "^14.2.4",
-    "svgo": "^3.3.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -64,6 +63,7 @@
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "node-fetch": "^3.3.2",
-    "sass": "^1.83.1"
+    "sass": "^1.83.1",
+    "svgo": "^3.3.2"
   }
 }
