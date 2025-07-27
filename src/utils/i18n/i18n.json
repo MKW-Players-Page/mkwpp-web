@@ -12213,13 +12213,13 @@
     "es": "Evadir los efectos del sticky road."
   },
   "rulesPageCategoryRulesParagraph27": {
-    "en": "Gaining or maintaining significant diagonal velocity using outside drift vehicles. Supergrinding/superhopping will not be considered for now, because they are not RTA viable on Nintendo tracks.",
-    "it": "Guadagnare o mantenere significative quantità di velocità diagonale utilizzando veicoli con drift esterno. Supergrinding/Superhopping non verrà considerato al momento, perché non sono possibili RTA su piste Nintendo.",
-    "fr": "Accumuler ou maintenir une vélocité diagonale significative en utilisant des véhicules au dérapage extérieur. Le Supergrinding/Superhopping n'est pas autorisé à cette heure, car ces techniques ne sont pas viables humainement sur les courses officielles.",
+    "en": "Gaining or maintaining significant diagonal velocity using outside drift vehicles.",
+    "it": "Guadagnare o mantenere significative quantità di velocità diagonale utilizzando veicoli con drift esterno.",
+    "fr": "Accumuler ou maintenir une vélocité diagonale significative en utilisant des véhicules au dérapage extérieur.",
     "de": "",
     "jp": "",
     "pt": "",
-    "es": "Ganar o mantener una velocidad diagonal significativa usando vehículos de derrape exterior. El Supergrinding/Superhopping no se considerará por ahora, ya que no son viables en RTA en pistas de Nintendo."
+    "es": "Ganar o mantener una velocidad diagonal significativa usando vehículos de derrape exterior."
   },
   "rulesPageCategoryRulesParagraph28": {
     "en": "Driving into a fall boundary, to reach a lap count before hitting the fall boundary.",
@@ -12283,6 +12283,15 @@
     "jp": "",
     "pt": "",
     "es": "La tabla de clasificación sin restricciones permite cualquier prueba contrarreloj elegible."
+  },
+  "rulesPageCategoryRulesParagraph35": {
+    "en": "Supersliding, Supergrinding and Superhopping",
+    "it": "Supersliding, Supergrinding e Superhopping",
+    "fr": "Supersliding, Supergrinding et Superhopping",
+    "de": "Supersliding, Supergrinding und Superhopping",
+    "jp": "",
+    "pt": "",
+    "es": "Supergrinding, Supersliding y Superhopping"
   },
   "rulesPageTrackCategoriesLCNoSC": {
     "en": "There is no known RTA-viable Luigi Circuit shortcut.",
