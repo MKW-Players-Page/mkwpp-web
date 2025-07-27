@@ -101,7 +101,11 @@ const Form = <T extends FormState>({
       noValidate
     >
       {title && <h1>{title}</h1>}
-      {errors && <p className="field-error">{errors}</p>}
+      {errors && (
+        <p style={{ paddingBottom: "10px" }} className="field-error">
+          {errors}
+        </p>
+      )}
       <div className="form-fields">
         <FormContext.Provider value={{ getValue, setValue, getErrors, disabled }}>
           {children}
