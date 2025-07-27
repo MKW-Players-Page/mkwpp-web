@@ -144,7 +144,7 @@ export const TextFormField = ({
     <div>
       <TextField
         label={label}
-        helperText={helperText}
+        helperText={errors.join(", ") ?? helperText}
         type={password && !showPassword ? "password" : type}
         slotProps={
           password
