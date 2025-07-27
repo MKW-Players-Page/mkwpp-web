@@ -34,7 +34,7 @@ import {
   SubmissionStatus,
   CountryRankingsTopEnum,
 } from "../../api";
-import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import { MenuItem, OutlinedInput, Select } from "@mui/material";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -157,17 +157,23 @@ export const handleBars = (
 export const LanguageDropdown = () => {
   const { lang, setLang } = useContext(I18nContext);
   return (
-    <Autocomplete
+    <Select
+      style={{ marginTop: "15px" }}
       value={lang}
-      style={{ minWidth: "300px" }}
-      onChange={(_, v) => {
-        if (v === null) return;
-        setLang(v);
+      onChange={(e) => {
+        if (e.target.value === null) return;
+        setLang(e.target.value);
       }}
-      autoComplete
-      autoHighlight
-      openOnFocus
-      options={[
+      fullWidth
+      input={<OutlinedInput size="small" />}
+      renderValue={(selected) => (
+        <span>
+          {langCodeToFlagIcon(lang)}
+          {langCodeToLanguageName(lang)}
+        </span>
+      )}
+    >
+      {[
         Language.English,
         Language.Italian,
         Language.French,
@@ -175,28 +181,13 @@ export const LanguageDropdown = () => {
         Language.Japanese,
         Language.Portuguese,
         Language.Spanish,
-      ]}
-      filterOptions={createFilterOptions({
-        ignoreCase: true,
-        ignoreAccents: true,
-      })}
-      renderInput={(params) => {
-        params.InputProps.startAdornment = langCodeToFlagIcon(lang);
-
-        return <TextField {...params} />;
-      }}
-      getOptionLabel={(option) => langCodeToLanguageName(option)}
-      renderOption={(props, option) => {
-        const { key, ...optionProps } = props;
-        return (
-          <li key={key} {...optionProps}>
-            {langCodeToFlagIcon(option)}
-            {langCodeToLanguageName(option)}
-          </li>
-        );
-      }}
-      sx={{ minWidth: "0 !important" }}
-    />
+      ].map((lang) => (
+        <MenuItem key={lang} value={lang}>
+          {langCodeToFlagIcon(lang)}
+          {langCodeToLanguageName(lang)}
+        </MenuItem>
+      ))}
+    </Select>
   );
 };
 
