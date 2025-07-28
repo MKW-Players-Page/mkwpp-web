@@ -4,6 +4,7 @@
   aspect-ratio: 1/1;
   margin-right: 15px;
   user-select: none;
+  vertical-align: middle;
 }
 
 .discord th {
