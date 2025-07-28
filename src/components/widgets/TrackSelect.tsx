@@ -36,9 +36,46 @@ export const TrackDropdown = ({ value, onChange, disabled, allTracks }: TrackDro
       disabled={disabled}
       groupBy={(option) => {
         if (option === -5) return "";
-        return translate(
-          `constantCup${metadata.cups?.find((cup) => cup.id === Math.floor((option - 1) / 4) + 1)?.code.toUpperCase()}` as TranslationKey,
-          lang,
+        return (
+          metadata.cups?.find((cup) => cup.id === Math.floor((option - 1) / 4) + 1)?.code ?? ""
+        );
+      }}
+      renderGroup={(params) => {
+        if (params.group === "")
+          return (
+            <li key={params.key}>
+              <ul style={{ padding: 0 }}>{params.children}</ul>
+            </li>
+          );
+
+        return (
+          <li key={params.key}>
+            <div
+              style={{
+                position: "sticky",
+                top: "-8px",
+                fontWeight: 500,
+                fontSize: ".875rem",
+                padding: "0 16px",
+                lineHeight: "48px",
+                listStyle: "none",
+                boxSizing: "border-box",
+                fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+                backgroundColor: "#121212",
+              }}
+            >
+              <span style={{ marginRight: "10px" }}>
+                <img
+                  width="30px"
+                  height="30px"
+                  src={`/mkw/cups/${metadata.cups?.find((cup) => cup.code === params.group)?.id ?? 1}.png`}
+                  alt="cup img"
+                />
+              </span>
+              {translate(`constantCup${params.group.toLocaleUpperCase()}` as TranslationKey, lang)}
+            </div>
+            <ul style={{ padding: 0 }}>{params.children}</ul>
+          </li>
         );
       }}
       autoComplete
@@ -50,7 +87,16 @@ export const TrackDropdown = ({ value, onChange, disabled, allTracks }: TrackDro
         ignoreAccents: true,
       })}
       renderInput={(params) => {
-        // params.InputProps.startAdornment = <FlagIcon region={value} showRegFlagRegardless />;
+        if (value !== -5) {
+          const cupId = metadata.tracks?.find((r) => r.id === value)?.cupId;
+          if (cupId !== undefined) {
+            params.InputProps.startAdornment = (
+              <span>
+                <img width="30px" height="30px" src={`/mkw/cups/${cupId}.png`} alt="cup img" />
+              </span>
+            );
+          }
+        }
         return <TextField {...params} />;
       }}
       getOptionLabel={(option) => {
@@ -74,8 +120,6 @@ export const TrackDropdown = ({ value, onChange, disabled, allTracks }: TrackDro
     />
   );
 };
-
-// Math.floor(id / 4) + 1 = cupNum
 
 export interface TrackSelectProps {
   /** Name of the state property to control */

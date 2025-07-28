@@ -14,6 +14,7 @@ import {
   stringToCountryRankingsTopEnum,
 } from "../api/endpoints/countryRankings";
 import { stringToRegionType } from "../api/endpoints/regions";
+import { formatDate } from "./Formatters";
 
 export type SearchParams = [URLSearchParams, SetURLSearchParams];
 
@@ -95,6 +96,31 @@ export const useLapModeParam = (
       const lap = lapMode === defVal ? undefined : lapMode.toString();
       searchParams[1]((prev) => paramReplace(prev, "lap", lap, overwriteParams));
     },
+  };
+};
+
+export const useDateParam = (searchParams: SearchParams, validDates: Date[]) => {
+  const dateStr = searchParams[0].get("dat");
+
+  if (validDates.length === 0)
+    return {
+      date: new Date(),
+      setDate: (date: Date) => {},
+    };
+
+  let date = validDates[0];
+  if (dateStr !== null) {
+    const inputDate = new Date(dateStr);
+    date = validDates.find((date) => date <= inputDate) ?? date;
+  }
+
+  return {
+    setDate: (date: Date) => {
+      let dateStr: string | undefined = formatDate(date);
+      if (dateStr === formatDate(validDates[0])) dateStr = undefined;
+      searchParams[1]((prev) => paramReplace(prev, "dat", dateStr));
+    },
+    date,
   };
 };
 

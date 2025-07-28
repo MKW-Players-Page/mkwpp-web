@@ -156,15 +156,6 @@ const SubmissionForm = ({
       return;
     }
 
-    // setState((prev) => ({
-    //   ...prev,
-    //   errored: true,
-    //   errors: {
-    //     ...prev.errors,
-    //     date: [translate("submissionPageSubmitTabInvalidDateErr", lang)],
-    //   },
-    // }));
-
     if (
       editModeScore !== undefined &&
       initialState.ghostLink === state.ghostLink &&
