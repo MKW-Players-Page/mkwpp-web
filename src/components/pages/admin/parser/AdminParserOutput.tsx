@@ -263,7 +263,7 @@ const AdminParserOutputPage = () => {
               return resolve(playerList);
 
             const promises = playersActions.current.map((r) =>
-              AdminPlayer.insertPlayer(r.playerName, r.regionId, new Date(), new Date(), []),
+              AdminPlayer.insertPlayer(r.playerName, r.regionId, new Date(), new Date(), [], []),
             );
 
             await Promise.all(promises);

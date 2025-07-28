@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { AdminPlayer } from "../../../../api";
 import { mkwReleaseDate } from "../../../../utils/Numbers";
 
-import Form, { FormState, TextFormField, DateFormField } from "../../../widgets/Form";
+import Form, {
+  FormState,
+  TextFormField,
+  DateFormField,
+  TagsFormField,
+} from "../../../widgets/Form";
 import { RegionSelectionDropdownField } from "../../../widgets/RegionDropdown";
 
 export interface AdminPlayerModuleProps {
@@ -18,6 +23,7 @@ interface AdminPlayerModuleState extends FormState {
   joinedDate: Dayjs;
   lastActivity: Dayjs;
   submitters: Array<number>;
+  chadsoftIds: Array<string>;
   alias?: string;
   bio?: string;
   pronouns?: string;
@@ -33,6 +39,7 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
     alias: player?.alias ?? "",
     bio: player?.bio ?? "",
     pronouns: player?.pronouns ?? "",
+    chadsoftIds: player?.chadsoftIds ?? [],
     errors: {},
     submitting: false,
   };
@@ -49,6 +56,7 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
           state.joinedDate.toDate(),
           state.lastActivity.toDate(),
           state.submitters,
+          state.chadsoftIds,
           state.alias !== "" ? state.alias : undefined,
           state.bio !== "" ? state.bio : undefined,
           state.pronouns !== "" ? state.pronouns : undefined,
@@ -60,6 +68,7 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
           state.joinedDate.toDate(),
           state.lastActivity.toDate(),
           state.submitters,
+          state.chadsoftIds,
           state.alias !== "" ? state.alias : undefined,
           state.bio !== "" ? state.bio : undefined,
           state.pronouns !== "" ? state.pronouns : undefined,
@@ -117,6 +126,19 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
         <TextFormField field="alias" label="Alias" />
         <TextFormField field="bio" label="Bio" multiline />
         <TextFormField field="pronouns" label="Pronouns" />
+
+        <TagsFormField
+          field="chadsoftIds"
+          label="Chadsoft IDs"
+          onClick={(_, idStr) => {
+            window
+              ?.open(
+                `https://chadsoft.co.uk/time-trials/players/${idStr.substring(0, 2)}/${idStr.substring(2)}.html`,
+                "_blank",
+              )
+              ?.focus();
+          }}
+        />
       </Form>
     </div>
   );

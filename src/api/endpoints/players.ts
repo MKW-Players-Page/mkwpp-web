@@ -78,6 +78,7 @@ export class Player extends PlayerBasic {
   readonly bio?: string;
   readonly joinedDate: number;
   readonly lastActivity: number;
+  readonly chadsoftIds: Array<string>;
 
   constructor(
     id: number,
@@ -88,12 +89,14 @@ export class Player extends PlayerBasic {
     bio?: string,
     alias?: string,
     pronouns?: string,
+    chadsoftIds: Array<string> = [],
   ) {
     super(id, name, regionId, alias);
     this.bio = bio;
     this.pronouns = pronouns;
     this.joinedDate = joinedDate;
     this.lastActivity = lastActivity;
+    this.chadsoftIds = chadsoftIds;
   }
 
   public static async getPlayers(ids: number[], metadata?: Metadata): Promise<Array<Player>> {
@@ -172,6 +175,7 @@ export class AdminPlayer extends Player {
     joinedDate: Date,
     lastActivity: Date,
     submitters: Array<number>,
+    chadsoftIds: Array<string>,
     alias?: string,
     bio?: string,
     pronouns?: string,
@@ -196,6 +200,7 @@ export class AdminPlayer extends Player {
         alias,
         bio,
         pronouns,
+        chadsoftIds,
       },
     ).then((r) => r.success);
   }
@@ -207,6 +212,7 @@ export class AdminPlayer extends Player {
     joinedDate: Date,
     lastActivity: Date,
     submitters: Array<number>,
+    chadsoftIds: Array<string>,
     alias?: string,
     bio?: string,
     pronouns?: string,
@@ -232,6 +238,7 @@ export class AdminPlayer extends Player {
         alias,
         bio,
         pronouns,
+        chadsoftIds,
       },
     ).then((r) => r.success);
   }

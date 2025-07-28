@@ -1,4 +1,4 @@
-import { Box, IconButton, Switch, TextField } from "@mui/material";
+import { Box, Chip, IconButton, Switch, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
 import {
@@ -173,6 +173,74 @@ export const TextFormField = ({
           setValue(field, e.target.value);
         }}
         value={getValue(field)}
+        error={errors.length > 0}
+      />
+    </div>
+  );
+};
+
+export interface TagsFormFieldProps {
+  field: string;
+  label: string;
+  disabled?: boolean;
+  helperText?: string;
+  onClick?: (e: React.MouseEventHandler<HTMLDivElement>, str: string, index: number) => void;
+}
+
+export const TagsFormField = ({
+  field,
+  label,
+  disabled,
+  helperText,
+  onClick,
+}: TagsFormFieldProps) => {
+  const { getValue, setValue, getErrors, disabled: disabledByForm } = useContext(FormContext);
+
+  const errors = getErrors(field);
+
+  return (
+    <div>
+      <TextField
+        label={label}
+        helperText={errors.join(", ") ?? helperText}
+        slotProps={{
+          input: {
+            onKeyDown: (e) => {
+              if (e.code === "Enter") {
+                const newArr = getValue(field) as string[];
+                newArr.push(e.currentTarget.value);
+                setValue(field, newArr);
+                e.currentTarget.value = "";
+                return;
+              }
+
+              if (e.code === "Backspace" && e.currentTarget.value === "") {
+                const newArr = getValue(field) as string[];
+                newArr.pop();
+                setValue(field, newArr);
+                return;
+              }
+            },
+            startAdornment: (
+              <div>
+                {(getValue(field) as string[]).map((str, index) => (
+                  <Chip
+                    style={{ marginRight: "5px" }}
+                    label={str}
+                    onClick={onClick ? (e: any) => onClick(e, str, index) : undefined}
+                    onDelete={() =>
+                      setValue(
+                        field,
+                        (getValue(field) as string[]).filter((_, i) => i !== index),
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            ),
+          },
+        }}
+        disabled={disabled || disabledByForm}
         error={errors.length > 0}
       />
     </div>
