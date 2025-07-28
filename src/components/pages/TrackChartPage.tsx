@@ -14,6 +14,7 @@ import OverwriteColor from "../widgets/OverwriteColor";
 import RegionSelectionDropdown from "../widgets/RegionDropdown";
 import {
   useCategoryParam,
+  useDateParam,
   useLapModeParam,
   usePageNumber,
   useRegionParam,
@@ -35,6 +36,7 @@ import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
 import { Tooltip } from "@mui/material";
+import DatePickerRestricted from "../widgets/DatePickerRestricted";
 
 const TrackChartPage = () => {
   const { id: idStr } = useParams();
@@ -68,10 +70,18 @@ const TrackChartPage = () => {
   };
   const prevTrackCat = getHighestValid(category, prevTrack?.categories ?? []);
   const nextTrackCat = getHighestValid(category, nextTrack?.categories ?? []);
+  const { isLoading: validDatesLoading, data: validDates } = useApi(
+    () => Score.getChartDates(id, category, lapMode === LapModeEnum.Lap, region.id),
+    [category, lapMode, region.id, id, metadata.isLoading],
+    "trackChartsDates",
+    [{ variable: metadata.isLoading, defaultValue: true }],
+  );
+
+  const { setDate, date } = useDateParam(searchParams, validDates ?? []);
 
   const { isLoading, data: scores } = useApi(
-    () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id),
-    [category, lapMode, region.id, id, metadata.isLoading],
+    () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id, date),
+    [category, lapMode, region.id, id, metadata.isLoading, date],
     "trackCharts",
     [{ variable: metadata.isLoading, defaultValue: true }],
   );
@@ -246,6 +256,9 @@ const TrackChartPage = () => {
             value={region}
             setValue={setRegion}
           />
+          <Deferred isWaiting={validDatesLoading}>
+            <DatePickerRestricted date={date} setDate={setDate} validDates={validDates ?? []} />
+          </Deferred>
         </div>
         <PaginationButtonRow
           selectedPage={pageNumber}
