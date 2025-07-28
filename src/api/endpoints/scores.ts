@@ -135,7 +135,7 @@ export class Score {
     date?: Date,
   ): Promise<Array<Score>> {
     return apiFetch(
-      `/custom/scores/records/${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
+      `/custom/scores/records/${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date ? formatDate(date) : undefined })}`,
     );
   }
 

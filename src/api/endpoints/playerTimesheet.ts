@@ -1,4 +1,5 @@
 import { CategoryEnum, Score, apiFetch, LapModeEnum } from "..";
+import { formatDate } from "../../utils/Formatters";
 import { buildQueryParamString } from "../../utils/SearchParams";
 
 export type Time = Omit<Score, "player">;
@@ -35,7 +36,7 @@ export class Timesheet {
     date?: Date,
   ): Promise<Timesheet> {
     return apiFetch(
-      `/custom/scores/timesheet/${playerId}${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
+      `/custom/scores/timesheet/${playerId}${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date ? formatDate(date) : undefined })}`,
     );
   }
 }
@@ -123,7 +124,7 @@ export class MatchupData {
     date?: Date,
   ): Promise<MatchupData> {
     return apiFetch(
-      `/custom/scores/matchup${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
+      `/custom/scores/matchup${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date ? formatDate(date) : undefined })}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
