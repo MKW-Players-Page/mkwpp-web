@@ -136,13 +136,13 @@ export const handleBars = (
   handleBarKeyReplPairs: [string, string | React.ReactNode][],
 ) => {
   let intermediateArray: (string | React.ReactNode)[] = [stringWithHandleBars];
-  for (let [key, value] of handleBarKeyReplPairs) {
+  for (const [key, value] of handleBarKeyReplPairs) {
     intermediateArray = intermediateArray
       .map((part) => {
         if (typeof part !== "string") return part;
-        let out = [];
+        const out = [];
         const parts = part.split(`{{${key}}}`);
-        for (let partX of parts) {
+        for (const partX of parts) {
           out.push(partX);
           out.push(value);
         }
@@ -166,7 +166,7 @@ export const LanguageDropdown = () => {
       }}
       fullWidth
       input={<OutlinedInput size="small" />}
-      renderValue={(selected) => (
+      renderValue={() => (
         <span>
           {langCodeToFlagIcon(lang)}
           {langCodeToLanguageName(lang)}
@@ -192,7 +192,7 @@ export const LanguageDropdown = () => {
 };
 
 export const translate = (key: TranslationKey, lang: Language): string => {
-  if (false || browserSettingsLoadParse().debugTranslation) return key; // DEBUG
+  if (browserSettingsLoadParse().debugTranslation) return key; // DEBUG
   if (!Object.keys(i18nJson).includes(key)) return `key '${key}' doesn't exist!`;
   return i18nJson[key][lang];
 };

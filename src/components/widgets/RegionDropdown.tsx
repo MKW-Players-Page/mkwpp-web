@@ -56,6 +56,7 @@ const RegionSelectionDropdown = ({
       groupBy={(option) =>
         translateRegionName(metadata.getRegionById(option.parentId), lang, "Subregions")
       }
+      disabled={disabled}
       autoComplete
       autoHighlight
       openOnFocus

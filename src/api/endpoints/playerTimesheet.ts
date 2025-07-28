@@ -58,13 +58,13 @@ export class MatchupData {
   diffPrwrNext: Array<number>;
   diffWinsFirst: Array<number>;
   diffWinsNext: Array<number>;
-  rgbDiff: Array<Array<Number>>;
-  rgbDiffAf: Array<Number>;
-  rgbDiffTotalTime: Array<Number>;
-  rgbDiffTally: Array<Number>;
-  rgbDiffArr: Array<Number>;
-  rgbDiffPrwr: Array<Number>;
-  rgbDiffWins: Array<Number>;
+  rgbDiff: Array<Array<number>>;
+  rgbDiffAf: Array<number>;
+  rgbDiffTotalTime: Array<number>;
+  rgbDiffTally: Array<number>;
+  rgbDiffArr: Array<number>;
+  rgbDiffPrwr: Array<number>;
+  rgbDiffWins: Array<number>;
 
   constructor(
     playerData: Array<Timesheet>,
@@ -83,13 +83,13 @@ export class MatchupData {
     diffPrwrNext: Array<number>,
     diffWinsFirst: Array<number>,
     diffWinsNext: Array<number>,
-    rgbDiff: Array<Array<Number>>,
-    rgbDiffAf: Array<Number>,
-    rgbDiffTotalTime: Array<Number>,
-    rgbDiffTally: Array<Number>,
-    rgbDiffArr: Array<Number>,
-    rgbDiffPrwr: Array<Number>,
-    rgbDiffWins: Array<Number>,
+    rgbDiff: Array<Array<number>>,
+    rgbDiffAf: Array<number>,
+    rgbDiffTotalTime: Array<number>,
+    rgbDiffTally: Array<number>,
+    rgbDiffArr: Array<number>,
+    rgbDiffPrwr: Array<number>,
+    rgbDiffWins: Array<number>,
   ) {
     this.playerData = playerData;
     this.wins = wins;

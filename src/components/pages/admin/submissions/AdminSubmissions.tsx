@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useSearchParams, Navigate, Link, useNavigate } from "react-router-dom";
+import { useSearchParams, Navigate, Link, useNavigate } from "react-router";
 import { AdminSubmission, LapModeEnum, Player, SubmissionStatus, User } from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";

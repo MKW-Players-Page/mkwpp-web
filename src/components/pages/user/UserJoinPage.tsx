@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router";
 import { Pages, resolvePage } from "../Pages";
 import Form, { TextFormField } from "../../widgets/Form";
 import { UserContext } from "../../../utils/User";
@@ -47,7 +47,7 @@ const UserJoinPage = () => {
     }
 
     User.register(state.username, state.password, state.email).then(
-      (r) => {
+      () => {
         navigate(resolvePage(Pages.UserJoinSuccess));
         done();
       },

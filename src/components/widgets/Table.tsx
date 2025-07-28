@@ -50,11 +50,11 @@ const ArrayTableRow = ({
   setSort,
 }: ArrayTableRowProps) => {
   const { settings } = useContext(SettingsContext);
-  const Cell: keyof JSX.IntrinsicElements = `t${th ? "h" : "d"}`;
+  const Cell: keyof HTMLElementTagNameMap = `t${th ? "h" : "d"}`;
 
   return (
     <tr id={id} className={className}>
-      {row.map((cell, idx, arr) =>
+      {row.map((cell, idx) =>
         cell.expandCell && cell.expandCell.includes(true) ? (
           <></>
         ) : (
@@ -181,7 +181,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
     }
   }, [tableData?.paginationData?.page, highlightRowPassed]);
 
-  let sortBlueprint = tableData?.rowSortData
+  const sortBlueprint = tableData?.rowSortData
     ?.filter((r) => r.sortKey === sort[0])
     .sort((a, b) => a.sortValue - b.sortValue);
   if (sort[1] === Sort.Descending) sortBlueprint?.reverse();
@@ -286,31 +286,27 @@ const createCellAreaMap = (cells: ArrayTableCellData[][]): number[][][] => {
       if (prevCellColSpan > 1) {
         colSpan = prevCellColSpan - 1;
       } else {
-        for (let checkingCellIdx = cellIdx + 1; true; checkingCellIdx++) {
-          if (
-            row[checkingCellIdx] !== undefined &&
-            row[checkingCellIdx] !== undefined &&
-            row[checkingCellIdx].expandCell !== undefined &&
-            (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
-          ) {
-            colSpan++;
-          } else {
-            break;
-          }
+        let checkingCellIdx = cellIdx + 1;
+        while (
+          row[checkingCellIdx] !== undefined &&
+          row[checkingCellIdx] !== undefined &&
+          row[checkingCellIdx].expandCell !== undefined &&
+          (row[checkingCellIdx].expandCell as [boolean, boolean])[1]
+        ) {
+          colSpan++;
+          checkingCellIdx++;
         }
       }
 
-      for (let checkingRowIdx = rowIdx + 1; true; checkingRowIdx++) {
-        if (
-          cells[checkingRowIdx] !== undefined &&
-          cells[checkingRowIdx][cellIdx] !== undefined &&
-          cells[checkingRowIdx][cellIdx].expandCell !== undefined &&
-          (cells[checkingRowIdx][cellIdx].expandCell as [boolean, boolean])[0]
-        ) {
-          rowSpan++;
-        } else {
-          break;
-        }
+      let checkingRowIdx = rowIdx + 1;
+      while (
+        cells[checkingRowIdx] !== undefined &&
+        cells[checkingRowIdx][cellIdx] !== undefined &&
+        cells[checkingRowIdx][cellIdx].expandCell !== undefined &&
+        (cells[checkingRowIdx][cellIdx].expandCell as [boolean, boolean])[0]
+      ) {
+        rowSpan++;
+        checkingRowIdx++;
       }
 
       prevCellColSpan = colSpan;

@@ -16,7 +16,6 @@ export interface PlayerSelectDropdownProps {
   restrictSet?: number[];
   blacklist?: boolean;
   disabled?: boolean;
-  hideNoneValue?: boolean;
   multiple?: boolean;
   label?: string;
 }
@@ -27,11 +26,25 @@ const PlayerSelectDropdown = ({
   restrictSet,
   blacklist,
   disabled = false,
-  hideNoneValue = true,
   multiple = false,
   label,
 }: PlayerSelectDropdownProps) => {
-  const { data: players, isLoading } = useApi(() => PlayerBasic.getPlayerList(), [], "playerData");
+  const { data: players, isLoading } = useApi(
+    () =>
+      PlayerBasic.getPlayerList().then((players) =>
+        players
+          .filter((player) =>
+            restrictSet
+              ? blacklist
+                ? !restrictSet.includes(player.id)
+                : restrictSet.includes(player.id)
+              : true,
+          )
+          .sort((a, b) => (a.alias ?? a.name).localeCompare(b.alias ?? b.name)),
+      ),
+    [],
+    "playerData",
+  );
 
   if (multiple)
     return (
@@ -39,10 +52,7 @@ const PlayerSelectDropdown = ({
         <PlayerSelectDropdownMultiple
           id={id as number[]}
           setId={setId as React.Dispatch<React.SetStateAction<number[]>>}
-          restrictSet={restrictSet}
-          blacklist={blacklist}
           disabled={disabled}
-          hideNoneValue={hideNoneValue}
           players={players}
           label={label}
         />
@@ -54,10 +64,7 @@ const PlayerSelectDropdown = ({
       <PlayerSelectDropdownSingle
         id={id as number}
         setId={setId as React.Dispatch<React.SetStateAction<number>>}
-        restrictSet={restrictSet}
-        blacklist={blacklist}
         disabled={disabled}
-        hideNoneValue={hideNoneValue}
         players={players}
         label={label}
       />
@@ -68,10 +75,7 @@ const PlayerSelectDropdown = ({
 export interface PlayerSelectDropdownPropsMultiple {
   setId: React.Dispatch<React.SetStateAction<number[]>>;
   id: number[];
-  restrictSet?: number[];
-  blacklist?: boolean;
   disabled?: boolean;
-  hideNoneValue?: boolean;
   players?: PlayerBasic[];
   label?: string;
 }
@@ -79,10 +83,7 @@ export interface PlayerSelectDropdownPropsMultiple {
 const PlayerSelectDropdownMultiple = ({
   id,
   setId,
-  restrictSet,
-  blacklist,
   disabled = false,
-  hideNoneValue = true,
   players,
   label,
 }: PlayerSelectDropdownPropsMultiple) => {
@@ -98,12 +99,13 @@ const PlayerSelectDropdownMultiple = ({
         }
         setId(v.map((r) => r.id));
       }}
+      disabled={disabled}
       autoComplete
       autoHighlight
       openOnFocus
       multiple
       filterSelectedOptions
-      options={players?.sort((a, b) => (a.alias ?? a.name).localeCompare(b.alias ?? b.name)) ?? []}
+      options={players ?? []}
       filterOptions={createFilterOptions({
         limit: 100,
         ignoreCase: true,
@@ -140,10 +142,7 @@ const PlayerSelectDropdownMultiple = ({
 export interface PlayerSelectDropdownPropsSingle {
   setId: React.Dispatch<React.SetStateAction<number>>;
   id: number;
-  restrictSet?: number[];
-  blacklist?: boolean;
   disabled?: boolean;
-  hideNoneValue?: boolean;
   players?: PlayerBasic[];
   label?: string;
 }
@@ -151,10 +150,7 @@ export interface PlayerSelectDropdownPropsSingle {
 const PlayerSelectDropdownSingle = ({
   id,
   setId,
-  restrictSet,
-  blacklist,
   disabled = false,
-  hideNoneValue = true,
   players,
   label,
 }: PlayerSelectDropdownPropsSingle) => {
@@ -171,7 +167,8 @@ const PlayerSelectDropdownSingle = ({
       autoHighlight
       openOnFocus
       filterSelectedOptions
-      options={players?.sort((a, b) => (a.alias ?? a.name).localeCompare(b.alias ?? b.name)) ?? []}
+      options={players ?? []}
+      disabled={disabled}
       filterOptions={createFilterOptions({
         limit: 100,
         ignoreCase: true,
@@ -205,7 +202,6 @@ export interface PlayerSelectDropdownFieldProps {
   field: string;
   /** Field label */
   label: string;
-  hideNoneValue?: boolean;
 }
 
 export const PlayerSelectDropdownField = ({
@@ -214,7 +210,6 @@ export const PlayerSelectDropdownField = ({
   field,
   label,
   disabled,
-  hideNoneValue = true,
 }: PlayerSelectDropdownFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
@@ -229,7 +224,6 @@ export const PlayerSelectDropdownField = ({
         id={getValue(field)}
         setId={setId}
         disabled={disabledByForm || !!disabled}
-        hideNoneValue={hideNoneValue}
         label={label}
       />
     </div>

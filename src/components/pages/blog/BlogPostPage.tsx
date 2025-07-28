@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 
 import Deferred from "../../widgets/Deferred";
 import { BlogPostModule } from "../../widgets";

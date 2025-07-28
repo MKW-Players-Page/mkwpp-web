@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { AdminPlayer, AdminScore, CategoryEnum, PlayerBasic, Region } from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { getHighestValid } from "../../../../utils/EnumUtils";
@@ -258,6 +258,8 @@ const AdminParserOutputPage = () => {
         value="Submit"
         onClick={(e) => {
           (e.target as HTMLInputElement).disabled = true;
+          // TODO: Find a way to fix this
+          // eslint-disable-next-line
           new Promise(async (resolve: (value: PlayerBasic[]) => void) => {
             if (playersActions.current.length === 0 && playerList !== undefined)
               return resolve(playerList);
@@ -271,7 +273,7 @@ const AdminParserOutputPage = () => {
           })
             .then(async (playerList) => {
               const promises = scoresActions.current.map((scoreData) => {
-                let playerId =
+                const playerId =
                   typeof scoreData.player === "string"
                     ? (playerList as PlayerBasic[])
                         .reverse()

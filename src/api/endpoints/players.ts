@@ -3,9 +3,8 @@ import { getToken } from "../../utils/Auth";
 import { Metadata } from "../../utils/Metadata";
 import { dateToSeconds } from "../../utils/DateUtils";
 
-export const typeguardPlayer = (x: Object): x is Player => {
-  return x.hasOwnProperty("joinedDate") && x.hasOwnProperty("lastActivity");
-};
+export const typeguardPlayer = (x: object): x is Player =>
+  Object.hasOwn(x, "joinedDate") && Object.hasOwn(x, "lastActivity");
 
 export class PlayerBasic {
   readonly id: number;
@@ -34,7 +33,7 @@ export class PlayerBasic {
     ids: number[],
     metadata?: Metadata,
   ): Promise<Array<PlayerBasic>> {
-    let actuallyFetchSet: Set<number> = new Set(ids);
+    const actuallyFetchSet: Set<number> = new Set(ids);
     const alreadyGrabbedSet: Set<PlayerBasic> = new Set();
     if (metadata !== undefined)
       for (const id of ids) {
@@ -100,7 +99,7 @@ export class Player extends PlayerBasic {
   }
 
   public static async getPlayers(ids: number[], metadata?: Metadata): Promise<Array<Player>> {
-    let actuallyFetchSet: Set<number> = new Set(ids);
+    const actuallyFetchSet: Set<number> = new Set(ids);
     const alreadyGrabbedSet: Set<Player> = new Set();
     if (metadata !== undefined)
       for (const id of ids) {

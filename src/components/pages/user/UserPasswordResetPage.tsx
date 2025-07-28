@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 import { FinalErrorResponse, User } from "../../../api";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { I18nContext, translate } from "../../utils/i18n/i18n";

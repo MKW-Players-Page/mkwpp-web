@@ -15,7 +15,7 @@ const OverwriteColor = ({
   className,
   key,
 }: OverwriteColorProp) => {
-  let outStyle: any = {};
+  const outStyle: any = {};
   if (hue !== undefined) outStyle["--site-hue"] = hue;
   if (saturationShift !== undefined) outStyle["--saturation-shift"] = saturationShift;
   if (luminosityShift !== undefined) outStyle["--luminosity-shift"] = luminosityShift;

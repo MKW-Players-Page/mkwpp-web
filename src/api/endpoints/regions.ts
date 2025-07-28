@@ -76,7 +76,7 @@ export class Region {
   }
 
   public static reduceRankedViaId(metadata: Metadata, acc: Region[], id: number): Region[] {
-    let region = metadata.getRegionById(id);
+    const region = metadata.getRegionById(id);
     if (!region) return acc;
     if (!region.isRanked) return acc;
     acc.push(region);

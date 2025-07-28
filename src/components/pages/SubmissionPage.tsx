@@ -16,7 +16,7 @@ import {
 } from "../../api";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router";
 import { Pages, resolvePage } from "./Pages";
 import { useApi } from "../../hooks";
 import { handleBars, I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
@@ -276,7 +276,9 @@ const SubmissionsTab = () => {
                   ? submission.submitterId === user?.playerId
                   : submission.playerId === user?.playerId,
             )
-            .map((submission) => <SubmissionCard setReload={setReload} submission={submission} />)}
+            .map((submission) => (
+              <SubmissionCard setReload={setReload} submission={submission} />
+            ))}
         </div>
       </Deferred>
     </div>
@@ -341,7 +343,7 @@ interface ScoreDoubled extends Score {
 const Filtering = {
   flapOnly: (a: Time) => a.isLap,
   courseOnly: (a: Time) => !a.isLap,
-  overall: (a: Time) => true,
+  overall: () => true,
 };
 
 const TimesheetTab = () => {

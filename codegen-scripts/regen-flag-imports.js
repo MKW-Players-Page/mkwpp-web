@@ -16,7 +16,7 @@ let out2 = ""; // Flags const
 
 for (const flagFileName of flagFileNames) {
   const fileNameNoExt = flagFileName.split(".")[0];
-  out1 += `import { ReactComponent as Flag${fileNameNoExt.toUpperCase()} } from "../../assets/flags/${flagFileName}";\n`;
+  out1 += `import Flag${fileNameNoExt.toUpperCase()} from "../../assets/flags/${flagFileName}?react";\n`;
   out2 += `  ${fileNameNoExt}: Flag${fileNameNoExt.toUpperCase()},\n`;
 }
 

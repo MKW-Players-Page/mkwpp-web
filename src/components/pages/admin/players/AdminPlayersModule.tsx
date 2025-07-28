@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { AdminPlayer } from "../../../../api";
 import { mkwReleaseDate } from "../../../../utils/Numbers";
 
@@ -76,7 +76,7 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
 
   const submit = () =>
     apiFunction()
-      .then((r) => {
+      .then(() => {
         setState({ ...initialState });
         navigate(0);
       })
@@ -96,7 +96,7 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
           player ? (
             <div
               onClick={() => {
-                AdminPlayer.deletePlayer(player.id).then((r) => navigate(0));
+                AdminPlayer.deletePlayer(player.id).then(() => navigate(0));
               }}
               className="submit-style"
             >

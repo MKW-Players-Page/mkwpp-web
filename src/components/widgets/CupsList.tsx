@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { I18nContext, translate, translateTrack, TranslationKey } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
@@ -105,7 +105,11 @@ const CupsList = () => {
   return (
     <>
       <Deferred isWaiting={metadata.isLoading}>
-        <div className="cups-list">{metadata.cups?.map((cup) => <CupTracks cup={cup} />)}</div>
+        <div className="cups-list">
+          {metadata.cups?.map((cup) => (
+            <CupTracks cup={cup} />
+          ))}
+        </div>
       </Deferred>
     </>
   );

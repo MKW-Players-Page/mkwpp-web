@@ -1,6 +1,6 @@
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { AdminRegion, Region, RegionType, RegionTypeValues } from "../../../../api";
 import { FlagIcon } from "../../../widgets";
 import { Flags } from "../../../widgets/Flags";
@@ -39,7 +39,7 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
 
   const submit = () =>
     apiFunction()
-      .then((r) => {
+      .then(() => {
         setState({ ...initialState });
         navigate(0);
       })
@@ -59,7 +59,7 @@ const AdminRegionModule = ({ region }: AdminRegionModuleProps) => {
           region ? (
             <div
               onClick={() => {
-                AdminRegion.deleteRegion(region.id).then((r) => navigate(0));
+                AdminRegion.deleteRegion(region.id).then(() => navigate(0));
               }}
               className="submit-style"
             >

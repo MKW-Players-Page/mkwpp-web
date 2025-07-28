@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useApi } from "../../hooks";
 import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import Deferred from "./Deferred";

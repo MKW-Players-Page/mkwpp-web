@@ -72,8 +72,8 @@ export class User {
     );
   }
 
-  public static async activate(token: string): Promise<{}> {
-    return apiFetch<{}>(
+  public static async activate(token: string): Promise<object> {
+    return apiFetch<object>(
       "/auth/activate",
       {
         method: "PUT",
@@ -321,10 +321,10 @@ export class User {
     reviewerNote?: string,
     status?: SubmissionStatus,
     reviewerId?: number,
-  ): Promise<null | {}> {
+  ): Promise<null | object> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    return apiFetch<{}>(
+    return apiFetch<object>(
       "/auth/submissions/create_submission",
       {
         method: "POST",
@@ -371,10 +371,10 @@ export class User {
     reviewerNote?: string,
     status?: SubmissionStatus,
     reviewerId?: number,
-  ): Promise<null | {}> {
+  ): Promise<null | object> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    return apiFetch<{}>(
+    return apiFetch<object>(
       "/auth/submissions/create_submission",
       {
         method: "POST",
@@ -405,10 +405,13 @@ export class User {
     );
   }
 
-  public static async deleteSubmission(userId: number, submissionId: number): Promise<null | {}> {
+  public static async deleteSubmission(
+    userId: number,
+    submissionId: number,
+  ): Promise<null | object> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    return apiFetch<{}>(
+    return apiFetch<object>(
       "/auth/submissions/delete_submission",
       {
         method: "POST",
@@ -449,10 +452,10 @@ export class User {
     reviewerNote?: string,
     status?: SubmissionStatus,
     reviewerId?: number,
-  ): Promise<null | {}> {
+  ): Promise<null | object> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    return apiFetch<{}>(
+    return apiFetch<object>(
       "/auth/submissions/create_edit_submission",
       {
         method: "POST",
@@ -495,10 +498,10 @@ export class User {
     reviewerNote?: string,
     status?: SubmissionStatus,
     reviewerId?: number,
-  ): Promise<null | {}> {
+  ): Promise<null | object> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    return apiFetch<{}>(
+    return apiFetch<object>(
       "/auth/submissions/create_edit_submission",
       {
         method: "POST",
@@ -532,10 +535,10 @@ export class User {
   public static async deleteEditSubmission(
     userId: number,
     submissionId: number,
-  ): Promise<null | {}> {
+  ): Promise<null | object> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(null));
-    return apiFetch<{}>(
+    return apiFetch<object>(
       "/auth/submissions/delete_edit_submission",
       {
         method: "POST",

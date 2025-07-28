@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Region, PlayerBasic } from "../../api";
 import { useApi } from "../../hooks";
 import { MetadataContext } from "../../utils/Metadata";
@@ -106,7 +106,7 @@ const PlayerMention = ({
 
   if (metadata.isLoading) return <>Loading..</>;
 
-  let resolvedPlayerId: number = typeof playerOrId === "number" ? playerOrId : playerOrId.id;
+  const resolvedPlayerId: number = typeof playerOrId === "number" ? playerOrId : playerOrId.id;
   if (typeof playerOrId !== "number") metadata.cachePlayers(playerOrId);
 
   const region: Region | undefined =

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { I18nContext, translate, translateCategoryName } from "../../utils/i18n/i18n";

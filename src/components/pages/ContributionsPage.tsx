@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { handleBars, I18nContext, Language, LanguageName, translate } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 
@@ -125,7 +125,7 @@ const ContributionsPage = () => {
                         Object.values(translations).map((val) =>
                           val[
                             (
-                              Object.entries(Language).find(([keyX, value]) => keyX === key) as [
+                              Object.entries(Language).find(([keyX, _]) => keyX === key) as [
                                 string,
                                 Language,
                               ]
