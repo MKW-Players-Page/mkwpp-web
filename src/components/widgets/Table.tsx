@@ -206,7 +206,7 @@ const ArrayTable = ({ rows, footerRows, tableData, headerRows, className }: Arra
           .join(" ")}
       />
     ))
-    .reduce((acc: (JSX.Element | RowSortData)[], val, idx) => {
+    .reduce((acc: (React.ReactNode | RowSortData)[], val, idx) => {
       let newIdx = idx;
       if (sort[1] !== Sort.Reset)
         newIdx = acc?.findIndex((r) => (r ? (r as RowSortData).rowIdx === idx : false));

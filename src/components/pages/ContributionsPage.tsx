@@ -377,8 +377,8 @@ const ContributionsPage = () => {
 
 interface FeatureProps {
   title?: string;
-  description?: JSX.Element;
-  images?: JSX.Element;
+  description?: React.ReactNode;
+  images?: React.ReactNode;
   workedOnBy?: number[];
   suggestedBy?: number[];
 }
