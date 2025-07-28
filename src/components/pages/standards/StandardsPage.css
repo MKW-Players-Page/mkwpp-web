@@ -7,7 +7,7 @@
 }
 
 .table-s1,
-.table-s1.radio-button-row,
+.table-s1.MuiToggleButtonGroup-root,
 .table-s3 {
   display: none;
 }
@@ -22,7 +22,7 @@
   .table-s1 {
     display: table-cell;
   }
-  .table-s1.radio-button-row {
+  .table-s1.MuiToggleButtonGroup-root {
     display: flex;
   }
   .table-b1 {

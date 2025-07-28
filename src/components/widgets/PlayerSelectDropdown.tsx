@@ -1,19 +1,24 @@
 import { useContext } from "react";
 import { useApi } from "../../hooks";
 import { PlayerBasic } from "../../api";
-import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
-import Dropdown, { DropdownItemSetDataChild } from "./Dropdown";
 import { FormContext } from "./Form";
 import { FlagIcon } from "./Icon";
+import { Autocomplete, Chip, createFilterOptions, TextField } from "@mui/material";
+import Deferred from "./Deferred";
+import PlayerMention from "./PlayerMention";
 
 export interface PlayerSelectDropdownProps {
-  setId: React.Dispatch<React.SetStateAction<number>>;
-  id: number;
+  setId:
+    | React.Dispatch<React.SetStateAction<number>>
+    | React.Dispatch<React.SetStateAction<number[]>>;
+  id: number | number[];
   restrictSet?: number[];
   blacklist?: boolean;
   disabled?: boolean;
   hideNoneValue?: boolean;
+  multiple?: boolean;
+  label?: string;
 }
 
 const PlayerSelectDropdown = ({
@@ -21,60 +26,172 @@ const PlayerSelectDropdown = ({
   setId,
   restrictSet,
   blacklist,
-  disabled,
+  disabled = false,
   hideNoneValue = true,
+  multiple = false,
+  label,
 }: PlayerSelectDropdownProps) => {
-  const { data: players } = useApi(() => PlayerBasic.getPlayerList(), [], "playerData");
-  const metadata = useContext(MetadataContext);
-  const { lang } = useContext(I18nContext);
-  const defaultValue: DropdownItemSetDataChild = {
-    type: "DropdownItemData",
-    hidden: hideNoneValue,
-    autodeleteText: true,
-    element: { text: translate("matchupPageDefaultValue", lang), value: 0 },
-  };
+  const { data: players, isLoading } = useApi(() => PlayerBasic.getPlayerList(), [], "playerData");
+
+  if (multiple)
+    return (
+      <Deferred isWaiting={isLoading}>
+        <PlayerSelectDropdownMultiple
+          id={id as number[]}
+          setId={setId as React.Dispatch<React.SetStateAction<number[]>>}
+          restrictSet={restrictSet}
+          blacklist={blacklist}
+          disabled={disabled}
+          hideNoneValue={hideNoneValue}
+          players={players}
+          label={label}
+        />
+      </Deferred>
+    );
 
   return (
-    <Dropdown
-      data={{
-        type: "TextInput",
-        defaultItemSet: 0,
-        value: id,
-        valueSetter: setId,
-        disabled: disabled,
-        data: [
-          {
-            id: 0,
-            children: [
-              ...((players
-                ?.filter((player) =>
-                  restrictSet !== undefined
-                    ? blacklist
-                      ? !restrictSet.includes(player.id)
-                      : restrictSet.includes(player.id)
-                    : true,
-                )
-                .sort((a, b) => ((a.alias ?? a.name) < (b.alias ?? b.name) ? -1 : 1))
-                .map((player) => {
-                  return {
-                    type: "DropdownItemData",
-                    element: {
-                      text: player.alias ?? player.name,
-                      value: player.id,
-                      rightIcon: (
-                        <FlagIcon
-                          region={metadata.getRegionById(
-                            player.regionId === 1 ? 0 : player.regionId,
-                          )}
-                        />
-                      ),
-                    },
-                  };
-                }) as DropdownItemSetDataChild[]) ?? []),
-              defaultValue,
-            ],
-          },
-        ],
+    <Deferred isWaiting={isLoading}>
+      <PlayerSelectDropdownSingle
+        id={id as number}
+        setId={setId as React.Dispatch<React.SetStateAction<number>>}
+        restrictSet={restrictSet}
+        blacklist={blacklist}
+        disabled={disabled}
+        hideNoneValue={hideNoneValue}
+        players={players}
+        label={label}
+      />
+    </Deferred>
+  );
+};
+
+export interface PlayerSelectDropdownPropsMultiple {
+  setId: React.Dispatch<React.SetStateAction<number[]>>;
+  id: number[];
+  restrictSet?: number[];
+  blacklist?: boolean;
+  disabled?: boolean;
+  hideNoneValue?: boolean;
+  players?: PlayerBasic[];
+  label?: string;
+}
+
+const PlayerSelectDropdownMultiple = ({
+  id,
+  setId,
+  restrictSet,
+  blacklist,
+  disabled = false,
+  hideNoneValue = true,
+  players,
+  label,
+}: PlayerSelectDropdownPropsMultiple) => {
+  const metadata = useContext(MetadataContext);
+
+  return (
+    <Autocomplete
+      value={id.map((a) => players?.find((r) => r.id === a) as PlayerBasic)}
+      onChange={(_, v) => {
+        if (v === null) {
+          setId([]);
+          return;
+        }
+        setId(v.map((r) => r.id));
+      }}
+      autoComplete
+      autoHighlight
+      openOnFocus
+      multiple
+      filterSelectedOptions
+      options={players?.sort((a, b) => (a.alias ?? a.name).localeCompare(b.alias ?? b.name)) ?? []}
+      filterOptions={createFilterOptions({
+        limit: 100,
+        ignoreCase: true,
+        ignoreAccents: true,
+      })}
+      renderInput={(params) => <TextField label={label} {...params} />}
+      getOptionLabel={(player) => player.alias ?? player.name}
+      renderOption={(props, option) => {
+        const { key, ...optionProps } = props;
+        return (
+          <li key={key} {...optionProps}>
+            <PlayerMention redirect={false} xxFlag playerOrId={option} />
+          </li>
+        );
+      }}
+      renderTags={(value: PlayerBasic[], getItemProps) => {
+        return value.map((option, index: number) => {
+          const { key, ...itemProps } = getItemProps({ index });
+          return (
+            <Chip
+              variant="outlined"
+              icon={<FlagIcon region={metadata.getRegionById(option.regionId)} />}
+              label={option.alias ?? option.name ?? ""}
+              key={key}
+              {...itemProps}
+            />
+          );
+        });
+      }}
+    />
+  );
+};
+
+export interface PlayerSelectDropdownPropsSingle {
+  setId: React.Dispatch<React.SetStateAction<number>>;
+  id: number;
+  restrictSet?: number[];
+  blacklist?: boolean;
+  disabled?: boolean;
+  hideNoneValue?: boolean;
+  players?: PlayerBasic[];
+  label?: string;
+}
+
+const PlayerSelectDropdownSingle = ({
+  id,
+  setId,
+  restrictSet,
+  blacklist,
+  disabled = false,
+  hideNoneValue = true,
+  players,
+  label,
+}: PlayerSelectDropdownPropsSingle) => {
+  const metadata = useContext(MetadataContext);
+
+  return (
+    <Autocomplete
+      value={players?.find((r) => r.id === id) as PlayerBasic}
+      onChange={(_, v) => {
+        if (v === null) return;
+        setId(v.id);
+      }}
+      autoComplete
+      autoHighlight
+      openOnFocus
+      filterSelectedOptions
+      options={players?.sort((a, b) => (a.alias ?? a.name).localeCompare(b.alias ?? b.name)) ?? []}
+      filterOptions={createFilterOptions({
+        limit: 100,
+        ignoreCase: true,
+        ignoreAccents: true,
+      })}
+      renderInput={(params) => {
+        params.InputProps.startAdornment = (
+          <FlagIcon region={metadata.getRegionById(players?.find((r) => r.id === id)?.regionId)} />
+        );
+
+        return <TextField label={label} {...params} />;
+      }}
+      getOptionLabel={(player) => player.alias ?? player.name}
+      renderOption={(props, option) => {
+        const { key, ...optionProps } = props;
+        return (
+          <li key={key} {...optionProps}>
+            <PlayerMention redirect={false} xxFlag playerOrId={option} />
+          </li>
+        );
       }}
     />
   );
@@ -101,18 +218,19 @@ export const PlayerSelectDropdownField = ({
 }: PlayerSelectDropdownFieldProps) => {
   const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
 
+  const setId = ((id: number) => setValue(field, id)) as React.Dispatch<
+    React.SetStateAction<number>
+  >;
   return (
     <div className="field">
-      <p>{label}</p>
       <PlayerSelectDropdown
         restrictSet={restrictSet}
         blacklist={blacklist}
         id={getValue(field)}
-        setId={(id) => {
-          setValue(field, id);
-        }}
+        setId={setId}
         disabled={disabledByForm || !!disabled}
         hideNoneValue={hideNoneValue}
+        label={label}
       />
     </div>
   );

@@ -193,14 +193,3 @@ input:disabled:hover,
 select:disabled:hover {
   background-color: var(--input-background-color-disabled-hover);
 }
-
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  align-self: center;
-  border: var(--input-border-color) 1px solid;
-  cursor: pointer;
-}
-input[type="checkbox"]:checked {
-  background-color: var(--input-selected);
-}

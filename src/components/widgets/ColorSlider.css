@@ -1,5 +1,8 @@
 .rainbow-slider {
   height: 4px;
+}
+
+.rainbow-slider > .MuiSlider-rail {
   background: linear-gradient(
     to right,
     #ff0000 0%,
@@ -10,6 +13,7 @@
     #ff00ff 83%,
     #ff0000 100%
   );
+  color: "none";
 }
 
 .color-slider {

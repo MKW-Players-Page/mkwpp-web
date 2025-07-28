@@ -9,11 +9,6 @@ import { getCategorySiteHue, getHighestValid } from "../../../utils/EnumUtils";
 import { formatLapMode, formatTime } from "../../../utils/Formatters";
 import { MetadataContext } from "../../../utils/Metadata";
 import OverwriteColor from "../../widgets/OverwriteColor";
-import Dropdown, {
-  DropdownData,
-  DropdownItemData,
-  DropdownItemSetDataChild,
-} from "../../widgets/Dropdown";
 import {
   useCategoryParam,
   useLapModeParam,
@@ -35,6 +30,7 @@ import { CategoryEnum, LapModeEnum, Timesheet } from "../../../api";
 import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import { TrackDropdown } from "../../widgets/TrackSelect";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 interface StandardDropdownProps {
   levelId: number;
@@ -43,84 +39,47 @@ interface StandardDropdownProps {
 
 // TODO: add some sort of grouping for standards on backend
 const SortingOfDropdown = [
-  1, 35, 2, 3, 4, 5, 36, 6, 7, 8, 9, 37, 10, 11, 12, 13, 38, 14, 15, 16, 17, 39, 18, 19, 20, 21, 40,
-  22, 23, 24, 25, 41, 26, 27, 28, 29, 42, 30, 31, 32, 33, 43,
+  43, 1, 35, 2, 3, 4, 5, 36, 6, 7, 8, 9, 37, 10, 11, 12, 13, 38, 14, 15, 16, 17, 39, 18, 19, 20, 21,
+  40, 22, 23, 24, 25, 41, 26, 27, 28, 29, 42, 30, 31, 32, 33, 34,
 ];
 
 const StandardDropdown = ({ levelId, setLevelId }: StandardDropdownProps) => {
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
 
-  const standardsData: DropdownItemSetDataChild[] = metadata.standardLevels?.map((l) => {
-    return {
-      type: "DropdownItemData",
-      element: { text: translateStandardName(l, lang), value: l.id },
-    } as DropdownItemSetDataChild;
-  }) ?? [
-    { type: "DropdownItemData", element: { text: "God", value: 1 } },
-    { type: "DropdownItemData", element: { text: "God", value: 1 } },
-  ];
-
-  standardsData.pop();
-  standardsData.push(
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllMyth", lang), value: 35 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllLegend", lang), value: 36 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllKing", lang), value: 37 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllHero", lang), value: 38 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllExpert", lang), value: 39 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllIntermediate", lang), value: 40 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllApprentice", lang), value: 41 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAllBeginner", lang), value: 42 },
-    },
-    {
-      type: "DropdownItemData",
-      element: { text: translate("standardsPageStandardDropdownAll", lang), value: 43 },
-    },
-  );
-
   return (
-    <Dropdown
-      data={
-        {
-          type: "Normal",
-          value: levelId,
-          valueSetter: setLevelId,
-          defaultItemSet: 0,
-          data: [
-            {
-              id: 0,
-              children: standardsData.sort(
-                (a, b) =>
-                  SortingOfDropdown.indexOf((a.element as DropdownItemData).value) -
-                  SortingOfDropdown.indexOf((b.element as DropdownItemData).value),
-              ),
-            },
-          ],
-        } as DropdownData
-      }
+    <Autocomplete
+      value={levelId}
+      style={{ minWidth: "300px" }}
+      onChange={(_, v) => {
+        if (v === null) return;
+        setLevelId(v);
+      }}
+      autoComplete
+      autoHighlight
+      openOnFocus
+      options={SortingOfDropdown}
+      filterOptions={createFilterOptions({
+        ignoreCase: true,
+        ignoreAccents: true,
+      })}
+      renderInput={(params) => {
+        return <TextField {...params} />;
+      }}
+      getOptionLabel={(option) => {
+        const standardLevel = metadata.standardLevels?.find((r) => r.id === option);
+        if (standardLevel !== undefined) return translateStandardName(standardLevel, lang);
+        if (option === 35) return translate("standardsPageStandardDropdownAllMyth", lang);
+        if (option === 36) return translate("standardsPageStandardDropdownAllLegend", lang);
+        if (option === 37) return translate("standardsPageStandardDropdownAllKing", lang);
+        if (option === 38) return translate("standardsPageStandardDropdownAllHero", lang);
+        if (option === 39) return translate("standardsPageStandardDropdownAllExpert", lang);
+        if (option === 40) return translate("standardsPageStandardDropdownAllIntermediate", lang);
+        if (option === 41) return translate("standardsPageStandardDropdownAllApprentice", lang);
+        if (option === 42) return translate("standardsPageStandardDropdownAllBeginner", lang);
+        if (option === 43) return translate("standardsPageStandardDropdownAll", lang);
+        return translateStandardName(undefined, lang);
+      }}
     />
   );
 };
@@ -154,8 +113,6 @@ const StandardsPage = () => {
     "Timesheet.get",
   );
 
-  const tableData: ArrayTableData = { classNames: [] };
-
   let hasHighlightedRow = [false, false];
 
   const highestValidPerTrack = [
@@ -177,26 +134,26 @@ const StandardsPage = () => {
     ),
   ];
 
-  const filteredStandards: ArrayTableCellData[][] =
-    metadata.standards
-      ?.filter(
-        (standard) =>
-          standard.standardLevelId !== 34 &&
-          (category === CategoryEnum.NonShortcut
-            ? standard.category === category
-            : standard.category === highestValidPerTrack[+standard.isLap][standard.trackId - 1]) &&
-          (levelId < 34
-            ? standard.standardLevelId === levelId
-            : levelId === 43 || Filter[levelId].includes(standard.standardLevelId)) &&
-          (track === -5 || standard.trackId === track),
-      )
-      .sort(
-        (a, b) =>
-          a.trackId - b.trackId ||
-          a.standardLevelId - b.standardLevelId ||
-          (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
-      )
-      .map((standard, idx, arr) => {
+  const { filteredStandards, tableData } = metadata.standards
+    ?.filter(
+      (standard) =>
+        standard.standardLevelId !== 34 &&
+        (category === CategoryEnum.NonShortcut
+          ? standard.category === category
+          : standard.category === highestValidPerTrack[+standard.isLap][standard.trackId - 1]) &&
+        (levelId < 34
+          ? standard.standardLevelId === levelId
+          : levelId === 43 || Filter[levelId].includes(standard.standardLevelId)) &&
+        (track === -5 || standard.trackId === track),
+    )
+    .sort(
+      (a, b) =>
+        a.trackId - b.trackId ||
+        a.standardLevelId - b.standardLevelId ||
+        (a.isLap ? 1 : 0) - (b.isLap ? 1 : 0),
+    )
+    .reduce(
+      (acc, standard, idx, arr) => {
         const track = metadata.tracks?.find((track) => track.id === standard.trackId);
         const value = formatTime(standard.value ?? 0);
 
@@ -216,10 +173,10 @@ const StandardsPage = () => {
             )?.value ?? 360000)
         ) {
           hasHighlightedRow[+(standard?.isLap ?? false)] = true;
-          tableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
+          acc.tableData.classNames?.push({ rowIdx: idx, className: "highlighted" });
         }
 
-        return [
+        acc.filteredStandards.push([
           {
             content: (
               <Link
@@ -265,8 +222,17 @@ const StandardsPage = () => {
           { content: standard.isLap ? null : value, className: "table-b1" },
           { content: value, expandCell: [false, !standard.isLap], className: "table-b1" },
           { content: value, className: "table-s1" },
-        ] as ArrayTableCellData[];
-      }) ?? [];
+        ]);
+
+        acc.tableData.rowKeys?.push(`${standard.trackId}-${standard.isLap}-${standard.id}`);
+
+        return acc;
+      },
+      {
+        filteredStandards: [] as ArrayTableCellData[][],
+        tableData: { classNames: [], rowKeys: [] } as ArrayTableData,
+      },
+    ) ?? { filteredStandards: [], tableData: { classNames: [], rowKeys: [] } };
 
   const siteHue = getCategorySiteHue(category, settings);
 

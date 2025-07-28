@@ -14,7 +14,10 @@ import "./RecentTimes.css";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "./SmallBigFormat";
 import ArrayTable, { ArrayTableCellData } from "./Table";
 import { secondsToDate } from "../../utils/DateUtils";
-import RadioButtons from "./RadioButtons";
+
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { Box, Slider } from "@mui/material";
 
 interface RecentTimesProps {
   defaultLimit?: number;
@@ -105,39 +108,41 @@ const RecentTimes = ({ defaultLimit, canChangeLimit = false }: RecentTimesProps)
           : translate("recentTimesRecentTimesHeading", lang)
       }
     >
-      <div style={{ padding: "5px" }}>
+      <div style={{ padding: "15px" }}>
+        <ToggleButtonGroup
+          value={records}
+          onChange={(_, records: boolean) => {
+            if (records !== null) setRecords(records);
+          }}
+          exclusive
+          fullWidth
+          style={{ margin: 0 }}
+          size="small"
+        >
+          <ToggleButton value={false}>
+            {translate("constantCountryRankingsTopEnumAll", lang)}
+          </ToggleButton>
+          <ToggleButton value={true}>
+            {translate("constantCountryRankingsTopEnumRecords", lang)}
+          </ToggleButton>
+        </ToggleButtonGroup>
         {canChangeLimit && (
-          <div
-            className="module-row"
-            style={{ gap: "5px", alignItems: "baseline", paddingBottom: "5px" }}
-          >
+          <Box style={{ marginTop: "15px" }}>
             <span>{translate("trackListPageMoreTimes", lang)}</span>
-            <input
-              type="number"
-              style={{ flexGrow: 1 }}
-              defaultValue={30}
-              onChange={(e) => {
-                let value = parseInt(e.target.value);
-                if (isNaN(value) || value < 31) {
-                  e.target.value = String((value = 30));
-                }
-                setLimit(value);
+            <Slider
+              onChangeCommitted={(_, v) => {
+                if (typeof v === "number") setLimit(v);
               }}
-              step="30"
-              min="30"
-              pattern="[0-9]*"
+              size="small"
+              valueLabelDisplay="auto"
+              defaultValue={30}
+              step={30}
+              shiftStep={30}
+              min={30}
+              max={3000}
             />
-          </div>
+          </Box>
         )}
-        <RadioButtons
-          data={[
-            { text: translate("constantCountryRankingsTopEnumAll", lang), value: false },
-            { text: translate("constantCountryRankingsTopEnumRecords", lang), value: true },
-          ]}
-          state={records}
-          setState={setRecords}
-          className="recent-times-input"
-        />
       </div>
       <Deferred isWaiting={recentTimesLoading || metadata.isLoading}>
         <ArrayTable

@@ -13,7 +13,6 @@ import {
   useRowHighlightParam,
   useTopParam,
 } from "../../utils/SearchParams";
-import Dropdown, { DropdownData } from "../widgets/Dropdown";
 import {
   handleBars,
   I18nContext,
@@ -33,6 +32,7 @@ import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { useMetadata } from "../../utils/Metadata";
 import { RegionTypeRadio } from "../widgets/RegionTypeSelect";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -145,27 +145,19 @@ const CountryRankingsPage = () => {
             onChange={setRegionType}
             options={[RegionType.Country, RegionType.Continent, RegionType.Subnational]}
           />
-          <Dropdown
-            data={
-              {
-                type: "Normal",
-                defaultItemSet: 0,
-                value: top,
-                valueSetter: setTopNumber,
-                data: [
-                  {
-                    id: 0,
-                    children: CountryRankingsTopEnumValues.map((r) => {
-                      return {
-                        type: "DropdownItemData",
-                        element: { text: translateCountryRankingsTopEnum(r, lang), value: r },
-                      };
-                    }),
-                  },
-                ],
-              } as DropdownData
-            }
-          />
+          <ToggleButtonGroup
+            value={top}
+            onChange={(_, v) => {
+              if (v !== null) setTopNumber(v);
+            }}
+            exclusive
+          >
+            {CountryRankingsTopEnumValues.map((option) => (
+              <ToggleButton value={option}>
+                {translateCountryRankingsTopEnum(option, lang)}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
         </div>
         <div className="module">
           <Deferred isWaiting={isLoading}>

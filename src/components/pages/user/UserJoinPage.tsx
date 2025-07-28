@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Pages, resolvePage } from "../Pages";
-import Form, { Field } from "../../widgets/Form";
+import Form, { TextFormField } from "../../widgets/Form";
 import { UserContext } from "../../../utils/User";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { User } from "../../../api";
@@ -72,16 +72,20 @@ const UserJoinPage = () => {
         submitLabel={translate("userJoinPageFormLabelSubmitButton", lang)}
         submit={submit}
       >
-        <Field type="email" field="email" label={translate("userJoinPageEmailLabel", lang)} />
-        <Field type="text" field="username" label={translate("userJoinPageUsernameLabel", lang)} />
-        <Field
-          type="password"
+        <TextFormField
+          type="email"
+          field="email"
+          label={translate("userJoinPageEmailLabel", lang)}
+        />
+        <TextFormField field="username" label={translate("userJoinPageUsernameLabel", lang)} />
+        <TextFormField
           field="password"
+          password
           label={translate("userJoinPagePasswordLabel", lang)}
         />
-        <Field
-          type="password"
+        <TextFormField
           field="password2"
+          password
           label={translate("userJoinPageConfirmPasswordLabel", lang)}
         />
       </Form>

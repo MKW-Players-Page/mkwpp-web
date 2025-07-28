@@ -1,9 +1,9 @@
+import { Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminUser } from "../../../../api";
-import { Tooltip } from "../../../widgets";
 
-import Form, { FormState, Field } from "../../../widgets/Form";
+import Form, { FormState, TextFormField, SwitchFormField } from "../../../widgets/Form";
 import { PlayerSelectDropdownField } from "../../../widgets/PlayerSelectDropdown";
 
 export interface AdminUserModuleProps {
@@ -92,7 +92,7 @@ const AdminUserModule = ({ user }: AdminUserModuleProps) => {
       >
         {user ? (
           <p>
-            <Tooltip text={"This should not be modified while the server is running."} left>
+            <Tooltip title={"This should not be modified while the server is running."}>
               <span style={{ fontWeight: "700", fontSize: "1.4em" }}>ID - {user.id}</span>
             </Tooltip>
           </p>
@@ -100,17 +100,23 @@ const AdminUserModule = ({ user }: AdminUserModuleProps) => {
           <></>
         )}
 
-        <Field type="text" field="username" label="Username" />
-        <Field type="text" field="password" label="Reset Password" />
-        <Field type="text" field="email" label="Email" />
-        <Field
-          defaultChecked={state.isVerified}
-          type="checkbox"
-          field="isVerified"
-          label="Is Verified"
+        <TextFormField field="username" label="Username" />
+        <TextFormField
+          password
+          field="password"
+          label="Reset Password"
+          helperText="Setting this will reset the password for the player"
         />
-        <Field defaultChecked={state.isActive} type="checkbox" field="isActive" label="Is Active" />
-        <Field defaultChecked={state.isStaff} type="checkbox" field="isStaff" label="Is Staff" />
+        <TextFormField field="email" label="Email" />
+        <div className="module-row">
+          <SwitchFormField
+            defaultChecked={state.isVerified}
+            field="isVerified"
+            label="Is Verified"
+          />
+          <SwitchFormField defaultChecked={state.isActive} field="isActive" label="Is Active" />
+          <SwitchFormField defaultChecked={state.isStaff} field="isStaff" label="Is Staff" />
+        </div>
         <PlayerSelectDropdownField field="playerId" label="Associated Player" hideNoneValue />
       </Form>
     </div>

@@ -31,7 +31,9 @@ const PastChampsPage = () => {
     <>
       <h1>{translate("pastChampsPageHeading", lang)}</h1>
       <OverwriteColor hue={siteHue}>
-        <CategoryRadio value={category} onChange={setCategory} />
+        <div className="module-row">
+          <CategoryRadio value={category} onChange={setCategory} />
+        </div>
         <Deferred isWaiting={isLoading}>
           <div className="module table-hover-rows">
             <ArrayTable

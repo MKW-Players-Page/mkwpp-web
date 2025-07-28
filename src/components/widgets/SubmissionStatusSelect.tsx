@@ -2,9 +2,8 @@ import { useContext } from "react";
 
 import { FormContext } from "./Form";
 import { SubmissionStatus, SubmissionStatusValues } from "../../api";
-import Dropdown, { DropdownData, DropdownItemSetDataChild } from "./Dropdown";
 import { I18nContext, translateSubmissionStatus } from "../../utils/i18n/i18n";
-import RadioButtons from "./RadioButtons";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 export interface SubmissionStatusSelectProps {
   /** The currently selected status */
@@ -23,47 +22,18 @@ export const SubmissionStatusRadio = ({
   const { lang } = useContext(I18nContext);
 
   return (
-    <RadioButtons
-      disabled={!!disabled}
-      data={SubmissionStatusValues.map((r) => {
-        return { text: translateSubmissionStatus(r, lang), value: r };
-      })}
-      state={value}
-      setState={onChange}
-    />
-  );
-};
-
-const SubmissionStatusSelect = ({ value, onChange, disabled }: SubmissionStatusSelectProps) => {
-  disabled = !!disabled;
-  const { lang } = useContext(I18nContext);
-
-  return (
-    <Dropdown
-      data={
-        {
-          type: "Normal",
-          value: value,
-          valueSetter: onChange,
-          disabled: disabled,
-          defaultItemSet: 0,
-          data: [
-            {
-              id: 0,
-              children: SubmissionStatusValues.map((category) => {
-                return {
-                  type: "DropdownItemData",
-                  element: {
-                    text: translateSubmissionStatus(category, lang),
-                    value: category,
-                  },
-                } as DropdownItemSetDataChild;
-              }),
-            },
-          ],
-        } as DropdownData
-      }
-    />
+    <ToggleButtonGroup
+      value={value}
+      onChange={(_, v) => {
+        if (v !== null) onChange(v);
+      }}
+      exclusive
+      disabled={disabled}
+    >
+      {SubmissionStatusValues.map((option) => (
+        <ToggleButton value={option}>{translateSubmissionStatus(option, lang)}</ToggleButton>
+      ))}
+    </ToggleButtonGroup>
   );
 };
 
@@ -76,23 +46,6 @@ export interface SubmissionStatusFieldProps {
   label: string;
   disabled?: boolean;
 }
-
-export const SubmissionStatusField = ({ field, label, disabled }: SubmissionStatusFieldProps) => {
-  const { getValue, setValue, disabled: disabledByForm } = useContext(FormContext);
-
-  return (
-    <div className="field">
-      <p>{label}</p>
-      <SubmissionStatusSelect
-        value={getValue(field) ?? SubmissionStatus.Pending}
-        onChange={(category) => {
-          setValue(field, category.toString());
-        }}
-        disabled={disabled || disabledByForm}
-      />
-    </div>
-  );
-};
 
 export const SubmissionStatusRadioField = ({
   field,
@@ -115,4 +68,4 @@ export const SubmissionStatusRadioField = ({
   );
 };
 
-export default SubmissionStatusSelect;
+export default SubmissionStatusRadio;

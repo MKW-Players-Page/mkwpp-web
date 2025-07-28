@@ -135,6 +135,7 @@ const RulesPage = () => {
                     <li>{translate("rulesPageCategoryRulesParagraph14", lang)}</li>
                     <li>{translate("rulesPageCategoryRulesParagraph15", lang)}</li>
                     <li>{translate("rulesPageCategoryRulesParagraph16", lang)}</li>
+                    <li>{translate("rulesPageCategoryRulesParagraph35", lang)}</li>
                     <li>
                       <p>{translate("rulesPageCategoryRulesParagraph17", lang)}</p>
                       <ol>

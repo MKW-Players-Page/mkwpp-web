@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 import init, { read_rksys, RKG } from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
-import { Icon, Tab, TabbedModule, Tooltip } from "../widgets";
+import { Icon, Tab, TabbedModule } from "../widgets";
 import {
   Score,
   Track,
@@ -22,7 +22,6 @@ import { useApi } from "../../hooks";
 import { handleBars, I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import SubmissionForm from "../widgets/SubmissionForm";
 import SubmissionCard from "../widgets/SubmissionCard";
-import RadioButtons from "../widgets/RadioButtons";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import { formatDate, formatTime } from "../../utils/Formatters";
 import { CategoryRadio } from "../widgets/CategorySelect";
@@ -34,6 +33,7 @@ import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
+import { Box, Switch, ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
 
 const SubmitTab = () => {
   const { lang } = useContext(I18nContext);
@@ -89,10 +89,7 @@ const BulkSubmitTab = () => {
   // technically unsafe but, be real
   const ids = useRef(0);
 
-  const lic1 = useRef<null | HTMLInputElement>(null);
-  const lic2 = useRef<null | HTMLInputElement>(null);
-  const lic3 = useRef<null | HTMLInputElement>(null);
-  const lic4 = useRef<null | HTMLInputElement>(null);
+  const [bitMapLicenses, setLicenseBitmap] = useState(0b0000);
 
   const [times, setTimes] = useState<RKGExportedTime[]>([]);
   const rows: ArrayTableCellData[][] = times.map((time) => {
@@ -144,30 +141,25 @@ const BulkSubmitTab = () => {
           </div>
         </OverwriteColor>
         <div className="module-row wrap" style={{ marginBottom: "16px" }}>
-          <div className="module-row">
-            <label htmlFor="lic1">
-              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 1]])}
-            </label>
-            <input type="checkbox" id="lic1" ref={lic1} defaultChecked />
-          </div>
-          <div className="module-row">
-            <label htmlFor="lic2">
-              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 2]])}
-            </label>
-            <input type="checkbox" id="lic2" ref={lic2} defaultChecked />
-          </div>
-          <div className="module-row">
-            <label htmlFor="lic3">
-              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 3]])}
-            </label>
-            <input type="checkbox" id="lic3" ref={lic3} defaultChecked />
-          </div>
-          <div className="module-row">
-            <label htmlFor="lic4">
-              {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [["number", 4]])}
-            </label>
-            <input type="checkbox" id="lic4" ref={lic4} defaultChecked />
-          </div>
+          {[
+            [1, 0b0001],
+            [2, 0b0010],
+            [3, 0b0100],
+            [4, 0b1000],
+          ].map(([number, bitmask]) => (
+            <Box>
+              <p>
+                {handleBars(translate("submissionPageBulkSubmitTabLicence", lang), [
+                  ["number", number],
+                ])}
+              </p>
+              <Switch
+                onChange={(_, c) =>
+                  setLicenseBitmap((prev) => (c ? prev | bitmask : prev & ~bitmask))
+                }
+              />
+            </Box>
+          ))}
         </div>
         <div
           style={{ marginBottom: "16px" }}
@@ -178,12 +170,6 @@ const BulkSubmitTab = () => {
             actualUpload.accept = ".dat";
             document.getElementById("root")?.appendChild(actualUpload);
             actualUpload.click();
-            const bitMapLicenses =
-              0b0000 |
-              (lic1.current && lic1.current.checked ? 0b0001 : 0) |
-              (lic2.current && lic2.current.checked ? 0b0010 : 0) |
-              (lic3.current && lic3.current.checked ? 0b0100 : 0) |
-              (lic4.current && lic4.current.checked ? 0b1000 : 0);
             actualUpload.addEventListener("change", async () => {
               const wasm = init().then(async () => {
                 if (!actualUpload.files) return;
@@ -262,24 +248,24 @@ const SubmissionsTab = () => {
 
   return (
     <div className="module-content">
-      <RadioButtons
-        state={filter}
-        setState={setFilter}
-        data={[
-          {
-            text: translate("submissionPageMySubmissionsTabFilterByYou", lang),
-            value: SubmissionFilter.ByYou,
-          },
-          {
-            text: translate("submissionPageMySubmissionsTabFilterForYou", lang),
-            value: SubmissionFilter.ForYou,
-          },
-          {
-            text: translate("submissionPageMySubmissionsTabFilterAll", lang),
-            value: SubmissionFilter.All,
-          },
-        ]}
-      />
+      <ToggleButtonGroup
+        value={filter}
+        onChange={(_, v) => {
+          if (v !== null) setFilter(v);
+        }}
+        exclusive
+        fullWidth
+      >
+        <ToggleButton value={SubmissionFilter.ByYou}>
+          {translate("submissionPageMySubmissionsTabFilterByYou", lang)}
+        </ToggleButton>
+        <ToggleButton value={SubmissionFilter.ForYou}>
+          {translate("submissionPageMySubmissionsTabFilterForYou", lang)}
+        </ToggleButton>
+        <ToggleButton value={SubmissionFilter.All}>
+          {translate("submissionPageMySubmissionsTabFilterAll", lang)}
+        </ToggleButton>
+      </ToggleButtonGroup>
       <Deferred isWaiting={isLoading || metadata.isLoading}>
         <div key={reload} className="card-container">
           {submissions
@@ -475,15 +461,17 @@ const TimesheetTab = () => {
                       </td>
                       <td className="icon-cell">
                         {score.comment && (
-                          <Tooltip text={score.comment}>
-                            <Icon icon="Comment" />
+                          <Tooltip title={score.comment}>
+                            <span>
+                              <Icon icon="Comment" />
+                            </span>
                           </Tooltip>
                         )}
                       </td>
                       <td className="icon-cell">
                         {submission && (
                           <Tooltip
-                            text={
+                            title={
                               <span style={{ whiteSpace: "nowrap" }}>
                                 {submission.submitterNote ? (
                                   <div style={{ marginBottom: "15px" }}>
@@ -509,14 +497,16 @@ const TimesheetTab = () => {
                               </span>
                             }
                           >
-                            <Icon icon="Note" />
+                            <span>
+                              <Icon icon="Note" />
+                            </span>
                           </Tooltip>
                         )}
                       </td>
                       <td className="icon-cell">
                         {submission && (
                           <Tooltip
-                            text={
+                            title={
                               <span style={{ whiteSpace: "nowrap" }}>
                                 {submission.reviewerNote ? (
                                   <div style={{ marginBottom: "15px" }}>
@@ -571,22 +561,24 @@ const TimesheetTab = () => {
                               </span>
                             }
                           >
-                            {submission.status === SubmissionStatus.Accepted ? (
-                              <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
-                                <Icon icon="SubmissionAccepted" />
-                              </OverwriteColor>
-                            ) : submission.status === SubmissionStatus.Rejected ? (
-                              <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
-                                <Icon icon="SubmissionRejected" />
-                              </OverwriteColor>
-                            ) : submission.status === SubmissionStatus.Pending ||
-                              submission.status === SubmissionStatus.OnHold ? (
-                              <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
-                                <Icon icon="SubmissionPending" />
-                              </OverwriteColor>
-                            ) : (
-                              <></>
-                            )}
+                            <span>
+                              {submission.status === SubmissionStatus.Accepted ? (
+                                <OverwriteColor hue={100} luminosityShift={1} saturationShift={100}>
+                                  <Icon icon="SubmissionAccepted" />
+                                </OverwriteColor>
+                              ) : submission.status === SubmissionStatus.Rejected ? (
+                                <OverwriteColor hue={0} luminosityShift={1} saturationShift={100}>
+                                  <Icon icon="SubmissionRejected" />
+                                </OverwriteColor>
+                              ) : submission.status === SubmissionStatus.Pending ||
+                                submission.status === SubmissionStatus.OnHold ? (
+                                <OverwriteColor hue={20} luminosityShift={1} saturationShift={100}>
+                                  <Icon icon="SubmissionPending" />
+                                </OverwriteColor>
+                              ) : (
+                                <></>
+                              )}
+                            </span>
                           </Tooltip>
                         )}
                       </td>

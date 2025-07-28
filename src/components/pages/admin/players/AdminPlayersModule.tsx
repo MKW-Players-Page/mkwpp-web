@@ -1,12 +1,11 @@
+import { Tooltip } from "@mui/material";
+import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminPlayer } from "../../../../api";
-import { secondsToDate } from "../../../../utils/DateUtils";
-import { formatDate } from "../../../../utils/Formatters";
 import { mkwReleaseDate } from "../../../../utils/Numbers";
-import { Tooltip } from "../../../widgets";
 
-import Form, { FormState, Field } from "../../../widgets/Form";
+import Form, { FormState, TextFormField, DateFormField } from "../../../widgets/Form";
 import { RegionSelectionDropdownField } from "../../../widgets/RegionDropdown";
 
 export interface AdminPlayerModuleProps {
@@ -16,8 +15,8 @@ export interface AdminPlayerModuleProps {
 interface AdminPlayerModuleState extends FormState {
   name: string;
   regionId: number;
-  joinedDate: Date;
-  lastActivity: Date;
+  joinedDate: Dayjs;
+  lastActivity: Dayjs;
   submitters: Array<number>;
   alias?: string;
   bio?: string;
@@ -28,8 +27,8 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
   const initialState: AdminPlayerModuleState = {
     name: player?.name ?? "",
     regionId: player?.regionId ?? 1,
-    joinedDate: player ? secondsToDate(player.joinedDate) : new Date(mkwReleaseDate),
-    lastActivity: player ? secondsToDate(player.lastActivity) : new Date(mkwReleaseDate),
+    joinedDate: player ? dayjs.unix(player.joinedDate) : dayjs(mkwReleaseDate),
+    lastActivity: player ? dayjs.unix(player.lastActivity) : dayjs(mkwReleaseDate),
     submitters: player?.submitters ?? [],
     alias: player?.alias ?? "",
     bio: player?.bio ?? "",
@@ -47,8 +46,8 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
           player.id,
           state.name,
           state.regionId,
-          state.joinedDate,
-          state.lastActivity,
+          state.joinedDate.toDate(),
+          state.lastActivity.toDate(),
           state.submitters,
           state.alias !== "" ? state.alias : undefined,
           state.bio !== "" ? state.bio : undefined,
@@ -58,8 +57,8 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
         AdminPlayer.insertPlayer(
           state.name,
           state.regionId,
-          state.joinedDate,
-          state.lastActivity,
+          state.joinedDate.toDate(),
+          state.lastActivity.toDate(),
           state.submitters,
           state.alias !== "" ? state.alias : undefined,
           state.bio !== "" ? state.bio : undefined,
@@ -99,7 +98,7 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
       >
         {player ? (
           <p>
-            <Tooltip text={"This should not be modified while the server is running."} left>
+            <Tooltip title={"This should not be modified while the server is running."}>
               <span style={{ fontWeight: "700", fontSize: "1.4em" }}>ID - {player.id}</span>
             </Tooltip>
           </p>
@@ -107,31 +106,17 @@ const AdminPlayerModule = ({ player }: AdminPlayerModuleProps) => {
           <></>
         )}
 
-        <Field type="text" field="name" label="Name" />
+        <TextFormField field="name" label="Name" />
 
         <RegionSelectionDropdownField field="regionId" label="Region" />
 
-        <Field
-          type="date"
-          field="joinedDate"
-          label="Joined Date"
-          fromStringFunction={(x) => new Date(Date.parse(x))}
-          toStringFunction={formatDate}
-        />
+        <DateFormField field="joinedDate" label="Joined Date" />
 
-        <Field
-          type="date"
-          field="lastActivity"
-          label="Last Activity"
-          fromStringFunction={(x) => new Date(Date.parse(x))}
-          toStringFunction={formatDate}
-        />
+        <DateFormField field="lastActivity" label="Last Activity" />
 
-        <Field type="text" field="alias" label="Alias" />
-
-        <Field type="text" field="bio" label="Bio" />
-
-        <Field type="text" field="pronouns" label="Pronouns" />
+        <TextFormField field="alias" label="Alias" />
+        <TextFormField field="bio" label="Bio" multiline />
+        <TextFormField field="pronouns" label="Pronouns" />
       </Form>
     </div>
   );

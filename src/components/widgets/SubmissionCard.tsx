@@ -12,7 +12,6 @@ import Icon from "./Icon";
 import ObscuredModule from "./ObscuredModule";
 import OverwriteColor from "./OverwriteColor";
 import SubmissionForm from "./SubmissionForm";
-import Tooltip from "./Tooltip";
 
 import "./SubmissionCard.css";
 import PlayerMention from "./PlayerMention";
@@ -20,6 +19,7 @@ import { LapModeEnum, Submission, SubmissionStatus } from "../../api";
 import { SettingsContext } from "../../utils/Settings";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { secondsToDate } from "../../utils/DateUtils";
+import { Tooltip } from "@mui/material";
 
 export interface SubmissionCardProps {
   submission: Submission;
@@ -58,8 +58,10 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
               </a>
             )}
             {submission.comment && (
-              <Tooltip left text={submission.comment}>
-                <Icon icon="Comment" />
+              <Tooltip title={submission.comment}>
+                <span>
+                  <Icon icon="Comment" />
+                </span>
               </Tooltip>
             )}
           </div>
@@ -104,7 +106,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
               <></>
             )}
             <Tooltip
-              text={
+              title={
                 <span style={{ whiteSpace: "nowrap" }}>
                   {submission.submitterNote ? (
                     <div style={{ marginBottom: "15px" }}>{submission.submitterNote}</div>
@@ -132,10 +134,12 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                 </span>
               }
             >
-              <Icon icon="Note" />
+              <span>
+                <Icon icon="Note" />
+              </span>
             </Tooltip>
             <Tooltip
-              text={
+              title={
                 <span style={{ whiteSpace: "nowrap" }}>
                   {submission.reviewerNote !== "" &&
                   submission.reviewerNote !== null &&

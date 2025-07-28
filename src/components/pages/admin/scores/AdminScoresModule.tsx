@@ -1,14 +1,14 @@
+import { Tooltip } from "@mui/material";
+import dayjs, { Dayjs } from "dayjs";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminScore, CategoryEnum, LapModeEnum } from "../../../../api";
-import { secondsToDate } from "../../../../utils/DateUtils";
-import { formatDate } from "../../../../utils/Formatters";
 import { MetadataContext } from "../../../../utils/Metadata";
 import { mkwReleaseDate } from "../../../../utils/Numbers";
-import { Tooltip, TrackSelect } from "../../../widgets";
+import { TrackSelect } from "../../../widgets";
 import { CategoryRadioField } from "../../../widgets/CategorySelect";
 
-import Form, { FormState, Field } from "../../../widgets/Form";
+import Form, { DateFormField, FormState, TextFormField } from "../../../widgets/Form";
 import { LapModeRadioField } from "../../../widgets/LapModeSelect";
 import { PlayerSelectDropdownField } from "../../../widgets/PlayerSelectDropdown";
 import { TimeInputField } from "../../../widgets/TimeInput";
@@ -23,7 +23,7 @@ interface AdminScoreModuleState extends FormState {
   lapMode: LapModeEnum;
   playerId: number;
   trackId: number;
-  date: Date;
+  date: Dayjs;
   videoLink?: string;
   ghostLink?: string;
   comment?: string;
@@ -39,7 +39,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
     lapMode: score?.isLap ? LapModeEnum.Lap : LapModeEnum.Course,
     playerId: score?.playerId ?? 1,
     trackId: score?.trackId ?? 1,
-    date: score?.date ? secondsToDate(score.date) : new Date(mkwReleaseDate),
+    date: score?.date ? dayjs.unix(score.date) : dayjs(mkwReleaseDate),
     videoLink: score?.videoLink ?? "",
     ghostLink: score?.ghostLink ?? "",
     comment: score?.comment ?? "",
@@ -61,7 +61,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           state.lapMode === LapModeEnum.Lap,
           state.playerId,
           state.trackId,
-          state.date,
+          state.date.toDate(),
           state.videoLink === "" ? undefined : state.videoLink,
           state.ghostLink === "" ? undefined : state.ghostLink,
           state.comment === "" ? undefined : state.comment,
@@ -75,7 +75,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           state.lapMode === LapModeEnum.Lap,
           state.playerId,
           state.trackId,
-          state.date,
+          state.date.toDate(),
           state.videoLink === "" ? undefined : state.videoLink,
           state.ghostLink === "" ? undefined : state.ghostLink,
           state.comment === "" ? undefined : state.comment,
@@ -116,7 +116,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
       >
         {score ? (
           <p>
-            <Tooltip text={"This should not be modified while the server is running."} left>
+            <Tooltip title={"This should not be modified while the server is running."}>
               <span style={{ fontWeight: "700", fontSize: "1.4em" }}>ID - {score.id}</span>
             </Tooltip>
           </p>
@@ -133,25 +133,12 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
         <LapModeRadioField field="lapMode" label="Lap Mode" />
 
         <TimeInputField field="value" label="Time" />
-        <Field
-          type="date"
-          field="date"
-          label="Date"
-          fromStringFunction={(x) => new Date(Date.parse(x))}
-          toStringFunction={formatDate}
-        />
-        <Field type="text" field="videoLink" label="Video Link" />
-        <Field type="text" field="ghostLink" label="Ghost Link" />
-        <Field type="text" field="comment" label="Comment" />
-        <Field type="text" field="adminNote" label="Admin Note" />
-        <Field
-          fromStringFunction={(x) => parseInt(x)}
-          toStringFunction={(x) => String(x)}
-          type="number"
-          field="initialRank"
-          label="Initial Rank"
-          max="2147483647"
-        />
+        <DateFormField field="date" label="Date" />
+        <TextFormField field="videoLink" label="Video Link" />
+        <TextFormField field="ghostLink" label="Ghost Link" />
+        <TextFormField field="comment" label="Comment" />
+        <TextFormField field="adminNote" label="Admin Note" />
+        <TextFormField type="number" field="initialRank" label="Initial Rank" />
       </Form>
     </div>
   );

@@ -14,6 +14,8 @@ import { ReactComponent as SubmissionPendingIcon } from "../../assets/icons/subm
 import { ReactComponent as SubmissionRejectedIcon } from "../../assets/icons/submissionRejected.svg";
 import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
+import { ReactComponent as VisibleIcon } from "../../assets/icons/visible.svg";
+import { ReactComponent as InvisibleIcon } from "../../assets/icons/invisible.svg";
 import { useContext } from "react";
 import { SettingsContext } from "../../utils/Settings";
 import { MetadataContext } from "../../utils/Metadata";
@@ -32,6 +34,8 @@ export const Icons = {
   SubmissionRejected: SubmissionRejectedIcon,
   Note: NoteIcon,
   Delete: DeleteIcon,
+  Visible: VisibleIcon,
+  Invisible: InvisibleIcon,
 };
 
 export interface IconProps {

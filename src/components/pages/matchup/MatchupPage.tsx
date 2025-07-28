@@ -14,10 +14,10 @@ import { useCategoryParam, useIdsParam, useLapModeParam } from "../../../utils/S
 import { useApi } from "../../../hooks/ApiHook";
 import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import { CategoryRadio } from "../../widgets/CategorySelect";
-import RadioButtons from "../../widgets/RadioButtons";
 import ArrayTable, { ArrayTableCellData } from "../../widgets/Table";
 import { SmallBigTrackFormat } from "../../widgets/SmallBigFormat";
 import { MatchupData } from "../../../api/endpoints/playerTimesheet";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 const MatchupPage = () => {
   const searchParams = useSearchParams();
@@ -363,27 +363,25 @@ const MatchupPage = () => {
         <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
           <LapModeRadio includeOverall value={lapMode} onChange={setLapMode} />
+          {isTwoPlayers ? (
+            <></>
+          ) : (
+            <ToggleButtonGroup
+              value={differenceMode}
+              onChange={(_, v: boolean) => {
+                if (v !== null) setDifferenceMode(v);
+              }}
+              exclusive
+            >
+              <ToggleButton value={false}>
+                {translate("matchupPageDiffColToFirst", lang)}
+              </ToggleButton>
+              <ToggleButton value={true}>
+                {translate("matchupPageDiffColToNext", lang)}
+              </ToggleButton>
+            </ToggleButtonGroup>
+          )}
         </div>
-        {isTwoPlayers ? (
-          <></>
-        ) : (
-          <div className="module-row wrap">
-            <RadioButtons
-              state={differenceMode}
-              setState={setDifferenceMode}
-              data={[
-                {
-                  text: translate("matchupPageDiffColToFirst", lang),
-                  value: false,
-                },
-                {
-                  text: translate("matchupPageDiffColToNext", lang),
-                  value: true,
-                },
-              ]}
-            />
-          </div>
-        )}
         <Deferred isWaiting={metadata.isLoading || matchupDataIsLoading}>
           <div className="module" ref={tableModule}>
             <ArrayTable headerRows={headerRows} rows={rows} footerRows={footerRows} />

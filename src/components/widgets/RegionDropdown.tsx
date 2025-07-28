@@ -1,19 +1,13 @@
 import { useContext } from "react";
 
-import { Region, RegionTree } from "../../api";
+import { Region } from "../../api";
 import { MetadataContext } from "../../utils/Metadata";
 
 import "./RegionDropdown.css";
-import Dropdown, {
-  DropdownData,
-  DropdownItemData,
-  DropdownItemSetDataChild,
-  DropdownItemSetSetterData,
-} from "./Dropdown";
-import { I18nContext, translate, translateRegionName } from "../../utils/i18n/i18n";
+import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
 import { FlagIcon } from "./Icon";
-import { useApi } from "../../hooks";
 import { FormContext } from "./Form";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 
 export interface RegionSelectionDropdownProps {
   ranked: boolean;
@@ -36,92 +30,58 @@ const RegionSelectionDropdown = ({
 }: RegionSelectionDropdownProps) => {
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
+  if (metadata.isLoading) return <></>;
 
-  const { isLoading, data: tree } = useApi(
-    () => Region.getRegionDescendentsTree(),
-    [],
-    "getRegionDescendentsTree",
+  const regions = metadata.regions.filter((region) => {
+    if (ranked && !region.isRanked) return false;
+    if (onePlayerMin && (region.playerCount ?? 0) < 1) return false;
+    if (twoPlayerMin && (region.playerCount ?? 0) < 2) return false;
+    return true;
+  });
+
+  regions.sort(
+    (a, b) =>
+      (a.parentId ?? 0) - (b.parentId ?? 0) ||
+      translateRegionName(a, lang).localeCompare(translateRegionName(b, lang)),
   );
 
-  if (metadata.isLoading || isLoading || tree === undefined) return <></>;
-
-  const dropdownData: DropdownData = {
-    type: "Normal",
-    defaultItemSet: (ranked ? metadata.getFirstRankedParent(value)?.id : value?.parentId) ?? 0,
-    value: value,
-    valueSetter: setValue,
-    data: [],
-    disabled,
-  };
-
-  const read = (
-    parentId: number,
-    children: Array<number | RegionTree>,
-    backParent: number | null = null,
-  ) => {
-    let outChildren: DropdownItemSetDataChild[] = [];
-    if (typeof backParent === "number")
-      outChildren.push({
-        type: "DropdownItemSetSetterData",
-        element: {
-          text: translate("genericBackButton", lang),
-          toItemSetId: backParent,
-        } satisfies DropdownItemSetSetterData,
-      });
-
-    for (const child of children) {
-      const hasChildren = typeof child !== "number";
-      const regionId = hasChildren ? Number(Object.keys(child)[0]) : child;
-      if (hasChildren) read(regionId, child[regionId], parentId);
-
-      const region = metadata.getRegionById(regionId);
-      if (region === undefined) continue;
-      if (twoPlayerMin && (region.playerCount ?? 0) < 2) {
-        continue;
-      } else if (onePlayerMin && (region.playerCount ?? 0) < 1) {
-        continue;
+  return (
+    <Autocomplete
+      value={value}
+      style={{ minWidth: "300px" }}
+      onChange={(_, v) => {
+        if (v === null) return;
+        setValue(v);
+      }}
+      groupBy={(option) =>
+        translateRegionName(metadata.getRegionById(option.parentId), lang, "Subregions")
       }
+      autoComplete
+      autoHighlight
+      openOnFocus
+      filterSelectedOptions
+      options={regions}
+      filterOptions={createFilterOptions({
+        ignoreCase: true,
+        ignoreAccents: true,
+      })}
+      renderInput={(params) => {
+        params.InputProps.startAdornment = <FlagIcon region={value} showRegFlagRegardless />;
 
-      outChildren.push({
-        type: "DropdownItemData",
-        element: {
-          text: translateRegionName(region, lang),
-          rightIcon: <FlagIcon region={region} showRegFlagRegardless />,
-          value: region,
-        } satisfies DropdownItemData,
-      });
-
-      if (hasChildren)
-        outChildren.push({
-          type: "DropdownItemSetSetterData",
-          element: {
-            text: translateRegionName(region, lang, "Subregions"),
-            rightIcon: <span style={{ paddingRight: "7px" }}>»</span>,
-            toItemSetId: region.id,
-          } satisfies DropdownItemSetSetterData,
-        });
-    }
-
-    if (outChildren.length === 0) return;
-
-    dropdownData.data.push({
-      id: parentId,
-      children: outChildren.sort((a, b) =>
-        a.element.text === translate("genericBackButton", lang)
-          ? -1
-          : a.type === b.type
-            ? a.element.text > b.element.text
-              ? 1
-              : -1
-            : a.type > b.type
-              ? 1
-              : -1,
-      ),
-    });
-  };
-  read(0, [tree]);
-
-  return <Dropdown data={dropdownData} />;
+        return <TextField {...params} />;
+      }}
+      getOptionLabel={(region) => translateRegionName(region, lang)}
+      renderOption={(props, option) => {
+        const { key, ...optionProps } = props;
+        return (
+          <li key={key} {...optionProps}>
+            {<FlagIcon region={option} showRegFlagRegardless />}
+            {translateRegionName(option, lang)}
+          </li>
+        );
+      }}
+    />
+  );
 };
 
 export default RegionSelectionDropdown;

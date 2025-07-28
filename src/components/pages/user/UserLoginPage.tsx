@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Pages, resolvePage } from "../Pages";
 import { loginUser, UserContext } from "../../../utils/User";
-import Form, { Field } from "../../widgets/Form";
+import Form, { TextFormField } from "../../widgets/Form";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { User } from "../../../api";
 
@@ -46,9 +46,9 @@ const UserLoginPage = () => {
         submitLabel={translate("userLoginPageFormLabelSubmitButton", lang)}
         submit={submit}
       >
-        <Field type="text" field="username" label={translate("userLoginPageUsernameLabel", lang)} />
-        <Field
-          type="password"
+        <TextFormField field="username" label={translate("userLoginPageUsernameLabel", lang)} />
+        <TextFormField
+          password
           field="password"
           label={translate("userLoginPagePasswordLabel", lang)}
         />

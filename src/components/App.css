@@ -54,16 +54,14 @@
 .module-row {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  column-gap: 16px;
 }
 
 .module-row.wrap {
   flex-wrap: wrap;
-  margin-bottom: 16px;
 }
 
 .module-row.wrap > .module {
-  margin: 0;
   width: auto;
   flex-grow: 1;
 }
@@ -234,7 +232,7 @@ td.track-records-columns-s1,
 tr.track-records-columns-s1,
 th.track-records-columns-s1,
 span.track-records-columns-s1,
-.track-records-columns-s1.radio-button-row {
+.track-records-columns-s1.MuiToggleButtonGroup-root {
   display: none;
 }
 
@@ -253,7 +251,7 @@ span.track-records-columns-s1,
     display: var(--hideCourse);
   }
 
-  .track-records-columns-s1.radio-button-row {
+  .track-records-columns-s1.MuiToggleButtonGroup-root {
     display: flex;
   }
   span.track-records-columns-s1 {

@@ -1,7 +1,25 @@
-import Dropdown, { DropdownData } from "../../components/widgets/Dropdown";
 import { createContext, useContext } from "react";
 /* Keys are camel case, and should start with the file name for easy retrieval while editing. */
 import i18nJson from "./i18n.json";
+
+import {
+  deDE as deDEpickers,
+  itIT as itITpickers,
+  jaJP as jaJPpickers,
+  ptPT as ptPTpickers,
+  esES as esESpickers,
+  enUS as enUSpickers,
+  frFR as frFRpickers,
+} from "@mui/x-date-pickers/locales";
+import {
+  deDE as deDEcore,
+  itIT as itITcore,
+  jaJP as jaJPcore,
+  ptPT as ptPTcore,
+  esES as esEScore,
+  enUS as enUScore,
+  frFR as frFRcore,
+} from "@mui/material/locale";
 
 import { Metadata } from "../Metadata";
 import { browserSettingsLoadParse } from "../Settings";
@@ -16,6 +34,7 @@ import {
   SubmissionStatus,
   CountryRankingsTopEnum,
 } from "../../api";
+import { MenuItem, OutlinedInput, Select } from "@mui/material";
 
 export type TranslationKey = keyof typeof i18nJson;
 export type TranslationJson = Record<TranslationKey, Record<Language, string>>;
@@ -39,6 +58,53 @@ export enum LanguageName {
   Portuguese = "Português",
   Spanish = "Español",
 }
+
+export const getMuiXLocaleText = (lang: Language) => {
+  switch (lang) {
+    case Language.English:
+      return { core: enUScore, pickers: enUSpickers };
+    case Language.German:
+      return { core: deDEcore, pickers: deDEpickers };
+    case Language.Italian:
+      return { core: itITcore, pickers: itITpickers };
+    case Language.Japanese:
+      return { core: jaJPcore, pickers: jaJPpickers };
+    case Language.Portuguese:
+      return { core: ptPTcore, pickers: ptPTpickers };
+    case Language.Spanish:
+      return { core: esEScore, pickers: esESpickers };
+    case Language.French:
+      return { core: frFRcore, pickers: frFRpickers };
+  }
+};
+
+export const langCodeToLanguageName = (lang: Language) => {
+  switch (lang) {
+    case Language.English:
+      return LanguageName.English;
+    case Language.German:
+      return LanguageName.German;
+    case Language.Italian:
+      return LanguageName.Italian;
+    case Language.Japanese:
+      return LanguageName.Japanese;
+    case Language.Portuguese:
+      return LanguageName.Portuguese;
+    case Language.Spanish:
+      return LanguageName.Spanish;
+    case Language.French:
+      return LanguageName.French;
+  }
+};
+
+export const langCodeToFlagIcon = (lang: Language) => {
+  switch (lang) {
+    case Language.English:
+      return <FlagIcon region={"gb"} />;
+    default:
+      return <FlagIcon region={lang} />;
+  }
+};
 
 /** Get selected language from localStorage. */
 export const getLang = (): Language => {
@@ -89,37 +155,39 @@ export const handleBars = (
 };
 
 export const LanguageDropdown = () => {
-  const context = useContext(I18nContext);
+  const { lang, setLang } = useContext(I18nContext);
   return (
-    <Dropdown
-      data={
-        {
-          type: "Normal",
-          defaultItemSet: 0,
-          value: context.lang,
-          valueSetter: context.setLang,
-          data: [
-            {
-              id: 0,
-              children: [
-                [Language.English, LanguageName.English, <FlagIcon region={"gb"} />],
-                [Language.Italian, LanguageName.Italian, <FlagIcon region={"it"} />],
-                [Language.French, LanguageName.French, <FlagIcon region={"fr"} />],
-                [Language.German, LanguageName.German, <FlagIcon region={"de"} />],
-                [Language.Japanese, LanguageName.Japanese, <FlagIcon region={"jp"} />],
-                [Language.Portuguese, LanguageName.Portuguese, <FlagIcon region={"pt"} />],
-                [Language.Spanish, LanguageName.Spanish, <FlagIcon region={"es"} />],
-              ].map(([value, text, rightIcon]) => {
-                return {
-                  type: "DropdownItemData",
-                  element: { text, value, rightIcon },
-                };
-              }),
-            },
-          ],
-        } as DropdownData
-      }
-    />
+    <Select
+      style={{ marginTop: "15px" }}
+      value={lang}
+      onChange={(e) => {
+        if (e.target.value === null) return;
+        setLang(e.target.value);
+      }}
+      fullWidth
+      input={<OutlinedInput size="small" />}
+      renderValue={(selected) => (
+        <span>
+          {langCodeToFlagIcon(lang)}
+          {langCodeToLanguageName(lang)}
+        </span>
+      )}
+    >
+      {[
+        Language.English,
+        Language.Italian,
+        Language.French,
+        Language.German,
+        Language.Japanese,
+        Language.Portuguese,
+        Language.Spanish,
+      ].map((lang) => (
+        <MenuItem key={lang} value={lang}>
+          {langCodeToFlagIcon(lang)}
+          {langCodeToLanguageName(lang)}
+        </MenuItem>
+      ))}
+    </Select>
   );
 };
 
