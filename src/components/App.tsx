@@ -27,6 +27,11 @@ import "dayjs/locale/ja";
 import "dayjs/locale/pt";
 import "dayjs/locale/es";
 
+import dayjs from "dayjs";
+
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+
 interface AppUserState {
   isLoading: boolean;
   user?: User;
@@ -137,6 +142,7 @@ const App = () => {
         MuiPickersInputBase: {
           styleOverrides: {
             root: {
+              backgroundColor: "var(--module-background-color)",
               marginBottom: "16px",
               "& .MuiPickersOutlinedInput-notchedOutline": {
                 color: "var(--text-color)",
