@@ -1,6 +1,13 @@
 import { useContext, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router";
-import { AdminPlayer, AdminScore, CategoryEnum, PlayerBasic, Region } from "../../../../api";
+import { Link } from "react-router";
+import {
+  AdminPlayer,
+  AdminScore,
+  CategoryEnum,
+  FinalErrorResponse,
+  PlayerBasic,
+  Region,
+} from "../../../../api";
 import { useApi } from "../../../../hooks";
 import { getHighestValid } from "../../../../utils/EnumUtils";
 import { formatDate, formatTime } from "../../../../utils/Formatters";
@@ -120,7 +127,6 @@ const AdminParserOutputPage = () => {
   const scoresActions = useRef<ActionScore[]>([]);
   const playersActions = useRef<ActionPlayer[]>([]);
   const metadata = useContext(MetadataContext);
-  const navigate = useNavigate();
 
   scoresActions.current = [];
   playersActions.current = [];
@@ -256,47 +262,89 @@ const AdminParserOutputPage = () => {
       <input
         type="button"
         value="Submit"
-        onClick={(e) => {
+        onClick={async (e) => {
           (e.target as HTMLInputElement).disabled = true;
-          // TODO: Find a way to fix this
-          // eslint-disable-next-line
-          new Promise(async (resolve: (value: PlayerBasic[]) => void) => {
-            if (playersActions.current.length === 0 && playerList !== undefined)
-              return resolve(playerList);
+          const finalOutput = document.getElementById("finalOutput");
+          if (finalOutput === null) return;
+          finalOutput.innerHTML = "";
+          const addToOutput = (str: string) => {
+            finalOutput.innerHTML += `<p>${str}</p>`;
+          };
 
-            const promises = playersActions.current.map((r) =>
-              AdminPlayer.insertPlayer(r.playerName, r.regionId, new Date(), new Date(), [], []),
+          if (playerList === undefined) {
+            addToOutput("Did not load Player List.");
+            return;
+          }
+
+          for (const action of playersActions.current) {
+            let shouldExit = false;
+            await AdminPlayer.insertPlayer(
+              action.playerName,
+              action.regionId,
+              new Date(),
+              new Date(),
+              [],
+              [],
+            )
+              .then((_) => {
+                addToOutput(`Added player ${action.playerName} to Players list`);
+              })
+              .catch((e: FinalErrorResponse) => {
+                addToOutput(`Couldn't add player ${action.playerName} to Players list`);
+                addToOutput(`Error: ${e.error_code} - ${e.non_field_errors.join(", ")}`);
+                addToOutput(`Aborting process`);
+                shouldExit = true;
+              });
+            if (shouldExit) return;
+          }
+
+          let newPlayerList = playerList;
+          if (playersActions.current.length > 0) newPlayerList = await PlayerBasic.getPlayerList();
+
+          for (const action of scoresActions.current) {
+            const player =
+              typeof action.player === "string"
+                ? newPlayerList.reverse().find((r: PlayerBasic) => r.name === action.player)
+                : action.player;
+
+            if (player === undefined) {
+              addToOutput(
+                `Couldn't find player ${typeof action.player === "string" ? action.player : action.player.name} from Players list`,
+              );
+              return;
+            }
+
+            addToOutput(
+              `Adding Score for ${player.name} on Track ${metadata.getTrackById(action.trackId)?.abbr ?? ""}, Time: ${formatTime(action.value)}, Category: ${translateCategoryName(action.category, Language.English)}, ${action.isLap ? "Flap" : "3lap"}, set on date ${formatDate(action.date)}`,
             );
 
-            await Promise.all(promises);
-            return resolve(await PlayerBasic.getPlayerList());
-          })
-            .then(async (playerList) => {
-              const promises = scoresActions.current.map((scoreData) => {
-                const playerId =
-                  typeof scoreData.player === "string"
-                    ? (playerList as PlayerBasic[])
-                        .reverse()
-                        .find((r: PlayerBasic) => r.name === scoreData.player)?.id
-                    : scoreData.player.id;
-                if (playerId === undefined) return Promise.resolve(); // This should be impossible
-                return AdminScore.insertScore(
-                  scoreData.value,
-                  scoreData.category,
-                  scoreData.isLap,
-                  playerId,
-                  scoreData.trackId,
-                  scoreData.date,
-                  scoreData.videoLink === "" ? undefined : scoreData.videoLink,
-                );
+            let shouldExit = false;
+            await AdminScore.insertScore(
+              action.value,
+              action.category,
+              action.isLap,
+              player.id,
+              action.trackId,
+              action.date,
+              action.videoLink === "" ? undefined : action.videoLink,
+            )
+              .then((_) => {
+                addToOutput(`Score added sucessfully`);
+              })
+              .catch((e: FinalErrorResponse) => {
+                addToOutput(`Couldn't add score`);
+                addToOutput(`Error: ${e.error_code} - ${e.non_field_errors.join(", ")}`);
+                addToOutput(`Aborting process`);
+                shouldExit = true;
               });
-              await Promise.all(promises);
-            })
-            .then(() => {
-              navigate(0);
-            });
+
+            if (shouldExit) return;
+          }
+
+          finalOutput.innerHTML += "Job ended. Please refresh the page if done.";
         }}
       />
+      <div id="finalOutput"></div>
     </>
   );
 };
