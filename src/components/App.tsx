@@ -135,6 +135,9 @@ const App = () => {
         MuiPopper: {
           styleOverrides: { root: { "& .MuiPickersLayout-root button": { padding: 0 } } },
         },
+        MuiDialog: {
+          styleOverrides: { root: { "& .MuiPickersLayout-root button": { padding: 0 } } },
+        },
       },
     },
     {
