@@ -3,16 +3,16 @@ module.exports = {
     "removeDoctype",
     "removeXMLProcInst",
     "sortAttrs",
-    "cleanupIds",
     "cleanupAttrs",
     "convertColors",
+    "cleanupIds",
     {
       name: "prefixIds",
       params: {
         delim: "-",
-        prefix: (e) => {
-          // Then manually replace in file.
-          return "filePrefixHere";
+        prefix: (e, a) => {
+          const split_1 = a.path.split("/");
+          return split_1[split_1.length - 1].split(".svg")[0];
         },
         prefixIds: true,
         prefixClassNames: true,
