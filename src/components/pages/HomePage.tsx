@@ -22,7 +22,9 @@ const HomePage = () => {
       <div className="home-page-grid">
         <div style={{ flex: 2, minWidth: "250px" }}>
           <Deferred isWaiting={blogPostsLoading}>
-            {posts?.map((post) => <BlogPostModule post={post} />)}
+            {posts?.map((post) => (
+              <BlogPostModule post={post} />
+            ))}
           </Deferred>
         </div>
         <div style={{ flex: 1 }}>

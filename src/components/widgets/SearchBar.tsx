@@ -9,9 +9,9 @@ export interface SearchBarProps {
 const SearchBar = ({ setFilterString, onChange = false }: SearchBarProps) => {
   const { lang } = useContext(I18nContext);
 
-  let searchBar = useRef<HTMLInputElement>(null);
+  const searchBar = useRef<HTMLInputElement>(null);
 
-  let setText = () =>
+  const setText = () =>
     setFilterString((searchBar.current?.value ?? "").toLowerCase().normalize("NFKD"));
 
   return (

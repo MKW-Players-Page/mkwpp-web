@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
@@ -56,7 +56,7 @@ const PlayerProfilePage = () => {
   const siteHue = getCategorySiteHue(category, settings);
 
   const getAllRegions = (arr: Region[], startId: number): Region[] => {
-    let region = metadata.getRegionById(startId);
+    const region = metadata.getRegionById(startId);
     if (region === undefined) return arr;
     arr.push(region);
     if (region.parentId === undefined || region.parentId === null) return arr;

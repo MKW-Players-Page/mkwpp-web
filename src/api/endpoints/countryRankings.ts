@@ -1,4 +1,5 @@
 import { apiFetch, RegionType } from "..";
+import { formatDate } from "../../utils/Formatters";
 import { buildQueryParamString } from "../../utils/SearchParams";
 import { CategoryEnum, LapModeEnum } from "./scores";
 
@@ -52,7 +53,7 @@ export class CountryRanking {
     date?: Date,
   ): Promise<Array<CountryRanking>> {
     return apiFetch(
-      `/custom/rankings/country${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, dat: date, lim: top, rty: regionType })}`,
+      `/custom/rankings/country${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, dat: date ? formatDate(date) : undefined, lim: top, rty: regionType })}`,
     );
   }
 }

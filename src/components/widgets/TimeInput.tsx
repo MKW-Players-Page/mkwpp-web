@@ -14,7 +14,7 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
   const seconds = useRef<HTMLInputElement>(null);
   const millis = useRef<HTMLInputElement>(null);
 
-  const onChange = (e: React.ChangeEvent) => {
+  const onChange = (_: React.ChangeEvent) => {
     let out = 0;
     if (minutes.current === null || seconds.current === null || millis.current === null)
       return value;

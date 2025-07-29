@@ -1,5 +1,5 @@
 import { useContext, useLayoutEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { Pages, resolvePage } from "../pages";
 import { MetadataContext } from "../../utils/Metadata";
@@ -147,7 +147,7 @@ const ComplexRegionSelection = ({
   const getRegionHierarchy = (regions: Region[]): Region[] => {
     const latest = regions[regions.length - 1];
     if (!latest.parentId) return regions.reverse();
-    let parent = metadata.getFirstRankedParent(latest);
+    const parent = metadata.getFirstRankedParent(latest);
     if (parent) {
       regions.push(parent);
       return getRegionHierarchy(regions);

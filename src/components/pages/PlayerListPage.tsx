@@ -9,7 +9,7 @@ import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18
 import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { usePageNumber } from "../../utils/SearchParams";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { PlayerBasic } from "../../api";
 import SearchBar from "../widgets/SearchBar";
@@ -40,16 +40,11 @@ const PlayerListPage = () => {
               aliasNormalized: player.alias?.toLowerCase().normalize("NFKD") ?? nameNormalized,
             };
           })
-          .sort(
-            (
-              { nameNormalized: nameNormalized1, aliasNormalized: aliasNormalized1 },
-              { nameNormalized: nameNormalized2, aliasNormalized: aliasNormalized2 },
-            ) => {
-              const sortAlias1 = aliasNormalized1;
-              const sortAlias2 = aliasNormalized2;
-              return sortAlias1 > sortAlias2 ? 1 : 0;
-            },
-          )
+          .sort(({ aliasNormalized: aliasNormalized1 }, { aliasNormalized: aliasNormalized2 }) => {
+            const sortAlias1 = aliasNormalized1;
+            const sortAlias2 = aliasNormalized2;
+            return sortAlias1 > sortAlias2 ? 1 : 0;
+          })
           .reduce(
             (accumulator, { player, nameNormalized, aliasNormalized }, index) => {
               const locationString =

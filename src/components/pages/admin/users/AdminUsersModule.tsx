@@ -1,6 +1,6 @@
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { AdminUser } from "../../../../api";
 
 import Form, { FormState, TextFormField, SwitchFormField } from "../../../widgets/Form";
@@ -61,7 +61,7 @@ const AdminUserModule = ({ user }: AdminUserModuleProps) => {
 
   const submit = () =>
     apiFunction()
-      .then((r) => {
+      .then(() => {
         setState({ ...initialState });
         navigate(0);
       })
@@ -81,7 +81,7 @@ const AdminUserModule = ({ user }: AdminUserModuleProps) => {
           user ? (
             <div
               onClick={() => {
-                AdminUser.deleteUser(user.id).then((r) => navigate(0));
+                AdminUser.deleteUser(user.id).then(() => navigate(0));
               }}
               className="submit-style"
             >
@@ -117,7 +117,7 @@ const AdminUserModule = ({ user }: AdminUserModuleProps) => {
           <SwitchFormField defaultChecked={state.isActive} field="isActive" label="Is Active" />
           <SwitchFormField defaultChecked={state.isStaff} field="isStaff" label="Is Staff" />
         </div>
-        <PlayerSelectDropdownField field="playerId" label="Associated Player" hideNoneValue />
+        <PlayerSelectDropdownField field="playerId" label="Associated Player" />
       </Form>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SetURLSearchParams } from "react-router-dom";
+import { SetURLSearchParams } from "react-router";
 import { MetadataContext } from "./Metadata";
 import {
   Region,
@@ -27,7 +27,7 @@ export const paramReplace = (
   return {
     ...Object.fromEntries(
       Object.entries(Object.fromEntries(prev)).filter(
-        ([k, v]) => ![param, ...overwriteParams].includes(k),
+        ([k, _]) => ![param, ...overwriteParams].includes(k),
       ),
     ),
     ...(value ? { [param]: value } : {}),
@@ -105,7 +105,7 @@ export const useDateParam = (searchParams: SearchParams, validDates: Date[]) => 
   if (validDates.length === 0)
     return {
       date: new Date(),
-      setDate: (date: Date) => {},
+      setDate: (_date: Date) => {},
     };
 
   let date = validDates[0];
@@ -188,8 +188,8 @@ export const useStandardLevelIdParam = (searchParams: SearchParams) => {
 };
 
 export const purgeQueryParamsFromRecord = (params: Record<string, any>) => {
-  let out: Record<string, string> = {};
-  for (let [k, v] of Object.entries(params)) {
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(params)) {
     if (v === null || v === undefined) continue;
     out[`${k}`] = `${v}`;
   }
@@ -197,6 +197,6 @@ export const purgeQueryParamsFromRecord = (params: Record<string, any>) => {
 };
 
 export const buildQueryParamString = (params: Record<string, any>) => {
-  let paramsArr = Object.entries(purgeQueryParamsFromRecord(params));
+  const paramsArr = Object.entries(purgeQueryParamsFromRecord(params));
   return paramsArr.length > 0 ? "?" + paramsArr.map(([k, v]) => `${k}=${v}`).join("&") : "";
 };

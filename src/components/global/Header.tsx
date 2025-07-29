@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import "./Header.css";
 import "./Header.scss";
@@ -152,7 +152,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
         >
           {user.playerId ? (
             <Link
-              onClick={(e) => {
+              onClick={(_) => {
                 setAccountActionsVisible(false);
               }}
               to={resolvePage(Pages.PlayerProfile, { id: user.playerId })}
@@ -163,7 +163,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
             <></>
           )}
           <Link
-            onClick={(e) => {
+            onClick={(_) => {
               setAccountActionsVisible(false);
             }}
             to={resolvePage(Pages.Options)}
@@ -172,7 +172,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
           </Link>
           {isAdmin ? (
             <Link
-              onClick={(e) => {
+              onClick={(_) => {
                 setAccountActionsVisible(false);
               }}
               to={resolvePage(Pages.AdminUi)}
@@ -183,7 +183,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
             <></>
           )}
           <Link
-            onClick={(e) => {
+            onClick={(_) => {
               setAccountActionsVisible(false);
             }}
             to={resolvePage(Pages.Submission)}
@@ -200,7 +200,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
           setStateVisible={setAccountActionsVisible}
         >
           <Link
-            onClick={(e) => {
+            onClick={(_) => {
               setAccountActionsVisible(false);
             }}
             to={resolvePage(Pages.Options)}
@@ -208,7 +208,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
             {translate("headerOptions", lang)}
           </Link>
           <Link
-            onClick={(e) => {
+            onClick={(_) => {
               setAccountActionsVisible(false);
             }}
             to={resolvePage(Pages.UserLogin)}
@@ -216,7 +216,7 @@ const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
             {translate("headerLogIn", lang)}
           </Link>
           <Link
-            onClick={(e) => {
+            onClick={(_) => {
               setAccountActionsVisible(false);
             }}
             to={resolvePage(Pages.UserJoin)}

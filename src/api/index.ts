@@ -45,7 +45,7 @@ export {
   CountryRanking,
 } from "./endpoints/countryRankings";
 
-const url = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
+const url = import.meta.env.VITE_BACKEND_URL ?? "http://localhost:8080";
 
 export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: any): Promise<T> => {
   if (
@@ -78,7 +78,6 @@ export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: a
     .then((r) => r.json())
     .then((r) => {
       if (typeguardErrorResponse(r)) {
-        // eslint-disable-next-line
         throw { non_field_errors: r.non_field_errors, ...r.field_errors };
       }
       return r;
@@ -91,10 +90,7 @@ export interface FinalErrorResponse {
   field_errors: Record<string, string[]>;
 }
 
-const typeguardErrorResponse = (x: Object): x is FinalErrorResponse => {
-  return (
-    x.hasOwnProperty("non_field_errors") &&
-    x.hasOwnProperty("field_errors") &&
-    x.hasOwnProperty("error_code")
-  );
-};
+const typeguardErrorResponse = (x: object): x is FinalErrorResponse =>
+  Object.hasOwn(x, "non_field_errors") &&
+  Object.hasOwn(x, "field_errors") &&
+  Object.hasOwn(x, "error_code");

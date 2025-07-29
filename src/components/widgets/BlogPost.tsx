@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { BlogPost } from "../../api";
 import { secondsToDate } from "../../utils/DateUtils";
 import { I18nContext } from "../../utils/i18n/i18n";

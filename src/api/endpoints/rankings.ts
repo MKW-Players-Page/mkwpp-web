@@ -1,4 +1,5 @@
 import { apiFetch } from "..";
+import { formatDate } from "../../utils/Formatters";
 import { buildQueryParamString } from "../../utils/SearchParams";
 import { PlayerBasic } from "./players";
 import { CategoryEnum, LapModeEnum } from "./scores";
@@ -30,7 +31,7 @@ export class Ranking {
     date?: Date,
   ): Promise<Array<Ranking>> {
     return apiFetch(
-      `/custom/rankings/${type}${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date })}`,
+      `/custom/rankings/${type}${buildQueryParamString({ cat: category, lap: lapMode === LapModeEnum.Overall ? undefined : lapMode, reg: regionId, dat: date ? formatDate(date) : undefined })}`,
     );
   }
 }

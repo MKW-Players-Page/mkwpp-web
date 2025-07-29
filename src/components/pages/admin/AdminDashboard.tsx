@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router";
 import { User } from "../../../api";
 import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";

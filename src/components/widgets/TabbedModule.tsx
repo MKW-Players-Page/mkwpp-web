@@ -7,7 +7,7 @@ export interface TabProps {
   element: ReactElement;
 }
 
-export const Tab = (props: TabProps) => {
+export const Tab = (_props: TabProps) => {
   throw TypeError("<Tab> element must be a child of <TabbedModule>.");
 };
 
@@ -23,7 +23,7 @@ const TabbedModule = ({ children }: TabbedModuleProps) => {
   const initialState = { activeTabIndex: -1 };
   const [state, setState] = useState<TabbedModuleState>(initialState);
 
-  let tabs = new Array<ReactElement<TabProps>>();
+  const tabs = new Array<ReactElement<TabProps>>();
 
   Children.forEach(children, (tab) => {
     if (!isValidElement(tab)) {

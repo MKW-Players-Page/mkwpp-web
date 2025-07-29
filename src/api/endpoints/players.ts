@@ -3,9 +3,8 @@ import { getToken } from "../../utils/Auth";
 import { Metadata } from "../../utils/Metadata";
 import { dateToSeconds } from "../../utils/DateUtils";
 
-export const typeguardPlayer = (x: Object): x is Player => {
-  return x.hasOwnProperty("joinedDate") && x.hasOwnProperty("lastActivity");
-};
+export const typeguardPlayer = (x: object): x is Player =>
+  Object.hasOwn(x, "joinedDate") && Object.hasOwn(x, "lastActivity");
 
 export class PlayerBasic {
   readonly id: number;
@@ -34,7 +33,7 @@ export class PlayerBasic {
     ids: number[],
     metadata?: Metadata,
   ): Promise<Array<PlayerBasic>> {
-    let actuallyFetchSet: Set<number> = new Set(ids);
+    const actuallyFetchSet: Set<number> = new Set(ids);
     const alreadyGrabbedSet: Set<PlayerBasic> = new Set();
     if (metadata !== undefined)
       for (const id of ids) {
@@ -78,6 +77,7 @@ export class Player extends PlayerBasic {
   readonly bio?: string;
   readonly joinedDate: number;
   readonly lastActivity: number;
+  readonly chadsoftIds: Array<string>;
 
   constructor(
     id: number,
@@ -88,16 +88,18 @@ export class Player extends PlayerBasic {
     bio?: string,
     alias?: string,
     pronouns?: string,
+    chadsoftIds: Array<string> = [],
   ) {
     super(id, name, regionId, alias);
     this.bio = bio;
     this.pronouns = pronouns;
     this.joinedDate = joinedDate;
     this.lastActivity = lastActivity;
+    this.chadsoftIds = chadsoftIds;
   }
 
   public static async getPlayers(ids: number[], metadata?: Metadata): Promise<Array<Player>> {
-    let actuallyFetchSet: Set<number> = new Set(ids);
+    const actuallyFetchSet: Set<number> = new Set(ids);
     const alreadyGrabbedSet: Set<Player> = new Set();
     if (metadata !== undefined)
       for (const id of ids) {
@@ -172,6 +174,7 @@ export class AdminPlayer extends Player {
     joinedDate: Date,
     lastActivity: Date,
     submitters: Array<number>,
+    chadsoftIds: Array<string>,
     alias?: string,
     bio?: string,
     pronouns?: string,
@@ -196,6 +199,7 @@ export class AdminPlayer extends Player {
         alias,
         bio,
         pronouns,
+        chadsoftIds,
       },
     ).then((r) => r.success);
   }
@@ -207,6 +211,7 @@ export class AdminPlayer extends Player {
     joinedDate: Date,
     lastActivity: Date,
     submitters: Array<number>,
+    chadsoftIds: Array<string>,
     alias?: string,
     bio?: string,
     pronouns?: string,
@@ -232,6 +237,7 @@ export class AdminPlayer extends Player {
         alias,
         bio,
         pronouns,
+        chadsoftIds,
       },
     ).then((r) => r.success);
   }

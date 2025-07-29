@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { AdminScore, CategoryEnum, LapModeEnum } from "../../../../api";
 import { MetadataContext } from "../../../../utils/Metadata";
 import { mkwReleaseDate } from "../../../../utils/Numbers";
@@ -85,7 +85,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
 
   const submit = () =>
     apiFunction()
-      .then((r) => {
+      .then(() => {
         setState({ ...initialState });
         navigate(0);
       })
@@ -105,7 +105,7 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           score ? (
             <div
               onClick={() => {
-                AdminScore.deleteScore(score.id).then((r) => navigate(0));
+                AdminScore.deleteScore(score.id).then(() => navigate(0));
               }}
               className="submit-style"
             >
