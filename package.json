@@ -25,12 +25,14 @@
     "typescript": "^5.8.3",
     "vite": "^7.0.6",
     "vite-plugin-svgr": "^4.3.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "serve": "^14.2.4"
   },
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
+    "serve": "tsc && vite build && serve -s dist/",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --watch=false",
     "lint": "eslint ./src/ --max-warnings=0 && npx prettier . --check",
@@ -73,7 +75,6 @@
     "jsdom": "^26.1.0",
     "node-fetch": "^3.3.2",
     "sass": "^1.89.2",
-    "serve": "^14.2.4",
     "svgo": "^4.0.0",
     "typescript-eslint": "^8.38.0",
     "vitest": "^3.2.4"
