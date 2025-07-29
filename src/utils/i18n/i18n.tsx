@@ -7,6 +7,7 @@ import {
   itIT as itITpickers,
   jaJP as jaJPpickers,
   ptPT as ptPTpickers,
+  ptBR as ptBRpickers,
   esES as esESpickers,
   enUS as enUSpickers,
   frFR as frFRpickers,
@@ -16,6 +17,7 @@ import {
   itIT as itITcore,
   jaJP as jaJPcore,
   ptPT as ptPTcore,
+  ptBR as ptBRcore,
   esES as esEScore,
   enUS as enUScore,
   frFR as frFRcore,
@@ -46,6 +48,7 @@ export enum Language {
   German = "de",
   Japanese = "jp",
   Portuguese = "pt",
+  Brazilian = "br",
   Spanish = "es",
 }
 
@@ -71,6 +74,8 @@ export const getMuiXLocaleText = (lang: Language) => {
       return { core: jaJPcore, pickers: jaJPpickers };
     case Language.Portuguese:
       return { core: ptPTcore, pickers: ptPTpickers };
+    case Language.Brazilian:
+      return { core: ptBRcore, pickers: ptBRpickers };
     case Language.Spanish:
       return { core: esEScore, pickers: esESpickers };
     case Language.French:
@@ -89,6 +94,7 @@ export const langCodeToLanguageName = (lang: Language) => {
     case Language.Japanese:
       return LanguageName.Japanese;
     case Language.Portuguese:
+    case Language.Brazilian:
       return LanguageName.Portuguese;
     case Language.Spanish:
       return LanguageName.Spanish;
@@ -180,6 +186,7 @@ export const LanguageDropdown = () => {
         Language.German,
         Language.Japanese,
         Language.Portuguese,
+        Language.Brazilian,
         Language.Spanish,
       ].map((lang) => (
         <MenuItem key={lang} value={lang}>
