@@ -1,6 +1,14 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router";
-import { handleBars, I18nContext, Language, LanguageName, translate } from "../../utils/i18n/i18n";
+import {
+  handleBars,
+  I18nContext,
+  langCodeToFlagIcon,
+  langCodeToLanguageName,
+  Language,
+  LanguageName,
+  translate,
+} from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
 
 interface Question {
@@ -116,23 +124,17 @@ const ContributionsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(LanguageName).map(([key, value]) => (
+              {Object.values(Language).map((langCode) => (
                 <tr>
-                  <td>{value}</td>
+                  <td>
+                    {langCodeToFlagIcon(langCode)}
+                    {langCodeToLanguageName(langCode)}
+                  </td>
                   <td>
                     {(
                       ((
                         Object.values(translations).map((val) =>
-                          val[
-                            (
-                              Object.entries(Language).find(([keyX, _]) => keyX === key) as [
-                                string,
-                                Language,
-                              ]
-                            )[1]
-                          ] !== ""
-                            ? 1
-                            : 0,
+                          val[langCode] !== "" ? 1 : 0,
                         ) as number[]
                       ).reduce((accumulator, currentValue) => accumulator + currentValue) /
                         Object.keys(translations).length) *
@@ -156,6 +158,8 @@ const ContributionsPage = () => {
               { player: <PlayerMention playerOrId={144} />, langs: [LanguageName.French] },
               { player: <PlayerMention playerOrId={145} />, langs: [LanguageName.English] },
               { player: <PlayerMention playerOrId={632} />, langs: [LanguageName.Portuguese] },
+              { player: <PlayerMention playerOrId={441} />, langs: [LanguageName.Portuguese] },
+              { player: <PlayerMention playerOrId={273} />, langs: [LanguageName.German] },
             ].map((credit) => (
               <li>
                 {credit.player} ({credit.langs.join(", ")})
