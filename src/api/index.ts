@@ -74,14 +74,25 @@ export const apiFetch = async <T>(endpoint: string, init?: RequestInit, body?: a
     init.body = JSON.stringify(newBody);
   }
 
-  return fetch(url + "/v1" + endpoint, { method: "GET", ...init })
-    .then((r) => r.json())
-    .then((r) => {
-      if (typeguardErrorResponse(r)) {
-        throw { non_field_errors: r.non_field_errors, ...r.field_errors };
+  return fetch(url + "/v1" + endpoint, { method: "GET", ...init }).then(async (r) => {
+    if (r.status !== 200) {
+      const json = await r.json();
+      if (typeguardErrorResponse(json)) {
+        throw {
+          error_code: json.error_code,
+          non_field_errors: json.non_field_errors,
+          ...json.field_errors,
+        };
+      } else {
+        throw {
+          error_code: -1,
+          non_field_errors: [await r.text()],
+        };
       }
-      return r;
-    });
+    }
+
+    return r.json();
+  });
 };
 
 export interface FinalErrorResponse {
