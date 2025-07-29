@@ -5189,6 +5189,126 @@
     "br": "",
     "es": ""
   },
+  "constantRegionIEC": {
+    "en": "Connaught",
+    "it": "Connacht",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionRecordIEC": {
+    "en": "Connaught Records",
+    "it": "Record del Connacht",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIEC": {
+    "en": "Connaught Counties",
+    "it": "Contee del Connacht",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionIEL": {
+    "en": "Leinster",
+    "it": "Leinster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionRecordIEL": {
+    "en": "Leinster Records",
+    "it": "Record del Leinster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIEL": {
+    "en": "Leinster Counties",
+    "it": "Contee del Leinster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionIEM": {
+    "en": "Munster",
+    "it": "Munster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionRecordIEM": {
+    "en": "Munster Records",
+    "it": "Record del Munster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIEM": {
+    "en": "Munster Counties",
+    "it": "Contee del Munster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionIEU": {
+    "en": "Ulster",
+    "it": "Ulster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionRecordIEU": {
+    "en": "Ulster Records",
+    "it": "Record del Ulster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIEU": {
+    "en": "Ulster Counties",
+    "it": "Contee del Ulster",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
   "constantRegionIL": {
     "en": "Israel",
     "it": "Israele",
@@ -13226,7 +13346,7 @@
     "de": "Siehe die Ranglisten",
     "jp": "",
     "pt": "",
-    "br": "Olhar as classificações",
+    "br": "Olhe as classificações",
     "es": "Ver las clasificaciones"
   },
   "homePageOpenGraphTitle": {
