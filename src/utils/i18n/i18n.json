@@ -111,7 +111,7 @@
   },
   "constantSubmissionStatus0": {
     "en": "Pending",
-    "it": "",
+    "it": "In attesa",
     "fr": "",
     "de": "In Bearbeitung",
     "jp": "",
@@ -121,7 +121,7 @@
   },
   "constantSubmissionStatus1": {
     "en": "Accepted",
-    "it": "",
+    "it": "Accettato",
     "fr": "",
     "de": "Akzeptiert",
     "jp": "",
@@ -131,7 +131,7 @@
   },
   "constantSubmissionStatus2": {
     "en": "Rejected",
-    "it": "",
+    "it": "Rifiutato",
     "fr": "",
     "de": "Abgelehnt",
     "jp": "",
@@ -141,7 +141,7 @@
   },
   "constantSubmissionStatus3": {
     "en": "On Hold",
-    "it": "",
+    "it": "In sospeso",
     "fr": "",
     "de": "Auf Eis gelegt",
     "jp": "",
@@ -928,6 +928,26 @@
     "pt": "",
     "br": "Desconhecido",
     "es": "Desconocida"
+  },
+  "constantRegionRecordXX": {
+    "en": "Unknown Records",
+    "it": "Unknown Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsXX": {
+    "en": "Unknown Subregions",
+    "it": "Unknown Subregion",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
   },
   "constantRegionWORLD": {
     "en": "World",
@@ -3226,7 +3246,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsCY": {
@@ -3236,7 +3256,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionCZ": {
@@ -3256,7 +3276,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsCZ": {
@@ -3266,7 +3286,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionBJ": {
@@ -3286,7 +3306,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsBJ": {
@@ -3296,7 +3316,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionDK": {
@@ -3316,7 +3336,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsDK": {
@@ -3326,7 +3346,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionDM": {
@@ -3346,7 +3366,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsDM": {
@@ -3356,7 +3376,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionDO": {
@@ -3376,7 +3396,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsDO": {
@@ -3386,7 +3406,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionEC": {
@@ -3406,7 +3426,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsEC": {
@@ -3416,7 +3436,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionSV": {
@@ -3436,7 +3456,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsSV": {
@@ -3446,7 +3466,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionGQ": {
@@ -3466,7 +3486,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsGQ": {
@@ -3476,7 +3496,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionET": {
@@ -3496,7 +3516,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsET": {
@@ -3506,7 +3526,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionER": {
@@ -3526,7 +3546,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsER": {
@@ -3536,7 +3556,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionEE": {
@@ -3556,7 +3576,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsEE": {
@@ -3566,7 +3586,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionFO": {
@@ -3586,7 +3606,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsFO": {
@@ -3596,7 +3616,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionFK": {
@@ -3616,7 +3636,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsFK": {
@@ -3626,7 +3646,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionGS": {
@@ -3646,7 +3666,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsGS": {
@@ -3656,7 +3676,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionFJ": {
@@ -3676,7 +3696,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsFJ": {
@@ -3686,7 +3706,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionFI": {
@@ -3706,7 +3726,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsFI": {
@@ -3716,7 +3736,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionAX": {
@@ -3736,7 +3756,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsAX": {
@@ -3746,7 +3766,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionFR": {
@@ -3766,7 +3786,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsFR": {
@@ -3776,7 +3796,667 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRA": {
+    "en": "Alsace",
+    "it": "Alsazia",
+    "fr": "Alsace",
+    "de": "Elsass",
+    "jp": "",
+    "pt": "Alsace",
+    "br": "Alsace",
+    "es": "Alsacia"
+  },
+  "constantRegionRecordFRA": {
+    "en": "Alsatian Records",
+    "it": "Record Alsazi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRA": {
+    "en": "Alsatian Departments",
+    "it": "Dipartimenti Alsazi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRB": {
+    "en": "Aquitaine",
+    "it": "Aquitania",
+    "fr": "Aquitaine",
+    "de": "Aquitanien",
+    "jp": "",
+    "pt": "Aquitânia",
+    "br": "Aquitânia",
+    "es": "Aquitania"
+  },
+  "constantRegionRecordFRB": {
+    "en": "Aquitainian Records",
+    "it": "Record Aquitani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRB": {
+    "en": "Aquitainian Departments",
+    "it": "Dipartimenti Aquitani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRC": {
+    "en": "Auvergne",
+    "it": "Alvernia",
+    "fr": "Auvergne",
+    "de": "Auvergne",
+    "jp": "",
+    "pt": "Auvergne",
+    "br": "Auvergne",
+    "es": "Auvernia"
+  },
+  "constantRegionRecordFRC": {
+    "en": "Auvergnat Records",
+    "it": "Record Alverni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRC": {
+    "en": "Auvergnat Deparments",
+    "it": "Dipartimenti Alverni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRD": {
+    "en": "Burgundy",
+    "it": "Borgogna",
+    "fr": "Bourgogne",
+    "de": "Burgund",
+    "jp": "",
+    "pt": "Borgonha",
+    "br": "Borgonha",
+    "es": "Borgoña"
+  },
+  "constantRegionRecordFRD": {
+    "en": "Burgundian Records",
+    "it": "Record Borgogni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRD": {
+    "en": "Burgundian Departments",
+    "it": "Dipartimenti Borgogni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRE": {
+    "en": "Brittany",
+    "it": "Bretagna",
+    "fr": "Bretagne",
+    "de": "Bretagne",
+    "jp": "",
+    "pt": "Bretanha",
+    "br": "Bretanha",
+    "es": "Bretaña"
+  },
+  "constantRegionRecordFRE": {
+    "en": "Breton Records",
+    "it": "Record Brettoni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRE": {
+    "en": "Breton Departments",
+    "it": "Dipartimenti Brettoni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRF": {
+    "en": "Centre-Val de Loire",
+    "it": "Centro-Valle della Loira",
+    "fr": "Centre-Val de Loire",
+    "de": "Centre-Val",
+    "jp": "",
+    "pt": "Centro-Vale do Loire",
+    "br": "Centro-Vale do Loire",
+    "es": "Centro"
+  },
+  "constantRegionRecordFRF": {
+    "en": "Centre-Val de Loire Records",
+    "it": "Record Centro-Val'Loirani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRF": {
+    "en": "Centre-Val de Loire Departments",
+    "it": "Dipartimenti Centro-Val'Loirani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRG": {
+    "en": "Champagne-Ardenne",
+    "it": "Champagne-Ardenne",
+    "fr": "Champagne-Ardenne",
+    "de": "Champagne-Ardenne",
+    "jp": "",
+    "pt": "Champagne-Ardenne",
+    "br": "Champagne-Ardenne",
+    "es": "Champaña-Ardenas"
+  },
+  "constantRegionRecordFRG": {
+    "en": "Champagne-Ardenne Records",
+    "it": "Record del Champagne-Ardenne",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRG": {
+    "en": "Champagne-Ardenne Departments",
+    "it": "Dipartimenti del Champagne-Ardenne",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRH": {
+    "en": "Corsica",
+    "it": "Corsica",
+    "fr": "Corse",
+    "de": "Korsika",
+    "jp": "",
+    "pt": "Córsega",
+    "br": "Córsega",
+    "es": "Córcega"
+  },
+  "constantRegionRecordFRH": {
+    "en": "Corsican Records",
+    "it": "Record Corsi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRH": {
+    "en": "Corsican Departments",
+    "it": "Dipartimenti Corsi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRI": {
+    "en": "Franche-Comté",
+    "it": "Franca Contea",
+    "fr": "Franche-Comté",
+    "de": "Franche-Comté",
+    "jp": "",
+    "pt": "Franco-Condado",
+    "br": "Franco-Condado",
+    "es": "Franco Condado"
+  },
+  "constantRegionRecordFRI": {
+    "en": "Franche-Comté Records",
+    "it": "Record della Franca Contea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRI": {
+    "en": "Franche-Comté Departments",
+    "it": "Dipartimenti della Franca Contea",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRJ": {
+    "en": "Île-de-France",
+    "it": "Île-de-France",
+    "fr": "Île-de-France",
+    "de": "Île-de-France",
+    "jp": "",
+    "pt": "Île-de-France",
+    "br": "Île-de-France",
+    "es": "Isla de Francia"
+  },
+  "constantRegionRecordFRJ": {
+    "en": "Île-de-France Records",
+    "it": "Record della Île-de-France",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRJ": {
+    "en": "Île-de-France Departments",
+    "it": "Dipartimenti della Île-de-France",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRK": {
+    "en": "Languedoc-Roussillon",
+    "it": "Linguadoca-Rossiglione",
+    "fr": "Languedoc-Roussillon",
+    "de": "Languedoc-Roussillon",
+    "jp": "",
+    "pt": "Languedoc-Roussillon",
+    "br": "Languedoc-Roussillon",
+    "es": "Languedoc-Rosellón"
+  },
+  "constantRegionRecordFRK": {
+    "en": "Languedoc-Roussillon Records",
+    "it": "Record della Linguadoca-Rossiglione",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRK": {
+    "en": "Languedoc-Roussillon Departments",
+    "it": "Dipartimenti della Linguadoca-Rossiglione",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRL": {
+    "en": "Limousin",
+    "it": "Limosino",
+    "fr": "Limousin",
+    "de": "Limousin",
+    "jp": "",
+    "pt": "Limousin",
+    "br": "Limousin",
+    "es": "Lemosín"
+  },
+  "constantRegionRecordFRL": {
+    "en": "Limousin Records",
+    "it": "Record Limosini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRL": {
+    "en": "Limousin Departments",
+    "it": "Dipartmenti Limosini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRM": {
+    "en": "Lorraine",
+    "it": "Lorena",
+    "fr": "Lorraine",
+    "de": "Lothringen",
+    "jp": "",
+    "pt": "Lorraine",
+    "br": "Lorraine",
+    "es": "Lorena"
+  },
+  "constantRegionRecordFRM": {
+    "en": "Lorrainian Records",
+    "it": "Record Loreni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRM": {
+    "en": "Lorrainian Departments",
+    "it": "Dipartimenti Loreni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRN": {
+    "en": "Midi-Pyrénées",
+    "it": "Midi-Pirenei",
+    "fr": "Midi-Pyrénées",
+    "de": "Midi-Pyrénées",
+    "jp": "",
+    "pt": "Midi-Pyrénées",
+    "br": "Midi-Pyrénées",
+    "es": "Mediodía-Pirineos"
+  },
+  "constantRegionRecordFRN": {
+    "en": "Midi-Pyrénées Records",
+    "it": "Record Midi-Pirenei",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRN": {
+    "en": "Midi-Pyrénées Departments",
+    "it": "Dipartimenti Midi-Pirenei",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRO": {
+    "en": "Nord-Pas-de-Calais",
+    "it": "Nord-Passo di Calais",
+    "fr": "Nord-Pas-de-Calais",
+    "de": "Nord-Pas-de-Calais",
+    "jp": "",
+    "pt": "Nord-Pas-de-Calais",
+    "br": "Nord-Pas-de-Calais",
+    "es": "Norte-Paso de Calais"
+  },
+  "constantRegionRecordFRO": {
+    "en": "Nord-Pas-de-Calais Records",
+    "it": "Record Nord-Calaisiani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRO": {
+    "en": "Nord-Pas-de-Calais Departments",
+    "it": "Dipartimenti Nord-Calaisiani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRP": {
+    "en": "Lower Normandy",
+    "it": "Bassa Normandia",
+    "fr": "Basse-Normandie",
+    "de": "Basse-Normandie",
+    "jp": "",
+    "pt": "Baixa Normandia",
+    "br": "Baixa Normandia",
+    "es": "Baja Normandía"
+  },
+  "constantRegionRecordFRP": {
+    "en": "Lower Norman Records",
+    "it": "Record Basso-Normanni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRP": {
+    "en": "Lower Norman Departments",
+    "it": "Dipartimenti Basso-Normanni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRQ": {
+    "en": "Upper Normandy",
+    "it": "Alta Normandia",
+    "fr": "Haute-Normandie",
+    "de": "Haute-Normandie",
+    "jp": "",
+    "pt": "Alta Normandia",
+    "br": "Alta Normandia",
+    "es": "Alta Normandía"
+  },
+  "constantRegionRecordFRQ": {
+    "en": "Upper Norman Records",
+    "it": "Record Alto-Normanni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRQ": {
+    "en": "Upper Norman Departments",
+    "it": "Dipartimenti Alto-Normanni",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRR": {
+    "en": "Pays de la Loire",
+    "it": "Paesi della Loira",
+    "fr": "Pays de la Loire",
+    "de": "Pays",
+    "jp": "",
+    "pt": "País do Loire",
+    "br": "País do Loire",
+    "es": "Países del Loira"
+  },
+  "constantRegionRecordFRR": {
+    "en": "Pays de la Loire Records",
+    "it": "Record Loirani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRR": {
+    "en": "Pays de la Loire Departments",
+    "it": "Dipartimenti Loirani",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRS": {
+    "en": "Picardy",
+    "it": "Piccardia",
+    "fr": "Picardie",
+    "de": "Picardie",
+    "jp": "",
+    "pt": "Picardia",
+    "br": "Picardia",
+    "es": "Picardía"
+  },
+  "constantRegionRecordFRS": {
+    "en": "Picardy Records",
+    "it": "Record Piccardi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRS": {
+    "en": "Picardy Departments",
+    "it": "Dipartimenti Piccadsi",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRT": {
+    "en": "Poitou-Charentes",
+    "it": "Poitou-Charentes",
+    "fr": "Poitou-Charentes",
+    "de": "Poitou-Charentes",
+    "jp": "",
+    "pt": "Poitou-Charentes",
+    "br": "Poitou-Charentes",
+    "es": "Poitou-Charentes"
+  },
+  "constantRegionRecordFRT": {
+    "en": "Poitou-Charentes Records",
+    "it": "Record del Poitou-Charentes",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRT": {
+    "en": "Poitou-Charentes Departments",
+    "it": "Dipartimenti del Poitou-Charentes",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRU": {
+    "en": "Provence-Alpes-Côte d'Azur",
+    "it": "Provenza-Alpi-Costa Azzurra",
+    "fr": "Provence-Alpes-Côte d'Azur",
+    "de": "Provence-Alpes-Côte",
+    "jp": "",
+    "pt": "Provença-Alpes-Costa Azul",
+    "br": "Provença-Alpes-Costa Azul",
+    "es": "Provenza-Alpes-Costa Azul"
+  },
+  "constantRegionRecordFRU": {
+    "en": "Provence-Alpes-Côte d'Azur Records",
+    "it": "Record Provenzo-Alpino-Costa Azzurrini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRU": {
+    "en": "Provence-Alpes-Côte d'Azur Departments",
+    "it": "Dipartimenti Provenzo-Alpino-Costa Azzurrini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionFRV": {
+    "en": "Rhône-Alpes",
+    "it": "Rodano-Alpi",
+    "fr": "Rhône-Alpes",
+    "de": "Rhône-Alpes",
+    "jp": "",
+    "pt": "Rhône-Alpes",
+    "br": "Rhône-Alpes",
+    "es": "Ródano-Alpes"
+  },
+  "constantRegionRecordFRV": {
+    "en": "Rhône-Alpes Records",
+    "it": "Record Rodano-Alpini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsFRV": {
+    "en": "Rhône-Alpes Departments",
+    "it": "Dipartimenti Rodano-Alpini",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
     "es": ""
   },
   "constantRegionGF": {
@@ -3796,7 +4476,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Recordes",
+    "br": "",
     "es": ""
   },
   "constantRegionSubregionsGF": {
@@ -3806,7 +4486,7 @@
     "de": "",
     "jp": "",
     "pt": "",
-    "br": "Sub-regiões",
+    "br": "",
     "es": ""
   },
   "constantRegionPF": {
@@ -5602,6 +6282,36 @@
   "constantRegionSubregionsIT45": {
     "en": "Emilia-Romagnan Subregions",
     "it": "Sottoregioni Emiliano-Romagnole",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionIT45R": {
+    "en": "Romagna",
+    "it": "Romagna",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionRecordIT45R": {
+    "en": "Romagnan Records",
+    "it": "Record Romagnoli",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsIT45R": {
+    "en": "Romagnan Provinces",
+    "it": "Province Romagnole",
     "fr": "",
     "de": "",
     "jp": "",

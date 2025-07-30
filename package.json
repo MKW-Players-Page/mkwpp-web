@@ -36,10 +36,13 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage --watch=false",
     "lint": "eslint ./src/ --max-warnings=0 && npx prettier . --check",
-    "format": "npx prettier . --write",
+    "lint:fix": "eslint ./src/ --fix && npx prettier . --write",
     "gen-flag-svg": "node ./codegen-scripts/regen-flag-imports.js",
     "detect-unused-i18n": "node ./codegen-scripts/unused-i18n.js",
-    "build-wasm": "node ./codegen-scripts/build-wasm.js"
+    "build-wasm": "node ./codegen-scripts/build-wasm.js",
+    "export-i18n-to-tsv": "node ./codegen-scripts/i18n-to-tsv.js",
+    "import-spreadsheet-to-i18n": "node ./codegen-scripts/spreadsheet-to-i18n.js",
+    "import-spreadsheet-to-i18n:force": "node ./codegen-scripts/spreadsheet-to-i18n.js && mv ./temp/i18n.json ./src/utils/i18n/i18n.json && npx prettier . --write"
   },
   "prettier": {
     "tabWidth": 2,
