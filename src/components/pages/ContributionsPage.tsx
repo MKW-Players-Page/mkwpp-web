@@ -152,7 +152,10 @@ const ContributionsPage = () => {
                 player: <PlayerMention playerOrId={918} />,
                 langs: [LanguageName.Italian, LanguageName.English],
               },
-              { player: <PlayerMention playerOrId={1165} />, langs: [LanguageName.English] },
+              {
+                player: <PlayerMention playerOrId={1165} />,
+                langs: [LanguageName.English, LanguageName.French],
+              },
               { player: <PlayerMention playerOrId={1230} />, langs: [LanguageName.Spanish] },
               { player: <PlayerMention playerOrId={1231} />, langs: [LanguageName.Spanish] },
               { player: <PlayerMention playerOrId={144} />, langs: [LanguageName.French] },
