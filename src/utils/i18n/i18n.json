@@ -111,7 +111,7 @@
   },
   "constantSubmissionStatus0": {
     "en": "Pending",
-    "it": "",
+    "it": "In attesa",
     "fr": "",
     "de": "In Bearbeitung",
     "jp": "",
@@ -121,7 +121,7 @@
   },
   "constantSubmissionStatus1": {
     "en": "Accepted",
-    "it": "",
+    "it": "Accettato",
     "fr": "",
     "de": "Akzeptiert",
     "jp": "",
@@ -131,7 +131,7 @@
   },
   "constantSubmissionStatus2": {
     "en": "Rejected",
-    "it": "",
+    "it": "Rifiutato",
     "fr": "",
     "de": "Abgelehnt",
     "jp": "",
@@ -141,7 +141,7 @@
   },
   "constantSubmissionStatus3": {
     "en": "On Hold",
-    "it": "",
+    "it": "In sospeso",
     "fr": "",
     "de": "Auf Eis gelegt",
     "jp": "",
@@ -928,6 +928,26 @@
     "pt": "",
     "br": "Desconhecido",
     "es": "Desconocida"
+  },
+  "constantRegionRecordXX": {
+    "en": "Unknown Records",
+    "it": "Unknown Records",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
+  },
+  "constantRegionSubregionsXX": {
+    "en": "Unknown Subregions",
+    "it": "Unknown Subregion",
+    "fr": "",
+    "de": "",
+    "jp": "",
+    "pt": "",
+    "br": "",
+    "es": ""
   },
   "constantRegionWORLD": {
     "en": "World",
