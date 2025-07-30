@@ -1,4 +1,4 @@
-import { Tooltip } from "@mui/material";
+import { Box, Switch, Tooltip } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
@@ -28,7 +28,6 @@ interface AdminScoreModuleState extends FormState {
   ghostLink?: string;
   comment?: string;
   adminNote?: string;
-  initialRank?: number;
 }
 
 const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
@@ -44,7 +43,6 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
     ghostLink: score?.ghostLink ?? "",
     comment: score?.comment ?? "",
     adminNote: score?.adminNote ?? "",
-    initialRank: score?.initialRank ?? 2147483647,
     errors: {},
     submitting: false,
   };
@@ -66,7 +64,6 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           state.ghostLink === "" ? undefined : state.ghostLink,
           state.comment === "" ? undefined : state.comment,
           state.adminNote === "" ? undefined : state.adminNote,
-          state.initialRank === 2147483647 ? undefined : state.initialRank,
         )
     : async () =>
         AdminScore.insertScore(
@@ -80,7 +77,6 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
           state.ghostLink === "" ? undefined : state.ghostLink,
           state.comment === "" ? undefined : state.comment,
           state.adminNote === "" ? undefined : state.adminNote,
-          state.initialRank === 2147483647 ? undefined : state.initialRank,
         );
 
   const submit = () =>
@@ -138,7 +134,13 @@ const AdminScoreModule = ({ score }: AdminScoreModuleProps) => {
         <TextFormField field="ghostLink" label="Ghost Link" />
         <TextFormField field="comment" label="Comment" />
         <TextFormField field="adminNote" label="Admin Note" />
-        <TextFormField type="number" field="initialRank" label="Initial Rank" />
+        <Box>
+          <p>Was WR?</p>
+          <Switch disabled defaultChecked={score?.wasWr ?? false} />
+          <p>
+            This cannot be changed because it's recalculated by the backend every time to be correct
+          </p>
+        </Box>
       </Form>
     </div>
   );

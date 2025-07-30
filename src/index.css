@@ -184,13 +184,13 @@ input[type="submit"]:hover {
   background-color: var(--input-background-color-hover);
 }
 
-input:disabled,
+input:disabled:not(.MuiSwitch-input),
 select:disabled {
   background-color: var(--input-background-color-disabled);
   opacity: 1;
 }
 
-input:disabled:hover,
+input:disabled:hover:not(.MuiSwitch-input),
 select:disabled:hover {
   background-color: var(--input-background-color-disabled-hover);
 }
