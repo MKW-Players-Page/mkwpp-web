@@ -225,39 +225,49 @@ export const translateRegionNameFull = (
   regionCompute: number | Region | undefined | null,
   turnWorldToUnknown = false,
 ) => {
-  let region: typeof regionCompute = undefined;
-  if (typeof regionCompute === "number") {
-    region = metadata.getRegionById(regionCompute);
-  } else {
-    region = regionCompute;
-  }
+  const region =
+    typeof regionCompute === "number" ? metadata.getRegionById(regionCompute) : regionCompute;
+
   if (
     region === undefined ||
     region === null ||
-    (turnWorldToUnknown && region.regionType === RegionType.World)
+    region.parentId === undefined ||
+    region.regionType === RegionType.World ||
+    region.regionType === RegionType.Continent ||
+    region.regionType === RegionType.CountryGroup ||
+    region.regionType === RegionType.Country
   )
-    return translate("constantRegionXX", lang);
+    return translateRegionName(region, lang, undefined, turnWorldToUnknown);
 
-  if (region.parentId && region.regionType === RegionType.Subnational) {
-    const parent = metadata.getRegionById(region.parentId);
-    if (parent) {
-      return `${translateRegionName(parent, lang)}, ${translateRegionName(region, lang)}`;
-    }
-  }
+  let parent = metadata.getRegionById(region.parentId);
+  while (
+    parent !== undefined &&
+    parent.parentId !== undefined &&
+    parent.regionType !== RegionType.Country
+  )
+    parent = metadata.getRegionById(parent.parentId);
 
-  return translateRegionName(region, lang);
+  if (parent)
+    return `${translateRegionName(parent, lang, undefined, turnWorldToUnknown)}, ${translateRegionName(region, lang, undefined, turnWorldToUnknown)}`;
+
+  return translateRegionName(region, lang, undefined, turnWorldToUnknown);
 };
 
 export const translateRegionName = (
   region: undefined | null | Region,
   lang: Language,
   type?: "Region" | "Subregions" | "Record" | undefined | null,
+  turnWorldToUnknown = false,
 ) => {
-  if (!region) {
-    return translate(`constantRegionXX`, lang);
-  }
+  const regionCode =
+    region === undefined ||
+    region === null ||
+    (turnWorldToUnknown && region.regionType === RegionType.World)
+      ? "XX"
+      : region.code;
+
   return translate(
-    `constantRegion${type === "Record" || type === "Subregions" ? type : ""}${region.code}` as TranslationKey,
+    `constantRegion${type === "Record" || type === "Subregions" ? type : ""}${regionCode}` as TranslationKey,
     lang,
   );
 };
