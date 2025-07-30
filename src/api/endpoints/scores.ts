@@ -51,7 +51,7 @@ export const LapModeEnumValues: LapModeEnum[] = [
 
 type ScoreByDate = Omit<
   Score,
-  "stdLvlCode" | "videoLink" | "ghostLink" | "comment" | "rank" | "prwr" | "initialRank"
+  "stdLvlCode" | "videoLink" | "ghostLink" | "comment" | "rank" | "prwr" | "wasWr"
 >;
 
 export class Score {
@@ -65,10 +65,10 @@ export class Score {
   readonly date: number;
   readonly rank: number;
   readonly prwr: number;
+  readonly wasWr: boolean;
   readonly videoLink?: string;
   readonly ghostLink?: string;
   readonly comment?: string;
-  readonly initialRank?: number;
 
   constructor(
     id: number,
@@ -84,7 +84,7 @@ export class Score {
     video_link?: string,
     ghost_link?: string,
     comment?: string,
-    initialRank?: number,
+    wasWr: boolean = false,
   ) {
     this.id = id;
     this.stdLvlCode = stdLvlCode;
@@ -99,7 +99,7 @@ export class Score {
     this.videoLink = video_link;
     this.ghostLink = ghost_link;
     this.comment = comment;
-    this.initialRank = initialRank;
+    this.wasWr = wasWr;
   }
 
   public static async getChart(
@@ -159,7 +159,7 @@ export class AdminScore {
   readonly ghostLink?: string;
   readonly comment?: string;
   readonly adminNote?: string;
-  readonly initialRank?: number;
+  readonly wasWr: boolean;
 
   constructor(
     id: number,
@@ -173,7 +173,7 @@ export class AdminScore {
     ghostLink?: string,
     comment?: string,
     adminNote?: string,
-    initialRank?: number,
+    wasWr: boolean = false,
   ) {
     this.id = id;
     this.value = value;
@@ -186,7 +186,7 @@ export class AdminScore {
     this.ghostLink = ghostLink;
     this.comment = comment;
     this.adminNote = adminNote;
-    this.initialRank = initialRank;
+    this.wasWr = wasWr;
   }
 
   public static async getList(trackId: number): Promise<Array<AdminScore> | null> {
@@ -230,7 +230,6 @@ export class AdminScore {
     ghostLink?: string,
     comment?: string,
     adminNote?: string,
-    initialRank?: number,
   ): Promise<boolean> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(false));
@@ -254,7 +253,6 @@ export class AdminScore {
         ghostLink,
         comment,
         adminNote,
-        initialRank,
       },
     ).then((r) => r.success);
   }
@@ -271,7 +269,6 @@ export class AdminScore {
     ghostLink?: string,
     comment?: string,
     adminNote?: string,
-    initialRank?: number,
   ): Promise<boolean> {
     const sessionToken = getToken();
     if (sessionToken === null) return new Promise((res) => res(false));
@@ -296,7 +293,6 @@ export class AdminScore {
         ghostLink,
         comment,
         adminNote,
-        initialRank,
       },
     ).then((r) => r.success);
   }
