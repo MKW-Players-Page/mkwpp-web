@@ -141,9 +141,35 @@ import FlagFK from "../../assets/flags/fk.svg?react";
 import FlagFM from "../../assets/flags/fm.svg?react";
 import FlagFO from "../../assets/flags/fo.svg?react";
 import FlagFR from "../../assets/flags/fr.svg?react";
+import FlagFRA from "../../assets/flags/fra.svg?react";
+import FlagFRB from "../../assets/flags/frb.svg?react";
+import FlagFRC from "../../assets/flags/frc.svg?react";
+import FlagFRD from "../../assets/flags/frd.svg?react";
+import FlagFRE from "../../assets/flags/fre.svg?react";
+import FlagFRF from "../../assets/flags/frf.svg?react";
+import FlagFRG from "../../assets/flags/frg.svg?react";
+import FlagFRH from "../../assets/flags/frh.svg?react";
+import FlagFRI from "../../assets/flags/fri.svg?react";
+import FlagFRJ from "../../assets/flags/frj.svg?react";
+import FlagFRK from "../../assets/flags/frk.svg?react";
+import FlagFRL from "../../assets/flags/frl.svg?react";
+import FlagFRM from "../../assets/flags/frm.svg?react";
+import FlagFRN from "../../assets/flags/frn.svg?react";
+import FlagFRO from "../../assets/flags/fro.svg?react";
+import FlagFRP from "../../assets/flags/frp.svg?react";
+import FlagFRQ from "../../assets/flags/frq.svg?react";
+import FlagFRR from "../../assets/flags/frr.svg?react";
+import FlagFRS from "../../assets/flags/frs.svg?react";
+import FlagFRT from "../../assets/flags/frt.svg?react";
+import FlagFRU from "../../assets/flags/fru.svg?react";
+import FlagFRV from "../../assets/flags/frv.svg?react";
 import FlagGA from "../../assets/flags/ga.svg?react";
 import FlagGB from "../../assets/flags/gb.svg?react";
+import FlagGBENG from "../../assets/flags/gbeng.svg?react";
 import FlagGBIE from "../../assets/flags/gbie.svg?react";
+import FlagGBNIR from "../../assets/flags/gbnir.svg?react";
+import FlagGBSCT from "../../assets/flags/gbsct.svg?react";
+import FlagGBWLS from "../../assets/flags/gbwls.svg?react";
 import FlagGD from "../../assets/flags/gd.svg?react";
 import FlagGE from "../../assets/flags/ge.svg?react";
 import FlagGF from "../../assets/flags/gf.svg?react";
@@ -170,6 +196,10 @@ import FlagHU from "../../assets/flags/hu.svg?react";
 import FlagIC from "../../assets/flags/ic.svg?react";
 import FlagID from "../../assets/flags/id.svg?react";
 import FlagIE from "../../assets/flags/ie.svg?react";
+import FlagIEC from "../../assets/flags/iec.svg?react";
+import FlagIEL from "../../assets/flags/iel.svg?react";
+import FlagIEM from "../../assets/flags/iem.svg?react";
+import FlagIEU from "../../assets/flags/ieu.svg?react";
 import FlagIL from "../../assets/flags/il.svg?react";
 import FlagIM from "../../assets/flags/im.svg?react";
 import FlagIN from "../../assets/flags/in.svg?react";
@@ -186,6 +216,7 @@ import FlagIT34 from "../../assets/flags/it34.svg?react";
 import FlagIT36 from "../../assets/flags/it36.svg?react";
 import FlagIT42 from "../../assets/flags/it42.svg?react";
 import FlagIT45 from "../../assets/flags/it45.svg?react";
+import FlagIT45R from "../../assets/flags/it45r.svg?react";
 import FlagIT52 from "../../assets/flags/it52.svg?react";
 import FlagIT55 from "../../assets/flags/it55.svg?react";
 import FlagIT57 from "../../assets/flags/it57.svg?react";
@@ -537,9 +568,35 @@ export const Flags = {
   fm: FlagFM,
   fo: FlagFO,
   fr: FlagFR,
+  fra: FlagFRA,
+  frb: FlagFRB,
+  frc: FlagFRC,
+  frd: FlagFRD,
+  fre: FlagFRE,
+  frf: FlagFRF,
+  frg: FlagFRG,
+  frh: FlagFRH,
+  fri: FlagFRI,
+  frj: FlagFRJ,
+  frk: FlagFRK,
+  frl: FlagFRL,
+  frm: FlagFRM,
+  frn: FlagFRN,
+  fro: FlagFRO,
+  frp: FlagFRP,
+  frq: FlagFRQ,
+  frr: FlagFRR,
+  frs: FlagFRS,
+  frt: FlagFRT,
+  fru: FlagFRU,
+  frv: FlagFRV,
   ga: FlagGA,
   gb: FlagGB,
+  gbeng: FlagGBENG,
   gbie: FlagGBIE,
+  gbnir: FlagGBNIR,
+  gbsct: FlagGBSCT,
+  gbwls: FlagGBWLS,
   gd: FlagGD,
   ge: FlagGE,
   gf: FlagGF,
@@ -566,6 +623,10 @@ export const Flags = {
   ic: FlagIC,
   id: FlagID,
   ie: FlagIE,
+  iec: FlagIEC,
+  iel: FlagIEL,
+  iem: FlagIEM,
+  ieu: FlagIEU,
   il: FlagIL,
   im: FlagIM,
   in: FlagIN,
@@ -582,6 +643,7 @@ export const Flags = {
   it36: FlagIT36,
   it42: FlagIT42,
   it45: FlagIT45,
+  it45r: FlagIT45R,
   it52: FlagIT52,
   it55: FlagIT55,
   it57: FlagIT57,
