@@ -45,8 +45,12 @@ export const useCategoryParam = (searchParams: SearchParams, overwriteParams: st
   };
 };
 
-export const useTrackParam = (searchParams: SearchParams, overwriteParams: string[] = []) => {
-  const track = parseInt(searchParams[0].get("trk") ?? "-5");
+export const useTrackParam = (
+  searchParams: SearchParams,
+  overwriteParams: string[] = [],
+  allTracks: boolean = false,
+) => {
+  const track = parseInt(searchParams[0].get("trk") ?? (allTracks ? "-5" : "1"));
   return {
     track,
     setTrack: (trackId: number) => {
