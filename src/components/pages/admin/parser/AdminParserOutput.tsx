@@ -39,9 +39,16 @@ interface OutputLinePlayerProps {
   arrayIndex: number;
   data: React.MutableRefObject<ActionPlayer[]>;
   children: React.ReactNode;
+  disabled: boolean;
 }
 
-const OutputLinePlayer = ({ arrayIndex, data, children, lineNum }: OutputLinePlayerProps) => {
+const OutputLinePlayer = ({
+  arrayIndex,
+  data,
+  children,
+  lineNum,
+  disabled,
+}: OutputLinePlayerProps) => {
   const metadata = useContext(MetadataContext);
   const value: undefined | ActionPlayer = data.current[arrayIndex];
   const [region, setRegion] = useState(
@@ -62,6 +69,7 @@ const OutputLinePlayer = ({ arrayIndex, data, children, lineNum }: OutputLinePla
             ranked={false}
             value={region}
             setValue={setRegion}
+            disabled={disabled}
           />
         ) : (
           <></>
@@ -123,6 +131,7 @@ interface ActionScore {
 }
 
 const AdminParserOutputPage = () => {
+  const [inputDisabled, setInputDisabled] = useState(false);
   const [textareaValue, setTextareaValue] = useState<string>("");
   const scoresActions = useRef<ActionScore[]>([]);
   const playersActions = useRef<ActionPlayer[]>([]);
@@ -164,6 +173,7 @@ const AdminParserOutputPage = () => {
               autoComplete="off"
               style={{ width: "100%" }}
               onChange={onChange}
+              disabled={inputDisabled}
             />
           </div>
         </div>
@@ -188,6 +198,7 @@ const AdminParserOutputPage = () => {
                     lineNum={lineIndex}
                     data={playersActions}
                     arrayIndex={arrayIndex}
+                    disabled={inputDisabled}
                   >
                     <p>{`Found player named ${columns[1]} at line ${lineIndex}`}</p>
                     {playerNameExists && <p>Player with the same name exists already</p>}
@@ -262,11 +273,13 @@ const AdminParserOutputPage = () => {
       <input
         type="button"
         value="Submit"
-        onClick={async (e) => {
-          (e.target as HTMLInputElement).disabled = true;
+        disabled={inputDisabled}
+        onClick={async () => {
+          setInputDisabled(true);
           const finalOutput = document.getElementById("finalOutput");
           if (finalOutput === null) return;
           finalOutput.innerHTML = "";
+
           const addToOutput = (str: string) => {
             finalOutput.innerHTML += `<p>${str}</p>`;
           };
@@ -301,7 +314,7 @@ const AdminParserOutputPage = () => {
           let newPlayerList = playerList;
           if (playersActions.current.length > 0) newPlayerList = await PlayerBasic.getPlayerList();
 
-          for (const action of scoresActions.current) {
+          const scores = scoresActions.current.map(async (action) => {
             const player =
               typeof action.player === "string"
                 ? newPlayerList.reverse().find((r: PlayerBasic) => r.name === action.player)
@@ -314,12 +327,7 @@ const AdminParserOutputPage = () => {
               return;
             }
 
-            addToOutput(
-              `Adding Score for ${player.name} on Track ${metadata.getTrackById(action.trackId)?.abbr ?? ""}, Time: ${formatTime(action.value)}, Category: ${translateCategoryName(action.category, Language.English)}, ${action.isLap ? "Flap" : "3lap"}, set on date ${formatDate(action.date)}`,
-            );
-
-            let shouldExit = false;
-            await AdminScore.insertScore(
+            return AdminScore.insertScore(
               action.value,
               action.category,
               action.isLap,
@@ -329,17 +337,19 @@ const AdminParserOutputPage = () => {
               action.videoLink === "" ? undefined : action.videoLink,
             )
               .then((_) => {
-                addToOutput(`Score added sucessfully`);
+                addToOutput(
+                  `Added Score for ${player.name} on Track ${metadata.getTrackById(action.trackId)?.abbr ?? ""}, Time: ${formatTime(action.value)}, Category: ${translateCategoryName(action.category, Language.English)}, ${action.isLap ? "Flap" : "3lap"}, set on date ${formatDate(action.date)}`,
+                );
               })
               .catch((e: FinalErrorResponse) => {
-                addToOutput(`Couldn't add score`);
+                addToOutput(
+                  `!!!! Couldn't add Score for ${player.name} on Track ${metadata.getTrackById(action.trackId)?.abbr ?? ""}, Time: ${formatTime(action.value)}, Category: ${translateCategoryName(action.category, Language.English)}, ${action.isLap ? "Flap" : "3lap"}, set on date ${formatDate(action.date)}`,
+                );
                 addToOutput(`Error: ${e.error_code} - ${e.non_field_errors.join(", ")}`);
-                addToOutput(`Aborting process`);
-                shouldExit = true;
               });
+          });
 
-            if (shouldExit) return;
-          }
+          await Promise.allSettled(scores);
 
           finalOutput.innerHTML += "Job ended. Please refresh the page if done.";
         }}

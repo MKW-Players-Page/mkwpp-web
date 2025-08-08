@@ -168,7 +168,7 @@ const RulesPage = () => {
       </section>
       <section className="module">
         <div id="trackcategories" className="module-content">
-          <h1>Categories Per Track</h1>
+          <h1>{translate("rulesPageScrollListItemTrackCategories", lang)}</h1>
           <ul>
             <TrackCategory
               trackName={translate("constantTrackNameLC", lang)}

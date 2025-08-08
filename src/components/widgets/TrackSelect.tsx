@@ -15,7 +15,12 @@ export interface TrackDropdownProps {
   allTracks?: boolean;
 }
 
-export const TrackDropdown = ({ value, onChange, disabled, allTracks }: TrackDropdownProps) => {
+export const TrackDropdown = ({
+  value,
+  onChange,
+  disabled,
+  allTracks = false,
+}: TrackDropdownProps) => {
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
 

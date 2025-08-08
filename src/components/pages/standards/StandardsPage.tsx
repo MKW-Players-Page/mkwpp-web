@@ -40,7 +40,7 @@ interface StandardDropdownProps {
 // TODO: add some sort of grouping for standards on backend
 const SortingOfDropdown = [
   43, 1, 35, 2, 3, 4, 5, 36, 6, 7, 8, 9, 37, 10, 11, 12, 13, 38, 14, 15, 16, 17, 39, 18, 19, 20, 21,
-  40, 22, 23, 24, 25, 41, 26, 27, 28, 29, 42, 30, 31, 32, 33, 34,
+  40, 22, 23, 24, 25, 41, 26, 27, 28, 29, 42, 30, 31, 32, 33,
 ];
 
 const StandardDropdown = ({ levelId, setLevelId }: StandardDropdownProps) => {
@@ -98,7 +98,7 @@ const Filter: Record<number, number[]> = {
 const StandardsPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
-  const { track, setTrack } = useTrackParam(searchParams);
+  const { track, setTrack } = useTrackParam(searchParams, [], true);
   const { levelId, setLevelId } = useStandardLevelIdParam(searchParams);
   const { lapMode, setLapMode } = useLapModeParam(searchParams);
 
