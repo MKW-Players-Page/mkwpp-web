@@ -34,7 +34,7 @@ const OptionsPage = () => {
 
   const reloadPlayer = () => {
     queryClient.invalidateQueries({ queryKey: ["loadedPlayer"] });
-  }
+  };
 
   const pronounsTextArea = useRef(null);
   const bioTextArea = useRef(null);
@@ -55,7 +55,7 @@ const OptionsPage = () => {
 
   const reloadSubmitters = () => {
     queryClient.invalidateQueries({ queryKey: ["loadedSubmitters"] });
-  }
+  };
 
   const [debugActive, setDebugActive] = useState(0);
 
@@ -250,9 +250,7 @@ const OptionsPage = () => {
                     const newAlias: string = (aliasTextArea.current as any).value;
                     if (aliasTextArea.current === null || newAlias === (player?.alias ?? ""))
                       return;
-                    await User.updateAlias(user.userId, newAlias).then((_) =>
-                      reloadPlayer(),
-                    );
+                    await User.updateAlias(user.userId, newAlias).then((_) => reloadPlayer());
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}
@@ -275,9 +273,7 @@ const OptionsPage = () => {
                   onClick={async () => {
                     const newBio: string = (bioTextArea.current as any).value;
                     if (bioTextArea.current === null || newBio === (player?.bio ?? "")) return;
-                    await User.updateBio(user.userId, newBio).then((_) =>
-                      reloadPlayer(),
-                    );
+                    await User.updateBio(user.userId, newBio).then((_) => reloadPlayer());
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}
@@ -303,9 +299,7 @@ const OptionsPage = () => {
                       newPronouns === (player?.pronouns ?? "")
                     )
                       return;
-                    await User.updatePronouns(user.userId, newPronouns).then((_) =>
-                      reloadPlayer(),
-                    );
+                    await User.updatePronouns(user.userId, newPronouns).then((_) => reloadPlayer());
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}

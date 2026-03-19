@@ -74,7 +74,7 @@ const TrackChartPage = () => {
     queryKey: ["trackChartsDates", id, category, region.id],
     queryFn: () => Score.getChartDates(id, category, lapMode === LapModeEnum.Lap, region.id),
     enabled: !metadata.isLoading,
-  })
+  });
 
   const { setDate, date } = useDateParam(searchParams, validDates ?? []);
 

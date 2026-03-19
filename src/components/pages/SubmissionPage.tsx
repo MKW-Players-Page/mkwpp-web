@@ -380,7 +380,7 @@ const TimesheetTab = () => {
 
   const reload = () => {
     queryClient.invalidateQueries({ queryKey: ["playerEdits"] });
-  }
+  };
 
   const sortedScores = timesheet?.times
     ?.filter(
