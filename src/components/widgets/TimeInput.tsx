@@ -44,11 +44,16 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
     setActiveFieldValue("");
   };
 
-  const focusField = (field: InputRef, position: "start" | "end" = "end") => {
+  type FocusFieldPosition = "start" | "end" | "all";
+  const focusField = (field: InputRef, position: FocusFieldPosition = "end") => {
     if (!field.current) return;
     field.current.focus();
-    const pos = position === "start" ? 0 : (field.current.value?.length ?? 0);
-    field.current.setSelectionRange(pos, pos);
+    if (position === "all") {
+      field.current.select();
+    } else {
+      const pos = position === "start" ? 0 : (field.current.value?.length ?? 0);
+      field.current.setSelectionRange(pos, pos);
+    }
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -119,14 +124,14 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
 
   const onChangeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (endsInDelimiter(e.target.value)) {
-      focusField(secondsField, "start");
+      focusField(secondsField, "all");
       return;
     } else if (!isNumerical(e.target.value)) {
       return;
     }
     updateValue({ newMinutes: Math.min(+e.target.value % 10, 5) });
     if (e.target.value.length >= 1) {
-      focusField(secondsField, "start");
+      focusField(secondsField, "all");
     } else {
       setActiveFieldValue(e.target.value);
     }
@@ -134,7 +139,7 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
 
   const onChangeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (endsInDelimiter(e.target.value)) {
-      focusField(millisField, "start");
+      focusField(millisField, "all");
       return;
     } else if (!isNumerical(e.target.value)) {
       return;
@@ -142,7 +147,7 @@ const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
     const clamped = +e.target.value % 100;
     updateValue({ newSeconds: clamped > 59 ? 50 + (clamped % 10) : clamped });
     if (e.target.value.length >= 2) {
-      focusField(millisField, "start");
+      focusField(millisField, "all");
     } else {
       setActiveFieldValue(e.target.value);
     }
