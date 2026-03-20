@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link, useNavigate } from "react-router";
+
 import { AdminSubmission, LapModeEnum, Player, SubmissionStatus, User } from "../../../../api";
-import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
 import { PaginationButtonRow } from "../../../widgets/PaginationButtons";
@@ -66,15 +67,19 @@ const AdminSubmissionUpdateButton = ({ submission }: AdminSubmissionUpdateButton
 };
 
 const AdminSubmissionsListPage = () => {
-  const { isLoading: adminIsLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
+  const { isLoading: adminIsLoading, data: isAdmin } = useQuery({
+    queryKey: ["isAdmin"],
+    queryFn: () => User.isAdmin(),
+  });
   const searchParams = useSearchParams();
   const { pageNumber, setPageNumber } = usePageNumber(searchParams);
   const metadata = useContext(MetadataContext);
 
   const [textFilter, setTextFilter] = useState("");
 
-  const { isLoading, data } = useApi(
-    () =>
+  const { isLoading, data } = useQuery({
+    queryKey: ["adminSubmissionsList", metadata.isLoading],
+    queryFn: () =>
       AdminSubmission.getList().then(async (submissions) => {
         if (submissions === null) return undefined;
         await Player.getPlayersBasic(
@@ -150,9 +155,8 @@ const AdminSubmissionsListPage = () => {
             }),
           );
       }),
-    [metadata],
-    "editSubmissionsList",
-  );
+    enabled: !metadata.isLoading,
+  });
 
   const rowsPerPage = 100;
   const [maxPageNumber, setMaxPageNumber] = useState(

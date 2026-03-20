@@ -1,9 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useRef } from "react";
 
 import Deferred from "../widgets/Deferred";
-import { useApi } from "../../hooks/ApiHook";
 import { MetadataContext } from "../../utils/Metadata";
-import { UserContext } from "../../utils/User";
 import { useState } from "react";
 import { I18nContext, translate, translateRegionNameFull } from "../../utils/i18n/i18n";
 import PlayerMention from "../widgets/PlayerMention";
@@ -17,7 +16,6 @@ import SearchBar from "../widgets/SearchBar";
 const PlayerListPage = () => {
   const { lang } = useContext(I18nContext);
   const metadata = useContext(MetadataContext);
-  const { user, isLoading: userIsLoading } = useContext(UserContext);
   const searchParams = useSearchParams();
   const { pageNumber, setPageNumber } = usePageNumber(searchParams);
 
@@ -28,8 +26,9 @@ const PlayerListPage = () => {
     translationCache.current = {};
   }, [lang]);
 
-  const { isLoading, data } = useApi(
-    () =>
+  const { isLoading, data } = useQuery({
+    queryKey: ["playerList", lang],
+    queryFn: () =>
       PlayerBasic.getPlayerList().then((players) =>
         players
           .map((player) => {
@@ -46,14 +45,13 @@ const PlayerListPage = () => {
             return sortAlias1 > sortAlias2 ? 1 : 0;
           })
           .reduce(
-            (accumulator, { player, nameNormalized, aliasNormalized }, index) => {
+            (accumulator, { player, nameNormalized, aliasNormalized }) => {
               const locationString =
                 translationCache.current[player?.regionId ?? 0] ??
                 translateRegionNameFull(metadata, lang, player.regionId, true);
 
               accumulator.keys.push(player.id.toString());
 
-              if (player.id === user?.playerId) accumulator.loggedInUserIndex = index;
               accumulator.tableArray.push([
                 {
                   content: (
@@ -77,13 +75,11 @@ const PlayerListPage = () => {
               tableArray: [] as ArrayTableCellData[][],
               filterStrings: [] as string[],
               keys: [] as string[],
-              loggedInUserIndex: -1,
             },
           ),
       ),
-    [metadata.isLoading, lang, userIsLoading],
-    "playerList",
-  );
+    enabled: !metadata.isLoading,
+  });
 
   const rowsPerPage = 100;
   const [maxPageNumber, setMaxPageNumber] = useState(
@@ -115,7 +111,7 @@ const PlayerListPage = () => {
         numberOfPages={maxPageNumber}
       />
       <div className="module player-list table-hover-rows">
-        <Deferred isWaiting={isLoading || metadata.isLoading || userIsLoading}>
+        <Deferred isWaiting={isLoading || metadata.isLoading}>
           <ArrayTable
             headerRows={[
               [

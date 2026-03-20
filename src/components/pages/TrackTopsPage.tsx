@@ -1,10 +1,10 @@
+import { useQueries } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { LapModeRadio } from "../widgets/LapModeSelect";
-import { useApiArray } from "../../hooks/ApiHook";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
@@ -57,23 +57,15 @@ const TrackTopsPage = () => {
 
   const { user } = useContext(UserContext);
 
-  const tops = useApiArray(
-    (params) =>
-      Score.getChart(
-        params.trackId,
-        category,
-        lapMode === LapModeEnum.Lap,
-        region.id,
-        undefined,
-        10,
-      ),
-    4,
-    cup?.trackIds.map((track) => ({
-      trackId: track,
-    })) || [],
-    [category, cup, lapMode, region, metadata.isLoading],
-    "trackTop10s",
-  );
+  const tops = useQueries({
+    queries:
+      cup?.trackIds.map((trackId) => ({
+        queryKey: ["trackTop10", trackId, category, lapMode, region.id],
+        queryFn: () =>
+          Score.getChart(trackId, category, lapMode === LapModeEnum.Lap, region.id, undefined, 10),
+        enabled: !metadata.isLoading,
+      })) ?? [],
+  });
 
   const siteHue = getCategorySiteHue(category, settings);
 

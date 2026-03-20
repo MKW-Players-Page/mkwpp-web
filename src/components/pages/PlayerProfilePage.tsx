@@ -1,10 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { FlagIcon, Icon } from "../widgets";
-import { useApi } from "../../hooks/ApiHook";
 import { formatLapMode, formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
@@ -45,13 +45,16 @@ const PlayerProfilePage = () => {
     isLoading: playerLoading,
     data: player,
     error: playerError,
-  } = useApi(() => Player.getPlayer(id), [id], "playerProfile");
+  } = useQuery({
+    queryKey: ["playerProfile", id],
+    queryFn: () => Player.getPlayer(id),
+  });
 
-  const { isLoading: timesheetLoading, data: timesheet } = useApi(
-    () => Timesheet.get(id, category, lapMode, region?.id ?? 1),
-    [id, category, lapMode, region],
-    "playerProfileTimesheet",
-  );
+  const { isLoading: timesheetLoading, data: timesheet } = useQuery({
+    queryKey: ["playerProfileTimesheet", id, category, lapMode, region.id],
+    queryFn: () => Timesheet.get(id, category, lapMode, region.id),
+    enabled: !metadata.isLoading,
+  });
 
   const siteHue = getCategorySiteHue(category, settings);
 

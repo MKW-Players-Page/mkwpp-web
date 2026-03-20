@@ -1,13 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link, Navigate } from "react-router";
+
 import { User } from "../../../api";
-import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import Deferred from "../../widgets/Deferred";
 import { Pages, resolvePage } from "../Pages";
 
 const AdminDashboard = () => {
-  const { isLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
+  const { isLoading, data: isAdmin } = useQuery({
+    queryKey: ["isAdmin"],
+    queryFn: () => User.isAdmin(),
+  });
   const { user } = useContext(UserContext);
 
   return (

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link, useSearchParams } from "react-router";
 
@@ -27,7 +28,6 @@ import { CategoryRadio } from "../../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../../widgets/Table";
 import { LapModeRadio } from "../../widgets/LapModeSelect";
 import { CategoryEnum, LapModeEnum, Timesheet } from "../../../api";
-import { useApi } from "../../../hooks";
 import { UserContext } from "../../../utils/User";
 import { TrackDropdown } from "../../widgets/TrackSelect";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
@@ -107,11 +107,11 @@ const StandardsPage = () => {
   const { settings } = useContext(SettingsContext);
   const { user } = useContext(UserContext);
 
-  const { data: userScores, isLoading: scoresLoading } = useApi(
-    () => Timesheet.get(user?.playerId ?? 1, category),
-    [user?.playerId, category],
-    "Timesheet.get",
-  );
+  const { data: userScores, isLoading: scoresLoading } = useQuery({
+    queryKey: ["standardsTimesheet", user?.playerId, category],
+    queryFn: () => Timesheet.get(user?.playerId ?? 1, category),
+    enabled: !!user?.playerId,
+  });
 
   let hasHighlightedRow = [false, false];
 

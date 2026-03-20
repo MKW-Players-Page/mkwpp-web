@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link } from "react-router";
-import { useApi } from "../../hooks";
+
 import { handleBars, I18nContext, translate } from "../../utils/i18n/i18n";
 import Deferred from "./Deferred";
 import "./DiscordEmbed.css";
@@ -30,14 +31,13 @@ const DiscordEmbed = ({ style }: DiscordEmbedProps) => {
   const UsersToShow = 10;
   const { lang } = useContext(I18nContext);
 
-  const { isLoading, data } = useApi(
-    () =>
+  const { isLoading, data } = useQuery({
+    queryKey: ["discord"],
+    queryFn: () =>
       fetch("https://discord.com/api/guilds/956549843348783114/widget.json")
         .then((r) => r.json())
         .then((r) => r as DiscordWidgetResponse),
-    [],
-    "discord",
-  );
+  });
 
   const onlineMembers = data?.members.filter(
     (r) => !r.username.includes("...") && r.status === "online",

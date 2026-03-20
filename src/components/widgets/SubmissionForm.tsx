@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import { useContext, useEffect, useState } from "react";
+
 import init, { read_rkg } from "mkw_lib";
 
-import { useContext, useEffect, useState } from "react";
-import { useApi } from "../../hooks";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
@@ -140,7 +141,11 @@ const SubmissionForm = ({
     }
   }, [state, track]);
 
-  const { data: submittees } = useApi(() => User.getSubmitteeList(user?.userId ?? 0, metadata));
+  const { data: submittees } = useQuery({
+    queryKey: ["submittees", user?.userId, metadata.isLoading],
+    queryFn: () => User.getSubmitteeList(user?.userId ?? 0, metadata),
+    enabled: !metadata.isLoading && !!user,
+  });
 
   const submit = (done: () => void, asReview: boolean = false) => {
     setState((prev) => ({ ...prev, errors: {} }));

@@ -1,8 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router";
 
 import Deferred from "../../widgets/Deferred";
 import { BlogPostModule } from "../../widgets";
-import { useApi } from "../../../hooks";
 import { integerOr } from "../../../utils/Numbers";
 import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
@@ -13,7 +13,10 @@ const BlogPostPage = () => {
   const { id: idStr } = useParams();
   const id = Math.max(integerOr(idStr, 0), 0);
 
-  const { isLoading, data: post } = useApi(() => BlogPost.getById(id), [id], "blogPosts");
+  const { isLoading, data: post } = useQuery({
+    queryKey: ["blogPosts", id],
+    queryFn: () => BlogPost.getById(id),
+  });
   const { lang } = useContext(I18nContext);
 
   return (

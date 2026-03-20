@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
-import { useApi } from "../../hooks";
+
 import { PlayerBasic } from "../../api";
 import { MetadataContext } from "../../utils/Metadata";
 import { FormContext } from "./Form";
@@ -29,8 +30,9 @@ const PlayerSelectDropdown = ({
   multiple = false,
   label,
 }: PlayerSelectDropdownProps) => {
-  const { data: players, isLoading } = useApi(
-    () =>
+  const { data: players, isLoading } = useQuery({
+    queryKey: ["playerData", restrictSet, blacklist],
+    queryFn: () =>
       PlayerBasic.getPlayerList().then((players) =>
         players
           .filter((player) =>
@@ -42,9 +44,7 @@ const PlayerSelectDropdown = ({
           )
           .sort((a, b) => (a.alias ?? a.name).localeCompare(b.alias ?? b.name)),
       ),
-    [],
-    "playerData",
-  );
+  });
 
   if (multiple)
     return (

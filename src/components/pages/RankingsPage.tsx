@@ -1,8 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useSearchParams } from "react-router";
 
 import Deferred from "../widgets/Deferred";
-import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { UserContext } from "../../utils/User";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
@@ -23,6 +23,7 @@ import { LapModeRadio } from "../widgets/LapModeSelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { MetricEnum, Ranking, RegionType } from "../../api";
+import { MetadataContext } from "../../utils/Metadata";
 
 export interface RankingsMetric {
   titleKey: TranslationKey;
@@ -93,14 +94,15 @@ const RankingsPage = ({ metric }: RankingsProps) => {
   const highlight = useRowHighlightParam(searchParams).highlight;
 
   const { lang } = useContext(I18nContext);
+  const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
   const { settings } = useContext(SettingsContext);
 
-  const { isLoading, data: rankings } = useApi(
-    () => Ranking.getChart(metric.metric, category, lapMode, region.id),
-    [category, lapMode, region],
-    "playerRankings",
-  );
+  const { isLoading, data: rankings } = useQuery({
+    queryKey: ["playerRankings", metric.metric, category, lapMode, region.id],
+    queryFn: () => Ranking.getChart(metric.metric, category, lapMode, region.id),
+    enabled: !metadata.isLoading,
+  });
 
   const tableArray: ArrayTableCellData[][] = [];
   const tableData: ArrayTableData = {

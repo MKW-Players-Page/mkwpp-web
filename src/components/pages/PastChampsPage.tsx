@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useSearchParams } from "react-router";
-import { useApi } from "../../hooks";
+
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { useCategoryParam } from "../../utils/SearchParams";
@@ -19,11 +20,10 @@ const PastChampsPage = () => {
   const searchParams = useSearchParams();
   const { category, setCategory } = useCategoryParam(searchParams);
   const siteHue = getCategorySiteHue(category, settings);
-  const { isLoading, data: champs } = useApi(
-    () => SiteChamp.get(category),
-    [category],
-    "siteChamps",
-  );
+  const { isLoading, data: champs } = useQuery({
+    queryKey: ["siteChamps", category],
+    queryFn: () => SiteChamp.get(category),
+  });
 
   const totalDuration = +new Date() - 1208390400000;
 

@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link } from "react-router";
+
 import { Region, PlayerBasic } from "../../api";
-import { useApi } from "../../hooks";
 import { MetadataContext } from "../../utils/Metadata";
 import { Pages, resolvePage } from "../pages";
 import { FlagIcon } from "./Icon";
@@ -14,7 +15,10 @@ export interface FlagIconSpanPlayerIdProps {
 
 const FlagIconSpanPlayerId = ({ id, showRegFlagRegardless, xxFlag }: FlagIconSpanPlayerIdProps) => {
   const metadata = useContext(MetadataContext);
-  const { data: player } = useApi(() => PlayerBasic.getPlayerBasic(id), [id], "player", [], false);
+  const { data: player } = useQuery({
+    queryKey: ["player", id],
+    queryFn: () => PlayerBasic.getPlayerBasic(id),
+  });
   return player?.regionId !== undefined || xxFlag ? (
     <FlagIcon
       region={metadata.getRegionById(player?.regionId ?? 0)}
@@ -47,7 +51,10 @@ export interface PlayerTextFromIdProps {
 }
 
 const PlayerTextFromId = ({ id }: PlayerTextFromIdProps) => {
-  const { data: player } = useApi(() => PlayerBasic.getPlayerBasic(id), [id], "player", [], false);
+  const { data: player } = useQuery({
+    queryKey: ["player", id],
+    queryFn: () => PlayerBasic.getPlayerBasic(id),
+  });
 
   return <>{player?.alias ?? player?.name}</>;
 };
@@ -65,13 +72,11 @@ const PlayerMentionNoPrecalc = ({
 }: PlayerMentionNoPrecalcProps) => {
   const metadata = useContext(MetadataContext);
 
-  const { isLoading, data: player } = useApi(
-    () => PlayerBasic.getPlayerBasic(id, metadata),
-    [id],
-    "player",
-    [],
-    false,
-  );
+  const { isLoading, data: player } = useQuery({
+    queryKey: ["player", id],
+    queryFn: () => PlayerBasic.getPlayerBasic(id, metadata),
+    enabled: !metadata.isLoading,
+  });
 
   if (metadata.isLoading || isLoading) return <>Loading..</>;
 

@@ -1,6 +1,8 @@
+import { Switch, TextField } from "@mui/material";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { useApi } from "../../hooks";
+
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import { setSettingKV, SettingsContext } from "../../utils/Settings";
 import { UserContext } from "../../utils/User";
@@ -9,7 +11,6 @@ import Deferred from "../widgets/Deferred";
 import PlayerSelectDropdown from "../widgets/PlayerSelectDropdown";
 import AccountPasswordChangeForm from "../widgets/options/AccountPasswordChangeForm";
 import { Player, User } from "../../api";
-import { Switch, TextField } from "@mui/material";
 import { arrayEquals } from "../../utils/ArrayUtils";
 
 const OptionsPage = () => {
@@ -23,32 +24,38 @@ const OptionsPage = () => {
     alignItems: "center",
   };
 
-  const [forciblyReloadPlayer, triggerForciblyReloadPlayer] = useState(0);
-  // it doesn't matter what player is loaded if you aren't logged in.
-  const { isLoading: playerLoading, data: player } = useApi(
-    () => Player.getPlayer(user?.playerId ?? 1),
-    [user, forciblyReloadPlayer],
-    "loadedUser",
-  );
+  const queryClient = useQueryClient();
+
+  const { isLoading: playerLoading, data: player } = useQuery({
+    queryKey: ["loadedPlayer", user?.playerId],
+    queryFn: () => Player.getPlayer(user?.playerId ?? 1),
+    enabled: !!user?.playerId,
+  });
+
+  const reloadPlayer = () => {
+    queryClient.invalidateQueries({ queryKey: ["loadedPlayer"] });
+  };
 
   const pronounsTextArea = useRef(null);
   const bioTextArea = useRef(null);
   const aliasTextArea = useRef(null);
   const navigate = useNavigate();
-  const [resetSubmittersList, setResetSubmittersList] = useState(0);
   const [submitterIds, setSubmitterIds] = useState<number[]>([]);
   const [submitterIdsFieldError, setSubmitterIdsFieldError] = useState("");
 
-  const { isLoading: submittersLoading, data: submitters } = useApi(
-    () =>
+  const { isLoading: submittersLoading, data: submitters } = useQuery({
+    queryKey: ["loadedSubmitters", user?.userId],
+    queryFn: () =>
       User.getSubmitterList(user?.userId ?? 0).then((submitters) => {
         setSubmitterIds(submitters?.map((r) => r.id) ?? []);
         return submitters;
       }),
-    [user, resetSubmittersList],
-    "loadedSubmitters",
-    [{ variable: user?.userId, defaultValue: undefined }],
-  );
+    enabled: !!user?.playerId,
+  });
+
+  const reloadSubmitters = () => {
+    queryClient.invalidateQueries({ queryKey: ["loadedSubmitters"] });
+  };
 
   const [debugActive, setDebugActive] = useState(0);
 
@@ -213,7 +220,7 @@ const OptionsPage = () => {
                     )
                       User.setSubmitterList(user.userId, submitterIds).then(
                         () => {
-                          setResetSubmittersList(Math.random());
+                          reloadSubmitters();
                         },
                         () => {
                           setSubmitterIdsFieldError(
@@ -243,9 +250,7 @@ const OptionsPage = () => {
                     const newAlias: string = (aliasTextArea.current as any).value;
                     if (aliasTextArea.current === null || newAlias === (player?.alias ?? ""))
                       return;
-                    await User.updateAlias(user.userId, newAlias).then((_) =>
-                      triggerForciblyReloadPlayer(Math.random()),
-                    );
+                    await User.updateAlias(user.userId, newAlias).then((_) => reloadPlayer());
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}
@@ -268,9 +273,7 @@ const OptionsPage = () => {
                   onClick={async () => {
                     const newBio: string = (bioTextArea.current as any).value;
                     if (bioTextArea.current === null || newBio === (player?.bio ?? "")) return;
-                    await User.updateBio(user.userId, newBio).then((_) =>
-                      triggerForciblyReloadPlayer(Math.random()),
-                    );
+                    await User.updateBio(user.userId, newBio).then((_) => reloadPlayer());
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}
@@ -296,9 +299,7 @@ const OptionsPage = () => {
                       newPronouns === (player?.pronouns ?? "")
                     )
                       return;
-                    await User.updatePronouns(user.userId, newPronouns).then((_) =>
-                      triggerForciblyReloadPlayer(Math.random()),
-                    );
+                    await User.updatePronouns(user.userId, newPronouns).then((_) => reloadPlayer());
                   }}
                 >
                   {translate("optionsPageSaveBtnText", lang)}

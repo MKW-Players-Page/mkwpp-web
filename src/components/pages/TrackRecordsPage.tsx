@@ -1,3 +1,5 @@
+import { Tooltip } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link, useSearchParams } from "react-router";
 
@@ -5,7 +7,6 @@ import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { Icon } from "../widgets";
 import OverwriteColor from "../widgets/OverwriteColor";
-import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import { formatTime } from "../../utils/Formatters";
 import { useCategoryParam, useLapModeParam, useRegionParam } from "../../utils/SearchParams";
@@ -26,7 +27,6 @@ import { LapModeEnum, RegionType, Score } from "../../api";
 import { LapModeRadio } from "../widgets/LapModeSelect";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
-import { Tooltip } from "@mui/material";
 
 const TrackRecordsPage = () => {
   const searchParams = useSearchParams();
@@ -41,12 +41,11 @@ const TrackRecordsPage = () => {
 
   const { user } = useContext(UserContext);
 
-  const { isLoading, data: scores } = useApi(
-    () => Score.getRecords(category, LapModeEnum.Overall, region.id),
-    [category, region.id, metadata.isLoading],
-    "trackRecords",
-    [{ variable: metadata.isLoading, defaultValue: true }],
-  );
+  const { isLoading, data: scores } = useQuery({
+    queryKey: ["trackRecords", category, region.id],
+    queryFn: () => Score.getRecords(category, LapModeEnum.Overall, region.id),
+    enabled: !metadata.isLoading,
+  });
 
   const siteHue = getCategorySiteHue(category, settings);
 

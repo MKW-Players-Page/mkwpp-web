@@ -23,10 +23,10 @@ import { Tooltip } from "@mui/material";
 
 export interface SubmissionCardProps {
   submission: Submission;
-  setReload: React.Dispatch<React.SetStateAction<number>>;
+  reload: () => void;
 }
 
-const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
+const SubmissionCard = ({ submission, reload }: SubmissionCardProps) => {
   const metadata = useContext(MetadataContext);
   const { lang } = useContext(I18nContext);
   const [visibleObscured, setVisibleObscured] = useState(false);
@@ -78,7 +78,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                 </span>
                 <OverwriteColor hue={216}>
                   <ObscuredModule
-                    onClose={() => setReload(Math.random())}
+                    onClose={reload}
                     stateVisible={visibleObscured}
                     setStateVisible={setVisibleObscured}
                   >
@@ -96,7 +96,7 @@ const SubmissionCard = ({ submission, setReload }: SubmissionCardProps) => {
                       starterSubmitterNote={submission.submitterNote ?? undefined}
                       onSuccess={() => {
                         setVisibleObscured(false);
-                        setReload(Math.random());
+                        reload();
                       }}
                     />
                   </ObscuredModule>

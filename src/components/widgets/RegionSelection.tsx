@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router";
 
@@ -8,7 +9,6 @@ import "./RegionSelection.css";
 import { I18nContext, translateRegionName } from "../../utils/i18n/i18n";
 import { FlagIcon } from "./Icon";
 import { Region, RegionType, CategoryEnum, LapModeEnum } from "../../api";
-import { useApi } from "../../hooks";
 import Deferred from "./Deferred";
 
 export interface ComplexRegionSelectionProps {
@@ -120,11 +120,10 @@ const ComplexRegionSelection = ({
   currentLap,
 }: ComplexRegionSelectionProps) => {
   const metadata = useContext(MetadataContext);
-  const { data: sortedRegions, isLoading: sortedRegionsIsLoading } = useApi(
-    () => Region.getRegionTypeHashmap(),
-    [],
-    "regionTypeHashMap",
-  );
+  const { data: sortedRegions, isLoading: sortedRegionsIsLoading } = useQuery({
+    queryKey: ["regionTypeHashMap"],
+    queryFn: () => Region.getRegionTypeHashmap(),
+  });
   if (metadata.isLoading || sortedRegions === undefined || sortedRegionsIsLoading) return <></>;
 
   const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>

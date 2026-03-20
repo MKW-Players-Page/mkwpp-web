@@ -1,8 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
-import { useApi } from "../../../hooks";
 import { useContext } from "react";
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { BlogPost } from "../../../api";
@@ -10,7 +10,10 @@ import PlayerMention from "../../widgets/PlayerMention";
 import { secondsToDate } from "../../../utils/DateUtils";
 
 const BlogListPage = () => {
-  const { isLoading, data: posts } = useApi(() => BlogPost.getList(2147483647), [], "blogPosts");
+  const { isLoading, data: posts } = useQuery({
+    queryKey: ["blogPosts"],
+    queryFn: () => BlogPost.getList(2147483647),
+  });
   const { lang } = useContext(I18nContext);
 
   return (

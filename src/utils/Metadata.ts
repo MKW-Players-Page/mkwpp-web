@@ -1,5 +1,6 @@
+import { useQueries } from "@tanstack/react-query";
 import { createContext } from "react";
-import { useApi } from "../hooks";
+
 import { Cup, Track, Region, StandardLevel, Standard, Player, PlayerBasic } from "../api";
 import { typeguardPlayer } from "../api/endpoints/players";
 
@@ -119,15 +120,30 @@ export class Metadata {
  * @returns A stateful object containing the fetched metadata if the loading flag is cleared.
  */
 export const useMetadata = (): Metadata => {
-  const regions = useApi(() => Region.get(), [], "regions");
-  const standardLevels = useApi(() => StandardLevel.get(), [], "standardLevels");
-  const standards = useApi(() => Standard.get(), [], "standards");
-  const cups = useApi(() => Cup.get(), [], "cups");
-  const tracks = useApi(
-    () => Track.get().then((tracks) => tracks.sort((a, b) => a.id - b.id)),
-    [],
-    "tracks",
-  );
+  const [regions, standardLevels, standards, cups, tracks] = useQueries({
+    queries: [
+      {
+        queryKey: ["regions"],
+        queryFn: () => Region.get(),
+      },
+      {
+        queryKey: ["standardLevels"],
+        queryFn: () => StandardLevel.get(),
+      },
+      {
+        queryKey: ["standards"],
+        queryFn: () => Standard.get(),
+      },
+      {
+        queryKey: ["cups"],
+        queryFn: () => Cup.get(),
+      },
+      {
+        queryKey: ["tracks"],
+        queryFn: () => Track.get().then((tracks) => tracks.sort((a, b) => a.id - b.id)),
+      },
+    ],
+  });
 
   const metadata = new Metadata(
     regions.isLoading ||
@@ -135,7 +151,7 @@ export const useMetadata = (): Metadata => {
       cups.isLoading ||
       tracks.isLoading ||
       standards.isLoading,
-    regions.data ?? undefined,
+    regions.data,
     standardLevels.data,
     standards.data,
     cups.data,

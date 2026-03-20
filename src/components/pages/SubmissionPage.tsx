@@ -1,4 +1,7 @@
+import { Box, Switch, ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext, useRef, useState } from "react";
+
 import init, { read_rksys, RKG } from "mkw_lib";
 
 import Deferred from "../widgets/Deferred";
@@ -18,7 +21,6 @@ import { MetadataContext } from "../../utils/Metadata";
 import { UserContext } from "../../utils/User";
 import { Link, Navigate, useNavigate } from "react-router";
 import { Pages, resolvePage } from "./Pages";
-import { useApi } from "../../hooks";
 import { handleBars, I18nContext, translate, translateTrack } from "../../utils/i18n/i18n";
 import SubmissionForm from "../widgets/SubmissionForm";
 import SubmissionCard from "../widgets/SubmissionCard";
@@ -33,7 +35,6 @@ import PlayerMention from "../widgets/PlayerMention";
 import ArrayTable, { ArrayTableCellData } from "../widgets/Table";
 import { SmallBigDateFormat, SmallBigTrackFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
-import { Box, Switch, ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
 
 const SubmitTab = () => {
   const { lang } = useContext(I18nContext);
@@ -237,14 +238,19 @@ const SubmissionsTab = () => {
   const metadata = useContext(MetadataContext);
   const { user } = useContext(UserContext);
   const { lang } = useContext(I18nContext);
-  const [reload, setReload] = useState(Math.random());
   const [filter, setFilter] = useState<SubmissionFilter>(SubmissionFilter.All);
 
-  const { isLoading, data: submissions } = useApi(
-    () => User.getUserSubmissionsList(user?.userId ?? 0),
-    [reload],
-    "trackSubmissions",
-  );
+  const queryClient = useQueryClient();
+
+  const { isLoading, data: submissions } = useQuery({
+    queryKey: ["trackSubmissions", user?.userId],
+    queryFn: () => User.getUserSubmissionsList(user?.userId ?? 0),
+    enabled: !!user?.playerId,
+  });
+
+  const reload = () => {
+    queryClient.invalidateQueries({ queryKey: ["trackSubmissions"] });
+  };
 
   return (
     <div className="module-content">
@@ -267,7 +273,7 @@ const SubmissionsTab = () => {
         </ToggleButton>
       </ToggleButtonGroup>
       <Deferred isWaiting={isLoading || metadata.isLoading}>
-        <div key={reload} className="card-container">
+        <div className="card-container">
           {submissions
             ?.filter((submission) =>
               filter === SubmissionFilter.All
@@ -277,7 +283,7 @@ const SubmissionsTab = () => {
                   : submission.playerId === user?.playerId,
             )
             .map((submission) => (
-              <SubmissionCard setReload={setReload} submission={submission} />
+              <SubmissionCard reload={reload} submission={submission} />
             ))}
         </div>
       </Deferred>
@@ -288,10 +294,10 @@ const SubmissionsTab = () => {
 interface TimesheetTabEditBtnProps {
   score: Score;
   patchUpData?: EditSubmission;
-  setReload: React.Dispatch<React.SetStateAction<number>>;
+  reload: () => void;
 }
 
-const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEditBtnProps) => {
+const TimesheetTabEditBtn = ({ patchUpData, score, reload }: TimesheetTabEditBtnProps) => {
   const [visibleObscured, setVisibleObscured] = useState(false);
   const { lang } = useContext(I18nContext);
 
@@ -307,7 +313,7 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
       </span>
       <OverwriteColor hue={216}>
         <ObscuredModule
-          onClose={() => setReload(Math.random())}
+          onClose={reload}
           stateVisible={visibleObscured}
           setStateVisible={setVisibleObscured}
         >
@@ -325,7 +331,7 @@ const TimesheetTabEditBtn = ({ patchUpData, score, setReload }: TimesheetTabEdit
             starterSubmitterNote={patchUpData?.submitterNote}
             onSuccess={() => {
               setVisibleObscured(false);
-              setReload(Math.random());
+              reload();
             }}
             disclaimerText={translate("submissionPageSubmitTabWarning2", lang)}
           />
@@ -352,24 +358,29 @@ const TimesheetTab = () => {
   const { user } = useContext(UserContext);
   const { settings } = useContext(SettingsContext);
 
-  const [reload, setReload] = useState(Math.random());
   const [category, setCategory] = useState<CategoryEnum>(CategoryEnum.NonShortcut);
   const [lapMode, setLapMode] = useState<LapModeEnum>(LapModeEnum.Overall);
 
-  const { isLoading: scoresLoading, data: timesheet } = useApi<Timesheet>(
-    () => Timesheet.get(user?.playerId ?? 0, category),
-    [user, category, reload],
-    "playerProfileScores",
-  );
+  const queryClient = useQueryClient();
 
-  const { isLoading: editsLoading, data: edits } = useApi(
-    () =>
+  const { isLoading: scoresLoading, data: timesheet } = useQuery({
+    queryKey: ["playerProfileScores", user?.playerId, category],
+    queryFn: () => Timesheet.get(user?.playerId ?? 0, category),
+    enabled: !!user?.playerId,
+  });
+
+  const { isLoading: editsLoading, data: edits } = useQuery({
+    queryKey: ["playerEdits", user?.userId],
+    queryFn: () =>
       User.getUserEditSubmissionsList(user?.userId ?? 0).then((r) =>
         r?.sort((a, b) => +b.submittedAt - +a.submittedAt),
       ),
-    [reload],
-    "playerEdits",
-  );
+    enabled: !!user?.playerId,
+  });
+
+  const reload = () => {
+    queryClient.invalidateQueries({ queryKey: ["playerEdits"] });
+  };
 
   const sortedScores = timesheet?.times
     ?.filter(
@@ -387,7 +398,7 @@ const TimesheetTab = () => {
 
   const siteHue = getCategorySiteHue(category, settings);
   return (
-    <div key={reload} style={{ padding: "10px" }}>
+    <div style={{ padding: "10px" }}>
       <OverwriteColor hue={siteHue}>
         <div className="module-row wrap">
           <CategoryRadio value={category} onChange={setCategory} />
@@ -395,7 +406,7 @@ const TimesheetTab = () => {
         </div>
         <Deferred isWaiting={metadata.isLoading || scoresLoading || editsLoading}>
           <div className="module">
-            <table key={reload}>
+            <table>
               <thead>
                 <tr>
                   <th>{translate("playerProfilePageTrackColumn", lang)}</th>
@@ -586,7 +597,7 @@ const TimesheetTab = () => {
                       </td>
                       <td className="icon-cell">
                         <TimesheetTabEditBtn
-                          setReload={setReload}
+                          reload={reload}
                           score={score}
                           patchUpData={
                             submission?.status === SubmissionStatus.Pending ? submission : undefined

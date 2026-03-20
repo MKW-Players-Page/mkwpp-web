@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useRef, useState } from "react";
 import { Link } from "react-router";
+
 import {
   AdminPlayer,
   AdminScore,
@@ -8,7 +10,6 @@ import {
   PlayerBasic,
   Region,
 } from "../../../../api";
-import { useApi } from "../../../../hooks";
 import { getHighestValid } from "../../../../utils/EnumUtils";
 import { formatDate, formatTime } from "../../../../utils/Formatters";
 import { Language, translateCategoryName } from "../../../../utils/i18n/i18n";
@@ -142,11 +143,10 @@ const AdminParserOutputPage = () => {
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
-  const { isLoading, data: playerList } = useApi(
-    () => PlayerBasic.getPlayerList(),
-    [],
-    "playerList",
-  );
+  const { isLoading, data: playerList } = useQuery({
+    queryKey: ["playerList"],
+    queryFn: () => PlayerBasic.getPlayerList(),
+  });
 
   const onChange = () => {
     if (ref.current !== null) {

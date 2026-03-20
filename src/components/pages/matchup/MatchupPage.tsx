@@ -1,5 +1,8 @@
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useLayoutEffect, useRef, useState } from "react";
 import { Link, Navigate, useSearchParams } from "react-router";
+
 import { I18nContext, translate } from "../../../utils/i18n/i18n";
 import { SettingsContext } from "../../../utils/Settings";
 import { MetadataContext } from "../../../utils/Metadata";
@@ -11,13 +14,11 @@ import PlayerMention from "../../widgets/PlayerMention";
 import { Pages, resolvePage } from "../Pages";
 import Deferred from "../../widgets/Deferred";
 import { useCategoryParam, useIdsParam, useLapModeParam } from "../../../utils/SearchParams";
-import { useApi } from "../../../hooks/ApiHook";
 import { formatTime, formatTimeDiff } from "../../../utils/Formatters";
 import { CategoryRadio } from "../../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData } from "../../widgets/Table";
 import { SmallBigTrackFormat } from "../../widgets/SmallBigFormat";
 import { MatchupData } from "../../../api/endpoints/playerTimesheet";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 const MatchupPage = () => {
   const searchParams = useSearchParams();
@@ -30,13 +31,10 @@ const MatchupPage = () => {
   const metadata = useContext(MetadataContext);
   const { settings } = useContext(SettingsContext);
 
-  const { isLoading: matchupDataIsLoading, data: matchupData } = useApi(
-    () => MatchupData.get(ids, category, lapMode),
-    [category, lapMode],
-    "playerData",
-    [],
-    false,
-  );
+  const { isLoading: matchupDataIsLoading, data: matchupData } = useQuery({
+    queryKey: ["playerData", ids, category, lapMode],
+    queryFn: () => MatchupData.get(ids, category, lapMode),
+  });
 
   const isTwoPlayers = matchupData?.playerData.length === 2;
   const siteHue = getCategorySiteHue(category, settings);

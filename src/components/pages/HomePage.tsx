@@ -1,21 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+
 import Deferred from "../widgets/Deferred";
-import { useApi } from "../../hooks";
 import { BlogPostModule } from "../widgets";
 import DiscordEmbed from "../widgets/DiscordEmbed";
 import ExpandableModule from "../widgets/ExpandableModule";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
-import { useContext } from "react";
 import CupsList from "../widgets/CupsList";
 import RecentTimes from "../widgets/RecentTimes";
 import { BlogPost } from "../../api";
 
 const HomePage = () => {
   const { lang } = useContext(I18nContext);
-  const { isLoading: blogPostsLoading, data: posts } = useApi(
-    () => BlogPost.getList(4),
-    [],
-    "blogPosts",
-  );
+  const { isLoading: blogPostsLoading, data: posts } = useQuery({
+    queryKey: ["blogPosts"],
+    queryFn: () => BlogPost.getList(4),
+  });
 
   return (
     <>

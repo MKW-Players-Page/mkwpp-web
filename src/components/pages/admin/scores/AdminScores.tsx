@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link } from "react-router";
+
 import { AdminScore, LapModeEnum, Player, User } from "../../../../api";
-import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
 import { PaginationButtonRow } from "../../../widgets/PaginationButtons";
@@ -40,7 +41,10 @@ const AdminScoreUpdateButton = ({ score }: AdminScoreUpdateButtonProps) => {
 };
 
 const AdminScoresListPage = () => {
-  const { isLoading: adminIsLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
+  const { isLoading: adminIsLoading, data: isAdmin } = useQuery({
+    queryKey: ["isAdmin"],
+    queryFn: () => User.isAdmin(),
+  });
   const searchParams = useSearchParams();
   const { pageNumber, setPageNumber } = usePageNumber(searchParams);
   const metadata = useContext(MetadataContext);
@@ -50,8 +54,9 @@ const AdminScoresListPage = () => {
   const [textFilter, setTextFilter] = useState("");
   const [visibleObscured, setVisibleObscured] = useState(false);
 
-  const { isLoading, data } = useApi(
-    () =>
+  const { isLoading, data } = useQuery({
+    queryKey: ["adminScoreList", trackId],
+    queryFn: () =>
       AdminScore.getList(trackId).then(async (scores) => {
         if (scores === null) return undefined;
         await Player.getPlayersBasic(
@@ -107,9 +112,8 @@ const AdminScoresListPage = () => {
             }),
           );
       }),
-    [metadata, trackId],
-    "scoreList",
-  );
+    enabled: !metadata.isLoading,
+  });
 
   const rowsPerPage = 100;
   const [maxPageNumber, setMaxPageNumber] = useState(

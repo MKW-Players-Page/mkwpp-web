@@ -1,9 +1,10 @@
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useSearchParams } from "react-router";
 
 import Deferred from "../widgets/Deferred";
 import { FlagIcon } from "../widgets";
-import { useApi } from "../../hooks";
 import { getCategorySiteHue } from "../../utils/EnumUtils";
 import OverwriteColor from "../widgets/OverwriteColor";
 import {
@@ -32,7 +33,6 @@ import { CategoryRadio } from "../widgets/CategorySelect";
 import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table";
 import { useMetadata } from "../../utils/Metadata";
 import { RegionTypeRadio } from "../widgets/RegionTypeSelect";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 const CountryRankingsPage = () => {
   const searchParams = useSearchParams();
@@ -46,11 +46,10 @@ const CountryRankingsPage = () => {
   const { lang } = useContext(I18nContext);
 
   const highlight = useRowHighlightParam(searchParams).highlight;
-  const { isLoading, data } = useApi(
-    () => CountryRanking.getChart(top, regionType, category, lapMode),
-    [category, lapMode, top, regionType],
-    "countryRankingsTops",
-  );
+  const { isLoading, data } = useQuery({
+    queryKey: ["countryRankingsTops", category, lapMode, top, regionType],
+    queryFn: () => CountryRanking.getChart(top, regionType, category, lapMode),
+  });
 
   const tableArray: ArrayTableCellData[][] = [];
   const tableData: ArrayTableData = {

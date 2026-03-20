@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { Link } from "react-router";
 
@@ -8,7 +9,6 @@ import { logoutUser, UserContext } from "../../utils/User";
 import { I18nContext, translate } from "../../utils/i18n/i18n";
 import Icon from "../widgets/Icon";
 import ObscuredModule from "../widgets/ObscuredModule";
-import { useApi } from "../../hooks";
 import { User } from "../../api";
 
 export interface HeaderProps {
@@ -18,11 +18,11 @@ export interface HeaderProps {
 
 const Header = ({ setNavbarHidden, navbarHidden }: HeaderProps) => {
   const { isLoading: userIsLoading, user, setUser } = useContext(UserContext);
-  const { isLoading: adminIsLoading, data: isAdmin } = useApi(
-    () => User.isAdmin(),
-    [user],
-    "isAdmin",
-  );
+  const { isLoading: adminIsLoading, data: isAdmin } = useQuery({
+    queryKey: ["isAdmin", user?.userId],
+    queryFn: () => User.isAdmin(),
+    enabled: !!user,
+  });
   const isLoading = userIsLoading && adminIsLoading;
   const { lang } = useContext(I18nContext);
 

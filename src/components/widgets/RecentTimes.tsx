@@ -1,6 +1,8 @@
+import { Box, Slider, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { Link } from "react-router";
-import { useApi } from "../../hooks";
+
 import { formatTime } from "../../utils/Formatters";
 import { I18nContext, translate, translateCategoryName } from "../../utils/i18n/i18n";
 import { MetadataContext } from "../../utils/Metadata";
@@ -15,10 +17,6 @@ import { SmallBigDateFormat, SmallBigTrackFormat } from "./SmallBigFormat";
 import ArrayTable, { ArrayTableCellData } from "./Table";
 import { secondsToDate } from "../../utils/DateUtils";
 
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Box, Slider } from "@mui/material";
-
 interface RecentTimesProps {
   defaultLimit?: number;
   canChangeLimit?: boolean;
@@ -31,8 +29,9 @@ const RecentTimes = ({ defaultLimit, canChangeLimit = false }: RecentTimesProps)
 
   const [limit, setLimit] = useState(defaultLimit ?? 30);
 
-  const { isLoading: recentTimesLoading, data } = useApi(
-    () =>
+  const { isLoading: recentTimesLoading, data } = useQuery({
+    queryKey: ["recentTimes", records, limit],
+    queryFn: () =>
       Score.getRecent(limit ?? 30, records).then((scores) =>
         scores.reduce(
           (acc, data, index) => {
@@ -95,9 +94,8 @@ const RecentTimes = ({ defaultLimit, canChangeLimit = false }: RecentTimesProps)
           { rows: [] as ArrayTableCellData[][], rowKeys: [] as string[] },
         ),
       ),
-    [metadata.isLoading, records, limit],
-    records ? "recentRecords" : "recentTimes",
-  );
+    enabled: !metadata.isLoading,
+  });
 
   return (
     <ExpandableModule

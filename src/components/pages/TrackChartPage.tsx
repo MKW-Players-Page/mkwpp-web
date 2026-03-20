@@ -1,10 +1,11 @@
+import { Tooltip } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router";
 
 import { Pages, resolvePage } from "./Pages";
 import Deferred from "../widgets/Deferred";
 import { Icon } from "../widgets";
-import { useApi } from "../../hooks";
 import { formatTime } from "../../utils/Formatters";
 import { MetadataContext } from "../../utils/Metadata";
 import { integerOr } from "../../utils/Numbers";
@@ -35,7 +36,6 @@ import ArrayTable, { ArrayTableCellData, ArrayTableData } from "../widgets/Table
 import { PaginationButtonRow } from "../widgets/PaginationButtons";
 import { SmallBigDateFormat } from "../widgets/SmallBigFormat";
 import { secondsToDate } from "../../utils/DateUtils";
-import { Tooltip } from "@mui/material";
 import DatePickerRestricted from "../widgets/DatePickerRestricted";
 
 const TrackChartPage = () => {
@@ -70,21 +70,19 @@ const TrackChartPage = () => {
   };
   const prevTrackCat = getHighestValid(category, prevTrack?.categories ?? []);
   const nextTrackCat = getHighestValid(category, nextTrack?.categories ?? []);
-  const { isLoading: validDatesLoading, data: validDates } = useApi(
-    () => Score.getChartDates(id, category, lapMode === LapModeEnum.Lap, region.id),
-    [category, lapMode, region.id, id, metadata.isLoading],
-    "trackChartsDates",
-    [{ variable: metadata.isLoading, defaultValue: true }],
-  );
+  const { isLoading: validDatesLoading, data: validDates } = useQuery({
+    queryKey: ["trackChartsDates", id, category, region.id],
+    queryFn: () => Score.getChartDates(id, category, lapMode === LapModeEnum.Lap, region.id),
+    enabled: !metadata.isLoading,
+  });
 
   const { setDate, date } = useDateParam(searchParams, validDates ?? []);
 
-  const { isLoading, data: scores } = useApi(
-    () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id, date),
-    [category, lapMode, region.id, id, metadata.isLoading, date],
-    "trackCharts",
-    [{ variable: metadata.isLoading, defaultValue: true }],
-  );
+  const { isLoading, data: scores } = useQuery({
+    queryKey: ["trackChart", id, category, lapMode, region.id, date],
+    queryFn: () => Score.getChart(id, category, lapMode === LapModeEnum.Lap, region.id, date),
+    enabled: !metadata.isLoading && !validDatesLoading,
+  });
 
   const tableArray: ArrayTableCellData[][] = [];
   const tableData: ArrayTableData = {

@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { useSearchParams, Navigate, Link } from "react-router";
+
 import { AdminUser, PlayerBasic, User } from "../../../../api";
-import { useApi } from "../../../../hooks";
 import { usePageNumber } from "../../../../utils/SearchParams";
 import Deferred from "../../../widgets/Deferred";
 import { PaginationButtonRow } from "../../../widgets/PaginationButtons";
@@ -38,7 +39,10 @@ const AdminUserUpdateButton = ({ user }: AdminUserUpdateButtonProps) => {
 };
 
 const AdminUsersListPage = () => {
-  const { isLoading: adminIsLoading, data: isAdmin } = useApi(() => User.isAdmin(), [], "isAdmin");
+  const { isLoading: adminIsLoading, data: isAdmin } = useQuery({
+    queryKey: ["isAdmin"],
+    queryFn: () => User.isAdmin(),
+  });
   const searchParams = useSearchParams();
   const { pageNumber, setPageNumber } = usePageNumber(searchParams);
   const metadata = useContext(MetadataContext);
@@ -46,8 +50,9 @@ const AdminUsersListPage = () => {
   const [textFilter, setTextFilter] = useState("");
   const [visibleObscured, setVisibleObscured] = useState(false);
 
-  const { isLoading, data } = useApi(
-    () =>
+  const { isLoading, data } = useQuery({
+    queryKey: ["adminUserList"],
+    queryFn: () =>
       AdminUser.getList().then(async (users) => {
         return users
           ?.sort((a, b) => a.id - b.id)
@@ -89,9 +94,8 @@ const AdminUsersListPage = () => {
             }),
           );
       }),
-    [metadata],
-    "userList",
-  );
+    enabled: !metadata.isLoading,
+  });
 
   const rowsPerPage = 100;
   const [maxPageNumber, setMaxPageNumber] = useState(
