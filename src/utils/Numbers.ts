@@ -39,5 +39,18 @@ export const parseOnlyNumbers = (value: string): number => {
   return parseInt(filterOnlyNumerical(value));
 };
 
+/** Destructure a time value into minutes, seconds, and milliseconds. */
+export const destructureTimeValue = (time: number) => {
+  const minutes = Math.trunc(time / 60000);
+  const seconds = Math.trunc((time % 60000) / 1000);
+  const millis = time % 1000;
+  return { minutes, seconds, millis };
+};
+
+/** Combine minutes, seconds, and milliseconds into a single time value. */
+export const toTimeValue = (minutes: number, seconds: number, millis: number) => {
+  return minutes * 60000 + seconds * 1000 + millis;
+};
+
 /* 2008-04-16 12:00 AM UTC */
 export const mkwReleaseDate = 1208289600000;
