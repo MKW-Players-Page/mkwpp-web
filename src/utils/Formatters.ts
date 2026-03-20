@@ -1,4 +1,5 @@
 import { LapModeEnum } from "../api";
+import { destructureTimeValue } from "./Numbers";
 
 /** Given a time in milliseconds, format it to a string in the form of
  *
@@ -10,10 +11,8 @@ import { LapModeEnum } from "../api";
  * @returns A human readable score time string
  */
 export const formatTime = (time: number) => {
-  const minutes = Math.trunc(time / 60000);
-  const seconds = Math.trunc((time % 60000) / 1000);
-  const milliseconds = time % 1000;
-  return `${minutes}'${String(seconds).padStart(2, "0")}"${String(milliseconds).padStart(3, "0")}`;
+  const { minutes, seconds, millis } = destructureTimeValue(time);
+  return `${minutes}'${String(seconds).padStart(2, "0")}"${String(millis).padStart(3, "0")}`;
 };
 
 /** Given a time difference in milliseconds, format it to a string in the form of
@@ -27,13 +26,11 @@ export const formatTime = (time: number) => {
  * @returns A human readable time difference string
  */
 export const formatTimeDiff = (diff: number) => {
-  const minutes = Math.trunc(Math.abs(diff) / 60000);
-  const seconds = Math.trunc((Math.abs(diff) % 60000) / 1000);
-  const milliseconds = Math.abs(diff) % 1000;
+  const { minutes, seconds, millis } = destructureTimeValue(Math.abs(diff));
   if (minutes > 0) {
-    return `${diff < 0 ? "-" : diff > 0 ? "+" : ""}${minutes}'${String(seconds).padStart(2, "0")}"${String(milliseconds).padStart(3, "0")}`;
+    return `${diff < 0 ? "-" : diff > 0 ? "+" : ""}${minutes}'${String(seconds).padStart(2, "0")}"${String(millis).padStart(3, "0")}`;
   } else {
-    return `${diff < 0 ? "-" : diff > 0 ? "+" : ""}${seconds}"${String(milliseconds).padStart(3, "0")}`;
+    return `${diff < 0 ? "-" : diff > 0 ? "+" : ""}${seconds}"${String(millis).padStart(3, "0")}`;
   }
 };
 

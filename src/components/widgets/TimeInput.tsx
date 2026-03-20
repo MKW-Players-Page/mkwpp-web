@@ -1,7 +1,12 @@
-import { useContext, useRef } from "react";
+import { TextField, styled } from "@mui/material";
+import { useContext, useRef, useState } from "react";
+
 import { parseTime } from "../../utils/Formatters";
-import { parseOnlyNumbers } from "../../utils/Numbers";
+import { destructureTimeValue, toTimeValue } from "../../utils/Numbers";
 import { FormContext } from "./Form";
+
+/** Shorthand since we use this type frequently */
+type InputRef = React.RefObject<HTMLInputElement | null>;
 
 export interface TimeInputProps {
   setValue: (x: number) => void;
@@ -10,102 +15,201 @@ export interface TimeInputProps {
 }
 
 const TimeInput = ({ setValue, value, disabled }: TimeInputProps) => {
-  const minutes = useRef<HTMLInputElement>(null);
-  const seconds = useRef<HTMLInputElement>(null);
-  const millis = useRef<HTMLInputElement>(null);
+  const minutesField = useRef<HTMLInputElement>(null);
+  const secondsField = useRef<HTMLInputElement>(null);
+  const millisField = useRef<HTMLInputElement>(null);
 
-  const onChange = (_: React.ChangeEvent) => {
-    let out = 0;
-    if (minutes.current === null || seconds.current === null || millis.current === null)
-      return value;
+  const [activeFieldValue, setActiveFieldValue] = useState<string>("");
 
-    let minutesParsed = minutes.current.value ? parseOnlyNumbers(minutes.current.value) : 0;
-    if (isNaN(minutesParsed)) minutesParsed = 0;
-    if (minutesParsed > 5) minutes.current.value = "5";
-    out += Math.min(minutesParsed, 5) * 60000;
+  const { minutes, seconds, millis } = destructureTimeValue(value);
 
-    let secondsParsed = seconds.current.value ? parseOnlyNumbers(seconds.current.value) : 0;
-    if (isNaN(secondsParsed)) secondsParsed = 0;
-    if (secondsParsed > 59) seconds.current.value = "59";
-    out += Math.min(secondsParsed, 59) * 1000;
-
-    let millisParsed = millis.current.value ? parseOnlyNumbers(millis.current.value) : 0;
-    if (isNaN(millisParsed)) millisParsed = 0;
-    if (millisParsed > 999) millis.current.value = "999";
-    out += Math.min(millisParsed, 999);
-
-    setValue(out);
+  const updateValue = ({
+    newMinutes,
+    newSeconds,
+    newMillis,
+  }: {
+    newMinutes?: number;
+    newSeconds?: number;
+    newMillis?: number;
+  }) => {
+    setValue(toTimeValue(newMinutes ?? minutes, newSeconds ?? seconds, newMillis ?? millis));
   };
 
-  const defaultMinutes = Math.floor(value / 60000);
-  const defaultSeconds = Math.floor(value / 1000) - defaultMinutes * 60;
-  const defaultMillis = value - (defaultMinutes * 60000 + defaultSeconds * 1000);
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setActiveFieldValue(e.target.value);
+    e.target.select();
+  };
 
-  const formatMinutes = () => {
-    if (minutes.current) minutes.current.value = String(defaultMinutes);
+  const onBlur = () => {
+    setActiveFieldValue("");
   };
-  const formatSeconds = () => {
-    if (seconds.current) seconds.current.value = String(defaultSeconds).padStart(2, "0");
+
+  type FocusFieldPosition = "start" | "end" | "all";
+  const focusField = (field: InputRef, position: FocusFieldPosition = "end") => {
+    if (!field.current) return;
+    field.current.focus();
+    if (position === "all") {
+      field.current.select();
+    } else {
+      const pos = position === "start" ? 0 : (field.current.value?.length ?? 0);
+      field.current.setSelectionRange(pos, pos);
+    }
   };
-  const formatMillis = () => {
-    if (millis.current) millis.current.value = String(defaultMillis).padStart(3, "0");
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      // Handle up/down arrow keys to increment/decrement the value in the active field
+      e.preventDefault();
+      const delta = e.key === "ArrowUp" ? 1 : -1;
+      if (document.activeElement === minutesField.current) {
+        const newMinutes = Math.max(0, Math.min(5, minutes + delta));
+        updateValue({ newMinutes });
+        setActiveFieldValue(String(newMinutes));
+      } else if (document.activeElement === secondsField.current) {
+        const newSeconds = Math.max(0, Math.min(59, seconds + delta));
+        updateValue({ newSeconds });
+        setActiveFieldValue(String(newSeconds).padStart(2, "0"));
+      } else if (document.activeElement === millisField.current) {
+        const newMillis = Math.max(0, Math.min(999, millis + delta));
+        updateValue({ newMillis });
+        setActiveFieldValue(String(newMillis).padStart(3, "0"));
+      }
+    } else if (e.key === "ArrowLeft") {
+      // Handle left arrow key to move focus to the previous field if the cursor is at the start
+      if (document.activeElement === secondsField.current) {
+        if (secondsField.current?.selectionEnd === 0) {
+          e.preventDefault();
+          focusField(minutesField, "end");
+        }
+      } else if (document.activeElement === millisField.current) {
+        if (millisField.current?.selectionEnd === 0) {
+          e.preventDefault();
+          focusField(secondsField, "end");
+        }
+      }
+    } else if (e.key === "ArrowRight") {
+      // Handle right arrow key to move focus to the next field if the cursor is at the end
+      if (document.activeElement === minutesField.current) {
+        if (minutesField.current?.selectionStart === minutesField.current?.value.length) {
+          e.preventDefault();
+          focusField(secondsField, "start");
+        }
+      } else if (document.activeElement === secondsField.current) {
+        if (secondsField.current?.selectionStart === secondsField.current?.value.length) {
+          e.preventDefault();
+          focusField(millisField, "start");
+        }
+      }
+    }
   };
 
   const onPaste = (e: React.ClipboardEvent) => {
-    e.preventDefault();
     const text = e.clipboardData.getData("text");
     const parsed = parseTime(text);
     if (parsed === null) return;
+    e.preventDefault();
+    focusField(millisField, "end");
     setValue(parsed);
-    formatMinutes();
-    formatSeconds();
-    formatMillis();
+    const { millis } = destructureTimeValue(parsed);
+    setActiveFieldValue(String(millis).padStart(3, "0"));
+  };
+
+  const endsInDelimiter = (str: string) => {
+    return /[:'."]$/.test(str);
+  };
+
+  const isNumerical = (str: string) => {
+    return /^\d*$/.test(str);
+  };
+
+  const onChangeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (endsInDelimiter(e.target.value)) {
+      focusField(secondsField, "all");
+      return;
+    } else if (!isNumerical(e.target.value)) {
+      return;
+    }
+    updateValue({ newMinutes: Math.min(+e.target.value % 10, 5) });
+    if (e.target.value.length >= 1) {
+      focusField(secondsField, "all");
+    } else {
+      setActiveFieldValue(e.target.value);
+    }
+  };
+
+  const onChangeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (endsInDelimiter(e.target.value)) {
+      focusField(millisField, "all");
+      return;
+    } else if (!isNumerical(e.target.value)) {
+      return;
+    }
+    const clamped = +e.target.value % 100;
+    updateValue({ newSeconds: clamped > 59 ? 50 + (clamped % 10) : clamped });
+    if (e.target.value.length >= 2) {
+      focusField(millisField, "all");
+    } else {
+      setActiveFieldValue(e.target.value);
+    }
+  };
+
+  const onChangeMillis = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumerical(e.target.value)) {
+      return;
+    }
+    updateValue({ newMillis: +e.target.value % 1000 });
+    setActiveFieldValue(e.target.value.slice(-3));
+  };
+
+  const getValue = (value: number, field: InputRef, digits: number) => {
+    if (field.current === document.activeElement) {
+      return activeFieldValue;
+    } else {
+      return value ? String(value).padStart(digits, "0") : "";
+    }
   };
 
   return (
-    <div>
-      <input
-        onChange={onChange}
-        onPaste={onPaste}
-        onBlur={formatMinutes}
-        type="number"
-        ref={minutes}
+    <TimeInputContainer className="time-input">
+      <TextField
+        inputRef={minutesField}
         disabled={disabled}
-        max={5}
-        min={0}
-        defaultValue="0"
-        step={1}
-        size={1}
-      />
-      :
-      <input
-        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
         onPaste={onPaste}
-        onBlur={formatSeconds}
-        defaultValue="00"
-        type="number"
-        ref={seconds}
-        disabled={disabled}
-        max={59}
-        min={0}
-        step={1}
-        size={2}
+        onChange={onChangeMinutes}
+        value={getValue(minutes, minutesField, 1)}
+        placeholder="0"
+        autoComplete="off"
       />
-      .
-      <input
-        onChange={onChange}
+      <span>'</span>
+      <TextField
+        inputRef={secondsField}
+        disabled={disabled}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
         onPaste={onPaste}
-        onBlur={formatMillis}
-        defaultValue="000"
-        type="number"
-        ref={millis}
-        disabled={disabled}
-        max={999}
-        min={0}
-        step={1}
-        size={3}
+        onChange={onChangeSeconds}
+        value={getValue(seconds, secondsField, 2)}
+        placeholder="00"
+        autoComplete="off"
       />
-    </div>
+      <span>"</span>
+      <TextField
+        inputRef={millisField}
+        disabled={disabled}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        onPaste={onPaste}
+        onChange={onChangeMillis}
+        value={getValue(millis, millisField, 3)}
+        placeholder="000"
+        autoComplete="off"
+      />
+    </TimeInputContainer>
   );
 };
 
@@ -135,3 +239,19 @@ export const TimeInputField = ({ field, label, disabled }: TimeInputFieldProps) 
 };
 
 export default TimeInput;
+
+// Styles
+
+const TimeInputContainer = styled("div")({
+  display: "inline-flex",
+  "& .MuiInputBase-input": {
+    textAlign: "center",
+    width: "28px",
+  },
+  "& span": {
+    alignItems: "center",
+    textAlign: "center",
+    width: "12px",
+    paddingTop: "14px",
+  },
+});
